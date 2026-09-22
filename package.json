@@ -1,0 +1,42 @@
+{
+  "name": "fruti-squad",
+  "version": "1.0.0",
+  "description": "Fruti Squad 🍓 — coco · lima · mora: a reusable trio of Kiro agents/skills that design, govern, and document a design system. Installer copies them into a project's .agents/skills and .kiro/agents.",
+  "bin": {
+    "fruti-squad": "bin/install.mjs"
+  },
+  "type": "module",
+  "files": [
+    "bin/",
+    "skills/",
+    "agentes/",
+    "assets/",
+    "install.sh",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "keywords": [
+    "kiro",
+    "skills",
+    "agents",
+    "design-system",
+    "design-hub",
+    "coco",
+    "lima",
+    "mora",
+    "fruti-squad"
+  ],
+  "author": "kevinedgm",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinedgm/fruti-squad.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kevinedgm/fruti-squad/issues"
+  },
+  "homepage": "https://github.com/kevinedgm/fruti-squad#readme"
+}

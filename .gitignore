@@ -1,0 +1,11 @@
+# Node
+node_modules/
+npm-debug.log*
+# Python caches (from lima/coco governance scripts)
+__pycache__/
+*.pyc
+# OS
+.DS_Store
+# Editor
+.vscode/
+.idea/
