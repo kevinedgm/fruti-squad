@@ -4,7 +4,7 @@
 
 # 🍓 Fruti Squad
 
-### <img src="assets/coco.png" alt="coco" width="28"> coco · <img src="assets/lima.png" alt="lima" width="28"> lima · <img src="assets/mora.png" alt="mora" width="28"> mora
+### <img src="assets/coco.png" alt="coco" width="28"> coco · <img src="assets/lima.png" alt="lima" width="28"> lima · <img src="assets/mora.png" alt="mora" width="28"> mora · 🌱 semilla
 
 **Un pequeño equipo para diseñar, gobernar y documentar sistemas de diseño sin convertir el repositorio en una selva de reglas duplicadas.**
 
@@ -37,9 +37,9 @@ Cada miembro tiene una responsabilidad clara:
 | -- | -------- | ------------------------------------------------------------- |
 | 🥥 | **coco** | Diseñar, implementar, auditar y refactorizar                  |
 | 🟢 | **lima** | Gobernar arquitectura, lifecycle, registry y madurez          |
-| 🫐 | **mora** | Documentar, inventariar y mantener el Design Hub sincronizado |
+| 🫐 | **mora** | Documentar, inventariar y mantener el Design Hub sincronizado |\n| 🌱 | **semilla** | Mapear el proyecto y mantener su memoria técnica estructurada |
 
-Los tres comparten un único perfil:
+Coco, lima y mora comparten un único perfil:
 
 ```text
 profiles/<proyecto>.md
@@ -164,7 +164,7 @@ Instalar únicamente el trío principal:
 
 ```bash
 npx github:kevinedgm/fruti-squad install \
-  --only coco,lima,mora
+  --only coco,lima,mora,semilla
 ```
 
 Instalar solo lima:
