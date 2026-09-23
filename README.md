@@ -21,7 +21,7 @@ npx github:kevinedgm/fruti-squad install --target kiro   # o claude / codex
 
 <br>
 
-**Una configuración. Tres especialistas. Una sola fuente de verdad.**
+**Una configuración. Cuatro especialistas. Contexto compartido sin redescubrir el proyecto.**
 
 </div>
 
@@ -29,7 +29,7 @@ npx github:kevinedgm/fruti-squad install --target kiro   # o claude / codex
 
 ## ✨ ¿Qué es Fruti Squad?
 
-**Fruti Squad** es un conjunto portable de agentes y skills especializados en el ciclo completo de un design system.
+**Fruti Squad** es un conjunto portable de agentes y skills para diseñar, gobernar y documentar interfaces, además de mapear el proyecto que las sostiene.
 
 Cada miembro tiene una responsabilidad clara:
 
@@ -61,24 +61,26 @@ Después:
 
 ```mermaid
 flowchart LR
+    S["🌱 SEMILLA<br/><b>Mapea</b><br/>Proyecto · Relaciones · Impacto"]
     L["🟢 LIMA<br/><b>Gobierna</b><br/>Lifecycle · Registry · Gates"]
-
     C["🥥 COCO<br/><b>Diseña y audita</b><br/>UI · Código · Arquitectura"]
-
     M["🫐 MORA<br/><b>Documenta</b><br/>Hub · Inventario · Sincronía"]
 
+    S -->|"contexto técnico"| L
+    S -->|"contexto técnico"| C
+    S -->|"implementación y consumidores"| M
     L -->|"solicita auditoría"| C
     C -->|"evidencia y findings"| L
-
     L -->|"estado del sistema"| M
     C -->|"implementación real"| M
-
-    M -.->|"problemas encontrados"| C
+    C -.->|"cambios"| S
+    L -.->|"cambios"| S
 ```
+
 
 > ### Regla de oro
 >
-> **🥥 coco audita · 🟢 lima gobierna y refina · 🫐 mora documenta**
+> **🥥 coco diseña/audita · 🟢 lima gobierna/refina · 🫐 mora documenta · 🌱 semilla mapea**
 
 No hay dos auditores.
 
@@ -87,6 +89,85 @@ No hay dos lifecycle managers.
 No hay una documentación que decide por su cuenta cómo debería funcionar el producto.
 
 Cada fruta conoce su parcela. Milagroso.
+
+
+## 🌱 Semilla — mapa técnico del proyecto
+
+**Semilla** mantiene un mapa técnico persistente para que el resto del Squad no tenga que redescubrir el repositorio en cada tarea.
+
+```text
+Proyecto
+   ↓
+🌱 Semilla
+   ├── entry points
+   ├── módulos y rutas
+   ├── componentes y consumidores
+   ├── servicios / API / datos
+   ├── relaciones entrantes y salientes
+   └── candidatos orphan / unreachable
+            ↓
+      .fruti/knowledge/
+```
+
+### Flujo recomendado
+
+```bash
+# Primera vez: construir el mapa
+fruti semilla init --scope src
+
+# Consultar el estado
+fruti semilla status
+
+# Actualizarlo después de cambios
+fruti semilla sync
+```
+
+Semilla puede activarse o ignorarse explícitamente:
+
+```bash
+fruti semilla on
+fruti semilla off
+```
+
+Con Semilla activa, los agentes deben consultar primero el Project Knowledge Map y abrir código únicamente para verificar o completar el contexto.
+
+### Relaciones e impacto
+
+```bash
+fruti semilla relations src/components/Foo.vue
+fruti semilla impact src/components/Foo.vue
+fruti semilla why src/components/Foo.vue
+fruti semilla graph --scope appointments
+```
+
+### Código potencialmente obsoleto
+
+```bash
+fruti semilla orphans
+```
+
+`orphan` o `unreachable` significa **candidato a revisión**, no “seguro para borrar”. Semilla conserva evidencia de relaciones y reachability para explicar la clasificación.
+
+### Benchmark con y sin Semilla
+
+```bash
+fruti semilla off
+fruti semilla benchmark start locate-data --variant control
+# ejecuta una tarea real
+fruti semilla benchmark end --input-tokens 30000 --output-tokens 2000 --tool-calls 25
+
+fruti semilla on
+fruti semilla benchmark start locate-data --variant semilla
+# repite la misma tarea desde una sesión limpia
+fruti semilla benchmark end --input-tokens 9000 --output-tokens 1800 --tool-calls 8
+
+fruti semilla benchmark report
+```
+
+El tiempo se registra automáticamente. Los tokens/tool calls se suministran al cerrar la ejecución porque cada host los expone de manera distinta.
+
+> Documentación técnica completa: [`skills/semilla/README.md`](skills/semilla/README.md) · [`SKILL.md`](skills/semilla/SKILL.md)
+
 
 ---
 
@@ -100,7 +181,7 @@ Fruti Squad se instala directamente desde GitHub, sin publicar en npm.
 npx github:kevinedgm/fruti-squad setup --target kiro   # o claude / codex
 ```
 
-Esto instala el trío y luego **te hace unas pocas preguntas en la terminal** (un asistente) para armar tu perfil. No necesitas crear ningún archivo ni saber YAML. El asistente tiene dos caminos:
+Esto instala el Squad y luego **te hace unas pocas preguntas en la terminal** (un asistente) para armar tu perfil. No necesitas crear ningún archivo ni saber YAML. El asistente tiene dos caminos:
 
 - **¿Ya tienes design system?** → te pide nombre, color de acción, color de peligro, superficie, tinta y fuente. Con eso arma el perfil completo.
 - **¿Aún no / estás empezando?** → responde "no": crea el perfil con `design_system: NEW` y **lima te ayuda a definir un sistema mínimo después**, cuando diseñes lo primero. Cero datos inventados.
@@ -278,7 +359,7 @@ bash .codex/skills/lima/scripts/init-project.sh --intake my-intake.yaml --qa pla
 Esta es la anatomía de lo que pasa al inicializar, para que sepas exactamente qué genera la herramienta y qué debes aportar.
 
 ### 1) `install` — copiar los archivos
-Copia las carpetas de coco, lima y mora a las rutas del entorno (ver tablas arriba). **No** crea ningún perfil todavía; solo deja disponibles a los tres. En Claude/Codex además genera un `SKILL.md` puente para coco/mora, y en Codex escribe el bloque en `AGENTS.md`.
+Copia las carpetas de coco, lima, mora y semilla a las rutas del entorno (ver tablas arriba). **No** crea ningún perfil todavía; solo deja disponibles a los tres. En Claude/Codex además genera un `SKILL.md` puente para coco/mora, y en Codex escribe el bloque en `AGENTS.md`.
 
 ### 2) `init` (lima) — crear el perfil y el laboratorio
 `lima/scripts/init-project.sh` **crea**, a partir de tu intake:
