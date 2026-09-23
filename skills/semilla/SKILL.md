@@ -21,24 +21,42 @@ Semilla no es la base de conocimiento. **Semilla la construye y la mantiene.**
 6. **Compacto.** Guarda hechos y relaciones, no copias del código ni documentación narrativa extensa.
 7. **No borres código.** Semilla reporta candidatos; la eliminación requiere una tarea explícita y verificación separada.
 
+## Dos capas, un solo mapa
+
+Semilla se escribe desde dos lados y **ninguno puede pisar al otro**:
+
+| Capa | Quién la escribe | Qué contiene | Archivos |
+|---|---|---|---|
+| **Determinista** | el CLI (`fruti semilla init/sync`) | grafo de imports y reachability desde raíces: puro parseo, sin interpretación | `graph.json`, `graph-orphans.json` |
+| **Semántica** | el agente siguiendo este SKILL.md | módulos, propósito, flujos, entidades, endpoints: lo que requiere entender el dominio | `modules.json`, `entrypoints.json`, `ui.json`, `data.json`, `api.json`, `flows.json`, `orphans.json` |
+
+`index.json` es compartido. El CLI **mezcla** su sección `graph` y sus entradas en `files`; nunca reescribe el archivo entero ni toca las claves del agente. Al escribir la capa semántica, respeta lo mismo en sentido contrario: conserva `graph` y `files.graph`.
+
+El grafo del CLI es barato y objetivo; úsalo como esqueleto y construye la capa semántica encima, no en su lugar.
+
 ## Ubicación canónica
 
 En el proyecto consumidor:
 
 ```text
 .fruti/
+├── semilla.json            # { enabled, knowledge_path }
 └── knowledge/
-    ├── index.json
-    ├── modules.json
-    ├── entrypoints.json
-    ├── ui.json
-    ├── data.json
-    ├── api.json
-    ├── flows.json
-    └── orphans.json
+    ├── index.json          # compartido: capa semántica + sección "graph" del CLI
+    ├── graph.json          # CLI
+    ├── graph-orphans.json  # CLI
+    ├── modules.json        # agente
+    ├── entrypoints.json    # agente
+    ├── ui.json             # agente
+    ├── data.json           # agente
+    ├── api.json            # agente
+    ├── flows.json          # agente
+    └── orphans.json        # agente
 ```
 
-Si el proyecto ya declara otra ruta para conocimiento técnico, respétala y registra esa ruta en `.fruti/knowledge/index.json`.
+El identificador de schema canónico es **`fruti-semilla/v1`**, exactamente esa cadena. No inventes variantes (`fruti.semilla/1` y similares): el CLI y los consumidores la comparan literalmente.
+
+Si el proyecto guarda su conocimiento técnico en otra ruta, declárala en `knowledge_path` dentro de `.fruti/semilla.json`; el CLI la respeta.
 
 ## Modos
 
@@ -67,7 +85,7 @@ Antes de explorar código por una tarea:
 
 ### SYNC — actualización incremental
 
-Después de cambios:
+`fruti semilla sync` reconstruye el grafo determinista completo, porque parsear imports es barato y así no acumula deriva. Lo incremental es el trabajo del agente sobre la capa semántica:
 
 1. Obtén archivos cambiados con Git cuando esté disponible.
 2. Clasifica el cambio: route, UI, state, service, API, data/schema, config, test, docs u otro.

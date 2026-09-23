@@ -9,7 +9,9 @@ Semilla construye y mantiene un mapa técnico persistente del proyecto para evit
 - `SYNC`: actualiza solo lo afectado por cambios.
 - `DEAD-CODE`: reporta candidatos huérfanos con evidencia, sin borrar nada.
 
-La base generada vive por defecto en `.fruti/knowledge/`.
+La base generada vive por defecto en `.fruti/knowledge/` (configurable con `knowledge_path` en `.fruti/semilla.json`).
+
+Se escribe desde dos lados que conviven en el mismo `index.json`: el **CLI** produce la capa determinista (`graph.json`, `graph-orphans.json` — grafo de imports y reachability) y el **agente** produce la capa semántica (`modules.json`, `ui.json`, `data.json`, `api.json`, `flows.json`…). Cada uno mezcla lo suyo y conserva lo del otro; `init` no destruye un mapa escrito por el agente.
 
 Semilla distingue entre **existir** y **estar en uso**. Un archivo sin referencias se marca `orphan`, no `unused`, hasta contar con evidencia suficiente.
 
@@ -34,6 +36,20 @@ fruti semilla orphans
 fruti semilla graph --scope appointments
 ```
 
+Los comandos de consulta leen `graph.json`, así que necesitan un `init` previo. Aceptan una ruta exacta o un fragmento; si el fragmento coincide con varios archivos los lista, y si no coincide con ninguno falla con código 1 en vez de callarse.
+
+### Qué pregunta responde cada uno
+
+| Pregunta | Comando |
+|---|---|
+| ¿Quién usa este archivo? | `relations` → `incoming` |
+| ¿Qué usa este archivo? | `relations` → `outgoing` |
+| ¿Desde qué ruta es alcanzable? | `why` → imprime la cadena raíz → … → archivo |
+| ¿Qué podría romper si lo modifico? | `impact` → cierre transitivo de dependientes |
+| ¿Qué archivos están aislados? | `orphans` → `orphan` (sin referencias entrantes) |
+| ¿Qué subgrafos están desconectados? | `orphans` → `unreachable` (se importan entre sí, sin camino desde una raíz) |
+| ¿Por qué considera algo huérfano? | `why` → línea `reason` |
+
 ### Benchmark A/B
 
 Usa la misma tarea, commit, modelo y reasoning effort.
@@ -53,6 +69,8 @@ fruti semilla benchmark report
 ```
 
 El cronómetro lo registra Semilla automáticamente. Los tokens y tool calls se pasan al cerrar porque cada host/modelo expone esas métricas de forma diferente.
+
+Solo puede haber un benchmark abierto a la vez: `start` sobre uno activo falla en vez de pisarlo (`--force` lo descarta a propósito), y `end` cierra el activo y lo borra, de modo que un segundo `end` no duplica la corrida.
 
 ## Qué significa orphan
 
