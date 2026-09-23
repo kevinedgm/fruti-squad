@@ -111,6 +111,8 @@ Verification reads            0          3
 Respuesta correcta            ✓          ✓
 ```
 
+El hook cuenta las lecturas hechas con la herramienta `Read` **y las hechas por shell** (`cat`, `head`, `sed -n`…): un agente en modo auto trabaja por Bash, y sin eso `files_read` y `verification_reads` se quedan en cero y el benchmark queda ciego justo en su métrica central. La contabilidad del propio experimento —invocar este CLI, leer `benchmarks.json` o los contadores— se excluye entera: no suma ni un tool call. Consultar `.fruti/knowledge/` sí cuenta, porque es el atajo que se está midiendo.
+
 **Verification reads** es la métrica que más importa. El hook marca cuándo el agente leyó `.fruti/knowledge/` y cuenta los archivos que abrió *después*. Cero significa que Semilla se usó como sustituto de la fuente de verdad, no como índice; el comportamiento sano es mapa → dos o tres archivos concretos → confirmación.
 
 **¿Vale la pena el invento?** Registra lo que costó construir el mapa y pregunta:

@@ -18,6 +18,9 @@ import { fileURLToPath } from 'node:url';
 const cwd=process.cwd(), root=resolve(cwd), fruti=join(root,'.fruti');
 const cfgPath=join(fruti,'semilla.json'), benchPath=join(fruti,'benchmarks.json'), activePath=join(fruti,'.benchmark-active.json');
 const SCHEMA='fruti-semilla/v1';
+// Como citar el comando: `fruti semilla` solo existe si se instalo el paquete;
+// si no, se cita la ruta real con la que nos acaban de ejecutar.
+const SELF=process.env.SEMILLA_INVOCATION||(()=>{const abs=process.argv[1]||'',r=relative(process.cwd(),abs);return `node ${r&&r.length<abs.length?r:abs}`})();
 const countersPath=join(fruti,'.counters.json'), testActivePath=join(fruti,'.test-active.json'), testsPath=join(fruti,'tests.json');
 const settingsPath=join(root,'.claude','settings.local.json');
 const hookScript=fileURLToPath(new URL('semilla-hook.mjs',import.meta.url));
@@ -109,7 +112,7 @@ function build(scope='.',isInit=true){
    roots:rs,counts}});
  return {ms:performance.now()-started,files:files.length,counts,roots:rs.length}
 }
-function graph(){const g=readJson(graphPath,null);if(g)return g;throw new Error(`No hay grafo del CLI en ${rel(graphPath)}. Ejecuta: fruti semilla init [--scope src]`)}
+function graph(){const g=readJson(graphPath,null);if(g)return g;throw new Error(`No hay grafo del CLI en ${rel(graphPath)}. Ejecuta: ${SELF} init [--scope src]`)}
 function nodeFor(q){
  if(!q)throw new Error('Falta archivo');
  const g=graph(), exact=g.nodes[slash(q)];if(exact)return exact;
@@ -180,25 +183,25 @@ function printPair(name,of_,on){
 }
 function help(){console.log(`
 🌱 Semilla
-  fruti semilla init [--scope src]
-  fruti semilla map <path>
-  fruti semilla sync
-  fruti semilla on | off | status
-  fruti semilla relations <file>
-  fruti semilla impact <file>
-  fruti semilla why <file>
-  fruti semilla orphans [--scope text]
-  fruti semilla graph [--scope text]
-  fruti semilla benchmark start <name> --variant control|semilla [--force]
-  fruti semilla benchmark end [--input-tokens N --output-tokens N --tool-calls N]
-  fruti semilla benchmark report
+  ${SELF} init [--scope src]
+  ${SELF} map <path>
+  ${SELF} sync
+  ${SELF} on | off | status
+  ${SELF} relations <file>
+  ${SELF} impact <file>
+  ${SELF} why <file>
+  ${SELF} orphans [--scope text]
+  ${SELF} graph [--scope text]
+  ${SELF} benchmark start <name> --variant control|semilla [--force]
+  ${SELF} benchmark end [--input-tokens N --output-tokens N --tool-calls N]
+  ${SELF} benchmark report
 
-  fruti semilla hook install | uninstall | status
-  fruti semilla test start <name> --task "..." --variant control|semilla
-  fruti semilla test end --correct|--wrong [--input-tokens N --output-tokens N] [--note "..."]
-  fruti semilla test report [<name>]
-  fruti semilla test overhead --init-tokens N [--sync-tokens N]
-  fruti semilla test status
+  ${SELF} hook install | uninstall | status
+  ${SELF} test start <name> --task "..." --variant control|semilla
+  ${SELF} test end --correct|--wrong [--input-tokens N --output-tokens N] [--note "..."]
+  ${SELF} test report [<name>]
+  ${SELF} test overhead --init-tokens N [--sync-tokens N]
+  ${SELF} test status
 `)}
 
 try{
@@ -207,7 +210,7 @@ try{
   const before=readJson(indexPath,null)?.graph?.init_scope;
   const r=build(scope,isInit);
   console.log(`🌱 mapa listo · ${r.files} archivos · ${r.roots} raíces · ${r.ms.toFixed(0)} ms`);console.log(r.counts);
-  if(!isInit&&before&&before!==scope)console.log(`\n⚠️  el grafo quedó acotado a "${scope}". "fruti semilla init --scope ${before}" lo restaura; "sync" ya vuelve solo a "${before}".`);
+  if(!isInit&&before&&before!==scope)console.log(`\n⚠️  el grafo quedó acotado a "${scope}". "${SELF} init --scope ${before}" lo restaura; "sync" ya vuelve solo a "${before}".`);
  }
  else if(cmd==='sync'){const c=changed();const old=readJson(indexPath,{});const scope=old.graph?.init_scope||old.graph?.scope||old.scope||'.';const r=build(scope);console.log(`🌱 sync · ${c.length} archivos cambiados · grafo reconstruido sobre "${scope}" en ${r.ms.toFixed(0)} ms`)}
  else if(cmd==='on'||cmd==='off'){ensure();const c=config();c.enabled=cmd==='on';c.updated_at=new Date().toISOString();writeJson(cfgPath,c);console.log('🌱 Semilla',c.enabled?'ON':'OFF')}
@@ -220,7 +223,7 @@ try{
    console.log('Map:',i.schema||'(sin schema)');
    if(i.counts||i.scope){console.log('  agente · scope:',i.scope||'—');if(i.counts)console.log('  agente · counts:',i.counts)}
    if(i.graph&&existsSync(graphPath))console.log('  grafo CLI · scope:',i.graph.scope,'· commit:',i.graph.verified_commit||'unknown','· counts:',JSON.stringify(i.graph.counts));
-   else console.log('  grafo CLI: NO CONSTRUIDO — ejecuta "fruti semilla init --scope src"')
+   else console.log(`  grafo CLI: NO CONSTRUIDO — ejecuta "${SELF} init --scope src"`)
   }
  }
  else if(cmd==='relations'||cmd==='why'){const n=nodeFor(args[1]);if(Array.isArray(n)){console.log(n.map(x=>x.path).join('\n'))}else{printNode(n);if(cmd==='why'){const chain=pathFromRoot(graph(),n.path);console.log('reachable from root:',chain?'yes':'no');if(chain)console.log('path:',chain.join('\n   -> '));console.log('reason:',n.status==='orphan'?'sin referencias entrantes conocidas':n.status==='unreachable'?'tiene relaciones internas pero no es alcanzable desde una raíz conocida':'alcanzable desde una raíz conocida')}}}
@@ -237,7 +240,7 @@ try{
    console.log('⏱ benchmark started:',name,variant)
   }
   else if(sub==='end'){
-   const a=readJson(activePath,null);if(!a)throw new Error('No hay benchmark activo. Ábrelo con: fruti semilla benchmark start <name> --variant control|semilla');
+   const a=readJson(activePath,null);if(!a)throw new Error(`No hay benchmark activo. Ábrelo con: ${SELF} benchmark start <name> --variant control|semilla`);
    const run={...a,ended_at:new Date().toISOString(),duration_ms:Date.now()-a.started_ms,input_tokens:num('--input-tokens'),output_tokens:num('--output-tokens'),tool_calls:num('--tool-calls')};
    all.push(run);writeJson(benchPath,all);rmSync(activePath,{force:true});console.log(run)
   }
@@ -267,7 +270,7 @@ try{
    const prev=readJson(testActivePath,null);
    if(prev&&!flag('--force',false))throw new Error(`Ya hay un test activo: "${prev.name}" (${prev.variant}). Cierralo con "test end" o repite con --force.`);
    const name=args[2]&&!args[2].startsWith('--')?args[2]:null;
-   if(!name)throw new Error('Falta el nombre del test: fruti semilla test start <name> --task "..." --variant control|semilla');
+   if(!name)throw new Error(`Falta el nombre del test: ${SELF} test start <name> --task "..." --variant control|semilla`);
    const variant=str('--variant',null);
    if(variant!=='control'&&variant!=='semilla')throw new Error('--variant debe ser control o semilla');
    const task=str('--task',null)||(t.runs.find(r=>r.name===name)?.task);
@@ -281,14 +284,14 @@ try{
    console.log(variant==='control'
     ?`Ignora por completo .fruti/knowledge/. Responde usando el repositorio directamente.\n\n${task}`
     :`Consulta .fruti/knowledge/ primero. Abre codigo solo para verificar o completar lo que el mapa no responda.\n\n${task}`);
-   console.log('\nAl terminar: fruti semilla test end --correct|--wrong [--input-tokens N]');
+   console.log(`\nAl terminar: ${SELF} test end --correct|--wrong [--input-tokens N]`);
   }
   else if(sub==='end'){
-   const a=readJson(testActivePath,null);if(!a)throw new Error('No hay test activo. Abrelo con: fruti semilla test start <name> --task "..." --variant control|semilla');
+   const a=readJson(testActivePath,null);if(!a)throw new Error(`No hay test activo. Abrelo con: ${SELF} test start <name> --task "..." --variant control|semilla`);
    const ok=flag('--correct',false)===true, bad=flag('--wrong',false)===true;
    if(ok===bad)throw new Error('Marca el resultado con --correct o --wrong (exactamente uno).');
    const c=readJson(countersPath,null);
-   if(!c)console.error('Semilla: aviso · sin contadores del hook; se registra solo el tiempo. Revisa "fruti semilla hook status".');
+   if(!c)console.error(`Semilla: aviso · sin contadores del hook; se registra solo el tiempo. Revisa "${SELF} hook status".`);
    const run={...a,ended_at:new Date().toISOString(),duration_ms:Date.now()-a.started_ms,
     tool_calls:c?.tool_calls??null,files_read:c?.files_read?.length??null,searches:c?.searches??null,
     verification_reads:c?.reads_after_map?.length??null,map_consulted:c?.map_consulted??null,
