@@ -67,8 +67,14 @@ function build(scope='.'){
  const orphans=Object.values(nodes).filter(n=>n.status==='orphan'||n.status==='unreachable');writeJson(graphOrphansPath,{generated_at:result.generated_at,items:orphans});
  const counts={};for(const n of Object.values(nodes))counts[n.status]=(counts[n.status]||0)+1;
  const prev=readJson(indexPath,null)||{};
- writeJson(indexPath,{...prev,schema:prev.schema||SCHEMA,updated_at:result.generated_at,
-  files:{...(prev.files||{}),graph:'graph.json',graph_orphans:'graph-orphans.json'},
+ // `files` solo se mezcla si es un objeto plano. Si el agente lo escribio como
+ // array (u otra forma), spreadearlo lo convertiria en {"0":..,"1":..}: se deja
+ // intacto y la seccion `graph` basta para localizar lo del CLI.
+ const plain=v=>!!v&&typeof v==='object'&&!Array.isArray(v);
+ const filesKey=(plain(prev.files)||prev.files===undefined)
+  ?{files:{...(plain(prev.files)?prev.files:{}),graph:'graph.json',graph_orphans:'graph-orphans.json'}}
+  :{};
+ writeJson(indexPath,{...prev,schema:prev.schema||SCHEMA,updated_at:result.generated_at,...filesKey,
   graph:{generated_at:result.generated_at,verified_commit:result.verified_commit,scope:result.scope,roots:rs,counts}});
  return {ms:performance.now()-started,files:files.length,counts,roots:rs.length}
 }
