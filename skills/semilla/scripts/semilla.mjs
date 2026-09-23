@@ -48,14 +48,41 @@ function resolveImport(file,spec){
  for(const p of tries)if(existsSync(p)&&statSync(p).isFile())return slash(relative(root,p));
  return null
 }
+const EXT='js|mjs|cjs|ts|tsx|jsx|vue|java|py|php|dart';
+function htmlRoots(files){
+ // Entradas declaradas en HTML (<script src="/src/main.js">). Vite y compania
+ // arrancan desde ahi, no desde un import, asi que sin esto salen huerfanos falsos.
+ const out=new Set();
+ let pages=[];try{pages=readdirSync(root).filter(f=>/\.html?$/i.test(f))}catch{}
+ for(const page of pages){
+  let text='';try{text=readFileSync(join(root,page),'utf8')}catch{continue}
+  for(const m of text.matchAll(/\b(?:src|href)\s*=\s*["']([^"']+)["']/g)){
+   const spec=m[1];
+   if(/^(?:[a-z]+:)?\/\//i.test(spec)||spec.startsWith('data:'))continue;
+   const p=slash(relative(root,resolve(root,spec.replace(/^\//,''))));
+   if(files.includes(p))out.add(p)
+  }
+ }
+ return [...out]
+}
 function roots(files){
  const rs=new Set();
- for(const f of files){const b=f.split('/').pop();if(/^(main|index|app|server|bootstrap)\.(js|mjs|cjs|ts|tsx|jsx|vue|java|py|php|dart)$/i.test(b))rs.add(f);if(/router|routes/i.test(f))rs.add(f)}
+ for(const f of files){
+  const b=f.split('/').pop(), depth=f.split('/').length;
+  if(new RegExp(`^(main|app|server|bootstrap)\\.(${EXT})$`,'i').test(b))rs.add(f);
+  // `index` solo cuenta como raiz en la cima del arbol: un src/utils/index.js es
+  // un barrel, no un entry point, y tratarlo como raiz oculta huerfanos reales.
+  if(new RegExp(`^index\\.(${EXT})$`,'i').test(b)&&depth<=2)rs.add(f);
+  // Los service workers son entry points aunque nadie los importe.
+  if(new RegExp(`^(sw|service-worker)\\.(${EXT})$`,'i').test(b))rs.add(f);
+  if(/router|routes/i.test(f))rs.add(f)
+ }
+ for(const h of htmlRoots(files))rs.add(h);
  try{const pkg=JSON.parse(readFileSync(join(root,'package.json'),'utf8'));for(const k of ['main','module','browser'])if(pkg[k])rs.add(slash(pkg[k]))}catch{}
  return [...rs].filter(x=>files.includes(x))
 }
 function classify(path){if(/test|spec|__tests__/i.test(path))return'test';if(/route|router/i.test(path))return'route';if(/component|\.vue$|\.svelte$/i.test(path))return'ui';if(/store|state/i.test(path))return'state';if(/service|api|client/i.test(path))return'service';return'code'}
-function build(scope='.'){
+function build(scope='.',isInit=true){
  const started=performance.now(), abs=resolve(root,scope);if(!existsSync(abs))throw new Error('Scope no existe: '+scope);
  const files=walk(abs).map(p=>slash(relative(root,p))), nodes={};
  for(const f of files){let text='';try{text=readFileSync(join(root,f),'utf8')}catch{}nodes[f]={path:f,kind:classify(f),outgoing:imports(text,join(root,f)),incoming:[],status:'unknown',confidence:'medium'}}
@@ -67,9 +94,19 @@ function build(scope='.'){
  const orphans=Object.values(nodes).filter(n=>n.status==='orphan'||n.status==='unreachable');writeJson(graphOrphansPath,{generated_at:result.generated_at,items:orphans});
  const counts={};for(const n of Object.values(nodes))counts[n.status]=(counts[n.status]||0)+1;
  const prev=readJson(indexPath,null)||{};
- writeJson(indexPath,{...prev,schema:prev.schema||SCHEMA,updated_at:result.generated_at,
-  files:{...(prev.files||{}),graph:'graph.json',graph_orphans:'graph-orphans.json'},
-  graph:{generated_at:result.generated_at,verified_commit:result.verified_commit,scope:result.scope,roots:rs,counts}});
+ // `files` solo se mezcla si es un objeto plano. Si el agente lo escribio como
+ // array (u otra forma), spreadearlo lo convertiria en {"0":..,"1":..}: se deja
+ // intacto y la seccion `graph` basta para localizar lo del CLI.
+ const plain=v=>!!v&&typeof v==='object'&&!Array.isArray(v);
+ const filesKey=(plain(prev.files)||prev.files===undefined)
+  ?{files:{...(plain(prev.files)?prev.files:{}),graph:'graph.json',graph_orphans:'graph-orphans.json'}}
+  :{};
+ writeJson(indexPath,{...prev,schema:prev.schema||SCHEMA,updated_at:result.generated_at,...filesKey,
+  graph:{generated_at:result.generated_at,verified_commit:result.verified_commit,scope:result.scope,
+   // `init_scope` recuerda el alcance completo para que un `map` acotado no deje
+   // a `sync` reconstruyendo para siempre sobre un subarbol.
+   init_scope:isInit?result.scope:(prev.graph?.init_scope||prev.graph?.scope||result.scope),
+   roots:rs,counts}});
  return {ms:performance.now()-started,files:files.length,counts,roots:rs.length}
 }
 function graph(){const g=readJson(graphPath,null);if(g)return g;throw new Error(`No hay grafo del CLI en ${rel(graphPath)}. Ejecuta: fruti semilla init [--scope src]`)}
@@ -165,8 +202,14 @@ function help(){console.log(`
 `)}
 
 try{
- if(cmd==='init'||cmd==='map'){const scope=cmd==='map'?(args[1]||'.'):(str('--scope','.')||'.');const r=build(scope);console.log(`🌱 mapa listo · ${r.files} archivos · ${r.roots} raíces · ${r.ms.toFixed(0)} ms`);console.log(r.counts)}
- else if(cmd==='sync'){const c=changed();const old=readJson(indexPath,{});const scope=old.graph?.scope||old.scope||'.';const r=build(scope);console.log(`🌱 sync · ${c.length} archivos cambiados · grafo reconstruido sobre "${scope}" en ${r.ms.toFixed(0)} ms`)}
+ if(cmd==='init'||cmd==='map'){
+  const isInit=cmd==='init', scope=isInit?(str('--scope','.')||'.'):(args[1]||'.');
+  const before=readJson(indexPath,null)?.graph?.init_scope;
+  const r=build(scope,isInit);
+  console.log(`🌱 mapa listo · ${r.files} archivos · ${r.roots} raíces · ${r.ms.toFixed(0)} ms`);console.log(r.counts);
+  if(!isInit&&before&&before!==scope)console.log(`\n⚠️  el grafo quedó acotado a "${scope}". "fruti semilla init --scope ${before}" lo restaura; "sync" ya vuelve solo a "${before}".`);
+ }
+ else if(cmd==='sync'){const c=changed();const old=readJson(indexPath,{});const scope=old.graph?.init_scope||old.graph?.scope||old.scope||'.';const r=build(scope);console.log(`🌱 sync · ${c.length} archivos cambiados · grafo reconstruido sobre "${scope}" en ${r.ms.toFixed(0)} ms`)}
  else if(cmd==='on'||cmd==='off'){ensure();const c=config();c.enabled=cmd==='on';c.updated_at=new Date().toISOString();writeJson(cfgPath,c);console.log('🌱 Semilla',c.enabled?'ON':'OFF')}
  else if(cmd==='status'){
   const c=config(),i=readJson(indexPath,null);

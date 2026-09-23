@@ -36,6 +36,12 @@ fruti semilla orphans
 fruti semilla graph --scope appointments
 ```
 
+`map <path>` acota el grafo a ese subárbol y lo avisa; `init` recuerda el alcance completo, así que `sync` vuelve solo a él.
+
+**Qué cuenta como raíz.** El grafo solo es tan bueno como sus raíces: una raíz que falta inventa huérfanos, y una de más los esconde. El CLI toma `main`/`app`/`server`/`bootstrap`, los `router`/`routes`, las entradas declaradas en los `.html` de la raíz (`<script src="/src/main.js">`), los service workers (`sw.js`, `service-worker.js`) y `main`/`module`/`browser` de `package.json`. Un `index.*` solo cuenta si está en la cima del árbol: `src/index.js` sí, `src/utils/index.js` no — eso es un barrel, y tratarlo como raíz esconde huérfanos reales.
+
+Aun así, lo que se carga por config de framework, glob o registry no aparece en un grafo de imports. Por eso `orphan` es un candidato a revisar, no un veredicto.
+
 Los comandos de consulta leen `graph.json`, así que necesitan un `init` previo. Aceptan una ruta exacta o un fragmento; si el fragmento coincide con varios archivos los lista, y si no coincide con ninguno falla con código 1 en vez de callarse.
 
 ### Qué pregunta responde cada uno

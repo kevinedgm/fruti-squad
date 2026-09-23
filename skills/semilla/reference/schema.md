@@ -32,6 +32,7 @@ Archivo compartido entre las dos capas. Las claves de nivel superior (`project`,
     "generated_at": "2026-01-01T00:00:00.000Z",
     "verified_commit": "abc123",
     "scope": "src",
+    "init_scope": "src",
     "roots": ["src/main.js"],
     "counts": { "active": 68, "orphan": 2 }
   }
@@ -63,6 +64,8 @@ Lo produce el CLI. Un nodo por archivo de código dentro del scope, sin semánti
 ```
 
 `status` aquí solo admite `active`, `orphan` y `unreachable`: es reachability por imports estáticos, nada más. Los estados ricos del SKILL.md (`dynamic`, `test-only`, `deprecated`…) pertenecen a la capa semántica, que puede corregir al grafo cuando tiene evidencia de carga dinámica.
+
+`scope` es el alcance del grafo actual; `init_scope` es el del último `init`. Se separan para que un `map <subárbol>` acotado no deje a `sync` reconstruyendo sobre ese subárbol para siempre.
 
 `graph-orphans.json` es el subconjunto `orphan` + `unreachable` con el mismo formato de nodo.
 
