@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Fruti Squad installer/setup — coco · lima · mora, for Kiro, Claude Code, Codex.
+// Fruti Squad installer/setup — coco · lima · mora · semilla, for Kiro, Claude Code, Codex.
 // Zero dependencies.
 //   npx github:kevinedgm/fruti-squad setup   --target kiro --intake my-intake.yaml
 //   npx github:kevinedgm/fruti-squad install --target kiro
@@ -427,9 +427,9 @@ async function doSetup(args) {
 
 function printUse(target) {
   log(`\n${C.bold}Usar:${C.reset}`);
-  if (target === 'kiro')   log(`  Invoca ${C.bold}/coco${C.reset}, ${C.bold}/mora${C.reset} o la skill ${C.bold}lima${C.reset} desde Kiro.`);
+  if (target === 'kiro')   log(`  Invoca ${C.bold}/coco${C.reset}, ${C.bold}/mora${C.reset} o las skills ${C.bold}lima${C.reset} / ${C.bold}semilla${C.reset} desde Kiro.`);
   if (target === 'claude') log(`  En Claude Code aparecen como skills en ${C.bold}.claude/skills/${C.reset}; invócalas por nombre.`);
-  if (target === 'codex')  log(`  Codex las conoce por el bloque en ${C.bold}AGENTS.md${C.reset}; pídele "usa coco/lima/mora".`);
+  if (target === 'codex')  log(`  Codex las conoce por el bloque en ${C.bold}AGENTS.md${C.reset}; pídele "usa coco/lima/mora/semilla".`);
 }
 
 function doList() {
