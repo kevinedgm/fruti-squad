@@ -40,7 +40,8 @@ const MEMBERS = {
   lima:                 { from: 'skills/lima',               kind: 'skill', blurb: 'gobierna el ciclo de vida y refina el design system' },
   impeccable:           { from: 'skills/impeccable',         kind: 'skill', blurb: 'playbooks de refinamiento de UI' },
   'improve-animations': { from: 'skills/improve-animations', kind: 'skill', blurb: 'micro-interacciones y animación' },
-  'skill-architect':    { from: 'skills/skill-architect',    kind: 'skill', blurb: 'creación de nuevas skills' },\n  semilla:              { from: 'skills/semilla',            kind: 'skill', blurb: 'mapea el proyecto y mantiene su memoria técnica estructurada' },
+  'skill-architect':    { from: 'skills/skill-architect',    kind: 'skill', blurb: 'creación de nuevas skills' },
+  semilla:              { from: 'skills/semilla',            kind: 'skill', blurb: 'mapea el proyecto y mantiene su memoria técnica estructurada' },
   coco:                 { from: 'agentes/coco',              kind: 'agent', blurb: 'diseña, implementa y audita interfaz (protocolo R0–R3)' },
   mora:                 { from: 'agentes/mora',              kind: 'agent', blurb: 'documenta y sincroniza el Design Hub' },
 };
