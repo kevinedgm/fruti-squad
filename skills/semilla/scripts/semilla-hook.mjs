@@ -9,7 +9,7 @@
  * Regla de oro: este hook NUNCA falla ni imprime nada. Un benchmark roto es
  * molesto; un hook que rompe la sesión del agente es inaceptable.
  */
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 
 const SEARCH_TOOLS=new Set(['Grep','Glob','WebSearch']);
@@ -31,6 +31,10 @@ const paths=cmd=>cmd.split(/\s+/).filter(t=>!t.startsWith('-')&&/^[^\s'"]*[\w)\]
 function main(raw){
  const ev=JSON.parse(raw||'{}');
  const root=ev.cwd||process.cwd();
+ // Sin una medicion abierta el hook no hace nada. Contar siempre ensuciaba el
+ // archivo con la exploracion de sesiones que no se estaban midiendo y hacia
+ // una escritura por cada tool call de cada sesion, para siempre.
+ if(!existsSync(join(root,'.fruti','.test-active.json'))&&!existsSync(join(root,'.fruti','.benchmark-active.json')))return;
  const file=join(root,'.fruti','.counters.json');
  const c=read(file)||{since:new Date().toISOString(),tool_calls:0,searches:0,by_tool:{},files_read:[],reads_after_map:[],map_consulted:false};
 
