@@ -21,7 +21,7 @@ npx github:kevinedgm/fruti-squad install --target kiro   # o claude / codex
 
 <br>
 
-**Una configuración. Tres especialistas. Una sola fuente de verdad.**
+**Una configuración. Cuatro especialistas. Contexto compartido sin redescubrir el proyecto.**
 
 </div>
 
@@ -29,7 +29,7 @@ npx github:kevinedgm/fruti-squad install --target kiro   # o claude / codex
 
 ## ✨ ¿Qué es Fruti Squad?
 
-**Fruti Squad** es un conjunto portable de agentes y skills especializados en el ciclo completo de un design system.
+**Fruti Squad** es un conjunto portable de agentes y skills para diseñar, gobernar y documentar interfaces, además de mapear el proyecto que las sostiene.
 
 Cada miembro tiene una responsabilidad clara:
 
@@ -61,24 +61,26 @@ Después:
 
 ```mermaid
 flowchart LR
+    S["🌱 SEMILLA<br/><b>Mapea</b><br/>Proyecto · Relaciones · Impacto"]
     L["🟢 LIMA<br/><b>Gobierna</b><br/>Lifecycle · Registry · Gates"]
-
     C["🥥 COCO<br/><b>Diseña y audita</b><br/>UI · Código · Arquitectura"]
-
     M["🫐 MORA<br/><b>Documenta</b><br/>Hub · Inventario · Sincronía"]
 
+    S -->|"contexto técnico"| L
+    S -->|"contexto técnico"| C
+    S -->|"implementación y consumidores"| M
     L -->|"solicita auditoría"| C
     C -->|"evidencia y findings"| L
-
     L -->|"estado del sistema"| M
     C -->|"implementación real"| M
-
-    M -.->|"problemas encontrados"| C
+    C -.->|"cambios"| S
+    L -.->|"cambios"| S
 ```
+
 
 > ### Regla de oro
 >
-> **🥥 coco audita · 🟢 lima gobierna y refina · 🫐 mora documenta**
+> **🥥 coco diseña/audita · 🟢 lima gobierna/refina · 🫐 mora documenta · 🌱 semilla mapea**
 
 No hay dos auditores.
 
