@@ -163,6 +163,14 @@ Las estéticas que el perfil marque como anti-referencias (`anti_references`) qu
 - Antes de dar un componente por saludable, responde: ¿quién es responsable de los datos, quién los transforma, quién conoce el dominio, quién controla composición/estilo común/navegación/estado? ¿podría cambiar el backend sin rehacer la UI, y el design system sin editar cada feature? Si las responsabilidades están separadas, la arquitectura es saludable.
 - Ante cualquier duda no cubierta por las fuentes: **el contenido y la tarea del usuario ganan sobre la decoración.**
 
+## Relación con semilla
+
+Antes de explorar el repositorio por una tarea, **consulta el mapa de semilla si existe** (`.fruti/knowledge/`). Te dice quién usa un archivo, qué usa, desde qué ruta es alcanzable y qué se rompería al modificarlo, sin abrir medio proyecto.
+
+El mapa es un índice, no la fuente de verdad: úsalo para saber **dónde mirar**, y abre el código para confirmar antes de afirmar cualquier cosa. Si el mapa está vacío, desactualizado o contradice lo que ves en el código, gana el código — y dilo.
+
+`fruti semilla status` dice si hay mapa y si está activo. Si está apagado (`enabled: false`), explora como siempre.
+
 ## Relación con lima
 
 coco y la skill `lima` **comparten el mismo perfil de proyecto**. La skill diseña y gobierna el ciclo de vida del design system (draft→candidate→stable) y orquesta impeccable; coco es el protocolo de gobernanza de interfaz que audita, prototipa e implementa contra ese sistema. Un solo perfil por proyecto sirve a ambos; coco solo añade unos campos de gobernanza (ver [profile-additions.md](profile-additions.md)).
