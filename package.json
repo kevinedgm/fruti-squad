@@ -1,9 +1,10 @@
 {
   "name": "fruti-squad",
-  "version": "1.0.0",
-  "description": "Fruti Squad 🍓 — coco · lima · mora: a reusable trio of Kiro agents/skills that design, govern, and document a design system. Installer copies them into a project's .agents/skills and .kiro/agents.",
+  "version": "1.2.0",
+  "description": "Fruti Squad 🍓 — coco · lima · mora · semilla: agentes y skills reutilizables para diseñar, gobernar, documentar y mapear proyectos y design systems.",
   "bin": {
-    "fruti-squad": "bin/install.mjs"
+    "fruti-squad": "bin/install.mjs",
+    "fruti": "bin/fruti.mjs"
   },
   "type": "module",
   "files": [
@@ -27,7 +28,9 @@
     "coco",
     "lima",
     "mora",
-    "fruti-squad"
+    "fruti-squad",
+    "project-mapping",
+    "semilla"
   ],
   "author": "kevinedgm",
   "license": "MIT",
