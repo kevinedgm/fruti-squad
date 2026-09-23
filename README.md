@@ -4,7 +4,7 @@
 
 # 🍓 Fruti Squad
 
-### <img src="assets/coco.png" alt="coco" width="28"> coco · <img src="assets/lima.png" alt="lima" width="28"> lima · <img src="assets/mora.png" alt="mora" width="28"> mora · 🌱 semilla
+### <img src="assets/coco.png" alt="coco" width="28"> coco · <img src="assets/lima.png" alt="lima" width="28"> lima · <img src="assets/mora.png" alt="mora" width="28"> mora
 
 **Un pequeño equipo para diseñar, gobernar y documentar sistemas de diseño sin convertir el repositorio en una selva de reglas duplicadas.**
 
@@ -21,7 +21,7 @@ npx github:kevinedgm/fruti-squad install --target kiro   # o claude / codex
 
 <br>
 
-**Una configuración. Cuatro especialistas. Contexto compartido sin redescubrir el proyecto.**
+**Una configuración. Tres especialistas. Un solo perfil compartido.**
 
 </div>
 
@@ -29,7 +29,7 @@ npx github:kevinedgm/fruti-squad install --target kiro   # o claude / codex
 
 ## ✨ ¿Qué es Fruti Squad?
 
-**Fruti Squad** es un conjunto portable de agentes y skills para diseñar, gobernar y documentar interfaces, además de mapear el proyecto que las sostiene.
+**Fruti Squad** es un conjunto portable de agentes y skills para diseñar, gobernar y documentar interfaces.
 
 Cada miembro tiene una responsabilidad clara:
 
@@ -37,7 +37,7 @@ Cada miembro tiene una responsabilidad clara:
 | -- | -------- | ------------------------------------------------------------- |
 | 🥥 | **coco** | Diseñar, implementar, auditar y refactorizar                  |
 | 🟢 | **lima** | Gobernar arquitectura, lifecycle, registry y madurez          |
-| 🫐 | **mora** | Documentar, inventariar y mantener el Design Hub sincronizado |\n| 🌱 | **semilla** | Mapear el proyecto y mantener su memoria técnica estructurada |
+| 🫐 | **mora** | Documentar, inventariar y mantener el Design Hub sincronizado |
 
 Coco, lima y mora comparten un único perfil:
 
@@ -61,26 +61,20 @@ Después:
 
 ```mermaid
 flowchart LR
-    S["🌱 SEMILLA<br/><b>Mapea</b><br/>Proyecto · Relaciones · Impacto"]
     L["🟢 LIMA<br/><b>Gobierna</b><br/>Lifecycle · Registry · Gates"]
     C["🥥 COCO<br/><b>Diseña y audita</b><br/>UI · Código · Arquitectura"]
     M["🫐 MORA<br/><b>Documenta</b><br/>Hub · Inventario · Sincronía"]
 
-    S -->|"contexto técnico"| L
-    S -->|"contexto técnico"| C
-    S -->|"implementación y consumidores"| M
     L -->|"solicita auditoría"| C
     C -->|"evidencia y findings"| L
     L -->|"estado del sistema"| M
     C -->|"implementación real"| M
-    C -.->|"cambios"| S
-    L -.->|"cambios"| S
 ```
 
 
 > ### Regla de oro
 >
-> **🥥 coco diseña/audita · 🟢 lima gobierna/refina · 🫐 mora documenta · 🌱 semilla mapea**
+> **🥥 coco diseña/audita · 🟢 lima gobierna/refina · 🫐 mora documenta**
 
 No hay dos auditores.
 
@@ -89,112 +83,6 @@ No hay dos lifecycle managers.
 No hay una documentación que decide por su cuenta cómo debería funcionar el producto.
 
 Cada fruta conoce su parcela. Milagroso.
-
-
-## 🌱 Semilla — mapa técnico del proyecto
-
-**Semilla** mantiene un mapa técnico persistente para que el resto del Squad no tenga que redescubrir el repositorio en cada tarea.
-
-```text
-Proyecto
-   ↓
-🌱 Semilla
-   │
-   ├── capa determinista (la escribe el CLI)
-   │     grafo de imports · reachability desde raíces
-   │     → graph.json · graph-orphans.json
-   │
-   └── capa semántica (la escribe el agente)
-         módulos · rutas · componentes · servicios · API · datos · flujos
-         → modules.json · ui.json · api.json · flows.json · …
-            ↓
-      .fruti/knowledge/
-```
-
-Las dos conviven en el mismo `index.json` y **ninguna pisa a la otra**: el CLI mezcla su sección y conserva las claves del agente, y al revés. El grafo del CLI es barato y objetivo; la capa semántica es la que entiende el dominio.
-
-### Flujo recomendado
-
-```bash
-# Primera vez: construir el mapa
-fruti semilla init --scope src
-
-# Consultar el estado
-fruti semilla status
-
-# Actualizarlo después de cambios
-fruti semilla sync
-```
-
-Semilla puede activarse o ignorarse explícitamente:
-
-```bash
-fruti semilla on
-fruti semilla off
-```
-
-Con Semilla activa, los agentes deben consultar primero el Project Knowledge Map y abrir código únicamente para verificar o completar el contexto.
-
-### Relaciones e impacto
-
-```bash
-fruti semilla relations src/components/Foo.vue
-fruti semilla impact src/components/Foo.vue
-fruti semilla why src/components/Foo.vue
-fruti semilla graph --scope appointments
-```
-
-### Código potencialmente obsoleto
-
-```bash
-fruti semilla orphans
-```
-
-`orphan` o `unreachable` significa **candidato a revisión**, no “seguro para borrar”. Semilla conserva evidencia de relaciones y reachability para explicar la clasificación.
-
-### ¿De verdad ahorra? — benchmark A/B
-
-Un mapa solo se justifica si reduce la exploración. `fruti semilla test` corre la misma tarea dos veces desde el mismo estado —una ignorando el mapa, otra consultándolo— y compara.
-
-```bash
-fruti semilla hook install     # una vez por proyecto; cuenta la exploración
-
-fruti semilla test start localiza-estado --task "¿Dónde se guarda el estado de X?" --variant control
-# pega en una sesión limpia el prompt que imprime, y al terminar:
-fruti semilla test end --correct --input-tokens 31420
-
-fruti semilla test start localiza-estado --variant semilla
-fruti semilla test end --correct --input-tokens 8910
-
-fruti semilla test report
-```
-
-```text
-                           OFF         ON          Δ
-────────────────────────────────────────────────────
-Tiempo                   48.2 s     11.7 s     -75.7%
-Archivos leidos              24          4     -83.3%
-Busquedas                    17          2     -88.2%
-Tool calls                   31          7     -77.4%
-Input tokens             31,420      8,910     -71.6%
-Verification reads            0          3
-Respuesta correcta            ✓          ✓
-```
-
-El CLI no puede ejecutar al agente ni ver su sesión, así que reparte: el **cronómetro** es suyo, las cifras de exploración las aporta el **hook**, y los **tokens** y la **respuesta correcta** los das tú al cerrar.
-
-**Verification reads** es la métrica que más importa: cuántos archivos abrió el agente *después* de consultar el mapa. Cero significa que lo usó como sustituto de la fuente de verdad; lo sano es mapa → dos o tres archivos → confirmación.
-
-```bash
-fruti semilla test overhead --init-tokens 82410
-fruti semilla test status
-```
-
-`test status` promedia todas las tareas, contrasta la precisión con y sin mapa, y calcula el **break-even**: cuántas tareas hacen falta para que el mapa se pague. Si la precisión baja, el ahorro no cuenta.
-
-Si prefieres no instalar el hook, `fruti semilla benchmark start|end|report` sigue ahí y recibe todas las métricas a mano.
-
-> Documentación técnica completa: [`skills/semilla/README.md`](skills/semilla/README.md) · [`SKILL.md`](skills/semilla/SKILL.md)
 
 
 ---
@@ -269,11 +157,11 @@ Formato del intake: `skills/lima/reference/intake.md` · ejemplo: `skills/lima/p
 
 ### Ejemplos
 
-Instalar solo los cuatro miembros principales (es lo mismo que omitir `--only`):
+Instalar solo los tres miembros principales (es lo mismo que omitir `--only`):
 
 ```bash
 npx github:kevinedgm/fruti-squad install \
-  --only coco,lima,mora,semilla
+  --only coco,lima,mora
 ```
 
 Instalar solo lima:
@@ -299,7 +187,7 @@ npx github:kevinedgm/fruti-squad help
 
 # 🚦 Inicio rápido — un solo comando (`setup`)
 
-**Lo más simple: un comando y el asistente hace el resto.** `setup` **instala** los cuatro miembros, te **pregunta** unos datos en la terminal (asistente), **inicializa** lima (crea el perfil + Design Hub + registry) y **añade automáticamente** los bloques `coco:` y `mora:`. No abres ni editas archivos.
+**Lo más simple: un comando y el asistente hace el resto.** `setup` **instala** los tres miembros, te **pregunta** unos datos en la terminal (asistente), **inicializa** lima (crea el perfil + Design Hub + registry) y **añade automáticamente** los bloques `coco:` y `mora:`. No abres ni editas archivos.
 
 ```bash
 npx github:kevinedgm/fruti-squad setup --target kiro     # o claude / codex
@@ -337,7 +225,7 @@ El **flujo es el mismo en los tres entornos**; solo cambia dónde quedó lima y 
 ```bash
 # 1 · Instalar
 npx github:kevinedgm/fruti-squad install --target kiro
-#   lima → .agents/skills/lima/   ·   semilla → .agents/skills/semilla/
+#   lima → .agents/skills/lima/
 #   coco → .kiro/agents/coco/     ·   mora → .kiro/agents/mora/
 
 # 2 · Inicializar — lima crea profiles/<proyecto>.md + Design Hub + registry (+ QA)
@@ -376,7 +264,7 @@ bash .codex/skills/lima/scripts/init-project.sh --intake my-intake.yaml --qa pla
 
 # 3 · Completar — bloques coco:/mora: (campos: .codex/skills/coco/intake.md · .../mora/intake.md)
 
-# 4 · Usar — Codex lee AGENTS.md (ya apunta a las carpetas); pídele "usa coco/lima/mora/semilla".
+# 4 · Usar — Codex lee AGENTS.md (ya apunta a las carpetas); pídele "usa coco/lima/mora".
 ```
 
 > Codex no auto-descubre carpetas: el instalador escribe el bloque `fruti-squad` en `AGENTS.md`. Si mueves las skills, re-corre el install para refrescarlo.
@@ -388,7 +276,7 @@ bash .codex/skills/lima/scripts/init-project.sh --intake my-intake.yaml --qa pla
 Esta es la anatomía de lo que pasa al inicializar, para que sepas exactamente qué genera la herramienta y qué debes aportar.
 
 ### 1) `install` — copiar los archivos
-Copia las carpetas de coco, lima, mora y semilla a las rutas del entorno (ver tablas arriba). **No** crea ningún perfil todavía; solo deja disponibles a los cuatro. En Claude/Codex además genera un `SKILL.md` puente para coco/mora, y en Codex escribe el bloque en `AGENTS.md`.
+Copia las carpetas de coco, lima y mora a las rutas del entorno (ver tablas arriba). **No** crea ningún perfil todavía; solo deja disponibles a los tres. En Claude/Codex además genera un `SKILL.md` puente para coco/mora, y en Codex escribe el bloque en `AGENTS.md`.
 
 ### 2) `init` (lima) — crear el perfil y el laboratorio
 `lima/scripts/init-project.sh` **crea**, a partir de tu intake:
@@ -628,11 +516,6 @@ diseño
 | Documentar componentes                 | 🫐 **mora** |
 | Revisar cobertura documental           | 🫐 **mora** |
 | Sincronizar Hub y registry             | 🫐 **mora** |
-| Saber quién usa un archivo             | 🌱 **semilla** |
-| Saber qué se rompe si lo modifico      | 🌱 **semilla** |
-| Saber desde qué ruta es alcanzable     | 🌱 **semilla** |
-| Encontrar código sin consumidores      | 🌱 **semilla** |
-| Ubicar un módulo sin leer medio repo   | 🌱 **semilla** |
 
 ---
 
@@ -697,8 +580,6 @@ skills/lima/profiles/<proyecto>.md
 ```
 
 El perfil contiene la configuración compartida del proyecto.
-
-🌱 **semilla no usa este perfil.** Su estado y su mapa viven aparte, en `.fruti/`, porque describe el proyecto real —qué archivos hay y cómo se conectan— y no el design system.
 
 ---
 
@@ -842,15 +723,14 @@ desde:
 Por tanto:
 
 ```text
-lima    → .agents/skills/lima/
-semilla → .agents/skills/semilla/
+lima → .agents/skills/lima/
 
 coco → .kiro/agents/coco/
 
 mora → .kiro/agents/mora/
 ```
 
-En Claude Code y Codex los cuatro caen juntos, en `.claude/skills/` y `.codex/skills/` respectivamente.
+En Claude Code y Codex los tres caen juntos, en `.claude/skills/` y `.codex/skills/` respectivamente.
 
 ---
 
@@ -918,7 +798,7 @@ Ese bloque apunta a las skills instaladas.
 
 # 🧃 Extras incluidos
 
-Además de los cuatro miembros que se instalan por defecto (coco · lima · mora · semilla), Fruti Squad puede distribuir:
+Además de los tres miembros que se instalan por defecto (coco · lima · mora), Fruti Squad puede distribuir:
 
 | Skill                | Función                              |
 | -------------------- | ------------------------------------ |
@@ -1020,14 +900,6 @@ fruti-squad/
 │   │   └── vendor/
 │   │       └── impeccable/
 │   │
-│   ├── semilla/
-│   │   ├── SKILL.md
-│   │   ├── README.md
-│   │   ├── reference/
-│   │   └── scripts/
-│   │       ├── semilla.mjs      # CLI del mapa
-│   │       └── semilla-hook.mjs # contador para el benchmark A/B
-│   │
 │   ├── impeccable/
 │   │
 │   ├── improve-animations/
@@ -1075,8 +947,8 @@ MIT © kevinedgm
 
 ## 🍓 Fruti Squad
 
-### 🌱 Mapea · 🥥 Diseña · 🟢 Gobierna · 🫐 Documenta
+### 🥥 Diseña · 🟢 Gobierna · 🫐 Documenta
 
-**Un sistema. Una fuente de verdad. Cuatro frutas sorprendentemente burocráticas.**
+**Un sistema. Una fuente de verdad. Tres frutas sorprendentemente burocráticas.**
 
 </div>
