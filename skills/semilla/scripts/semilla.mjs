@@ -13,10 +13,14 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync, statSy
 import { resolve, join, relative, extname, dirname } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { performance } from 'node:perf_hooks';
+import { fileURLToPath } from 'node:url';
 
 const cwd=process.cwd(), root=resolve(cwd), fruti=join(root,'.fruti');
 const cfgPath=join(fruti,'semilla.json'), benchPath=join(fruti,'benchmarks.json'), activePath=join(fruti,'.benchmark-active.json');
 const SCHEMA='fruti-semilla/v1';
+const countersPath=join(fruti,'.counters.json'), testActivePath=join(fruti,'.test-active.json'), testsPath=join(fruti,'tests.json');
+const settingsPath=join(root,'.claude','settings.local.json');
+const hookScript=fileURLToPath(new URL('semilla-hook.mjs',import.meta.url));
 const IGNORE=new Set(['node_modules','.git','.fruti','dist','build','coverage','.next','.nuxt','.output','vendor']);
 const CODE=new Set(['.js','.mjs','.cjs','.ts','.tsx','.jsx','.vue','.svelte','.java','.py','.php','.dart']);
 const args=process.argv.slice(2), cmd=args[0]||'help';
@@ -94,6 +98,49 @@ function changed(){
  }
  return [...new Set(out)].filter(f=>!f.split('/').some(seg=>IGNORE.has(seg)))
 }
+// ---------- hook ----------
+function hookCmd(){return `node ${JSON.stringify(hookScript)}`}
+function hasHook(s){return (s?.hooks?.PostToolUse||[]).some(m=>(m.hooks||[]).some(h=>String(h.command||'').includes('semilla-hook.mjs')))}
+function hookInstall(){
+ const s=readJson(settingsPath,null)||{};
+ if(hasHook(s))return 'El hook ya estaba instalado.';
+ s.hooks??={};s.hooks.PostToolUse??=[];
+ s.hooks.PostToolUse.push({matcher:'*',hooks:[{type:'command',command:hookCmd()}]});
+ writeJson(settingsPath,s);
+ return `Hook instalado en ${rel(settingsPath)}. Reinicia la sesion del agente para que lo cargue.`
+}
+function hookUninstall(){
+ const s=readJson(settingsPath,null);
+ if(!s||!hasHook(s))return 'No habia hook de Semilla instalado.';
+ s.hooks.PostToolUse=s.hooks.PostToolUse.map(m=>({...m,hooks:(m.hooks||[]).filter(h=>!String(h.command||'').includes('semilla-hook.mjs'))})).filter(m=>(m.hooks||[]).length);
+ writeJson(settingsPath,s);
+ return 'Hook desinstalado.'
+}
+
+// ---------- test A/B ----------
+function tests(){const t=readJson(testsPath,null);return t&&Array.isArray(t.runs)?t:{runs:[],overhead:{}}}
+const nfmt=n=>Number.isFinite(n)?n.toLocaleString('en-US'):'—';
+function pct(a,b){if(!Number.isFinite(a)||!Number.isFinite(b)||a===0)return '—';const d=(b-a)/a*100;return (d>0?'+':'')+d.toFixed(1)+'%'}
+function row(label,a,b,fmt=nfmt){console.log(label.padEnd(20)+String(fmt(a)).padStart(10)+String(fmt(b)).padStart(11)+String(pct(a,b)).padStart(11))}
+function pair(runs,name){
+ const of_=[...runs].reverse().find(r=>r.name===name&&r.variant==='control');
+ const on=[...runs].reverse().find(r=>r.name===name&&r.variant==='semilla');
+ return {of_,on}
+}
+function printPair(name,of_,on){
+ console.log('\nTask: '+name);
+ if(of_?.task||on?.task)console.log('"'+(of_?.task||on?.task)+'"');
+ console.log(''.padEnd(20)+'OFF'.padStart(10)+'ON'.padStart(11)+'Δ'.padStart(11));
+ console.log('─'.repeat(52));
+ row('Tiempo',of_?.duration_ms/1000,on?.duration_ms/1000,n=>Number.isFinite(n)?n.toFixed(1)+' s':'—');
+ row('Archivos leidos',of_?.files_read,on?.files_read);
+ row('Busquedas',of_?.searches,on?.searches);
+ row('Tool calls',of_?.tool_calls,on?.tool_calls);
+ row('Input tokens',of_?.input_tokens,on?.input_tokens);
+ console.log('Verification reads'.padEnd(20)+String(of_?.verification_reads??'—').padStart(10)+String(on?.verification_reads??'—').padStart(11));
+ console.log('Respuesta correcta'.padEnd(20)+(of_?of_.correct?'✓':'✗':'—').padStart(10)+(on?on.correct?'✓':'✗':'—').padStart(11));
+ if(!of_||!on)console.log('\n(falta la condicion '+(of_?'ON':'OFF')+'; corre la otra mitad para comparar)')
+}
 function help(){console.log(`
 🌱 Semilla
   fruti semilla init [--scope src]
@@ -108,6 +155,13 @@ function help(){console.log(`
   fruti semilla benchmark start <name> --variant control|semilla [--force]
   fruti semilla benchmark end [--input-tokens N --output-tokens N --tool-calls N]
   fruti semilla benchmark report
+
+  fruti semilla hook install | uninstall | status
+  fruti semilla test start <name> --task "..." --variant control|semilla
+  fruti semilla test end --correct|--wrong [--input-tokens N --output-tokens N] [--note "..."]
+  fruti semilla test report [<name>]
+  fruti semilla test overhead --init-tokens N [--sync-tokens N]
+  fruti semilla test status
 `)}
 
 try{
@@ -148,6 +202,90 @@ try{
    const by={};for(const r of all)(by[r.name]??=[]).push(r);
    if(!Object.keys(by).length){console.log('Sin corridas registradas.')}
    for(const [n,rs] of Object.entries(by)){console.log('\n'+n);for(const r of rs){const d=Number.isFinite(r.duration_ms)?(r.duration_ms/1000).toFixed(2)+'s':'—';console.log(`  ${String(r.variant||'?').padEnd(8)} ${d} input:${r.input_tokens??0} output:${r.output_tokens??0} tools:${r.tool_calls??0}`)}}
+  }
+  else help()
+ }
+ else if(cmd==='hook'){
+  const sub=args[1]||'status';
+  if(sub==='install')console.log('🌱 '+hookInstall());
+  else if(sub==='uninstall')console.log('🌱 '+hookUninstall());
+  else{
+   const s=readJson(settingsPath,null);
+   console.log('🌱 Hook:',hasHook(s)?'INSTALADO':'NO INSTALADO');
+   console.log('Settings:',rel(settingsPath));
+   console.log('Script:',hookScript);
+   const c=readJson(countersPath,null);
+   console.log('Contadores:',c?`${c.tool_calls} tool calls · ${c.files_read.length} archivos · ${c.searches} busquedas (desde ${c.since})`:'sin actividad registrada');
+  }
+ }
+ else if(cmd==='test'){
+  const sub=args[1]||'status', t=tests();
+  if(sub==='start'){
+   const prev=readJson(testActivePath,null);
+   if(prev&&!flag('--force',false))throw new Error(`Ya hay un test activo: "${prev.name}" (${prev.variant}). Cierralo con "test end" o repite con --force.`);
+   const name=args[2]&&!args[2].startsWith('--')?args[2]:null;
+   if(!name)throw new Error('Falta el nombre del test: fruti semilla test start <name> --task "..." --variant control|semilla');
+   const variant=str('--variant',null);
+   if(variant!=='control'&&variant!=='semilla')throw new Error('--variant debe ser control o semilla');
+   const task=str('--task',null)||(t.runs.find(r=>r.name===name)?.task);
+   if(!task)throw new Error('Falta --task "..." la primera vez que corres este test');
+   ensure();const c=config();c.enabled=variant==='semilla';c.updated_at=new Date().toISOString();writeJson(cfgPath,c);
+   rmSync(countersPath,{force:true});
+   writeJson(testActivePath,{name,task,variant,started_at:new Date().toISOString(),started_ms:Date.now()});
+   console.log(`\n🌱 test "${name}" · ${variant.toUpperCase()} · Semilla ${c.enabled?'ON':'OFF'}`);
+   console.log('─'.repeat(52));
+   console.log('Abre una sesion LIMPIA del agente y pega exactamente esto:\n');
+   console.log(variant==='control'
+    ?`Ignora por completo .fruti/knowledge/. Responde usando el repositorio directamente.\n\n${task}`
+    :`Consulta .fruti/knowledge/ primero. Abre codigo solo para verificar o completar lo que el mapa no responda.\n\n${task}`);
+   console.log('\nAl terminar: fruti semilla test end --correct|--wrong [--input-tokens N]');
+  }
+  else if(sub==='end'){
+   const a=readJson(testActivePath,null);if(!a)throw new Error('No hay test activo. Abrelo con: fruti semilla test start <name> --task "..." --variant control|semilla');
+   const ok=flag('--correct',false)===true, bad=flag('--wrong',false)===true;
+   if(ok===bad)throw new Error('Marca el resultado con --correct o --wrong (exactamente uno).');
+   const c=readJson(countersPath,null);
+   if(!c)console.error('Semilla: aviso · sin contadores del hook; se registra solo el tiempo. Revisa "fruti semilla hook status".');
+   const run={...a,ended_at:new Date().toISOString(),duration_ms:Date.now()-a.started_ms,
+    tool_calls:c?.tool_calls??null,files_read:c?.files_read?.length??null,searches:c?.searches??null,
+    verification_reads:c?.reads_after_map?.length??null,map_consulted:c?.map_consulted??null,
+    input_tokens:flag('--input-tokens',null)===null?null:num('--input-tokens'),
+    output_tokens:flag('--output-tokens',null)===null?null:num('--output-tokens'),
+    correct:ok,note:flag('--note',null)===true?null:flag('--note',null)};
+   t.runs.push(run);writeJson(testsPath,t);
+   rmSync(testActivePath,{force:true});rmSync(countersPath,{force:true});
+   console.log(`🌱 registrado · ${run.name} · ${run.variant} · ${(run.duration_ms/1000).toFixed(1)}s · ${run.files_read??'—'} archivos · ${run.searches??'—'} busquedas · ${run.tool_calls??'—'} tool calls · ${ok?'✓':'✗'}`);
+   const {of_,on}=pair(t.runs,run.name);if(of_&&on)printPair(run.name,of_,on);
+  }
+  else if(sub==='report'){
+   const only=args[2]&&!args[2].startsWith('--')?args[2]:null;
+   const names=[...new Set(t.runs.map(r=>r.name))].filter(n=>!only||n===only);
+   if(!names.length){console.log('Sin tests registrados.')}
+   else{console.log('\n🌱 SEMILLA BENCHMARK');for(const n of names){const {of_,on}=pair(t.runs,n);printPair(n,of_,on)}}
+  }
+  else if(sub==='overhead'){
+   t.overhead={...t.overhead,init_tokens:num('--init-tokens'),...(flag('--sync-tokens',null)===null?{}:{sync_tokens:num('--sync-tokens')})};
+   writeJson(testsPath,t);console.log('🌱 overhead registrado:',t.overhead);
+  }
+  else if(sub==='status'){
+   const names=[...new Set(t.runs.map(r=>r.name))];
+   const pairs=names.map(n=>pair(t.runs,n)).filter(p=>p.of_&&p.on);
+   console.log('\n🌱 Semilla effectiveness');
+   console.log('Experiments'.padEnd(20)+String(pairs.length).padStart(8)+`  (de ${names.length} tareas registradas)`);
+   if(!pairs.length){console.log('\nNingun test tiene todavia sus dos condiciones. Corre la mitad que falte.')}
+   else{
+    const avg=k=>{const v=pairs.map(p=>{const a=k(p.of_),b=k(p.on);return Number.isFinite(a)&&Number.isFinite(b)&&a!==0?(b-a)/a*100:null}).filter(x=>x!==null);return v.length?(v.reduce((s,x)=>s+x,0)/v.length):null};
+    const line=(l,v)=>console.log('  '+l.padEnd(18)+(v===null?'sin datos':(v>0?'+':'')+v.toFixed(0)+'%').padStart(10));
+    console.log('\nAverage');line('Tiempo',avg(r=>r.duration_ms));line('Input tokens',avg(r=>r.input_tokens));line('Archivos leidos',avg(r=>r.files_read));line('Busquedas',avg(r=>r.searches));
+    const acc=v=>{const rs=t.runs.filter(r=>r.variant===v);return rs.length?(rs.filter(r=>r.correct).length/rs.length*100).toFixed(1)+'%':'sin datos'};
+    console.log('\nAccuracy');console.log('  OFF'.padEnd(20)+acc('control').padStart(10));console.log('  ON'.padEnd(20)+acc('semilla').padStart(10));
+    console.log('\nSemilla overhead');
+    console.log('  INIT'.padEnd(20)+(t.overhead?.init_tokens?nfmt(t.overhead.init_tokens)+' tokens':'sin datos').padStart(10));
+    console.log('  SYNC'.padEnd(20)+(t.overhead?.sync_tokens?nfmt(t.overhead.sync_tokens)+' tokens':'sin datos').padStart(10));
+    const saved=pairs.map(p=>Number.isFinite(p.of_.input_tokens)&&Number.isFinite(p.on.input_tokens)?p.of_.input_tokens-p.on.input_tokens:null).filter(x=>x!==null);
+    const mean=saved.length?saved.reduce((s,x)=>s+x,0)/saved.length:null;
+    console.log('\nBreak-even'.padEnd(20)+((t.overhead?.init_tokens&&mean&&mean>0)?(t.overhead.init_tokens/mean).toFixed(1)+' tareas':'sin datos (falta overhead o input tokens)').padStart(10));
+   }
   }
   else help()
  }

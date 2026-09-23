@@ -50,21 +50,81 @@ Los comandos de consulta leen `graph.json`, así que necesitan un `init` previo.
 | ¿Qué subgrafos están desconectados? | `orphans` → `unreachable` (se importan entre sí, sin camino desde una raíz) |
 | ¿Por qué considera algo huérfano? | `why` → línea `reason` |
 
-### Benchmark A/B
+### Benchmark A/B — ¿de verdad ahorra exploración?
 
-Usa la misma tarea, commit, modelo y reasoning effort.
+Semilla solo se justifica si reduce la exploración del agente. `fruti semilla test` mide eso con la misma tarea, commit, modelo y reasoning effort en dos condiciones.
+
+**Qué mide quién.** El CLI no puede ejecutar al agente ni ver su sesión: es un script sin dependencias. Reparte así:
+
+| Métrica | Quién la aporta |
+|---|---|
+| tiempo | el CLI, con su cronómetro |
+| tool calls, archivos leídos, búsquedas, verification reads | el hook `PostToolUse` |
+| input/output tokens | tú, al cerrar (`--input-tokens N`); el hook no los ve |
+| respuesta correcta | tú, al cerrar (`--correct` / `--wrong`) |
+
+Instala el hook una vez por proyecto y reinicia la sesión del agente:
 
 ```bash
-fruti semilla off
+fruti semilla hook install
+fruti semilla hook status
+```
+
+Escribe en `.claude/settings.local.json`, que está gitignorado: queda en tu máquina.
+
+**Condición A — Semilla OFF:**
+
+```bash
+fruti semilla test start localiza-estado-cita \
+  --task "Localiza dónde se almacena el estado de una cita y qué archivos intervienen en su lectura y visualización" \
+  --variant control
+```
+
+`test start` apaga Semilla, pone los contadores en cero e imprime el prompt exacto para pegar en una sesión limpia. Al terminar:
+
+```bash
+fruti semilla test end --correct --input-tokens 31420 --output-tokens 2000
+```
+
+**Condición B — Semilla ON:** lo mismo con `--variant semilla` (el `--task` ya queda guardado). El prompt cambia a *consulta el mapa primero, abre código solo para verificar*.
+
+```bash
+fruti semilla test report
+```
+
+```text
+Task: localiza-estado-cita
+                           OFF         ON          Δ
+────────────────────────────────────────────────────
+Tiempo                   48.2 s     11.7 s     -75.7%
+Archivos leidos              24          4     -83.3%
+Busquedas                    17          2     -88.2%
+Tool calls                   31          7     -77.4%
+Input tokens             31,420      8,910     -71.6%
+Verification reads            0          3
+Respuesta correcta            ✓          ✓
+```
+
+**Verification reads** es la métrica que más importa. El hook marca cuándo el agente leyó `.fruti/knowledge/` y cuenta los archivos que abrió *después*. Cero significa que Semilla se usó como sustituto de la fuente de verdad, no como índice; el comportamiento sano es mapa → dos o tres archivos concretos → confirmación.
+
+**¿Vale la pena el invento?** Registra lo que costó construir el mapa y pregunta:
+
+```bash
+fruti semilla test overhead --init-tokens 82410 --sync-tokens 11204
+fruti semilla test status
+```
+
+`Break-even` divide el costo del INIT entre el ahorro medio por tarea: cuántas tareas hay que hacer para que Semilla se pague. Si `Accuracy ON` baja respecto a `OFF`, el ahorro no cuenta — significa que el mapa está llevando al agente a respuestas peores.
+
+Tareas sugeridas, de menos a más exigentes: localización simple (`¿dónde se guarda el nombre del usuario?`), valores admitidos, endpoint que modifica, pantalla que lo consume, impacto de cambiar un modelo, y código antiguo sin consumidores. Las primeras miden localización; las últimas miden si el grafo sirve de verdad.
+
+### Benchmark manual
+
+Si no quieres instalar el hook, el primitivo crudo sigue ahí y recibe todas las métricas a mano:
+
+```bash
 fruti semilla benchmark start locate-status --variant control
-# ejecuta la tarea con el agente
 fruti semilla benchmark end --input-tokens 30000 --output-tokens 2000 --tool-calls 25
-
-fruti semilla on
-fruti semilla benchmark start locate-status --variant semilla
-# ejecuta exactamente la misma tarea en una sesión limpia
-fruti semilla benchmark end --input-tokens 9000 --output-tokens 1800 --tool-calls 8
-
 fruti semilla benchmark report
 ```
 
