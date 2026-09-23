@@ -78,6 +78,8 @@ fruti semilla hook status
 
 Escribe en `.claude/settings.local.json`, que está gitignorado: queda en tu máquina.
 
+El hook **solo cuenta mientras hay una medición abierta** (`test start` o `benchmark start`). Fuera de esa ventana no escribe nada, así que no ensucia los contadores con sesiones que no estás midiendo ni deja un archivo creciendo por cada tool call. Ojo: es independiente del interruptor de Semilla — `semilla off` apaga el mapa, no el hook. Para quitarlo, `hook uninstall`.
+
 **Condición A — Semilla OFF:**
 
 ```bash

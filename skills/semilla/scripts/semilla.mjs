@@ -260,8 +260,9 @@ try{
    console.log('🌱 Hook:',hasHook(s)?'INSTALADO':'NO INSTALADO');
    console.log('Settings:',rel(settingsPath));
    console.log('Script:',hookScript);
-   const c=readJson(countersPath,null);
-   console.log('Contadores:',c?`${c.tool_calls} tool calls · ${c.files_read.length} archivos · ${c.searches} busquedas (desde ${c.since})`:'sin actividad registrada');
+   const c=readJson(countersPath,null), open=readJson(testActivePath,null)||readJson(activePath,null);
+   console.log('Midiendo:',open?`"${open.name}" · ${open.variant} · desde ${open.started_at}`:'no — el hook solo cuenta con una medicion abierta');
+   console.log('Contadores:',c?`${c.tool_calls} tool calls · ${c.files_read.length} archivos · ${c.searches} busquedas · ${c.reads_after_map.length} de verificacion (desde ${c.since})`:'sin actividad registrada');
   }
  }
  else if(cmd==='test'){
