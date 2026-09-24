@@ -4,7 +4,7 @@
 
 # 🍓 Fruti Squad
 
-### 🥝 kiwi · <img src="assets/coco.png" alt="coco" width="28"> coco · <img src="assets/lima.png" alt="lima" width="28"> lima 
+### 🥝 kiwi · <img src="assets/coco.png" alt="coco" width="28"> coco · <img src="assets/lima.png" alt="lima" width="28"> lima · <img src="assets/mora.png" alt="mora" width="28"> mora
 
 **Un pequeño equipo para diseñar, gobernar y documentar sistemas de diseño sin convertir el repositorio en una selva de reglas duplicadas.**
 
@@ -21,7 +21,7 @@ npx github:kevinedgm/fruti-squad install --target kiro   # o claude / codex
 
 <br>
 
-**Una configuración. Cinco especialistas. Contexto compartido sin redescubrir el proyecto.**
+**Una configuración. Cuatro especialistas. Contexto compartido sin redescubrir el proyecto.**
 
 </div>
 
@@ -40,7 +40,7 @@ Cada miembro tiene una responsabilidad clara:
 | 🟢 | **lima** | Gobernar arquitectura, lifecycle, registry y madurez          |
 | 🫐 | **mora** | Documentar, inventariar y mantener el Design Hub sincronizado |
 
-Coco, lima y mora comparten un único perfil:
+Kiwi, coco, lima y mora usan un único perfil:
 
 ```text
 profiles/<proyecto>.md
@@ -158,11 +158,11 @@ Formato del intake: `skills/lima/reference/intake.md` · ejemplo: `skills/lima/p
 
 ### Ejemplos
 
-Instalar solo los tres miembros principales (es lo mismo que omitir `--only`):
+Instalar los cuatro miembros principales (es lo mismo que omitir `--only`):
 
 ```bash
 npx github:kevinedgm/fruti-squad install \
-  --only coco,lima,mora
+  --only kiwi,coco,lima,mora
 ```
 
 Instalar solo lima:
@@ -188,7 +188,7 @@ npx github:kevinedgm/fruti-squad help
 
 # 🚦 Inicio rápido — un solo comando (`setup`)
 
-**Lo más simple: un comando y el asistente hace el resto.** `setup` **instala** los tres miembros, te **pregunta** unos datos en la terminal (asistente), **inicializa** lima (crea el perfil + Design Hub + registry) y **añade automáticamente** los bloques `coco:` y `mora:`. No abres ni editas archivos.
+**Lo más simple: un comando y el asistente hace el resto.** `setup` **instala** los cuatro miembros, te **pregunta** unos datos en la terminal (asistente), **inicializa** lima (crea el perfil + Design Hub + registry) y **añade automáticamente** los bloques `coco:` y `mora:`. No abres ni editas archivos.
 
 ```bash
 npx github:kevinedgm/fruti-squad setup --target kiro     # o claude / codex
@@ -799,7 +799,7 @@ Ese bloque apunta a las skills instaladas.
 
 # 🧃 Extras incluidos
 
-Además de los tres miembros que se instalan por defecto (coco · lima · mora), Fruti Squad puede distribuir:
+Además de los cuatro miembros que se instalan por defecto (kiwi · coco · lima · mora), Fruti Squad puede distribuir:
 
 | Skill                | Función                              |
 | -------------------- | ------------------------------------ |
