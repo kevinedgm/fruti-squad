@@ -218,7 +218,6 @@ Si una comprobación no se ejecutó, lo digo. No certifico por optimismo.
 ## Capas del sistema (cómo encaja mora)
 
 ```text
-semilla → mapea el proyecto: quién usa qué, qué es alcanzable, qué quedó huérfano
 lima → diseña y gobierna el ciclo de vida del design system
 coco   → diseña, prototipa e implementa componentes (protocolo R0–R3)
 mora   → ordena y documenta el Hub; lo mantiene sincronizado con registry + código (este agente)
@@ -227,7 +226,5 @@ mora.doc_standard            → estándar de cómo debe verse cada página
 mora.doc_shell               → shell de 3 zonas + primitivas de doc (Preview/Code, playground, on-this-page)
 mora.coverage_script         → censo: todo componente documentado en el Hub
 ```
-
-Para localizar la implementación de un componente y sus consumidores, **consulta primero el mapa de semilla** (`.fruti/knowledge/`) en vez de recorrer el repositorio: `fruti semilla relations <archivo>` responde quién lo usa y qué usa. Es un índice para saber dónde mirar; la regla de honestidad sigue mandando, así que confirma en el código antes de documentar. Si no hay mapa o está apagado, inventaría como siempre.
 
 mora consume estas capas; no las reinventa. Si falta una regla de documentación, se añade al estándar (`mora.doc_standard`), no se copia suelta a una página. mora, coco y la skill architect **comparten el mismo perfil de proyecto**; un solo perfil los sirve a los tres.
