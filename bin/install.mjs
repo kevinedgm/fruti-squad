@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Fruti Squad installer/setup — coco · lima · mora · semilla, for Kiro, Claude Code, Codex.
+// Fruti Squad installer/setup — coco · lima · mora, for Kiro, Claude Code, Codex.
 // Zero dependencies.
 //   npx github:kevinedgm/fruti-squad setup   --target kiro --intake my-intake.yaml
 //   npx github:kevinedgm/fruti-squad install --target kiro
@@ -41,11 +41,10 @@ const MEMBERS = {
   impeccable:           { from: 'skills/impeccable',         kind: 'skill', blurb: 'playbooks de refinamiento de UI' },
   'improve-animations': { from: 'skills/improve-animations', kind: 'skill', blurb: 'micro-interacciones y animación' },
   'skill-architect':    { from: 'skills/skill-architect',    kind: 'skill', blurb: 'creación de nuevas skills' },
-  semilla:              { from: 'skills/semilla',            kind: 'skill', blurb: 'mapea el proyecto y mantiene su memoria técnica estructurada' },
   coco:                 { from: 'agentes/coco',              kind: 'agent', blurb: 'diseña, implementa y audita interfaz (protocolo R0–R3)' },
   mora:                 { from: 'agentes/mora',              kind: 'agent', blurb: 'documenta y sincroniza el Design Hub' },
 };
-const DEFAULT = ['coco', 'lima', 'mora', 'semilla'];
+const DEFAULT = ['coco', 'lima', 'mora'];
 const TARGETS = ['kiro', 'claude', 'codex'];
 
 const C = {
@@ -77,7 +76,7 @@ function parseArgs(argv) {
 
 function helpText() {
   return `
-${C.bold}🍓 Fruti Squad${C.reset} — coco · lima · mora · semilla  (Kiro · Claude Code · Codex)
+${C.bold}🍓 Fruti Squad${C.reset} — coco · lima · mora  (Kiro · Claude Code · Codex)
 
 ${C.bold}Commands${C.reset}
   ${C.bold}setup${C.reset}          One shot: install + init (lima) + append coco:/mora: to the profile
@@ -164,13 +163,13 @@ function writeCodexAgentsMd(base, members, skillsRootRel, dryRun) {
   const end = '<!-- fruti-squad:end -->';
   const lines = [
     start,
-    '## 🍓 Fruti Squad (coco · lima · mora · semilla)',
+    '## 🍓 Fruti Squad (coco · lima · mora)',
     '',
     'Este proyecto incluye el Fruti Squad en `' + skillsRootRel + '`. Cada carpeta tiene su `SKILL.md`/`AGENT.md`; léelos cuando la tarea lo pida:',
     '',
     ...members.map((n) => `- **${n}** — ${MEMBERS[n].blurb} → \`${skillsRootRel}/${n}/\``),
     '',
-    'Frontera: **coco audita · lima gobierna el ciclo y refina · mora documenta · semilla mapea.** Coco, lima y mora comparten el perfil de proyecto de lima (`' + skillsRootRel + '/lima/profiles/<proyecto>.md`).',
+    'Frontera: **coco audita · lima gobierna el ciclo y refina · mora documenta.** Coco, lima y mora comparten el perfil de proyecto de lima (`' + skillsRootRel + '/lima/profiles/<proyecto>.md`).',
     end,
   ].join('\n');
 
@@ -427,9 +426,9 @@ async function doSetup(args) {
 
 function printUse(target) {
   log(`\n${C.bold}Usar:${C.reset}`);
-  if (target === 'kiro')   log(`  Invoca ${C.bold}/coco${C.reset}, ${C.bold}/mora${C.reset} o las skills ${C.bold}lima${C.reset} / ${C.bold}semilla${C.reset} desde Kiro.`);
+  if (target === 'kiro')   log(`  Invoca ${C.bold}/coco${C.reset}, ${C.bold}/mora${C.reset} o la skill ${C.bold}lima${C.reset} desde Kiro.`);
   if (target === 'claude') log(`  En Claude Code aparecen como skills en ${C.bold}.claude/skills/${C.reset}; invócalas por nombre.`);
-  if (target === 'codex')  log(`  Codex las conoce por el bloque en ${C.bold}AGENTS.md${C.reset}; pídele "usa coco/lima/mora/semilla".`);
+  if (target === 'codex')  log(`  Codex las conoce por el bloque en ${C.bold}AGENTS.md${C.reset}; pídele "usa coco/lima/mora".`);
 }
 
 function doList() {
