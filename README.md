@@ -4,7 +4,7 @@
 
 # 🍓 Fruti Squad
 
-### <img src="assets/coco.png" alt="coco" width="28"> coco · <img src="assets/lima.png" alt="lima" width="28"> lima · <img src="assets/mora.png" alt="mora" width="28"> mora · 🌱 semilla
+### 🥝 kiwi · <img src="assets/coco.png" alt="coco" width="28"> coco · <img src="assets/lima.png" alt="lima" width="28"> lima · <img src="assets/mora.png" alt="mora" width="28"> mora · 🌱 semilla
 
 **Un pequeño equipo para diseñar, gobernar y documentar sistemas de diseño sin convertir el repositorio en una selva de reglas duplicadas.**
 
@@ -21,7 +21,7 @@ npx github:kevinedgm/fruti-squad install --target kiro   # o claude / codex
 
 <br>
 
-**Una configuración. Cuatro especialistas. Contexto compartido sin redescubrir el proyecto.**
+**Una configuración. Cinco especialistas. Contexto compartido sin redescubrir el proyecto.**
 
 </div>
 
@@ -35,6 +35,7 @@ Cada miembro tiene una responsabilidad clara:
 
 |    | Miembro  | Se encarga de                                                 |
 | -- | -------- | ------------------------------------------------------------- |
+| 🥝 | **kiwi** | Investigar flujos y entregar wireframes adaptativos y contratos de traspaso |
 | 🥥 | **coco** | Diseñar, implementar, auditar y refactorizar                  |
 | 🟢 | **lima** | Gobernar arquitectura, lifecycle, registry y madurez          |
 | 🫐 | **mora** | Documentar, inventariar y mantener el Design Hub sincronizado |\n| 🌱 | **semilla** | Mapear el proyecto y mantener su memoria técnica estructurada |
