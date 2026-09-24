@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Fruti Squad installer/setup — kiwi · coco · lima · mora · semilla, for Kiro, Claude Code, Codex.
+// Fruti Squad installer/setup — kiwi · coco · lima · mora, for Kiro, Claude Code, Codex.
 // Zero dependencies.
 //   npx github:kevinedgm/fruti-squad setup   --target kiro --intake my-intake.yaml
 //   npx github:kevinedgm/fruti-squad install --target kiro
@@ -21,7 +21,7 @@
 //   --qa <runner>   (setup) passed to lima init, e.g. playwright | none
 //   --global        install user-wide (~ instead of the project root)
 //   --dest <dir>    target project root (default: current working directory)
-//   --only <names>  comma list (default: kiwi,coco,lima,mora,semilla). Extra: impeccable,
+//   --only <names>  comma list (default: kiwi,coco,lima,mora). Extra: impeccable,
 //                   improve-animations, skill-architect
 //   --force         overwrite existing destinations
 //   --dry-run       print actions, change nothing
@@ -45,7 +45,7 @@ const MEMBERS = {
   coco:                 { from: 'agentes/coco',              kind: 'agent', blurb: 'diseña, implementa y audita interfaz (protocolo R0–R3)' },
   mora:                 { from: 'agentes/mora',              kind: 'agent', blurb: 'documenta y sincroniza el Design Hub' },
 };
-const DEFAULT = ['kiwi', 'coco', 'lima', 'mora', 'semilla'];
+const DEFAULT = ['kiwi', 'coco', 'lima', 'mora'];
 const TARGETS = ['kiro', 'claude', 'codex'];
 
 const C = {
@@ -77,7 +77,7 @@ function parseArgs(argv) {
 
 function helpText() {
   return `
-${C.bold}🍓 Fruti Squad${C.reset} — kiwi · coco · lima · mora · semilla  (Kiro · Claude Code · Codex)
+${C.bold}🍓 Fruti Squad${C.reset} — kiwi · coco · lima · mora  (Kiro · Claude Code · Codex)
 
 ${C.bold}Commands${C.reset}
   ${C.bold}setup${C.reset}          One shot: install + init (lima) + append coco:/mora: to the profile
@@ -91,7 +91,7 @@ ${C.bold}Options${C.reset}
   --qa <runner>    (setup) playwright | none   (default: playwright)
   --global         Install user-wide (home dir instead of project root)
   --dest <dir>     Target project root (default: current directory)
-  --only <names>   Comma list (default: kiwi,coco,lima,mora,semilla). Extra: impeccable,
+  --only <names>   Comma list (default: kiwi,coco,lima,mora). Extra: impeccable,
                    improve-animations, skill-architect
   --force          Overwrite existing destinations
   --dry-run        Show actions without changing anything
@@ -427,7 +427,7 @@ async function doSetup(args) {
 
 function printUse(target) {
   log(`\n${C.bold}Usar:${C.reset}`);
-  if (target === 'kiro')   log(`  Invoca ${C.bold}/kiwi${C.reset}, ${C.bold}/coco${C.reset}, ${C.bold}/mora${C.reset} o las skills ${C.bold}lima${C.reset} / ${C.bold}semilla${C.reset} desde Kiro.`);
+  if (target === 'kiro')   log(`  Invoca ${C.bold}/kiwi${C.reset}, ${C.bold}/coco${C.reset}, ${C.bold}/mora${C.reset} o la skill ${C.bold}lima${C.reset} desde Kiro.`);
   if (target === 'claude') log(`  En Claude Code aparecen como skills en ${C.bold}.claude/skills/${C.reset}; invócalas por nombre.`);
   if (target === 'codex')  log(`  Codex las conoce por el bloque en ${C.bold}AGENTS.md${C.reset}; pídele "usa kiwi/coco/lima/mora".`);
 }
