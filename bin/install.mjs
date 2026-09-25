@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Fruti Squad installer/setup — kiwi · coco · lima · mora, for Kiro, Claude Code, Codex.
+// Fruti Squad installer/setup — kiwi → lima → coco → mora, for Kiro, Claude Code, Codex.
 // Zero dependencies.
 //   npx github:kevinedgm/fruti-squad setup   --target kiro --intake my-intake.yaml
 //   npx github:kevinedgm/fruti-squad install --target kiro
@@ -21,7 +21,7 @@
 //   --qa <runner>   (setup) passed to lima init, e.g. playwright | none
 //   --global        install user-wide (~ instead of the project root)
 //   --dest <dir>    target project root (default: current working directory)
-//   --only <names>  comma list (default: kiwi,coco,lima,mora). Extra: impeccable,
+//   --only <names>  comma list (default: kiwi,lima,coco,mora). Extra: impeccable,
 //                   improve-animations, skill-architect
 //   --force         overwrite existing destinations
 //   --dry-run       print actions, change nothing
@@ -37,15 +37,15 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const PKG_ROOT = resolve(__dirname, '..');
 
 const MEMBERS = {
-  lima:                 { from: 'skills/lima',               kind: 'skill', blurb: 'gobierna el ciclo de vida y refina el design system' },
+  lima:                 { from: 'skills/lima',               kind: 'skill', blurb: 'gobierna: clasifica, reutiliza, registra y decide el estado de cada pieza' },
   impeccable:           { from: 'skills/impeccable',         kind: 'skill', blurb: 'playbooks de refinamiento de UI' },
   'improve-animations': { from: 'skills/improve-animations', kind: 'skill', blurb: 'micro-interacciones y animación' },
   'skill-architect':    { from: 'skills/skill-architect',    kind: 'skill', blurb: 'creación de nuevas skills' },
-  kiwi:                 { from: 'agentes/kiwi',              kind: 'agent', blurb: 'define wireframes y contratos de experiencia adaptativa' },
-  coco:                 { from: 'agentes/coco',              kind: 'agent', blurb: 'diseña, implementa y audita interfaz (protocolo R0–R3)' },
-  mora:                 { from: 'agentes/mora',              kind: 'agent', blurb: 'documenta y sincroniza el Design Hub' },
+  kiwi:                 { from: 'agentes/kiwi',              kind: 'agent', blurb: 'estructura: brief, user flow y wireframes F0–F2 adaptativos con traspaso a lima' },
+  coco:                 { from: 'agentes/coco',              kind: 'agent', blurb: 'construye: alta fidelidad con el sistema real, implementación y auditoría' },
+  mora:                 { from: 'agentes/mora',              kind: 'agent', blurb: 'documenta lo implementado y sincroniza el Design Hub (último paso del flujo)' },
 };
-const DEFAULT = ['kiwi', 'coco', 'lima', 'mora'];
+const DEFAULT = ['kiwi', 'lima', 'coco', 'mora'];
 const TARGETS = ['kiro', 'claude', 'codex'];
 
 const C = {
@@ -77,7 +77,7 @@ function parseArgs(argv) {
 
 function helpText() {
   return `
-${C.bold}🍓 Fruti Squad${C.reset} — kiwi · coco · lima · mora  (Kiro · Claude Code · Codex)
+${C.bold}🍓 Fruti Squad${C.reset} — kiwi → lima → coco → mora  (Kiro · Claude Code · Codex)
 
 ${C.bold}Commands${C.reset}
   ${C.bold}setup${C.reset}          One shot: install + init (lima) + append coco:/mora: to the profile
@@ -91,7 +91,7 @@ ${C.bold}Options${C.reset}
   --qa <runner>    (setup) playwright | none   (default: playwright)
   --global         Install user-wide (home dir instead of project root)
   --dest <dir>     Target project root (default: current directory)
-  --only <names>   Comma list (default: kiwi,coco,lima,mora). Extra: impeccable,
+  --only <names>   Comma list (default: kiwi,lima,coco,mora). Extra: impeccable,
                    improve-animations, skill-architect
   --force          Overwrite existing destinations
   --dry-run        Show actions without changing anything
@@ -141,6 +141,12 @@ function selectedMembers(args) {
   return names;
 }
 
+function installedMemberName(name, target) {
+  // `mora` is also the name of an unrelated Verdant governance skill.
+  // Keep the Kiro agent command for compatibility, but avoid skill-name collisions.
+  return name === 'mora' && (target === 'claude' || target === 'codex') ? 'mora-docs' : name;
+}
+
 function ensureSkillBridge(dest, name) {
   const skillPath = join(dest, 'SKILL.md');
   const agentPath = join(dest, 'AGENT.md');
@@ -164,13 +170,16 @@ function writeCodexAgentsMd(base, members, skillsRootRel, dryRun) {
   const end = '<!-- fruti-squad:end -->';
   const lines = [
     start,
-    '## 🍓 Fruti Squad (kiwi · coco · lima · mora)',
+    '## 🍓 Fruti Squad (kiwi → lima → coco → mora)',
     '',
     'Este proyecto incluye el Fruti Squad en `' + skillsRootRel + '`. Cada carpeta tiene su `SKILL.md`/`AGENT.md`; léelos cuando la tarea lo pida:',
     '',
-    ...members.map((n) => `- **${n}** — ${MEMBERS[n].blurb} → \`${skillsRootRel}/${n}/\``),
+    ...members.map((n) => {
+      const installed = installedMemberName(n, 'codex');
+      return `- **${installed}** — ${MEMBERS[n].blurb} → \`${skillsRootRel}/${installed}/\``;
+    }),
     '',
-    'Frontera: **kiwi define wireframes adaptativos · coco diseña e implementa · lima gobierna el ciclo y refina · mora documenta.** Kiwi, coco, lima y mora usan el perfil de proyecto de lima (`' + skillsRootRel + '/lima/profiles/<proyecto>.md`).',
+    'Flujo: **kiwi estructura → lima gobierna → coco construye → mora documenta.** Cada uno se dedica a una actividad y todos usan el perfil de proyecto de lima (`' + skillsRootRel + '/lima/profiles/<proyecto>.md`).',
     end,
   ].join('\n');
 
@@ -206,25 +215,26 @@ function doInstall(args) {
   let skillsRoot = resolveRoot(target, 'skill', base);
   for (const name of members) {
     const m = MEMBERS[name];
+    const installedName = installedMemberName(name, target);
     const src = join(PKG_ROOT, m.from);
     if (!existsSync(src)) { log(err(`  missing in package: ${m.from} — skipped`)); continue; }
     const root = resolveRoot(target, m.kind, base);
-    const dest = join(root, name);
+    const dest = join(root, installedName);
 
     if (existsSync(dest) && !args.force) {
-      log(`  ${warn('skip')}  ${C.bold}${name}${C.reset} — already exists (use --force) ${C.dim}${dest}${C.reset}`);
+      log(`  ${warn('skip')}  ${C.bold}${installedName}${C.reset} — already exists (use --force) ${C.dim}${dest}${C.reset}`);
       skipped++;
       continue;
     }
     if (args.dryRun) {
-      log(`  ${C.cyan}would copy${C.reset}  ${C.bold}${name}${C.reset} → ${C.dim}${dest}${C.reset}`);
+      log(`  ${C.cyan}would copy${C.reset}  ${C.bold}${installedName}${C.reset} → ${C.dim}${dest}${C.reset}`);
       installed++;
       continue;
     }
     mkdirSync(root, { recursive: true });
     cpSync(src, dest, { recursive: true });
-    log(`  ${ok('ok')}    ${C.bold}${name}${C.reset} → ${C.dim}${dest}${C.reset}`);
-    if (m.kind === 'agent' && (target === 'claude' || target === 'codex')) ensureSkillBridge(dest, name);
+    log(`  ${ok('ok')}    ${C.bold}${installedName}${C.reset} → ${C.dim}${dest}${C.reset}`);
+    if (m.kind === 'agent' && (target === 'claude' || target === 'codex')) ensureSkillBridge(dest, installedName);
     installed++;
   }
 
@@ -263,11 +273,11 @@ const MORA_BLOCK = `
 mora:
   doc_standard:        # ruta al estándar de documentación, o VACÍO (usa el interno de mora)
   doc_shell:           # css/js del Hub cuyas clases reutilizan las páginas
-    # - design-hub/docs.css
-    # - design-hub/docs.js
+    # - design-hub/assets/hub-shell.css
+    # - design-hub/assets/hub-navigation.js
   serve_command:       # cómo servir el Hub, o VACÍO ("python3 -m http.server" por defecto)
   coverage_script:     # censo de cobertura | AUTO | VACÍO
-  hub_preview:         # cómo la Preview embebe el componente real, o VACÍO (espejo de CSS)
+  hub_preview:         # cómo la Preview embebe el componente real, o VACÍO (no disponible/no verificada)
 `;
 
 function findNewestProfile(profilesDir) {
@@ -427,9 +437,9 @@ async function doSetup(args) {
 
 function printUse(target) {
   log(`\n${C.bold}Usar:${C.reset}`);
-  if (target === 'kiro')   log(`  Invoca ${C.bold}/kiwi${C.reset}, ${C.bold}/coco${C.reset}, ${C.bold}/mora${C.reset} o la skill ${C.bold}lima${C.reset} desde Kiro.`);
+  if (target === 'kiro')   log(`  Invoca ${C.bold}/kiwi${C.reset}, la skill ${C.bold}lima${C.reset}, ${C.bold}/coco${C.reset} o ${C.bold}/mora${C.reset} desde Kiro (en ese orden de flujo).`);
   if (target === 'claude') log(`  En Claude Code aparecen como skills en ${C.bold}.claude/skills/${C.reset}; invócalas por nombre.`);
-  if (target === 'codex')  log(`  Codex las conoce por el bloque en ${C.bold}AGENTS.md${C.reset}; pídele "usa kiwi/coco/lima/mora".`);
+  if (target === 'codex')  log(`  Codex las conoce por el bloque en ${C.bold}AGENTS.md${C.reset}; pídele "usa kiwi/lima/coco/mora-docs".`);
 }
 
 function doList() {

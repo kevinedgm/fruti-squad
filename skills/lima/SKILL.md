@@ -37,6 +37,35 @@ Optional `/` shortcuts, never required: `/design`, `/critique`, `/polish`, `/har
 
 No mandatory interview. If the request implies the piece and its purpose, inspect the system and start. Ask only when a **product decision that changes the experience** is missing (e.g. "should this destructive action be undoable?"), never a design detail (e.g. radius, spacing) — those are inferred from tokens and existing patterns. Authoritative rule: [reference/source-of-truth.md](reference/source-of-truth.md).
 
+## Squad flow — lima is the governance step
+
+In the Fruti Squad every member owns one activity, and work moves in one direction:
+
+```text
+🥝 kiwi  → STRUCTURE     brief, user flow, wireframes F0–F2 (neutral kit)
+🟢 lima  → GOVERNANCE    classify, reuse, register, fix the contract, decide status   ← this skill
+🥥 coco  → CONSTRUCTION  high fidelity with the real system (F3), implementation (R3), audit (R0)
+🫐 mora  → DOCUMENTATION publish only what is implemented and verified
+```
+
+**What lima receives (from kiwi):** an approved structure round (`<hub_root>/lab/<surface>/rNN/` with `brief.md`, `index.html`, `declaracion.md`) and its handoff: pieces, adaptation matrix, required states, data proposal. If there is no kiwi round and the request is structural (a new screen, flow, or feature), hand it to kiwi first. For a well-known primitive (e.g. a button), kiwi's abbreviated brief is enough.
+
+**What lima does (governance only):**
+
+1. **Classify** each piece: primitive · pattern · template · `product-application` (request-router.md).
+2. **Reuse first:** check the registry and existing components; mark each piece `reuse` / `extend` / `new` / `local`.
+3. **Register** new system pieces as `draft` in the registry (registry.md) with owner and source round.
+4. **Fix the contract** of each piece (ui-artifact-contract.md, component-api.md): states, variants, adaptive behavior, a11y target — derived from kiwi's frozen structure, never redesigned.
+5. **Hand coco a build order:** pieces, classification, contract, tokens/primitives to reuse, and which pieces are local vs system.
+6. **Gates:** when coco returns its compliance declaration, lima evaluates the Candidate/Stable gates (quality-gates.md) using **coco's audit as evidence**, records status/version/QA in the registry, and applies lifecycle transitions with user approval.
+7. **Release to mora:** only after the registry reflects the new status. mora documents what the registry and the real code say.
+
+**What lima does not do in the squad:** it does not author structure (kiwi), does not produce visual designs or code (coco), does not run a parallel audit (coco), and does not write Hub pages (mora). The impeccable passes (critique, distill, adapt, polish, harden) run in **review mode**: lima runs them against coco's output, records findings, and coco applies the changes.
+
+**Returns:** structural or flow defects → kiwi (new round). Visual, code, or QA defects → coco. Documentation drift → mora.
+
+**Standalone fallback:** if kiwi or coco are not installed in the project, lima runs the full pipeline below by itself and says so in one line.
+
 ## The pipeline
 
 Two phases separated by user review. Design and light refinement happen before `candidate`; final hardening happens only after the user decides to stabilize a direction they have accepted.

@@ -4,20 +4,21 @@ mora es agnóstica del proyecto. En un repo que nunca ha curado no hay perfil ac
 
 ## Orden de resolución (compuerta 0)
 
-1. **Busca un perfil existente** en `profiles/<project>.md` de la skill architect.
+1. **Busca un perfil existente** en `profiles/<project>.md` de Lima.
    - Si existe y resuelve → **reúsalo**. Luego verifica el bloque `mora:` ([profile-additions.md](profile-additions.md)); si falta, pide solo esas adiciones ([intake.md](intake.md), la parte `mora:`) y añádelas.
-2. **Aún no hay perfil** → inicializa pidiendo el intake completo ([intake.md](intake.md)): los campos del architect + el bloque `mora:`, en un solo mensaje. Mapea las respuestas a `profiles/<project>.md` y confirma.
-3. **Override del usuario** → una instrucción explícita en la conversación gana sobre el perfil; obedécela y anota la desviación en una línea.
+2. **Aún no hay perfil y el trabajo es global/persistente** → inspecciona primero las rutas mecánicas; pide solo las decisiones no inferibles y crea el perfil con el intake de Lima + el bloque `mora:`.
+3. **No hay perfil, pero el usuario dio un Hub y una corrección acotada** → trabaja en ese alcance, registra los supuestos y no bloquees la tarea con un bootstrap.
+4. **Override del usuario** → una instrucción explícita en la conversación gana sobre el perfil; obedécela y anota la desviación en una línea.
 
-Nunca hagas inventario ni reestructures contra una taxonomía de Hub asumida. Si no hay perfil y el usuario no ha dado el intake, pídelo primero. Y aun con un perfil, mora siempre empieza el trabajo real con el **inventario (paso 1)** — nunca reordena ni reescribe antes de saber qué está desincronizado.
+Nunca reestructures contra una taxonomía asumida. El inventario debe ser proporcional al alcance: completo para navegación/cobertura global; localizado para una página o defecto concreto.
 
 ## Dos formas de enlazar
 
 ### A. Guiada (por defecto, con el usuario presente)
-Presenta el/los formulario(s) de intake literalmente, valida cada campo, resuelve `AUTO` inspeccionando el repo y mostrando hallazgos, luego escribe/extiende el perfil y confirma.
+Inspecciona primero, completa los campos mecánicos y pregunta solo lo que requiera juicio. Luego escribe/extiende el perfil y confirma los supuestos relevantes.
 
 ### B. Reusar el bootstrap compartido (lo más rápido al arrancar desde cero)
-Si el proyecto es totalmente nuevo, corre primero el bootstrap de la skill architect — crea `profiles/<project>.md`, el Hub y el registry:
+Si el proyecto es totalmente nuevo, corre primero el bootstrap de Lima — crea `profiles/<project>.md`, el Hub y el registry:
 
 ```bash
 # desde la raíz del repo
@@ -38,12 +39,12 @@ Incluso con un perfil, algunas capacidades dependen del tooling del proyecto. mo
 | Censo de cobertura | `mora.coverage_script` | reporta cobertura como `manual` |
 | Servir + validar páginas | `mora.serve_command` (o python3) | reporta el check de HTTP/shell como no ejecutado |
 | Reusar el shell de doc real | `mora.doc_shell` | señala que las páginas no tienen shell que reutilizar (riesgo de páginas sin estilo) |
-| Preview viva del componente | `mora.hub_preview` / un harness corriendo | espeja el CSS del componente, etiquetado como espejo |
+| Preview viva del componente | `mora.hub_preview` / un harness corriendo | marca la preview no disponible/no verificada; no duplica CSS |
 | Orden de secciones + spec de honestidad | `mora.doc_standard` | usa el orden canónico interno de mora, declarado |
 
-Ninguna de estas impide que mora *cure*; solo cambian qué checks son verificables vs manuales. La declaración de cumplimiento (paso 5) siempre dice la verdad sobre cuáles corrieron.
+Ninguna de estas impide que mora *cure*; solo cambian qué checks son verificables vs manuales. La entrega (AGENT.md §8) siempre dice la verdad sobre cuáles corrieron.
 
 ## Resultado
 
-- mora queda enlazada a `profiles/<project>.md` (compartido con la skill architect y coco), incluyendo un bloque `mora:`.
-- Desde aquí aplica el protocolo de 5 pasos (AGENT.md): inventario → alcance → leer estándar → estructura canónica del Hub → verificar + declaración de cumplimiento.
+- mora queda enlazada a `profiles/<project>.md` (compartido con Lima y Coco), incluyendo un bloque `mora:`.
+- Desde aquí aplica AGENT.md: contexto (§1) → inventario proporcional (§2) → modo M0–M3 (§3) → propiedad de la verdad (§4) → reparación (§5) → contrato de página (§6) → verificación (§7) → entrega (§8).
