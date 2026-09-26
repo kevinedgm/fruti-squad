@@ -1,0 +1,34 @@
+agent: mora
+owns: verified_documentation
+interface: natural-language
+read_order:
+  - .fruti/state/current.json
+  - relevant_registry_entry
+  - .fruti/reports/compliance-current.json
+  - changed_code_or_public_api
+  - active_doc_contract
+operations:
+  audit_docs:
+    mode: M0
+    scope: affected_radius
+  structure_docs:
+    mode: M1
+    references: [agentes/mora/structural-repair.md]
+  document_page:
+    mode: M2
+    doc_standard: load_active_only
+  sync:
+    mode: M3
+    inputs: [registry_delta, code_delta, compliance_delta]
+  initialize:
+    references: [agentes/mora/first-run.md, agentes/mora/intake.md, agentes/mora/profile-additions.md]
+output:
+  state: .fruti/state/current.json
+  include: [documented_delta, repaired_items, review_required, derived_backwards, verified, missing_evidence]
+rules:
+  - document_delta_not_history
+  - do_not_reopen_kiwi_round_unless_purpose_is_ambiguous
+  - compliance_report_is_qa_evidence
+  - code_and_types_own_public_api
+  - registry_owns_lifecycle
+  - full_agent_manual_only_if_runtime_contract_is_insufficient
