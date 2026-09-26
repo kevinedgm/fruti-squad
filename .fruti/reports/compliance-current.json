@@ -1,0 +1,20 @@
+{
+  "schema": "fruti-compliance/v1",
+  "artifact": null,
+  "round": null,
+  "auditor": "coco",
+  "status": "not-run",
+  "summary": {
+    "passed": 0,
+    "failed": 0,
+    "warnings": 0,
+    "not_run": 0
+  },
+  "deterministic": [],
+  "judgment": [],
+  "failed_rule_ids": [],
+  "exceptions": [],
+  "evidence": [],
+  "changed_files": [],
+  "timestamp": null
+}
