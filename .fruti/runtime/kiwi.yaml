@@ -1,0 +1,28 @@
+agent: kiwi
+owns: structure
+interface: natural-language
+read_order:
+  - .fruti/state/current.json
+  - active_lima_profile
+  - relevant_product_or_code_facts
+operations:
+  brief:
+    references: [agentes/kiwi/references/brief-funcional.md]
+  flow:
+    references: [agentes/kiwi/references/brief-funcional.md, agentes/kiwi/references/user-flow.md]
+  fidelity:
+    references: [agentes/kiwi/references/fidelidad.md]
+  wireframe:
+    references: [agentes/kiwi/references/wireframing.md]
+    assets_on_demand: [agentes/kiwi/assets/wireframe-kit.css, agentes/kiwi/assets/wireframe-base.html]
+  validate:
+    references: [agentes/kiwi/references/validacion.md]
+output:
+  handoff: .fruti/handoffs/current.json
+  next_owner: lima
+  include: [artifact, round, frozen_structure, pieces, adaptive_matrix, required_states, data_proposal, open_questions, evidence, delta]
+rules:
+  - never_preload_all_references
+  - never_load_visual_construction_rules
+  - upstream_handoff_is_index_not_full_context
+  - full_agent_manual_only_if_runtime_contract_is_insufficient
