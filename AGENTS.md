@@ -17,6 +17,58 @@ For every request:
 
 Deep AGENT/SKILL/reference prose remains normative when a rule is ambiguous, disputed, changed, or cannot be evaluated from the compact contract. Runtime contracts are indexes, not replacement sources of truth.
 
+## Approved Sources Only
+
+All agents MUST distinguish between normative authority and implementation evidence. Agents may inspect the code required to execute or verify a change, but MUST NOT mine unrelated project code, neighboring components, screenshots, examples, or historical artifacts to invent design rules.
+
+### Normative authority order
+
+Use the narrowest approved source that owns the decision:
+1. Active user instruction for the current request.
+2. Approved structural lock / current handoff for frozen architecture, anatomy, geometry, states, and adaptive behavior.
+3. Component or pattern contract for component semantics, variants, API, accessibility obligations, and allowed behavior.
+4. `.fruti/tokens.json` (when present) for visual-system values and semantic design tokens; generated token outputs are derivatives, not independent authority.
+5. Active project profile for implementation target, framework/language, styling strategy, breakpoints, and project configuration.
+6. Registry for lifecycle, ownership, canonical identity, reuse/extend/new/local disposition, and promotion status.
+7. Audit manifest and verified compliance evidence for QA criteria/results.
+8. Deep AGENT/SKILL/reference prose only when the compact approved sources explicitly require it or a rule remains unresolved/ambiguous.
+
+When two approved sources conflict, do not silently choose whichever is convenient. Prefer the source that canonically owns that decision; if ownership itself is ambiguous, mark the decision `unresolved` and route it to the owning agent.
+
+### Forbidden inference
+
+Agents MUST NOT:
+- infer a design rule by inspecting unrelated or neighboring components;
+- copy raw colors, font sizes, spacing, radii, shadows, motion values, breakpoints, or other visual values from existing code when an approved token/contract owns that decision;
+- treat an implementation accident, legacy value, screenshot, demo, or example as design-system truth;
+- scan the repository broadly to discover styling conventions when the relevant approved contract/token already exists;
+- invent a missing value merely to keep execution moving;
+- reinterpret a frozen lock without routing the structural change back to Kiwi/Lima as appropriate.
+
+### Code inspection boundary
+
+Existing code is implementation evidence, not design authority. An agent MAY inspect:
+- the exact files it must modify;
+- direct dependencies/imports needed to understand or safely edit those files;
+- generated outputs that must be regenerated or verified;
+- targeted implementation/API evidence required by the current contract or audit rule.
+
+That permission does not allow exploratory repository-wide inspection for design inspiration or convention discovery.
+
+### Missing decisions
+
+If an approved source does not define a required decision:
+1. Do not infer it from unrelated code.
+2. Record it as `unresolved` in the active handoff/state delta.
+3. Route it to the agent that owns the decision (Kiwi for structure/UX geometry, Lima for governance/contracts/tokens ownership, Coco for implementation-only choices inside an approved contract, Mora only for documentation gaps).
+4. Ask the user only when the missing decision is genuinely a product/identity choice that cannot be derived from an approved default.
+
+### Token discipline
+
+When `.fruti/tokens.json` exists, it is the canonical editable source for global visual tokens. Components consume semantic tokens rather than owning duplicated raw values. Generated CSS/TS/framework token files are regenerated derivatives and MUST NOT become competing sources of truth.
+
+A request such as `cambia la fuente principal`, `cambia el color de acción`, or `haz los radios menos redondeados` should update the owning semantic token/configuration and regenerate affected derivatives. It should not trigger component-by-component visual reinterpretation.
+
 ## Runtime contracts
 
 - `.fruti/runtime/kiwi.yaml`: route structural work, define minimum inputs and handoff output.
@@ -28,10 +80,10 @@ Read one runtime contract for the active owner. Do not read all four just becaus
 
 ## Squad routing
 
-- Kiwi: structure and UX, brief/flow/wireframes F0-F2. Read only structural references needed for the selected fidelity.
-- Lima: governance, classification, reuse, registry, contracts and lifecycle. Read only the reference for the current governance operation/gate.
-- Coco: F3 construction, implementation and canonical UI audit. For audits, use `.fruti/audit-manifest.yaml` plus automated evidence first; open prose standards only for failed/ambiguous/non-deterministic checks.
-- Mora: documentation of implemented/verified truth. Work from registry + Coco compliance report + code/diff; document the delta. Do not reconstruct the whole design history.
+- Kiwi: structure and UX, brief/flow/wireframes F0-F2. Read only structural references needed for the selected fidelity. Kiwi defines functional geometry and adaptive composition but does not invent visual styling.
+- Lima: governance, classification, reuse, registry, contracts, token ownership and lifecycle. Read only the reference for the current governance operation/gate.
+- Coco: F3 construction, implementation and canonical UI audit. Consume approved locks/contracts/tokens. For audits, use `.fruti/audit-manifest.yaml` plus automated evidence first; open prose standards only for failed/ambiguous/non-deterministic checks.
+- Mora: documentation of implemented/verified truth. Work from registry + approved contracts/tokens + Coco compliance report + targeted code/diff; document the delta. Do not reconstruct the whole design history or infer rules from the implementation.
 
 ## Handoff contract
 
@@ -49,7 +101,7 @@ Never copy whole reference documents into a handoff. The receiving agent treats 
 
 ## Persistent state
 
-`.fruti/state/current.json` is an operational cache, not a second source of truth. Canonical ownership remains: project profile for configuration, registry for lifecycle/status, real code/types for implementation/API, audit evidence for QA.
+`.fruti/state/current.json` is an operational cache, not a second source of truth. Canonical ownership remains: project profile for configuration, registry for lifecycle/status, real code/types for implementation/API evidence, approved locks/contracts/tokens for design decisions, and audit evidence for QA.
 
 Update state with pointers + compact decisions. If cached state conflicts with a canonical source, canonical truth wins and state is repaired.
 
@@ -63,8 +115,8 @@ Coco writes `.fruti/reports/compliance-current.json` (or artifact-specific equiv
 
 ## Documentation policy
 
-Mora reads only the affected artifact, registry entry, public API/code, compliance report, active documentation contract and affected navigation/shell. Expand scope only for global audit/synchronization requests.
+Mora reads only the affected artifact, registry entry, public API/code, approved token/contract sources, compliance report, active documentation contract and affected navigation/shell. Expand scope only for global audit/synchronization requests. The Design Hub documents approved truth; it does not derive new design rules from the product implementation.
 
 ## User experience
 
-The user should be able to say things like `rediseña este formulario`, `ahora haz el de registro`, `audítalo`, or `promuévelo` without internal flags. Infer routing from current state and the request. Ask only for product decisions that materially change the experience.
+The user should be able to say things like `rediseña este formulario`, `ahora haz el de registro`, `audítalo`, `promuévelo`, `cambia la fuente principal`, or `cambia el color de acción` without internal flags. Infer routing from current state and the request. Ask only for product decisions that materially change the experience.
