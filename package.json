@@ -1,7 +1,7 @@
 {
   "name": "fruti-squad",
-  "version": "1.2.0",
-  "description": "Fruti Squad 🍓 — coco · lima · mora: agentes y skills reutilizables para diseñar, gobernar y documentar proyectos y design systems.",
+  "version": "1.3.0",
+  "description": "Fruti Squad 🍓 — kiwi · lima · coco · mora: estructura, gobierno, construcción, auditoría, pruebas y documentación de interfaces.",
   "bin": {
     "fruti-squad": "bin/install.mjs",
     "fruti": "bin/fruti.mjs"
@@ -9,6 +9,7 @@
   "type": "module",
   "files": [
     "bin/",
+    ".fruti/",
     "skills/",
     "agentes/",
     "assets/",
