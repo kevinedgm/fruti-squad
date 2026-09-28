@@ -101,6 +101,22 @@ Do not copy legacy colors, spacing, typography, radii, shadows, component stylin
 
 `.fruti/design/design-direction.yaml` is an approved compact source for experiential intent: desired perception, quality level, composition character, mobile/desktop emphasis, reference qualities and explicit anti-patterns. It guides Kiwi's structural choices and Lima's governance checks. It does not replace `.fruti/tokens.json`; tokens remain the canonical materialization of visual values.
 
+
+## Full-squad design test
+
+`fruti test` is the acceptance harness for the design pipeline. It does not replace the agents; it creates `.fruti/tests/current/request.md`, which the active coding agent executes through Kiwi → Lima → Coco → Lima gate → Mora.
+
+The test is successful only when it produces:
+- Kiwi neutral F2 + decision/geometry evidence;
+- Lima approved or rejected contract with explicit reasons;
+- Coco real F3/implementation + compliance report;
+- Mora canonical Design Hub page whose Preview renders the verified component;
+- `.fruti/tests/current/result.md` with PASS/PARTIAL/FAIL for every stage.
+
+When `--file` is supplied, the file is current-state evidence. It is not target visual authority.
+
+A missing configured normative reference (including a project-specific interface guideline) is reported as missing evidence. Never silently reconstruct a missing standard from memory.
+
 ## Runtime contracts
 
 - `.fruti/runtime/kiwi.yaml`: route structural work, define minimum inputs and handoff output.
