@@ -69,6 +69,38 @@ When `.fruti/tokens.json` exists, it is the canonical editable source for global
 
 A request such as `cambia la fuente principal`, `cambia el color de acción`, or `haz los radios menos redondeados` should update the owning semantic token/configuration and regenerate affected derivatives. It should not trigger component-by-component visual reinterpretation.
 
+
+## Redesign mode: understand before changing
+
+Fruti Squad supports both greenfield design and redesign of an existing product. A redesign is NOT permission to rewrite the application or treat legacy styling as target truth.
+
+When redesign intent is detected, use this sequence before implementation:
+1. **Understanding** — Kiwi converts natural-language goals (for example modern, polished, clear, mobile-first, non-generic) into compact approved design intent.
+2. **References** — optional inspiration may be supplied. Extract qualities and interaction principles only; references are direction, never specifications to copy.
+3. **Design Inventory** — perform a quick grouped scan of design-bearing surfaces: foundations, navigation, controls, components/patterns, views and states. This is discovery, not a deep audit.
+4. **Scope Approval** — present the inventory as a user-reviewable checklist/status set. Persist decisions in `.fruti/redesign/scope.yaml`.
+5. **Design Direction** — synthesize product context + intent + reference qualities into `.fruti/design/design-direction.yaml`. Later agents consume this compact direction instead of reconstructing the conversation.
+6. **Redesign Plan** — plan only approved surfaces, ordered by dependencies: foundations → primitives → patterns → domain components → views → polish.
+7. Execute normal Kiwi → Lima → Coco → Mora handoffs per approved item.
+
+### Redesign statuses
+
+Use: `not-reviewed`, `proposed`, `approved`, `excluded`, `preserve`, `completed`.
+
+- `excluded`: agents MUST ignore the surface for direct redesign. Do not modify it as a redesign side effect. Approved global-token propagation is tracked separately and must not be misrepresented as a direct redesign.
+- `preserve`: current structure/behavior is intentionally frozen. Visual work may only touch what the approved scope explicitly allows.
+- `approved`: eligible for the redesign plan and downstream execution.
+
+### Existing-product boundary
+
+In redesign mode, existing code is an authorized source for understanding current functionality, data requirements, routes, interactions and implementation constraints. It is NOT an authorized source for deciding the target visual identity unless the user explicitly marks a current rule as preserved.
+
+Do not copy legacy colors, spacing, typography, radii, shadows, component styling or layout conventions merely because they exist. The target design direction, approved contracts and tokens own the redesigned visual system.
+
+### Design direction
+
+`.fruti/design/design-direction.yaml` is an approved compact source for experiential intent: desired perception, quality level, composition character, mobile/desktop emphasis, reference qualities and explicit anti-patterns. It guides Kiwi's structural choices and Lima's governance checks. It does not replace `.fruti/tokens.json`; tokens remain the canonical materialization of visual values.
+
 ## Runtime contracts
 
 - `.fruti/runtime/kiwi.yaml`: route structural work, define minimum inputs and handoff output.
