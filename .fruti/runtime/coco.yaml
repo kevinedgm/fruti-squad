@@ -23,6 +23,23 @@ operations:
     output: .fruti/reports/compliance-current.json
   first_run:
     references: [agentes/coco/first-run.md, agentes/coco/intake.md, agentes/coco/profile-additions.md]
+  test_f3:
+    inputs:
+      - .fruti/tests/current/request.md
+      - .fruti/tests/current/lima-contract.yaml
+      - kiwi_frozen_structure
+      - real_tokens
+      - design_direction
+    outputs:
+      - configured_target_component
+      - .fruti/reports/compliance-current.json
+    rules:
+      - preserve_approved_information_architecture
+      - visual_expression_belongs_here_not_in_kiwi_f2
+      - use_real_icon_library_when_configured
+      - motion_must_explain_feedback_continuity_or_state
+      - audit_compact_medium_expanded
+
 output:
   handoff: .fruti/handoffs/current.json
   compliance_report: .fruti/reports/compliance-current.json
