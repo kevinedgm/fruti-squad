@@ -62,7 +62,7 @@ operations:
   fidelity:
     references: [agentes/kiwi/references/fidelidad.md]
   wireframe:
-    references: [agentes/kiwi/references/wireframing.md]
+    references: [agentes/kiwi/references/wireframing.md, agentes/kiwi/references/geometry-contract.md]
     assets_on_demand: [agentes/kiwi/assets/wireframe-kit.css, agentes/kiwi/assets/wireframe-base.html]
   validate:
     references: [agentes/kiwi/references/validacion.md]
@@ -73,6 +73,7 @@ operations:
       - agentes/kiwi/references/brief-funcional.md
       - agentes/kiwi/references/fidelidad.md
       - agentes/kiwi/references/wireframing.md
+      - agentes/kiwi/references/geometry-contract.md
       - agentes/kiwi/references/validacion.md
     outputs:
       - .fruti/tests/current/kiwi-f2.html
