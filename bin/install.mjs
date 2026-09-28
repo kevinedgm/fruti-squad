@@ -482,6 +482,11 @@ switch (cmd) {
     process.exit(tr.status ?? 1);
     break;
   }
+  case 'foundations': {
+    const fr = spawnSync(process.execPath, [resolve(__dirname, 'foundations.mjs'), ...process.argv.slice(3)], { stdio: 'inherit', cwd: process.cwd() });
+    process.exit(fr.status ?? 1);
+    break;
+  }
   case 'help':
   default: log(helpText());
 }
