@@ -73,7 +73,8 @@ if(source){
   cpSync(source,join(current,'input'+ext));
 }
 console.log('🍓 Fruti Squad test preparado');
-console.log('round: '+round);\nconsole.log('request: '+join(dir,'request.md'));
+console.log('round: '+round);
+console.log('request: '+join(dir,'request.md'));
 console.log('');
 console.log('Ahora pide a tu agente:');
-console.log('"Ejecuta .fruti/tests/'+round+'/request.md completo de Kiwi a Mora y muéstrame result.md y la página final del Design Hub."');
+console.log('"Ejecuta '+join('.fruti','tests',round,'request.md')+' completo de Kiwi a Mora. No uses artefactos de rondas anteriores como salida de esta ronda. Muéstrame result.md y solo la página del Design Hub generada válidamente en esta ronda."');
