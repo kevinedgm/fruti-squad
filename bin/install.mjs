@@ -238,6 +238,22 @@ function doInstall(args) {
     installed++;
   }
 
+  // Install compact runtime contracts in the project so all targets share the same routing/test protocol.
+  if (!args.global && !args.dryRun) {
+    const runtimeSrc = join(PKG_ROOT, '.fruti', 'runtime');
+    const runtimeDest = join(base, '.fruti', 'runtime');
+    if (existsSync(runtimeSrc)) {
+      mkdirSync(runtimeDest, { recursive: true });
+      cpSync(runtimeSrc, runtimeDest, { recursive: true, force: true });
+      log(`  ${ok('ok')}    runtime contracts → ${C.dim}${runtimeDest}${C.reset}`);
+    }
+    const manifestSrc = join(PKG_ROOT, '.fruti', 'audit-manifest.yaml');
+    if (existsSync(manifestSrc)) {
+      mkdirSync(join(base, '.fruti'), { recursive: true });
+      cpSync(manifestSrc, join(base, '.fruti', 'audit-manifest.yaml'), { force: true });
+    }
+  }
+
   if (target === 'codex') {
     const rel = skillsRoot.startsWith(base) ? '.' + skillsRoot.slice(base.length) : skillsRoot;
     writeCodexAgentsMd(base, members, rel.replace(/\\/g, '/'), args.dryRun);
