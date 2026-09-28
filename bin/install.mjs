@@ -460,7 +460,7 @@ const cmd = args._[0] || 'help';
 switch (cmd) {
   case 'setup': doSetup(args).catch((e) => { log(err('setup falló: ' + (e && e.message))); process.exit(1); }); break;
   case 'install': doInstall(args); break;
-  case 'list': doList(); break;
+  case 'list': doList(); break;\n  case 'test': {\n    const tr=spawnSync(process.execPath,[resolve(__dirname,'test.mjs'),...process.argv.slice(3)],{stdio:'inherit',cwd:process.cwd()});\n    process.exit(tr.status??1);\n    break;\n  }
   case 'help':
   default: log(helpText());
 }
