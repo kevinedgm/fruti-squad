@@ -106,6 +106,10 @@ Do not copy legacy colors, spacing, typography, radii, shadows, component stylin
 
 `fruti test` is the acceptance harness for the design pipeline. It does not replace the agents; it creates `.fruti/tests/current/request.md`, which the active coding agent executes through Kiwi → Lima → Coco → Lima gate → Mora.
 
+The test is successful only when it produces a multidimensional verdict (technical, structural, visual, accessibility, design_system, documentation) and every mandatory dimension passes. Build/type/runtime success alone is never design approval.
+
+If `design_system: NEW` and minimum approved foundations are missing, stop before final F3 visual approval: initialize/approve foundations first or report design_system BLOCKED.
+
 The test is successful only when it produces:
 - Kiwi neutral F2 + decision/geometry evidence;
 - Lima approved or rejected contract with explicit reasons;
