@@ -4,71 +4,145 @@ import { resolve, join } from 'node:path';
 import { createInterface } from 'node:readline';
 
 const argv=process.argv.slice(2);
-let dest=process.cwd(), yes=false;
-for(let i=0;i<argv.length;i++){ if(argv[i]==='--dest') dest=argv[++i]||dest; else if(argv[i]==='--yes') yes=true; }
+let dest=process.cwd();
+for(let i=0;i<argv.length;i++) if(argv[i]==='--dest') dest=argv[++i]||dest;
 dest=resolve(dest);
 
-const candidates=[
+const profileCandidates=[
   join(dest,'.codex','skills','lima','profiles','pulz.md'),
   join(dest,'.claude','skills','lima','profiles','pulz.md'),
   join(dest,'.agents','skills','lima','profiles','pulz.md')
 ];
-const profile=candidates.find(existsSync);
-if(!profile){ console.error('No encuentro un perfil activo pulz.md. Ejecuta setup primero.'); process.exit(2); }
+const profile=profileCandidates.find(existsSync);
+if(!profile){ console.error('No encuentro el perfil PULZ. Ejecuta setup primero.'); process.exit(2); }
 const raw=readFileSync(profile,'utf8');
-const isNew=/design_system:\s*NEW\b/.test(raw);
-if(!isNew){ console.log('El perfil ya tiene design_system definido. Foundations no necesita bootstrap NEW.'); process.exit(0); }
+if(!/design_system:\s*NEW\b/.test(raw)){
+  console.log('El perfil ya tiene un design system definido; NEW foundations no aplica.');
+  process.exit(0);
+}
+if(!process.stdin.isTTY){ console.error('fruti foundations necesita una terminal interactiva.'); process.exit(2); }
 
-const ask=async()=>{
- const rl=createInterface({input:process.stdin,output:process.stdout});
- const q=(t,d='')=>new Promise(r=>rl.question('? '+t+(d?' ['+d+']':'')+' ',a=>r((a||'').trim()||d)));
- console.log('\n🍓 Fruti Squad · foundations NEW\n');
- console.log('Esto establece la ley mínima que Coco podrá consumir. No genera componentes todavía.\n');
- const intent=await q('Describe en una frase cómo debe sentirse el producto:','claro, contemporáneo, pulido y fácil de operar');
- const primary=await q('Color primario (hex):','#5B4BFF');
- const secondary=await q('Color secundario (hex):','#FF7664');
- const surface=await q('Superficie base (hex):','#F8F8FA');
- const ink=await q('Tinta/texto principal (hex):','#17171B');
- const danger=await q('Peligro/error (hex):','#C84655');
- const body=await q('Tipografía primaria/interfaz:','Inter');
- const display=await q('Tipografía secundaria/display:','');
- const radius=await q('Radio base de controles (px):','10');
- const spacing=await q('Paso base de spacing (px):','4');
- const motion=await q('Motion base:','fast 140ms; standard 220ms; emphasis 320ms; ease cubic-bezier(.2,.8,.2,1)');
- rl.close();
- return {intent,primary,secondary,surface,ink,danger,body,display,radius,spacing,motion};
+const rl=createInterface({input:process.stdin,output:process.stdout});
+const q=(text,def='')=>new Promise(res=>rl.question('? '+text+(def?' ['+def+']':'')+'\n> ',a=>res((a||'').trim()||def)));
+const hex=async(text,def)=>{
+  while(true){
+    const v=await q(text,def);
+    if(/^#[0-9a-fA-F]{6}$/.test(v)) return v.toUpperCase();
+    console.log('  Usa un hex de 6 dígitos, por ejemplo #5B4BFF.');
+  }
 };
-if(!process.stdin.isTTY && !yes){ console.error('Foundations necesita terminal interactiva.'); process.exit(2); }
-const v=await ask();
-const proposal=[
-'# PULZ foundations proposal','',
-'status: proposed',
-'design_intent: '+v.intent,'',
+const integer=async(text,def,min,max)=>{
+  while(true){
+    const v=Number(await q(text,String(def)));
+    if(Number.isInteger(v)&&v>=min&&v<=max) return v;
+    console.log('  Ingresa un entero entre '+min+' y '+max+'.');
+  }
+};
+
+console.log('\n🍓 Fruti Squad · Foundations Lab\n');
+console.log('Construiremos una PROPUESTA. Nada se vuelve canónico hasta tu aprobación explícita.\n');
+
+console.log('1/8 · Identidad');
+const feeling=await q('¿Cómo debe sentirse el producto?','contemporáneo, altamente pulido, expresivo, distintivo, claro y fácil de operar');
+const avoid=await q('¿Qué debe evitar visualmente?','estética SaaS genérica, clichés del sector, ruido visual, apariencia improvisada');
+const refs=await q('Referencias de calidad/dirección (separadas por coma):','Notion, Apple, Stripe');
+const audience=await q('Contexto principal de uso:','80% móvil; trabajadores jóvenes de campo; sesiones operativas cortas');
+
+console.log('\n2/8 · Color');
+const primary=await hex('Color primario de identidad','#6654F6');
+const secondary=await hex('Color secundario de identidad','#FF7866');
+const surface=await hex('Superficie base','#F8F8FA');
+const ink=await hex('Tinta principal','#17171B');
+const danger=await hex('Danger/error','#C84655');
+const success=await hex('Success','#187A5B');
+const warning=await hex('Warning','#9A6715');
+
+console.log('\n3/8 · Tipografía');
+const body=await q('Familia primaria para interfaz/datos:','Inter');
+const display=await q('Familia secundaria para display/editorial (NONE si no quieres):','NONE');
+const typeCharacter=await q('Carácter tipográfico deseado:','alta legibilidad, jerarquía fuerte, números claros, display con personalidad sin afectar operación');
+
+console.log('\n4/8 · Geometría');
+const spacing=await integer('Paso base de spacing en px',4,2,8);
+const controlRadius=await integer('Radio base de controles en px',10,0,24);
+const surfaceRadius=await integer('Radio de superficies/paneles en px',16,0,32);
+const density=await q('Densidad operativa: compacta | equilibrada | amplia','equilibrada');
+const controlHeight=await integer('Altura operativa recomendada en px',48,44,64);
+
+console.log('\n5/8 · Iconografía');
+const icons=await q('Librería de iconos:','lucide');
+const iconRule=await q('Regla de iconografía:','trazo coherente; icono + texto en acciones ambiguas; estado nunca solo por icono o color');
+
+console.log('\n6/8 · Motion');
+const motion=await q('Carácter del movimiento:','rápido, físico y contenido; continuidad y feedback, nunca decoración');
+const fast=await integer('Duración fast ms',140,80,220);
+const standard=await integer('Duración standard ms',220,140,360);
+const emphasis=await integer('Duración emphasis ms',320,220,500);
+const easing=await q('Easing estándar:','cubic-bezier(.2,.8,.2,1)');
+
+console.log('\n7/8 · Adaptividad');
+const compact=await q('Compact (<600):','una columna; bottom navigation; acción primaria en zona alcanzable; progressive disclosure');
+const medium=await q('Medium (600–1023):','navigation rail; 8 columnas; detalle contextual cuando aporte');
+const expanded=await q('Expanded (>=1024):','sidebar persistente; 12 columnas; master-detail cuando mejore comparación');
+const touch=await integer('Target táctil mínimo px',44,44,64);
+
+console.log('\n8/8 · Accesibilidad');
+const a11y=await q('Objetivo:','WCAG 2.2 AA');
+const accessibility=await q('Reglas adicionales:','foco visible; significado nunca solo por color; zoom 200%; reduced motion; forced-colors; teclado');
+
+rl.close();
+
+const displayValue=/^none$/i.test(display)?'none':display;
+const proposal={
+  version:2,status:'proposed',approval:'pending',
+  identity:{feeling,avoid,references:refs,audience},
+  color:{surface,ink,primary,secondary,danger,success,warning},
+  typography:{primary:body,secondary:displayValue,character:typeCharacter},
+  geometry:{spacing_base_px:spacing,control_radius_px:controlRadius,surface_radius_px:surfaceRadius,density,control_height_px:controlHeight,touch_min_px:touch},
+  iconography:{library:icons,rule:iconRule},
+  motion:{character:motion,fast_ms:fast,standard_ms:standard,emphasis_ms:emphasis,easing,reduced_motion:'required'},
+  adaptive:{compact,medium,expanded},
+  accessibility:{target:a11y,rule:accessibility}
+};
+const yaml=[
+'# PULZ foundations proposal v2','',
+'status: proposed','approval: pending','',
+'identity:',
+'  feeling: '+JSON.stringify(feeling),
+'  avoid: '+JSON.stringify(avoid),
+'  references: '+JSON.stringify(refs),
+'  audience: '+JSON.stringify(audience),'',
 'color:',
-'  surface: '+v.surface,
-'  ink: '+v.ink,
-'  primary: '+v.primary,
-'  secondary: '+v.secondary,
-'  danger: '+v.danger,
-'  rule: primary owns primary action/active selection; secondary is expressive support; semantic states keep independent roles.','',
+'  surface: '+surface,'  ink: '+ink,'  primary: '+primary,'  secondary: '+secondary,
+'  danger: '+danger,'  success: '+success,'  warning: '+warning,
+'  law: "primary = acción primaria/selección activa; secondary = expresión/acento; semantic roles son independientes; contenido ordinario = ink sobre surface"','',
 'typography:',
-'  primary: '+v.body,
-'  secondary: '+(v.display||'none'),
-'  rule: primary owns UI/data; secondary, when present, is display/editorial only.','',
+'  primary: '+JSON.stringify(body),'  secondary: '+JSON.stringify(displayValue),
+'  character: '+JSON.stringify(typeCharacter),
+'  law: "primary gobierna UI y datos; secondary solo display/editorial; números comparables usan tabular figures"','',
 'geometry:',
-'  spacing_base_px: '+v.spacing,
-'  control_radius_px: '+v.radius,
-'  touch_min_px: 44','',
+'  spacing_base_px: '+spacing,'  control_radius_px: '+controlRadius,'  surface_radius_px: '+surfaceRadius,
+'  density: '+JSON.stringify(density),'  control_height_px: '+controlHeight,'  touch_min_px: '+touch,'',
 'iconography:',
-'  library: lucide',
-'  rule: one stroke set; icons support labels and never carry state alone.','',
+'  library: '+JSON.stringify(icons),'  rule: '+JSON.stringify(iconRule),'',
 'motion:',
-'  law: '+v.motion,
-'  reduced_motion: required','',
-'approval: pending',''
+'  character: '+JSON.stringify(motion),'  fast_ms: '+fast,'  standard_ms: '+standard,'  emphasis_ms: '+emphasis,
+'  easing: '+JSON.stringify(easing),'  reduced_motion: required','',
+'adaptive:',
+'  compact: '+JSON.stringify(compact),'  medium: '+JSON.stringify(medium),'  expanded: '+JSON.stringify(expanded),'',
+'accessibility:',
+'  target: '+JSON.stringify(a11y),'  rule: '+JSON.stringify(accessibility),'',
+'derived_tokens:',
+'  status: not-materialized',
+'  note: "Lima derives scales/semantic tokens only after explicit approval; this proposal is not truth."',''
 ].join('\n');
+
 const dir=join(dest,'.fruti','foundations'); mkdirSync(dir,{recursive:true});
-const file=join(dir,'proposal.yaml'); writeFileSync(file,proposal);
-console.log('\nPropuesta escrita en '+file);
-console.log('Revísala. Si la apruebas, dile a Codex:');
-console.log('"Usa Lima para aprobar .fruti/foundations/proposal.yaml, materializar tokens/foundations en el Design Hub y actualizar el perfil PULZ como fuente normativa. No diseñes componentes todavía."');
+const file=join(dir,'proposal.yaml'); writeFileSync(file,yaml);
+writeFileSync(join(dir,'proposal.json'),JSON.stringify(proposal,null,2)+'\n');
+console.log('\n✓ Propuesta creada: '+file);
+console.log('✓ JSON espejo: '+join(dir,'proposal.json'));
+console.log('\nNO está aprobada. Revísala primero.');
+console.log('Para verla: cat .fruti/foundations/proposal.yaml');
+console.log('Si la apruebas, dile a Codex:');
+console.log('"Usa Lima foundations_new para aprobar .fruti/foundations/proposal.yaml, materializar tokens y páginas Foundations, actualizar el perfil PULZ y detenerte antes de diseñar componentes."');
