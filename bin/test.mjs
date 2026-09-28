@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { existsSync, mkdirSync, writeFileSync, cpSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync, cpSync, readdirSync } from 'node:fs';
 import { resolve, join, extname } from 'node:path';
 
 const argv=process.argv.slice(2);
@@ -21,11 +21,20 @@ if(source && !existsSync(source)){
   console.error('No encuentro --file: '+source);
   process.exit(2);
 }
-const dir=join(dest,'.fruti','tests','current');
+const testsRoot=join(dest,'.fruti','tests');
+mkdirSync(testsRoot,{recursive:true});
+const rounds=readdirSync(testsRoot,{withFileTypes:true})
+  .filter(d=>d.isDirectory() && /^r\\d{2}$/.test(d.name))
+  .map(d=>Number(d.name.slice(1)));
+const next=(rounds.length?Math.max(...rounds):0)+1;
+const round='r'+String(next).padStart(2,'0');
+const dir=join(testsRoot,round);
 mkdirSync(dir,{recursive:true});
+const current=join(testsRoot,'current');
+mkdirSync(current,{recursive:true});
 const request=[
-'# Fruti Squad Design Test','',
-'status: ready','mode: full-squad-test','',
+'# Fruti Squad Design Test · '+round,'',
+'status: ready','mode: full-squad-test','round: '+round,'',
 '## User request',prompt||'(redesign the supplied source artifact)','',
 '## Source artifact',source||'none','',
 '## Required pipeline',
@@ -35,14 +44,14 @@ const request=[
 '4. Lima: consume Coco compliance evidence for lifecycle/gate; do not rerun the audit.',
 '5. Mora: generate/update the canonical Design Hub page from verified evidence. Preview MUST render the real implemented component or a verified preview artifact.','',
 '## Required deliverables',
-'- .fruti/tests/current/kiwi-f2.html',
-'- .fruti/tests/current/kiwi-decisions.yaml',
-'- .fruti/tests/current/lima-contract.yaml',
+'- .fruti/tests/'+round+'/kiwi-f2.html',
+'- .fruti/tests/'+round+'/kiwi-decisions.yaml',
+'- .fruti/tests/'+round+'/lima-contract.yaml',
 '- Coco implementation/component',
 '- .fruti/reports/compliance-current.json',
 '- Mora Design Hub documentation page with verified Preview',
 '- result dimensions: technical, structural, visual, accessibility, design_system, documentation',
-'- .fruti/tests/current/result.md with PASS/PARTIAL/FAIL per stage','',
+'- .fruti/tests/'+round+'/result.md with PASS/PARTIAL/FAIL per stage','',
 '## Invariants',
 '- Existing HTML/code is current-state evidence, not target visual authority.',
 '- F2 is grayscale/neutral; no branding, final color, shadow or decorative motion.',
@@ -57,12 +66,14 @@ const request=[
 '- If design_system is NEW and minimum foundations are missing, F3 visual PASS is BLOCKED until foundations are approved.',''
 ].join('\n');
 writeFileSync(join(dir,'request.md'),request);
+writeFileSync(join(current,'request.md'),request);
 if(source){
   const ext=extname(source)||'.txt';
   cpSync(source,join(dir,'input'+ext));
+  cpSync(source,join(current,'input'+ext));
 }
 console.log('🍓 Fruti Squad test preparado');
-console.log('request: '+join(dir,'request.md'));
+console.log('round: '+round);\nconsole.log('request: '+join(dir,'request.md'));
 console.log('');
 console.log('Ahora pide a tu agente:');
-console.log('"Ejecuta .fruti/tests/current/request.md completo de Kiwi a Mora y muéstrame result.md y la página final del Design Hub."');
+console.log('"Ejecuta .fruti/tests/'+round+'/request.md completo de Kiwi a Mora y muéstrame result.md y la página final del Design Hub."');
