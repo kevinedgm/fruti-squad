@@ -38,6 +38,20 @@ operations:
       - current implementation may prove behavior but cannot define target visual identity
       - target contracts and tokens own new visual-system decisions
       - references/inspiration never become component specifications
+  test_governance:
+    inputs:
+      - .fruti/tests/current/request.md
+      - .fruti/tests/current/kiwi-decisions.yaml
+      - .fruti/handoffs/current.json
+    output: .fruti/tests/current/lima-contract.yaml
+    rules:
+      - classify_reuse_extend_new_local
+      - validate_geometry_and_adaptive_contract
+      - validate_against_configured_interface_standards
+      - do_not_redesign_f2
+      - do_not_infer_missing_normative_guidance
+      - approve_or_return_to_kiwi_with_rule_ids
+
 output:
   handoff: .fruti/handoffs/current.json
   state: .fruti/state/current.json
