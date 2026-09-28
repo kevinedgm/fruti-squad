@@ -51,6 +51,8 @@ operations:
       - do_not_redesign_f2
       - do_not_infer_missing_normative_guidance
       - approve_or_return_to_kiwi_with_rule_ids
+      - block_f3_visual_pass_when_design_system_new_and_minimum_foundations_missing
+      - require_multidimensional_verdict_technical_structural_visual_accessibility_design_system_documentation
 
 output:
   handoff: .fruti/handoffs/current.json
