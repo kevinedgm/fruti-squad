@@ -218,6 +218,66 @@ Foundations → Primitives → Patterns → Domain components → Views → Poli
 La aplicación existente sirve para entender funcionalidad y restricciones. No se usa como autoridad de la nueva identidad visual, salvo decisiones que el usuario marque explícitamente como preservadas.
 
 
+
+# Probar el Squad de punta a punta
+
+El comando `test` prepara una prueba reproducible del flujo completo sin obligarte a escribir flags internos de Kiwi/Lima/Coco/Mora.
+
+```bash
+fruti test --prompt "Diseña un card que muestre tina, día, horas desde la última medición, temperatura y Brix"
+```
+
+También puedes entregar una implementación existente como evidencia del estado actual:
+
+```bash
+fruti test --file ./src/components/LegacyCard.vue --prompt "Rediseña este componente"
+```
+
+Con `npx` desde esta rama:
+
+```bash
+npx github:kevinedgm/fruti-squad#refactor/context-efficient-squad test \
+  --prompt "Diseña un card de tina con prioridad de medición"
+```
+
+El comando crea `.fruti/tests/current/request.md`. Después pide al agente del entorno:
+
+```text
+Ejecuta .fruti/tests/current/request.md completo de Kiwi a Mora y
+muéstrame result.md y la página final del Design Hub.
+```
+
+La prueba exige:
+
+```text
+KIWI
+  F2 neutral en grises
+  geometry contract
+  compact / medium / expanded
+  estados + decision records
+        ↓
+LIMA
+  reuse / extend / new / local
+  validación contra contratos y estándares realmente configurados
+        ↓
+COCO
+  F3 + implementación real
+  auditoría + compliance report
+        ↓
+LIMA
+  gate usando la evidencia de Coco
+        ↓
+MORA
+  página canónica del Design Hub
+  Preview = componente verificado real
+        ↓
+result.md
+  PASS / PARTIAL / FAIL por etapa
+```
+
+Si una guía normativa configurada no está disponible, la prueba debe marcarla como evidencia faltante. No se permite inventarla desde memoria.
+
+
 # Arquitectura de contexto eficiente
 
 La regla central está en `AGENTS.md`:
