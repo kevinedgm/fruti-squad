@@ -1,6 +1,6 @@
 # Fruti Squad runtime policy
 
-This repository uses a context-efficient execution model for Codex. The user's natural language is the interface; never require the user to name phases, reference files, loading rules, or internal state.
+This repository uses a context-efficient execution model for coding agents (Claude Code, Codex, Kiro). Claude Code loads this file through `CLAUDE.md`. The user's natural language is the interface; never require the user to name phases, reference files, loading rules, or internal state.
 
 ## Core rule: route first, read second
 
@@ -183,3 +183,8 @@ Mora reads only the affected artifact, registry entry, public API/code, approved
 ## User experience
 
 The user should be able to say things like `rediseña este formulario`, `ahora haz el de registro`, `audítalo`, `promuévelo`, `cambia la fuente principal`, or `cambia el color de acción` without internal flags. Infer routing from current state and the request. Ask only for product decisions that materially change the experience.
+
+
+## Path resolution
+
+Runtime contracts cite package-relative paths (`skills/lima/...`, `agentes/kiwi/...`). In an installed project, resolve them through `.fruti/paths.yaml` (written by the installer); when absent (this repo itself), the paths are literal.

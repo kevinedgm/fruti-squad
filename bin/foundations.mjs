@@ -144,5 +144,5 @@ console.log('\n✓ Propuesta creada: '+file);
 console.log('✓ JSON espejo: '+join(dir,'proposal.json'));
 console.log('\nNO está aprobada. Revísala primero.');
 console.log('Para verla: cat .fruti/foundations/proposal.yaml');
-console.log('Si la apruebas, dile a Codex:');
+console.log('Si la apruebas, díselo a tu agente (Claude Code, Codex…):');
 console.log('"Usa Lima foundations_new para aprobar .fruti/foundations/proposal.yaml, materializar tokens y páginas Foundations, actualizar el perfil PULZ y detenerte antes de diseñar componentes."');

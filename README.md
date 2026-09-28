@@ -52,7 +52,7 @@ No hay dos auditores ni dos propietarios del lifecycle.
 
 - Git
 - Node.js 16 o superior
-- Un entorno compatible: Codex, Claude Code o Kiro
+- Un entorno compatible: Claude Code, Codex o Kiro
 
 ## Instalación guiada
 
@@ -78,6 +78,16 @@ npx github:kevinedgm/fruti-squad install --target codex
 ```
 
 Cambia `codex` por `claude` o `kiro` según corresponda.
+
+### Claude Code
+
+Con `--target claude` el instalador deja:
+
+- `.claude/skills/{kiwi,lima,coco,mora-docs}/` — cada miembro como Skill.
+- `CLAUDE.md` — bloque del Squad que importa `.fruti/policy.md` (la política de ruteo, la misma que usa Codex vía `AGENTS.md`).
+- `.fruti/paths.yaml` — mapa de rutas para resolver las referencias de `.fruti/runtime/*.yaml`.
+
+Después basta con pedir en lenguaje natural ("rediseña este formulario") o invocar `kiwi`, `lima`, `coco` o `mora-docs`.
 
 ## Probar la arquitectura optimizada antes de mergear
 
