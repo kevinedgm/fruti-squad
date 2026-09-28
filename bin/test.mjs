@@ -41,6 +41,7 @@ const request=[
 '- Coco implementation/component',
 '- .fruti/reports/compliance-current.json',
 '- Mora Design Hub documentation page with verified Preview',
+'- result dimensions: technical, structural, visual, accessibility, design_system, documentation',
 '- .fruti/tests/current/result.md with PASS/PARTIAL/FAIL per stage','',
 '## Invariants',
 '- Existing HTML/code is current-state evidence, not target visual authority.',
@@ -50,7 +51,10 @@ const request=[
 '- Important geometry records size, spacing, hierarchy and source: rule | product-context | inference.',
 '- Do not introduce a card merely as a generic visual container; grouping requires a functional reason.',
 '- Missing standards/references are blockers or explicit gaps, never silently reconstructed.',
-'- Mora Preview corresponds to Coco verified output.',''
+'- Mora Preview corresponds to Coco verified output.',
+'- Overall PASS is forbidden unless every mandatory quality dimension passes.',
+'- No-overflow is not evidence of collision-free or well-composed layout.',
+'- If design_system is NEW and minimum foundations are missing, F3 visual PASS is BLOCKED until foundations are approved.',''
 ].join('\n');
 writeFileSync(join(dir,'request.md'),request);
 if(source){
