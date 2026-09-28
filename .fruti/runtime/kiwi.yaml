@@ -66,6 +66,29 @@ operations:
     assets_on_demand: [agentes/kiwi/assets/wireframe-kit.css, agentes/kiwi/assets/wireframe-base.html]
   validate:
     references: [agentes/kiwi/references/validacion.md]
+  test_f2:
+    purpose: prove structural reasoning before visual construction
+    inputs: [.fruti/tests/current/request.md]
+    references:
+      - agentes/kiwi/references/brief-funcional.md
+      - agentes/kiwi/references/fidelidad.md
+      - agentes/kiwi/references/wireframing.md
+      - agentes/kiwi/references/validacion.md
+    outputs:
+      - .fruti/tests/current/kiwi-f2.html
+      - .fruti/tests/current/kiwi-decisions.yaml
+      - .fruti/handoffs/current.json
+    requirements:
+      - neutral_grayscale_f2
+      - geometry_contract_with_sizes_spacing_density_hierarchy
+      - adaptive_matrix_compact_medium_expanded
+      - realistic_content
+      - loading_empty_error_offline_permissions_long_content_large_list_keyboard
+      - decision_source_rule_product_context_or_inference
+      - no_generic_card_without_grouping_reason
+      - configured_interface_standards_are_normative_when_present
+      - missing_normative_standard_is_reported_not_invented
+
 output:
   handoff: .fruti/handoffs/current.json
   next_owner: lima
