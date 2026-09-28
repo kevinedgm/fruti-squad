@@ -38,7 +38,10 @@ operations:
     rules:
       - proposal_must_be_explicitly_approved_before_becoming_truth
       - materialize_semantic_tokens_from_approved_roles
+      - derive_tonal_scales_without_changing_approved_base_roles
+      - materialize_foundation_pages_color_type_geometry_icons_motion_adaptive_accessibility
       - persist_truth_sources_color_law_type_law_icon_geometry_motion
+      - proposal_text_fields_must_be_preserved_verbatim_as_intent_not_parsed_as_tokens
       - change_design_system_from_NEW_to_project_system_name
       - do_not_design_product_components_during_foundations_init
   redesign_governance:
