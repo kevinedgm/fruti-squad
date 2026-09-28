@@ -149,6 +149,75 @@ el sistema parte del estado persistido y de las fuentes canónicas. No debería 
 
 ---
 
+
+# Rediseño de una aplicación existente
+
+Fruti Squad puede entrar a un producto ya construido sin asumir que debe reescribirlo ni que su UI actual es correcta.
+
+Cuando detecta intención de rediseño, el flujo es:
+
+```text
+UNDERSTANDING
+  ↓
+REFERENCES (opcional)
+  ↓
+DESIGN INVENTORY
+  ↓
+USER SCOPE APPROVAL
+  ↓
+DESIGN DIRECTION
+  ↓
+REDESIGN PLAN
+  ↓
+Kiwi → Lima → Coco → Mora
+```
+
+## Understanding
+
+Puedes describir la intención en lenguaje natural:
+
+```text
+"Quiero que se vea moderno, pulcro, profesional, claro y nada genérico.
+El 90% del uso será móvil."
+```
+
+Kiwi comprime esa intención en fuentes aprobadas dentro de `.fruti/design/`, de modo que los agentes posteriores no tengan que reconstruir la conversación.
+
+Las referencias también pueden expresarse naturalmente, por ejemplo: "me gusta la claridad de Notion y la precisión de Linear". Fruti extrae cualidades; no copia componentes, layouts ni estilos de esos productos.
+
+## Design Inventory + checklist
+
+Antes de rediseñar, Kiwi realiza una inspección rápida y agrupa todo lo que puede implicar diseño: foundations, navegación, controles, componentes/patrones, vistas, estados y visualización de datos.
+
+El resultado se presenta como alcance revisable. Cada superficie puede quedar como:
+
+```text
+not-reviewed · proposed · approved · excluded · preserve · completed
+```
+
+Lo marcado como `excluded` se ignora. Lo marcado como `preserve` conserva su estructura/comportamiento salvo cambio explícito posterior. Solo `approved` entra al plan de rediseño.
+
+## Design Direction
+
+La síntesis aprobada vive en:
+
+```text
+.fruti/design/design-direction.yaml
+```
+
+Describe cómo debe sentirse el producto (por ejemplo moderno, refinado, claro, mobile-first, no genérico) y qué evitar. Es dirección, no tokens. Los valores visuales concretos siguen perteneciendo a `.fruti/tokens.json`.
+
+## Plan de rediseño
+
+Fruti ordena el trabajo por dependencias, no por capricho de archivos:
+
+```text
+Foundations → Primitives → Patterns → Domain components → Views → Polish
+```
+
+La aplicación existente sirve para entender funcionalidad y restricciones. No se usa como autoridad de la nueva identidad visual, salvo decisiones que el usuario marque explícitamente como preservadas.
+
+
 # Arquitectura de contexto eficiente
 
 La regla central está en `AGENTS.md`:
