@@ -92,6 +92,8 @@ operations:
 
 output:
   handoff: .fruti/handoffs/current.json
+  state: .fruti/state/current.json
+  round_copy: .fruti/tests/<round>/handoff-kiwi.json
   next_owner: lima
   include: [artifact, round, frozen_structure, pieces, adaptive_matrix, required_states, data_proposal, design_direction_ref, redesign_scope_ref, open_questions, evidence, delta]
 rules:

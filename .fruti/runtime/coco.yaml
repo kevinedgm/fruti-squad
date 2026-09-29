@@ -46,7 +46,10 @@ operations:
 
 output:
   handoff: .fruti/handoffs/current.json
+  state: .fruti/state/current.json
+  round_copy: .fruti/tests/<round>/handoff-coco.json
   compliance_report: .fruti/reports/compliance-current.json
+  compliance_round_copy: .fruti/tests/<round>/compliance.json
   next_owner: lima_or_mora
   include: [artifact, round, implementation_target, implementation_paths, changed_files, audit_summary, failed_rule_ids, evidence, unresolved_exceptions, delta]
 rules:

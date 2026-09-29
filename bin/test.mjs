@@ -49,7 +49,7 @@ const request=[
 '- .fruti/tests/'+round+'/lima-contract.yaml',
 '- Coco implementation/component',
 '- .fruti/reports/compliance-current.json (latest pointer; must carry round: '+round+')',
-'- .fruti/tests/'+round+'/compliance.json and .fruti/tests/'+round+'/handoff-<stage>.json for each stage (round copies)',
+'- .fruti/tests/'+round+'/compliance.json and .fruti/tests/'+round+'/handoff-<stage>.json for each stage (round copies; stage = kiwi | lima | coco | lima-gate | mora)',
 '- Mora Design Hub documentation page with verified Preview',
 '- result dimensions: technical, structural, visual, accessibility, design_system, documentation',
 '- .fruti/tests/'+round+'/result.md with PASS/PARTIAL/FAIL per stage','',
