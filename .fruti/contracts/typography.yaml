@@ -35,6 +35,9 @@ recommended_scale:
     weight: 700
     tracking: -0.03em
     role: hero-title
+    medium_override:
+      size: 48px
+      line_height: 52px
     compact_override:
       size: 38px
       line_height: 40px
@@ -118,6 +121,9 @@ secondary_family_rules:
   forbidden_by_default: [body, form, navigation, metadata, data]
 
 semantic_rules:
+  - "Mode resolution: expanded (>=1024) always uses the base values; medium (600-1023) uses medium_override when the role defines one, else the base values; compact (<600) uses compact_override when defined, else the base values. A role with no override in a mode deliberately keeps its base size there (heading_1 is 36/40 in medium and expanded)."
+  - "Sizes must not increase as the space shrinks: compact <= medium <= expanded for every role."
+  - "medium_override follows the same rules as compact_override: omitted properties keep the base value and a size change MUST also set line_height."
   - "compact_override applies in layout mode compact (<600); properties it omits keep the base value, and when it changes size it MUST also set line_height."
   - "In compact, page-title (heading_1) stays larger than section-heading (heading_2, 26px); do not shrink heading_1 below it."
   - "Agents MUST choose a semantic typography role before choosing rendered values."
