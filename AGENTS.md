@@ -76,14 +76,7 @@ A request such as `cambia la fuente principal`, `cambia el color de acción`, or
 
 Fruti Squad supports both greenfield design and redesign of an existing product. A redesign is NOT permission to rewrite the application or treat legacy styling as target truth.
 
-When redesign intent is detected, use this sequence before implementation:
-1. **Understanding** — Kiwi converts natural-language goals (for example modern, polished, clear, mobile-first, non-generic) into compact approved design intent.
-2. **References** — optional inspiration may be supplied. Extract qualities and interaction principles only; references are direction, never specifications to copy.
-3. **Design Inventory** — perform a quick grouped scan of design-bearing surfaces: foundations, navigation, controls, components/patterns, views and states. This is discovery, not a deep audit.
-4. **Scope Approval** — present the inventory as a user-reviewable checklist/status set. Persist decisions in `.fruti/redesign/scope.yaml`.
-5. **Design Direction** — synthesize product context + intent + reference qualities into `.fruti/design/design-direction.yaml`. Later agents consume this compact direction instead of reconstructing the conversation.
-6. **Redesign Plan** — plan only approved surfaces, ordered by dependencies: foundations → primitives → patterns → domain components → views → polish.
-7. Execute normal Kiwi → Lima → Coco → Mora handoffs per approved item.
+When redesign intent is detected, Kiwi runs `understand → inventory → scope (user approval) → redesign_plan` (operations and rules in `.fruti/runtime/kiwi.yaml`), persisting to `.fruti/redesign/scope.yaml`, `.fruti/design/design-direction.yaml` and `.fruti/redesign/plan.yaml`. Only then the normal Kiwi → Lima → Coco → Mora handoffs run, per approved item. References are inspiration (qualities, not specifications).
 
 ### Redesign statuses
 
@@ -101,9 +94,7 @@ Do not copy legacy colors, spacing, typography, radii, shadows, component stylin
 
 ### Design direction
 
-`.fruti/design/design-direction.yaml` is an approved compact source for experiential intent: desired perception, quality level, composition character, mobile/desktop emphasis, reference qualities and explicit anti-patterns. It guides Kiwi's structural choices and Lima's governance checks. It does not replace `.fruti/tokens.json`; tokens remain the canonical materialization of visual values.
-
-
+`.fruti/design/design-direction.yaml` is the approved compact source for experiential intent (perception, quality level, composition, device emphasis, anti-patterns). It guides Kiwi's structure and Lima's checks; `.fruti/tokens.json` remains the canonical materialization of visual values.
 
 ## Round isolation and repair ownership
 
