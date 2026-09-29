@@ -21,6 +21,9 @@ operations:
     deterministic_first: true
     deep_docs: failed_or_ambiguous_rules_only
     output: .fruti/reports/compliance-current.json
+    deterministic_checks: [dom_validity, duplicate_ids, broken_links, horizontal_overflow, token_usage, forbidden_raw_values, interactive_semantics, required_states, target_sizes, focus_hooks, registry_consistency]
+    model_review: [hierarchy, clarity, density, affordance, consistency, adaptive_composition, misleading_interaction, visual_regressions, exceptions]
+    report: rule_ids_and_evidence_never_reread_a_standard_to_rediscover_a_known_criterion
   first_run:
     references: [agentes/coco/first-run.md, agentes/coco/intake.md, agentes/coco/profile-additions.md]
   test_f3:

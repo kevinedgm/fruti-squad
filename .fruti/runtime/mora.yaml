@@ -7,6 +7,9 @@ read_order:
   - .fruti/reports/compliance-current.json
   - changed_code_or_public_api
   - .fruti/contracts/documentation.yaml
+read_scope:
+  only: [affected_artifact, registry_entry, public_api_or_code, approved_token_and_contract_sources, compliance_report, documentation_contract, affected_navigation_and_shell]
+  expand_only_for: global_audit_or_synchronization_requests
 operations:
   audit_docs:
     mode: M0
@@ -51,6 +54,8 @@ rules:
   - preview_must_use_real_component_or_verified_evidence
   - do_not_reopen_kiwi_round_unless_purpose_is_ambiguous
   - compliance_report_is_qa_evidence
+  - do_not_rerun_coco_audit_to_understand_the_report
+  - design_hub_documents_approved_truth_and_never_derives_new_design_rules_from_implementation
   - code_and_types_own_public_api
   - registry_owns_lifecycle
   - full_agent_manual_only_if_runtime_contract_is_insufficient

@@ -179,17 +179,11 @@ Update state with pointers + compact decisions. If cached state conflicts with a
 
 ## Audit policy
 
-Deterministic checks should be executed by scripts/tools where available: DOM validity, duplicate IDs, broken links, horizontal overflow, token usage, forbidden raw values, interactive semantics, required states, target sizes, focus hooks and registry consistency.
-
-Coco spends model reasoning on non-deterministic review: hierarchy, clarity, density, affordance, consistency, adaptive composition, misleading interaction, visual regressions and exceptions. Report rule IDs and evidence; do not reread an entire standard to rediscover a known criterion.
-
-Coco writes `.fruti/reports/compliance-current.json` (or artifact-specific equivalent). Lima consumes that report for gates; Mora consumes it as QA evidence. Neither should rerun Coco's audit merely to understand the result.
+Coco owns the canonical audit and writes `.fruti/reports/compliance-current.json` (or artifact-specific equivalent). Lima consumes it for gates and Mora as QA evidence; neither reruns Coco's audit merely to understand the result. Deterministic checks run in scripts first; model reasoning is for non-deterministic review (details in `.fruti/runtime/coco.yaml` → `r0_audit`).
 
 ## Documentation policy
 
-`.fruti/contracts/documentation.yaml` is the single normative source for Design Hub page anatomy, section order and the neutral documentation shell. `skills/lima/reference/component-documentation.md` and `design-hub.md` contribute only guidance that does not conflict with it (golden rule, lifecycle-gated API, isolated previews); on any conflict the contract wins.
-
-Mora reads only the affected artifact, registry entry, public API/code, approved token/contract sources, compliance report, active documentation contract and affected navigation/shell. Expand scope only for global audit/synchronization requests. The Design Hub documents approved truth; it does not derive new design rules from the product implementation.
+`.fruti/contracts/documentation.yaml` is the single normative source for Design Hub page anatomy, section order and the neutral documentation shell. `skills/lima/reference/component-documentation.md` and `design-hub.md` contribute only guidance that does not conflict with it (golden rule, lifecycle-gated API, isolated previews); on any conflict the contract wins. Mora's read scope is in `.fruti/runtime/mora.yaml`.
 
 ## User experience
 
