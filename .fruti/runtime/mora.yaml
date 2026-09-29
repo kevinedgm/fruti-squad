@@ -24,6 +24,20 @@ operations:
     contract: .fruti/contracts/documentation.yaml
   initialize:
     references: [agentes/mora/first-run.md, agentes/mora/intake.md, agentes/mora/profile-additions.md]
+  test_document:
+    inputs:
+      - .fruti/tests/current/request.md
+      - relevant_registry_entry
+      - .fruti/reports/compliance-current.json
+      - coco_verified_component
+    outputs:
+      - canonical_design_hub_page
+      - .fruti/tests/current/result.md
+    rules:
+      - preview_renders_real_verified_component_or_verified_preview
+      - show_anatomy_geometry_behavior_api_accessibility_responsive_verification
+      - result_reports_pass_partial_fail_for_kiwi_lima_coco_mora
+
 output:
   state: .fruti/state/current.json
   include: [documented_delta, repaired_items, review_required, derived_backwards, verified, missing_evidence]
