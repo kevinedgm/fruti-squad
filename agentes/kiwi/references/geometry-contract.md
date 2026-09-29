@@ -41,6 +41,7 @@ Recompose, don't restack: every size must state which value is promoted and whic
 - If the dominant value is the same at every size, justify it (`because`); do not copy it by default. Ask whether a different value should lead when the space is much larger or smaller.
 - State what each dimension derives from (content range, 44 px target, one-hand use); an unexplained number is not a dimension.
 - A pattern that repeats (for example the same section header three times) is one piece, listed once with its count.
+- Test each piece with the longest content of its expected range (longest phrase, largest numbers, long-locale words) and record whether it fits at every size. If it does not fit, change the structure (for example a sentence becomes a label plus counted rows); do not only truncate or wrap.
 
 ## Decision provenance
 
