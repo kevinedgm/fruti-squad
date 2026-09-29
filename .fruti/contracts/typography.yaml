@@ -95,6 +95,16 @@ recommended_scale:
     role: metric
     numeric_variant: tabular-nums
 
+authority:   # who owns which typography decision (resolves profile type_law vs this contract)
+  family: profile.typography.primary_family, else profile.type_law.body / display
+  scale: >-
+    this contract's recommended_scale (semantic roles with fixed sizes) unless the profile
+    persists typography.scale_mode: custom, in which case profile typography.roles win.
+  type_law_scale_line: >-
+    a free-text scale in profile.type_law (e.g. "1.20 modular scale") is descriptive only; it never
+    overrides the roles. To change sizes, set typography.scale_mode: custom and persist typography.roles.
+  default_scale_mode: recommended
+
 secondary_family_rules:
   default_scope: brand-only
   allowed_roles: [brand, editorial-accent]
