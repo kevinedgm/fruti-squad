@@ -87,6 +87,8 @@ operations:
       - loading_empty_error_offline_permissions_long_content_large_list_keyboard
       - decision_source_rule_product_context_or_inference
       - no_generic_card_without_grouping_reason
+      - piece_contract_per_piece_with_promote_demote_per_size
+      - adaptation_is_recomposition_not_restacking
       - configured_interface_standards_are_normative_when_present
       - missing_normative_standard_is_reported_not_invented
 

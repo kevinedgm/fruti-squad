@@ -19,7 +19,7 @@ Deep AGENT/SKILL/reference prose remains normative when a rule is ambiguous, dis
 
 ## Approved Sources Only
 
-All agents MUST distinguish between normative authority and implementation evidence. Agents may inspect the code required to execute or verify a change, but MUST NOT mine unrelated project code, neighboring components, screenshots, examples, or historical artifacts to invent design rules.
+All agents MUST distinguish between normative authority and implementation evidence. Agents may inspect the code required to execute or verify a change (see Code inspection boundary), but MUST NOT use anything else as a source of design rules.
 
 ### Normative authority order
 
@@ -38,11 +38,9 @@ When two approved sources conflict, do not silently choose whichever is convenie
 ### Forbidden inference
 
 Agents MUST NOT:
-- infer a design rule by inspecting unrelated or neighboring components;
+- infer a design rule from unrelated or neighboring components, or by scanning the repository broadly when the relevant approved contract/token already exists;
 - copy raw colors, font sizes, spacing, radii, shadows, motion values, breakpoints, or other visual values from existing code when an approved token/contract owns that decision;
-- treat an implementation accident, legacy value, screenshot, demo, or example as design-system truth;
-- scan the repository broadly to discover styling conventions when the relevant approved contract/token already exists;
-- invent a missing value merely to keep execution moving;
+- treat an implementation accident, legacy value, screenshot, demo, example, or historical artifact as design-system truth;
 - reinterpret a frozen lock without routing the structural change back to Kiwi/Lima as appropriate.
 
 ### Code inspection boundary
@@ -53,12 +51,10 @@ Existing code is implementation evidence, not design authority. An agent MAY ins
 - generated outputs that must be regenerated or verified;
 - targeted implementation/API evidence required by the current contract or audit rule.
 
-That permission does not allow exploratory repository-wide inspection for design inspiration or convention discovery.
-
 ### Missing decisions
 
 If an approved source does not define a required decision:
-1. Do not infer it from unrelated code.
+1. Do not infer it from unrelated code, and do not invent a value merely to keep execution moving.
 2. Record it as `unresolved` in the active handoff/state delta.
 3. Route it to the agent that owns the decision (Kiwi for structure/UX geometry, Lima for governance/contracts/tokens ownership, Coco for implementation-only choices inside an approved contract, Mora only for documentation gaps).
 4. Ask the user only when the missing decision is genuinely a product/identity choice that cannot be derived from an approved default.
@@ -67,7 +63,7 @@ If an approved source does not define a required decision:
 
 Typography: semantic roles and sizes come from `.fruti/contracts/typography.yaml` (`recommended_scale`) unless the profile persists `typography.scale_mode: custom`; a free-text scale line in `type_law` is descriptive only (see the contract's `authority` block).
 
-When `.fruti/tokens.json` exists, it is the canonical editable source for global visual tokens. Components consume semantic tokens rather than owning duplicated raw values. Generated CSS/TS/framework token files are regenerated derivatives and MUST NOT become competing sources of truth.
+When `.fruti/tokens.json` exists, it is the canonical editable source for global visual tokens. Components consume semantic tokens rather than owning duplicated raw values.
 
 A request such as `cambia la fuente principal`, `cambia el color de acción`, or `haz los radios menos redondeados` should update the owning semantic token/configuration and regenerate affected derivatives. It should not trigger component-by-component visual reinterpretation.
 
@@ -76,14 +72,7 @@ A request such as `cambia la fuente principal`, `cambia el color de acción`, or
 
 Fruti Squad supports both greenfield design and redesign of an existing product. A redesign is NOT permission to rewrite the application or treat legacy styling as target truth.
 
-When redesign intent is detected, use this sequence before implementation:
-1. **Understanding** — Kiwi converts natural-language goals (for example modern, polished, clear, mobile-first, non-generic) into compact approved design intent.
-2. **References** — optional inspiration may be supplied. Extract qualities and interaction principles only; references are direction, never specifications to copy.
-3. **Design Inventory** — perform a quick grouped scan of design-bearing surfaces: foundations, navigation, controls, components/patterns, views and states. This is discovery, not a deep audit.
-4. **Scope Approval** — present the inventory as a user-reviewable checklist/status set. Persist decisions in `.fruti/redesign/scope.yaml`.
-5. **Design Direction** — synthesize product context + intent + reference qualities into `.fruti/design/design-direction.yaml`. Later agents consume this compact direction instead of reconstructing the conversation.
-6. **Redesign Plan** — plan only approved surfaces, ordered by dependencies: foundations → primitives → patterns → domain components → views → polish.
-7. Execute normal Kiwi → Lima → Coco → Mora handoffs per approved item.
+When redesign intent is detected, Kiwi runs `understand → inventory → scope (user approval) → redesign_plan` (operations and rules in `.fruti/runtime/kiwi.yaml`), persisting to `.fruti/redesign/scope.yaml`, `.fruti/design/design-direction.yaml` and `.fruti/redesign/plan.yaml`. Only then the normal Kiwi → Lima → Coco → Mora handoffs run, per approved item. References are inspiration (qualities, not specifications).
 
 ### Redesign statuses
 
@@ -101,9 +90,7 @@ Do not copy legacy colors, spacing, typography, radii, shadows, component stylin
 
 ### Design direction
 
-`.fruti/design/design-direction.yaml` is an approved compact source for experiential intent: desired perception, quality level, composition character, mobile/desktop emphasis, reference qualities and explicit anti-patterns. It guides Kiwi's structural choices and Lima's governance checks. It does not replace `.fruti/tokens.json`; tokens remain the canonical materialization of visual values.
-
-
+`.fruti/design/design-direction.yaml` is the approved compact source for experiential intent (perception, quality level, composition, device emphasis, anti-patterns). It guides Kiwi's structure and Lima's checks; `.fruti/tokens.json` remains the canonical materialization of visual values.
 
 ## Round isolation and repair ownership
 
@@ -188,17 +175,11 @@ Update state with pointers + compact decisions. If cached state conflicts with a
 
 ## Audit policy
 
-Deterministic checks should be executed by scripts/tools where available: DOM validity, duplicate IDs, broken links, horizontal overflow, token usage, forbidden raw values, interactive semantics, required states, target sizes, focus hooks and registry consistency.
-
-Coco spends model reasoning on non-deterministic review: hierarchy, clarity, density, affordance, consistency, adaptive composition, misleading interaction, visual regressions and exceptions. Report rule IDs and evidence; do not reread an entire standard to rediscover a known criterion.
-
-Coco writes `.fruti/reports/compliance-current.json` (or artifact-specific equivalent). Lima consumes that report for gates; Mora consumes it as QA evidence. Neither should rerun Coco's audit merely to understand the result.
+Coco owns the canonical audit and writes `.fruti/reports/compliance-current.json` (or artifact-specific equivalent). Lima consumes it for gates and Mora as QA evidence; neither reruns Coco's audit merely to understand the result. Deterministic checks run in scripts first; model reasoning is for non-deterministic review (details in `.fruti/runtime/coco.yaml` → `r0_audit`).
 
 ## Documentation policy
 
-`.fruti/contracts/documentation.yaml` is the single normative source for Design Hub page anatomy, section order and the neutral documentation shell. `skills/lima/reference/component-documentation.md` and `design-hub.md` contribute only guidance that does not conflict with it (golden rule, lifecycle-gated API, isolated previews); on any conflict the contract wins.
-
-Mora reads only the affected artifact, registry entry, public API/code, approved token/contract sources, compliance report, active documentation contract and affected navigation/shell. Expand scope only for global audit/synchronization requests. The Design Hub documents approved truth; it does not derive new design rules from the product implementation.
+`.fruti/contracts/documentation.yaml` is the single normative source for Design Hub page anatomy, section order and the neutral documentation shell. `skills/lima/reference/component-documentation.md` and `design-hub.md` contribute only guidance that does not conflict with it (golden rule, lifecycle-gated API, isolated previews); on any conflict the contract wins. Mora's read scope is in `.fruti/runtime/mora.yaml`.
 
 ## User experience
 
