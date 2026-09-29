@@ -73,7 +73,7 @@ VENDOR_IMPECCABLE="$SKILL_DIR/vendor/impeccable"
 # --design-system / --hub / --qa flags still override individual values.
 HAVE_INTAKE=0
 declare -a INTAKE_TRUTH=()
-INTAKE_COLOR_LAW="" INTAKE_TYPE_LAW="" INTAKE_STACK="" INTAKE_COMPONENT_LAYOUT="" INTAKE_FRAMEWORK="" INTAKE_STYLING=""
+INTAKE_COLOR_LAW="" INTAKE_TYPE_LAW="" INTAKE_STACK="" INTAKE_COMPONENT_LAYOUT="" INTAKE_FRAMEWORK="" INTAKE_LANGUAGE="" INTAKE_STYLING=""
 INTAKE_A11Y="" INTAKE_TOUCH="" INTAKE_ANTI="" INTAKE_VIEWPORTS="" INTAKE_SERVE=""
 INTAKE_TOKEN_BINDING="" INTAKE_HUB_LANG=""
 
@@ -193,10 +193,10 @@ elif [[ "$HAVE_INTAKE" -eq 1 ]]; then
     echo "  component_layout: ${INTAKE_COMPONENT_LAYOUT:-match existing naming}"
     echo
     echo "# Implementation target (consumed by .fruti/contracts/implementation-target.yaml)"
-    echo "implementation:"
-    echo "  framework: ${INTAKE_FRAMEWORK:-AUTO}"
-    echo "  language: AUTO"
-    echo "  styling: ${INTAKE_STYLING:-AUTO}"
+    echo "implementation:   # null = unresolved: detect from the repo or ask once, then persist"
+    echo "  framework: ${INTAKE_FRAMEWORK:-null}"
+    echo "  language: ${INTAKE_LANGUAGE:-null}"
+    echo "  styling: ${INTAKE_STYLING:-null}"
     echo
     echo "impeccable_path: $IMPECCABLE"
     if [[ "$QA" == "playwright" ]]; then
@@ -261,10 +261,10 @@ production:
   component_layout:       # TODO: where production components live + naming convention
 
 # Implementation target (consumed by .fruti/contracts/implementation-target.yaml)
-implementation:
-  framework: AUTO         # TODO: react | vue3 | svelte | html-css ...
-  language: AUTO
-  styling: AUTO           # TODO: css | css-modules | tailwind ...
+implementation:           # null = unresolved: detect from the repo or ask once, then persist
+  framework: null         # TODO: react | vue3 | svelte | html-css ...
+  language: null          # TODO: typescript | javascript | html
+  styling: null           # TODO: css | css-modules | tailwind ...
 
 impeccable_path: $IMPECCABLE
 EOF

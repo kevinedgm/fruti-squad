@@ -164,7 +164,7 @@ Never copy whole reference documents into a handoff. The receiving agent treats 
 
 ## Round-scoped outputs
 
-`<round>` in any `.fruti/tests/<round>/...` path is the round named by the request being executed (fallback: `.fruti/state/current.json` `round`). `.fruti/tests/current/` holds only a pointer to the latest request/input and is never an output location.
+`<round>` in any `.fruti/tests/<round>/...` path is the round named by the request being executed (fallbacks in order: `.fruti/state/current.json` `round` — which `fruti test` sets — then the highest-numbered `.fruti/tests/rNN/` directory; never a literal `<round>` and never `current`). `.fruti/tests/current/` holds only a pointer to the latest request/input and is never an output location.
 
 `.fruti/handoffs/current.json` and `.fruti/reports/compliance-current.json` are latest-pointers and MUST carry a `round` field. During a test round each stage also writes a round copy (`.fruti/tests/<round>/handoff-<stage>.json`, `.fruti/tests/<round>/compliance.json`). A stage must not consume a `current` file whose `round` differs from the active round.
 

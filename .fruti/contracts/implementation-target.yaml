@@ -20,6 +20,7 @@ principles:
   - changing_framework_does_not_redesign_the_component_contract
 
 resolution:
+  unresolved_values: [null, "", AUTO]   # a profile value in this set counts as missing, never as the target
   order:
     - explicit_current_user_instruction
     - active_project_profile.implementation
