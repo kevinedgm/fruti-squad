@@ -65,6 +65,8 @@ If an approved source does not define a required decision:
 
 ### Token discipline
 
+Typography: semantic roles and sizes come from `.fruti/contracts/typography.yaml` (`recommended_scale`) unless the profile persists `typography.scale_mode: custom`; a free-text scale line in `type_law` is descriptive only (see the contract's `authority` block).
+
 When `.fruti/tokens.json` exists, it is the canonical editable source for global visual tokens. Components consume semantic tokens rather than owning duplicated raw values. Generated CSS/TS/framework token files are regenerated derivatives and MUST NOT become competing sources of truth.
 
 A request such as `cambia la fuente principal`, `cambia el color de acción`, or `haz los radios menos redondeados` should update the owning semantic token/configuration and regenerate affected derivatives. It should not trigger component-by-component visual reinterpretation.
@@ -168,6 +170,14 @@ Never copy whole reference documents into a handoff. The receiving agent treats 
 
 `.fruti/handoffs/current.json` and `.fruti/reports/compliance-current.json` are latest-pointers and MUST carry a `round` field. During a test round each stage also writes a round copy (`.fruti/tests/<round>/handoff-<stage>.json`, `.fruti/tests/<round>/compliance.json`). A stage must not consume a `current` file whose `round` differs from the active round.
 
+## Breakpoint semantics
+
+Two different things share the word "breakpoint":
+- **Layout modes** — fixed by the adaptive contract: compact `<600`, medium `600–1023`, expanded `>=1024`. Kiwi and Coco design with these.
+- **Verification viewports** — the profile's `breakpoints` / `runtime_qa.viewports`: the widths every piece is verified at (default `[1440, 1024, 768, 390]`). They are not layout thresholds.
+
+A viewport set must cover every mode (at least one `<600`, one in `600–1023`, one `>=1024`); `lima init` warns otherwise. The generated Playwright config derives its projects from the profile viewports.
+
 ## Persistent state
 
 `.fruti/state/current.json` is an operational cache, not a second source of truth. Canonical ownership remains: project profile for configuration, registry for lifecycle/status, real code/types for implementation/API evidence, approved locks/contracts/tokens for design decisions, and audit evidence for QA.
@@ -183,6 +193,8 @@ Coco spends model reasoning on non-deterministic review: hierarchy, clarity, den
 Coco writes `.fruti/reports/compliance-current.json` (or artifact-specific equivalent). Lima consumes that report for gates; Mora consumes it as QA evidence. Neither should rerun Coco's audit merely to understand the result.
 
 ## Documentation policy
+
+`.fruti/contracts/documentation.yaml` is the single normative source for Design Hub page anatomy, section order and the neutral documentation shell. `skills/lima/reference/component-documentation.md` and `design-hub.md` contribute only guidance that does not conflict with it (golden rule, lifecycle-gated API, isolated previews); on any conflict the contract wins.
 
 Mora reads only the affected artifact, registry entry, public API/code, approved token/contract sources, compliance report, active documentation contract and affected navigation/shell. Expand scope only for global audit/synchronization requests. The Design Hub documents approved truth; it does not derive new design rules from the product implementation.
 

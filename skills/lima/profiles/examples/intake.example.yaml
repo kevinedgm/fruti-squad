@@ -19,7 +19,7 @@ color_law: |
 type_law: |
   body:    "Inter"
   display: "Inter Tight"
-  scale:   1.20 modular scale from 14px base
+  # roles/sizes come from .fruti/contracts/typography.yaml; to override set typography.scale_mode: custom in the profile
 
 tokens_source:
   - src/styles/tokens.css
