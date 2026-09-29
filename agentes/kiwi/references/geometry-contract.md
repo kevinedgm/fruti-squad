@@ -37,6 +37,11 @@ Decompose each screen into pieces: a piece is a group of data plus an interactio
 
 Recompose, don't restack: every size must state which value is promoted and which is demoted. Only moving blocks into rows or columns does not count as adaptation.
 
+- Every piece classified new or extend gets its own per-size table, not only the first one you think of.
+- If the dominant value is the same at every size, justify it (`because`); do not copy it by default. Ask whether a different value should lead when the space is much larger or smaller.
+- State what each dimension derives from (content range, 44 px target, one-hand use); an unexplained number is not a dimension.
+- A pattern that repeats (for example the same section header three times) is one piece, listed once with its count.
+
 ## Decision provenance
 
 Important structural decisions use a compact record:
