@@ -37,12 +37,16 @@ recommended_scale:
     role: hero-title
     compact_override:
       size: 38px
+      line_height: 40px
   heading_1:
     size: 36px
     line_height: 40px
     weight: 700
     tracking: -0.025em
     role: page-title
+    compact_override:
+      size: 30px
+      line_height: 34px
   heading_2:
     size: 26px
     line_height: 32px
@@ -114,6 +118,8 @@ secondary_family_rules:
   forbidden_by_default: [body, form, navigation, metadata, data]
 
 semantic_rules:
+  - "compact_override applies in layout mode compact (<600); properties it omits keep the base value, and when it changes size it MUST also set line_height."
+  - "In compact, page-title (heading_1) stays larger than section-heading (heading_2, 26px); do not shrink heading_1 below it."
   - "Agents MUST choose a semantic typography role before choosing rendered values."
   - "Coco MUST NOT invent arbitrary font sizes, weights, line-heights, or tracking when a semantic role exists."
   - "Kiwi may name semantic text hierarchy in wireframes but MUST NOT apply visual font styling."
