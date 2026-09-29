@@ -280,6 +280,11 @@ function doInstall(args) {
       cpSync(runtimeSrc, runtimeDest, { recursive: true, force: true });
       log(`  ${ok('ok')}    runtime contracts → ${C.dim}${runtimeDest}${C.reset}`);
     }
+    const contractsSrc = join(PKG_ROOT, '.fruti', 'contracts');
+    if (existsSync(contractsSrc)) {
+      cpSync(contractsSrc, join(base, '.fruti', 'contracts'), { recursive: true, force: true });
+      log(`  ${ok('ok')}    contracts → ${C.dim}${join(base, '.fruti', 'contracts')}${C.reset}`);
+    }
     const manifestSrc = join(PKG_ROOT, '.fruti', 'audit-manifest.yaml');
     if (existsSync(manifestSrc)) {
       mkdirSync(join(base, '.fruti'), { recursive: true });
