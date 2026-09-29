@@ -26,6 +26,17 @@ Always describe compact (<600), medium (600–1023), expanded (>=1024):
 
 Do not merely scale the same layout.
 
+## Piece contract (per piece, not per region)
+
+Decompose each screen into pieces: a piece is a group of data plus an interaction boundary that could stand alone (a widget, a card with a domain object, a list row). For every piece record, for each size it can receive (reference container sizes, not only the three layout modes):
+- dominant value and the type role it uses (semantic role from the typography contract, never an invented px value);
+- secondary values, each marked kept | demoted (smaller role) | disclosed on demand | hidden;
+- spacing role and reference dimensions (w×h, min/max) derived from the content range, the 44 px target and one-hand use; Coco verifies them at the profile viewports;
+- states the piece must support and its overflow/long-text behavior;
+- candidate disposition for Lima (reuse | extend | new | local) with the reason.
+
+Recompose, don't restack: every size must state which value is promoted and which is demoted. Only moving blocks into rows or columns does not count as adaptation.
+
 ## Decision provenance
 
 Important structural decisions use a compact record:
