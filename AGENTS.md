@@ -170,6 +170,8 @@ Never copy whole reference documents into a handoff. The receiving agent treats 
 
 `.fruti/handoffs/current.json` and `.fruti/reports/compliance-current.json` are latest-pointers and MUST carry a `round` field. During a test round each stage also writes a round copy (`.fruti/tests/<round>/handoff-<stage>.json`, `.fruti/tests/<round>/compliance.json`). A stage must not consume a `current` file whose `round` differs from the active round.
 
+`<stage>` is one of exactly five ids, in pipeline order: `kiwi`, `lima` (contract, after Kiwi), `coco`, `lima-gate` (gate, after Coco), `mora`. Every stage that writes `handoffs/current.json` also updates `.fruti/state/current.json` (`round`, `phase`, `owner`, `next_owner`) and writes its round copy `.fruti/tests/<round>/handoff-<stage>.json`; only Coco writes `compliance.json`.
+
 ## Breakpoint semantics
 
 Two different things share the word "breakpoint":

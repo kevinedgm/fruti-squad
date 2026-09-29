@@ -40,6 +40,7 @@ operations:
 
 output:
   state: .fruti/state/current.json
+  round_copy: .fruti/tests/<round>/handoff-mora.json
   include: [documented_delta, repaired_items, review_required, derived_backwards, verified, missing_evidence]
 rules:
   - documentation_contract_is_mandatory_for_documentable_artifacts
