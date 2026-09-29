@@ -214,5 +214,5 @@ Usa `references/geometry-contract.md` junto con `references/wireframing.md`. La 
 
 Las decisiones estructurales importantes deben registrar procedencia `rule | product-context | inference`. Una inferencia nunca se presenta como regla de un estándar.
 
-En pruebas `fruti test`, produce además `.fruti/tests/current/kiwi-f2.html` y `.fruti/tests/current/kiwi-decisions.yaml` antes de entregar a lima.
+En pruebas `fruti test`, produce además `.fruti/tests/<round>/kiwi-f2.html` y `.fruti/tests/<round>/kiwi-decisions.yaml` antes de entregar a lima.
 

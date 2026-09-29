@@ -115,7 +115,7 @@ When the active profile has `design_system: NEW`, run `fruti foundations` before
 
 ## Full-squad design test
 
-`fruti test` is the acceptance harness for the design pipeline. It does not replace the agents; it creates `.fruti/tests/current/request.md`, which the active coding agent executes through Kiwi → Lima → Coco → Lima gate → Mora.
+`fruti test` is the acceptance harness for the design pipeline. It does not replace the agents; it creates `.fruti/tests/<round>/request.md` (and a `current/request.md` pointer to the latest one), which the active coding agent executes through Kiwi → Lima → Coco → Lima gate → Mora.
 
 The test is successful only when it produces a multidimensional verdict (technical, structural, visual, accessibility, design_system, documentation) and every mandatory dimension passes. Build/type/runtime success alone is never design approval.
 
@@ -126,7 +126,7 @@ The test is successful only when it produces:
 - Lima approved or rejected contract with explicit reasons;
 - Coco real F3/implementation + compliance report;
 - Mora canonical Design Hub page whose Preview renders the verified component;
-- `.fruti/tests/current/result.md` with PASS/PARTIAL/FAIL for every stage.
+- `.fruti/tests/<round>/result.md` with PASS/PARTIAL/FAIL for every stage.
 
 When `--file` is supplied, the file is current-state evidence. It is not target visual authority.
 
@@ -161,6 +161,12 @@ Each stage passes a compact handoff at `.fruti/handoffs/current.json` (or an art
 - changed fields since the previous handoff
 
 Never copy whole reference documents into a handoff. The receiving agent treats the handoff as an index to canonical artifacts, not as permission to reopen every upstream document.
+
+## Round-scoped outputs
+
+`<round>` in any `.fruti/tests/<round>/...` path is the round named by the request being executed (fallback: `.fruti/state/current.json` `round`). `.fruti/tests/current/` holds only a pointer to the latest request/input and is never an output location.
+
+`.fruti/handoffs/current.json` and `.fruti/reports/compliance-current.json` are latest-pointers and MUST carry a `round` field. During a test round each stage also writes a round copy (`.fruti/tests/<round>/handoff-<stage>.json`, `.fruti/tests/<round>/compliance.json`). A stage must not consume a `current` file whose `round` differs from the active round.
 
 ## Persistent state
 
