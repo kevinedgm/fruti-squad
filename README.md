@@ -277,7 +277,7 @@ Si una guía normativa configurada no está disponible, la prueba debe marcarla 
 
 # Arquitectura de contexto eficiente
 
-La regla central está en `AGENTS.md`:
+La regla central está en `AGENTS.md` (en un proyecto instalado: `.fruti/policy.md`):
 
 ```text
 route first → read second
