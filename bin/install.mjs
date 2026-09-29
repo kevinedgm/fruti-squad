@@ -217,6 +217,25 @@ function writeCodexAgentsMd(base, members, skillsRootRel, dryRun) {
   writeInstructionBlock(base, 'AGENTS.md', squadLines(members, 'codex', skillsRootRel), dryRun);
 }
 
+// Kiro reads .kiro/steering/*.md; `always` keeps it working in the CLI, which ignores inclusion modes.
+// The file is only a pointer so the always-on cost stays a few lines.
+function writeKiroSteering(base, dryRun) {
+  const rel = join('.kiro', 'steering', 'fruti-squad.md');
+  if (dryRun) { log(`  ${C.cyan}would write${C.reset} ${rel}`); return; }
+  mkdirSync(join(base, '.kiro', 'steering'), { recursive: true });
+  writeFileSync(join(base, rel), [
+    '---',
+    'inclusion: always',
+    '---',
+    '',
+    '# Fruti Squad (kiwi → lima → coco → mora)',
+    '',
+    'Antes de la primera tarea de diseño/UI lee `.fruti/policy.md` (política de ruteo: rutea primero, lee después; fuentes aprobadas; handoffs compactos). Rutas reales de skills/agentes: `.fruti/paths.yaml`.',
+    '',
+  ].join('\n'));
+  log(`  ${ok('ok')}    ${rel} ${C.dim}(policy pointer)${C.reset}`);
+}
+
 function writeClaudeMd(base, members, skillsRootRel, dryRun, global = false) {
   // Global installs have no project .fruti/, so user-level memory gets only the squad list.
   if (global) { writeInstructionBlock(base, join('.claude', 'CLAUDE.md'), squadLines(members, 'claude', skillsRootRel), dryRun); return; }
@@ -344,6 +363,8 @@ function doInstall(args) {
     }
     writePathsMap(base, members, target, false);
   }
+
+  if (target === 'kiro' && !args.global) writeKiroSteering(base, args.dryRun);
 
   if (target === 'codex' || target === 'claude') {
     const rel = (skillsRoot.startsWith(base) ? '.' + skillsRoot.slice(base.length) : skillsRoot).replace(/\\/g, '/');
