@@ -137,6 +137,8 @@ def emit(data):
     scalar("INTAKE_QA_RUNNER", "qa_runner")
     scalar("INTAKE_SERVE", "serve_command")
     scalar("INTAKE_A11Y", "a11y_target")
+    scalar("INTAKE_FRAMEWORK", "framework")
+    scalar("INTAKE_STYLING", "styling")
     scalar("INTAKE_TOUCH", "touch_min_px")
     scalar("INTAKE_VIEWPORTS", "breakpoints")
 

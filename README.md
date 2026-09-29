@@ -250,10 +250,10 @@ npx github:kevinedgm/fruti-squad#refactor/context-efficient-squad test \
   --prompt "Diseña un card de tina con prioridad de medición"
 ```
 
-El comando crea `.fruti/tests/current/request.md`. Después pide al agente del entorno:
+El comando crea `.fruti/tests/<round>/request.md`. Después pide al agente del entorno:
 
 ```text
-Ejecuta .fruti/tests/current/request.md completo de Kiwi a Mora y
+Ejecuta .fruti/tests/<round>/request.md completo de Kiwi a Mora y
 muéstrame result.md y la página final del Design Hub.
 ```
 

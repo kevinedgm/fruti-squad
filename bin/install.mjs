@@ -58,6 +58,17 @@ const ok = (s) => `${C.green}${s}${C.reset}`;
 const warn = (s) => `${C.yellow}${s}${C.reset}`;
 const err = (s) => `${C.red}${s}${C.reset}`;
 
+// WCAG relative-luminance contrast, used to warn when text on the action color would fail AA.
+function contrastRatio(a, b) {
+  const lum = (h) => {
+    const c = [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255)
+      .map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  };
+  const [x, y] = [lum(a), lum(b)];
+  return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
+}
+
 function parseArgs(argv) {
   const args = { _: [], target: null, intake: null, qa: null, global: false, force: false, dryRun: false, dest: null, only: null };
   for (let i = 0; i < argv.length; i++) {
@@ -292,6 +303,12 @@ function doInstall(args) {
       mkdirSync(join(base, '.fruti'), { recursive: true });
       cpSync(manifestSrc, join(base, '.fruti', 'audit-manifest.yaml'), { force: true });
     }
+    // Empty state/handoff caches so agents start from a valid file (never overwrite live state).
+    for (const rel of [['state', 'current.json'], ['handoffs', 'current.json']]) {
+      const src = join(PKG_ROOT, '.fruti', ...rel);
+      const dst = join(base, '.fruti', ...rel);
+      if (existsSync(src) && !existsSync(dst)) { mkdirSync(dirname(dst), { recursive: true }); cpSync(src, dst); }
+    }
     // Runtime policy (AGENTS.md in the package) ships as a neutral file every target can import.
     const policySrc = join(PKG_ROOT, 'AGENTS.md');
     if (existsSync(policySrc)) {
@@ -386,10 +403,14 @@ async function runWizard(base) {
   let designSystem, colorLaw, typeLaw;
   if (hasDS) {
     designSystem = await ask('  Nombre del design system:', projectName);
-    const action = await ask('  Color de ACCIÓN principal (hex):', '#2F6BFF');
+    const action = await ask('  Color de ACCIÓN principal (hex):', '#2A62F0');
     const danger = await ask('  Color de PELIGRO/error (hex):', '#C0392B');
     const surface = await ask('  Color de SUPERFICIE/fondo (hex):', '#FFFFFF');
     const ink = await ask('  Color de TEXTO/tinta (hex):', '#14161A');
+    if (/^#[0-9a-f]{6}$/i.test(action) && /^#[0-9a-f]{6}$/i.test(surface)) {
+      const cr = contrastRatio(action, surface);
+      if (cr < 4.5) log(`  ${warn('!')} el texto ${surface} sobre la acción ${action} da ${cr.toFixed(2)}:1 (< 4.5:1 de WCAG AA para texto normal). Considera oscurecer la acción.`);
+    }
     const bodyFont = await ask('  Fuente base:', 'Inter');
     colorLaw = `surface ${surface}\nink ${ink}\naction ${action}   # solo la acción primaria\ndanger ${danger}   # solo errores/destructivo\nrule: si un elemento no es acción ni estado, es ink sobre surface.`;
     typeLaw = `body: "${bodyFont}"`;

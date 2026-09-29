@@ -25,8 +25,8 @@ operations:
     references: [agentes/coco/first-run.md, agentes/coco/intake.md, agentes/coco/profile-additions.md]
   test_f3:
     inputs:
-      - .fruti/tests/current/request.md
-      - .fruti/tests/current/lima-contract.yaml
+      - .fruti/tests/<round>/request.md
+      - .fruti/tests/<round>/lima-contract.yaml
       - kiwi_frozen_structure
       - real_tokens
       - design_direction

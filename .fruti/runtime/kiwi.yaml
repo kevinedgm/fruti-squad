@@ -68,7 +68,7 @@ operations:
     references: [agentes/kiwi/references/validacion.md]
   test_f2:
     purpose: prove structural reasoning before visual construction
-    inputs: [.fruti/tests/current/request.md]
+    inputs: [.fruti/tests/<round>/request.md]
     references:
       - agentes/kiwi/references/brief-funcional.md
       - agentes/kiwi/references/fidelidad.md
@@ -76,8 +76,8 @@ operations:
       - agentes/kiwi/references/geometry-contract.md
       - agentes/kiwi/references/validacion.md
     outputs:
-      - .fruti/tests/current/kiwi-f2.html
-      - .fruti/tests/current/kiwi-decisions.yaml
+      - .fruti/tests/<round>/kiwi-f2.html
+      - .fruti/tests/<round>/kiwi-decisions.yaml
       - .fruti/handoffs/current.json
     requirements:
       - neutral_grayscale_f2
