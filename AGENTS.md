@@ -19,7 +19,7 @@ Deep AGENT/SKILL/reference prose remains normative when a rule is ambiguous, dis
 
 ## Approved Sources Only
 
-All agents MUST distinguish between normative authority and implementation evidence. Agents may inspect the code required to execute or verify a change, but MUST NOT mine unrelated project code, neighboring components, screenshots, examples, or historical artifacts to invent design rules.
+All agents MUST distinguish between normative authority and implementation evidence. Agents may inspect the code required to execute or verify a change (see Code inspection boundary), but MUST NOT use anything else as a source of design rules.
 
 ### Normative authority order
 
@@ -38,11 +38,9 @@ When two approved sources conflict, do not silently choose whichever is convenie
 ### Forbidden inference
 
 Agents MUST NOT:
-- infer a design rule by inspecting unrelated or neighboring components;
+- infer a design rule from unrelated or neighboring components, or by scanning the repository broadly when the relevant approved contract/token already exists;
 - copy raw colors, font sizes, spacing, radii, shadows, motion values, breakpoints, or other visual values from existing code when an approved token/contract owns that decision;
-- treat an implementation accident, legacy value, screenshot, demo, or example as design-system truth;
-- scan the repository broadly to discover styling conventions when the relevant approved contract/token already exists;
-- invent a missing value merely to keep execution moving;
+- treat an implementation accident, legacy value, screenshot, demo, example, or historical artifact as design-system truth;
 - reinterpret a frozen lock without routing the structural change back to Kiwi/Lima as appropriate.
 
 ### Code inspection boundary
@@ -53,12 +51,10 @@ Existing code is implementation evidence, not design authority. An agent MAY ins
 - generated outputs that must be regenerated or verified;
 - targeted implementation/API evidence required by the current contract or audit rule.
 
-That permission does not allow exploratory repository-wide inspection for design inspiration or convention discovery.
-
 ### Missing decisions
 
 If an approved source does not define a required decision:
-1. Do not infer it from unrelated code.
+1. Do not infer it from unrelated code, and do not invent a value merely to keep execution moving.
 2. Record it as `unresolved` in the active handoff/state delta.
 3. Route it to the agent that owns the decision (Kiwi for structure/UX geometry, Lima for governance/contracts/tokens ownership, Coco for implementation-only choices inside an approved contract, Mora only for documentation gaps).
 4. Ask the user only when the missing decision is genuinely a product/identity choice that cannot be derived from an approved default.
@@ -67,7 +63,7 @@ If an approved source does not define a required decision:
 
 Typography: semantic roles and sizes come from `.fruti/contracts/typography.yaml` (`recommended_scale`) unless the profile persists `typography.scale_mode: custom`; a free-text scale line in `type_law` is descriptive only (see the contract's `authority` block).
 
-When `.fruti/tokens.json` exists, it is the canonical editable source for global visual tokens. Components consume semantic tokens rather than owning duplicated raw values. Generated CSS/TS/framework token files are regenerated derivatives and MUST NOT become competing sources of truth.
+When `.fruti/tokens.json` exists, it is the canonical editable source for global visual tokens. Components consume semantic tokens rather than owning duplicated raw values.
 
 A request such as `cambia la fuente principal`, `cambia el color de acción`, or `haz los radios menos redondeados` should update the owning semantic token/configuration and regenerate affected derivatives. It should not trigger component-by-component visual reinterpretation.
 
