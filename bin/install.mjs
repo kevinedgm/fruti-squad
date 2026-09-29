@@ -208,6 +208,8 @@ function squadLines(members, target, skillsRootRel) {
     }),
     '',
     'Flujo: **kiwi estructura → lima gobierna → coco construye → mora documenta.** Cada uno se dedica a una actividad y todos usan el perfil de proyecto de lima (`' + skillsRootRel + '/lima/profiles/<proyecto>.md`).',
+    // Claude imports the policy with @; Codex has no import syntax, so it gets an explicit read instruction.
+    ...(target === 'codex' ? ['', 'Antes de la primera tarea de diseño/UI lee `.fruti/policy.md` (política de ruteo: rutea primero, lee después; fuentes aprobadas; handoffs compactos). Rutas reales de skills/agentes: `.fruti/paths.yaml`.'] : []),
   ];
 }
 
