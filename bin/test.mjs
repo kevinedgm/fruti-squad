@@ -24,7 +24,7 @@ if(source && !existsSync(source)){
 const testsRoot=join(dest,'.fruti','tests');
 mkdirSync(testsRoot,{recursive:true});
 const rounds=readdirSync(testsRoot,{withFileTypes:true})
-  .filter(d=>d.isDirectory() && /^r\\d{2}$/.test(d.name))
+  .filter(d=>d.isDirectory() && /^r\d{2}$/.test(d.name))
   .map(d=>Number(d.name.slice(1)));
 const next=(rounds.length?Math.max(...rounds):0)+1;
 const round='r'+String(next).padStart(2,'0');

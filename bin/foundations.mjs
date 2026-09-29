@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { existsSync, readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import { resolve, join } from 'node:path';
 import { createInterface } from 'node:readline';
 
@@ -8,13 +8,11 @@ let dest=process.cwd();
 for(let i=0;i<argv.length;i++) if(argv[i]==='--dest') dest=argv[++i]||dest;
 dest=resolve(dest);
 
-const profileCandidates=[
-  join(dest,'.codex','skills','lima','profiles','pulz.md'),
-  join(dest,'.claude','skills','lima','profiles','pulz.md'),
-  join(dest,'.agents','skills','lima','profiles','pulz.md')
-];
-const profile=profileCandidates.find(existsSync);
-if(!profile){ console.error('No encuentro el perfil PULZ. Ejecuta setup primero.'); process.exit(2); }
+const profilesDirs=['.codex','.claude','.agents'].map(d=>join(dest,d,'skills','lima','profiles'));
+const profiles=profilesDirs.filter(existsSync).flatMap(d=>readdirSync(d).filter(f=>f.endsWith('.md')&&f!=='_TEMPLATE.md').map(f=>join(d,f)));
+if(!profiles.length){ console.error('No encuentro un perfil de proyecto de lima. Ejecuta setup primero.'); process.exit(2); }
+// Prefer the profile that is still NEW; otherwise any profile (reported as already defined below).
+const profile=profiles.find(f=>/design_system:\s*NEW\b/.test(readFileSync(f,'utf8')))||profiles[0];
 const raw=readFileSync(profile,'utf8');
 if(!/design_system:\s*NEW\b/.test(raw)){
   console.log('El perfil ya tiene un design system definido; NEW foundations no aplica.');

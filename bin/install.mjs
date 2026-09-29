@@ -203,7 +203,9 @@ function writeCodexAgentsMd(base, members, skillsRootRel, dryRun) {
   writeInstructionBlock(base, 'AGENTS.md', squadLines(members, 'codex', skillsRootRel), dryRun);
 }
 
-function writeClaudeMd(base, members, skillsRootRel, dryRun) {
+function writeClaudeMd(base, members, skillsRootRel, dryRun, global = false) {
+  // Global installs have no project .fruti/, so user-level memory gets only the squad list.
+  if (global) { writeInstructionBlock(base, join('.claude', 'CLAUDE.md'), squadLines(members, 'claude', skillsRootRel), dryRun); return; }
   writeInstructionBlock(base, 'CLAUDE.md', [
     ...squadLines(members, 'claude', skillsRootRel),
     '',
@@ -299,10 +301,10 @@ function doInstall(args) {
     writePathsMap(base, members, target, false);
   }
 
-  if ((target === 'codex' || target === 'claude') && !args.global) {
+  if (target === 'codex' || target === 'claude') {
     const rel = (skillsRoot.startsWith(base) ? '.' + skillsRoot.slice(base.length) : skillsRoot).replace(/\\/g, '/');
     if (target === 'codex') writeCodexAgentsMd(base, members, rel, args.dryRun);
-    else writeClaudeMd(base, members, rel, args.dryRun);
+    else writeClaudeMd(base, members, rel, args.dryRun, args.global);
   }
 
   log('');
