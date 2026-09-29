@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { existsSync, mkdirSync, writeFileSync, cpSync, readdirSync } from 'node:fs';
+import { existsSync, mkdirSync, writeFileSync, cpSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve, join, extname } from 'node:path';
 
 const argv=process.argv.slice(2);
@@ -66,6 +66,15 @@ const request=[
 '- If design_system is NEW and minimum foundations are missing, F3 visual PASS is BLOCKED until foundations are approved.',''
 ].join('\n');
 writeFileSync(join(dir,'request.md'),request);
+// Point the operational cache at this round so agents resolving <round> from state get it.
+{
+  const stateFile=join(dest,'.fruti','state','current.json');
+  let st={version:1};
+  try{ st=JSON.parse(readFileSync(stateFile,'utf8')); }catch{}
+  st.round=round;
+  mkdirSync(join(dest,'.fruti','state'),{recursive:true});
+  writeFileSync(stateFile,JSON.stringify(st,null,2)+'\n');
+}
 writeFileSync(join(current,'request.md'),request);
 if(source){
   const ext=extname(source)||'.txt';

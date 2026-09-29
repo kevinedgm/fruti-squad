@@ -89,20 +89,6 @@ Con `--target claude` el instalador deja:
 
 Después basta con pedir en lenguaje natural ("rediseña este formulario") o invocar `kiwi`, `lima`, `coco` o `mora-docs`.
 
-## Probar la arquitectura optimizada antes de mergear
-
-La versión con runtime eficiente vive actualmente en:
-
-```text
-refactor/context-efficient-squad
-```
-
-Puedes probarla directamente con:
-
-```bash
-npx github:kevinedgm/fruti-squad#refactor/context-efficient-squad setup --target codex
-```
-
 ---
 
 # Configuración del proyecto
@@ -243,10 +229,10 @@ También puedes entregar una implementación existente como evidencia del estado
 fruti test --file ./src/components/LegacyCard.vue --prompt "Rediseña este componente"
 ```
 
-Con `npx` desde esta rama:
+Con `npx`:
 
 ```bash
-npx github:kevinedgm/fruti-squad#refactor/context-efficient-squad test \
+npx github:kevinedgm/fruti-squad test \
   --prompt "Diseña un card de tina con prioridad de medición"
 ```
 
@@ -473,12 +459,11 @@ Lima evalúa los gates con la evidencia existente y solicita aprobación cuando 
 
 # Desarrollo
 
-Para trabajar sobre la optimización actual:
+Para trabajar sobre el proyecto:
 
 ```bash
 git clone https://github.com/kevinedgm/fruti-squad.git
 cd fruti-squad
-git checkout refactor/context-efficient-squad
 ```
 
 Antes de integrar cambios, compara contra `main` y prueba al menos estos escenarios:
