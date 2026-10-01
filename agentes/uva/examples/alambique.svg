@@ -1,4 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-alambique" role="img" aria-label="Alambique destilando">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-alambique" aria-hidden="true">
+  <!-- Oculto por defecto (lo acompaña una etiqueta). Si el icono va solo y comunica algo esencial: quita aria-hidden y añade role="img" aria-label="Alambique destilando". -->
   <style>
     .uva-alambique{stroke-width:var(--uva-stroke,1.5)}
     .uva-alambique .acento{fill:var(--uva-accent,currentColor);stroke:none}

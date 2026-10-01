@@ -76,9 +76,14 @@ function check(file) {
   const fixedCss = (css.match(/#[0-9a-f]{3,8}\b|rgba?\(|hsla?\(/gi) || []);
   add('COL2', fixedAttr.length === 0 && fixedCss.length === 0, 'bloqueante', `sin colores fijos${fixedAttr.length + fixedCss.length ? ` (encontrados: ${[...fixedAttr, ...fixedCss].join(', ')})` : ''}`);
   add('COL3', /var\(--uva-stroke/.test(css), 'recomendado', 'grosor ajustable con --uva-stroke');
-  const labelled = attr(root, 'role') === 'img' && !!attr(root, 'aria-label');
+  // Lucide: oculto por defecto; nombre accesible solo si el icono informa por sí solo.
+  const named = !!attr(root, 'aria-label') || /<title\b[^>]*>[^<]+<\/title>/.test(body);
+  const labelled = attr(root, 'role') === 'img' && named;
   const hidden = attr(root, 'aria-hidden') === 'true';
-  add('C2', labelled || hidden, 'bloqueante', 'role="img" + aria-label, o aria-hidden="true"');
+  add('C2', (labelled || hidden) && !(hidden && named), 'bloqueante',
+    hidden && named ? 'aria-hidden="true" y nombre accesible a la vez: elige uno'
+      : 'oculto (aria-hidden="true") o, si informa solo, role="img" + aria-label/<title>');
+  if (labelled && !hidden) add('C2b', false, 'recomendado', 'expuesto con nombre: confirma que comunica algo esencial sin etiqueta (si no, aria-hidden="true")');
   add('ID', !!id && /\buva-icon\b/.test(cls), 'bloqueante', 'clases "uva-icon uva-<id>"');
   if (id) {
     const unprefixed = [...css.matchAll(/@keyframes\s+([\w-]+)/g)].map((m) => m[1]).filter((k) => !k.startsWith(`uva-${id}-`));

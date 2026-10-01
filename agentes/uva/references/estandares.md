@@ -36,7 +36,8 @@ Fuentes consultadas (2026-10): guía de diseño de iconos de Lucide, iconos de s
 | # | Criterio | Fuente | Nivel | Cómo comprobar |
 |---|---|---|---|---|
 | C1 | Contraste ≥3:1 contra el fondo cuando el icono transmite información | WCAG 2.2 · 1.4.11 (AA) | bloqueante | propuesta: lectura de contraste para cada color/fondo |
-| C2 | Nombre accesible: `role="img"` + `aria-label` si informa sola; `aria-hidden="true"` si es decorativa o acompaña una etiqueta | WCAG 1.1.1 | bloqueante | `check-icon` |
+| C2 | **Oculto por defecto** (`aria-hidden="true"`). Nombre accesible (`role="img"` + `aria-label` o `<title>`) **solo** si el icono comunica algo esencial por sí solo; nunca las dos cosas a la vez | Lucide (accesibilidad), WCAG 1.1.1 | bloqueante | `check-icon` |
+| C4 | En un botón solo con icono, el nombre accesible va **en el botón** (`aria-label` del `<button>`), y el icono queda oculto | Lucide (accesibilidad), WCAG 4.1.2 | bloqueante | E1 define el uso; la propuesta lo indica |
 | C3 | El color no es el único portador del significado (la forma o la etiqueta también lo dicen) | WCAG 1.4.1 | bloqueante | ¿en gris sigue significando lo mismo? |
 
 ## D · Movimiento
@@ -59,6 +60,7 @@ En la propuesta, cada variante lleva una tabla corta: criterio, ✅/❌/➖ (no 
 - IBM Carbon — Icons usage: https://carbondesignsystem.com/elements/icons/usage/
 - Apple HIG — Icons: https://developer.apple.com/design/human-interface-guidelines/icons
 - Nielsen Norman Group — Icon usability: https://www.nngroup.com/articles/icon-usability/
+- Lucide — Accessibility: https://lucide.dev/how-to/accessibility
 - WCAG 2.2 — 1.4.11 Non-text contrast: https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast
 - WCAG 2.2 — 2.2.2 Pause, Stop, Hide: https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide
 - WCAG 2.2 — 2.3.3 Animation from Interactions: https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions

@@ -93,7 +93,7 @@ El usuario ve el trabajo **una sola vez**, en la propuesta (E5), salvo que E1 en
 
 Escribe un `brief.md` corto (≤15 líneas):
 - **Concepto y significado.** Objeto ("alambique") ≠ significado en la interfaz ("destilando: proceso en curso"). Ambos importan: NN/g distingue *reconocer* la forma de *interpretar* lo que significa.
-- **Uso.** Tamaño real (16/20/24px), dónde aparece, qué iconos tendrá al lado y si llevará **etiqueta de texto** (salvo casa, imprimir y lupa, ningún icono es universal).
+- **Uso.** Tamaño real (16/20/24px), dónde aparece, qué iconos tendrá al lado y si llevará **etiqueta de texto** (salvo casa, imprimir y lupa, ningún icono es universal). Esto decide su accesibilidad: con etiqueta o dentro de un botón → icono oculto (y el nombre, en el botón); solo y con significado esencial → nombre accesible.
 - **Estilo.** Fuente del ADN (tokens → librería del perfil → base de Uva).
 - **Rasgos distintivos** de la referencia: silueta y proporción (R1), 2–3 rasgos que lo hacen *este* objeto, qué se descarta, vista más legible.
 - **Confusiones del dominio:** 2–3 iconos con los que podría leerse mal (R2, R5).
@@ -147,6 +147,7 @@ Tras la elección del usuario: copia la variante elegida a `<id>.svg` con la cla
 - Grosor por CSS: `.uva-<id>{stroke-width:var(--uva-stroke,1.5)}`.
 - Acento: `.uva-<id> .acento{fill:var(--uva-accent,currentColor);stroke:none}` (o `stroke:` si el acento es un trazo).
 - **Selectores sin depender de ancestros externos al SVG** cuando el icono se reutilice con `<use>`: las reglas tipo `.contenedor .pieza` no alcanzan el contenido clonado. Las variables CSS y `currentColor` sí se heredan.
+- **Accesibilidad (criterio de Lucide):** oculto por defecto con `aria-hidden="true"`. Solo si comunica algo esencial por sí solo: sin `aria-hidden`, con `role="img"` y `aria-label` (o `<title>`). En un botón con solo icono, `aria-label` va en el `<button>`.
 - Clases con prefijo `uva-<id>`/`@keyframes uva-<id>-…` para no colisionar si se inlinean varios iconos.
 - El color solo se hereda si el SVG va **inline** o vía `<use>`; como `<img src>` no hereda `currentColor` (avisarlo al entregar).
 - Los elementos que se animan con `stroke-dashoffset` llevan `pathLength` explícito.
