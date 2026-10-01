@@ -1,6 +1,6 @@
 # Movimiento en iconos (E4)
 
-El movimiento existe para comunicar **estado o proceso** (cargando, sincronizando, un proceso de producción en curso). Si no comunica algo, no se anima. La norma (§27–34 de `estandar-iconografia.md`) manda; este archivo da los patrones CSS. En los ejemplos, `x` es el `semanticName` del icono.
+El movimiento existe para comunicar **estado o proceso** (cargando, sincronizando, un proceso de producción en curso). Si no comunica algo, no se anima. La norma (§27–34, `norma/03-movimiento.md`) manda; este archivo da los patrones CSS. En los ejemplos, `x` es el `semanticName` del icono.
 
 ## Categorías y tokens (norma §28–29)
 
@@ -11,6 +11,8 @@ El movimiento existe para comunicar **estado o proceso** (cargando, sincronizand
 | Progress | proceso real en curso | `motion.loop`: ciclos de 1.6–2.4 s, máximo 2 (límite de 5 s) |
 | Attention | campana | con extrema moderación |
 | Decorative | brillos, rebotes, flotación | **no se propone** |
+
+La categoría se decide por el **significado**, no por el disparador: un proceso real en curso es *progress* aunque solo se anime al entrar en el estado.
 
 Los tokens `fast`, `base` y `slow` (§29) rigen transiciones y feedback; el progreso usa `motion.loop`, cuya duración la norma deja variable. Para progreso, Uva usa ciclos de 1.6–2.4 s.
 

@@ -1,6 +1,6 @@
 # Estándares para evaluar iconos (E3)
 
-Rúbrica que aplica la norma de Uva (`estandar-iconografia.md`, citada como §n) a cada prototipo. Si esta rúbrica y la norma discrepan, gana la norma.
+Rúbrica que aplica la norma de Uva (`norma/`, citada como §n: §2–10 en `norma/01-seleccion.md`, §11–26 en `norma/02-uso-interfaz.md`, §27–34 en `norma/03-movimiento.md`) a cada prototipo. Si esta rúbrica y la norma discrepan, gana la norma.
 
 Cada criterio indica **fuente**, **qué se mide** y **cómo se comprueba**. Un criterio `bloqueante` que falla descarta la variante o obliga a iterarla; uno `recomendado` se reporta y se justifica si no se cumple.
 
@@ -66,7 +66,7 @@ Nota: el ejemplo de la norma §2.1 usa `category: destructive-action`, que no fi
 | D4 | El movimiento pertenece a una categoría: state transition, feedback, progress o attention; nunca decorative | Norma §27–28 | bloqueante | brief / E4 |
 | D5 | Los trazos animados con `stroke-dashoffset` llevan `pathLength` explícito | Política de Uva | bloqueante | `check-icon` (D5) |
 | D6 | Duraciones dentro de los tokens de movimiento (fast 100–160 ms, base 160–240, slow 240–400; loop solo para progreso real) | Norma §29 | recomendado | revisar `animation` |
-| D7 | Con propósito, breve, predecible, sin rebote excesivo, zoom grande, sacudida continua ni varios movimientos simultáneos (dos movimientos **distintos** a la vez; el mismo movimiento en varias partículas, o dos encadenados, cuentan como uno: ver `movimiento.md`) | Norma §30 | bloqueante | revisión en el banco (`#medio`) |
+| D7 | Con propósito, breve, predecible, sin rebote excesivo, zoom grande, sacudida continua ni varios movimientos simultáneos (dos movimientos **distintos** a la vez; el mismo movimiento en varias partículas, o dos encadenados, cuentan como uno) | Norma §30 | bloqueante | revisión en el banco (`#medio`) |
 
 ## U · Recomendaciones de uso (Uva las indica; no las implementa)
 
@@ -85,7 +85,7 @@ En la propuesta, cada variante lleva una tabla corta: criterio, ✅/❌/➖ (no 
 
 ## Fuentes
 
-- Norma de Uva — Guía y estándar de iconografía accesible v1.0: `references/estandar-iconografia.md`
+- Norma de Uva — Guía y estándar de iconografía accesible v1.0: `references/norma/`
 
 - Lucide — Icon design guide / specification: https://lucide.dev/contribute/icons/specification
 - Material Design — System icons: https://material.io/design/iconography/system-icons.html

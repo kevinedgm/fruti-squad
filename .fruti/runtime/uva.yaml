@@ -2,7 +2,7 @@ agent: uva
 owns: custom_icons
 interface: natural-language
 position: lateral   # no forma parte de la cadena kiwi → lima → coco → mora; la alimenta con SVG verificados
-norm: agentes/uva/references/estandar-iconografia.md   # Guía y estándar de iconografía accesible v1.0 (solo Uva); recibido hasta §34 (incompleto)
+norm: agentes/uva/references/norma/   # Guía y estándar de iconografía accesible v1.0 (solo Uva), partida por bloques; recibido hasta §34 (incompleto)
 rubric: agentes/uva/references/estandares.md           # aplica la norma; en conflicto gana la norma salvo `decisions`
 decisions:
   stroke: "1.5 por elección del usuario (la norma §6 fija 2 con Lucide por defecto). Un solo grosor por familia: si el proyecto usa Lucide a 2, Uva usa 2; si usa 1.5, Lucide se renderiza con strokeWidth 1.5 (§8, §10)."
@@ -36,7 +36,8 @@ stages:
     outcome_may_be: reuse_existing_lucide_icon
     format: one_line_per_field
     captures: [semantic_name, category, meaning_assumptions, lucide_search, consistency_conflicts, domain_vocabulary, concept, meaning, real_size, neighbors, text_label, accessible_name_purpose, style_source, distinctive_traits, domain_confusions, success_criteria]
-    references: [agentes/uva/references/estandar-iconografia.md]   # §2–10
+    references: [agentes/uva/references/norma/01-seleccion.md]   # §2–10
+    template: agentes/uva/assets/brief-template.md
     confusions: "al menos 2, por silueta y por metáfora; se añaden las que aparezcan al renderizar (banco: hasta 4 a la vez)"
     ask_user_only_if: answer_changes_the_icon
   E2_prototype:
@@ -46,25 +47,28 @@ stages:
     include_partial_lucide_match_as_variant: true   # como referencia, aunque choque con el dominio; se evalúa con S3/B2
     sketch_motion_if_state_or_process: true          # la zona libre (R4) se reserva al dibujar
     class_naming: "uva-<id>-<v>, uva-<id>-<v>__<pieza>, @keyframes uva-<id>-<v>-<nombre>"
-    references: [agentes/uva/references/reglas.md]
+    references: [agentes/uva/references/reglas.md, agentes/uva/references/contrato-svg.md]
   E3_evaluate:
     order: [check_icon_script, rendered_test_bench, rubric, iterate_with_cause, choose]
     script: node agentes/uva/scripts/check-icon.mjs <svg...>
+    render: node agentes/uva/scripts/render-banco.mjs banco.html --modo todos
     assets: [agentes/uva/assets/banco-prueba.html]   # todas las variantes; modos #final #medio #reducido
     references: [agentes/uva/references/estandares.md, agentes/uva/references/reglas.md]
     recommended_requires: no_blocking_criterion_failed
   E4_animate:
     when: meaning_is_state_or_process
-    references: [agentes/uva/references/movimiento.md]
+    references: [agentes/uva/references/movimiento.md, agentes/uva/references/norma/03-movimiento.md]
     categories: [state_transition, feedback, progress, attention]   # decorative no se propone (§28); se decide por el significado, no por el disparador
     limits: [total_motion_le_5s_or_pause_control, reduced_motion_instant_or_opacity_not_slower, no_flashing, motion_tokens_s29]
   E5_propose:
     assets: [agentes/uva/assets/propuesta.html]
+    references: [agentes/uva/references/norma/02-uso-interfaz.md]   # §11–26: recomendaciones de uso
     output: propuesta.html
     chat_summary_max_lines: 8
     user_checkpoint: true
   E6_deliver:
     after: user_choice
+    references: [agentes/uva/references/contrato-svg.md]   # nombres definitivos y plantilla de registro.yaml
     output: ["<id>.svg", "<id>.small.svg (solo si R7)", registro.yaml]   # registro.yaml = entrada propuesta §5.1
 operations:
   create_icon: [E1_understand, E2_prototype, E3_evaluate, E4_animate, E5_propose, E6_deliver]
