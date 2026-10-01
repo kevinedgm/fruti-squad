@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "icon": {
+    "id": "heart-rate-high",
+    "source": "uva",
+    "next_owner": "coco",
+    "style_source": "uva_base (sin tokens icon.* ni librería en el perfil)",
+    "family": ["blood-pressure-high"],
+    "sizes": [16, 20, 24, 32, 48],
+    "small_variant": false,
+    "motion": {
+      "category": "attention",
+      "trigger": "uva-heart-rate-high--latir al entrar una lectura alta nueva",
+      "duration_ms": 1920,
+      "reduced_motion": "none (no añadir la clase)",
+      "overflow": "ondas ~2 px fuera de la caja por la derecha; el contenedor no debe recortar"
+    },
+    "confusions_tested": ["blood-pressure-high", "heart-pulse", "activity", "heart"],
+    "criteria_failed": [],
+    "deviations": ["latido + onda tratados como un solo efecto encadenado (§30)"],
+    "files": ["heart-rate-high.svg", "registro.yaml", "uso.md", "prueba.html"],
+    "unresolved": [
+      "RTL: espejado recomendado, no probado",
+      "Safari: animación de stroke-width con calc(var()) en keyframes no verificada",
+      "sin prueba con personas (¿se distingue de blood-pressure-high a 16 px sin texto?)"
+    ]
+  }
+}

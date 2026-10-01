@@ -19,7 +19,8 @@ sizes: { tested: [14, 16, 20, 24, 32, 48, 96], recommended: [20, 24, 32, 48] }
 smallVariant: false               # a 14–16 la punta de la flecha se acerca a la hendidura del corazón, pero se lee
 confusionsTested: [heart, heart-plus, gauge, trending-up]
 alternatives: { lucide: heart-pulse } # dice «salud cardíaca / pulso», no «alta»
-reserved: "solo presión arterial alta; la frecuencia cardíaca alta necesita su propio icono (pendiente)"
+reserved: "solo presión arterial alta; la frecuencia cardíaca alta usa heart-rate-high"
+family: [heart-rate-high]
 status: proposed
 usage:
   label: required                 # siempre con texto («Presión alta», valor); el icono refuerza, no sustituye

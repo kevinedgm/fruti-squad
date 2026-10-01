@@ -1,0 +1,29 @@
+# Entrada propuesta del registro semántico de iconos (norma §5.1). Es una propuesta: el registro del proyecto lo gobierna lima.
+semanticName: heart-rate-high
+icon: { library: custom, name: uva-heart-rate-high, file: heart-rate-high.svg }
+category: status
+meaning: "Frecuencia cardíaca alta detectada (un solo nivel)"
+accessibility: { defaultLabel: Frecuencia cardíaca alta, hiddenByDefault: true }
+direction: { rtl: mirror }        # las líneas de velocidad marcan avance hacia la derecha; en RTL se recomienda espejarlo (supuesto: no se probó)
+motion:
+  allowed: attention
+  trigger: "clase uva-heart-rate-high--latir cuando entra una lectura alta nueva; se quita en animationend"
+  duration: 1920ms                # 4 latidos de 480 ms: el ritmo rápido es parte del significado
+  phases: [primer golpe + onda, relajación, segundo golpe + onda débil, reposo]
+  reducedMotion: "sin movimiento: ni latido ni ondas; las líneas de velocidad ya dicen «rápido» quieto"
+  rest: "mientras la frecuencia siga alta, quieto (estado largo)"
+  overflow: "las ondas salen ~2 px por la derecha de la caja de 24; el contenedor no debe recortar"
+  deviation: "latido + onda cuentan como un solo efecto encadenado (§30); mismo lenguaje que blood-pressure-high"
+style: { source: uva_base, stroke: 1.5, cap: round, join: round, accent: "--uva-accent opcional para las ondas" }
+family: [blood-pressure-high]     # mismo corazón, mismo golpe doble y ondas; se distinguen por silueta y ritmo
+sizes: { tested: [14, 16, 20, 24, 32, 48, 96], recommended: [16, 20, 24, 32, 48] }
+smallVariant: false               # las líneas se leen a 14–16 px
+confusionsTested: [blood-pressure-high, heart-pulse, activity, heart]
+alternatives: { lucide: heart-pulse } # dice «pulso», no «alto»
+reserved: "solo frecuencia cardíaca alta; no usar con flecha ni para presión"
+status: proposed
+usage:
+  label: required                 # siempre con texto («118 lpm · Pulso alto»)
+  iconOnly: "si va solo, role=img y aria-label «Frecuencia cardíaca alta»"
+  color: "lo pone el sistema de alertas vía color del contenedor (currentColor)"
+  inlineOnly: "el color y la animación solo funcionan con el SVG inline o vía <use>; como <img src> queda estático y negro"

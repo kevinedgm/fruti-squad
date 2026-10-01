@@ -20,4 +20,4 @@ svg.addEventListener('animationend', (e) => {
 4. **Deja espacio a las ondas.** Salen 2–3 px fuera de la caja del icono. Un contenedor con `overflow: hidden` pegado al icono las corta en los bordes; dale relleno o `overflow: visible`.
 5. **Mientras la presión siga alta, quieto.** Late 3 veces (2,4 s) y se detiene (WCAG 2.2.2). No lo pongas en bucle.
 6. **Color y grosor:** el color sale de `color` del contenedor; `--uva-accent` cambia solo el color de las ondas; `--uva-stroke` cambia el grosor de toda la familia.
-7. **Reservado para presión.** No lo uses para frecuencia cardíaca alta: ese aviso necesita su propio icono (pendiente), para que los dos no se confundan.
+7. **Reservado para presión.** Para frecuencia cardíaca alta usa `heart-rate-high` (misma familia: líneas de velocidad y latido rápido).

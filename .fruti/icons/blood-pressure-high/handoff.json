@@ -5,7 +5,12 @@
     "source": "uva",
     "next_owner": "coco",
     "style_source": "uva_base (sin tokens icon.* ni librería en el perfil)",
-    "sizes": [20, 24, 32, 48],
+    "sizes": [
+      20,
+      24,
+      32,
+      48
+    ],
     "small_variant": false,
     "motion": {
       "category": "attention",
@@ -14,14 +19,28 @@
       "reduced_motion": "none (no añadir la clase)",
       "overflow": "ondas ~2–3 px fuera de la caja; el contenedor no debe recortar"
     },
-    "confusions_tested": ["heart", "heart-plus", "gauge", "trending-up"],
+    "confusions_tested": [
+      "heart",
+      "heart-plus",
+      "gauge",
+      "trending-up"
+    ],
     "criteria_failed": [],
-    "deviations": ["latido + onda tratados como un solo efecto encadenado (§30)"],
-    "files": ["blood-pressure-high.svg", "registro.yaml", "uso.md", "prueba.html"],
+    "deviations": [
+      "latido + onda tratados como un solo efecto encadenado (§30)"
+    ],
+    "files": [
+      "blood-pressure-high.svg",
+      "registro.yaml",
+      "uso.md",
+      "prueba.html"
+    ],
     "unresolved": [
-      "icono propio para frecuencia cardíaca alta (el sistema también la avisa): pendiente, no debe reutilizar este",
       "Safari: animación de stroke-width con calc(var()) en keyframes no verificada (si falla, las ondas solo engrosan un poco)",
       "sin prueba con personas"
+    ],
+    "family": [
+      "heart-rate-high"
     ]
   }
 }
