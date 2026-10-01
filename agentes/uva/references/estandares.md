@@ -38,7 +38,7 @@ Nota: el ejemplo de la norma §2.1 usa `category: destructive-action`, que no fi
 
 | # | Criterio | Fuente | Nivel | Cómo comprobar |
 |---|---|---|---|---|
-| B1 | **Reconocible:** a su tamaño real se identifica qué objeto es | NN/g (reconocibilidad) | bloqueante | banco a 22–24px; prueba de 5 segundos con una persona sin contexto, si es posible |
+| B1 | **Reconocible:** a su tamaño real se identifica qué objeto es | NN/g (reconocibilidad) | bloqueante | banco a 20–24px; prueba de 5 segundos con una persona sin contexto si la hay; si no, se anota «sin prueba con personas» y el veredicto sale del banco |
 | B2 | **Interpretable:** en su contexto se entiende qué *significa* (estado, acción) | NN/g (interpretación ≠ reconocimiento) | bloqueante | E1 define el significado; el movimiento o el modificador lo refuerzan |
 | B3 | Silueta clara con la menor información gráfica necesaria: sin microdetalles, texturas, formas redundantes ni sombras internas | Apple HIG, norma §9 | bloqueante | R1: tapar el detalle; ¿la silueta sola basta? |
 | B4 | No se confunde con iconos del mismo dominio | Regla R5 de Uva | bloqueante | banco con 2–3 confusiones declaradas |

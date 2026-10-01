@@ -10,7 +10,7 @@ permissions:
       match: ["**"]
       effect: allow
     - capability: fs_write
-      match: ["*.svg", "*.html", "*.md", "*.css"]
+      match: ["*.svg", "*.html", "*.md", "*.css", ".fruti/icons/**", ".fruti/handoffs/**"]
       effect: allow
     - capability: fs_write
       match: ["**"]
@@ -53,7 +53,7 @@ Vectorizar una foto produce un único `<path>` lleno de nodos: se parece al orig
 
 **Entrada mínima:** una imagen de referencia **o** una descripción del objeto/concepto. Lo demás (significado, tamaño, vecinos, etiqueta) Uva lo deduce del contexto o lo pregunta en E1 solo si cambia el resultado.
 
-**Salidas** (en `icons.dir` del perfil; si no existe, `.fruti/icons/<id>/`):
+**Salidas** (en `icons.dir` del perfil activo; si no hay perfil o no lo define, `.fruti/icons/<id>/`; si tampoco se puede escribir ahí, en la carpeta de trabajo de la sesión, avisándolo en el resumen):
 
 | Etapa | Archivo |
 |---|---|
@@ -107,16 +107,18 @@ Escribe un `brief.md` breve: **una línea por campo**, sin párrafos. Sigue el o
 - **Uso.** Tamaño real (16/20/24px), dónde aparece, qué iconos tendrá al lado y si llevará **etiqueta de texto** (salvo casa, imprimir y lupa, ningún icono es universal). Esto decide su accesibilidad: con etiqueta o dentro de un botón → icono oculto (y el nombre, en el botón); solo y con significado esencial → nombre accesible. El nombre describe el **propósito**, no el dibujo ("Buscar", no "icono de lupa"; §15) y contiene el texto visible si lo hay (§18). Si irá en un botón solo con icono, anota que necesita área de 44×44 (§11–12).
 - **Estilo.** Fuente del ADN (tokens → librería del perfil → base de Uva).
 - **Rasgos distintivos** de la referencia: silueta y proporción **medidas en la referencia** (R1), 2–3 rasgos que lo hacen *este* objeto, qué se descarta, vista más legible.
-- **Confusiones del dominio:** 2–4 iconos con los que podría leerse mal, buscados por **silueta** y por **metáfora** (R2, R5); usa `buscar-lucide.mjs` también con los términos de la metáfora.
+- **Confusiones del dominio:** al menos 2 iconos con los que podría leerse mal (el banco muestra hasta 4 a la vez), buscados por **silueta** y por **metáfora** (R2, R5); usa `buscar-lucide.mjs` también con los términos de la metáfora.
 - **Criterio de éxito:** qué debe pasar en el banco para darlo por bueno.
 
 Para un concepto abstracto (sin objeto físico), lista 2–3 metáforas posibles (1–2 objetos reconocibles + un modificador); se convierten en variantes en E2.
+
+Si el usuario no dijo qué significa el icono y el objeto podría ser tanto un objeto como un estado o una acción, elige el significado más probable en su contexto, anótalo como **supuesto** en el brief y en el campo `supuestos` de la propuesta (se muestra destacado), y sigue. Si la categoría es *object*, el `semanticName` es el nombre genérico del objeto en su función (`bulk-container`, no la marca ni el modelo).
 
 Si la imagen no se puede abrir, dilo y pide adjuntarla. Pregunta al usuario solo cuando la respuesta cambie el icono (p. ej. dos significados posibles); si no, decide, anótalo en el brief y sigue.
 
 ### E2 · Prototipar varias opciones
 
-- Dibuja **3 variantes** (2 si el objeto es muy simple, 4 como máximo) con primitivas sobre la cuadrícula.
+- Dibuja **3 variantes propias** (2 si el objeto es muy simple, 4 como máximo) con primitivas sobre la cuadrícula. La variante de referencia de Lucide, si la hay, va aparte y no cuenta en ese máximo.
 - Las variantes deben diferir en **una decisión de fondo**, no en retoques: metáfora, silueta/proporción, nivel de detalle, o qué rasgo distintivo se usa. Ejemplo (reloj de arena): contorno único / dos ampollas separadas por un cuello / con arena que cae como acento.
 - Cada variante lleva una **hipótesis** de una línea: por qué podría funcionar.
 - Si E1 encontró un icono de Lucide parcial o cercano, inclúyelo como variante (`--svg <nombre> --stroke <grosor de la familia>`): es la opción de referencia contra la que se mide el icono propio (§2.2).
@@ -137,6 +139,7 @@ En este orden, primero lo determinista y después lo visual:
    ```
    Modos del banco (fragmento de la URL): `#final` (fotograma que queda tras la animación), `#medio` (animaciones congeladas a mitad del primer ciclo, para R4), `#reducido` (bloque de movimiento reducido activo, para D2). El reloj virtual de Chromium no hace avanzar las animaciones CSS de forma fiable; por eso los modos fijan el fotograma.
 3. **Rúbrica** (`references/estandares.md`): marca cada criterio ✅/❌/➖ con una línea de evidencia sacada de la captura o del script. Sin captura no hay veredicto.
+   **Confusiones que aparecen al renderizar** (algo que no estaba en la lista de E1 y la captura sugiere): añádelas al brief y al banco, sustituyendo la que menos se parezca si ya hay 4, e itera con causa como con las demás.
 4. **Iterar con causa:** si una variante falla un bloqueante, nombra qué falló y qué variable lo causa ("parece botella → hombro curvo"), cambia esa variable y vuelve a 1. Tras 3 iteraciones sin convergencia, vuelve a E1: el problema suele ser el rasgo elegido.
 5. **Elegir:** la recomendada no puede tener bloqueantes en ❌. Las descartadas se conservan en la propuesta con su motivo: muestran por qué la recomendada es mejor.
 

@@ -35,12 +35,12 @@ stages:
     script: node agentes/uva/scripts/buscar-lucide.mjs <términos en inglés>
     outcome_may_be: reuse_existing_lucide_icon
     format: one_line_per_field
-    captures: [semantic_name, category, lucide_search, consistency_conflicts, domain_vocabulary, concept, meaning, real_size, neighbors, text_label, accessible_name_purpose, style_source, distinctive_traits, domain_confusions, success_criteria]
+    captures: [semantic_name, category, meaning_assumptions, lucide_search, consistency_conflicts, domain_vocabulary, concept, meaning, real_size, neighbors, text_label, accessible_name_purpose, style_source, distinctive_traits, domain_confusions, success_criteria]
     references: [agentes/uva/references/estandar-iconografia.md]   # §2–10
-    confusions: "2-4, por silueta y por metáfora"
+    confusions: "al menos 2, por silueta y por metáfora; se añaden las que aparezcan al renderizar (banco: hasta 4 a la vez)"
     ask_user_only_if: answer_changes_the_icon
   E2_prototype:
-    variants: "3 (2 if trivial, max 4)"
+    variants: "3 propias (2 if trivial, max 4); la referencia de Lucide no cuenta"
     variants_differ_in: [metaphor, silhouette_or_proportion, detail_level, distinctive_trait]
     each_variant_has: hypothesis
     include_partial_lucide_match_as_variant: true   # como referencia, aunque choque con el dominio; se evalúa con S3/B2
@@ -74,7 +74,7 @@ operations:
     load_only_if: user_asks_for_examples_or_tool_debugging   # nunca durante un encargo: sesgan el diseño
     files: [agentes/uva/examples/fermenting.svg, agentes/uva/examples/distilling.svg, agentes/uva/examples/propuesta-distilling.html, agentes/uva/examples/casos.md]
 output:
-  dir: profile.icons.dir | .fruti/icons/<id>/
+  dir: profile.icons.dir | .fruti/icons/<id>/ | carpeta de trabajo (avisar)
   handoff: .fruti/handoffs/current.json#icon
   include: [id, style_source, sizes, small_variant, motion, confusions_tested, criteria_failed, files, unresolved]
 rules:
