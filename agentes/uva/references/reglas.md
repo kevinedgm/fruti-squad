@@ -10,7 +10,7 @@ Principios de dibujo y evaluación. Cada uno se formula como **regla → mecanis
 
 ## R2 · Probar contra las confusiones, no solo contra vecinos al azar
 
-- **Regla:** un icono puede encajar con la familia y aun así significar otra cosa. Declara en E1 entre 2 y 4 confusiones y pruébalas a 24px junto a tu icono.
+- **Regla:** un icono puede encajar con la familia y aun así significar otra cosa. Declara en E1 al menos 2 confusiones y pruébalas a 20–24px junto a tu icono; añade las que aparezcan al renderizar (el banco muestra hasta 4 a la vez).
 - **Busca confusiones de dos tipos:**
   - **por silueta:** iconos con un contorno parecido (cilindros, botellas, cajas, cuencos…);
   - **por metáfora:** iconos que usan la misma idea visual (p. ej. "recipiente + algo que sale de él", "objeto + flecha"). Búscalos con `buscar-lucide.mjs` usando los términos de la metáfora, no solo los del objeto.

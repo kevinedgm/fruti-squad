@@ -41,7 +41,7 @@ Nota: el ejemplo de la norma §2.1 usa `category: destructive-action`, que no fi
 | B1 | **Reconocible:** a su tamaño real se identifica qué objeto es | NN/g (reconocibilidad) | bloqueante | banco a 20–24px; prueba de 5 segundos con una persona sin contexto si la hay; si no, se anota «sin prueba con personas» y el veredicto sale del banco |
 | B2 | **Interpretable:** en su contexto se entiende qué *significa* (estado, acción) | NN/g (interpretación ≠ reconocimiento) | bloqueante | E1 define el significado; el movimiento o el modificador lo refuerzan |
 | B3 | Silueta clara con la menor información gráfica necesaria: sin microdetalles, texturas, formas redundantes ni sombras internas | Apple HIG, norma §9 | bloqueante | R1: tapar el detalle; ¿la silueta sola basta? |
-| B4 | No se confunde con iconos del mismo dominio | Regla R5 de Uva | bloqueante | banco con 2–3 confusiones declaradas |
+| B4 | No se confunde con iconos del mismo dominio | Regla R5 de Uva | bloqueante | banco con las confusiones declaradas en E1 y las que aparecieron al renderizar |
 | B5 | Lleva **etiqueta de texto** visible salvo que sea universal (solo casa, imprimir y lupa lo son) | NN/g | recomendado (decisión del producto) | E1 pregunta si habrá etiqueta; la propuesta lo indica |
 | B6 | Coherente con la familia: mismo trazo, terminaciones, radios y peso óptico | Apple, Lucide, R6 | bloqueante | banco: fila de familia |
 
