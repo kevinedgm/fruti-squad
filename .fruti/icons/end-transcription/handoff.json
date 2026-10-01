@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "icon": {
+    "id": "end-transcription",
+    "source": "uva",
+    "next_owner": "coco",
+    "style_source": "uva_base (sin tokens icon.* ni librería en el perfil)",
+    "pair": "transcribing",
+    "sizes": [16, 20, 24],
+    "small_variant": false,
+    "motion": { "category": "none" },
+    "confusions_tested": ["square", "mic-off", "circle", "circle-stop"],
+    "criteria_failed": [],
+    "deviations": [],
+    "files": ["end-transcription.svg", "registro.yaml", "uso.md", "prueba.html"],
+    "unresolved": ["sin prueba con médicos"]
+  }
+}

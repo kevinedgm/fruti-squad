@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dictado · prueba</title>
+<style>
+  :root{--fondo:#fafaf9;--panel:#fff;--texto:#1a1a1a;--tenue:#5f5f5f;--linea:#e5e4e2;--grabando:#d92d20;--marca:#7c5cd6}
+  *{box-sizing:border-box} body{margin:0;background:var(--fondo);color:var(--texto);font:15px/1.5 system-ui,sans-serif}
+  main{max-width:820px;margin:0 auto;padding:28px 16px 48px} h1{font-size:22px;margin:0 0 4px} h2{font-size:16px;margin:28px 0 8px}
+  .sub{color:var(--tenue);margin:0 0 20px} .panel{background:var(--panel);border:1px solid var(--linea);border-radius:12px;padding:0;overflow:hidden}
+  .barra{display:flex;align-items:center;gap:4px;border-bottom:1px solid var(--linea);padding:0 12px;flex-wrap:wrap}
+  .tab{font:inherit;background:none;border:0;border-bottom:2px solid transparent;padding:12px 12px 10px;color:var(--tenue);cursor:pointer;display:inline-flex;align-items:center;gap:6px;min-height:44px}
+  .tab[aria-selected="true"]{color:var(--texto);border-bottom-color:var(--marca);font-weight:600}
+  .tab:focus-visible,.boton:focus-visible,.solo:focus-visible{outline:2px solid var(--marca);outline-offset:2px}
+  .estado{margin-left:auto;display:inline-flex;align-items:center;gap:8px;padding:6px 0}
+  .dictado{display:inline-flex;align-items:center;gap:6px;color:var(--texto);font-size:14px;--uva-accent:var(--grabando)}
+  .boton{font:inherit;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:10px;border:1px solid var(--linea);background:#fff;color:var(--texto);cursor:pointer}
+  .solo{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;border:1px solid var(--linea);background:#fff;color:var(--texto);cursor:pointer}
+  .cuerpo{padding:18px} .cuerpo textarea{width:100%;min-height:110px;font:inherit;border:1px solid var(--linea);border-radius:8px;padding:10px}
+  [hidden]{display:none!important}
+  .fila{display:flex;flex-wrap:wrap;gap:24px;align-items:center;padding:18px;--uva-accent:var(--grabando)} .fila+.fila{border-top:1px solid var(--linea)}
+  .oscuro{background:#0b0b0b;color:#fff;border-radius:12px;padding:18px;display:flex;gap:24px;align-items:center;flex-wrap:wrap;--uva-accent:#ff6b5e}
+  label.toggle{display:flex;gap:8px;align-items:center;margin-top:12px;font-size:14px}
+  .sin-mov .uva-transcribing--iniciar{--uva-transcribing-onda:none;--uva-transcribing-punto:none}
+  ul{margin:8px 0 0;padding-left:20px} li{margin:4px 0}
+</style></head><body>
+<main>
+<h1>Dictado en la consulta</h1>
+<p class="sub">Pulsa «Iniciar dictado»: en la barra de pestañas salen ondas de voz del micrófono y aparece el punto de grabación (1,8 s); después queda quieto en todas las pestañas hasta que pulses «Finalizar dictado».</p>
+<div class="panel">
+  <div class="barra" role="tablist" aria-label="Consulta">
+    <button class="tab" role="tab" aria-selected="true">Padecimiento</button>
+    <button class="tab" role="tab" aria-selected="false">Exploración</button>
+    <button class="tab" role="tab" aria-selected="false">Diagnóstico</button>
+    <button class="tab" role="tab" aria-selected="false">Receta</button>
+    <span class="estado">
+      <span class="dictado" id="indicador" role="status" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-transcribing" width="20" height="20" aria-hidden="true">
+  <style>
+    .uva-transcribing{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    .uva-transcribing__punto{fill:var(--uva-accent,currentColor);stroke:none;transform-box:fill-box;transform-origin:center;animation:var(--uva-transcribing-punto,none) 320ms cubic-bezier(.3,1.4,.5,1) 1.45s 1;animation-fill-mode:both}
+    /* Al empezar el dictado: una onda de voz sale del micrófono dos veces (2 × 700 ms) y después aparece el
+       punto de grabación (1.77 s en total); luego queda quieto mientras dure. El componente añade uva-transcribing--iniciar
+       al empezar y la quita en el animationend del punto (uva-transcribing-punto). */
+    .uva-transcribing--iniciar{--uva-transcribing-onda:uva-transcribing-onda;--uva-transcribing-punto:uva-transcribing-punto}
+    .uva-transcribing__onda{opacity:0;transform-origin:10px 8px;animation:var(--uva-transcribing-onda,none) 700ms cubic-bezier(.2,.6,.3,1) 0s 2}
+    @keyframes uva-transcribing-onda{0%{opacity:0;transform:scale(.92)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.15)}}
+    @keyframes uva-transcribing-punto{0%{transform:scale(0)}100%{transform:scale(1)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-transcribing--iniciar{--uva-transcribing-onda:none;--uva-transcribing-punto:none}
+    }
+  </style>
+  <!-- transcribing · al empezar el dictado salen ondas de voz y aparece el punto (clase uva-transcribing--iniciar) -->
+  <path class="uva-transcribing__onda" d="M16.45 3.97A7.6 7.6 0 0 1 16.45 12.03M3.55 3.97A7.6 7.6 0 0 0 3.55 12.03"/>
+  <rect class="uva-transcribing__mic" x="7.00" y="2.5" width="6" height="11.0" rx="3.0"/>
+  <path class="uva-transcribing__soporte" d="M15.50 9.50V10.50A5.50 5.50 0 0 1 4.50 10.50V9.50M10 16.00V20.00"/>
+  <circle class="uva-transcribing__punto" cx="19.3" cy="4.7" r="2.1"/>
+</svg>Transcribiendo</span>
+      <button class="boton" type="button" id="finalizar" hidden><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-end-transcription" width="20" height="20" aria-hidden="true">
+  <style>.uva-end-transcription{stroke-width:var(--uva-stroke,1.5)}.uva-end-transcription__cuadro{fill:currentColor}</style>
+  <!-- end-transcription · círculo + cuadrado de detener (sin movimiento: acción) -->
+  <circle class="uva-end-transcription__aro" cx="12" cy="12" r="9.5"/>
+  <rect class="uva-end-transcription__cuadro" x="9" y="9" width="6" height="6" rx="1"/>
+</svg>Finalizar dictado</button>
+      <button class="boton" type="button" id="iniciar">Iniciar dictado</button>
+    </span>
+  </div>
+  <div class="cuerpo"><textarea aria-label="Padecimiento actual" placeholder="El texto dictado aparecería aquí…"></textarea>
+  <label class="toggle"><input type="checkbox" id="reducir"> Simular «reducir movimiento»</label></div>
+</div>
+<h2>Tamaños: indicador (arriba) y finalizar (abajo) · 16 · 20 · 24 · 32 · 48</h2>
+<div class="panel"><div class="fila"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-transcribing" width="16" height="16" aria-hidden="true">
+  <style>
+    .uva-transcribing{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    .uva-transcribing__punto{fill:var(--uva-accent,currentColor);stroke:none;transform-box:fill-box;transform-origin:center;animation:var(--uva-transcribing-punto,none) 320ms cubic-bezier(.3,1.4,.5,1) 1.45s 1;animation-fill-mode:both}
+    /* Al empezar el dictado: una onda de voz sale del micrófono dos veces (2 × 700 ms) y después aparece el
+       punto de grabación (1.77 s en total); luego queda quieto mientras dure. El componente añade uva-transcribing--iniciar
+       al empezar y la quita en el animationend del punto (uva-transcribing-punto). */
+    .uva-transcribing--iniciar{--uva-transcribing-onda:uva-transcribing-onda;--uva-transcribing-punto:uva-transcribing-punto}
+    .uva-transcribing__onda{opacity:0;transform-origin:10px 8px;animation:var(--uva-transcribing-onda,none) 700ms cubic-bezier(.2,.6,.3,1) 0s 2}
+    @keyframes uva-transcribing-onda{0%{opacity:0;transform:scale(.92)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.15)}}
+    @keyframes uva-transcribing-punto{0%{transform:scale(0)}100%{transform:scale(1)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-transcribing--iniciar{--uva-transcribing-onda:none;--uva-transcribing-punto:none}
+    }
+  </style>
+  <!-- transcribing · al empezar el dictado salen ondas de voz y aparece el punto (clase uva-transcribing--iniciar) -->
+  <path class="uva-transcribing__onda" d="M16.45 3.97A7.6 7.6 0 0 1 16.45 12.03M3.55 3.97A7.6 7.6 0 0 0 3.55 12.03"/>
+  <rect class="uva-transcribing__mic" x="7.00" y="2.5" width="6" height="11.0" rx="3.0"/>
+  <path class="uva-transcribing__soporte" d="M15.50 9.50V10.50A5.50 5.50 0 0 1 4.50 10.50V9.50M10 16.00V20.00"/>
+  <circle class="uva-transcribing__punto" cx="19.3" cy="4.7" r="2.1"/>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-transcribing" width="20" height="20" aria-hidden="true">
+  <style>
+    .uva-transcribing{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    .uva-transcribing__punto{fill:var(--uva-accent,currentColor);stroke:none;transform-box:fill-box;transform-origin:center;animation:var(--uva-transcribing-punto,none) 320ms cubic-bezier(.3,1.4,.5,1) 1.45s 1;animation-fill-mode:both}
+    /* Al empezar el dictado: una onda de voz sale del micrófono dos veces (2 × 700 ms) y después aparece el
+       punto de grabación (1.77 s en total); luego queda quieto mientras dure. El componente añade uva-transcribing--iniciar
+       al empezar y la quita en el animationend del punto (uva-transcribing-punto). */
+    .uva-transcribing--iniciar{--uva-transcribing-onda:uva-transcribing-onda;--uva-transcribing-punto:uva-transcribing-punto}
+    .uva-transcribing__onda{opacity:0;transform-origin:10px 8px;animation:var(--uva-transcribing-onda,none) 700ms cubic-bezier(.2,.6,.3,1) 0s 2}
+    @keyframes uva-transcribing-onda{0%{opacity:0;transform:scale(.92)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.15)}}
+    @keyframes uva-transcribing-punto{0%{transform:scale(0)}100%{transform:scale(1)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-transcribing--iniciar{--uva-transcribing-onda:none;--uva-transcribing-punto:none}
+    }
+  </style>
+  <!-- transcribing · al empezar el dictado salen ondas de voz y aparece el punto (clase uva-transcribing--iniciar) -->
+  <path class="uva-transcribing__onda" d="M16.45 3.97A7.6 7.6 0 0 1 16.45 12.03M3.55 3.97A7.6 7.6 0 0 0 3.55 12.03"/>
+  <rect class="uva-transcribing__mic" x="7.00" y="2.5" width="6" height="11.0" rx="3.0"/>
+  <path class="uva-transcribing__soporte" d="M15.50 9.50V10.50A5.50 5.50 0 0 1 4.50 10.50V9.50M10 16.00V20.00"/>
+  <circle class="uva-transcribing__punto" cx="19.3" cy="4.7" r="2.1"/>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-transcribing" width="24" height="24" aria-hidden="true">
+  <style>
+    .uva-transcribing{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    .uva-transcribing__punto{fill:var(--uva-accent,currentColor);stroke:none;transform-box:fill-box;transform-origin:center;animation:var(--uva-transcribing-punto,none) 320ms cubic-bezier(.3,1.4,.5,1) 1.45s 1;animation-fill-mode:both}
+    /* Al empezar el dictado: una onda de voz sale del micrófono dos veces (2 × 700 ms) y después aparece el
+       punto de grabación (1.77 s en total); luego queda quieto mientras dure. El componente añade uva-transcribing--iniciar
+       al empezar y la quita en el animationend del punto (uva-transcribing-punto). */
+    .uva-transcribing--iniciar{--uva-transcribing-onda:uva-transcribing-onda;--uva-transcribing-punto:uva-transcribing-punto}
+    .uva-transcribing__onda{opacity:0;transform-origin:10px 8px;animation:var(--uva-transcribing-onda,none) 700ms cubic-bezier(.2,.6,.3,1) 0s 2}
+    @keyframes uva-transcribing-onda{0%{opacity:0;transform:scale(.92)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.15)}}
+    @keyframes uva-transcribing-punto{0%{transform:scale(0)}100%{transform:scale(1)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-transcribing--iniciar{--uva-transcribing-onda:none;--uva-transcribing-punto:none}
+    }
+  </style>
+  <!-- transcribing · al empezar el dictado salen ondas de voz y aparece el punto (clase uva-transcribing--iniciar) -->
+  <path class="uva-transcribing__onda" d="M16.45 3.97A7.6 7.6 0 0 1 16.45 12.03M3.55 3.97A7.6 7.6 0 0 0 3.55 12.03"/>
+  <rect class="uva-transcribing__mic" x="7.00" y="2.5" width="6" height="11.0" rx="3.0"/>
+  <path class="uva-transcribing__soporte" d="M15.50 9.50V10.50A5.50 5.50 0 0 1 4.50 10.50V9.50M10 16.00V20.00"/>
+  <circle class="uva-transcribing__punto" cx="19.3" cy="4.7" r="2.1"/>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-transcribing" width="32" height="32" aria-hidden="true">
+  <style>
+    .uva-transcribing{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    .uva-transcribing__punto{fill:var(--uva-accent,currentColor);stroke:none;transform-box:fill-box;transform-origin:center;animation:var(--uva-transcribing-punto,none) 320ms cubic-bezier(.3,1.4,.5,1) 1.45s 1;animation-fill-mode:both}
+    /* Al empezar el dictado: una onda de voz sale del micrófono dos veces (2 × 700 ms) y después aparece el
+       punto de grabación (1.77 s en total); luego queda quieto mientras dure. El componente añade uva-transcribing--iniciar
+       al empezar y la quita en el animationend del punto (uva-transcribing-punto). */
+    .uva-transcribing--iniciar{--uva-transcribing-onda:uva-transcribing-onda;--uva-transcribing-punto:uva-transcribing-punto}
+    .uva-transcribing__onda{opacity:0;transform-origin:10px 8px;animation:var(--uva-transcribing-onda,none) 700ms cubic-bezier(.2,.6,.3,1) 0s 2}
+    @keyframes uva-transcribing-onda{0%{opacity:0;transform:scale(.92)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.15)}}
+    @keyframes uva-transcribing-punto{0%{transform:scale(0)}100%{transform:scale(1)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-transcribing--iniciar{--uva-transcribing-onda:none;--uva-transcribing-punto:none}
+    }
+  </style>
+  <!-- transcribing · al empezar el dictado salen ondas de voz y aparece el punto (clase uva-transcribing--iniciar) -->
+  <path class="uva-transcribing__onda" d="M16.45 3.97A7.6 7.6 0 0 1 16.45 12.03M3.55 3.97A7.6 7.6 0 0 0 3.55 12.03"/>
+  <rect class="uva-transcribing__mic" x="7.00" y="2.5" width="6" height="11.0" rx="3.0"/>
+  <path class="uva-transcribing__soporte" d="M15.50 9.50V10.50A5.50 5.50 0 0 1 4.50 10.50V9.50M10 16.00V20.00"/>
+  <circle class="uva-transcribing__punto" cx="19.3" cy="4.7" r="2.1"/>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-transcribing" width="48" height="48" aria-hidden="true">
+  <style>
+    .uva-transcribing{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    .uva-transcribing__punto{fill:var(--uva-accent,currentColor);stroke:none;transform-box:fill-box;transform-origin:center;animation:var(--uva-transcribing-punto,none) 320ms cubic-bezier(.3,1.4,.5,1) 1.45s 1;animation-fill-mode:both}
+    /* Al empezar el dictado: una onda de voz sale del micrófono dos veces (2 × 700 ms) y después aparece el
+       punto de grabación (1.77 s en total); luego queda quieto mientras dure. El componente añade uva-transcribing--iniciar
+       al empezar y la quita en el animationend del punto (uva-transcribing-punto). */
+    .uva-transcribing--iniciar{--uva-transcribing-onda:uva-transcribing-onda;--uva-transcribing-punto:uva-transcribing-punto}
+    .uva-transcribing__onda{opacity:0;transform-origin:10px 8px;animation:var(--uva-transcribing-onda,none) 700ms cubic-bezier(.2,.6,.3,1) 0s 2}
+    @keyframes uva-transcribing-onda{0%{opacity:0;transform:scale(.92)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.15)}}
+    @keyframes uva-transcribing-punto{0%{transform:scale(0)}100%{transform:scale(1)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-transcribing--iniciar{--uva-transcribing-onda:none;--uva-transcribing-punto:none}
+    }
+  </style>
+  <!-- transcribing · al empezar el dictado salen ondas de voz y aparece el punto (clase uva-transcribing--iniciar) -->
+  <path class="uva-transcribing__onda" d="M16.45 3.97A7.6 7.6 0 0 1 16.45 12.03M3.55 3.97A7.6 7.6 0 0 0 3.55 12.03"/>
+  <rect class="uva-transcribing__mic" x="7.00" y="2.5" width="6" height="11.0" rx="3.0"/>
+  <path class="uva-transcribing__soporte" d="M15.50 9.50V10.50A5.50 5.50 0 0 1 4.50 10.50V9.50M10 16.00V20.00"/>
+  <circle class="uva-transcribing__punto" cx="19.3" cy="4.7" r="2.1"/>
+</svg></div><div class="fila"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-end-transcription" width="16" height="16" aria-hidden="true">
+  <style>.uva-end-transcription{stroke-width:var(--uva-stroke,1.5)}.uva-end-transcription__cuadro{fill:currentColor}</style>
+  <!-- end-transcription · círculo + cuadrado de detener (sin movimiento: acción) -->
+  <circle class="uva-end-transcription__aro" cx="12" cy="12" r="9.5"/>
+  <rect class="uva-end-transcription__cuadro" x="9" y="9" width="6" height="6" rx="1"/>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-end-transcription" width="20" height="20" aria-hidden="true">
+  <style>.uva-end-transcription{stroke-width:var(--uva-stroke,1.5)}.uva-end-transcription__cuadro{fill:currentColor}</style>
+  <!-- end-transcription · círculo + cuadrado de detener (sin movimiento: acción) -->
+  <circle class="uva-end-transcription__aro" cx="12" cy="12" r="9.5"/>
+  <rect class="uva-end-transcription__cuadro" x="9" y="9" width="6" height="6" rx="1"/>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-end-transcription" width="24" height="24" aria-hidden="true">
+  <style>.uva-end-transcription{stroke-width:var(--uva-stroke,1.5)}.uva-end-transcription__cuadro{fill:currentColor}</style>
+  <!-- end-transcription · círculo + cuadrado de detener (sin movimiento: acción) -->
+  <circle class="uva-end-transcription__aro" cx="12" cy="12" r="9.5"/>
+  <rect class="uva-end-transcription__cuadro" x="9" y="9" width="6" height="6" rx="1"/>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-end-transcription" width="32" height="32" aria-hidden="true">
+  <style>.uva-end-transcription{stroke-width:var(--uva-stroke,1.5)}.uva-end-transcription__cuadro{fill:currentColor}</style>
+  <!-- end-transcription · círculo + cuadrado de detener (sin movimiento: acción) -->
+  <circle class="uva-end-transcription__aro" cx="12" cy="12" r="9.5"/>
+  <rect class="uva-end-transcription__cuadro" x="9" y="9" width="6" height="6" rx="1"/>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-end-transcription" width="48" height="48" aria-hidden="true">
+  <style>.uva-end-transcription{stroke-width:var(--uva-stroke,1.5)}.uva-end-transcription__cuadro{fill:currentColor}</style>
+  <!-- end-transcription · círculo + cuadrado de detener (sin movimiento: acción) -->
+  <circle class="uva-end-transcription__aro" cx="12" cy="12" r="9.5"/>
+  <rect class="uva-end-transcription__cuadro" x="9" y="9" width="6" height="6" rx="1"/>
+</svg></div>
+<div class="fila"><button class="solo" type="button" aria-label="Finalizar dictado"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-end-transcription" width="20" height="20" aria-hidden="true">
+  <style>.uva-end-transcription{stroke-width:var(--uva-stroke,1.5)}.uva-end-transcription__cuadro{fill:currentColor}</style>
+  <!-- end-transcription · círculo + cuadrado de detener (sin movimiento: acción) -->
+  <circle class="uva-end-transcription__aro" cx="12" cy="12" r="9.5"/>
+  <rect class="uva-end-transcription__cuadro" x="9" y="9" width="6" height="6" rx="1"/>
+</svg></button><span style="color:var(--tenue);font-size:14px">Botón solo con icono (44×44, nombre en el botón)</span></div></div>
+<h2>Contexto oscuro</h2>
+<div class="oscuro"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-transcribing" width="20" height="20" aria-hidden="true">
+  <style>
+    .uva-transcribing{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    .uva-transcribing__punto{fill:var(--uva-accent,currentColor);stroke:none;transform-box:fill-box;transform-origin:center;animation:var(--uva-transcribing-punto,none) 320ms cubic-bezier(.3,1.4,.5,1) 1.45s 1;animation-fill-mode:both}
+    /* Al empezar el dictado: una onda de voz sale del micrófono dos veces (2 × 700 ms) y después aparece el
+       punto de grabación (1.77 s en total); luego queda quieto mientras dure. El componente añade uva-transcribing--iniciar
+       al empezar y la quita en el animationend del punto (uva-transcribing-punto). */
+    .uva-transcribing--iniciar{--uva-transcribing-onda:uva-transcribing-onda;--uva-transcribing-punto:uva-transcribing-punto}
+    .uva-transcribing__onda{opacity:0;transform-origin:10px 8px;animation:var(--uva-transcribing-onda,none) 700ms cubic-bezier(.2,.6,.3,1) 0s 2}
+    @keyframes uva-transcribing-onda{0%{opacity:0;transform:scale(.92)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.15)}}
+    @keyframes uva-transcribing-punto{0%{transform:scale(0)}100%{transform:scale(1)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-transcribing--iniciar{--uva-transcribing-onda:none;--uva-transcribing-punto:none}
+    }
+  </style>
+  <!-- transcribing · al empezar el dictado salen ondas de voz y aparece el punto (clase uva-transcribing--iniciar) -->
+  <path class="uva-transcribing__onda" d="M16.45 3.97A7.6 7.6 0 0 1 16.45 12.03M3.55 3.97A7.6 7.6 0 0 0 3.55 12.03"/>
+  <rect class="uva-transcribing__mic" x="7.00" y="2.5" width="6" height="11.0" rx="3.0"/>
+  <path class="uva-transcribing__soporte" d="M15.50 9.50V10.50A5.50 5.50 0 0 1 4.50 10.50V9.50M10 16.00V20.00"/>
+  <circle class="uva-transcribing__punto" cx="19.3" cy="4.7" r="2.1"/>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-transcribing" width="40" height="40" aria-hidden="true">
+  <style>
+    .uva-transcribing{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    .uva-transcribing__punto{fill:var(--uva-accent,currentColor);stroke:none;transform-box:fill-box;transform-origin:center;animation:var(--uva-transcribing-punto,none) 320ms cubic-bezier(.3,1.4,.5,1) 1.45s 1;animation-fill-mode:both}
+    /* Al empezar el dictado: una onda de voz sale del micrófono dos veces (2 × 700 ms) y después aparece el
+       punto de grabación (1.77 s en total); luego queda quieto mientras dure. El componente añade uva-transcribing--iniciar
+       al empezar y la quita en el animationend del punto (uva-transcribing-punto). */
+    .uva-transcribing--iniciar{--uva-transcribing-onda:uva-transcribing-onda;--uva-transcribing-punto:uva-transcribing-punto}
+    .uva-transcribing__onda{opacity:0;transform-origin:10px 8px;animation:var(--uva-transcribing-onda,none) 700ms cubic-bezier(.2,.6,.3,1) 0s 2}
+    @keyframes uva-transcribing-onda{0%{opacity:0;transform:scale(.92)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.15)}}
+    @keyframes uva-transcribing-punto{0%{transform:scale(0)}100%{transform:scale(1)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-transcribing--iniciar{--uva-transcribing-onda:none;--uva-transcribing-punto:none}
+    }
+  </style>
+  <!-- transcribing · al empezar el dictado salen ondas de voz y aparece el punto (clase uva-transcribing--iniciar) -->
+  <path class="uva-transcribing__onda" d="M16.45 3.97A7.6 7.6 0 0 1 16.45 12.03M3.55 3.97A7.6 7.6 0 0 0 3.55 12.03"/>
+  <rect class="uva-transcribing__mic" x="7.00" y="2.5" width="6" height="11.0" rx="3.0"/>
+  <path class="uva-transcribing__soporte" d="M15.50 9.50V10.50A5.50 5.50 0 0 1 4.50 10.50V9.50M10 16.00V20.00"/>
+  <circle class="uva-transcribing__punto" cx="19.3" cy="4.7" r="2.1"/>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-end-transcription" width="20" height="20" aria-hidden="true">
+  <style>.uva-end-transcription{stroke-width:var(--uva-stroke,1.5)}.uva-end-transcription__cuadro{fill:currentColor}</style>
+  <!-- end-transcription · círculo + cuadrado de detener (sin movimiento: acción) -->
+  <circle class="uva-end-transcription__aro" cx="12" cy="12" r="9.5"/>
+  <rect class="uva-end-transcription__cuadro" x="9" y="9" width="6" height="6" rx="1"/>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-end-transcription" width="40" height="40" aria-hidden="true">
+  <style>.uva-end-transcription{stroke-width:var(--uva-stroke,1.5)}.uva-end-transcription__cuadro{fill:currentColor}</style>
+  <!-- end-transcription · círculo + cuadrado de detener (sin movimiento: acción) -->
+  <circle class="uva-end-transcription__aro" cx="12" cy="12" r="9.5"/>
+  <rect class="uva-end-transcription__cuadro" x="9" y="9" width="6" height="6" rx="1"/>
+</svg></div>
+<h2>Qué mirar</h2>
+<ul>
+  <li>En la pestaña, a 20 px, ¿se nota que el micrófono está grabando?</li>
+  <li>¿«Finalizar» se lee como «detener», no como una casilla o «silenciar»?</li>
+  <li>Tras la animación de inicio, ¿el indicador queda quieto y no distrae durante la consulta?</li>
+</ul>
+</main>
+<script>
+  const C = 'uva-transcribing--iniciar';
+  const ind = document.getElementById('indicador'), ini = document.getElementById('iniciar'), fin = document.getElementById('finalizar');
+  const reducir = () => matchMedia('(prefers-reduced-motion: reduce)').matches || document.body.classList.contains('sin-mov');
+  const animar = svg => { if (reducir()) return; svg.classList.remove(C); void svg.getBBox(); svg.classList.add(C); };
+  for (const svg of document.querySelectorAll('.uva-transcribing')) svg.addEventListener('animationend', e => { if (e.animationName === 'uva-transcribing-punto') svg.classList.remove(C); });
+  ini.addEventListener('click', () => { ind.hidden = false; fin.hidden = false; ini.hidden = true; animar(ind.querySelector('svg')); fin.focus(); });
+  fin.addEventListener('click', () => { ind.hidden = true; fin.hidden = true; ini.hidden = false; ini.focus(); });
+  document.getElementById('reducir').addEventListener('change', e => document.body.classList.toggle('sin-mov', e.target.checked));
+  document.querySelectorAll('.fila .uva-transcribing, .oscuro .uva-transcribing').forEach(animar);
+</script>
+</body></html>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-end-transcription" aria-hidden="true">
+  <style>.uva-end-transcription{stroke-width:var(--uva-stroke,1.5)}.uva-end-transcription__cuadro{fill:currentColor}</style>
+  <!-- end-transcription · círculo + cuadrado de detener (sin movimiento: acción) -->
+  <circle class="uva-end-transcription__aro" cx="12" cy="12" r="9.5"/>
+  <rect class="uva-end-transcription__cuadro" x="9" y="9" width="6" height="6" rx="1"/>
+</svg>

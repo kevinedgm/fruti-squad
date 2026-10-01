@@ -1,0 +1,26 @@
+# Entrada propuesta del registro semántico de iconos (norma §5.1). Es una propuesta: el registro del proyecto lo gobierna lima.
+semanticName: transcribing
+icon: { library: custom, name: uva-transcribing, file: transcribing.svg }
+category: status
+meaning: "Dictado activo: el micrófono graba y la consulta se transcribe (speech to text)"
+accessibility: { defaultLabel: Transcribiendo, hiddenByDefault: true }
+direction: { rtl: fixed }         # el punto arriba a la derecha es convención de «grabando»; no se espeja (supuesto)
+motion:
+  allowed: attention
+  trigger: "clase uva-transcribing--iniciar al empezar el dictado; se quita en el animationend de uva-transcribing-punto"
+  duration: 1770ms                # una onda de voz × 2 (700 ms) y aparece el punto (320 ms desde 1.45 s)
+  phases: [onda de voz, onda de voz, aparece el punto de grabación]
+  reducedMotion: "sin movimiento: el punto se ve desde el principio"
+  rest: "mientras el dictado siga activo, quieto con el punto (estado largo; WCAG 2.2.2)"
+style: { source: uva_base, stroke: 1.5, cap: round, join: round, accent: "--uva-accent: color del punto (el sistema lo pone rojo)" }
+pair: end-transcription           # punto = grabando · cuadrado = detener (convención de medios)
+sizes: { tested: [14, 16, 20, 24, 32, 48, 96], recommended: [16, 20, 24] }
+smallVariant: false
+confusionsTested: [mic, mic-audio-lines, message-square-text, captions]
+alternatives: { lucide: mic-audio-lines } # dice «audio/voz», no «grabando»
+status: proposed
+usage:
+  label: required                 # en la barra de pestañas con el texto «Transcribiendo» (usuario)
+  liveRegion: "el contenedor con role=status anuncia «Transcribiendo» al empezar"
+  color: "el punto usa --uva-accent; el significado no depende del color (forma del punto + texto)"
+  inlineOnly: "el color y la animación solo funcionan con el SVG inline o vía <use>"

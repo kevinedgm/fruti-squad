@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-transcribing" aria-hidden="true">
+  <style>
+    .uva-transcribing{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    .uva-transcribing__punto{fill:var(--uva-accent,currentColor);stroke:none;transform-box:fill-box;transform-origin:center;animation:var(--uva-transcribing-punto,none) 320ms cubic-bezier(.3,1.4,.5,1) 1.45s 1;animation-fill-mode:both}
+    /* Al empezar el dictado: una onda de voz sale del micrófono dos veces (2 × 700 ms) y después aparece el
+       punto de grabación (1.77 s en total); luego queda quieto mientras dure. El componente añade uva-transcribing--iniciar
+       al empezar y la quita en el animationend del punto (uva-transcribing-punto). */
+    .uva-transcribing--iniciar{--uva-transcribing-onda:uva-transcribing-onda;--uva-transcribing-punto:uva-transcribing-punto}
+    .uva-transcribing__onda{opacity:0;transform-origin:10px 8px;animation:var(--uva-transcribing-onda,none) 700ms cubic-bezier(.2,.6,.3,1) 0s 2}
+    @keyframes uva-transcribing-onda{0%{opacity:0;transform:scale(.92)}30%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.15)}}
+    @keyframes uva-transcribing-punto{0%{transform:scale(0)}100%{transform:scale(1)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-transcribing--iniciar{--uva-transcribing-onda:none;--uva-transcribing-punto:none}
+    }
+  </style>
+  <!-- transcribing · al empezar el dictado salen ondas de voz y aparece el punto (clase uva-transcribing--iniciar) -->
+  <path class="uva-transcribing__onda" d="M16.45 3.97A7.6 7.6 0 0 1 16.45 12.03M3.55 3.97A7.6 7.6 0 0 0 3.55 12.03"/>
+  <rect class="uva-transcribing__mic" x="7.00" y="2.5" width="6" height="11.0" rx="3.0"/>
+  <path class="uva-transcribing__soporte" d="M15.50 9.50V10.50A5.50 5.50 0 0 1 4.50 10.50V9.50M10 16.00V20.00"/>
+  <circle class="uva-transcribing__punto" cx="19.3" cy="4.7" r="2.1"/>
+</svg>

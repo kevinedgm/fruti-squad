@@ -1,0 +1,19 @@
+# Entrada propuesta del registro semántico de iconos (norma §5.1). Es una propuesta: el registro del proyecto lo gobierna lima.
+semanticName: end-transcription
+icon: { library: custom, name: uva-end-transcription, file: end-transcription.svg }
+category: action
+meaning: "Finalizar el dictado; el texto transcrito se conserva"
+accessibility: { defaultLabel: Finalizar dictado, hiddenByDefault: true }
+direction: { rtl: fixed }
+motion: { allowed: none }         # acción instantánea: no hay estado que contar con movimiento
+style: { source: uva_base, stroke: 1.5, cap: round, join: round, fill: "cuadrado relleno con currentColor (convención de detener; evita leerse como casilla)" }
+pair: transcribing
+sizes: { tested: [14, 16, 20, 24, 32, 48, 96], recommended: [16, 20, 24] }
+smallVariant: false
+confusionsTested: [square, mic-off, circle, circle-stop]
+alternatives: { lucide: circle-stop } # mismo significado; cuadro hueco, más débil a 14–16 px
+status: proposed
+usage:
+  label: recommended              # «Finalizar dictado» junto al icono
+  iconOnlyButton: "44x44, aria-label «Finalizar dictado» en el <button>, no en el SVG"
+  notFor: "no usar para pausar ni para silenciar (mic-off); no usar un teléfono («colgar» implica llamada)"
