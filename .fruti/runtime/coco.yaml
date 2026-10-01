@@ -11,10 +11,12 @@ operations:
     inputs: [kiwi_frozen_structure, lima_contract, real_tokens, existing_components]
     implementation_target: resolve_from_handoff_or_profile
     target_contract: .fruti/contracts/implementation-target.yaml
+    references: [agentes/coco/references/reglas-construccion.md]
     deep_docs: only_if_ambiguous
   r3_implement:
     inputs: [approved_contract, implementation_target, real_tokens, public_api]
     target_contract: .fruti/contracts/implementation-target.yaml
+    references: [agentes/coco/references/reglas-construccion.md, agentes/coco/references/auditoria-arquitectonica.md]
     deep_docs: only_if_ambiguous
   r0_audit:
     manifest: .fruti/audit-manifest.yaml
@@ -24,8 +26,13 @@ operations:
     deterministic_checks: [dom_validity, duplicate_ids, broken_links, horizontal_overflow, token_usage, forbidden_raw_values, interactive_semantics, required_states, target_sizes, focus_hooks, registry_consistency]
     model_review: [hierarchy, clarity, density, affordance, consistency, adaptive_composition, misleading_interaction, visual_regressions, exceptions]
     report: rule_ids_and_evidence_never_reread_a_standard_to_rediscover_a_known_criterion
+    architecture: agentes/coco/references/auditoria-arquitectonica.md   # al auditar componentes
+    declaration: agentes/coco/assets/plantillas/declaracion.md
   first_run:
-    references: [agentes/coco/first-run.md, agentes/coco/intake.md, agentes/coco/profile-additions.md]
+    references: [agentes/coco/references/first-run.md, agentes/coco/references/intake.md, agentes/coco/references/profile-additions.md]
+  autonomous:
+    when: no_kiwi_round_and_no_lima_order_and_user_continues_with_coco
+    references: [agentes/coco/references/modo-autonomo.md]
   test_f3:
     inputs:
       - .fruti/tests/<round>/request.md

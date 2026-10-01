@@ -14,7 +14,7 @@ Fuente única de los roles del squad. Cada miembro describe en su manual solo su
 
 Orden: **kiwi estructura → lima gobierna → coco construye/verifica → mora documenta.** Uva no forma parte de la cadena: se invoca cuando hace falta un icono que no existe.
 
-**Un auditor, un gestor del ciclo de vida:** coco es el único auditor (R0) y lima la única dueña del lifecycle y del registry. No hay dos.
+**Un auditor, un gestor del ciclo de vida:** coco es el único auditor (R0 de interfaz y auditoría de arquitectura de componentes) y lima la única dueña del lifecycle y del registry. No hay dos. Cuando el Stable Gate de lima necesita `audit`, se lo pide a coco y consume su declaración de cumplimiento como evidencia; lima conserva `harden` (refinamiento) y todo el ciclo de vida. Lima y coco comparten el mismo perfil de proyecto.
 
 ## ¿A quién llamo?
 
@@ -43,3 +43,4 @@ Cuando el usuario aprueba una estructura, la ronda pasa a lima, no directo a coc
 | Hueco de gobierno, contrato o tokens | kiwi, coco, mora o uva | 🟢 lima |
 | Decisión solo de implementación dentro de un contrato aprobado | cualquiera | 🥥 coco |
 | Hueco de documentación | cualquiera | 🫐 mora |
+| Problema de diseño o de arquitectura | mora (u otro) | 🥥 coco |

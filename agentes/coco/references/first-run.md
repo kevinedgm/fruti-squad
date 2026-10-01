@@ -4,9 +4,9 @@ coco es agnóstico del proyecto. En un repo que nunca ha gobernado no hay perfil
 
 ## Orden de resolución (compuerta 0)
 
-1. **Busca un perfil existente** en `profiles/<project>.md` de la skill architect.
+1. **Busca un perfil existente** en `profiles/<project>.md` de la skill lima.
    - Si existe y sus rutas resuelven → **reúsalo**. Luego verifica el bloque `coco:` (ver [profile-additions.md](profile-additions.md)); si falta, pide solo esas adiciones ([intake.md](intake.md), la parte `coco:`) y añádelas.
-2. **Aún no hay perfil** → inicializa pidiendo el intake completo ([intake.md](intake.md)): los campos del architect + el bloque `coco:`, en un solo mensaje. Mapea las respuestas a `profiles/<project>.md` y confirma.
+2. **Aún no hay perfil** → inicializa pidiendo el intake completo ([intake.md](intake.md)): los campos de lima + el bloque `coco:`, en un solo mensaje. Mapea las respuestas a `profiles/<project>.md` y confirma.
 3. **Override del usuario** → una instrucción explícita en la conversación gana sobre el perfil; obedécela y anota la desviación en una línea.
 
 Nunca diseñes, audites ni prototipes contra un design system asumido. Si no hay perfil y el usuario no ha dado el intake, pídelo primero.
@@ -16,8 +16,8 @@ Nunca diseñes, audites ni prototipes contra un design system asumido. Si no hay
 ### A. Guiada (por defecto, con el usuario presente)
 Presenta el/los formulario(s) de intake literalmente, valida cada campo, resuelve `AUTO` inspeccionando el repo y mostrando hallazgos, luego escribe/extiende el perfil y confirma.
 
-### B. Reusar el bootstrap del architect (lo más rápido al arrancar un proyecto desde cero)
-Si estás configurando un proyecto totalmente nuevo, corre primero el bootstrap de la skill architect — crea `profiles/<project>.md`, el Design Hub y el registry:
+### B. Reusar el bootstrap de lima (lo más rápido al arrancar un proyecto desde cero)
+Si estás configurando un proyecto totalmente nuevo, corre primero el bootstrap de la skill lima — crea `profiles/<project>.md`, el Design Hub y el registry:
 
 ```bash
 # desde la raíz del repo
@@ -45,5 +45,5 @@ Ninguna de estas impide que coco *gobierne*; solo cambian qué checks son verifi
 
 ## Resultado
 
-- coco queda enlazado a `profiles/<project>.md` (compartido con la skill architect), incluyendo un bloque `coco:`.
+- coco queda enlazado a `profiles/<project>.md` (compartido con la skill lima), incluyendo un bloque `coco:`.
 - Desde aquí aplica el protocolo de 5 pasos (AGENT.md): brief → ruta → leer estándares → construir con el sistema real → verificar + declaración de cumplimiento.

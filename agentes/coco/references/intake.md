@@ -2,18 +2,18 @@
 
 coco gobierna el trabajo de interfaz contra el design system real de un proyecto. Antes de diseñar nada, necesita un **perfil**. coco **no** ronda el repo adivinando un design system ni inventa tokens — pide un conjunto fijo de datos en un formato específico y los mapea 1:1 al perfil.
 
-coco comparte el perfil con la skill `lima`, así que el intake es: **el intake del architect, más un pequeño bloque `coco:`.**
+coco comparte el perfil con la skill `lima`, así que el intake es: **el intake de lima, más un pequeño bloque `coco:`.**
 
 ## Cómo usa esto coco
 
-1. En el primer uso en un repo, busca un perfil activo en `profiles/<project>.md` de la skill architect.
+1. En el primer uso en un repo, busca un perfil activo en `profiles/<project>.md` de la skill lima.
    - **Si existe**: reúsalo. Pide solo las adiciones `coco:` de abajo si faltan.
-   - **Si no existe**: presenta el intake completo (campos del architect + bloque `coco:`), un solo mensaje, y espera.
+   - **Si no existe**: presenta el intake completo (campos de lima + bloque `coco:`), un solo mensaje, y espera.
 2. Valida cada campo contra su formato. Vuelve a pedir solo los campos que fallen. Los campos marcados `AUTO` pueden rellenarse inspeccionando el repo — muestra lo que encontraste para confirmar.
-3. Mapea todo al perfil (los campos del architect vía el mapeo de su `reference/intake.md`; los campos `coco:` vía la tabla de abajo).
+3. Mapea todo al perfil (los campos de lima vía el mapeo de su `reference/intake.md`; los campos `coco:` vía la tabla de abajo).
 4. Confirma el perfil terminado con el usuario antes de diseñar.
 
-## Los campos del architect (reusar literalmente)
+## Los campos de lima (reusar literalmente)
 
 Usa el formulario exacto de `lima/reference/intake.md`: `project_name`, `design_system_name`, `color_law`, `type_law`, `tokens_source`, `canonical_reference`, `framework`, `styling`, `icon_library`, `router`, `component_dir`, `naming_convention`, `hub_root`, `hub_language`, `a11y_target`, `breakpoints`, `touch_min_px`, `qa_runner`, `serve_command`, `anti_references`.
 
@@ -67,5 +67,5 @@ Ver [profile-additions.md](profile-additions.md) para cómo se consume cada camp
 ## Por qué un intake fijo
 
 - Los campos del perfil son el contrato real de coco; pedirlos directo significa cero adivinanzas y cero deriva.
-- Compartir el perfil del architect significa que un proyecto se describe **una vez** y tanto la skill de diseño como el agente de gobernanza leen la misma verdad.
+- Compartir el perfil de lima significa que un proyecto se describe **una vez** y tanto la skill de diseño como el agente de gobernanza leen la misma verdad.
 - `AUTO` deja que el repo responda las preguntas mecánicas (rutas de scripts) mientras el humano posee las de juicio (contrato de datos, ley de color/tipografía).
