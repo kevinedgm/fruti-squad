@@ -183,7 +183,7 @@ Coco owns the canonical audit and writes `.fruti/reports/compliance-current.json
 
 ## Documentation policy
 
-`.fruti/contracts/documentation.yaml` is the single normative source for Design Hub page anatomy, section order and the neutral documentation shell. `skills/lima/reference/component-documentation.md` and `design-hub.md` contribute only guidance that does not conflict with it (golden rule, lifecycle-gated API, isolated previews); on any conflict the contract wins. Mora's read scope is in `.fruti/runtime/mora.yaml`.
+`.fruti/contracts/documentation.yaml` is the single normative source for Design Hub page anatomy, section order and the neutral documentation shell. `skills/lima/references/component-documentation.md` and `design-hub.md` contribute only guidance that does not conflict with it (golden rule, lifecycle-gated API, isolated previews); on any conflict the contract wins. Mora's read scope is in `.fruti/runtime/mora.yaml`.
 
 ## User experience
 

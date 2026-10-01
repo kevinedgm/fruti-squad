@@ -8,28 +8,36 @@ read_order:
   - relevant_registry_entry
 operations:
   classify:
-    references: [skills/lima/reference/request-router.md]
+    references: [skills/lima/references/request-router.md]
   reuse_or_truth:
-    references: [skills/lima/reference/source-of-truth.md, skills/lima/reference/registry.md]
+    references: [skills/lima/references/source-of-truth.md, skills/lima/references/registry.md]
   contract:
-    references: [skills/lima/reference/ui-artifact-contract.md, skills/lima/reference/component-api.md]
+    references: [skills/lima/references/ui-artifact-contract.md, skills/lima/references/component-api.md]
     implementation_target: inherit_from_active_profile
     target_contract: .fruti/contracts/implementation-target.yaml
   adapt_contract:
-    references: [skills/lima/reference/adaptive-design.md]
+    references: [skills/lima/references/adaptive-design.md]
+  review_passes:
+    references: [skills/lima/references/impeccable-bridge.md]
+    mode: review_coco_output   # lima runs the passes and records findings; coco applies changes
+  autonomous:
+    when: kiwi_or_coco_not_installed
+    references: [skills/lima/references/modo-autonomo.md]
+    loads_on_demand: [skills/lima/references/design-process.md, skills/lima/references/design-hub.md, skills/lima/references/component-documentation.md, skills/lima/references/runtime-qa.md]
   candidate_gate:
-    references: [skills/lima/reference/quality-gates.md, skills/lima/reference/lifecycle.md]
+    references: [skills/lima/references/quality-gates.md, skills/lima/references/lifecycle.md]
   stable_gate:
     inputs: [.fruti/reports/compliance-current.json]
-    references: [skills/lima/reference/quality-gates.md, skills/lima/reference/lifecycle.md]
+    references: [skills/lima/references/quality-gates.md, skills/lima/references/lifecycle.md, skills/lima/references/impeccable-bridge.md]
+    evidence_rules: skills/lima/references/runtime-qa.md
   promote:
-    references: [skills/lima/reference/promotion.md]
+    references: [skills/lima/references/promotion.md]
   initialize:
-    references: [skills/lima/reference/first-run.md, skills/lima/reference/intake.md, skills/lima/reference/project-profile.md]
+    references: [skills/lima/references/first-run.md, skills/lima/references/intake.md, skills/lima/references/project-profile.md]
     persist: [implementation.framework, implementation.language, implementation.styling]
   foundations_new:
     inputs: [.fruti/foundations/proposal.yaml, active_project_profile]
-    references: [skills/lima/reference/intake.md, skills/lima/reference/source-of-truth.md]
+    references: [skills/lima/references/intake.md, skills/lima/references/source-of-truth.md]
     outputs:
       - design-hub/Foundations
       - .fruti/tokens.json
@@ -87,5 +95,6 @@ rules:
   - changing_target_does_not_redesign_contract
   - consume_coco_compliance_report_for_gates
   - do_not_rerun_coco_audit
+  - mora_writes_only_documentation_and_updated_in_registry
   - enforce_redesign_scope
   - full_skill_manual_only_if_runtime_contract_is_insufficient

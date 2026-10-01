@@ -56,6 +56,7 @@ Every dependency — whether in `dependencies` or `profileDependencies` — must
 - **Write on every completed transition**, in the same step you change the artifact (no drift): draft→candidate sets `status=candidate, qa.candidate=true` (and `qa.visual` stays `"pending"` until browser/rendered QA actually runs); candidate→stable sets `status=stable, qa.stable=true` and requires `qa.visual="passed"`; promotion sets `production`; deprecation sets `status=deprecated, replacedBy`.
 - **Respect dependencies**: do not promote a piece to production before its dependencies are stable; warn before deprecating a piece others depend on.
 - **Status lives only here** — a file may hold its own docs, never its own status.
+- **Who writes which field.** The registry is lima's. Mora may write only `documentation` (the Hub page path) and `updated` when it changes it; every other field (`status`, `version`, owner, `qa`, `refinement`, `production`, `replacedBy`, `dependencies`, `profileDependencies`, `kind`, `source`, `behavior`) is written by lima. Mora reports any other drift to lima instead of fixing it (`.fruti/contracts/squad.md`).
 
 ## Queries it must answer
 

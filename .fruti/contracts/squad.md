@@ -12,11 +12,17 @@ Fuente única de los roles del squad. Cada miembro describe en su manual solo su
 🍇 uva   → lateral: iconos SVG a medida; entrega SVG verificados a coco
 ```
 
-Orden: **kiwi estructura → lima gobierna → coco construye/verifica → mora documenta.** Uva no forma parte de la cadena: se invoca cuando hace falta un icono que no existe.
+Orden: **kiwi estructura → lima gobierna → coco construye/verifica → mora documenta.** Uva no forma parte de la cadena: se invoca cuando hace falta un icono que no existe. Entrega SVG verificados a coco, que los consume sin redibujarlos; lima decide si su ADN base se vuelve token (`icon.*`) y registra el icono si el proyecto lleva registry de iconos; mora lo documenta si el proyecto documenta iconos.
 
 **Un auditor, un gestor del ciclo de vida:** coco es el único auditor (R0 de interfaz y auditoría de arquitectura de componentes) y lima la única dueña del lifecycle y del registry. No hay dos. Cuando el Stable Gate de lima necesita `audit`, se lo pide a coco y consume su declaración de cumplimiento como evidencia; lima conserva `harden` (refinamiento) y todo el ciclo de vida. Lima y coco comparten el mismo perfil de proyecto.
 
 **Registry y mora:** el registry es de lima. Mora solo escribe en él el campo documental `documentation` (ruta de la página del Hub) y `updated` cuando lo cambia; nunca `status`, `version`, owner, `qa`, `refinement`, `production`, `replacedBy`, `dependencies` ni `profileDependencies`. Cualquier otro desajuste lo reporta y lo deriva a lima.
+
+**Modo revisión de impeccable:** los pases de impeccable (critique, distill, adapt, polish, harden) corren sobre la salida de coco: lima los ejecuta, registra los hallazgos y coco aplica los cambios.
+
+**Perfil compartido y vivo:** un solo perfil por proyecto (`skills/lima/profiles/<proyecto>.md`, resuelto con `.fruti/paths.yaml` o `fruti path`). Lima escribe los campos del sistema (`design_system`, `color_law`, `type_law`, `truth_sources`, `production.*`, `breakpoints`, `anti_references`), coco escribe el bloque `coco:` y mora el bloque `mora:`. Cuando el usuario cambia un dato en lenguaje natural, su dueño lo actualiza y lo confirma en una línea; nunca hace falta reinstalar ni repetir el asistente. El intake del perfil es único y vive en lima (`references/intake.md`); coco y mora solo piden sus bloques.
+
+**Modo autónomo:** si kiwi o coco no están instalados, lima ejecuta el pipeline completo y lo dice en una línea. Coco tiene su propio modo autónomo cuando no hay ronda de kiwi.
 
 ## ¿A quién llamo?
 

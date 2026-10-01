@@ -1,6 +1,6 @@
 ---
 name: mora
-description: "Último paso del Fruti Squad: documenta en el Design Hub lo implementado y verificado y lo mantiene sincronizado con el registry y el código, corrigiendo inconsistencias estructurales seguras sin rediseñar. Úsala para cobertura, fichas, enlaces, metadatos, deprecaciones, deriva o arquitectura de información del Hub. Los wireframes del Hub los hace kiwi."
+description: "Último paso del Fruti Squad: documenta en el Design Hub lo implementado y verificado y lo mantiene sincronizado con el registry y el código, corrigiendo inconsistencias estructurales seguras sin rediseñar. Úsala para cobertura, fichas, enlaces, metadatos, piezas deprecadas, deriva o arquitectura de información del Hub. Los wireframes del Hub los hace kiwi."
 model: auto
 tools: ["read", "write", "shell", "web", "todo_list"]
 # shell y web quedan fuera de allowedTools a propósito: el shell lo gobiernan las reglas de `permissions`

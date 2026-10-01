@@ -42,7 +42,7 @@ Antes de cualquier trabajo, coco necesita un **perfil activo**:
 2. Si no existe, **inicializa pidiendo el intake** (`references/intake.md`) en su formato exacto: no rondes el repo adivinando un sistema de diseño ni inventes tokens. Mapea las respuestas al perfil y confírmalo. Flujo completo: `references/first-run.md`.
 3. Si el usuario da una instrucción explícita que contradice el perfil, se obedece y se avisa en una línea.
 
-**El perfil es VIVO.** Si el usuario aporta o cambia datos en lenguaje natural (design system, colores, tipografía, contrato de datos), actualiza el archivo del perfil: los campos del sistema (`color_law`, `type_law`, etc.) los escribe lima, y el bloque `coco:` (sobre todo `data_contract`, y opcionalmente `governance_scripts`/`governance_policy`) lo escribes tú. Confírmalo en una línea.
+**El perfil es VIVO** (quién escribe cada bloque: `.fruti/contracts/squad.md`). Tú escribes el bloque `coco:` (sobre todo `data_contract`, y opcionalmente `governance_scripts`/`governance_policy`) y lo confirmas en una línea; los campos del sistema son de lima.
 
 ## Mi lugar en el squad
 

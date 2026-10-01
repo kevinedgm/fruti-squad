@@ -2,7 +2,7 @@
 
 Configuración determinista para usar la skill `lima` en un **proyecto nuevo**. El núcleo de la skill es agnóstico del proyecto; estos scripts generan lo específico del proyecto que la skill delega a un perfil (el archivo de perfil, el Design Hub, el registry y un harness de QA opcional).
 
-Ver [../reference/first-run.md](../reference/first-run.md) para el playbook completo de inicialización y la alternativa guiada (conversacional).
+Ver [../references/first-run.md](../references/first-run.md) para el playbook completo de inicialización y la alternativa guiada (conversacional).
 
 ## `init-project.sh`
 
@@ -20,7 +20,7 @@ bash <ruta-a-la-skill>/scripts/init-project.sh \
   --qa playwright
 ```
 
-`impeccable` viene incluido dentro de la skill (`vendor/impeccable`), así que `--impeccable` es opcional y por defecto apunta a esa copia.
+`impeccable` llega con la skill (el instalador lo copia en `vendor/impeccable`; en el repositorio fuente se usa `skills/impeccable`), así que `--impeccable` es opcional y por defecto apunta a esa copia.
 
 ### Flags
 
@@ -29,10 +29,10 @@ bash <ruta-a-la-skill>/scripts/init-project.sh \
 | `--name` | nombre de la carpeta actual | Nombre humano del perfil (también genera el slug del archivo de perfil). |
 | `--design-system` | igual que `--name` | Nombre del design system que es la verdad visual. |
 | `--hub` | `design-hub` | Ruta de la raíz del Design Hub a crear. |
-| `--impeccable` | `vendor/impeccable` incluido | Ruta a la skill `impeccable`. Por defecto la copia embebida en esta skill (relativa al repo). Sobreescribe solo para una instalación compartida. |
+| `--impeccable` | `vendor/impeccable` | Ruta a la skill `impeccable`. Por defecto la copia que pone el instalador (relativa al repo). Sobreescribe solo para una instalación compartida. |
 | `--qa` | `none` | `playwright` scaffoldea un harness de QA en `<hub>/qa/`; `none` lo omite. |
 | `--port` | `4321` | Puerto donde se sirve el Hub (usado en la config de QA + el perfil). |
-| `--intake` | — | Ruta a un intake YAML rellenado (ver `../reference/intake.md` + `../profiles/examples/intake.example.yaml`). Genera un perfil **completo** (sin TODOs). Sobreescribe los flags individuales donde se solapan; otros flags ganan si se pasan explícitamente. |
+| `--intake` | — | Ruta a un intake YAML rellenado (ver `../references/intake.md` + `../profiles/examples/intake.example.yaml`). Genera un perfil **completo** (sin TODOs). Sobreescribe los flags individuales donde se solapan; otros flags ganan si se pasan explícitamente. |
 
 ### Desde un intake rellenado (perfil completo, sin editar)
 

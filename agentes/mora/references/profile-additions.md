@@ -10,7 +10,7 @@ Encima de ese perfil, mora lee un pequeño bloque `mora:` para las cosas que una
 mora:
   # El estándar de documentación: orden de secciones + regla de honestidad para una página
   # viva de componente. Apunta a un archivo de spec, o déjalo vacío para usar el orden interno de mora.
-  doc_standard:     # p. ej. ".../lima/reference/component-documentation.md" | vacío
+  doc_standard:     # p. ej. ".../lima/references/component-documentation.md" | vacío
 
   # El shell del Hub: la(s) hoja(s)/script(s) cuyas clases reales toda página debe
   # reutilizar (nunca inventar un sistema de estilos paralelo). Lista los archivos.

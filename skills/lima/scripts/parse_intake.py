@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 parse_intake.py — dependency-free parser for the lima
-intake file (reference/intake.md format). Emits shell-eval lines consumed by
+intake file (references/intake.md format). Emits shell-eval lines consumed by
 init-project.sh. No PyYAML required: the intake is a small, known subset
 (flat scalar keys, `|` block scalars, simple `-` lists).
 

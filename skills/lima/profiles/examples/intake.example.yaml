@@ -1,7 +1,7 @@
 # === lima · project intake (EXAMPLE, filled) ===
 # Copy this, fill your values, and pass it to the bootstrap:
 #   bash <skill>/scripts/init-project.sh --intake my-intake.yaml --qa playwright
-# Keys must match reference/intake.md exactly. AUTO = let the skill inspect the repo.
+# Keys must match references/intake.md exactly. AUTO = let the skill inspect the repo.
 
 project_name: "Acme Health"
 design_system_name: "PULZ"

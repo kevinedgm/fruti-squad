@@ -106,7 +106,7 @@ Cada campo del intake aterriza en exactamente un campo del perfil ([project-prof
 | `framework` + `styling` + `icon_library` + `router` | `production.known_stack` |
 | `tokens_source` | `production.token_binding` (mapea tokens del Hub a este archivo; nunca hardcodees) |
 | `component_dir` + `naming_convention` | `production.component_layout` |
-| — (incluido) | `impeccable_path` = `vendor/impeccable` embebido (ver first-run.md) |
+| — (incluido) | `impeccable_path` = `vendor/impeccable`, que copia el instalador (ver first-run.md) |
 | `qa_runner` + `serve_command` + `breakpoints` | `runtime_qa.*` |
 | `breakpoints` | `runtime_qa.viewports` |
 | `a11y_target` + `touch_min_px` + `anti_references` | `Notes` del perfil |

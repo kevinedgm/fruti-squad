@@ -4,9 +4,9 @@ This skill is the architectural brain; `impeccable` is the specialist for critiq
 
 ## Invoking impeccable in this workspace
 
-`impeccable` is **bundled with this skill** at `vendor/impeccable/` — the skill is self-contained and does not depend on an external install. The profile's `impeccable_path` points at it by default (init resolves the bundled copy's path relative to the repo). A project may override `impeccable_path` to a different install if it wants a shared/newer impeccable, but nothing external is required. Prefer driving it through its reference playbooks, since the launcher binary may be unavailable:
+`impeccable` ships with this skill: the repository keeps a single copy at `skills/impeccable/`, and the installer copies it into `vendor/impeccable/` whenever lima is installed (if you copy `skills/lima/` by hand, also copy `skills/impeccable/`). The profile's `impeccable_path` points at that copy by default (init resolves it relative to the repo; in a source checkout it falls back to `skills/impeccable/`). A project may override `impeccable_path` to a different install if it wants a shared/newer impeccable, but nothing external is required. Prefer driving it through its reference playbooks, since the launcher binary may be unavailable:
 
-- Load `<impeccable_path>/reference/{critique,distill,adapt,polish,harden,audit,extract}.md` and follow them for the matching phase. When `impeccable_path` is unset or its path does not resolve, fall back to the bundled `vendor/impeccable/reference/*`.
+- Load `<impeccable_path>/reference/{critique,distill,adapt,polish,harden,audit,extract}.md` and follow them for the matching phase. When `impeccable_path` is unset or its path does not resolve, fall back to `vendor/impeccable/reference/*`.
 - If impeccable's own setup (`impeccable context`) runs, let it load product/design context; otherwise proceed with what this skill gathered.
 
 ## Pipeline order (matters) — split across the two lifecycle phases

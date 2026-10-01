@@ -4,7 +4,7 @@
   This is the profile template for the lima skill.
   A profile is the ONLY place project-specific facts live: design system,
   tokens, Design Hub location, registry path, production stack, QA harness.
-  The skill core (SKILL.md + reference/*) never hardcodes any of this.
+  The skill core (SKILL.md + references/*) never hardcodes any of this.
 
   HOW TO USE
   1. Copy this file to profiles/<your-project>.md (lowercase, dashed).
@@ -14,7 +14,7 @@
      browser QA harness yet) — but prefer scaffolding them (see scripts/).
   4. Confirm the finished profile with the user before designing anything.
 
-  See reference/first-run.md for the full initialization playbook and
+  See references/first-run.md for the full initialization playbook and
   scripts/init-project.sh for a bootstrap that generates this for you.
 -->
 
@@ -54,9 +54,9 @@ production:
   token_binding:      # How Hub tokens map to production tokens. e.g. "Map to tailwind.config.js; never hardcode values."
   component_layout:   # Where production components live + naming convention. e.g. "src/components/, match existing naming."
 
-impeccable_path:      # Where the impeccable skill lives. impeccable is BUNDLED with this
-                      # skill at vendor/impeccable, so init defaults this to the bundled
-                      # copy (a repo-relative path). Override only to use a shared install.
+impeccable_path:      # Where the impeccable skill lives. The installer copies it into this
+                      # skill at vendor/impeccable, so init defaults to that copy
+                      # (a repo-relative path). Override only to use a shared install.
 
 runtime_qa:           # Optional. Delete this whole block if there is no browser QA yet.
   enabled: true

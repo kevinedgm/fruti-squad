@@ -89,7 +89,7 @@ Con `--target claude` el instalador deja:
 - `.claude/skills/{kiwi,lima,coco,mora-docs}/` — cada miembro como Skill (mora se instala como `mora-docs` en Claude y Codex para no chocar con otras skills llamadas mora).
 - `CLAUDE.md` — bloque del Squad que importa `.fruti/policy.md` (la política de ruteo, la misma que usa Codex vía `AGENTS.md`).
 - `.fruti/paths.yaml` — mapa de rutas para resolver las referencias de `.fruti/runtime/*.yaml`.
-  Para resolver una ruta desde scripts o desde el agente: `fruti path skills/lima/reference/quality-gates.md` imprime la ruta real en el proyecto.
+  Para resolver una ruta desde scripts o desde el agente: `fruti path skills/lima/references/quality-gates.md` imprime la ruta real en el proyecto.
 
 Después basta con pedir en lenguaje natural ("rediseña este formulario") o invocar `kiwi`, `lima`, `coco` o `mora-docs`.
 

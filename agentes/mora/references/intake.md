@@ -2,7 +2,7 @@
 
 mora cura el Design Hub de un proyecto. Inspecciona el repo para resolver datos mecánicos y pregunta únicamente decisiones que no puedan inferirse con seguridad.
 
-mora comparte el perfil con `lima` y coco, así que el intake es: **el intake del architect, más un pequeño bloque `mora:`.**
+mora comparte el perfil con `lima` y coco, así que el intake es: **el intake de lima, más un pequeño bloque `mora:`.**
 
 ## Cómo usa esto mora
 
@@ -11,12 +11,12 @@ mora comparte el perfil con `lima` y coco, así que el intake es: **el intake de
    - **Si no existe y la configuración debe persistir**: inspecciona el repo, completa rutas mecánicas y pregunta solo los campos de juicio que falten.
    - **Si el trabajo es acotado y el usuario ya dio el Hub**: registra supuestos y continúa sin bloquear por el perfil.
 2. Valida cada campo. Los campos `AUTO` se resuelven inspeccionando el repo; confirma solo hallazgos ambiguos o de alto impacto.
-3. Mapea todo al perfil (los campos del architect vía el mapeo de su `reference/intake.md`; los campos `mora:` vía la tabla de abajo).
+3. Mapea todo al perfil (los campos de lima vía el mapeo de su `references/intake.md`; los campos `mora:` vía la tabla de abajo).
 4. Confirma el perfil antes de una reestructura global. Para reparaciones deterministas y acotadas, informa el supuesto y continúa.
 
-## Los campos del architect (reusar literalmente)
+## Los campos de lima (reusar literalmente)
 
-Usa el formulario exacto de `lima/reference/intake.md`. mora se apoya específicamente en: `hub_root`, `hub_language`, `registry_path` (derivado), `component_dir` (→ `production.component_layout`), `breakpoints`, `a11y_target`. También se beneficia de `design_system_name`.
+Usa el formulario exacto de `lima/references/intake.md`. mora se apoya específicamente en: `hub_root`, `hub_language`, `registry_path` (derivado), `component_dir` (→ `production.component_layout`), `breakpoints`, `a11y_target`. También se beneficia de `design_system_name`.
 
 ## Las adiciones de mora (presentar esto literalmente)
 
@@ -24,7 +24,7 @@ Usa el formulario exacto de `lima/reference/intake.md`. mora se apoya específic
 # === mora · documentation additions (append to the project intake) ===
 doc_standard:      # OPTIONAL. Ruta al spec del estándar de doc (orden de secciones + regla de honestidad).
                    # Vacío => mora usa su orden canónico interno.
-                   # p. ej. ".../lima/reference/component-documentation.md"
+                   # p. ej. ".../lima/references/component-documentation.md"
 
 doc_shell:         # REQUIRED (o AUTO). La(s) hoja(s)/script(s) del único shell activo.
                    # p. ej. ["design-hub/assets/hub-shell.css", "design-hub/assets/hub-navigation.js"]
@@ -69,5 +69,5 @@ Ver [profile-additions.md](profile-additions.md) para cómo se consume cada camp
 ## Por qué un intake fijo
 
 - Los campos del perfil son el contrato persistente de mora; la inspección resuelve mecánica y el usuario conserva las decisiones de juicio.
-- Compartir el perfil del architect significa que un proyecto se describe **una vez** y la skill de diseño, coco y mora leen todos la misma verdad.
+- Compartir el perfil de lima significa que un proyecto se describe **una vez** y la skill de diseño, coco y mora leen todos la misma verdad.
 - `AUTO` deja que el repo responda las preguntas mecánicas (shell/rutas) mientras el humano posee las de juicio (estándar de doc, estrategia de preview).

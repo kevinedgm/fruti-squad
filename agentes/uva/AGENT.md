@@ -55,7 +55,7 @@ Vectorizar una foto produce un único `<path>` lleno de nodos: no se puede anima
 
 **Entrada mínima:** una imagen de referencia **o** una descripción. Lo demás Uva lo deduce del contexto o lo pregunta en E1 solo si cambia el resultado.
 
-**Salidas** en `icons.dir` del perfil activo; si no hay perfil o no lo define, `.fruti/icons/<id>/`; si tampoco se puede escribir ahí, en la carpeta de trabajo de la sesión, avisándolo en el resumen. E1 → `brief.md` · E2–E3 → `variantes/<id>-a.svg`…, `banco.html` + capturas · E5 → `propuesta.html` · E6 → `<id>.svg` (y `<id>.small.svg` solo si R7 lo exige), `registro.yaml` y handoff.
+**Salidas** en `icons.dir` del perfil compartido (vía `.fruti/paths.yaml` o `fruti path`; sin él, `.../lima/profiles/`); si no hay perfil o no lo define, `.fruti/icons/<id>/`; si tampoco se puede escribir ahí, en la carpeta de trabajo de la sesión, avisándolo en el resumen. E1 → `brief.md` · E2–E3 → `variantes/<id>-a.svg`…, `banco.html` + capturas · E5 → `propuesta.html` · E6 → `<id>.svg` (y `<id>.small.svg` solo si R7 lo exige), `registro.yaml` y handoff.
 
 ## Estilo: de dónde sale el ADN
 
@@ -128,10 +128,7 @@ Todo SVG debe pasar `node scripts/check-icon.mjs`. Las reglas completas, con lo 
 
 ## Traspaso
 
-Uva es un miembro lateral: no forma parte de la cadena kiwi → lima → coco → mora, pero se integra con ella.
-- **Lima** decide si el ADN base se vuelve token (`icon.*`) y registra el icono si el proyecto lleva registry de iconos.
-- **Coco** consume el SVG en la implementación; no lo redibuja.
-- **Mora** lo documenta en el Design Hub si el proyecto documenta iconos.
+Miembro lateral: entrego SVG verificados a coco, que los consume sin redibujarlos. Qué hacen lima y mora con un icono: `.fruti/contracts/squad.md`.
 
 Handoff compacto (`.fruti/handoffs/current.json`, campo `icon` o archivo propio si hay una ronda activa):
 `{ id, source: "uva", next_owner, style_source, sizes, small_variant, motion, confusions_tested, files, unresolved }`.

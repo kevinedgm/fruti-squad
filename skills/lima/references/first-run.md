@@ -54,10 +54,10 @@ bash mis-agentes/skills/lima/scripts/init-project.sh \
   --qa playwright
 ```
 
-`impeccable` viene incluido con la skill en `vendor/impeccable`, así que `--impeccable` es opcional; el script deja `impeccable_path` apuntando a esa copia embebida (relativa al repo). Pasa `--impeccable <ruta>` solo para apuntar a una instalación compartida.
+`impeccable` llega con la skill: el instalador lo copia en `vendor/impeccable` al instalar lima (en el repositorio fuente vive solo en `skills/impeccable`), así que `--impeccable` es opcional; el script deja `impeccable_path` apuntando a esa copia (relativa al repo). Pasa `--impeccable <ruta>` solo para apuntar a una instalación compartida.
 
 El script:
-- crea `profiles/<slug>.md` desde la plantilla (pre-rellenando name/design-system/hub/registry/impeccable/qa; impeccable por defecto al `vendor/impeccable` embebido),
+- crea `profiles/<slug>.md` desde la plantilla (pre-rellenando name/design-system/hub/registry/impeccable/qa; impeccable por defecto a `vendor/impeccable` o, en el repositorio fuente, a `skills/impeccable`),
 - crea la raíz del Hub con sus carpetas de taxonomía,
 - crea `<hub>/system/registry.json` como `{}` (registry vacío),
 - si `--qa playwright`, scaffoldea `<hub>/qa/` con `package.json`, `playwright.config.js`, `tests/`, `evidence/`,

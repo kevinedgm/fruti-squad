@@ -6,8 +6,8 @@ Estos ejemplos son neutrales. No contienen rutas, clases, breakpoints ni estilos
 
 ```yaml
 mora:
-  doc_standard: AUTO   # o la ruta INSTALADA, p. ej. .agents/skills/lima/reference/component-documentation.md (Kiro)
-                       #   .claude/skills/lima/reference/… (Claude) · .codex/skills/lima/reference/… (Codex)
+  doc_standard: AUTO   # o la ruta INSTALADA, p. ej. .agents/skills/lima/references/component-documentation.md (Kiro)
+                       #   .claude/skills/lima/references/… (Claude) · .codex/skills/lima/references/… (Codex)
   doc_shell:
     - design-hub/assets/hub-shell.css
     - design-hub/assets/hub-navigation.js
@@ -22,7 +22,7 @@ Mora reutiliza ese único shell, muestra el componente real y ejecuta los checks
 
 ```yaml
 mora:
-  doc_standard: skills/lima/reference/component-documentation.md
+  doc_standard: skills/lima/references/component-documentation.md
   doc_shell:
     - design-hub/assets/hub-shell.css
     - design-hub/assets/hub-navigation.js

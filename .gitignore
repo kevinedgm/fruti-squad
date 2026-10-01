@@ -9,3 +9,6 @@ __pycache__/
 # Editor
 .vscode/
 .idea/
+
+# impeccable: single copy in skills/impeccable; the installer copies it into lima/vendor/
+skills/lima/vendor/

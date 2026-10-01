@@ -97,4 +97,4 @@ Review checks: props express intent? redundant props? invalid boolean combinatio
 
 ## Profile-provided specifics
 
-This file stays universal. The active profile supplies: framework, component syntax, type system, router, styling, icon system, testing conventions, component paths, naming conventions. For the Manik/Lustre profile these resolve to Vue 3 `<script setup lang="ts">` + Tailwind + lucide-vue-next + Vue Router — but that belongs to the profile, not to this universal policy.
+This file stays universal. The active profile supplies: framework, component syntax, type system, router, styling, icon system, testing conventions, component paths, naming conventions. For the example Tallerio/Brezo profile these resolve to Vue 3 `<script setup lang="ts">` + Tailwind + lucide-vue-next + Vue Router — but that belongs to the profile, not to this universal policy.
