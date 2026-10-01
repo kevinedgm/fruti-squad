@@ -133,6 +133,8 @@ Read one runtime contract for the active owner. Do not read all four just becaus
 
 ## Squad routing
 
+Roles, «who to call» table and return paths for the whole squad live in `.fruti/contracts/squad.md` (single source; each member's manual keeps only its own boundary).
+
 - Kiwi: structure and UX, brief/flow/wireframes F0-F2. Read only structural references needed for the selected fidelity. Kiwi defines functional geometry and adaptive composition but does not invent visual styling.
 - Lima: governance, classification, reuse, registry, contracts, token ownership and lifecycle. Read only the reference for the current governance operation/gate.
 - Coco: F3 construction, implementation and canonical UI audit. Consume approved locks/contracts/tokens. For audits, use `.fruti/audit-manifest.yaml` plus automated evidence first; open prose standards only for failed/ambiguous/non-deterministic checks.

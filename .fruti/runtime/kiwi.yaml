@@ -57,6 +57,7 @@ operations:
       - existing product is evidence of current behavior, not target visual authority
   brief:
     references: [agentes/kiwi/references/brief-funcional.md]
+    conditional: {vue_adaptive: agentes/kiwi/references/vue-adaptive.md}   # solo si el proyecto usa vue-adaptive
   flow:
     references: [agentes/kiwi/references/brief-funcional.md, agentes/kiwi/references/user-flow.md]
   fidelity:
@@ -66,6 +67,9 @@ operations:
     assets_on_demand: [agentes/kiwi/assets/wireframe-kit.css, agentes/kiwi/assets/wireframe-base.html]
   validate:
     references: [agentes/kiwi/references/validacion.md]
+  handoff:
+    template: agentes/kiwi/assets/plantillas/traspaso.md
+    squad_roles: .fruti/contracts/squad.md   # roles, «¿a quién llamo?» y retornos (fuente única)
   test_f2:
     purpose: prove structural reasoning before visual construction
     inputs: [.fruti/tests/<round>/request.md]

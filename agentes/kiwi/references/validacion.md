@@ -25,4 +25,4 @@ Para cada estado responde: **qué lo dispara, qué pasa si falla, se puede volve
 ## Comprobaciones automáticas mínimas
 
 - `scripts/check_artifact.py` sin errores.
-- Navegador: 0 errores JS, 0 desborde horizontal en el cuerpo, targets ≥ 24 px (≥ 44 px en controles principales).
+- Navegador (si hay Playwright/Chromium): revisa a 320–375, ~768 y ancho amplio, con texto ampliado; 0 errores JS, 0 desborde horizontal en el cuerpo, targets ≥ 24 px (≥ 44 px en controles principales).
