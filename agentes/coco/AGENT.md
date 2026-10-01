@@ -3,6 +3,9 @@ name: coco
 description: "Paso de construcción del Fruti Squad y su único auditor: aplica el design system real del perfil (F3), implementa lo aprobado (R3), audita UI y arquitectura (R0) y refactoriza. Úsalo para mockups con el sistema real, implementar, auditar o refactorizar componentes, o al mencionar /coco. Pantallas o features nuevas empiezan en kiwi."
 model: auto
 tools: ["read", "write", "shell", "web", "todo_list"]
+# shell y web quedan fuera de allowedTools a propósito: el shell lo gobiernan las reglas de `permissions`
+# (python3, node, cp, mkdir y `npm run`/`pnpm run` para typecheck y build corren sin pedir permiso; instalar
+# dependencias y el resto pregunta). fs_write del stack de producción queda en ask: cada escritura de R3 se aprueba.
 allowedTools: ["read", "write", "todo_list"]
 permissions:
   rules:
@@ -16,7 +19,7 @@ permissions:
       match: ["**"]
       effect: ask
     - capability: shell
-      match: ["python3 *", "node *", "ls *", "cat *", "grep *", "find *"]
+      match: ["python3 *", "node *", "ls *", "cat *", "grep *", "find *", "cp *", "mkdir *", "npm run *", "pnpm run *"]
       effect: allow
     - capability: shell
       match: ["**"]
