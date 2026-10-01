@@ -16,17 +16,24 @@ operations:
     scope: affected_radius
   structure_docs:
     mode: M1
-    references: [agentes/mora/structural-repair.md]
+    references: [agentes/mora/references/structural-repair.md]
+  hub_structure_round:
+    when: new_hub_structure_or_information_architecture
+    owner_of_structure: kiwi
+    references: [agentes/mora/references/ronda-documental.md, agentes/mora/references/documentation-round-standard.md, agentes/mora/assets/plantillas/encargo-estructura.md]
   document_page:
     mode: M2
     contract: .fruti/contracts/documentation.yaml
     strategy: compile_from_evidence
+    fallback_contract_without_doc_standard: agentes/mora/references/contrato-pagina-minimo.md
+  verify:
+    references: [agentes/mora/references/verificacion.md]
   sync:
     mode: M3
     inputs: [registry_delta, code_delta, compliance_delta]
     contract: .fruti/contracts/documentation.yaml
   initialize:
-    references: [agentes/mora/first-run.md, agentes/mora/intake.md, agentes/mora/profile-additions.md]
+    references: [agentes/mora/references/first-run.md, agentes/mora/references/intake.md, agentes/mora/references/profile-additions.md]
   test_document:
     inputs:
       - .fruti/tests/<round>/request.md
@@ -44,6 +51,7 @@ operations:
 output:
   state: .fruti/state/current.json
   round_copy: .fruti/tests/<round>/handoff-mora.json
+  report_formats: agentes/mora/assets/plantillas/declaracion.md
   include: [documented_delta, repaired_items, review_required, derived_backwards, verified, missing_evidence]
 rules:
   - documentation_contract_is_mandatory_for_documentable_artifacts
@@ -58,4 +66,5 @@ rules:
   - design_hub_documents_approved_truth_and_never_derives_new_design_rules_from_implementation
   - code_and_types_own_public_api
   - registry_owns_lifecycle
+  - registry_writes_limited_to_documentation_and_updated
   - full_agent_manual_only_if_runtime_contract_is_insufficient

@@ -16,6 +16,8 @@ Orden: **kiwi estructura → lima gobierna → coco construye/verifica → mora 
 
 **Un auditor, un gestor del ciclo de vida:** coco es el único auditor (R0 de interfaz y auditoría de arquitectura de componentes) y lima la única dueña del lifecycle y del registry. No hay dos. Cuando el Stable Gate de lima necesita `audit`, se lo pide a coco y consume su declaración de cumplimiento como evidencia; lima conserva `harden` (refinamiento) y todo el ciclo de vida. Lima y coco comparten el mismo perfil de proyecto.
 
+**Registry y mora:** el registry es de lima. Mora solo escribe en él el campo documental `documentation` (ruta de la página del Hub) y `updated` cuando lo cambia; nunca `status`, `version`, owner, `qa`, `refinement`, `production`, `replacedBy`, `dependencies` ni `profileDependencies`. Cualquier otro desajuste lo reporta y lo deriva a lima.
+
 ## ¿A quién llamo?
 
 | Pide… | Lo hace | Por qué |
@@ -41,6 +43,7 @@ Cuando el usuario aprueba una estructura, la ronda pasa a lima, no directo a coc
 | Defecto de estructura o de flujo | lima, coco o mora | 🥝 kiwi, que abre `rNN+1` |
 | Rechazo de un F2 en el contrato | lima (indica reglas fallidas y qué conservar; no rediseña) | 🥝 kiwi |
 | Hueco de gobierno, contrato o tokens | kiwi, coco, mora o uva | 🟢 lima |
+| Decisión de estado, versión o taxonomía | mora (u otro) | 🟢 lima |
 | Decisión solo de implementación dentro de un contrato aprobado | cualquiera | 🥥 coco |
 | Hueco de documentación | cualquiera | 🫐 mora |
-| Problema de diseño o de arquitectura | mora (u otro) | 🥥 coco |
+| Problema de diseño o de arquitectura, código o evidencia de QA faltante | mora (u otro) | 🥥 coco |

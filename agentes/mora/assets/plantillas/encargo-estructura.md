@@ -29,7 +29,7 @@
 
 ## Restricciones del estándar
 
-- Contratos de ficha y metadata según `documentation-round-standard.md`.
+- Contratos de ficha y metadata según `references/documentation-round-standard.md`.
 - Una sola navegación global; «En esta página» deriva de secciones reales.
 - Madurez por texto + señal no cromática.
 - [Otras del proyecto]

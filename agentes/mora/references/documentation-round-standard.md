@@ -4,10 +4,10 @@ Estándar que deben cumplir las rondas que cambian la estructura del Design Hub.
 
 | Paso | Quién | Artefacto |
 |---|---|---|
-| Encargo documental | 🫐 mora | `templates/encargo-estructura.template.md` |
+| Encargo documental | 🫐 mora | `assets/plantillas/encargo-estructura.md` |
 | Ronda de estructura F0–F2 | 🥝 kiwi | `brief.md` · `index.html` · `declaracion.md` (plantillas de kiwi) |
 | Validación contra este estándar | 🫐 mora | hallazgos (`structural-repair.md`) |
-| Páginas reales en el shell activo | 🫐 mora | páginas + `templates/declaracion.template.md` |
+| Páginas reales en el shell activo | 🫐 mora | páginas + `assets/plantillas/declaracion.md` |
 
 ## Lo normativo y lo contextual
 

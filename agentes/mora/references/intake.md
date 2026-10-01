@@ -50,7 +50,7 @@ hub_preview:       # OPTIONAL. Cómo la Preview viva embebe el componente REAL (
 | `coverage_script` | comando de shell, `AUTO`, o vacío | `AUTO` → detecta; vacío → cobertura reportada `manual` |
 | `hub_preview` | string que describe el embed del harness, o vacío | vacío → preview no disponible/no verificada; sin espejo de CSS |
 
-Ejemplos neutrales del bloque completo: [examples/mora-block.example.md](examples/mora-block.example.md).
+Ejemplos neutrales del bloque completo: [examples/mora-block.example.md](../examples/mora-block.example.md).
 
 ## Mapeo Campo → perfil (bloque mora)
 

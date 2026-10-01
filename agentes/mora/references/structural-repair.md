@@ -9,11 +9,11 @@ Se requieren las cuatro condiciones: resultado inequívoco, fuente propietaria d
 Casos habituales:
 
 - enlace, anchor o ruta relativa rota con destino único comprobable;
-- IDs duplicados, `aria-controls` huérfano o estado activo que no coincide con el ID de página;
+- IDs duplicados, `aria-controls` huérfano, `aria-current` incoherente o estado activo que no coincide con el ID de página;
 - sección existente fuera del orden relativo del estándar;
 - entrada de índice que no corresponde a una sección real;
 - import duplicado o referencia a un shell declarado como deprecado cuando el perfil identifica el shell activo;
-- metadata repetida que contradice el registry;
+- metadata repetida que contradice el registry, o metadata documental desfasada respecto a su fuente propietaria;
 - API documental que contradice tipos/código público real: retirar la afirmación falsa o marcarla no disponible;
 - HTML mal anidado o atributo inválido cuya intención sea inequívoca;
 - elemento deprecated presentado como vigente: retirar indicadores de vigencia y enlazar migración existente;
