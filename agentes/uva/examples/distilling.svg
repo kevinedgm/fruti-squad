@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-distilling" aria-hidden="true">
+  <!-- semanticName: distilling · category: status · objeto: alambique de cobre.
+       Oculto por defecto (lo acompaña la etiqueta "Destilando"). Si va solo y comunica algo esencial:
+       quita aria-hidden y añade role="img" aria-label="Destilando". -->
+  <style>
+    .uva-distilling{stroke-width:var(--uva-stroke,1.5)}
+    .uva-distilling__acento{fill:var(--uva-accent,currentColor);stroke:none}
+    /* progress: 2 ciclos; el vapor recorre el cuello y cae la gota; la gota queda visible. Total 4.8 s (WCAG 2.2.2) */
+    .uva-distilling__vapor{opacity:0;stroke:var(--uva-accent,currentColor);stroke-dasharray:3 30;animation:uva-distilling-fluir 2.2s linear 0s 2}
+    .uva-distilling__gota{opacity:0;animation:uva-distilling-caer 2.2s cubic-bezier(.5,0,.9,.6) 0s 2,uva-distilling-asentar .4s ease-out 4.4s forwards}
+    @keyframes uva-distilling-fluir{from{opacity:1;stroke-dashoffset:33}to{opacity:1;stroke-dashoffset:0}}
+    @keyframes uva-distilling-caer{0%,60%{transform:translateY(0);opacity:0}68%{opacity:1}100%{transform:translateY(1.5px);opacity:0}}
+    @keyframes uva-distilling-asentar{to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.uva-distilling__vapor{animation:none;opacity:0}.uva-distilling__gota{animation:none;opacity:1}}
+  </style>
+  <!-- contenedor: olla + columna en un solo contorno, hombro en escalón -->
+  <path d="M10.5 20v-5a2 2 0 0 1 2-2h1V8a2.5 2.5 0 0 1 5 0v5h.5a2 2 0 0 1 2 2v5q0 1.5-1.5 1.5h-7.5q-1.5 0-1.5-1.5z"/>
+  <!-- cuello de cisne -->
+  <path d="M16 5.5V4a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 5 4v4"/>
+  <path class="uva-distilling__vapor" pathLength="33" d="M16 5.5V4a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 5 4v4"/>
+  <!-- serpentín: 2 vueltas -->
+  <path d="M5 8 7.5 9.5 2.5 12.8 7.5 16.1 2.5 19.4 5 20.5"/>
+  <circle class="uva-distilling__gota uva-distilling__acento" cx="5" cy="21.6" r=".8"/>
+</svg>

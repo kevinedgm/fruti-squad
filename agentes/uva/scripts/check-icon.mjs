@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 // Uva · verificador determinista del contrato técnico de un icono SVG (fase E3).
 // Uso: node check-icon.mjs <icono.svg> [más.svg…] [--json]
+// Los iconos de librería (clase "lucide" o atributo data-referencia) se verifican como referencia: solo
+// construcción, color y accesibilidad; no se les exigen las convenciones propias de Uva (uva-<id>, --uva-stroke).
 // Sale con código 1 si algún criterio bloqueante falla. Las comprobaciones visuales
 // (reconocimiento, confusiones, peso óptico, separación) se hacen en el banco de prueba.
 
@@ -55,6 +57,22 @@ function motionTotals(css) {
   return { animated: totals.length > 0, infinite, total: totals.length ? Math.max(...totals) + extra : 0 };
 }
 
+// Selectores con combinadores (descendencia, hijo, hermano) fuera de @keyframes: no sobreviven a <use>.
+function compoundSelectors(css) {
+  const sinKeyframes = css
+    .replace(/\/\*[\s\S]*?\*\//g, '')                                   // comentarios
+    .replace(/@keyframes[^{]*\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}/g, '')        // bloques @keyframes
+    .replace(/@[^{;]+\{/g, '');                                          // preludios @media/@supports
+  const out = [];
+  for (const m of sinKeyframes.matchAll(/([^{}@;]+)\{/g)) {
+    for (const sel of m[1].split(',').map((x) => x.trim()).filter(Boolean)) {
+      if (/^@|^(from|to|\d+%)$/.test(sel)) continue;
+      if (/[\s>+~]/.test(sel.replace(/\([^)]*\)/g, ''))) out.push(sel);
+    }
+  }
+  return out;
+}
+
 function check(file) {
   const src = readFileSync(file, 'utf8');
   const root = rootTag(src);
@@ -62,6 +80,7 @@ function check(file) {
   const body = src.replace(/<style[\s\S]*?<\/style>/g, '');
   const cls = attr(root, 'class') || '';
   const id = (cls.match(/\buva-(?!icon\b)([\w-]+)/) || [])[1];
+  const referencia = /\blucide\b/.test(cls) || attr(root, 'data-referencia') !== null;
   const motion = motionTotals(css);
   const r = [];
   const add = (code, ok, level, msg) => r.push({ code, ok, level, msg });
@@ -75,7 +94,7 @@ function check(file) {
     .map((m) => m[1]).filter((v) => !/^(none|currentColor|inherit|transparent)$/i.test(v));
   const fixedCss = (css.match(/#[0-9a-f]{3,8}\b|rgba?\(|hsla?\(/gi) || []);
   add('COL2', fixedAttr.length === 0 && fixedCss.length === 0, 'bloqueante', `sin colores fijos${fixedAttr.length + fixedCss.length ? ` (encontrados: ${[...fixedAttr, ...fixedCss].join(', ')})` : ''}`);
-  add('COL3', /var\(--uva-stroke/.test(css), 'recomendado', 'grosor ajustable con --uva-stroke');
+  if (!referencia) add('COL3', /var\(--uva-stroke/.test(css), 'recomendado', 'grosor ajustable con --uva-stroke');
   // Lucide: oculto por defecto; nombre accesible solo si el icono informa por sí solo.
   const named = !!attr(root, 'aria-label') || /<title\b[^>]*>[^<]+<\/title>/.test(body);
   const labelled = attr(root, 'role') === 'img' && named;
@@ -84,8 +103,13 @@ function check(file) {
     hidden && named ? 'aria-hidden="true" y nombre accesible a la vez: elige uno'
       : 'oculto (aria-hidden="true") o, si informa solo, role="img" + aria-label/<title>');
   if (labelled && !hidden) add('C2b', false, 'recomendado', 'expuesto con nombre: confirma que comunica algo esencial sin etiqueta (si no, aria-hidden="true")');
-  add('ID', !!id && /\buva-icon\b/.test(cls), 'bloqueante', 'clases "uva-icon uva-<id>"');
-  if (id) {
+  if (referencia) add('REF', true, 'info', 'icono de librería verificado como referencia (sin convenciones uva-*)');
+  else add('ID', !!id && /\buva-icon\b/.test(cls), 'bloqueante', 'clases "uva-icon uva-<id>"');
+  if (!referencia) {
+    const comp = compoundSelectors(css);
+    add('SEL', comp.length === 0, 'bloqueante', `una clase por regla, sin combinadores${comp.length ? ` (encontrados: ${comp.join(' | ')})` : ''}`);
+  }
+  if (id && !referencia) {
     const unprefixed = [...css.matchAll(/@keyframes\s+([\w-]+)/g)].map((m) => m[1]).filter((k) => !k.startsWith(`uva-${id}-`));
     add('ID2', unprefixed.length === 0, 'bloqueante', `@keyframes con prefijo uva-${id}-${unprefixed.length ? ` (sin prefijo: ${unprefixed.join(', ')})` : ''}`);
   }
@@ -98,7 +122,7 @@ function check(file) {
   } else {
     add('D0', true, 'info', 'icono estático');
   }
-  return { file: basename(file), id: id || null, motion, results: r, ok: r.every((x) => x.ok || x.level !== 'bloqueante') };
+  return { file: basename(file), id: id || null, referencia, motion, results: r, ok: r.every((x) => x.ok || x.level !== 'bloqueante') };
 }
 
 const args = process.argv.slice(2);
@@ -108,7 +132,7 @@ if (!files.length) { console.error('Uso: node check-icon.mjs <icono.svg> [...] [
 const reports = files.map(check);
 if (json) console.log(JSON.stringify(reports, null, 2));
 else for (const rep of reports) {
-  console.log(`\n${rep.ok ? '✅' : '❌'} ${rep.file}${rep.id ? ` (uva-${rep.id})` : ''}`);
+  console.log(`\n${rep.ok ? '✅' : '❌'} ${rep.file}${rep.id ? ` (uva-${rep.id})` : ''}${rep.referencia ? ' (referencia de librería)' : ''}`);
   for (const x of rep.results) console.log(`  ${x.ok ? '✅' : x.level === 'bloqueante' ? '❌' : '⚠️ '} ${x.code.padEnd(4)} ${x.msg}${x.ok || x.level === 'bloqueante' ? '' : ' (recomendado)'}`);
 }
 process.exit(reports.every((x) => x.ok) ? 0 : 1);

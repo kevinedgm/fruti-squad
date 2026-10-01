@@ -3,9 +3,10 @@
 <title>Uva · propuesta</title>
 <!--
   Propuesta de Uva (fase E5). El usuario compara variantes y prueba la que quiera.
-  1. Rellena el JSON de <script id="meta">.
-  2. Añade un <template class="variante"> por variante (data-id, data-nombre, data-recomendada opcional) con:
-     - el <svg> (clase uva-icon uva-<id>-<variante>, para que las variantes no compartan estilos),
+  1. Rellena el JSON del script con id "meta".
+  2. Sustituye el comentario UVA:VARIANTES (dentro de main) por una plantilla de variante por opción:
+     elemento template con clase "variante" y atributos data-id, data-nombre y data-recomendada (opcional), que contiene:
+     - el <svg> (clases uva-icon uva-<id>-<variante>, para que las variantes no compartan estilos),
      - <p class="hipotesis"> por qué podría funcionar,
      - <table class="evaluacion"> con la rúbrica de references/estandares.md (criterio · ✅/❌/➖ · evidencia).
   Cada icono se monta en su propio shadow root: los <style> internos no se pisan entre copias.
@@ -19,8 +20,11 @@
   .sub{color:var(--tenue);margin:0 0 20px}
   h2{font-size:15px;margin:28px 0 10px}
   .variantes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
-  .tarjeta{background:var(--panel);border:1px solid var(--linea);border-radius:12px;padding:14px;cursor:pointer;text-align:left;font:inherit;color:inherit}
-  .tarjeta[aria-pressed="true"]{outline:2px solid var(--marca);outline-offset:-1px}
+  .tarjeta{background:var(--panel);border:1px solid var(--linea);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:4px}
+  .tarjeta.activa{outline:2px solid var(--marca);outline-offset:-1px}
+  .elegir{align-self:flex-start;margin-top:8px;font:inherit;font-size:13px;border:1px solid var(--linea);background:#fff;border-radius:8px;padding:6px 12px;cursor:pointer}
+  .elegir[aria-pressed="true"]{background:#efeafd;border-color:var(--marca);color:#3d2a8a}
+  .elegir:focus-visible{outline:2px solid var(--marca);outline-offset:2px}
   .tarjeta .cab{display:flex;gap:12px;align-items:center}
   .tarjeta .nom{font-weight:600}
   .badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:99px;background:#efeafd;color:#5b3fc0;margin-left:6px}
@@ -55,12 +59,12 @@
   "concepto": "CONCEPTO",
   "significado": "qué debe comunicar",
   "etiqueta": "Etiqueta",
-  "colorTrazo": "#c8743a",
-  "colorAcento": "#d99a3c"
+  "colorTrazo": "#1a1a1a",
+  "colorAcento": "#b07400"
 }
 </script>
 
-<!-- VARIANTES: un <template class="variante"> por opción -->
+<!-- UVA:VARIANTES -->
 
 <h1 id="titulo"></h1>
 <p class="sub" id="subtitulo"></p>
@@ -84,6 +88,7 @@
     <label>Simular movimiento reducido <input type="checkbox" id="red"></label>
     <button class="accion" id="play" type="button">▶ Reproducir animación</button>
     <div class="medida" id="contraste"></div>
+    <div class="medida" id="contrasteAcento"></div>
     <div class="medida" id="margen"></div>
     <button class="accion" id="copiar" type="button">Copiar SVG</button>
   </div>
@@ -123,14 +128,17 @@
   }
   let actual = vars.find(v => v.recomendada) || vars[0];
 
+  // Cada variante es un <article>; solo el botón "Probar" es interactivo (nombre corto y válido, norma §13–15).
   vars.forEach(v => {
+    const a = document.createElement('article');
+    a.className = 'tarjeta';
+    a.innerHTML = `<div class="cab"><span class="ic"></span><span class="ic24"></span><h3 class="nom" style="margin:0;font-size:14px">${v.nombre}${v.recomendada ? ' <span class="badge">recomendada</span>' : ''}</h3></div>${v.hip}${v.eva}`;
+    montar(a.querySelector('.ic'), v.svg, 56, true);
+    montar(a.querySelector('.ic24'), v.svg, 24, true);
     const b = document.createElement('button');
-    b.className = 'tarjeta'; b.type = 'button';
-    b.innerHTML = `<div class="cab"><span class="ic"></span><span class="ic24"></span><span><span class="nom">${v.nombre}</span>${v.recomendada ? '<span class="badge">recomendada</span>' : ''}</span></div>${v.hip}${v.eva}`;
-    montar(b.querySelector('.ic'), v.svg, 56, true);
-    montar(b.querySelector('.ic24'), v.svg, 24, true);
-    b.onclick = () => { actual = v; pintar(); };
-    v.boton = b; $('variantes').append(b);
+    b.type = 'button'; b.className = 'elegir'; b.textContent = `Probar ${v.id}`;
+    b.onclick = () => { actual = v; pintar(); document.getElementById('escena').scrollIntoView({behavior: 'smooth', block: 'center'}); };
+    a.append(b); v.boton = b; v.tarjeta = a; $('variantes').append(a);
   });
 
   function luminancia(hex) {
@@ -142,12 +150,19 @@
     const [x, y] = [luminancia(a), luminancia(b)].sort((m, n) => n - m);
     return (x + 0.05) / (y + 0.05);
   }
-  function margenMinimo(svg) {
+  // Mide el fotograma estático (bloque reducido activo) en una copia oculta: no depende de nombres de clase.
+  const medidor = document.createElement('div');
+  medidor.style.cssText = 'position:absolute;left:-9999px;top:0';
+  document.body.append(medidor);
+  function margenMinimo(svgText, grosor) {
+    medidor.style.setProperty('--uva-stroke', grosor);
+    const svg = montar(medidor, svgText, 96, true);
     const sw = parseFloat(getComputedStyle(svg).strokeWidth) || 1.5;
     let b = null;
     svg.querySelectorAll('path,circle,ellipse,rect,line,polyline,polygon').forEach(el => {
-      if (getComputedStyle(el).opacity === '0' && !el.classList.contains('burbuja') && !el.classList.contains('gota')) return;
-      const r = el.getBBox(); const pad = getComputedStyle(el).stroke === 'none' ? 0 : sw / 2;
+      const cs = getComputedStyle(el);
+      if (cs.opacity === '0' || cs.display === 'none' || cs.visibility === 'hidden') return;
+      const r = el.getBBox(); const pad = cs.stroke === 'none' ? 0 : sw / 2;
       const e = {x1: r.x - pad, y1: r.y - pad, x2: r.x + r.width + pad, y2: r.y + r.height + pad};
       b = b ? {x1: Math.min(b.x1, e.x1), y1: Math.min(b.y1, e.y1), x2: Math.max(b.x2, e.x2), y2: Math.max(b.y2, e.y2)} : e;
     });
@@ -155,7 +170,7 @@
   }
 
   function pintar() {
-    vars.forEach(v => v.boton.setAttribute('aria-pressed', v === actual));
+    vars.forEach(v => { v.boton.setAttribute('aria-pressed', v === actual); v.tarjeta.classList.toggle('activa', v === actual); });
     const px = +$('tam').value, g = $('gro').value, oscuro = $('osc').checked, red = $('red').checked;
     $('tamV').textContent = px; $('groV').textContent = g;
     const esc = $('escena');
@@ -187,11 +202,13 @@
     const b3 = b2.cloneNode(true); b3.classList.add('foco'); fig(b3, 'con foco visible');
     montar(i1, actual.svg, 20, red); montar(b2.firstChild, actual.svg, 20, red); montar(b3.firstChild, actual.svg, 20, red);
     const fondo = oscuro ? '#0b0b0b' : '#ffffff';
-    const cr = contraste(color, fondo);
-    const nivel = cr >= 4.5 ? ['ok', '✅', 'cumple WCAG (≥3:1) y el objetivo de la norma (≥4.5:1)'] : cr >= 3 ? ['aviso', '⚠️', 'cumple WCAG (≥3:1); por debajo del objetivo 4.5:1'] : ['mal', '❌', 'no cumple WCAG 1.4.11 (≥3:1)'];
-    $('contraste').innerHTML = `Contraste del trazo: <b class="${nivel[0]}">${cr.toFixed(2)}:1</b> ${nivel[1]} ${nivel[2]}`;
+    const nivel = cr => cr >= 4.5 ? ['ok', '✅', 'cumple WCAG (≥3:1) y el objetivo de la norma (≥4.5:1)'] : cr >= 3 ? ['aviso', '⚠️', 'cumple WCAG (≥3:1); por debajo del objetivo 4.5:1'] : ['mal', '❌', 'no cumple WCAG 1.4.11 (≥3:1)'];
+    const linea = (txt, cr) => { const n = nivel(cr); return `${txt}: <b class="${n[0]}">${cr.toFixed(2)}:1</b> ${n[1]} ${n[2]}`; };
+    $('contraste').innerHTML = linea('Contraste del trazo', contraste(color, fondo));
+    // El acento cuenta si la variante lo usa: a menudo es la pieza que lleva el significado (burbujas, gotas, flujo).
+    $('contrasteAcento').innerHTML = actual.svg.includes('--uva-accent') ? linea('Contraste del acento', contraste($('acc').value, fondo)) : 'Esta variante no usa acento.';
     requestAnimationFrame(() => {
-      const m = margenMinimo(svg);
+      const m = margenMinimo(actual.svg, g);
       $('margen').innerHTML = m === null ? '' : `Margen mínimo al borde: <b class="${m >= 1 ? 'ok' : 'mal'}">${m.toFixed(2)}</b> ${m >= 1 ? '✅' : '❌'} (≥1; recomendado 2)`;
     });
   }

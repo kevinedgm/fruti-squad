@@ -425,7 +425,7 @@ Trabaja por etapas:
 5. **Proponer**: una página donde comparas las variantes evaluadas y pruebas la recomendada (tamaño, grosor, color, fondo, animación, contraste).
 6. **Entregar** la elegida.
 
-Reglas, estándares y patrones: `agentes/uva/references/`. Ejemplo de propuesta: `agentes/uva/examples/propuesta-alambique.html`.
+Reglas, estándares y patrones: `agentes/uva/references/`. Ejemplo de propuesta: `agentes/uva/examples/propuesta-distilling.html`.
 
 ---
 

@@ -1,11 +1,12 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Uva · propuesta alambique</title>
+<title>Uva · propuesta distilling</title>
 <!--
   Propuesta de Uva (fase E5). El usuario compara variantes y prueba la que quiera.
-  1. Rellena el JSON de <script id="meta">.
-  2. Añade un <template class="variante"> por variante (data-id, data-nombre, data-recomendada opcional) con:
-     - el <svg> (clase uva-icon uva-<id>-<variante>, para que las variantes no compartan estilos),
+  1. Rellena el JSON del script con id "meta".
+  2. Sustituye el comentario UVA:VARIANTES (dentro de main) por una plantilla de variante por opción:
+     elemento template con clase "variante" y atributos data-id, data-nombre y data-recomendada (opcional), que contiene:
+     - el <svg> (clases uva-icon uva-<id>-<variante>, para que las variantes no compartan estilos),
      - <p class="hipotesis"> por qué podría funcionar,
      - <table class="evaluacion"> con la rúbrica de references/estandares.md (criterio · ✅/❌/➖ · evidencia).
   Cada icono se monta en su propio shadow root: los <style> internos no se pisan entre copias.
@@ -19,8 +20,11 @@
   .sub{color:var(--tenue);margin:0 0 20px}
   h2{font-size:15px;margin:28px 0 10px}
   .variantes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
-  .tarjeta{background:var(--panel);border:1px solid var(--linea);border-radius:12px;padding:14px;cursor:pointer;text-align:left;font:inherit;color:inherit}
-  .tarjeta[aria-pressed="true"]{outline:2px solid var(--marca);outline-offset:-1px}
+  .tarjeta{background:var(--panel);border:1px solid var(--linea);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:4px}
+  .tarjeta.activa{outline:2px solid var(--marca);outline-offset:-1px}
+  .elegir{align-self:flex-start;margin-top:8px;font:inherit;font-size:13px;border:1px solid var(--linea);background:#fff;border-radius:8px;padding:6px 12px;cursor:pointer}
+  .elegir[aria-pressed="true"]{background:#efeafd;border-color:var(--marca);color:#3d2a8a}
+  .elegir:focus-visible{outline:2px solid var(--marca);outline-offset:2px}
   .tarjeta .cab{display:flex;gap:12px;align-items:center}
   .tarjeta .nom{font-weight:600}
   .badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:99px;background:#efeafd;color:#5b3fc0;margin-left:6px}
@@ -52,86 +56,77 @@
 <main>
 <script type="application/json" id="meta">
 {
-  "concepto": "Alambique de cobre",
+  "concepto": "Alambique de cobre (distilling)",
   "significado": "destilando (proceso en curso)",
   "etiqueta": "Destilando",
   "colorTrazo": "#c8743a",
-  "colorAcento": "#d99a3c"
+  "colorAcento": "#b07400"
 }
 </script>
 
 <template class="variante" data-id="A" data-nombre="A · Contorno único, hombro en escalón" data-recomendada>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-alambique-a" aria-hidden="true">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-distilling-a" aria-hidden="true">
   <style>
-    .uva-alambique-a{stroke-width:var(--uva-stroke,1.5)}
-    .uva-alambique-a .acento{fill:var(--uva-accent,currentColor);stroke:none}
-    /* 2 ciclos: el vapor recorre el cuello y cae la gota; la gota queda visible al final. Total 4.8 s (WCAG 2.2.2) */
-    .uva-alambique-a .vapor{opacity:0;stroke:var(--uva-accent,currentColor);stroke-dasharray:3 30;animation:uva-alambique-a-fluir 2.2s linear 0s 2}
-    .uva-alambique-a .gota{opacity:0;animation:uva-alambique-a-caer 2.2s cubic-bezier(.5,0,.9,.6) 0s 2,uva-alambique-a-asentar .4s ease-out 4.4s forwards}
-    @keyframes uva-alambique-a-fluir{from{opacity:1;stroke-dashoffset:33}to{opacity:1;stroke-dashoffset:0}}
-    @keyframes uva-alambique-a-caer{0%,60%{transform:translateY(0);opacity:0}68%{opacity:1}100%{transform:translateY(1.5px);opacity:0}}
-    @keyframes uva-alambique-a-asentar{to{opacity:1}}
-    @media (prefers-reduced-motion:reduce){.uva-alambique-a .vapor{animation:none;opacity:0}.uva-alambique-a .gota{animation:none;opacity:1}}
+    .uva-distilling-a{stroke-width:var(--uva-stroke,1.5)}
+    .uva-distilling-a__acento{fill:var(--uva-accent,currentColor);stroke:none}
+    /* progress: 2 ciclos; el vapor recorre el cuello y cae la gota; la gota queda visible. Total 4.8 s (WCAG 2.2.2) */
+    .uva-distilling-a__vapor{opacity:0;stroke:var(--uva-accent,currentColor);stroke-dasharray:3 30;animation:uva-distilling-a-fluir 2.2s linear 0s 2}
+    .uva-distilling-a__gota{opacity:0;animation:uva-distilling-a-caer 2.2s cubic-bezier(.5,0,.9,.6) 0s 2,uva-distilling-a-asentar .4s ease-out 4.4s forwards}
+    @keyframes uva-distilling-a-fluir{from{opacity:1;stroke-dashoffset:33}to{opacity:1;stroke-dashoffset:0}}
+    @keyframes uva-distilling-a-caer{0%,60%{transform:translateY(0);opacity:0}68%{opacity:1}100%{transform:translateY(1.5px);opacity:0}}
+    @keyframes uva-distilling-a-asentar{to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.uva-distilling-a__vapor{animation:none;opacity:0}.uva-distilling-a__gota{animation:none;opacity:1}}
   </style>
-  <!-- contenedor: olla + columna en un solo contorno, hombro en escalón (evita leerse como botella) -->
-  <path class="contenedor" d="M10.5 20v-5a2 2 0 0 1 2-2h1V8a2.5 2.5 0 0 1 5 0v5h.5a2 2 0 0 1 2 2v5q0 1.5-1.5 1.5h-7.5q-1.5 0-1.5-1.5z"/>
-  <!-- cuello de cisne -->
-  <path class="tubo" d="M16 5.5V4a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 5 4v4"/>
-  <path class="vapor" pathLength="33" d="M16 5.5V4a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 5 4v4"/>
-  <!-- serpentín: 2 vueltas (R7) -->
-  <path class="serpentin" d="M5 8 7.5 9.5 2.5 12.8 7.5 16.1 2.5 19.4 5 20.5"/>
-  <circle class="gota acento" cx="5" cy="21.6" r=".8"/>
+  <path d="M10.5 20v-5a2 2 0 0 1 2-2h1V8a2.5 2.5 0 0 1 5 0v5h.5a2 2 0 0 1 2 2v5q0 1.5-1.5 1.5h-7.5q-1.5 0-1.5-1.5z"/>
+  <path d="M16 5.5V4a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 5 4v4"/>
+  <path class="uva-distilling-a__vapor" pathLength="33" d="M16 5.5V4a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 5 4v4"/>
+  <path d="M5 8 7.5 9.5 2.5 12.8 7.5 16.1 2.5 19.4 5 20.5"/>
+  <circle class="uva-distilling-a__gota uva-distilling-a__acento" cx="5" cy="21.6" r=".8"/>
 </svg>
 <p class="hipotesis">El escalón entre olla y columna copia la foto y rompe la lectura de botella; 3 trazos y 2 vueltas de serpentín.</p>
-<table class="evaluacion"><tr><td>A1–A4 contrato</td><td>✅</td><td>check-icon sin bloqueantes</td></tr><tr><td>A6 separación ≥2</td><td>✅</td><td>serpentín y olla separados ~3 unidades</td></tr><tr><td>B1 reconocible a 24px</td><td>✅</td><td>olla + cuello + serpentín se distinguen</td></tr><tr><td>B4 confusiones</td><td>✅</td><td>no se lee como botella ni como surtidor</td></tr><tr><td>C1 contraste</td><td>✅</td><td>cobre ≥3:1 en claro (3.49) y oscuro (5.64)</td></tr><tr><td>C1b objetivo 4.5:1</td><td>⚠️</td><td>en fondo claro queda en 3.49: usar un cobre más oscuro si el icono va solo</td></tr><tr><td>D1 ≤5 s</td><td>✅</td><td>2 ciclos, 4.8 s; termina con la gota visible</td></tr></table>
+<table class="evaluacion"><tr><td>A1–A4 contrato</td><td>✅</td><td>check-icon sin bloqueantes</td></tr><tr><td>A6 separación ≥2</td><td>✅</td><td>serpentín y olla separados ~3 unidades</td></tr><tr><td>B1 reconocible a 24px</td><td>✅</td><td>olla + cuello + serpentín se distinguen</td></tr><tr><td>B4 confusiones</td><td>✅</td><td>no se lee como botella ni como surtidor</td></tr><tr><td>C1 contraste</td><td>✅</td><td>cobre ≥3:1 en claro (3.49) y oscuro (5.64)</td></tr><tr><td>C1 acento</td><td>✅</td><td>gotas y vapor en #b07400: 3.93 claro / 5.01 oscuro (el ámbar #d99a3c daba 2.43 y no cumplía)</td></tr><tr><td>C1b objetivo 4.5:1</td><td>⚠️</td><td>en fondo claro queda en 3.49: usar un cobre más oscuro si el icono va solo</td></tr><tr><td>D1 ≤5 s</td><td>✅</td><td>2 ciclos, 4.8 s; termina con la gota visible</td></tr></table>
 </template>
 <template class="variante" data-id="B" data-nombre="B · Contorno único, hombro curvo">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-alambique-b" aria-hidden="true">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-distilling-b" aria-hidden="true">
   <style>
-    .uva-alambique-b{stroke-width:var(--uva-stroke,1.5)}
-    .uva-alambique-b .acento{fill:var(--uva-accent,currentColor);stroke:none}
-    /* 2 ciclos: el vapor recorre el cuello y cae la gota; la gota queda visible al final. Total 4.8 s (WCAG 2.2.2) */
-    .uva-alambique-b .vapor{opacity:0;stroke:var(--uva-accent,currentColor);stroke-dasharray:3 30;animation:uva-alambique-b-fluir 2.2s linear 0s 2}
-    .uva-alambique-b .gota{opacity:0;animation:uva-alambique-b-caer 2.2s cubic-bezier(.5,0,.9,.6) 0s 2,uva-alambique-b-asentar .4s ease-out 4.4s forwards}
-    @keyframes uva-alambique-b-fluir{from{opacity:1;stroke-dashoffset:33}to{opacity:1;stroke-dashoffset:0}}
-    @keyframes uva-alambique-b-caer{0%,60%{transform:translateY(0);opacity:0}68%{opacity:1}100%{transform:translateY(1.5px);opacity:0}}
-    @keyframes uva-alambique-b-asentar{to{opacity:1}}
-    @media (prefers-reduced-motion:reduce){.uva-alambique-b .vapor{animation:none;opacity:0}.uva-alambique-b .gota{animation:none;opacity:1}}
+    .uva-distilling-b{stroke-width:var(--uva-stroke,1.5)}
+    .uva-distilling-b__acento{fill:var(--uva-accent,currentColor);stroke:none}
+    /* progress: 2 ciclos; el vapor recorre el cuello y cae la gota; la gota queda visible. Total 4.8 s (WCAG 2.2.2) */
+    .uva-distilling-b__vapor{opacity:0;stroke:var(--uva-accent,currentColor);stroke-dasharray:3 30;animation:uva-distilling-b-fluir 2.2s linear 0s 2}
+    .uva-distilling-b__gota{opacity:0;animation:uva-distilling-b-caer 2.2s cubic-bezier(.5,0,.9,.6) 0s 2,uva-distilling-b-asentar .4s ease-out 4.4s forwards}
+    @keyframes uva-distilling-b-fluir{from{opacity:1;stroke-dashoffset:33}to{opacity:1;stroke-dashoffset:0}}
+    @keyframes uva-distilling-b-caer{0%,60%{transform:translateY(0);opacity:0}68%{opacity:1}100%{transform:translateY(1.5px);opacity:0}}
+    @keyframes uva-distilling-b-asentar{to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.uva-distilling-b__vapor{animation:none;opacity:0}.uva-distilling-b__gota{animation:none;opacity:1}}
   </style>
-  <!-- contenedor: olla + columna en un solo contorno, hombro en escalón (evita leerse como botella) -->
-  <path class="contenedor" d="M11 20v-4q0-3 2.5-3.5V8a2.5 2.5 0 0 1 5 0v4.5Q21 13 21 16v4q0 1.5-1.5 1.5h-7Q11 21.5 11 20z"/>
-  <!-- cuello de cisne -->
-  <path class="tubo" d="M16 5.5V4a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 5 4v4"/>
-  <path class="vapor" pathLength="33" d="M16 5.5V4a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 5 4v4"/>
-  <!-- serpentín: 2 vueltas (R7) -->
-  <path class="serpentin" d="M5 8 7.5 9.5 2.5 12.8 7.5 16.1 2.5 19.4 5 20.5"/>
-  <circle class="gota acento" cx="5" cy="21.6" r=".8"/>
+  <path d="M11 20v-4q0-3 2.5-3.5V8a2.5 2.5 0 0 1 5 0v4.5Q21 13 21 16v4q0 1.5-1.5 1.5h-7Q11 21.5 11 20z"/>
+  <path d="M16 5.5V4a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 5 4v4"/>
+  <path class="uva-distilling-b__vapor" pathLength="33" d="M16 5.5V4a1.5 1.5 0 0 0-1.5-1.5h-8A1.5 1.5 0 0 0 5 4v4"/>
+  <path d="M5 8 7.5 9.5 2.5 12.8 7.5 16.1 2.5 19.4 5 20.5"/>
+  <circle class="uva-distilling-b__gota uva-distilling-b__acento" cx="5" cy="21.6" r=".8"/>
 </svg>
 <p class="hipotesis">Misma estructura con transición suave entre olla y columna.</p>
 <table class="evaluacion"><tr><td>A1–A4 contrato</td><td>✅</td><td>check-icon sin bloqueantes</td></tr><tr><td>B1 reconocible a 24px</td><td>✅</td><td>se lee limpio</td></tr><tr><td>B4 confusiones</td><td>❌</td><td>el contorno suave se lee como botella (R5); riesgo alto en dominio mezcal</td></tr><tr><td>D1 ≤5 s</td><td>✅</td><td>4.8 s</td></tr></table>
 </template>
 <template class="variante" data-id="C" data-nombre="C · Olla y columna separadas, 3 vueltas">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-alambique-c" aria-hidden="true">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-distilling-c" aria-hidden="true">
   <style>
-    .uva-alambique-c{stroke-width:var(--uva-stroke,1.5)}
-    .uva-alambique-c .acento{fill:var(--uva-accent,currentColor);stroke:none}
-    /* 2 ciclos: el vapor recorre el cuello y cae la gota; la gota queda visible al final. Total 4.8 s (WCAG 2.2.2) */
-    .uva-alambique-c .vapor{opacity:0;stroke:var(--uva-accent,currentColor);stroke-dasharray:3 30;animation:uva-alambique-c-fluir 2.2s linear 0s 2}
-    .uva-alambique-c .gota{opacity:0;animation:uva-alambique-c-caer 2.2s cubic-bezier(.5,0,.9,.6) 0s 2,uva-alambique-c-asentar .4s ease-out 4.4s forwards}
-    @keyframes uva-alambique-c-fluir{from{opacity:1;stroke-dashoffset:33}to{opacity:1;stroke-dashoffset:0}}
-    @keyframes uva-alambique-c-caer{0%,60%{transform:translateY(0);opacity:0}68%{opacity:1}100%{transform:translateY(1.5px);opacity:0}}
-    @keyframes uva-alambique-c-asentar{to{opacity:1}}
-    @media (prefers-reduced-motion:reduce){.uva-alambique-c .vapor{animation:none;opacity:0}.uva-alambique-c .gota{animation:none;opacity:1}}
+    .uva-distilling-c{stroke-width:var(--uva-stroke,1.5)}
+    .uva-distilling-c__acento{fill:var(--uva-accent,currentColor);stroke:none}
+    /* progress: 2 ciclos; el vapor recorre el cuello y cae la gota; la gota queda visible. Total 4.8 s (WCAG 2.2.2) */
+    .uva-distilling-c__vapor{opacity:0;stroke:var(--uva-accent,currentColor);stroke-dasharray:3 30;animation:uva-distilling-c-fluir 2.2s linear 0s 2}
+    .uva-distilling-c__gota{opacity:0;animation:uva-distilling-c-caer 2.2s cubic-bezier(.5,0,.9,.6) 0s 2,uva-distilling-c-asentar .4s ease-out 4.4s forwards}
+    @keyframes uva-distilling-c-fluir{from{opacity:1;stroke-dashoffset:33}to{opacity:1;stroke-dashoffset:0}}
+    @keyframes uva-distilling-c-caer{0%,60%{transform:translateY(0);opacity:0}68%{opacity:1}100%{transform:translateY(1.5px);opacity:0}}
+    @keyframes uva-distilling-c-asentar{to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.uva-distilling-c__vapor{animation:none;opacity:0}.uva-distilling-c__gota{animation:none;opacity:1}}
   </style>
-  <!-- contenedor: olla + columna en un solo contorno, hombro en escalón (evita leerse como botella) -->
-  <path class="olla" d="M10 20v-4.5Q10 12 15.5 12T21 15.5V20q0 1.5-1.5 1.5h-8Q10 21.5 10 20z"/>
-  <path class="columna" d="M13.5 12V7.5a2 2 0 0 1 4 0V12"/>
-  <!-- cuello de cisne -->
-  <path class="tubo" d="M15.5 5.5V4A1.5 1.5 0 0 0 14 2.5H7A1.5 1.5 0 0 0 5.5 4v4.5"/>
-  <path class="vapor" pathLength="33" d="M15.5 5.5V4A1.5 1.5 0 0 0 14 2.5H7A1.5 1.5 0 0 0 5.5 4v4.5"/>
-  <!-- serpentín: 2 vueltas (R7) -->
-  <path class="serpentin" d="M5.5 8.5 8 10 3 12.2 8 14.4 3 16.6 8 18.8 5.5 20"/>
-  <circle class="gota acento" cx="5.5" cy="21.4" r=".8"/>
+  <path d="M10 20v-4.5Q10 12 15.5 12T21 15.5V20q0 1.5-1.5 1.5h-8Q10 21.5 10 20z"/>
+  <path d="M13.5 12V7.5a2 2 0 0 1 4 0V12"/>
+  <path d="M15.5 5.5V4A1.5 1.5 0 0 0 14 2.5H7A1.5 1.5 0 0 0 5.5 4v4.5"/>
+  <path class="uva-distilling-c__vapor" pathLength="33" d="M15.5 5.5V4A1.5 1.5 0 0 0 14 2.5H7A1.5 1.5 0 0 0 5.5 4v4.5"/>
+  <path d="M5.5 8.5 8 10 3 12.2 8 14.4 3 16.6 8 18.8 5.5 20"/>
+  <circle class="uva-distilling-c__gota uva-distilling-c__acento" cx="5.5" cy="21.4" r=".8"/>
 </svg>
 <p class="hipotesis">Más fiel al detalle: dos piezas y serpentín de 3 vueltas.</p>
 <table class="evaluacion"><tr><td>A1–A4 contrato</td><td>✅</td><td>check-icon sin bloqueantes</td></tr><tr><td>A6 separación ≥2</td><td>❌</td><td>a 22px el serpentín de 3 vueltas empasta (R7)</td></tr><tr><td>B1 reconocible a 24px</td><td>➖</td><td>se reconoce a 44px; apretado a 22px</td></tr><tr><td>B6 coherencia de familia</td><td>❌</td><td>4 trazos + 3 vueltas: más denso que sus vecinos</td></tr></table>
@@ -164,6 +159,7 @@
     <label>Simular movimiento reducido <input type="checkbox" id="red"></label>
     <button class="accion" id="play" type="button">▶ Reproducir animación</button>
     <div class="medida" id="contraste"></div>
+    <div class="medida" id="contrasteAcento"></div>
     <div class="medida" id="margen"></div>
     <button class="accion" id="copiar" type="button">Copiar SVG</button>
   </div>
@@ -203,14 +199,17 @@
   }
   let actual = vars.find(v => v.recomendada) || vars[0];
 
+  // Cada variante es un <article>; solo el botón "Probar" es interactivo (nombre corto y válido, norma §13–15).
   vars.forEach(v => {
+    const a = document.createElement('article');
+    a.className = 'tarjeta';
+    a.innerHTML = `<div class="cab"><span class="ic"></span><span class="ic24"></span><h3 class="nom" style="margin:0;font-size:14px">${v.nombre}${v.recomendada ? ' <span class="badge">recomendada</span>' : ''}</h3></div>${v.hip}${v.eva}`;
+    montar(a.querySelector('.ic'), v.svg, 56, true);
+    montar(a.querySelector('.ic24'), v.svg, 24, true);
     const b = document.createElement('button');
-    b.className = 'tarjeta'; b.type = 'button';
-    b.innerHTML = `<div class="cab"><span class="ic"></span><span class="ic24"></span><span><span class="nom">${v.nombre}</span>${v.recomendada ? '<span class="badge">recomendada</span>' : ''}</span></div>${v.hip}${v.eva}`;
-    montar(b.querySelector('.ic'), v.svg, 56, true);
-    montar(b.querySelector('.ic24'), v.svg, 24, true);
-    b.onclick = () => { actual = v; pintar(); };
-    v.boton = b; $('variantes').append(b);
+    b.type = 'button'; b.className = 'elegir'; b.textContent = `Probar ${v.id}`;
+    b.onclick = () => { actual = v; pintar(); document.getElementById('escena').scrollIntoView({behavior: 'smooth', block: 'center'}); };
+    a.append(b); v.boton = b; v.tarjeta = a; $('variantes').append(a);
   });
 
   function luminancia(hex) {
@@ -222,12 +221,19 @@
     const [x, y] = [luminancia(a), luminancia(b)].sort((m, n) => n - m);
     return (x + 0.05) / (y + 0.05);
   }
-  function margenMinimo(svg) {
+  // Mide el fotograma estático (bloque reducido activo) en una copia oculta: no depende de nombres de clase.
+  const medidor = document.createElement('div');
+  medidor.style.cssText = 'position:absolute;left:-9999px;top:0';
+  document.body.append(medidor);
+  function margenMinimo(svgText, grosor) {
+    medidor.style.setProperty('--uva-stroke', grosor);
+    const svg = montar(medidor, svgText, 96, true);
     const sw = parseFloat(getComputedStyle(svg).strokeWidth) || 1.5;
     let b = null;
     svg.querySelectorAll('path,circle,ellipse,rect,line,polyline,polygon').forEach(el => {
-      if (getComputedStyle(el).opacity === '0' && !el.classList.contains('burbuja') && !el.classList.contains('gota')) return;
-      const r = el.getBBox(); const pad = getComputedStyle(el).stroke === 'none' ? 0 : sw / 2;
+      const cs = getComputedStyle(el);
+      if (cs.opacity === '0' || cs.display === 'none' || cs.visibility === 'hidden') return;
+      const r = el.getBBox(); const pad = cs.stroke === 'none' ? 0 : sw / 2;
       const e = {x1: r.x - pad, y1: r.y - pad, x2: r.x + r.width + pad, y2: r.y + r.height + pad};
       b = b ? {x1: Math.min(b.x1, e.x1), y1: Math.min(b.y1, e.y1), x2: Math.max(b.x2, e.x2), y2: Math.max(b.y2, e.y2)} : e;
     });
@@ -235,7 +241,7 @@
   }
 
   function pintar() {
-    vars.forEach(v => v.boton.setAttribute('aria-pressed', v === actual));
+    vars.forEach(v => { v.boton.setAttribute('aria-pressed', v === actual); v.tarjeta.classList.toggle('activa', v === actual); });
     const px = +$('tam').value, g = $('gro').value, oscuro = $('osc').checked, red = $('red').checked;
     $('tamV').textContent = px; $('groV').textContent = g;
     const esc = $('escena');
@@ -267,11 +273,13 @@
     const b3 = b2.cloneNode(true); b3.classList.add('foco'); fig(b3, 'con foco visible');
     montar(i1, actual.svg, 20, red); montar(b2.firstChild, actual.svg, 20, red); montar(b3.firstChild, actual.svg, 20, red);
     const fondo = oscuro ? '#0b0b0b' : '#ffffff';
-    const cr = contraste(color, fondo);
-    const nivel = cr >= 4.5 ? ['ok', '✅', 'cumple WCAG (≥3:1) y el objetivo de la norma (≥4.5:1)'] : cr >= 3 ? ['aviso', '⚠️', 'cumple WCAG (≥3:1); por debajo del objetivo 4.5:1'] : ['mal', '❌', 'no cumple WCAG 1.4.11 (≥3:1)'];
-    $('contraste').innerHTML = `Contraste del trazo: <b class="${nivel[0]}">${cr.toFixed(2)}:1</b> ${nivel[1]} ${nivel[2]}`;
+    const nivel = cr => cr >= 4.5 ? ['ok', '✅', 'cumple WCAG (≥3:1) y el objetivo de la norma (≥4.5:1)'] : cr >= 3 ? ['aviso', '⚠️', 'cumple WCAG (≥3:1); por debajo del objetivo 4.5:1'] : ['mal', '❌', 'no cumple WCAG 1.4.11 (≥3:1)'];
+    const linea = (txt, cr) => { const n = nivel(cr); return `${txt}: <b class="${n[0]}">${cr.toFixed(2)}:1</b> ${n[1]} ${n[2]}`; };
+    $('contraste').innerHTML = linea('Contraste del trazo', contraste(color, fondo));
+    // El acento cuenta si la variante lo usa: a menudo es la pieza que lleva el significado (burbujas, gotas, flujo).
+    $('contrasteAcento').innerHTML = actual.svg.includes('--uva-accent') ? linea('Contraste del acento', contraste($('acc').value, fondo)) : 'Esta variante no usa acento.';
     requestAnimationFrame(() => {
-      const m = margenMinimo(svg);
+      const m = margenMinimo(actual.svg, g);
       $('margen').innerHTML = m === null ? '' : `Margen mínimo al borde: <b class="${m >= 1 ? 'ok' : 'mal'}">${m.toFixed(2)}</b> ${m >= 1 ? '✅' : '❌'} (≥1; recomendado 2)`;
     });
   }

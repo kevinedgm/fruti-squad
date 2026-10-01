@@ -1,54 +1,51 @@
 # Reglas de Uva (R1–R7) y trampas técnicas
 
-Cada regla salió de un fallo real observado en el banco de prueba, no de una suposición. Formato: **regla → mecanismo → cómo comprobarlo → caso que la originó.**
+Principios de dibujo y evaluación. Cada uno se formula como **regla → mecanismo → cómo comprobarlo**, con ejemplos genéricos. Los casos concretos de los que salieron están en `examples/casos.md` (no se cargan durante un encargo: describen soluciones de otros iconos y sesgarían el diseño).
 
 ## R1 · La proporción distingue antes que el detalle
 
-- **Mecanismo:** a 24px el ojo lee primero la silueta (relación ancho/alto y hacia dónde se estrecha); el detalle interior apenas se percibe.
+- **Regla:** la silueta (relación ancho/alto, hacia dónde se estrecha o se abre, si está abierta o cerrada) es lo primero que se lee; el detalle interior apenas se percibe a 24px.
+- **Mide la referencia, no el estereotipo:** toma la proporción y la dirección del contorno de la **referencia real** (foto o descripción), no de la forma típica del objeto. Si la proporción real coincide con la de otro icono, el desempate lo da R5, no deformar la silueta.
 - **Comprobar:** tapa el detalle interior; ¿la silueta sola ya separa el objeto de su confusión principal?
-- **Caso:** tina v1 (alta, abierta arriba, con aros) se leía como *bote de basura*. Agregar duelas no lo resolvió; hacerla **ancha y baja** sí. Con la foto real se corrigió otra vez: la tina **no se abre hacia arriba** (eso la hacía *cubeta*); sus paredes son casi rectas.
 
 ## R2 · Probar contra las confusiones, no solo contra vecinos al azar
 
-- **Mecanismo:** un icono puede encajar con la familia y aun así significar otra cosa.
-- **Comprobar:** en el banco, coloca 2–3 iconos con los que podría confundirse (declarados en E1) a 24px junto al tuyo.
-- **Caso:** sin el bote de basura al lado, la tina v1 "parecía bien".
+- **Regla:** un icono puede encajar con la familia y aun así significar otra cosa. Declara en E1 entre 2 y 4 confusiones y pruébalas a 24px junto a tu icono.
+- **Busca confusiones de dos tipos:**
+  - **por silueta:** iconos con un contorno parecido (cilindros, botellas, cajas, cuencos…);
+  - **por metáfora:** iconos que usan la misma idea visual (p. ej. "recipiente + algo que sale de él", "objeto + flecha"). Búscalos con `buscar-lucide.mjs` usando los términos de la metáfora, no solo los del objeto.
+- **Comprobar:** en el banco, fila de familia y contexto oscuro: ¿alguna confusión se lee igual que tu icono?
 
 ## R3 · Líneas cruzadas forman trama
 
-- **Mecanismo:** verticales + horizontales que se cruzan se leen como tejido o rejilla.
-- **Comprobar:** si hay cruces, ¿el resultado evoca canasta, rejilla, tabla o calendario?
-- **Caso:** tina B2 (aro + duelas verticales) se leyó como *canasta*; alambique con duelas, como *tambor/maceta*.
+- **Regla:** verticales y horizontales que se cruzan se leen como tejido, rejilla, tabla o calendario; varias paralelas cercanas, como cesta o pila.
+- **Comprobar:** si hay cruces o 3+ paralelas, ¿el resultado evoca canasta, rejilla o pila de discos?
 
 ## R4 · El movimiento necesita espacio reservado
 
-- **Mecanismo:** lo que se anima detrás o encima de un trazo queda tapado y no se percibe.
-- **Comprobar:** en el fotograma intermedio de la animación, ¿la pieza móvil está sobre área libre?
-- **Caso:** las burbujas de la tina v1 nacían dentro de la boca y desaparecían bajo el borde. Se rediseñó dejando el tercio superior libre.
+- **Regla:** lo que se anima detrás o encima de un trazo queda tapado y no se percibe. Reserva la zona libre **antes** de dibujar el resto.
+- **Comprobar:** en el fotograma intermedio (`banco.html#medio`), ¿la pieza móvil está sobre área libre?
 
 ## R5 · Una forma correcta puede coincidir con otro icono: el contexto desempata
 
-- **Mecanismo:** formas geométricas simples (cilindro, botella, caja) ya tienen significado en interfaces.
-- **Comprobar:** busca en el **mismo dominio** del producto qué iconos comparten la silueta.
-- **Casos:**
-  - Tina A3 (cilindro con aro, idéntica a la foto) = icono de *base de datos*. Lo resolvieron las **burbujas** (contexto), no más detalle.
-  - Alambique con olla+columna unidas en contorno suave = *botella* (riesgo alto en un producto de mezcal). Lo resolvió un **hombro en escalón**, fiel a la foto; la botella se estrecha suavemente.
+- **Regla:** formas simples ya tienen significado en interfaces. Si la silueta fiel coincide con otro icono del dominio, no la deformes: añade un **modificador de contexto** (lo que sale del objeto, lo que lo acompaña, un rasgo de construcción propio) que la otra forma no tiene.
+- **Comprobar:** con el modificador, ¿la confusión deja de leerse igual? ¿El modificador refuerza el significado (B2) en vez de añadir ruido?
 
 ## R6 · Igualar peso óptico, no tamaño de caja
 
-- **Mecanismo:** el ojo compara masa visual. Un objeto bajo que deja aire arriba se ve más pequeño que uno que llena la caja.
-- **Comprobar:** pon el icono junto a uno que llene bien la cuadrícula (p. ej. una mano). Si se ve menor, escala el cuerpo hasta igualar, aunque invada ligeramente el margen.
-- **Caso:** la tina (baja, con zona libre para burbujas) se veía más pequeña que la mano en el contexto oscuro estilo Claude.
+- **Regla:** el ojo compara masa visual. Un objeto bajo o que deja aire para el movimiento se ve más pequeño que uno que llena la caja.
+- **Comprobar:** junto a un icono que llene bien la cuadrícula (la mano del banco). Si se ve menor, escala el cuerpo usando la franja entre 1 y 2 unidades del borde: el mínimo de A2 (≥1) **nunca** se cruza; el margen recomendado de 2 sí puede ceder para igualar peso.
 
 ## R7 · Objetos compuestos: menos detalle a tamaño pequeño
 
-- **Mecanismo:** dos objetos lado a lado en 24 unidades tienen la mitad del espacio cada uno; el detalle se vuelve mancha.
-- **Comprobar:** a 22–24px, ¿cada parte se distingue? ¿Hay al menos 2 unidades de separación entre partes?
-- **Acción:** reduce detalle (p. ej. 2 vueltas de serpentín en vez de 3) o, si el icono también se usa grande, entrega `<id>.small.svg` para ≤24px. Solo para iconos que lo necesiten; uno simple (la tina) no.
-- **Caso:** alambique con serpentín de 3 vueltas, denso a 22px; 2 vueltas se leen limpias.
+- **Regla:** dos objetos lado a lado en 24 unidades tienen la mitad del espacio cada uno; el detalle repetido (vueltas, dientes, rayas) se vuelve mancha.
+- **Comprobar:** a 20–24px, ¿cada parte se distingue? ¿Hay separación mínima (A6) entre partes?
+- **Acción:** reduce las repeticiones o, si el icono también se usa grande, entrega `<id>.small.svg` para ≤24px. Solo cuando haga falta.
 
 ## Trampas técnicas
 
-- **`<use>` y selectores con ancestro:** `.uva-icon .acento{…}` no alcanza el contenido clonado por `<use>`; los rellenos del acento desaparecieron. Usa selectores sin ancestro externo y transmite valores con variables CSS (`--uva-accent`, `--uva-stroke`), que sí se heredan.
-- **Rellenos y grosor:** al bajar el trazo de 2 a 1.5/1, los puntos (burbujas, gotas) se vuelven pesados. Escala su radio con el grosor.
-- **Serpentín curvo:** las vueltas curvas se enredaron y chocaron con la olla; el zigzag con uniones redondeadas se lee mejor a 24px.
+- **Selectores con descendencia:** reglas como `.contenedor .pieza{…}` no alcanzan el contenido clonado por `<use>` ni sobreviven a ciertos empaquetados. Cada pieza estilada lleva su propia clase con prefijo (`uva-<id>__pieza`) y cada regla usa **una sola clase**; los valores externos llegan por variables CSS (`--uva-accent`, `--uva-stroke`) y `currentColor`, que sí se heredan.
+- **Especificidad en el bloque reducido:** si una pieza tiene reglas escalonadas con `:nth-of-type(…)`, el bloque `prefers-reduced-motion` debe igualar esa especificidad (`.uva-<id>__p,.uva-<id>__p:nth-of-type(n)`).
+- **Rellenos y grosor:** al bajar el trazo, los puntos rellenos se vuelven pesados; escala su radio con el grosor.
+- **Pares alineados se leen como ojos:** dos círculos a la misma altura dentro o sobre una forma redondeada forman una cara. Desalinéalos en diagonal o cambia sus tamaños.
+- **Curvas repetidas apretadas:** espirales o vueltas curvas a 24px se enredan; un zigzag con uniones redondeadas suele leerse mejor.

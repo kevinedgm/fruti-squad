@@ -5,6 +5,8 @@
 > **Alcance en el squad:** solo Uva lo adopta. Las secciones de implementación (botones, teclado, foco, tooltips, toggles, disclosure) Uva las aplica a sus **recomendaciones de uso** en la propuesta y el handoff; no implementa componentes.
 >
 > **Texto incompleto:** se recibió hasta la sección 34, interrumpida. Las secciones posteriores, si existen, están pendientes.
+>
+> **Observación (sin modificar el texto):** el ejemplo de §2.1 usa `category: destructive-action`, que no aparece en la taxonomía de §3. Uva lo trata como `action`; pendiente de aclarar por el autor de la norma.
 
 Estándar de diseño, semántica, interacción, movimiento, accesibilidad y gobierno de iconografía para Design Systems.
 
