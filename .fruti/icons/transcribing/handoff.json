@@ -6,7 +6,11 @@
     "next_owner": "coco",
     "style_source": "uva_base (sin tokens icon.* ni librería en el perfil)",
     "pair": "end-transcription",
-    "sizes": [16, 20, 24],
+    "sizes": [
+      16,
+      20,
+      24
+    ],
     "small_variant": false,
     "motion": {
       "category": "attention",
@@ -14,13 +18,27 @@
       "duration_ms": 1770,
       "reduced_motion": "none (no añadir la clase; el punto se ve fijo)"
     },
-    "confusions_tested": ["mic", "mic-audio-lines", "message-square-text", "captions"],
+    "confusions_tested": [
+      "mic",
+      "mic-audio-lines",
+      "message-square-text",
+      "captions"
+    ],
     "criteria_failed": [],
-    "deviations": ["onda + punto tratados como un solo efecto encadenado (§30)"],
-    "files": ["transcribing.svg", "registro.yaml", "uso.md", "prueba.html"],
+    "deviations": [
+      "onda + punto tratados como un solo efecto encadenado (§30)"
+    ],
+    "files": [
+      "transcribing.svg",
+      "registro.yaml",
+      "uso.md",
+      "prueba.html"
+    ],
     "unresolved": [
-      "a 16–20 px el punto mide ~2 px: agrandarlo si en la barra real cuesta verlo",
       "sin prueba con médicos (¿notan durante la consulta que sigue grabando?)"
+    ],
+    "changed": [
+      "punto de grabación r 2.1 → 2.6 (≈4 px a 20 px), a petición del usuario"
     ]
   }
 }
