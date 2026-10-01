@@ -1,0 +1,28 @@
+# Entrada propuesta del registro semántico de iconos (norma §5.1). Es una propuesta: el registro del proyecto lo gobierna lima.
+semanticName: blood-pressure-high
+icon: { library: custom, name: uva-blood-pressure-high, file: blood-pressure-high.svg }
+category: status
+meaning: "Presión arterial alta detectada (un solo nivel)"
+accessibility: { defaultLabel: Presión arterial alta, hiddenByDefault: true }
+direction: { rtl: fixed }         # simétrico; la flecha hacia arriba no depende del sentido de lectura
+motion:
+  allowed: attention
+  trigger: "clase uva-blood-pressure-high--latir cuando entra una lectura alta nueva; se quita en animationend"
+  duration: 2400ms                # 3 latidos de 800 ms
+  phases: [primer golpe + onda, relajación, segundo golpe + onda débil, reposo]
+  reducedMotion: "sin movimiento: ni latido ni ondas; el icono quieto ya dice el estado"
+  rest: "mientras la presión siga alta, quieto (estado largo)"
+  overflow: "las ondas salen ~2–3 px fuera de la caja de 24; el contenedor no debe recortar (overflow visible)"
+  deviation: "latido + onda cuentan como un solo efecto encadenado (el golpe causa la onda), no como dos movimientos simultáneos (§30)"
+style: { source: uva_base, stroke: 1.5, cap: round, join: round, accent: "--uva-accent opcional para las ondas" }
+sizes: { tested: [14, 16, 20, 24, 32, 48, 96], recommended: [20, 24, 32, 48] }
+smallVariant: false               # a 14–16 la punta de la flecha se acerca a la hendidura del corazón, pero se lee
+confusionsTested: [heart, heart-plus, gauge, trending-up]
+alternatives: { lucide: heart-pulse } # dice «salud cardíaca / pulso», no «alta»
+reserved: "solo presión arterial alta; la frecuencia cardíaca alta necesita su propio icono (pendiente)"
+status: proposed
+usage:
+  label: required                 # siempre con texto («Presión alta», valor); el icono refuerza, no sustituye
+  iconOnly: "si va solo, role=img y aria-label «Presión arterial alta» en el contenedor o el SVG"
+  color: "lo pone el sistema de alertas vía color del contenedor (currentColor); no depende del color para significar"
+  inlineOnly: "el color y la animación solo funcionan con el SVG inline o vía <use>; como <img src> queda estático y negro"
