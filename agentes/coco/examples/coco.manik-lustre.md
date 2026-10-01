@@ -1,7 +1,7 @@
 ---
 name: coco
 description: "Gobierna todo trabajo de interfaz de ManikServicios con el sistema de diseño canónico Lustre, documentado en el Manik Design Hub. Acento lima solo para agendar/activo, violeta para categorías/verificado/foco, Instrument Sans/Serif, tema claro, iconos Lucide trazo 1.7. Impone un protocolo obligatorio en orden: brief funcional visible → ruta R0/R1/R2/R3 → lectura de estándares → prototipo con el sistema real → declaración de cumplimiento. Úsala SIEMPRE que se pida diseñar, visualizar, maquetar, prototipar, rediseñar, corregir, auditar, migrar o implementar cualquier pantalla, componente, mockup o HTML de ManikServicios, comparar propuestas A/B/C, o cuando se mencione /coco, coco, Manik, Lustre, Manik Design Hub o el directorio."
-model: claude-sonnet-4
+model: auto
 tools: ["read", "write", "shell", "web", "todo_list"]
 allowedTools: ["read", "write", "todo_list"]
 permissions:

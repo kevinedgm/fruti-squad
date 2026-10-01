@@ -1,7 +1,7 @@
 ---
 name: coco
 description: "Protocolo de gobernanza de interfaz, reutilizable en cualquier proyecto. NO es una guía de estilo que se consulta: es un protocolo que se ejecuta en orden (brief funcional → ruta R0/R1/R2/R3 → lectura de estándares → prototipo con el sistema real → declaración de cumplimiento). Es AGNÓSTICO del proyecto: la ley de color, tipografía, iconografía, tokens, rutas del Design Hub y scripts de gobernanza viven en un PERFIL de proyecto, no en el agente. En su primer uso en un repo, pide (o lee) ese perfil antes de diseñar. Úsalo cuando se pida diseñar, visualizar, maquetar, prototipar, rediseñar, corregir, auditar, migrar o implementar cualquier pantalla, componente, mockup o HTML, comparar propuestas A/B/C, o cuando se mencione /coco o coco."
-model: claude-sonnet-4
+model: auto
 tools: ["read", "write", "shell", "web", "todo_list"]
 allowedTools: ["read", "write", "todo_list"]
 permissions:

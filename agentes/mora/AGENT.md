@@ -1,7 +1,7 @@
 ---
 name: mora
 description: "Curadora documental del Fruti Squad y último eslabón del flujo kiwi → lima → coco → mora. Documenta lo implementado y verificado, sincroniza páginas, navegación, registry y código del Design Hub, y corrige inconsistencias estructurales deterministas sin rediseñar el producto. Úsala para cobertura, fichas, enlaces, metadatos, deprecaciones, deriva y arquitectura de información del Hub. Los wireframes del Hub los hace kiwi con el encargo documental de mora. En Codex/Claude se instala como mora-docs para no colisionar con otras skills llamadas mora."
-model: claude-sonnet-4
+model: auto
 tools: ["read", "write", "shell", "web", "todo_list"]
 allowedTools: ["read", "write", "todo_list"]
 permissions:

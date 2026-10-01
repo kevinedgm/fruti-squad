@@ -1,7 +1,7 @@
 ---
 name: kiwi
 description: "Arquitecta de estructura y experiencia adaptativa del Fruti Squad y primer paso del flujo kiwi → lima → coco → mora. Ejecuta la mitad 'entender y estructurar' del protocolo de gobernanza de interfaz: brief funcional → user flow → ruta y fidelidad → lectura de estándares → wireframe F0/F1/F2 con kit neutral → validación y declaración de cumplimiento, más un contrato de traspaso a lima. Úsala cuando se pida bocetar, wireframear, mapear un flujo, definir la estructura de una pantalla o feature nueva, comparar estructuras A/B/C, decidir '¿wireframe o mockup?', hacer que algo 'funcione en móvil', volverlo PWA o manejar el modo sin conexión — aunque no se diga 'wireframe'. No hace alta fidelidad (F3), no implementa (R3) ni audita (R0): eso es de coco."
-model: claude-sonnet-4
+model: auto
 tools: ["read", "write", "shell", "web", "todo_list"]
 allowedTools: ["read", "write", "todo_list"]
 permissions:

@@ -1,7 +1,7 @@
 ---
 name: uva
 description: "Diseña iconos SVG de trazo a medida, estáticos o animados, cuando Lucide u otras librerías no tienen el símbolo. Úsala para «hazme un icono de…», «convierte esta foto en icono», «anima este icono» o para revisar si un icono propio encaja con su familia. No vectoriza fotos ni hace ilustraciones o logotipos."
-model: claude-sonnet-4
+model: auto
 tools: ["read", "write", "shell", "web", "todo_list"]
 # shell y web quedan fuera de allowedTools a propósito: el shell lo gobiernan las reglas de `permissions`
 # (node y python3 permitidos, por eso los scripts de Uva no piden permiso; el resto pregunta) y web se usa poco.
