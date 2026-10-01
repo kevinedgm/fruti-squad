@@ -1,0 +1,27 @@
+# Entrada propuesta del registro semántico de iconos (norma §5.1). Es una propuesta: el registro del proyecto lo gobierna lima.
+semanticName: turtle
+icon: { library: custom, name: uva-turtle, file: turtle.svg }
+category: object
+meaning: "Tortuga (el animal: mascota, fauna)"
+accessibility: { defaultLabel: Tortuga, hiddenByDefault: true }
+direction: { rtl: mirror }        # mira a la derecha, como rabbit; en RTL se recomienda espejarlo (supuesto: no se probó en RTL)
+motion:
+  allowed: feedback
+  trigger: "clase uva-turtle--esconder al pasar el cursor, recibir el foco o pulsar; se quita en animationend"
+  duration: 800ms
+  phases: [sobresalto, esconderse, espera escondida, asomarse, salir del todo]
+  reducedMotion: "sin movimiento (cambio instantáneo); el feedback lo da el estado del botón"
+  fallback: "navegadores sin animación de la propiedad d: el icono entero se encoge y recupera (360 ms)"
+  deviation: "D6 recomendado: 800 ms supera el token motion.slow (240–400 ms); esconderse, esperar y asomarse no caben en menos"
+style: { source: uva_base, stroke: 1.5, cap: round, join: round }
+family: [rabbit]                  # misma silueta continua, grosor y orientación
+opticalWeight: { ink: "20.5%", familyRange: "18.9–26.0%" }
+sizes: { tested: [14, 16, 20, 24, 32, 48, 96], recommended: [20, 24, 32, 48] }
+smallVariant: false               # R7 no aplica: caparazón, banda, cabeza y patas se leen a 14–16 px
+confusionsTested: [snail, bug, dome]
+alternatives: { lucide: turtle }  # existe; no se eligió porque su estilo geométrico (patas rectangulares, trama) no casa con rabbit
+status: proposed
+usage:
+  label: recommended              # junto a la etiqueta «Tortuga» el icono queda oculto
+  iconOnlyButton: "44x44, nombre «Tortuga» en el <button>, no en el SVG"
+  inlineOnly: "el color (currentColor) y la animación solo funcionan con el SVG inline o vía <use>; como <img src> queda estático y negro"

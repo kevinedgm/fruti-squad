@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "icon": {
+    "id": "rabbit",
+    "source": "uva",
+    "next_owner": "coco",
+    "style_source": "uva_base (sin tokens icon.* ni librería en el perfil)",
+    "sizes": [
+      20,
+      24,
+      32,
+      48
+    ],
+    "small_variant": false,
+    "motion": {
+      "category": "feedback",
+      "trigger": "uva-rabbit--saltar (pointerenter, focus, click)",
+      "duration_ms": 650,
+      "reduced_motion": "none",
+      "fallback": "salto simple 400 ms sin soporte de d"
+    },
+    "confusions_tested": [
+      "squirrel",
+      "cat",
+      "rat",
+      "dog"
+    ],
+    "criteria_failed": [],
+    "deviations": [
+      "D6 recomendado: 650 ms > motion.slow"
+    ],
+    "files": [
+      "rabbit.svg",
+      "registro.yaml",
+      "uso.md",
+      "prueba.html"
+    ],
+    "unresolved": [
+      "Safari: soporte de animación de d no verificado (hay fallback)",
+      "RTL: espejado recomendado, no probado",
+      "sin prueba con personas"
+    ]
+  }
+}

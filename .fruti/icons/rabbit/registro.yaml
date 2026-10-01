@@ -1,0 +1,25 @@
+# Entrada propuesta del registro semántico de iconos (norma §5.1). Es una propuesta: el registro del proyecto lo gobierna lima.
+semanticName: rabbit
+icon: { library: custom, name: uva-rabbit, file: rabbit.svg }
+category: object
+meaning: "Conejo (el animal: mascota, fauna)"
+accessibility: { defaultLabel: Conejo, hiddenByDefault: true }
+direction: { rtl: mirror }        # mira a la derecha; en interfaces RTL se recomienda espejarlo (supuesto: no se probó en RTL)
+motion:
+  allowed: feedback
+  trigger: "clase uva-rabbit--saltar al pasar el cursor, recibir el foco o pulsar; se quita en animationend"
+  duration: 650ms
+  phases: [agacharse, impulso, vuelo, apoyo delantero, asentarse]
+  reducedMotion: "sin movimiento (cambio instantáneo); el feedback lo da el estado del botón"
+  fallback: "navegadores sin animación de la propiedad d: salto simple del icono entero (400 ms)"
+  deviation: "D6 recomendado: 650 ms supera el token motion.slow (240–400 ms); un salto natural no cabe en menos"
+style: { source: uva_base, stroke: 1.5, cap: round, join: round }
+sizes: { tested: [14, 16, 20, 24, 32, 48], recommended: [20, 24, 32, 48] }
+smallVariant: false               # R7 no aplica: la silueta continua se lee a 14–16 px
+confusionsTested: [squirrel, cat, rat, dog]
+alternatives: { lucide: rabbit } # existe; no se eligió porque a 24 px sus patas se funden (criterio del usuario)
+status: proposed
+usage:
+  label: recommended              # junto a la etiqueta «Conejo» el icono queda oculto
+  iconOnlyButton: "44x44, nombre «Conejo» en el <button>, no en el SVG"
+  inlineOnly: "el color (currentColor) y la animación solo funcionan con el SVG inline o vía <use>; como <img src> queda estático y negro"

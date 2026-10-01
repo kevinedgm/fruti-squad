@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "icon": {
+    "id": "turtle",
+    "source": "uva",
+    "next_owner": "coco",
+    "style_source": "uva_base (sin tokens icon.* ni librería en el perfil)",
+    "family": ["rabbit"],
+    "sizes": [20, 24, 32, 48],
+    "small_variant": false,
+    "motion": {
+      "category": "feedback",
+      "trigger": "uva-turtle--esconder (pointerenter, focus, click)",
+      "duration_ms": 800,
+      "reduced_motion": "none",
+      "fallback": "encoger 360 ms sin soporte de d"
+    },
+    "confusions_tested": ["snail", "bug", "dome"],
+    "criteria_failed": [],
+    "deviations": ["D6 recomendado: 800 ms > motion.slow"],
+    "files": ["turtle.svg", "registro.yaml", "uso.md", "prueba.html"],
+    "unresolved": [
+      "Safari: soporte de animación de d no verificado (hay fallback)",
+      "RTL: espejado recomendado, no probado",
+      "sin prueba con personas"
+    ]
+  }
+}
