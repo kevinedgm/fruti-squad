@@ -10,7 +10,9 @@
          --window-size=900,1100 --virtual-time-budget=1500 --screenshot=banco.png "file://$PWD/banco.html#final"
      sin modo  → lo que se ve al cargar (puede caer a mitad de la animación)
      #final    → fotograma final de la animación (lo que queda tras ≤5 s)
-     #medio    → animaciones congeladas a mitad del primer ciclo (comprueba R4: la pieza móvil sobre zona libre)
+     #medio    → todas las animaciones congeladas en un mismo instante: la mitad del primer ciclo de la animación
+                 más larga (comprueba R4: la pieza móvil sobre zona libre)
+     #t=1.2    → todas congeladas en el instante indicado, en segundos (para revisar otros momentos)
      #reducido → bloque prefers-reduced-motion activo (comprueba D2)
   Los vecinos (casa, mano, reloj, rama) son redibujos simples estilo Lucide (ISC).
 -->
@@ -132,12 +134,18 @@
   addEventListener('load', () => requestAnimationFrame(() => {
     const anims = document.getAnimations();
     if (modo === 'final') anims.forEach(a => { try { a.finish(); } catch (e) { a.cancel(); } });
-    if (modo === 'medio') anims.forEach(a => {
-      const t = a.effect.getComputedTiming();
-      a.pause(); a.currentTime = (t.delay || 0) + (t.duration || 0) / 2;
-    });
+    // Un instante común para todas: con animaciones encadenadas (subir → asentar) congelar cada una en su
+    // propio punto medio mezclaría momentos distintos.
+    let instante = null;
+    if (modo === 'medio' && anims.length) {
+      const larga = anims.map(a => a.effect.getComputedTiming()).sort((x, y) => (y.duration || 0) - (x.duration || 0))[0];
+      instante = ((larga.delay || 0) + (larga.duration || 0) / 2) / 1000;
+    }
+    const mt = modo.match(/^t=([\d.]+)$/);
+    if (mt) instante = parseFloat(mt[1]);
+    if (instante !== null) anims.forEach(a => { a.pause(); a.currentTime = instante * 1000; });
     document.getElementById('modo').textContent = modo
-      ? `Modo: ${modo} · ${anims.length} animaciones`
+      ? `Modo: ${modo}${instante !== null ? ` (t = ${instante.toFixed(2)} s)` : ''} · ${anims.length} animaciones`
       : `Modo: al cargar · ${anims.length} animaciones (usa #final, #medio o #reducido)`;
   }));
 </script>

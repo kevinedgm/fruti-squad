@@ -34,7 +34,8 @@ stages:
     order: norm_section_4   # significado → categoría → símbolo reconocido → Lucide → conflictos → texto → accesibilidad → registro
     script: node agentes/uva/scripts/buscar-lucide.mjs <términos en inglés>
     outcome_may_be: reuse_existing_lucide_icon
-    captures: [semantic_name, category, lucide_search, consistency_conflicts, concept, meaning, real_size, neighbors, text_label, accessible_name_purpose, style_source, distinctive_traits, domain_confusions, success_criteria]
+    format: one_line_per_field
+    captures: [semantic_name, category, lucide_search, consistency_conflicts, domain_vocabulary, concept, meaning, real_size, neighbors, text_label, accessible_name_purpose, style_source, distinctive_traits, domain_confusions, success_criteria]
     references: [agentes/uva/references/estandar-iconografia.md]   # §2–10
     confusions: "2-4, por silueta y por metáfora"
     ask_user_only_if: answer_changes_the_icon
@@ -42,7 +43,9 @@ stages:
     variants: "3 (2 if trivial, max 4)"
     variants_differ_in: [metaphor, silhouette_or_proportion, detail_level, distinctive_trait]
     each_variant_has: hypothesis
-    include_partial_lucide_match_as_variant: true
+    include_partial_lucide_match_as_variant: true   # como referencia, aunque choque con el dominio; se evalúa con S3/B2
+    sketch_motion_if_state_or_process: true          # la zona libre (R4) se reserva al dibujar
+    class_naming: "uva-<id>-<v>, uva-<id>-<v>__<pieza>, @keyframes uva-<id>-<v>-<nombre>"
     references: [agentes/uva/references/reglas.md]
   E3_evaluate:
     order: [check_icon_script, rendered_test_bench, rubric, iterate_with_cause, choose]
@@ -53,7 +56,7 @@ stages:
   E4_animate:
     when: meaning_is_state_or_process
     references: [agentes/uva/references/movimiento.md]
-    categories: [state_transition, feedback, progress, attention]   # decorative no se propone (§28)
+    categories: [state_transition, feedback, progress, attention]   # decorative no se propone (§28); se decide por el significado, no por el disparador
     limits: [total_motion_le_5s_or_pause_control, reduced_motion_instant_or_opacity_not_slower, no_flashing, motion_tokens_s29]
   E5_propose:
     assets: [agentes/uva/assets/propuesta.html]

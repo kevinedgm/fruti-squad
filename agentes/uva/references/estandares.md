@@ -2,7 +2,7 @@
 
 Rúbrica que aplica la norma de Uva (`estandar-iconografia.md`, citada como §n) a cada prototipo. Si esta rúbrica y la norma discrepan, gana la norma.
 
-Rúbrica que Uva aplica a cada prototipo. Cada criterio indica **fuente**, **qué se mide** y **cómo se comprueba**. Un criterio `bloqueante` que falla descarta la variante o obliga a iterarla; uno `recomendado` se reporta y se justifica si no se cumple.
+Cada criterio indica **fuente**, **qué se mide** y **cómo se comprueba**. Un criterio `bloqueante` que falla descarta la variante o obliga a iterarla; uno `recomendado` se reporta y se justifica si no se cumple.
 
 Fuentes consultadas (2026-10): guía de diseño de iconos de Lucide, iconos de sistema de Material Design, iconografía de IBM Carbon, Apple HIG (iconos y SF Symbols), investigación de usabilidad de iconos de Nielsen Norman Group y WCAG 2.2.
 
@@ -26,11 +26,11 @@ Nota: el ejemplo de la norma §2.1 usa `category: destructive-action`, que no fi
 | A3 | Grosor uniforme en todo el icono (curvas, rectas, interiores y exteriores) | Material, Lucide, Apple | bloqueante | `check-icon` (un solo `stroke-width` raíz, sin sobrescrituras) |
 | A4 | Uniones redondas; extremos abiertos con terminación redonda | Lucide | bloqueante (ADN base) | `check-icon` |
 | A5 | Esquinas de 90°: radio 2 si el elemento mide ≥8, radio 1 si mide <8 | Lucide; Material (radio 2 por defecto) | recomendado | inspección en el banco a 96px |
-| A6 | Separación visible entre elementos distintos y huecos interiores ≥ el grosor de la familia (Lucide: 2 con trazo 2; con trazo 1.5, ≥1.5; ver `decisions` en `uva.yaml`) | Lucide, norma §6 | bloqueante | banco a 20–24px: ¿se tocan o empastan? |
+| A6 | Separación visible (medida entre los **bordes** de los trazos, no entre sus ejes) entre elementos distintos y huecos interiores ≥ el grosor de la familia (Lucide: 2 con trazo 2; con trazo 1.5, ≥1.5; ver `decisions` en `uva.yaml`) | Lucide, norma §6 | bloqueante | banco a 20–24px: ¿se tocan o empastan? |
 | A7 | Formas basadas en las figuras clave (círculo, cuadrado, rectángulos) para proporciones coherentes con la familia | Material (keylines) | recomendado | comparar masa con vecinos (R6) |
 | A8 | Centrado óptico, no geométrico, en iconos asimétricos | Apple HIG | recomendado | banco: ¿se ve descentrado junto a sus vecinos? |
-| A10 | El trazo no aumenta al reducir el tamaño | Norma §10 | bloqueante | `--uva-stroke` único en la familia |
 | A9 | A 16px: trazo y margen se reducen proporcionalmente (Carbon: 1px de trazo y 1px de margen a 16px; 2 y 2 a 32px) | IBM Carbon | recomendado si se usa a 16px | variante `.small` (R7) |
+| A10 | El trazo no aumenta al reducir el tamaño | Norma §10 | bloqueante | `--uva-stroke` único en la familia |
 
 **Nota sobre el grosor:** Lucide usa 2 y el ADN base de Uva usa 1.5, por preferencia de estilo. Si el icono convive con una librería, `--uva-stroke` debe igualar el grosor de esa librería (Lucide acepta `strokeWidth`).
 
@@ -52,18 +52,19 @@ Nota: el ejemplo de la norma §2.1 usa `category: destructive-action`, que no fi
 | C1 | Contraste ≥3:1 contra el fondo cuando el icono transmite información, **para el trazo y para el acento** si el acento lleva significado | WCAG 2.2 · 1.4.11 (AA) | bloqueante | propuesta: contraste del trazo y del acento, en claro y oscuro |
 | C1b | Contraste ≥4.5:1 cuando sea viable | Norma §22 (criterio conservador de Lucide) | recomendado | propuesta: aviso si queda entre 3 y 4.5 |
 | C2 | **Oculto por defecto** (`aria-hidden="true"`). Nombre accesible (`role="img"` + `aria-label` o `<title>`) **solo** si el icono comunica algo esencial por sí solo; nunca las dos cosas a la vez | Lucide (accesibilidad), WCAG 1.1.1 | bloqueante | `check-icon` |
-| C5 | El nombre accesible describe el propósito, no el dibujo, y contiene el texto visible si lo hay | Norma §15, §18; WCAG 2.5.3 | bloqueante | brief y `registro.yaml` (`defaultLabel`) |
-| C4 | En un botón solo con icono, el nombre accesible va **en el botón** (`aria-label` del `<button>`), y el icono queda oculto | Lucide (accesibilidad), WCAG 4.1.2 | bloqueante | E1 define el uso; la propuesta lo indica |
 | C3 | El color no es el único portador del significado (la forma o la etiqueta también lo dicen) | WCAG 1.4.1 | bloqueante | ¿en gris sigue significando lo mismo? |
+| C4 | En un botón solo con icono, el nombre accesible va **en el botón** (`aria-label` del `<button>`), y el icono queda oculto | Lucide (accesibilidad), WCAG 4.1.2 | bloqueante | E1 define el uso; la propuesta lo indica |
+| C5 | El nombre accesible describe el propósito, no el dibujo, y contiene el texto visible si lo hay | Norma §15, §18; WCAG 2.5.3 | bloqueante | brief y `registro.yaml` (`defaultLabel`) |
 
 ## D · Movimiento
 
 | # | Criterio | Fuente | Nivel | Cómo comprobar |
 |---|---|---|---|---|
 | D1 | Movimiento automático **≤5 s** o con mecanismo para pausar/detener (p. ej. termina en un fotograma estático y se repite solo al entrar en el estado o al pasar el puntero o el foco). Si el estado dura más, el icono queda estático mientras dura | WCAG 2.2 · 2.2.2 (A) | bloqueante | `check-icon`: duración × repeticiones ≤ 5 s, o sin `infinite` |
-| D2 | Respeta `prefers-reduced-motion` con cambio instantáneo o de opacidad sutil, nunca la misma animación más lenta; el fotograma estático sigue comunicando | WCAG 2.3.3 (AAA), técnica C39, norma §31 | bloqueante | `check-icon` + captura con `--force-prefers-reduced-motion` |
+| D2 | Respeta `prefers-reduced-motion` con cambio instantáneo o de opacidad sutil, nunca la misma animación más lenta; el fotograma estático sigue comunicando | WCAG 2.3.3 (AAA), técnica C39, norma §31 | bloqueante | `check-icon` + `banco.html#reducido` |
 | D3 | Sin destellos: nada parpadea más de 3 veces por segundo | WCAG 2.3.1 (A) | bloqueante | revisar keyframes de opacidad |
 | D4 | El movimiento pertenece a una categoría: state transition, feedback, progress o attention; nunca decorative | Norma §27–28 | bloqueante | brief / E4 |
+| D5 | Los trazos animados con `stroke-dashoffset` llevan `pathLength` explícito | Política de Uva | bloqueante | `check-icon` (D5) |
 | D6 | Duraciones dentro de los tokens de movimiento (fast 100–160 ms, base 160–240, slow 240–400; loop solo para progreso real) | Norma §29 | recomendado | revisar `animation` |
 | D7 | Con propósito, breve, predecible, sin rebote excesivo, zoom grande, sacudida continua ni varios movimientos simultáneos (dos movimientos **distintos** a la vez; el mismo movimiento en varias partículas, o dos encadenados, cuentan como uno: ver `movimiento.md`) | Norma §30 | bloqueante | revisión en el banco (`#medio`) |
 

@@ -3,7 +3,8 @@
 <title>Uva · propuesta</title>
 <!--
   Propuesta de Uva (fase E5). El usuario compara variantes y prueba la que quiera.
-  1. Rellena el JSON del script con id "meta".
+  1. Rellena el JSON del script con id "meta". Los colores *Oscuro (opcionales) se usan con fondo oscuro:
+     un mismo color rara vez cumple 3:1 sobre blanco y sobre negro a la vez.
   2. Sustituye el comentario UVA:VARIANTES (dentro de main) por una plantilla de variante por opción:
      elemento template con clase "variante" y atributos data-id, data-nombre y data-recomendada (opcional), que contiene:
      - el <svg> (clases uva-icon uva-<id>-<variante>, para que las variantes no compartan estilos),
@@ -60,7 +61,9 @@
   "significado": "qué debe comunicar",
   "etiqueta": "Etiqueta",
   "colorTrazo": "#1a1a1a",
-  "colorAcento": "#b07400"
+  "colorAcento": "#b07400",
+  "colorTrazoOscuro": "#e8e8e8",
+  "colorAcentoOscuro": "#d99a3c"
 }
 </script>
 
@@ -106,8 +109,10 @@
   const $ = id => document.getElementById(id);
   $('titulo').textContent = `Icono: ${meta.concepto}`;
   $('subtitulo').textContent = `Debe comunicar: ${meta.significado}`;
-  $('col').value = meta.colorTrazo || '#1a1a1a';
-  $('acc').value = meta.colorAcento || meta.colorTrazo || '#1a1a1a';
+  const colores = oscuro => oscuro
+    ? [meta.colorTrazoOscuro || meta.colorTrazo || '#e8e8e8', meta.colorAcentoOscuro || meta.colorAcento || meta.colorTrazoOscuro || '#e8e8e8']
+    : [meta.colorTrazo || '#1a1a1a', meta.colorAcento || meta.colorTrazo || '#1a1a1a'];
+  [$('col').value, $('acc').value] = colores(false);
 
   // Monta un SVG en su propio shadow root; con `reducido` convierte el bloque reduced-motion en siempre activo.
   function montar(host, svgText, px, reducido) {
@@ -154,24 +159,37 @@
   const medidor = document.createElement('div');
   medidor.style.cssText = 'position:absolute;left:-9999px;top:0';
   document.body.append(medidor);
-  function margenMinimo(svgText, grosor) {
-    medidor.style.setProperty('--uva-stroke', grosor);
-    const svg = montar(medidor, svgText, 96, true);
+  // Margen al borde en unidades de la cuadrícula: rectángulos en pantalla (incluyen transformaciones
+  // animadas) + medio trazo. Se mide en el fotograma estático y en instantes de toda la animación (≤5 s).
+  function margenEn(svg) {
+    const caja = svg.getBoundingClientRect(); const u = caja.width / 24;
     const sw = parseFloat(getComputedStyle(svg).strokeWidth) || 1.5;
-    let b = null;
+    let m = Infinity;
     svg.querySelectorAll('path,circle,ellipse,rect,line,polyline,polygon').forEach(el => {
       const cs = getComputedStyle(el);
-      if (cs.opacity === '0' || cs.display === 'none' || cs.visibility === 'hidden') return;
-      const r = el.getBBox(); const pad = cs.stroke === 'none' ? 0 : sw / 2;
-      const e = {x1: r.x - pad, y1: r.y - pad, x2: r.x + r.width + pad, y2: r.y + r.height + pad};
-      b = b ? {x1: Math.min(b.x1, e.x1), y1: Math.min(b.y1, e.y1), x2: Math.max(b.x2, e.x2), y2: Math.max(b.y2, e.y2)} : e;
+      if (parseFloat(cs.opacity) < 0.05 || cs.display === 'none' || cs.visibility === 'hidden') return;
+      const r = el.getBoundingClientRect(); const pad = cs.stroke === 'none' ? 0 : sw / 2;
+      m = Math.min(m, (r.left - caja.left) / u - pad, (r.top - caja.top) / u - pad, (caja.right - r.right) / u - pad, (caja.bottom - r.bottom) / u - pad);
     });
-    return b ? Math.min(b.x1, b.y1, 24 - b.x2, 24 - b.y2) : null;
+    return m;
+  }
+  function margenMinimo(svgText, grosor) {
+    medidor.style.setProperty('--uva-stroke', grosor);
+    const estatico = margenEn(montar(medidor, svgText, 96, true));
+    const svg = montar(medidor, svgText, 96, false);
+    const anims = svg.getAnimations ? svg.getAnimations({subtree: true}) : [];
+    let enMovimiento = Infinity;
+    for (let t = 0; t <= 5000 && anims.length; t += 100) {
+      anims.forEach(a => { a.pause(); a.currentTime = t; });
+      enMovimiento = Math.min(enMovimiento, margenEn(svg));
+    }
+    return {estatico, enMovimiento: anims.length ? enMovimiento : null};
   }
 
   function pintar() {
     vars.forEach(v => { v.boton.setAttribute('aria-pressed', v === actual); v.tarjeta.classList.toggle('activa', v === actual); });
     const px = +$('tam').value, g = $('gro').value, oscuro = $('osc').checked, red = $('red').checked;
+    if (oscuro !== pintar.oscuro) { [$('col').value, $('acc').value] = colores(oscuro); pintar.oscuro = oscuro; }
     $('tamV').textContent = px; $('groV').textContent = g;
     const esc = $('escena');
     esc.className = 'escena ' + (oscuro ? 'oscuro' : 'claro');
@@ -209,7 +227,9 @@
     $('contrasteAcento').innerHTML = actual.svg.includes('--uva-accent') ? linea('Contraste del acento', contraste($('acc').value, fondo)) : 'Esta variante no usa acento.';
     requestAnimationFrame(() => {
       const m = margenMinimo(actual.svg, g);
-      $('margen').innerHTML = m === null ? '' : `Margen mínimo al borde: <b class="${m >= 1 ? 'ok' : 'mal'}">${m.toFixed(2)}</b> ${m >= 1 ? '✅' : '❌'} (≥1; recomendado 2)`;
+      const f = v => `<b class="${v >= 1 ? 'ok' : 'mal'}">${v.toFixed(2)}</b> ${v >= 1 ? '✅' : '❌'}`;
+      $('margen').innerHTML = `Margen mínimo al borde (≥1; recomendado 2): estático ${f(m.estatico)}` +
+        (m.enMovimiento !== null ? ` · durante la animación ${f(m.enMovimiento)}` : '');
     });
   }
   ['tam', 'gro', 'col', 'acc', 'osc', 'red'].forEach(id => $(id).addEventListener('input', pintar));
