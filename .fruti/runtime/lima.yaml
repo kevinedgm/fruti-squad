@@ -3,6 +3,7 @@ owns: governance
 interface: natural-language
 read_order:
   - .fruti/state/current.json
+  - .fruti/contracts/rediseno.md   # only if redesign intent or .fruti/redesign/scope.yaml exists; before touching any surface
   - .fruti/handoffs/current.json
   - active_project_profile
   - relevant_registry_entry
@@ -16,7 +17,7 @@ operations:
     implementation_target: inherit_from_active_profile
     target_contract: .fruti/contracts/implementation-target.yaml
   adapt_contract:
-    references: [skills/lima/references/adaptive-design.md]
+    references: [skills/lima/references/adaptive-design.md, .fruti/contracts/adaptativo.md]
   review_passes:
     references: [skills/lima/references/impeccable-bridge.md]
     mode: review_coco_output   # lima runs the passes and records findings; coco applies changes
@@ -33,7 +34,7 @@ operations:
   promote:
     references: [skills/lima/references/promotion.md]
   initialize:
-    references: [skills/lima/references/first-run.md, skills/lima/references/intake.md, skills/lima/references/project-profile.md]
+    references: [skills/lima/references/first-run.md, skills/lima/references/intake.md, skills/lima/references/project-profile.md, .fruti/contracts/adaptativo.md]
     persist: [implementation.framework, implementation.language, implementation.styling]
   foundations_new:
     inputs: [.fruti/foundations/proposal.yaml, active_project_profile]
@@ -53,6 +54,7 @@ operations:
       - change_design_system_from_NEW_to_project_system_name
       - do_not_design_product_components_during_foundations_init
   redesign_governance:
+    contract: .fruti/contracts/rediseno.md
     inputs:
       - .fruti/design/design-direction.yaml
       - .fruti/redesign/scope.yaml
@@ -64,6 +66,7 @@ operations:
       - target contracts and tokens own new visual-system decisions
       - references/inspiration never become component specifications
   test_governance:
+    contract: .fruti/contracts/ronda-prueba.md
     inputs:
       - .fruti/tests/<round>/request.md
       - .fruti/tests/<round>/kiwi-decisions.yaml

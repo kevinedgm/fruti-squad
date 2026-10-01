@@ -47,7 +47,7 @@ Cuando el usuario aprueba una estructura, la ronda pasa a lima, no directo a coc
 | Detecta | Quién | Vuelve a |
 |---|---|---|
 | Defecto de estructura o de flujo | lima, coco o mora | 🥝 kiwi, que abre `rNN+1` |
-| Rechazo de un F2 en el contrato | lima (indica reglas fallidas y qué conservar; no rediseña) | 🥝 kiwi |
+| Rechazo de un F2 en el contrato | lima (indica reglas fallidas, restricciones a conservar y qué reconsiderar; no reescribe geometría, no mueve acciones ni reagrupa regiones) | 🥝 kiwi, que crea la siguiente revisión estructural |
 | Hueco de gobierno, contrato o tokens | kiwi, coco, mora o uva | 🟢 lima |
 | Decisión de estado, versión o taxonomía | mora (u otro) | 🟢 lima |
 | Decisión solo de implementación dentro de un contrato aprobado | cualquiera | 🥥 coco |

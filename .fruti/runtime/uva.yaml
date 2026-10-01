@@ -13,6 +13,7 @@ decisions:
   long_states: "Si el estado dura más que la animación, el icono es estático mientras dura y anima al entrar en el estado (WCAG 2.2.2)."
 read_order:
   - .fruti/state/current.json
+  - .fruti/contracts/rediseno.md   # only if redesign intent or .fruti/redesign/scope.yaml exists; before touching any surface
   - .fruti/tokens.json#icon        # ADN de iconos si Lima lo materializó
   - active_project_profile#icons   # icons.library / icons.dir
   - user_reference_image_or_description

@@ -3,6 +3,7 @@ owns: construction_and_canonical_audit
 interface: natural-language
 read_order:
   - .fruti/state/current.json
+  - .fruti/contracts/rediseno.md   # only if redesign intent or .fruti/redesign/scope.yaml exists; before touching any surface
   - .fruti/handoffs/current.json
   - active_project_profile
   - relevant_registry_entry
@@ -12,6 +13,7 @@ operations:
     implementation_target: resolve_from_handoff_or_profile
     target_contract: .fruti/contracts/implementation-target.yaml
     references: [agentes/coco/references/reglas-construccion.md]
+    adaptive_contract: .fruti/contracts/adaptativo.md   # layout modes vs verification viewports
     deep_docs: only_if_ambiguous
   r3_implement:
     inputs: [approved_contract, implementation_target, real_tokens, public_api]
@@ -20,6 +22,7 @@ operations:
     deep_docs: only_if_ambiguous
   r0_audit:
     manifest: .fruti/audit-manifest.yaml
+    adaptive_contract: .fruti/contracts/adaptativo.md
     deterministic_first: true
     deep_docs: failed_or_ambiguous_rules_only
     output: .fruti/reports/compliance-current.json
@@ -53,6 +56,7 @@ operations:
       - visual_review_must_check_collision_crowding_hierarchy_grouping_alignment_density_action_dominance
       - no_overflow_does_not_imply_valid_composition
       - if_design_system_new_and_foundations_missing_block_final_f3_pass
+    contract: .fruti/contracts/ronda-prueba.md
 
 output:
   handoff: .fruti/handoffs/current.json
@@ -70,6 +74,7 @@ rules:
   - preserve_framework_agnostic_design_contract
   - explicit_target_override_applies_only_when_user_requests_it
   - deterministic_checks_before_model_review
+  - never_use_an_unapproved_foundations_proposal_as_design_system_truth
   - model_review_only_for_visual_judgment_and_exceptions
   - full_agent_manual_only_if_runtime_contract_is_insufficient
   - overall_pass_requires_all_mandatory_quality_dimensions_pass

@@ -35,6 +35,7 @@ mkdirSync(current,{recursive:true});
 const request=[
 '# Fruti Squad Design Test · '+round,'',
 'status: ready','mode: full-squad-test','round: '+round,'',
+'Round rules (pass criteria, isolation, round-scoped outputs): read `.fruti/contracts/ronda-prueba.md` before the first stage.','',
 '## User request',prompt||'(redesign the supplied source artifact)','',
 '## Source artifact',source||'none','',
 '## Required pipeline',
