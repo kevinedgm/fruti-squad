@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-tina-fermentacion" role="img" aria-label="Tina en fermentación">
+  <style>
+    .uva-tina-fermentacion{stroke-width:var(--uva-stroke,1.5)}
+    .uva-tina-fermentacion .acento{fill:var(--uva-accent,currentColor);stroke:none}
+    .uva-tina-fermentacion .burbuja{opacity:0;animation:uva-tina-fermentacion-subir 1.8s cubic-bezier(.2,.6,.3,1) infinite}
+    .uva-tina-fermentacion .burbuja:nth-of-type(2){animation-delay:-.6s}
+    .uva-tina-fermentacion .burbuja:nth-of-type(3){animation-delay:-1.2s}
+    @keyframes uva-tina-fermentacion-subir{0%{transform:translateY(2px);opacity:0}30%{opacity:1}100%{transform:translateY(-3px);opacity:0}}
+    @media (prefers-reduced-motion:reduce){.uva-tina-fermentacion .burbuja{animation:none;opacity:1}}
+  </style>
+  <g class="cuerpo">
+    <ellipse cx="12" cy="8.5" rx="8" ry="2.5"/>
+    <path d="M4 8.5 3.2 16.8q-.25 2.4 2 3.1Q12 21.8 18.8 19.9q2.25-.7 2-3.1L20 8.5"/>
+    <path class="aro" d="M3.47 14q8.53 2.8 17.06 0"/>
+  </g>
+  <g class="burbujas acento">
+    <circle class="burbuja" cx="9.5" cy="4.8" r="1"/>
+    <circle class="burbuja" cx="14" cy="4.3" r=".85"/>
+    <circle class="burbuja" cx="12" cy="5.3" r=".95"/>
+  </g>
+</svg>

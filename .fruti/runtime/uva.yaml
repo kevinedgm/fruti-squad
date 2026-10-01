@@ -1,0 +1,53 @@
+agent: uva
+owns: custom_icons
+interface: natural-language
+position: lateral   # no forma parte de la cadena kiwi → lima → coco → mora; la alimenta con SVG verificados
+read_order:
+  - .fruti/state/current.json
+  - .fruti/tokens.json#icon        # ADN de iconos si Lima lo materializó
+  - active_project_profile#icons   # icons.library / icons.dir
+  - user_reference_image_or_description
+style_source_priority: [tokens_icon, profile_icons_library, uva_base]
+uva_base:
+  grid: 24
+  padding: 2
+  stroke: 1.5
+  cap: round
+  join: round
+  corners: rounded
+  strokes_per_icon: "3-5"
+  color: currentColor
+  accent_var: --uva-accent
+  stroke_var: --uva-stroke
+operations:
+  create_icon:
+    phases: [U0_context, U1_distinctive_traits, U2_geometry, U3_test_bench, U4_iterate, U6_deliver]
+    references: [agentes/uva/references/reglas.md]
+    assets: [agentes/uva/assets/banco-prueba.html]
+  animate_icon:
+    phases: [U5_motion, U3_test_bench]
+    references: [agentes/uva/references/movimiento.md]
+  review_icon:
+    phases: [U3_test_bench]
+    references: [agentes/uva/references/reglas.md]
+  examples:
+    load_only_if: user_asks_for_examples_or_style_is_ambiguous
+    files: [agentes/uva/examples/tina-fermentacion.svg, agentes/uva/examples/alambique.svg]
+output:
+  dir: profile.icons.dir | .fruti/icons/<id>/
+  files: ["<id>.svg", "<id>.small.svg (solo si R7)", banco.html, banco.png]
+  handoff: .fruti/handoffs/current.json#icon
+  include: [id, style_source, sizes, small_variant, motion, confusions_tested, files, unresolved]
+rules:
+  - redraw_with_primitives_never_autotrace
+  - declare_distinctive_traits_and_domain_confusions_before_drawing
+  - verdict_requires_rendered_screenshot_at_22_24px
+  - test_against_domain_confusions_not_only_random_neighbors
+  - match_optical_weight_not_bounding_box
+  - reserve_free_area_before_adding_motion
+  - motion_only_for_state_or_process
+  - reduced_motion_keeps_a_meaningful_static_frame
+  - color_only_via_currentColor_and_css_variables
+  - selectors_must_not_depend_on_external_ancestors_when_reused_via_use
+  - unapproved_uva_base_is_not_a_token_lima_decides_promotion
+  - full_agent_manual_only_if_runtime_contract_is_insufficient

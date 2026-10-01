@@ -127,6 +127,7 @@ A missing configured normative reference (including a project-specific interface
 - `.fruti/runtime/lima.yaml`: route governance operations and registry/lifecycle reads.
 - `.fruti/runtime/coco.yaml`: route F3/R3/R0 and audit-manifest execution.
 - `.fruti/runtime/mora.yaml`: route documentation work from verified deltas.
+- `.fruti/runtime/uva.yaml`: route custom icon creation, icon motion and icon review (optional member).
 
 Read one runtime contract for the active owner. Do not read all four just because a full squad pipeline may eventually run; each stage reads its own contract when control reaches it.
 
@@ -136,6 +137,7 @@ Read one runtime contract for the active owner. Do not read all four just becaus
 - Lima: governance, classification, reuse, registry, contracts, token ownership and lifecycle. Read only the reference for the current governance operation/gate.
 - Coco: F3 construction, implementation and canonical UI audit. Consume approved locks/contracts/tokens. For audits, use `.fruti/audit-manifest.yaml` plus automated evidence first; open prose standards only for failed/ambiguous/non-deterministic checks.
 - Mora: documentation of implemented/verified truth. Work from registry + approved contracts/tokens + Coco compliance report + targeted code/diff; document the delta. Do not reconstruct the whole design history or infer rules from the implementation.
+- Uva (optional, lateral to the chain): custom SVG icons from a reference image or description, matching the project's icon style, with optional CSS motion. Icon style comes from `icon.*` tokens, then the profile's icon library, then Uva's base style; promoting that base to tokens is Lima's decision. Uva hands verified SVGs to Coco; it never autotraces images.
 
 ## Handoff contract
 

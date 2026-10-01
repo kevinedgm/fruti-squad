@@ -23,7 +23,7 @@
 //   --global        install user-wide (~ instead of the project root)
 //   --dest <dir>    target project root (default: current working directory)
 //   --only <names>  comma list (default: kiwi,lima,coco,mora). Extra: impeccable,
-//                   improve-animations, skill-architect
+//                   improve-animations, skill-architect, uva
 //   --force         overwrite existing destinations
 //   --dry-run       print actions, change nothing
 
@@ -42,6 +42,7 @@ const MEMBERS = {
   impeccable:           { from: 'skills/impeccable',         kind: 'skill', blurb: 'playbooks de refinamiento de UI' },
   'improve-animations': { from: 'skills/improve-animations', kind: 'skill', blurb: 'micro-interacciones y animación' },
   'skill-architect':    { from: 'skills/skill-architect',    kind: 'skill', blurb: 'creación de nuevas skills' },
+  uva:                  { from: 'agentes/uva',               kind: 'agent', blurb: 'iconos SVG a medida desde una foto o descripción, con estilo de familia y movimiento CSS opcional' },
   kiwi:                 { from: 'agentes/kiwi',              kind: 'agent', blurb: 'estructura: brief, user flow y wireframes F0–F2 adaptativos con traspaso a lima' },
   coco:                 { from: 'agentes/coco',              kind: 'agent', blurb: 'construye: alta fidelidad con el sistema real, implementación y auditoría' },
   mora:                 { from: 'agentes/mora',              kind: 'agent', blurb: 'documenta lo implementado y sincroniza el Design Hub (último paso del flujo)' },
@@ -105,7 +106,7 @@ ${C.bold}Options${C.reset}
   --global         Install user-wide (home dir instead of project root)
   --dest <dir>     Target project root (default: current directory)
   --only <names>   Comma list (default: kiwi,lima,coco,mora). Extra: impeccable,
-                   improve-animations, skill-architect
+                   improve-animations, skill-architect, uva
   --force          Overwrite existing destinations
   --dry-run        Show actions without changing anything
 

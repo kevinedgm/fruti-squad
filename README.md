@@ -35,6 +35,7 @@ El Squad resuelve internamente quién debe actuar, qué contexto necesita y qué
 | 2 | 🟢 Lima | Gobernanza: clasificación, reutilización, contratos, registry y lifecycle |
 | 3 | 🥥 Coco | Construcción: F3, implementación y auditoría canónica |
 | 4 | 🫐 Mora | Documentación: publica únicamente lo implementado y verificado |
+| — | 🍇 Uva (opcional) | Iconos SVG a medida desde una foto o descripción, con movimiento CSS opcional |
 
 Regla principal:
 
@@ -43,6 +44,8 @@ Kiwi estructura → Lima gobierna → Coco construye/verifica → Mora documenta
 ```
 
 No hay dos auditores ni dos propietarios del lifecycle.
+
+Uva no forma parte de la cadena: es un miembro lateral que entrega iconos verificados a Coco.
 
 ---
 
@@ -89,6 +92,16 @@ Con `--target claude` el instalador deja:
   Para resolver una ruta desde scripts o desde el agente: `fruti path skills/lima/reference/quality-gates.md` imprime la ruta real en el proyecto.
 
 Después basta con pedir en lenguaje natural ("rediseña este formulario") o invocar `kiwi`, `lima`, `coco` o `mora-docs`.
+
+### Uva (opcional)
+
+Uva no se instala por defecto. `--only` reemplaza la lista por defecto, así que nombra a todo el Squad:
+
+```bash
+npx github:kevinedgm/fruti-squad install --target claude --only kiwi,lima,coco,mora,uva
+```
+
+Luego: "hazme un icono de esta tina de fermentación" (con la foto adjunta) o "anima este icono".
 
 ---
 
@@ -315,7 +328,8 @@ La capa runtime se organiza así:
 │   ├── kiwi.yaml
 │   ├── lima.yaml
 │   ├── coco.yaml
-│   └── mora.yaml
+│   ├── mora.yaml
+│   └── uva.yaml
 ├── state/
 │   └── current.json
 ├── handoffs/
@@ -397,6 +411,12 @@ Produce `compliance-current.json`.
 Parte de registry + compliance report + código/API real + diff afectado.
 
 Documenta el delta implementado y verificado. No reconstruye todo el historial de diseño para escribir una ficha.
+
+## 🍇 Uva
+
+Parte de una foto o descripción y del estilo de iconos del proyecto (tokens `icon.*`, la librería del perfil o su estilo base: 24×24, trazo 1.5, terminaciones redondeadas, `currentColor`).
+
+Antes de dibujar, declara los rasgos que distinguen al objeto y los iconos del mismo dominio con los que podría confundirse. Redibuja con primitivas (nunca vectoriza la foto), lo prueba en un banco renderizado junto a vecinos y confusiones, y solo entonces añade movimiento CSS. Reglas y patrones: `agentes/uva/references/`.
 
 ---
 
