@@ -5,8 +5,17 @@
     "source": "uva",
     "next_owner": "coco",
     "style_source": "uva_base (sin tokens icon.* ni librería en el perfil)",
-    "family": ["blood-pressure-high"],
-    "sizes": [16, 20, 24, 32, 48],
+    "family": [
+      "blood-pressure-high",
+      "glucose-high"
+    ],
+    "sizes": [
+      16,
+      20,
+      24,
+      32,
+      48
+    ],
     "small_variant": false,
     "motion": {
       "category": "attention",
@@ -15,10 +24,22 @@
       "reduced_motion": "none (no añadir la clase)",
       "overflow": "ondas ~2 px fuera de la caja por la derecha; el contenedor no debe recortar"
     },
-    "confusions_tested": ["blood-pressure-high", "heart-pulse", "activity", "heart"],
+    "confusions_tested": [
+      "blood-pressure-high",
+      "heart-pulse",
+      "activity",
+      "heart"
+    ],
     "criteria_failed": [],
-    "deviations": ["latido + onda tratados como un solo efecto encadenado (§30)"],
-    "files": ["heart-rate-high.svg", "registro.yaml", "uso.md", "prueba.html"],
+    "deviations": [
+      "latido + onda tratados como un solo efecto encadenado (§30)"
+    ],
+    "files": [
+      "heart-rate-high.svg",
+      "registro.yaml",
+      "uso.md",
+      "prueba.html"
+    ],
     "unresolved": [
       "RTL: espejado recomendado, no probado",
       "Safari: animación de stroke-width con calc(var()) en keyframes no verificada",

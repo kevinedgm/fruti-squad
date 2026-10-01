@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Glucosa alta · prueba</title>
+<style>
+  :root{--fondo:#fafaf9;--panel:#fff;--texto:#1a1a1a;--tenue:#5f5f5f;--linea:#e5e4e2;--alerta:#b42318;--alerta-fondo:#fef3f2;--marca:#7c5cd6}
+  *{box-sizing:border-box} body{margin:0;background:var(--fondo);color:var(--texto);font:15px/1.5 system-ui,sans-serif}
+  main{max-width:760px;margin:0 auto;padding:28px 16px 48px} h1{font-size:22px;margin:0 0 4px} h2{font-size:16px;margin:28px 0 8px}
+  .sub{color:var(--tenue);margin:0 0 20px} .panel{background:var(--panel);border:1px solid var(--linea);border-radius:12px;padding:18px}
+  .lectura{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;background:var(--alerta-fondo);color:var(--alerta);border:1px solid #fecdca;margin-bottom:10px}
+  .lectura strong{font-size:18px} .lectura .unidad{color:var(--texto)} .lectura .estado{margin-left:auto;font-weight:600}
+  .fila{display:flex;flex-wrap:wrap;gap:24px;align-items:center;color:var(--alerta)}
+  .oscuro{background:#0b0b0b;color:#ffb4a9;border-radius:12px;padding:18px;display:flex;gap:24px;align-items:center;flex-wrap:wrap} .oscuro .blanco{color:#fff}
+  .botones{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+  button.accion{font:inherit;min-height:44px;padding:0 16px;border-radius:10px;border:1px solid var(--linea);background:#fff;color:var(--texto);cursor:pointer}
+  button.accion:focus-visible{outline:2px solid var(--marca);outline-offset:2px}
+  label.toggle{display:flex;gap:8px;align-items:center;margin-top:12px;font-size:14px}
+  .sin-mov .uva-glucose-high--caer{--uva-glucose-high-gota:none;--uva-glucose-high-onda:none}
+  .sin-mov .uva-blood-pressure-high--latir{--uva-blood-pressure-high-latido:none;--uva-blood-pressure-high-onda:none;--uva-blood-pressure-high-onda2:none}
+  .sin-mov .uva-heart-rate-high--latir{--uva-heart-rate-high-latido:none;--uva-heart-rate-high-onda:none;--uva-heart-rate-high-onda2:none}
+  ul{margin:8px 0 0;padding-left:20px} li{margin:4px 0}
+</style></head><body>
+<main>
+<h1>Glucosa alta</h1>
+<p class="sub">Al llegar una glucosa alta, la gota se eleva, cae, se aplasta al tocar y suelta una onda; 2 veces (1,8 s) y queda quieta. Junto a ella, las otras alertas de la familia.</p>
+<div class="panel">
+  <div class="lectura" id="glucosa" role="status"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-glucose-high" width="24" height="24" aria-hidden="true">
+  <style>
+    .uva-glucose-high{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    /* Atención: al llegar una glucosa alta nueva, la gota se eleva, cae, se aplasta al tocar y rebota;
+       en el impacto suelta una onda (2 × 900 ms = 1.8 s). Después queda quieta mientras dure.
+       El componente añade uva-glucose-high--caer al entrar en el estado y la quita en animationend. */
+    .uva-glucose-high--caer{--uva-glucose-high-gota:uva-glucose-high-caer;--uva-glucose-high-onda:uva-glucose-high-onda}
+    .uva-glucose-high__cuerpo{transform-box:fill-box;transform-origin:50% 100%;animation:var(--uva-glucose-high-gota,none) 900ms linear 0s 2}
+    .uva-glucose-high__onda{opacity:0;stroke:var(--uva-accent,currentColor);transform-box:fill-box;transform-origin:50% 65%;animation:var(--uva-glucose-high-onda,none) 900ms linear 0s 2}
+    @keyframes uva-glucose-high-caer{0%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:none}18%{animation-timing-function:cubic-bezier(.55,0,.9,.4);transform:translateY(-1.6px)}38%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:translateY(0) scale(1.12,.86)}52%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:translateY(-.4px) scale(.95,1.05)}66%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:scale(1.03,.97)}80%{transform:none}100%{transform:none}}
+    @keyframes uva-glucose-high-onda{0%{opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}38%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}40%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:.85;transform:scale(1.06);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}95%{opacity:0;transform:scale(1.35);stroke-width:calc(var(--uva-stroke,1.5)*0.45)}100%{opacity:0;transform:scale(1.35)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-glucose-high--caer{--uva-glucose-high-gota:none;--uva-glucose-high-onda:none}
+    }
+  </style>
+  <!-- glucose-high · cae, se aplasta y suelta una onda al entrar en el estado (clase uva-glucose-high--caer) -->
+  <path class="uva-glucose-high__onda" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+  <g class="uva-glucose-high__cuerpo">
+    <path class="uva-glucose-high__gota" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+    <path class="uva-glucose-high__flecha" d="M12 18.2V11.2M9.2 14L12 11.2L14.8 14"/>
+  </g>
+</svg><span><strong>245</strong> <span class="unidad">mg/dL</span></span><span class="estado">Glucosa alta</span></div><div class="lectura" id="presion" role="status"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-blood-pressure-high" width="24" height="24" aria-hidden="true">
+  <style>
+    .uva-blood-pressure-high{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    /* Atención: al detectarse la presión alta late 3 veces (lub-dub, 2.4 s) y cada golpe suelta una onda
+       que se expande y se desvanece; después queda quieto mientras dure. El componente añade uva-blood-pressure-high--latir
+       al entrar en el estado. La flecha («alta») no se mueve. */
+    .uva-blood-pressure-high--latir{--uva-blood-pressure-high-latido:uva-blood-pressure-high-latir;--uva-blood-pressure-high-onda:uva-blood-pressure-high-onda;--uva-blood-pressure-high-onda2:uva-blood-pressure-high-onda2}
+    .uva-blood-pressure-high__corazon{transform-box:fill-box;transform-origin:50% 55%;animation:var(--uva-blood-pressure-high-latido,none) 800ms linear 0s 3}
+    .uva-blood-pressure-high__onda{opacity:0;stroke:var(--uva-accent,currentColor);transform-box:fill-box;transform-origin:50% 50%;animation:var(--uva-blood-pressure-high-onda,none) 800ms linear 0s 3}
+    .uva-blood-pressure-high__onda2{opacity:0;stroke:var(--uva-accent,currentColor);transform-box:fill-box;transform-origin:50% 50%;animation:var(--uva-blood-pressure-high-onda2,none) 800ms linear 0s 3}
+    @keyframes uva-blood-pressure-high-latir{0%{animation-timing-function:cubic-bezier(.3,0,.5,1);transform:scale(1)}9%{animation-timing-function:cubic-bezier(.5,0,.7,1);transform:scale(1.1)}18%{animation-timing-function:cubic-bezier(.3,0,.5,1);transform:scale(.98)}26%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:scale(1.05)}40%{transform:scale(1)}100%{transform:scale(1)}}
+    @keyframes uva-blood-pressure-high-onda{0%{opacity:0;transform:scale(1.1);stroke-width:calc(var(--uva-stroke,1.5)*.62)}9%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:.9;transform:scale(1.1);stroke-width:calc(var(--uva-stroke,1.5)*.62)}75%{opacity:0;transform:scale(1.62);stroke-width:calc(var(--uva-stroke,1.5)*.45)}100%{opacity:0;transform:scale(1.62)}}
+    @keyframes uva-blood-pressure-high-onda2{0%{opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*.55)}26%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:.55;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*.55)}88%{opacity:0;transform:scale(1.45);stroke-width:calc(var(--uva-stroke,1.5)*.42)}100%{opacity:0;transform:scale(1.45)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-blood-pressure-high--latir{--uva-blood-pressure-high-latido:none;--uva-blood-pressure-high-onda:none;--uva-blood-pressure-high-onda2:none}
+    }
+  </style>
+  <!-- blood-pressure-high · late y emite ondas al entrar en el estado con la clase uva-blood-pressure-high--latir -->
+  <path class="uva-blood-pressure-high__onda" d="M12 20.01C9.56 17.85 3.07 13.71 3.07 9.29C3.07 6.57 5.14 4.59 7.68 4.59C9.56 4.59 11.06 5.63 12 7.13C12.94 5.63 14.44 4.59 16.32 4.59C18.86 4.59 20.93 6.57 20.93 9.29C20.93 13.71 14.44 17.85 12 20.01Z"/>
+  <path class="uva-blood-pressure-high__onda2" d="M12 20.01C9.56 17.85 3.07 13.71 3.07 9.29C3.07 6.57 5.14 4.59 7.68 4.59C9.56 4.59 11.06 5.63 12 7.13C12.94 5.63 14.44 4.59 16.32 4.59C18.86 4.59 20.93 6.57 20.93 9.29C20.93 13.71 14.44 17.85 12 20.01Z"/>
+  <path class="uva-blood-pressure-high__corazon" d="M12 20.01C9.56 17.85 3.07 13.71 3.07 9.29C3.07 6.57 5.14 4.59 7.68 4.59C9.56 4.59 11.06 5.63 12 7.13C12.94 5.63 14.44 4.59 16.32 4.59C18.86 4.59 20.93 6.57 20.93 9.29C20.93 13.71 14.44 17.85 12 20.01Z"/>
+  <path class="uva-blood-pressure-high__flecha" d="M12 16.4V9.6M9.3 12.3L12 9.6L14.7 12.3"/>
+</svg><span><strong>152/98</strong> <span class="unidad">mmHg</span></span><span class="estado">Presión alta</span></div><div class="lectura" id="pulso" role="status"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-heart-rate-high" width="24" height="24" aria-hidden="true">
+  <style>
+    .uva-heart-rate-high{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    /* Atención: al detectarse frecuencia cardíaca alta late deprisa 4 veces (lub-dub, 1.92 s) y cada golpe
+       suelta una onda; después queda quieto mientras dure. El componente añade uva-heart-rate-high--latir al entrar en el
+       estado. Las líneas de velocidad no se mueven. */
+    .uva-heart-rate-high--latir{--uva-heart-rate-high-latido:uva-heart-rate-high-latir;--uva-heart-rate-high-onda:uva-heart-rate-high-onda;--uva-heart-rate-high-onda2:uva-heart-rate-high-onda2}
+    .uva-heart-rate-high__corazon{transform-box:fill-box;transform-origin:50% 55%;animation:var(--uva-heart-rate-high-latido,none) 480ms linear 0s 4}
+    .uva-heart-rate-high__onda{opacity:0;stroke:var(--uva-accent,currentColor);transform-box:fill-box;transform-origin:50% 50%;animation:var(--uva-heart-rate-high-onda,none) 480ms linear 0s 4}
+    .uva-heart-rate-high__onda2{opacity:0;stroke:var(--uva-accent,currentColor);transform-box:fill-box;transform-origin:50% 50%;animation:var(--uva-heart-rate-high-onda2,none) 480ms linear 0s 4}
+    @keyframes uva-heart-rate-high-latir{0%{animation-timing-function:cubic-bezier(.3,0,.5,1);transform:scale(1)}12%{animation-timing-function:cubic-bezier(.5,0,.7,1);transform:scale(1.1)}24%{animation-timing-function:cubic-bezier(.3,0,.5,1);transform:scale(.98)}34%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:scale(1.05)}50%{transform:scale(1)}100%{transform:scale(1)}}
+    @keyframes uva-heart-rate-high-onda{0%{opacity:0;transform:scale(1.1);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}12%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:.9;transform:scale(1.1);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}85%{opacity:0;transform:scale(1.55);stroke-width:calc(var(--uva-stroke,1.5)*0.45)}100%{opacity:0;transform:scale(1.55)}}
+    @keyframes uva-heart-rate-high-onda2{0%{opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.55)}34%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:.55;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.55)}95%{opacity:0;transform:scale(1.4);stroke-width:calc(var(--uva-stroke,1.5)*0.42)}100%{opacity:0;transform:scale(1.4)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-heart-rate-high--latir{--uva-heart-rate-high-latido:none;--uva-heart-rate-high-onda:none;--uva-heart-rate-high-onda2:none}
+    }
+  </style>
+  <!-- heart-rate-high · late deprisa y emite ondas al entrar en el estado con la clase uva-heart-rate-high--latir -->
+  <path class="uva-heart-rate-high__onda" d="M14.3 18.86C12.22 17.02 6.7 13.5 6.7 9.74C6.7 7.42 8.46 5.74 10.62 5.74C12.22 5.74 13.5 6.62 14.3 7.9C15.1 6.62 16.38 5.74 17.98 5.74C20.14 5.74 21.9 7.42 21.9 9.74C21.9 13.5 16.38 17.02 14.3 18.86Z"/>
+  <path class="uva-heart-rate-high__onda2" d="M14.3 18.86C12.22 17.02 6.7 13.5 6.7 9.74C6.7 7.42 8.46 5.74 10.62 5.74C12.22 5.74 13.5 6.62 14.3 7.9C15.1 6.62 16.38 5.74 17.98 5.74C20.14 5.74 21.9 7.42 21.9 9.74C21.9 13.5 16.38 17.02 14.3 18.86Z"/>
+  <path class="uva-heart-rate-high__corazon" d="M14.3 18.86C12.22 17.02 6.7 13.5 6.7 9.74C6.7 7.42 8.46 5.74 10.62 5.74C12.22 5.74 13.5 6.62 14.3 7.9C15.1 6.62 16.38 5.74 17.98 5.74C20.14 5.74 21.9 7.42 21.9 9.74C21.9 13.5 16.38 17.02 14.3 18.86Z"/>
+  <path class="uva-heart-rate-high__velocidad" d="M1.8 8.4H4.8M2.4 11.8H5.6M3.8 15.2H7"/>
+</svg><span><strong>118</strong> <span class="unidad">lpm</span></span><span class="estado">Pulso alto</span></div>
+  <div class="botones"><button class="accion" type="button" data-sim="uva-glucose-high" data-t="caer">Simular glucosa alta</button><button class="accion" type="button" data-sim="uva-blood-pressure-high" data-t="latir">Simular presión alta</button><button class="accion" type="button" data-sim="uva-heart-rate-high" data-t="latir">Simular pulso alto</button></div>
+  <label class="toggle"><input type="checkbox" id="reducir"> Simular «reducir movimiento»</label>
+</div>
+<h2>Tamaños (16 · 20 · 24 · 32 · 48)</h2>
+<div class="panel"><div class="fila"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-glucose-high" width="16" height="16" aria-hidden="true">
+  <style>
+    .uva-glucose-high{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    /* Atención: al llegar una glucosa alta nueva, la gota se eleva, cae, se aplasta al tocar y rebota;
+       en el impacto suelta una onda (2 × 900 ms = 1.8 s). Después queda quieta mientras dure.
+       El componente añade uva-glucose-high--caer al entrar en el estado y la quita en animationend. */
+    .uva-glucose-high--caer{--uva-glucose-high-gota:uva-glucose-high-caer;--uva-glucose-high-onda:uva-glucose-high-onda}
+    .uva-glucose-high__cuerpo{transform-box:fill-box;transform-origin:50% 100%;animation:var(--uva-glucose-high-gota,none) 900ms linear 0s 2}
+    .uva-glucose-high__onda{opacity:0;stroke:var(--uva-accent,currentColor);transform-box:fill-box;transform-origin:50% 65%;animation:var(--uva-glucose-high-onda,none) 900ms linear 0s 2}
+    @keyframes uva-glucose-high-caer{0%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:none}18%{animation-timing-function:cubic-bezier(.55,0,.9,.4);transform:translateY(-1.6px)}38%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:translateY(0) scale(1.12,.86)}52%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:translateY(-.4px) scale(.95,1.05)}66%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:scale(1.03,.97)}80%{transform:none}100%{transform:none}}
+    @keyframes uva-glucose-high-onda{0%{opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}38%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}40%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:.85;transform:scale(1.06);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}95%{opacity:0;transform:scale(1.35);stroke-width:calc(var(--uva-stroke,1.5)*0.45)}100%{opacity:0;transform:scale(1.35)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-glucose-high--caer{--uva-glucose-high-gota:none;--uva-glucose-high-onda:none}
+    }
+  </style>
+  <!-- glucose-high · cae, se aplasta y suelta una onda al entrar en el estado (clase uva-glucose-high--caer) -->
+  <path class="uva-glucose-high__onda" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+  <g class="uva-glucose-high__cuerpo">
+    <path class="uva-glucose-high__gota" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+    <path class="uva-glucose-high__flecha" d="M12 18.2V11.2M9.2 14L12 11.2L14.8 14"/>
+  </g>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-glucose-high" width="20" height="20" aria-hidden="true">
+  <style>
+    .uva-glucose-high{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    /* Atención: al llegar una glucosa alta nueva, la gota se eleva, cae, se aplasta al tocar y rebota;
+       en el impacto suelta una onda (2 × 900 ms = 1.8 s). Después queda quieta mientras dure.
+       El componente añade uva-glucose-high--caer al entrar en el estado y la quita en animationend. */
+    .uva-glucose-high--caer{--uva-glucose-high-gota:uva-glucose-high-caer;--uva-glucose-high-onda:uva-glucose-high-onda}
+    .uva-glucose-high__cuerpo{transform-box:fill-box;transform-origin:50% 100%;animation:var(--uva-glucose-high-gota,none) 900ms linear 0s 2}
+    .uva-glucose-high__onda{opacity:0;stroke:var(--uva-accent,currentColor);transform-box:fill-box;transform-origin:50% 65%;animation:var(--uva-glucose-high-onda,none) 900ms linear 0s 2}
+    @keyframes uva-glucose-high-caer{0%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:none}18%{animation-timing-function:cubic-bezier(.55,0,.9,.4);transform:translateY(-1.6px)}38%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:translateY(0) scale(1.12,.86)}52%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:translateY(-.4px) scale(.95,1.05)}66%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:scale(1.03,.97)}80%{transform:none}100%{transform:none}}
+    @keyframes uva-glucose-high-onda{0%{opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}38%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}40%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:.85;transform:scale(1.06);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}95%{opacity:0;transform:scale(1.35);stroke-width:calc(var(--uva-stroke,1.5)*0.45)}100%{opacity:0;transform:scale(1.35)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-glucose-high--caer{--uva-glucose-high-gota:none;--uva-glucose-high-onda:none}
+    }
+  </style>
+  <!-- glucose-high · cae, se aplasta y suelta una onda al entrar en el estado (clase uva-glucose-high--caer) -->
+  <path class="uva-glucose-high__onda" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+  <g class="uva-glucose-high__cuerpo">
+    <path class="uva-glucose-high__gota" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+    <path class="uva-glucose-high__flecha" d="M12 18.2V11.2M9.2 14L12 11.2L14.8 14"/>
+  </g>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-glucose-high" width="24" height="24" aria-hidden="true">
+  <style>
+    .uva-glucose-high{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    /* Atención: al llegar una glucosa alta nueva, la gota se eleva, cae, se aplasta al tocar y rebota;
+       en el impacto suelta una onda (2 × 900 ms = 1.8 s). Después queda quieta mientras dure.
+       El componente añade uva-glucose-high--caer al entrar en el estado y la quita en animationend. */
+    .uva-glucose-high--caer{--uva-glucose-high-gota:uva-glucose-high-caer;--uva-glucose-high-onda:uva-glucose-high-onda}
+    .uva-glucose-high__cuerpo{transform-box:fill-box;transform-origin:50% 100%;animation:var(--uva-glucose-high-gota,none) 900ms linear 0s 2}
+    .uva-glucose-high__onda{opacity:0;stroke:var(--uva-accent,currentColor);transform-box:fill-box;transform-origin:50% 65%;animation:var(--uva-glucose-high-onda,none) 900ms linear 0s 2}
+    @keyframes uva-glucose-high-caer{0%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:none}18%{animation-timing-function:cubic-bezier(.55,0,.9,.4);transform:translateY(-1.6px)}38%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:translateY(0) scale(1.12,.86)}52%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:translateY(-.4px) scale(.95,1.05)}66%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:scale(1.03,.97)}80%{transform:none}100%{transform:none}}
+    @keyframes uva-glucose-high-onda{0%{opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}38%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}40%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:.85;transform:scale(1.06);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}95%{opacity:0;transform:scale(1.35);stroke-width:calc(var(--uva-stroke,1.5)*0.45)}100%{opacity:0;transform:scale(1.35)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-glucose-high--caer{--uva-glucose-high-gota:none;--uva-glucose-high-onda:none}
+    }
+  </style>
+  <!-- glucose-high · cae, se aplasta y suelta una onda al entrar en el estado (clase uva-glucose-high--caer) -->
+  <path class="uva-glucose-high__onda" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+  <g class="uva-glucose-high__cuerpo">
+    <path class="uva-glucose-high__gota" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+    <path class="uva-glucose-high__flecha" d="M12 18.2V11.2M9.2 14L12 11.2L14.8 14"/>
+  </g>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-glucose-high" width="32" height="32" aria-hidden="true">
+  <style>
+    .uva-glucose-high{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    /* Atención: al llegar una glucosa alta nueva, la gota se eleva, cae, se aplasta al tocar y rebota;
+       en el impacto suelta una onda (2 × 900 ms = 1.8 s). Después queda quieta mientras dure.
+       El componente añade uva-glucose-high--caer al entrar en el estado y la quita en animationend. */
+    .uva-glucose-high--caer{--uva-glucose-high-gota:uva-glucose-high-caer;--uva-glucose-high-onda:uva-glucose-high-onda}
+    .uva-glucose-high__cuerpo{transform-box:fill-box;transform-origin:50% 100%;animation:var(--uva-glucose-high-gota,none) 900ms linear 0s 2}
+    .uva-glucose-high__onda{opacity:0;stroke:var(--uva-accent,currentColor);transform-box:fill-box;transform-origin:50% 65%;animation:var(--uva-glucose-high-onda,none) 900ms linear 0s 2}
+    @keyframes uva-glucose-high-caer{0%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:none}18%{animation-timing-function:cubic-bezier(.55,0,.9,.4);transform:translateY(-1.6px)}38%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:translateY(0) scale(1.12,.86)}52%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:translateY(-.4px) scale(.95,1.05)}66%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:scale(1.03,.97)}80%{transform:none}100%{transform:none}}
+    @keyframes uva-glucose-high-onda{0%{opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}38%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}40%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:.85;transform:scale(1.06);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}95%{opacity:0;transform:scale(1.35);stroke-width:calc(var(--uva-stroke,1.5)*0.45)}100%{opacity:0;transform:scale(1.35)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-glucose-high--caer{--uva-glucose-high-gota:none;--uva-glucose-high-onda:none}
+    }
+  </style>
+  <!-- glucose-high · cae, se aplasta y suelta una onda al entrar en el estado (clase uva-glucose-high--caer) -->
+  <path class="uva-glucose-high__onda" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+  <g class="uva-glucose-high__cuerpo">
+    <path class="uva-glucose-high__gota" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+    <path class="uva-glucose-high__flecha" d="M12 18.2V11.2M9.2 14L12 11.2L14.8 14"/>
+  </g>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-glucose-high" width="48" height="48" aria-hidden="true">
+  <style>
+    .uva-glucose-high{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    /* Atención: al llegar una glucosa alta nueva, la gota se eleva, cae, se aplasta al tocar y rebota;
+       en el impacto suelta una onda (2 × 900 ms = 1.8 s). Después queda quieta mientras dure.
+       El componente añade uva-glucose-high--caer al entrar en el estado y la quita en animationend. */
+    .uva-glucose-high--caer{--uva-glucose-high-gota:uva-glucose-high-caer;--uva-glucose-high-onda:uva-glucose-high-onda}
+    .uva-glucose-high__cuerpo{transform-box:fill-box;transform-origin:50% 100%;animation:var(--uva-glucose-high-gota,none) 900ms linear 0s 2}
+    .uva-glucose-high__onda{opacity:0;stroke:var(--uva-accent,currentColor);transform-box:fill-box;transform-origin:50% 65%;animation:var(--uva-glucose-high-onda,none) 900ms linear 0s 2}
+    @keyframes uva-glucose-high-caer{0%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:none}18%{animation-timing-function:cubic-bezier(.55,0,.9,.4);transform:translateY(-1.6px)}38%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:translateY(0) scale(1.12,.86)}52%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:translateY(-.4px) scale(.95,1.05)}66%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:scale(1.03,.97)}80%{transform:none}100%{transform:none}}
+    @keyframes uva-glucose-high-onda{0%{opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}38%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}40%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:.85;transform:scale(1.06);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}95%{opacity:0;transform:scale(1.35);stroke-width:calc(var(--uva-stroke,1.5)*0.45)}100%{opacity:0;transform:scale(1.35)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-glucose-high--caer{--uva-glucose-high-gota:none;--uva-glucose-high-onda:none}
+    }
+  </style>
+  <!-- glucose-high · cae, se aplasta y suelta una onda al entrar en el estado (clase uva-glucose-high--caer) -->
+  <path class="uva-glucose-high__onda" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+  <g class="uva-glucose-high__cuerpo">
+    <path class="uva-glucose-high__gota" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+    <path class="uva-glucose-high__flecha" d="M12 18.2V11.2M9.2 14L12 11.2L14.8 14"/>
+  </g>
+</svg></div></div>
+<h2>Contexto oscuro</h2>
+<div class="oscuro"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-glucose-high" width="22" height="22" aria-hidden="true">
+  <style>
+    .uva-glucose-high{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    /* Atención: al llegar una glucosa alta nueva, la gota se eleva, cae, se aplasta al tocar y rebota;
+       en el impacto suelta una onda (2 × 900 ms = 1.8 s). Después queda quieta mientras dure.
+       El componente añade uva-glucose-high--caer al entrar en el estado y la quita en animationend. */
+    .uva-glucose-high--caer{--uva-glucose-high-gota:uva-glucose-high-caer;--uva-glucose-high-onda:uva-glucose-high-onda}
+    .uva-glucose-high__cuerpo{transform-box:fill-box;transform-origin:50% 100%;animation:var(--uva-glucose-high-gota,none) 900ms linear 0s 2}
+    .uva-glucose-high__onda{opacity:0;stroke:var(--uva-accent,currentColor);transform-box:fill-box;transform-origin:50% 65%;animation:var(--uva-glucose-high-onda,none) 900ms linear 0s 2}
+    @keyframes uva-glucose-high-caer{0%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:none}18%{animation-timing-function:cubic-bezier(.55,0,.9,.4);transform:translateY(-1.6px)}38%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:translateY(0) scale(1.12,.86)}52%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:translateY(-.4px) scale(.95,1.05)}66%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:scale(1.03,.97)}80%{transform:none}100%{transform:none}}
+    @keyframes uva-glucose-high-onda{0%{opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}38%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}40%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:.85;transform:scale(1.06);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}95%{opacity:0;transform:scale(1.35);stroke-width:calc(var(--uva-stroke,1.5)*0.45)}100%{opacity:0;transform:scale(1.35)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-glucose-high--caer{--uva-glucose-high-gota:none;--uva-glucose-high-onda:none}
+    }
+  </style>
+  <!-- glucose-high · cae, se aplasta y suelta una onda al entrar en el estado (clase uva-glucose-high--caer) -->
+  <path class="uva-glucose-high__onda" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+  <g class="uva-glucose-high__cuerpo">
+    <path class="uva-glucose-high__gota" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+    <path class="uva-glucose-high__flecha" d="M12 18.2V11.2M9.2 14L12 11.2L14.8 14"/>
+  </g>
+</svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-glucose-high" width="44" height="44" aria-hidden="true">
+  <style>
+    .uva-glucose-high{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    /* Atención: al llegar una glucosa alta nueva, la gota se eleva, cae, se aplasta al tocar y rebota;
+       en el impacto suelta una onda (2 × 900 ms = 1.8 s). Después queda quieta mientras dure.
+       El componente añade uva-glucose-high--caer al entrar en el estado y la quita en animationend. */
+    .uva-glucose-high--caer{--uva-glucose-high-gota:uva-glucose-high-caer;--uva-glucose-high-onda:uva-glucose-high-onda}
+    .uva-glucose-high__cuerpo{transform-box:fill-box;transform-origin:50% 100%;animation:var(--uva-glucose-high-gota,none) 900ms linear 0s 2}
+    .uva-glucose-high__onda{opacity:0;stroke:var(--uva-accent,currentColor);transform-box:fill-box;transform-origin:50% 65%;animation:var(--uva-glucose-high-onda,none) 900ms linear 0s 2}
+    @keyframes uva-glucose-high-caer{0%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:none}18%{animation-timing-function:cubic-bezier(.55,0,.9,.4);transform:translateY(-1.6px)}38%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:translateY(0) scale(1.12,.86)}52%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:translateY(-.4px) scale(.95,1.05)}66%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:scale(1.03,.97)}80%{transform:none}100%{transform:none}}
+    @keyframes uva-glucose-high-onda{0%{opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}38%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}40%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:.85;transform:scale(1.06);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}95%{opacity:0;transform:scale(1.35);stroke-width:calc(var(--uva-stroke,1.5)*0.45)}100%{opacity:0;transform:scale(1.35)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-glucose-high--caer{--uva-glucose-high-gota:none;--uva-glucose-high-onda:none}
+    }
+  </style>
+  <!-- glucose-high · cae, se aplasta y suelta una onda al entrar en el estado (clase uva-glucose-high--caer) -->
+  <path class="uva-glucose-high__onda" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+  <g class="uva-glucose-high__cuerpo">
+    <path class="uva-glucose-high__gota" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+    <path class="uva-glucose-high__flecha" d="M12 18.2V11.2M9.2 14L12 11.2L14.8 14"/>
+  </g>
+</svg><span class="blanco"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-glucose-high" width="22" height="22" aria-hidden="true">
+  <style>
+    .uva-glucose-high{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    /* Atención: al llegar una glucosa alta nueva, la gota se eleva, cae, se aplasta al tocar y rebota;
+       en el impacto suelta una onda (2 × 900 ms = 1.8 s). Después queda quieta mientras dure.
+       El componente añade uva-glucose-high--caer al entrar en el estado y la quita en animationend. */
+    .uva-glucose-high--caer{--uva-glucose-high-gota:uva-glucose-high-caer;--uva-glucose-high-onda:uva-glucose-high-onda}
+    .uva-glucose-high__cuerpo{transform-box:fill-box;transform-origin:50% 100%;animation:var(--uva-glucose-high-gota,none) 900ms linear 0s 2}
+    .uva-glucose-high__onda{opacity:0;stroke:var(--uva-accent,currentColor);transform-box:fill-box;transform-origin:50% 65%;animation:var(--uva-glucose-high-onda,none) 900ms linear 0s 2}
+    @keyframes uva-glucose-high-caer{0%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:none}18%{animation-timing-function:cubic-bezier(.55,0,.9,.4);transform:translateY(-1.6px)}38%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:translateY(0) scale(1.12,.86)}52%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:translateY(-.4px) scale(.95,1.05)}66%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:scale(1.03,.97)}80%{transform:none}100%{transform:none}}
+    @keyframes uva-glucose-high-onda{0%{opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}38%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}40%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:.85;transform:scale(1.06);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}95%{opacity:0;transform:scale(1.35);stroke-width:calc(var(--uva-stroke,1.5)*0.45)}100%{opacity:0;transform:scale(1.35)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-glucose-high--caer{--uva-glucose-high-gota:none;--uva-glucose-high-onda:none}
+    }
+  </style>
+  <!-- glucose-high · cae, se aplasta y suelta una onda al entrar en el estado (clase uva-glucose-high--caer) -->
+  <path class="uva-glucose-high__onda" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+  <g class="uva-glucose-high__cuerpo">
+    <path class="uva-glucose-high__gota" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+    <path class="uva-glucose-high__flecha" d="M12 18.2V11.2M9.2 14L12 11.2L14.8 14"/>
+  </g>
+</svg></span><span class="blanco"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-glucose-high" width="44" height="44" aria-hidden="true">
+  <style>
+    .uva-glucose-high{stroke-width:var(--uva-stroke,1.5);overflow:visible}
+    /* Atención: al llegar una glucosa alta nueva, la gota se eleva, cae, se aplasta al tocar y rebota;
+       en el impacto suelta una onda (2 × 900 ms = 1.8 s). Después queda quieta mientras dure.
+       El componente añade uva-glucose-high--caer al entrar en el estado y la quita en animationend. */
+    .uva-glucose-high--caer{--uva-glucose-high-gota:uva-glucose-high-caer;--uva-glucose-high-onda:uva-glucose-high-onda}
+    .uva-glucose-high__cuerpo{transform-box:fill-box;transform-origin:50% 100%;animation:var(--uva-glucose-high-gota,none) 900ms linear 0s 2}
+    .uva-glucose-high__onda{opacity:0;stroke:var(--uva-accent,currentColor);transform-box:fill-box;transform-origin:50% 65%;animation:var(--uva-glucose-high-onda,none) 900ms linear 0s 2}
+    @keyframes uva-glucose-high-caer{0%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:none}18%{animation-timing-function:cubic-bezier(.55,0,.9,.4);transform:translateY(-1.6px)}38%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:translateY(0) scale(1.12,.86)}52%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:translateY(-.4px) scale(.95,1.05)}66%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:scale(1.03,.97)}80%{transform:none}100%{transform:none}}
+    @keyframes uva-glucose-high-onda{0%{opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}38%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:0;transform:scale(1.05);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}40%{animation-timing-function:cubic-bezier(.1,.75,.3,1);opacity:.85;transform:scale(1.06);stroke-width:calc(var(--uva-stroke,1.5)*0.62)}95%{opacity:0;transform:scale(1.35);stroke-width:calc(var(--uva-stroke,1.5)*0.45)}100%{opacity:0;transform:scale(1.35)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-glucose-high--caer{--uva-glucose-high-gota:none;--uva-glucose-high-onda:none}
+    }
+  </style>
+  <!-- glucose-high · cae, se aplasta y suelta una onda al entrar en el estado (clase uva-glucose-high--caer) -->
+  <path class="uva-glucose-high__onda" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+  <g class="uva-glucose-high__cuerpo">
+    <path class="uva-glucose-high__gota" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
+    <path class="uva-glucose-high__flecha" d="M12 18.2V11.2M9.2 14L12 11.2L14.8 14"/>
+  </g>
+</svg></span></div>
+<h2>Qué mirar</h2>
+<ul>
+  <li>¿Se lee «gota de sangre + alta» y no «agua» ni «subir archivo»?</li>
+  <li>En el panel, sin leer el texto, ¿distingues glucosa, presión y pulso?</li>
+  <li>¿La caída se siente como una gota y no como un rebote de pelota?</li>
+</ul>
+</main>
+<script>
+  const play = (svg, c, t) => { svg.classList.remove(c + '--' + t); void svg.getBBox(); svg.classList.add(c + '--' + t); };
+  for (const [c, t] of [['uva-glucose-high','caer'],['uva-blood-pressure-high','latir'],['uva-heart-rate-high','latir']]) for (const svg of document.querySelectorAll('.' + c)) svg.addEventListener('animationend', () => svg.classList.remove(c + '--' + t));
+  for (const b of document.querySelectorAll('[data-sim]')) b.addEventListener('click', () => document.querySelectorAll('.' + b.dataset.sim).forEach(s => play(s, b.dataset.sim, b.dataset.t)));
+  document.getElementById('reducir').addEventListener('change', e => document.body.classList.toggle('sin-mov', e.target.checked));
+  document.querySelectorAll('.uva-glucose-high').forEach(s => play(s, 'uva-glucose-high', 'caer'));
+</script>
+</body></html>

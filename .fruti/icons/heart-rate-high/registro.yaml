@@ -15,7 +15,7 @@ motion:
   overflow: "las ondas salen ~2 px por la derecha de la caja de 24; el contenedor no debe recortar"
   deviation: "latido + onda cuentan como un solo efecto encadenado (§30); mismo lenguaje que blood-pressure-high"
 style: { source: uva_base, stroke: 1.5, cap: round, join: round, accent: "--uva-accent opcional para las ondas" }
-family: [blood-pressure-high]     # mismo corazón, mismo golpe doble y ondas; se distinguen por silueta y ritmo
+family: [blood-pressure-high, glucose-high]     # mismo corazón, mismo golpe doble y ondas; se distinguen por silueta y ritmo
 sizes: { tested: [14, 16, 20, 24, 32, 48, 96], recommended: [16, 20, 24, 32, 48] }
 smallVariant: false               # las líneas se leen a 14–16 px
 confusionsTested: [blood-pressure-high, heart-pulse, activity, heart]

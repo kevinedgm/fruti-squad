@@ -40,7 +40,8 @@
       "sin prueba con personas"
     ],
     "family": [
-      "heart-rate-high"
+      "heart-rate-high",
+      "glucose-high"
     ]
   }
 }

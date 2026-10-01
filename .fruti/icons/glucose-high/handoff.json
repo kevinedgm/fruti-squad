@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "icon": {
+    "id": "glucose-high",
+    "source": "uva",
+    "next_owner": "coco",
+    "style_source": "uva_base (sin tokens icon.* ni librería en el perfil)",
+    "family": ["blood-pressure-high", "heart-rate-high"],
+    "sizes": [16, 20, 24, 32, 48],
+    "small_variant": false,
+    "motion": {
+      "category": "attention",
+      "trigger": "uva-glucose-high--caer al entrar una lectura alta nueva",
+      "duration_ms": 1800,
+      "reduced_motion": "none (no añadir la clase)",
+      "overflow": "~1–2 px fuera de la caja al subir y con la onda; el contenedor no debe recortar"
+    },
+    "confusions_tested": ["droplet", "blood-pressure-high", "cloud-upload", "box"],
+    "criteria_failed": [],
+    "deviations": ["caída + onda tratadas como un solo efecto encadenado (§30)"],
+    "files": ["glucose-high.svg", "registro.yaml", "uso.md", "prueba.html"],
+    "unresolved": [
+      "Safari: animación de stroke-width con calc(var()) en keyframes no verificada",
+      "sin prueba con personas (¿«gota de sangre» y no «agua» o «subir archivo»?)"
+    ]
+  }
+}

@@ -1,0 +1,29 @@
+# Entrada propuesta del registro semántico de iconos (norma §5.1). Es una propuesta: el registro del proyecto lo gobierna lima.
+semanticName: glucose-high
+icon: { library: custom, name: uva-glucose-high, file: glucose-high.svg }
+category: status
+meaning: "Glucosa alta detectada en el panel del paciente (un solo nivel)"
+accessibility: { defaultLabel: Glucosa alta, hiddenByDefault: true }
+direction: { rtl: fixed }         # simétrica; la flecha hacia arriba no depende del sentido de lectura
+motion:
+  allowed: attention
+  trigger: "clase uva-glucose-high--caer cuando entra una lectura alta nueva; se quita en animationend"
+  duration: 1800ms                # 2 caídas de 900 ms
+  phases: [se eleva, cae, se aplasta al tocar + onda, rebota, se asienta]
+  reducedMotion: "sin movimiento: ni caída ni onda; el icono quieto ya dice el estado"
+  rest: "mientras la glucosa siga alta, quieta (estado largo)"
+  overflow: "al subir y con la onda sobresale ~1–2 px de la caja de 24; el contenedor no debe recortar"
+  deviation: "caída + onda cuentan como un solo efecto encadenado (el impacto causa la onda, §30)"
+style: { source: uva_base, stroke: 1.5, cap: round, join: round, accent: "--uva-accent opcional para la onda" }
+family: [blood-pressure-high, heart-rate-high]   # objeto del dato + señal de «alto»; ondas al llegar la lectura
+opticalWeight: { ink: "17.5%", blood-pressure-high: "17.8%" }
+sizes: { tested: [14, 16, 20, 24, 32, 48, 96], recommended: [16, 20, 24, 32, 48] }
+smallVariant: false
+confusionsTested: [droplet, blood-pressure-high, cloud-upload, box]
+alternatives: { lucide: droplet } # dice «agua/líquido», no «glucosa alta»
+status: proposed
+usage:
+  label: required                 # siempre con texto («245 mg/dL · Glucosa alta»)
+  iconOnly: "si va solo, role=img y aria-label «Glucosa alta»"
+  color: "lo pone el sistema de alertas vía color del contenedor (currentColor); no depende del rojo"
+  inlineOnly: "el color y la animación solo funcionan con el SVG inline o vía <use>"
