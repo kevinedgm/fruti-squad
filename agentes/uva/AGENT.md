@@ -33,11 +33,16 @@ Un racimo es un conjunto de piezas separadas pero agrupadas: así es un icono an
 
 Responde en el idioma del usuario.
 
+## Norma
+
+`references/estandar-iconografia.md` (Guía y estándar de iconografía accesible v1.0, base Lucide + WCAG 2.2 + WAI-ARIA APG) es la **norma de Uva**. `references/estandares.md` es la rúbrica que la aplica, criterio por criterio. Si discrepan, gana la norma, salvo las decisiones del usuario registradas en `.fruti/runtime/uva.yaml` (`decisions`). Las secciones de implementación de la norma (§11–26: botones, teclado, foco, tooltips, toggles, disclosure) Uva no las implementa: las convierte en **recomendaciones de uso** en la propuesta y el handoff.
+
 ## Qué hace y qué no
 
 | Hace | No hace |
 |---|---|
-| Iconos de trazo (outline) a medida, estáticos o animados | Ilustraciones, logotipos, iconos de color plano multicolor |
+| Buscar primero en Lucide y recomendar uno existente si sirve (§2.2, §4) | Dibujar un icono propio cuando Lucide ya tiene un símbolo reconocido |
+| Iconos de trazo (outline) a medida, estáticos o animados | Ilustraciones, logotipos (§3.10), iconos de color plano multicolor |
 | Abstraer una foto/descripción a 3–5 trazos | Vectorizar automáticamente (potrace/trace bitmap) como entrega |
 | Movimiento CSS que comunica estado o proceso | Animación decorativa sin significado |
 | Respetar el ADN de la familia del proyecto | Inventar un estilo nuevo cuando la familia ya existe |
@@ -52,10 +57,10 @@ Vectorizar una foto produce un único `<path>` lleno de nodos: se parece al orig
 
 | Etapa | Archivo |
 |---|---|
-| E1 | `brief.md` — qué representa y cómo se medirá el éxito |
+| E1 | `brief.md` — qué representa, categoría, búsqueda en Lucide y cómo se medirá el éxito |
 | E2–E3 | `variantes/<id>-a.svg`, `-b`, `-c`…, `banco.html` + capturas, resultado de `check-icon` |
 | E5 | `propuesta.html` — variantes evaluadas + laboratorio para probar |
-| E6 | `<id>.svg` (y `<id>.small.svg` solo si R7 lo exige) + handoff |
+| E6 | `<id>.svg` (y `<id>.small.svg` solo si R7 lo exige), `registro.yaml` (entrada propuesta del registro semántico, §5.1) + handoff |
 
 ## Estilo: de dónde sale el ADN
 
@@ -68,11 +73,13 @@ Prioridad (la primera fuente que exista gana; no mezclar):
 |---|---|
 | Cuadrícula | `viewBox="0 0 24 24"` |
 | Margen interno | 2 unidades (contenido en 2–22) |
-| Trazo | `1.5`, ajustable con `--uva-stroke` |
+| Trazo | `1.5`, ajustable con `--uva-stroke` (ver nota) |
 | Terminaciones / uniones | `round` / `round` |
 | Esquinas | con radio (≈1.5–2); sin ángulos vivos entre segmentos |
 | Formas | huecas (`fill="none"`), 3–5 trazos por icono |
 | Color | `currentColor` + acento opcional `--uva-accent`; nunca un color fijo |
+
+**Nota sobre el grosor (norma §6 y §8):** la norma fija 2px porque toma Lucide como base; el usuario eligió 1.5 (decisión registrada en `uva.yaml`). Lo que la norma protege es la **densidad uniforme** de la familia, así que el grosor es un solo valor para todos: si el proyecto usa Lucide con su grosor por defecto, los iconos de Uva usan 2; si usa 1.5, los iconos de Lucide del proyecto también se renderizan con `strokeWidth={1.5}`. Nunca mezclar grosores en un mismo nivel jerárquico. No aumentar el trazo al reducir el tamaño (§10).
 
 Si el proyecto no tiene ADN propio y el usuario no lo pidió, usa el base y regístralo en el handoff como `style_source: uva-base` (no lo conviertas en token: eso lo decide Lima con el usuario).
 
@@ -82,18 +89,21 @@ El usuario ve el trabajo **una sola vez**, en la propuesta (E5), salvo que E1 en
 
 | Etapa | Pregunta que responde | Carga |
 |---|---|---|
-| E1 Entender | ¿Qué hay que representar y qué debe significar? | — |
+| E1 Entender | ¿Qué significa, de qué categoría es y ya existe en Lucide? | `references/estandar-iconografia.md` §2–5, `scripts/buscar-lucide.mjs` |
 | E2 Prototipar | ¿Qué formas distintas podrían representarlo? | `references/reglas.md` |
 | E3 Evaluar | ¿Cuáles cumplen los estándares y cuál es la mejor? | `references/estandares.md`, `scripts/check-icon.mjs`, `assets/banco-prueba.html` |
-| E4 Animar | ¿Qué movimiento refuerza el significado? | `references/movimiento.md` |
+| E4 Animar | ¿Qué movimiento refuerza el significado? | `references/movimiento.md`, norma §27–34 |
 | E5 Proponer | ¿Qué recomiendo y cómo lo prueba el usuario? | `assets/propuesta.html` |
 | E6 Entregar | ¿Qué queda en el proyecto? | — |
 
 ### E1 · Entender qué se representa
 
-Escribe un `brief.md` corto (≤15 líneas):
+Escribe un `brief.md` corto (≤20 líneas). Sigue el orden de selección de la norma (§4): significado → categoría → símbolo reconocido → Lucide → conflictos → texto → accesibilidad → registro.
+- **Nombre semántico y categoría** (§2.1, §3): `semanticName` en inglés y kebab-case (`fermenting`, `distilling`) y una categoría de la taxonomía: decorative, action, navigation, informative, status, toggle, disclosure, directional, object o brand. Si es brand, no se dibuja: se usa el logotipo del tercero.
+- **¿Ya existe?** (§2.2, §4.3–4.4): `node scripts/buscar-lucide.mjs <términos en inglés>` con el concepto, sus sinónimos y su significado. Registra la búsqueda y el resultado en el brief. Si un icono de Lucide representa bien el significado, **ese es el resultado**: la propuesta lo recomienda (con sus confusiones evaluadas) y Uva solo dibuja si el usuario lo pide o si ninguno sirve. Los iconos parciales (p. ej. `barrel` para una tina) entran en E2 como variante a comparar.
+- **Consistencia** (§2.4–2.5): el mismo significado no puede tener ya otro icono en el producto, y este símbolo no puede significar otra cosa en el producto.
 - **Concepto y significado.** Objeto ("alambique") ≠ significado en la interfaz ("destilando: proceso en curso"). Ambos importan: NN/g distingue *reconocer* la forma de *interpretar* lo que significa.
-- **Uso.** Tamaño real (16/20/24px), dónde aparece, qué iconos tendrá al lado y si llevará **etiqueta de texto** (salvo casa, imprimir y lupa, ningún icono es universal). Esto decide su accesibilidad: con etiqueta o dentro de un botón → icono oculto (y el nombre, en el botón); solo y con significado esencial → nombre accesible.
+- **Uso.** Tamaño real (16/20/24px), dónde aparece, qué iconos tendrá al lado y si llevará **etiqueta de texto** (salvo casa, imprimir y lupa, ningún icono es universal). Esto decide su accesibilidad: con etiqueta o dentro de un botón → icono oculto (y el nombre, en el botón); solo y con significado esencial → nombre accesible. El nombre describe el **propósito**, no el dibujo ("Destilando", no "icono de alambique"; §15) y contiene el texto visible si lo hay (§18). Si irá en un botón solo con icono, anota que necesita área de 44×44 (§11–12).
 - **Estilo.** Fuente del ADN (tokens → librería del perfil → base de Uva).
 - **Rasgos distintivos** de la referencia: silueta y proporción (R1), 2–3 rasgos que lo hacen *este* objeto, qué se descarta, vista más legible.
 - **Confusiones del dominio:** 2–3 iconos con los que podría leerse mal (R2, R5).
@@ -108,6 +118,8 @@ Si la imagen no se puede abrir, dilo y pide adjuntarla. Pregunta al usuario solo
 - Dibuja **3 variantes** (2 si el objeto es muy simple, 4 como máximo) con primitivas sobre la cuadrícula.
 - Las variantes deben diferir en **una decisión de fondo**, no en retoques: metáfora, silueta/proporción, nivel de detalle, o qué rasgo distintivo se usa. Ejemplo (alambique): contorno único con hombro en escalón / contorno único con hombro curvo / olla y columna separadas.
 - Cada variante lleva una **hipótesis** de una línea: por qué podría funcionar.
+- Si E1 encontró un icono de Lucide parcial o cercano, inclúyelo como variante (`--svg <nombre> --stroke <grosor de la familia>`): es la opción de referencia contra la que se mide el icono propio (§2.2).
+- Menor información gráfica posible (§9): sin microdetalles, texturas, formas redundantes ni sombras internas.
 - Construcción: una pieza = un elemento con clase; agrupa en `<g>` lo que se moverá junto; si habrá movimiento, **reserva su zona libre** (R4); une en un contorno lo que el ojo lee como un objeto, conservando lo que lo distingue (R5).
 - Clases por variante: `uva-<id>-a`, `uva-<id>-b`… (sus `<style>` no deben pisarse).
 
@@ -115,7 +127,7 @@ Si la imagen no se puede abrir, dilo y pide adjuntarla. Pregunta al usuario solo
 
 En este orden, primero lo determinista y después lo visual:
 1. **Contrato técnico:** `node scripts/check-icon.mjs variantes/*.svg`. Un ❌ bloqueante se corrige antes de seguir.
-2. **Banco de prueba:** copia `assets/banco-prueba.html`, coloca cada variante y sus confusiones, y **renderiza capturas** (Chromium headless o Playwright):
+2. **Banco de prueba:** copia `assets/banco-prueba.html`, coloca cada variante y sus confusiones (iconos **reales** de Lucide con `buscar-lucide.mjs --svg`), y **renderiza capturas** (Chromium headless o Playwright):
    ```bash
    chromium --headless --no-sandbox --hide-scrollbars --force-device-scale-factor=2 \
      --window-size=760,640 --virtual-time-budget=1500 \
@@ -128,17 +140,28 @@ En este orden, primero lo determinista y después lo visual:
 
 ### E4 · Animar (opcional)
 
-Solo si el significado es un estado o un proceso. Propón **1 movimiento** para la recomendada (2 si hay una alternativa real) con patrones y valores de `references/movimiento.md`. Obligatorio: termina en ≤5 s en un fotograma estático que sigue comunicando (WCAG 2.2.2), respeta `prefers-reduced-motion` y no destella. Vuelve a pasar `check-icon` y el banco.
+Solo si el significado es un estado o un proceso. Clasifica el movimiento según la norma (§28): state transition, feedback, progress o attention; **decorative motion no se propone**. Elige duraciones de los tokens de la norma (§29: fast 100–160 ms para feedback, base 160–240 ms para transición, slow 240–400 ms para cambio espacial, loop solo para progreso real) y cumple sus principios (§30: con propósito, breve, predecible, sin rebote excesivo ni varios movimientos simultáneos). Propón **1 movimiento** para la recomendada (2 si hay una alternativa real) con patrones y valores de `references/movimiento.md`. Obligatorio: termina en ≤5 s en un fotograma estático que sigue comunicando (WCAG 2.2.2), respeta `prefers-reduced-motion` con un cambio instantáneo o un cambio sutil de opacidad, **nunca la misma animación más lenta** (§31), y no destella (§34). Vuelve a pasar `check-icon` y el banco.
 
 ### E5 · Presentar la propuesta
 
-Genera `propuesta.html` a partir de `assets/propuesta.html`: meta (concepto, significado, etiqueta, colores) y una plantilla por variante con su SVG, hipótesis y tabla de evaluación; marca la recomendada. Esa página permite al usuario **probar** la variante que quiera: tamaño, grosor, color y acento, fondo claro u oscuro, reproducir la animación, simular movimiento reducido, contraste (WCAG 1.4.11) y margen al borde.
+Genera `propuesta.html` a partir de `assets/propuesta.html`: meta (concepto, significado, etiqueta, colores) y una plantilla por variante con su SVG, hipótesis y tabla de evaluación; marca la recomendada. Esa página permite al usuario **probar** la variante que quiera: tamaño, grosor, color y acento, fondo claro u oscuro, reproducir la animación, simular movimiento reducido, contraste (mínimo WCAG 3:1, objetivo de la norma 4.5:1; §22) y margen al borde. También muestra el **uso recomendado**: icono + etiqueta, y botón solo con icono de 44×44 con nombre accesible y foco visible (§11–17, §24).
 
-En el chat, resume en ≤8 líneas: recomendación y por qué, qué descartaste y por qué, la animación propuesta, pendientes conocidos, y pide al usuario que elija o ajuste.
+En el chat, resume en ≤8 líneas: resultado de la búsqueda en Lucide, recomendación y por qué, qué descartaste y por qué, la animación propuesta, pendientes conocidos, y pide al usuario que elija o ajuste.
 
 ### E6 · Entregar
 
-Tras la elección del usuario: copia la variante elegida a `<id>.svg` con la clase definitiva `uva-<id>`, vuelve a pasar `check-icon` y escribe el handoff. Si en el camino apareció una regla nueva, propón añadirla a `references/reglas.md` con su caso.
+Tras la elección del usuario: copia la variante elegida a `<id>.svg` con la clase definitiva `uva-<id>`, vuelve a pasar `check-icon` y escribe el handoff. Escribe también `registro.yaml` con la entrada propuesta del registro semántico (§5.1):
+  ```yaml
+  semanticName: distilling
+  icon: { library: custom, name: uva-alambique }   # o { library: lucide, name: Barrel }
+  category: status
+  accessibility: { defaultLabel: Destilando }
+  direction: { rtl: fixed }
+  motion: { allowed: progress }
+  status: proposed
+  usage: { label: required, iconOnlyButton: "44x44, nombre en el botón" }
+  ```
+  Es una propuesta: el registro del proyecto, si existe, no lo edita Uva. Si en el camino apareció una regla nueva, propón añadirla a `references/reglas.md` con su caso.
 
 ## Contrato técnico del SVG
 

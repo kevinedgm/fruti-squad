@@ -7,7 +7,8 @@
   3. Renderiza una captura y mírala:
      chromium --headless --no-sandbox --hide-scrollbars --force-device-scale-factor=2 \
        --window-size=760,640 --virtual-time-budget=1500 --screenshot=banco.png file://$PWD/banco.html
-  Los vecinos son redibujos simples estilo Lucide (ISC); sustitúyelos por iconos reales del proyecto si existen.
+  Los vecinos son redibujos simples estilo Lucide (ISC). Prefiere iconos reales: node scripts/buscar-lucide.mjs --svg <nombre> --stroke <grosor>
+  imprime el SVG de Lucide listo para pegarlo como confusión o vecino.
 -->
 <style>
   :root{--fondo:#ffffff;--texto:#1a1a1a;--tenue:#777;--oscuro:#0b0b0b;--lila:#a99cf0;--ambar:#d99a3c;--verde:#5fb98a}
@@ -29,7 +30,7 @@
   <!-- PEGA AQUÍ 2–3 SVG con data-nombre="…" -->
 </template>
 
-<h2>Tamaños (fondo claro)</h2>
+<h2>Tamaños de la norma (§10: xs 14 · sm 16 · md 20 · base 24 · lg 32 · xl 48) y 96 de inspección</h2>
 <div class="fila" id="tamanos"></div>
 
 <h2>Familia a 24px: vecinos · icono · confusiones</h2>
@@ -74,7 +75,7 @@
   if (!icono) {
     document.body.insertAdjacentHTML('afterbegin', '<p style="color:#b4541a">Falta el SVG en &lt;template id="icono"&gt;.</p>');
   } else {
-    for (const px of [16, 22, 24, 48, 96]) document.getElementById('tamanos').append(celda(tam(icono, px), px + 'px'));
+    for (const px of [14, 16, 20, 24, 32, 48, 96]) document.getElementById('tamanos').append(celda(tam(icono, px), px + 'px'));
 
     const fam = document.getElementById('familia');
     fam.append(vecino('casa', 24), vecino('mano', 24), tam(icono, 24), vecino('reloj', 24));

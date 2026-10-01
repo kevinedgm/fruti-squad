@@ -39,7 +39,14 @@
   .controles input[type=range]{width:130px}
   button.accion{font:inherit;border:1px solid var(--linea);background:#fff;border-radius:8px;padding:6px 10px;cursor:pointer}
   .medida{font-size:12px;color:var(--tenue)}
-  .ok{color:#1d7a4f}.mal{color:#b3261e}
+  .ok{color:#1d7a4f}.mal{color:#b3261e}.aviso{color:#9a5b00}
+  .uso{display:flex;gap:18px;align-items:center;flex-wrap:wrap;font-size:12px}
+  .uso figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .uso figcaption{opacity:.7}
+  .btn-icono{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;padding:0}
+  .btn-icono.foco,.btn-icono:focus-visible{outline:2px solid #7c5cd6;outline-offset:2px}
+  .btn-etiqueta{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:10px;border:1px solid currentColor;background:transparent;color:inherit;font:inherit;cursor:pointer}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
   .vecino{fill:none;stroke:currentColor;stroke-width:var(--uva-stroke,1.5);stroke-linecap:round;stroke-linejoin:round;display:block}
 </style></head><body>
 <main>
@@ -66,6 +73,7 @@
   <div class="escena claro" id="escena">
     <div id="grande"></div>
     <div class="contexto" id="contexto"></div>
+    <div class="uso" id="uso"></div>
   </div>
   <div class="controles">
     <label>Tamaño <span><input type="range" id="tam" min="16" max="128" value="96"> <span id="tamV">96</span>px</span></label>
@@ -109,6 +117,10 @@
   const MANO = '<path d="M18 11V6a2 2 0 0 0-4 0"/><path d="M14 10V4a2 2 0 0 0-4 0v2"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-6-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>';
   const RELOJ = '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>';
 
+  if (!vars.length) {
+    document.querySelector('main').insertAdjacentHTML('afterbegin', '<p class="mal">Faltan variantes: añade al menos un &lt;template class="variante"&gt;.</p>');
+    throw new Error('propuesta sin variantes');
+  }
   let actual = vars.find(v => v.recomendada) || vars[0];
 
   vars.forEach(v => {
@@ -161,9 +173,23 @@
     ctx.insertAdjacentHTML('beforeend', vecino(RELOJ, 24));
     ctx.append(chip);
     montar(solo, actual.svg, 24, red); montar(ic, actual.svg, 20, red);
+    // Uso recomendado (norma §11–17, §24): el SVG va dentro de <button>, oculto; el nombre es del botón.
+    const uso = $('uso'); uso.innerHTML = '';
+    uso.style.color = oscuro ? '#e8e8e8' : '#1a1a1a';
+    const etiqueta = meta.etiqueta || meta.significado;
+    const fig = (btn, cap) => { const f = document.createElement('figure'); const c = document.createElement('figcaption'); c.textContent = cap; f.append(btn, c); uso.append(f); };
+    const b1 = document.createElement('button'); b1.type = 'button'; b1.className = 'btn-etiqueta';
+    const i1 = document.createElement('span'); b1.append(i1, etiqueta); i1.style.color = color;
+    fig(b1, 'icono + etiqueta (icono oculto)');
+    const b2 = document.createElement('button'); b2.type = 'button'; b2.className = 'btn-icono';
+    const i2 = document.createElement('span'); i2.style.color = color; const sr = document.createElement('span'); sr.className = 'sr-only'; sr.textContent = etiqueta;
+    b2.append(i2, sr); fig(b2, 'solo icono · 44×44 · nombre en el botón');
+    const b3 = b2.cloneNode(true); b3.classList.add('foco'); fig(b3, 'con foco visible');
+    montar(i1, actual.svg, 20, red); montar(b2.firstChild, actual.svg, 20, red); montar(b3.firstChild, actual.svg, 20, red);
     const fondo = oscuro ? '#0b0b0b' : '#ffffff';
     const cr = contraste(color, fondo);
-    $('contraste').innerHTML = `Contraste del trazo: <b class="${cr >= 3 ? 'ok' : 'mal'}">${cr.toFixed(2)}:1</b> ${cr >= 3 ? '✅' : '❌'} (WCAG 1.4.11 pide ≥3:1)`;
+    const nivel = cr >= 4.5 ? ['ok', '✅', 'cumple WCAG (≥3:1) y el objetivo de la norma (≥4.5:1)'] : cr >= 3 ? ['aviso', '⚠️', 'cumple WCAG (≥3:1); por debajo del objetivo 4.5:1'] : ['mal', '❌', 'no cumple WCAG 1.4.11 (≥3:1)'];
+    $('contraste').innerHTML = `Contraste del trazo: <b class="${nivel[0]}">${cr.toFixed(2)}:1</b> ${nivel[1]} ${nivel[2]}`;
     requestAnimationFrame(() => {
       const m = margenMinimo(svg);
       $('margen').innerHTML = m === null ? '' : `Margen mínimo al borde: <b class="${m >= 1 ? 'ok' : 'mal'}">${m.toFixed(2)}</b> ${m >= 1 ? '✅' : '❌'} (≥1; recomendado 2)`;

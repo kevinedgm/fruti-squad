@@ -1,6 +1,18 @@
 # Movimiento en iconos (E4)
 
-El movimiento existe para comunicar **estado o proceso** (cargando, fermentando, destilando, sincronizando). Si no comunica algo, no se anima.
+El movimiento existe para comunicar **estado o proceso** (cargando, fermentando, destilando, sincronizando). Si no comunica algo, no se anima. La norma (§27–34 de `estandar-iconografia.md`) manda; este archivo da los patrones CSS.
+
+## Categorías y tokens (norma §28–29)
+
+| Categoría | Ejemplo | Token de duración |
+|---|---|---|
+| State transition | chevron que gira al expandir | `motion.base` 160–240 ms |
+| Feedback | guardar → check | `motion.fast` 100–160 ms |
+| Progress | fermentando, destilando, cargando (proceso real) | `motion.loop` (ciclos), con el límite de 5 s |
+| Attention | campana | con extrema moderación |
+| Decorative | brillos, rebotes, flotación | **no se propone** |
+
+Principios (§30): con propósito, breve, predecible, reversible, interrumpible, sin bloquear. Evitar rebote excesivo, zoom grande, sacudida continua, oscilación y varios movimientos simultáneos.
 
 ## Límites (WCAG, bloqueantes)
 
@@ -69,6 +81,8 @@ Misma duración y repeticiones para ambas; la segunda arranca dentro del ciclo c
 - Desplazamientos pequeños: 2–5 unidades de la cuadrícula.
 
 ## Movimiento reducido (obligatorio)
+
+Movimiento reducido **no** es la misma animación más lenta (prolonga la exposición, §31). Se sustituye por un cambio instantáneo de estado o un cambio sutil de opacidad, conservando la información.
 
 ```css
 @media (prefers-reduced-motion:reduce){

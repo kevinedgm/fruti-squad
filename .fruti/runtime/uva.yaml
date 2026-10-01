@@ -2,6 +2,12 @@ agent: uva
 owns: custom_icons
 interface: natural-language
 position: lateral   # no forma parte de la cadena kiwi → lima → coco → mora; la alimenta con SVG verificados
+norm: agentes/uva/references/estandar-iconografia.md   # Guía y estándar de iconografía accesible v1.0 (solo Uva); recibido hasta §34 (incompleto)
+rubric: agentes/uva/references/estandares.md           # aplica la norma; en conflicto gana la norma salvo `decisions`
+decisions:
+  stroke: "1.5 por elección del usuario (la norma §6 fija 2 con Lucide por defecto). Un solo grosor por familia: si el proyecto usa Lucide a 2, Uva usa 2; si usa 1.5, Lucide se renderiza con strokeWidth 1.5 (§8, §10)."
+  contrast: "WCAG 3:1 bloqueante; objetivo de la norma 4.5:1 como recomendado (§22)."
+  scope: "Solo Uva adopta la norma; §11–26 (implementación) se entregan como recomendaciones de uso, no se implementan."
 read_order:
   - .fruti/state/current.json
   - .fruti/tokens.json#icon        # ADN de iconos si Lima lo materializó
@@ -22,12 +28,17 @@ uva_base:
 stages:
   E1_understand:
     output: brief.md
-    captures: [concept, meaning, real_size, neighbors, text_label, style_source, distinctive_traits, domain_confusions, success_criteria]
+    order: norm_section_4   # significado → categoría → símbolo reconocido → Lucide → conflictos → texto → accesibilidad → registro
+    script: node agentes/uva/scripts/buscar-lucide.mjs <términos en inglés>
+    outcome_may_be: reuse_existing_lucide_icon
+    captures: [semantic_name, category, lucide_search, consistency_conflicts, concept, meaning, real_size, neighbors, text_label, accessible_name_purpose, style_source, distinctive_traits, domain_confusions, success_criteria]
+    references: [agentes/uva/references/estandar-iconografia.md]
     ask_user_only_if: answer_changes_the_icon
   E2_prototype:
     variants: "3 (2 if trivial, max 4)"
     variants_differ_in: [metaphor, silhouette_or_proportion, detail_level, distinctive_trait]
     each_variant_has: hypothesis
+    include_partial_lucide_match_as_variant: true
     references: [agentes/uva/references/reglas.md]
   E3_evaluate:
     order: [check_icon_script, rendered_test_bench, rubric, iterate_with_cause, choose]
@@ -38,7 +49,8 @@ stages:
   E4_animate:
     when: meaning_is_state_or_process
     references: [agentes/uva/references/movimiento.md]
-    limits: [total_motion_le_5s_or_pause_control, reduced_motion_static_frame, no_flashing]
+    categories: [state_transition, feedback, progress, attention]   # decorative no se propone (§28)
+    limits: [total_motion_le_5s_or_pause_control, reduced_motion_instant_or_opacity_not_slower, no_flashing, motion_tokens_s29]
   E5_propose:
     assets: [agentes/uva/assets/propuesta.html]
     output: propuesta.html
@@ -46,7 +58,7 @@ stages:
     user_checkpoint: true
   E6_deliver:
     after: user_choice
-    output: ["<id>.svg", "<id>.small.svg (solo si R7)"]
+    output: ["<id>.svg", "<id>.small.svg (solo si R7)", registro.yaml]   # registro.yaml = entrada propuesta §5.1
 operations:
   create_icon: [E1_understand, E2_prototype, E3_evaluate, E4_animate, E5_propose, E6_deliver]
   animate_icon: [E4_animate, E3_evaluate, E5_propose]
@@ -59,6 +71,8 @@ output:
   handoff: .fruti/handoffs/current.json#icon
   include: [id, style_source, sizes, small_variant, motion, confusions_tested, criteria_failed, files, unresolved]
 rules:
+  - search_lucide_before_drawing_and_prefer_an_existing_recognized_symbol
+  - define_semantic_name_and_category_before_appearance
   - redraw_with_primitives_never_autotrace
   - understand_meaning_before_drawing
   - prototype_several_variants_that_differ_in_a_fundamental_decision
@@ -69,6 +83,8 @@ rules:
   - reserve_free_area_before_adding_motion
   - motion_only_for_state_or_process_and_ends_within_5s_on_a_meaningful_frame
   - color_only_via_currentColor_and_css_variables
+  - hidden_by_default_accessible_name_describes_purpose_and_belongs_to_the_control
+  - one_stroke_width_per_family
   - selectors_must_not_depend_on_external_ancestors_when_reused_via_use
   - present_once_with_a_defended_recommendation_user_tries_before_choosing
   - unapproved_uva_base_is_not_a_token_lima_decides_promotion
