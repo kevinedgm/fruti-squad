@@ -137,7 +137,7 @@ Read one runtime contract for the active owner. Do not read all four just becaus
 - Lima: governance, classification, reuse, registry, contracts, token ownership and lifecycle. Read only the reference for the current governance operation/gate.
 - Coco: F3 construction, implementation and canonical UI audit. Consume approved locks/contracts/tokens. For audits, use `.fruti/audit-manifest.yaml` plus automated evidence first; open prose standards only for failed/ambiguous/non-deterministic checks.
 - Mora: documentation of implemented/verified truth. Work from registry + approved contracts/tokens + Coco compliance report + targeted code/diff; document the delta. Do not reconstruct the whole design history or infer rules from the implementation.
-- Uva (optional, lateral to the chain): custom SVG icons from a reference image or description, matching the project's icon style, with optional CSS motion. Icon style comes from `icon.*` tokens, then the profile's icon library, then Uva's base style; promoting that base to tokens is Lima's decision. Uva hands verified SVGs to Coco; it never autotraces images.
+- Uva (optional, lateral to the chain): custom SVG icons from a reference image or description, matching the project's icon style, with optional CSS motion. Icon style comes from `icon.*` tokens, then the profile's icon library, then Uva's base style; promoting that base to tokens is Lima's decision. Uva works in stages (understand → prototype variants → evaluate against standards with `check-icon` + rendered bench → animate → interactive proposal → deliver the user's choice), hands verified SVGs to Coco, and never autotraces images.
 
 ## Handoff contract
 

@@ -416,7 +416,16 @@ Documenta el delta implementado y verificado. No reconstruye todo el historial d
 
 Parte de una foto o descripción y del estilo de iconos del proyecto (tokens `icon.*`, la librería del perfil o su estilo base: 24×24, trazo 1.5, terminaciones redondeadas, `currentColor`).
 
-Antes de dibujar, declara los rasgos que distinguen al objeto y los iconos del mismo dominio con los que podría confundirse. Redibuja con primitivas (nunca vectoriza la foto), lo prueba en un banco renderizado junto a vecinos y confusiones, y solo entonces añade movimiento CSS. Reglas y patrones: `agentes/uva/references/`.
+Trabaja por etapas:
+
+1. **Entender** qué representa y qué debe significar (concepto, uso, rasgos distintivos, confusiones del dominio).
+2. **Prototipar** varias variantes que difieren en una decisión de fondo. Redibuja con primitivas; nunca vectoriza la foto.
+3. **Evaluar** con un script (`agentes/uva/scripts/check-icon.mjs`), un banco renderizado y una rúbrica basada en Lucide, Material, Carbon, Apple HIG, NN/g y WCAG.
+4. **Animar** si el significado es un estado o proceso: ≤5 s, termina en un fotograma con significado y respeta el movimiento reducido.
+5. **Proponer**: una página donde comparas las variantes evaluadas y pruebas la recomendada (tamaño, grosor, color, fondo, animación, contraste).
+6. **Entregar** la elegida.
+
+Reglas, estándares y patrones: `agentes/uva/references/`. Ejemplo de propuesta: `agentes/uva/examples/propuesta-alambique.html`.
 
 ---
 

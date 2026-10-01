@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Uva · propuesta</title>
+<!--
+  Propuesta de Uva (fase E5). El usuario compara variantes y prueba la que quiera.
+  1. Rellena el JSON de <script id="meta">.
+  2. Añade un <template class="variante"> por variante (data-id, data-nombre, data-recomendada opcional) con:
+     - el <svg> (clase uva-icon uva-<id>-<variante>, para que las variantes no compartan estilos),
+     - <p class="hipotesis"> por qué podría funcionar,
+     - <table class="evaluacion"> con la rúbrica de references/estandares.md (criterio · ✅/❌/➖ · evidencia).
+  Cada icono se monta en su propio shadow root: los <style> internos no se pisan entre copias.
+-->
+<style>
+  :root{--fondo:#fafaf9;--panel:#fff;--texto:#1a1a1a;--tenue:#6b6b6b;--linea:#e5e4e2;--marca:#7c5cd6}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--fondo);color:var(--texto);font:14px/1.5 system-ui,sans-serif}
+  main{max-width:1080px;margin:0 auto;padding:24px 16px 48px}
+  h1{font-size:20px;margin:0 0 4px}
+  .sub{color:var(--tenue);margin:0 0 20px}
+  h2{font-size:15px;margin:28px 0 10px}
+  .variantes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+  .tarjeta{background:var(--panel);border:1px solid var(--linea);border-radius:12px;padding:14px;cursor:pointer;text-align:left;font:inherit;color:inherit}
+  .tarjeta[aria-pressed="true"]{outline:2px solid var(--marca);outline-offset:-1px}
+  .tarjeta .cab{display:flex;gap:12px;align-items:center}
+  .tarjeta .nom{font-weight:600}
+  .badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:99px;background:#efeafd;color:#5b3fc0;margin-left:6px}
+  .hipotesis{color:var(--tenue);margin:8px 0}
+  table{border-collapse:collapse;width:100%;font-size:12px}
+  td{border-top:1px solid var(--linea);padding:4px 4px;vertical-align:top}
+  .lab{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px}
+  @media (max-width:760px){.lab{grid-template-columns:1fr}}
+  .escena{border:1px solid var(--linea);border-radius:12px;min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:20px;transition:background .2s}
+  .escena.oscuro{background:#0b0b0b;color:#e8e8e8}
+  .escena.claro{background:#fff;color:var(--texto)}
+  .contexto{display:flex;gap:18px;align-items:center}
+  .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid currentColor;border-radius:99px;padding:3px 10px 3px 6px;font-size:13px;opacity:.9}
+  .controles{background:var(--panel);border:1px solid var(--linea);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:12px}
+  .controles label{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px}
+  .controles input[type=range]{width:130px}
+  button.accion{font:inherit;border:1px solid var(--linea);background:#fff;border-radius:8px;padding:6px 10px;cursor:pointer}
+  .medida{font-size:12px;color:var(--tenue)}
+  .ok{color:#1d7a4f}.mal{color:#b3261e}
+  .vecino{fill:none;stroke:currentColor;stroke-width:var(--uva-stroke,1.5);stroke-linecap:round;stroke-linejoin:round;display:block}
+</style></head><body>
+<main>
+<script type="application/json" id="meta">
+{
+  "concepto": "CONCEPTO",
+  "significado": "qué debe comunicar",
+  "etiqueta": "Etiqueta",
+  "colorTrazo": "#c8743a",
+  "colorAcento": "#d99a3c"
+}
+</script>
+
+<!-- VARIANTES: un <template class="variante"> por opción -->
+
+<h1 id="titulo"></h1>
+<p class="sub" id="subtitulo"></p>
+
+<h2>Variantes evaluadas</h2>
+<div class="variantes" id="variantes"></div>
+
+<h2>Pruébala</h2>
+<div class="lab">
+  <div class="escena claro" id="escena">
+    <div id="grande"></div>
+    <div class="contexto" id="contexto"></div>
+  </div>
+  <div class="controles">
+    <label>Tamaño <span><input type="range" id="tam" min="16" max="128" value="96"> <span id="tamV">96</span>px</span></label>
+    <label>Grosor <span><input type="range" id="gro" min="1" max="2" step=".25" value="1.5"> <span id="groV">1.5</span></span></label>
+    <label>Color <input type="color" id="col"></label>
+    <label>Acento <input type="color" id="acc"></label>
+    <label>Fondo oscuro <input type="checkbox" id="osc"></label>
+    <label>Simular movimiento reducido <input type="checkbox" id="red"></label>
+    <button class="accion" id="play" type="button">▶ Reproducir animación</button>
+    <div class="medida" id="contraste"></div>
+    <div class="medida" id="margen"></div>
+    <button class="accion" id="copiar" type="button">Copiar SVG</button>
+  </div>
+</div>
+</main>
+
+<script>
+  const meta = JSON.parse(document.getElementById('meta').textContent);
+  const vars = [...document.querySelectorAll('template.variante')].map(t => ({
+    id: t.dataset.id, nombre: t.dataset.nombre || t.dataset.id, recomendada: 'recomendada' in t.dataset,
+    svg: t.content.querySelector('svg').outerHTML,
+    hip: t.content.querySelector('.hipotesis')?.outerHTML || '',
+    eva: t.content.querySelector('.evaluacion')?.outerHTML || ''
+  }));
+  const $ = id => document.getElementById(id);
+  $('titulo').textContent = `Icono: ${meta.concepto}`;
+  $('subtitulo').textContent = `Debe comunicar: ${meta.significado}`;
+  $('col').value = meta.colorTrazo || '#1a1a1a';
+  $('acc').value = meta.colorAcento || meta.colorTrazo || '#1a1a1a';
+
+  // Monta un SVG en su propio shadow root; con `reducido` convierte el bloque reduced-motion en siempre activo.
+  function montar(host, svgText, px, reducido) {
+    const root = host.shadowRoot || host.attachShadow({mode: 'open'});
+    const txt = reducido ? svgText.replace(/prefers-reduced-motion\s*:\s*reduce/g, 'min-width:0px') : svgText;
+    root.innerHTML = `<style>:host{display:inline-block;line-height:0}svg{width:${px}px;height:${px}px;display:block}</style>${txt}`;
+    return root.querySelector('svg');
+  }
+  function vecino(d, px) {
+    return `<svg class="vecino" viewBox="0 0 24 24" width="${px}" height="${px}">${d}</svg>`;
+  }
+  const MANO = '<path d="M18 11V6a2 2 0 0 0-4 0"/><path d="M14 10V4a2 2 0 0 0-4 0v2"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-6-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>';
+  const RELOJ = '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>';
+
+  let actual = vars.find(v => v.recomendada) || vars[0];
+
+  vars.forEach(v => {
+    const b = document.createElement('button');
+    b.className = 'tarjeta'; b.type = 'button';
+    b.innerHTML = `<div class="cab"><span class="ic"></span><span class="ic24"></span><span><span class="nom">${v.nombre}</span>${v.recomendada ? '<span class="badge">recomendada</span>' : ''}</span></div>${v.hip}${v.eva}`;
+    montar(b.querySelector('.ic'), v.svg, 56, true);
+    montar(b.querySelector('.ic24'), v.svg, 24, true);
+    b.onclick = () => { actual = v; pintar(); };
+    v.boton = b; $('variantes').append(b);
+  });
+
+  function luminancia(hex) {
+    const c = hex.replace('#', '').match(/../g).map(x => parseInt(x, 16) / 255)
+      .map(x => x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4);
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+  function contraste(a, b) {
+    const [x, y] = [luminancia(a), luminancia(b)].sort((m, n) => n - m);
+    return (x + 0.05) / (y + 0.05);
+  }
+  function margenMinimo(svg) {
+    const sw = parseFloat(getComputedStyle(svg).strokeWidth) || 1.5;
+    let b = null;
+    svg.querySelectorAll('path,circle,ellipse,rect,line,polyline,polygon').forEach(el => {
+      if (getComputedStyle(el).opacity === '0' && !el.classList.contains('burbuja') && !el.classList.contains('gota')) return;
+      const r = el.getBBox(); const pad = getComputedStyle(el).stroke === 'none' ? 0 : sw / 2;
+      const e = {x1: r.x - pad, y1: r.y - pad, x2: r.x + r.width + pad, y2: r.y + r.height + pad};
+      b = b ? {x1: Math.min(b.x1, e.x1), y1: Math.min(b.y1, e.y1), x2: Math.max(b.x2, e.x2), y2: Math.max(b.y2, e.y2)} : e;
+    });
+    return b ? Math.min(b.x1, b.y1, 24 - b.x2, 24 - b.y2) : null;
+  }
+
+  function pintar() {
+    vars.forEach(v => v.boton.setAttribute('aria-pressed', v === actual));
+    const px = +$('tam').value, g = $('gro').value, oscuro = $('osc').checked, red = $('red').checked;
+    $('tamV').textContent = px; $('groV').textContent = g;
+    const esc = $('escena');
+    esc.className = 'escena ' + (oscuro ? 'oscuro' : 'claro');
+    esc.style.setProperty('--uva-stroke', g);
+    esc.style.setProperty('--uva-accent', $('acc').value);
+    const color = $('col').value;
+    const grande = $('grande'); grande.style.color = color;
+    const svg = montar(grande, actual.svg, px, red);
+    const ctx = $('contexto'); ctx.innerHTML = '';
+    const chip = document.createElement('span'); chip.className = 'chip'; chip.style.color = color;
+    const ic = document.createElement('span'); chip.append(ic, meta.etiqueta || '');
+    ctx.insertAdjacentHTML('beforeend', vecino(MANO, 24));
+    const solo = document.createElement('span'); solo.style.color = color; ctx.append(solo);
+    ctx.insertAdjacentHTML('beforeend', vecino(RELOJ, 24));
+    ctx.append(chip);
+    montar(solo, actual.svg, 24, red); montar(ic, actual.svg, 20, red);
+    const fondo = oscuro ? '#0b0b0b' : '#ffffff';
+    const cr = contraste(color, fondo);
+    $('contraste').innerHTML = `Contraste del trazo: <b class="${cr >= 3 ? 'ok' : 'mal'}">${cr.toFixed(2)}:1</b> ${cr >= 3 ? '✅' : '❌'} (WCAG 1.4.11 pide ≥3:1)`;
+    requestAnimationFrame(() => {
+      const m = margenMinimo(svg);
+      $('margen').innerHTML = m === null ? '' : `Margen mínimo al borde: <b class="${m >= 1 ? 'ok' : 'mal'}">${m.toFixed(2)}</b> ${m >= 1 ? '✅' : '❌'} (≥1; recomendado 2)`;
+    });
+  }
+  ['tam', 'gro', 'col', 'acc', 'osc', 'red'].forEach(id => $(id).addEventListener('input', pintar));
+  $('play').onclick = pintar;
+  $('copiar').onclick = () => navigator.clipboard?.writeText(actual.svg);
+  pintar();
+</script>
+</body></html>

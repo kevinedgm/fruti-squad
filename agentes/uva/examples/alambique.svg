@@ -2,10 +2,12 @@
   <style>
     .uva-alambique{stroke-width:var(--uva-stroke,1.5)}
     .uva-alambique .acento{fill:var(--uva-accent,currentColor);stroke:none}
-    .uva-alambique .vapor{stroke:var(--uva-accent,currentColor);stroke-dasharray:3 30;stroke-dashoffset:33;animation:uva-alambique-fluir 2.4s linear infinite}
-    .uva-alambique .gota{opacity:0;animation:uva-alambique-caer 2.4s cubic-bezier(.5,0,.9,.6) infinite}
-    @keyframes uva-alambique-fluir{to{stroke-dashoffset:0}}
+    /* 2 ciclos: el vapor recorre el cuello y cae la gota; la gota queda visible al final. Total 4.8 s (WCAG 2.2.2) */
+    .uva-alambique .vapor{opacity:0;stroke:var(--uva-accent,currentColor);stroke-dasharray:3 30;animation:uva-alambique-fluir 2.2s linear 0s 2}
+    .uva-alambique .gota{opacity:0;animation:uva-alambique-caer 2.2s cubic-bezier(.5,0,.9,.6) 0s 2,uva-alambique-asentar .4s ease-out 4.4s forwards}
+    @keyframes uva-alambique-fluir{from{opacity:1;stroke-dashoffset:33}to{opacity:1;stroke-dashoffset:0}}
     @keyframes uva-alambique-caer{0%,60%{transform:translateY(0);opacity:0}68%{opacity:1}100%{transform:translateY(1.5px);opacity:0}}
+    @keyframes uva-alambique-asentar{to{opacity:1}}
     @media (prefers-reduced-motion:reduce){.uva-alambique .vapor{animation:none;opacity:0}.uva-alambique .gota{animation:none;opacity:1}}
   </style>
   <!-- contenedor: olla + columna en un solo contorno, hombro en escalón (evita leerse como botella) -->

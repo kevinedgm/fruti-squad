@@ -11,7 +11,7 @@ Cada regla salió de un fallo real observado en el banco de prueba, no de una su
 ## R2 · Probar contra las confusiones, no solo contra vecinos al azar
 
 - **Mecanismo:** un icono puede encajar con la familia y aun así significar otra cosa.
-- **Comprobar:** en el banco, coloca 2–3 iconos con los que podría confundirse (declarados en U1) a 24px junto al tuyo.
+- **Comprobar:** en el banco, coloca 2–3 iconos con los que podría confundirse (declarados en E1) a 24px junto al tuyo.
 - **Caso:** sin el bote de basura al lado, la tina v1 "parecía bien".
 
 ## R3 · Líneas cruzadas forman trama

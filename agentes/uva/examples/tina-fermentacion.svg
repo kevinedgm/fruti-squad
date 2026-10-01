@@ -2,11 +2,13 @@
   <style>
     .uva-tina-fermentacion{stroke-width:var(--uva-stroke,1.5)}
     .uva-tina-fermentacion .acento{fill:var(--uva-accent,currentColor);stroke:none}
-    .uva-tina-fermentacion .burbuja{opacity:0;animation:uva-tina-fermentacion-subir 1.8s cubic-bezier(.2,.6,.3,1) infinite}
-    .uva-tina-fermentacion .burbuja:nth-of-type(2){animation-delay:-.6s}
-    .uva-tina-fermentacion .burbuja:nth-of-type(3){animation-delay:-1.2s}
+    /* 2 ciclos de subida y luego la burbuja se asienta visible: total ≤ 4.8 s (WCAG 2.2.2) */
+    .uva-tina-fermentacion .burbuja{opacity:0;animation:uva-tina-fermentacion-subir 1.6s cubic-bezier(.2,.6,.3,1) 0s 2,uva-tina-fermentacion-asentar .4s ease-out 3.2s forwards}
+    .uva-tina-fermentacion .burbuja:nth-of-type(2){animation:uva-tina-fermentacion-subir 1.6s cubic-bezier(.2,.6,.3,1) .6s 2,uva-tina-fermentacion-asentar .4s ease-out 3.8s forwards}
+    .uva-tina-fermentacion .burbuja:nth-of-type(3){animation:uva-tina-fermentacion-subir 1.6s cubic-bezier(.2,.6,.3,1) 1.2s 2,uva-tina-fermentacion-asentar .4s ease-out 4.4s forwards}
     @keyframes uva-tina-fermentacion-subir{0%{transform:translateY(2px);opacity:0}30%{opacity:1}100%{transform:translateY(-3px);opacity:0}}
-    @media (prefers-reduced-motion:reduce){.uva-tina-fermentacion .burbuja{animation:none;opacity:1}}
+    @keyframes uva-tina-fermentacion-asentar{to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.uva-tina-fermentacion .burbuja,.uva-tina-fermentacion .burbuja:nth-of-type(n){animation:none;opacity:1}}
   </style>
   <g class="cuerpo">
     <ellipse cx="12" cy="8.5" rx="8" ry="2.5"/>
