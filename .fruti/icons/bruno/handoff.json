@@ -32,7 +32,6 @@
     ],
     "criteria_failed": [],
     "criteria_warned": [
-      "A2: margen 1.65 (recomendado 2)",
       "D6: cola 640 ms > motion.slow"
     ],
     "files": [
@@ -44,8 +43,8 @@
       "propuesta/"
     ],
     "unresolved": [
-      "sin prueba con personas (B1 por banco)",
-      "parecido con Bruno: silueta genérica de malinois, no un retrato"
-    ]
+      "sin prueba con personas (B1 por banco)"
+    ],
+    "revision": "ronda 2: de malinois a perro genérico (oreja semicaída, hocico medio) por decisión del usuario; margen 1.65 → 2.15"
   }
 }

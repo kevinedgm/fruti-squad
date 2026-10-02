@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Uva · banco de prueba</title>
+<!--
+  Banco de prueba de Uva (etapa E3). Compara todas las variantes a la vez.
+  1. Sustituye el comentario UVA:ICONOS por los SVG de las variantes (uno por variante; data-nombre="A · …").
+  2. Sustituye el comentario UVA:CONFUSIONES por 2–4 confusiones del dominio (data-nombre). Para iconos reales de Lucide:
+       node scripts/buscar-lucide.mjs --svg <nombre> --stroke <grosor de la familia>
+  3. Renderiza y mira cada captura (Chromium headless; añade #final, #medio o #reducido a la URL):
+       chromium --headless --no-sandbox --hide-scrollbars --force-device-scale-factor=2 \
+         --window-size=900,1100 --virtual-time-budget=1500 --screenshot=banco.png "file://$PWD/banco.html#final"
+     sin modo  → lo que se ve al cargar (puede caer a mitad de la animación)
+     #final    → fotograma final de la animación (lo que queda tras ≤5 s)
+     #medio    → todas las animaciones congeladas en un mismo instante: la mitad del primer ciclo de la animación
+                 más larga (comprueba R4: la pieza móvil sobre zona libre)
+     #t=1.2    → todas congeladas en el instante indicado, en segundos (para revisar otros momentos)
+     #reducido → bloque prefers-reduced-motion activo (comprueba D2)
+  Los vecinos (casa, mano, reloj, rama) son redibujos simples estilo Lucide (ISC).
+-->
+<style>
+  :root{--fondo:#ffffff;--texto:#1a1a1a;--tenue:#777;--oscuro:#0b0b0b;--lila:#a99cf0;--ambar:#d99a3c;--verde:#5fb98a}
+  body{margin:0;padding:20px 24px;background:var(--fondo);color:var(--texto);font-family:system-ui,sans-serif}
+  h2{font-size:13px;margin:20px 0 8px;color:var(--tenue);font-weight:600}
+  .modo{font-size:12px;color:#5b3fc0;margin:0}
+  .fila{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin:6px 0}
+  .nombre{font-size:11px;color:var(--tenue);width:120px;flex:none}
+  .celda{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11px;color:var(--tenue)}
+  .oscuro{background:var(--oscuro);padding:10px 16px;border-radius:10px}
+  .oscuro .nombre{color:#9a9a9a}
+  .vecino{display:block;fill:none;stroke:currentColor;stroke-width:var(--uva-stroke,1.5);stroke-linecap:round;stroke-linejoin:round}
+  svg{display:block}
+  .celda > svg,.fila > svg{color:var(--texto)}
+  .oscuro .fila > svg{color:inherit}
+</style></head><body>
+
+<template id="iconos">
+  <svg data-nombre="perro genérico" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-bruno" aria-hidden="true">
+  <style>
+    .uva-bruno{stroke-width:var(--uva-stroke,1.5);overflow:visible;transform-origin:50% 85%}
+    .uva-bruno__ojo{fill:currentColor;stroke:none}
+    /* Dos movimientos, cada uno con su significado y su modificador (el componente lo añade y lo quita en animationend):
+       uva-bruno (modificador contento) · feedback, «Bruno respondió»: mueve la cola dos veces (640 ms).
+       uva-bruno (modificador avisar) · attention, «Bruno tiene un aviso»: ladra dos veces, la mandíbula se abre y se cierra (600 ms). Con moderación. */
+    .uva-bruno--contento{--uva-bruno-cola:uva-bruno-menear}
+    .uva-bruno--avisar{--uva-bruno-cuerpo:uva-bruno-ladrar}
+    .uva-bruno__cola{transform-box:view-box;transform-origin:5.1px 10.9px;animation:var(--uva-bruno-cola,none) 640ms cubic-bezier(.4,0,.6,1) 0s 1}
+    .uva-bruno__cuerpo{animation:var(--uva-bruno-cuerpo,none) 300ms cubic-bezier(.3,0,.4,1) 0s 2}
+    @keyframes uva-bruno-menear{0%{transform:rotate(0)}15%{transform:rotate(32deg)}35%{transform:rotate(-15deg)}55%{transform:rotate(32deg)}75%{transform:rotate(-15deg)}100%{transform:rotate(0)}}
+    @keyframes uva-bruno-ladrar{0%{d:path("M5.4 10.8C6.18 10.58 7.83 10.97 9 10.9C10.17 10.83 11.67 10.75 12.4 10.4C13.13 10.05 13.17 9.38 13.4 8.8C13.63 8.22 13.75 7.58 13.8 6.9C13.85 6.22 13.53 5.33 13.7 4.7C13.87 4.07 14.35 3.32 14.8 3.1C15.25 2.88 16 3.13 16.4 3.4C16.8 3.67 17.2 4.7 17.2 4.7C17.2 4.7 17.28 5.28 17.5 5.5C17.72 5.72 18.08 5.77 18.5 6C18.92 6.23 19.68 6.6 20 6.9C20.32 7.2 20.4 7.8 20.4 7.8C20.4 7.8 20.12 8.32 19.8 8.5C19.48 8.68 18.5 8.9 18.5 8.9C18.5 8.9 19.4 9.08 19.2 9.2C19 9.32 17.83 9.37 17.3 9.6C16.77 9.83 16.22 10.1 16 10.6C15.78 11.1 16.07 11.97 16 12.6C15.93 13.23 15.63 13.1 15.6 14.4C15.57 15.7 15.8 20.4 15.8 20.4C15.8 20.4 13.6 20.4 13.6 20.4C13.6 20.4 13.7 16.5 13.4 15.6C13.1 14.7 12.48 15.13 11.8 15C11.12 14.87 9.83 14.68 9.3 14.8C8.77 14.92 8.72 14.77 8.6 15.7C8.48 16.63 8.6 20.4 8.6 20.4C8.6 20.4 6.4 20.4 6.4 20.4C6.4 20.4 6.33 18.53 6 17.6C5.67 16.67 4.68 15.7 4.4 14.8C4.12 13.9 4.13 12.87 4.3 12.2C4.47 11.53 4.62 11.02 5.4 10.8Z")}35%{d:path("M5.4 10.8C6.18 10.58 7.83 10.97 9 10.9C10.17 10.83 11.67 10.75 12.4 10.4C13.13 10.05 13.17 9.38 13.4 8.8C13.63 8.22 13.75 7.58 13.8 6.9C13.85 6.22 13.53 5.33 13.7 4.7C13.87 4.07 14.35 3.32 14.8 3.1C15.25 2.88 16 3.13 16.4 3.4C16.8 3.67 17.2 4.7 17.2 4.7C17.2 4.7 17.28 5.28 17.5 5.5C17.72 5.72 18.08 5.77 18.5 6C18.92 6.23 19.67 6.67 20 6.9C20.33 7.13 20.5 7.4 20.5 7.4C20.5 7.4 20.08 7.88 19.7 8.1C19.32 8.32 18.2 8.7 18.2 8.7C18.2 8.7 19.72 10 19.6 10.3C19.48 10.6 18.1 10.45 17.5 10.5C16.9 10.55 16.25 10.25 16 10.6C15.75 10.95 16.07 11.97 16 12.6C15.93 13.23 15.63 13.1 15.6 14.4C15.57 15.7 15.8 20.4 15.8 20.4C15.8 20.4 13.6 20.4 13.6 20.4C13.6 20.4 13.7 16.5 13.4 15.6C13.1 14.7 12.48 15.13 11.8 15C11.12 14.87 9.83 14.68 9.3 14.8C8.77 14.92 8.72 14.77 8.6 15.7C8.48 16.63 8.6 20.4 8.6 20.4C8.6 20.4 6.4 20.4 6.4 20.4C6.4 20.4 6.33 18.53 6 17.6C5.67 16.67 4.68 15.7 4.4 14.8C4.12 13.9 4.13 12.87 4.3 12.2C4.47 11.53 4.62 11.02 5.4 10.8Z")}100%{d:path("M5.4 10.8C6.18 10.58 7.83 10.97 9 10.9C10.17 10.83 11.67 10.75 12.4 10.4C13.13 10.05 13.17 9.38 13.4 8.8C13.63 8.22 13.75 7.58 13.8 6.9C13.85 6.22 13.53 5.33 13.7 4.7C13.87 4.07 14.35 3.32 14.8 3.1C15.25 2.88 16 3.13 16.4 3.4C16.8 3.67 17.2 4.7 17.2 4.7C17.2 4.7 17.28 5.28 17.5 5.5C17.72 5.72 18.08 5.77 18.5 6C18.92 6.23 19.68 6.6 20 6.9C20.32 7.2 20.4 7.8 20.4 7.8C20.4 7.8 20.12 8.32 19.8 8.5C19.48 8.68 18.5 8.9 18.5 8.9C18.5 8.9 19.4 9.08 19.2 9.2C19 9.32 17.83 9.37 17.3 9.6C16.77 9.83 16.22 10.1 16 10.6C15.78 11.1 16.07 11.97 16 12.6C15.93 13.23 15.63 13.1 15.6 14.4C15.57 15.7 15.8 20.4 15.8 20.4C15.8 20.4 13.6 20.4 13.6 20.4C13.6 20.4 13.7 16.5 13.4 15.6C13.1 14.7 12.48 15.13 11.8 15C11.12 14.87 9.83 14.68 9.3 14.8C8.77 14.92 8.72 14.77 8.6 15.7C8.48 16.63 8.6 20.4 8.6 20.4C8.6 20.4 6.4 20.4 6.4 20.4C6.4 20.4 6.33 18.53 6 17.6C5.67 16.67 4.68 15.7 4.4 14.8C4.12 13.9 4.13 12.87 4.3 12.2C4.47 11.53 4.62 11.02 5.4 10.8Z")}}
+    /* Navegadores que no animan la forma (propiedad d): el ladrido se reduce a un leve impulso del icono entero */
+    @supports not (d: path("M0 0")) {
+      .uva-bruno--avisar{animation:uva-bruno-impulso 300ms cubic-bezier(.3,0,.4,1) 0s 2}
+    }
+    @keyframes uva-bruno-impulso{0%{transform:none}35%{transform:translateY(-4%) rotate(-3deg)}100%{transform:none}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-bruno--contento{--uva-bruno-cola:none}
+      .uva-bruno--avisar{--uva-bruno-cuerpo:none;animation:none}
+    }
+  </style>
+  
+  <path class="uva-bruno__cuerpo" d="M5.4 10.8C6.18 10.58 7.83 10.97 9 10.9C10.17 10.83 11.67 10.75 12.4 10.4C13.13 10.05 13.17 9.38 13.4 8.8C13.63 8.22 13.75 7.58 13.8 6.9C13.85 6.22 13.53 5.33 13.7 4.7C13.87 4.07 14.35 3.32 14.8 3.1C15.25 2.88 16 3.13 16.4 3.4C16.8 3.67 17.2 4.7 17.2 4.7C17.2 4.7 17.28 5.28 17.5 5.5C17.72 5.72 18.08 5.77 18.5 6C18.92 6.23 19.68 6.6 20 6.9C20.32 7.2 20.4 7.8 20.4 7.8C20.4 7.8 20.12 8.32 19.8 8.5C19.48 8.68 18.5 8.9 18.5 8.9C18.5 8.9 19.4 9.08 19.2 9.2C19 9.32 17.83 9.37 17.3 9.6C16.77 9.83 16.22 10.1 16 10.6C15.78 11.1 16.07 11.97 16 12.6C15.93 13.23 15.63 13.1 15.6 14.4C15.57 15.7 15.8 20.4 15.8 20.4C15.8 20.4 13.6 20.4 13.6 20.4C13.6 20.4 13.7 16.5 13.4 15.6C13.1 14.7 12.48 15.13 11.8 15C11.12 14.87 9.83 14.68 9.3 14.8C8.77 14.92 8.72 14.77 8.6 15.7C8.48 16.63 8.6 20.4 8.6 20.4C8.6 20.4 6.4 20.4 6.4 20.4C6.4 20.4 6.33 18.53 6 17.6C5.67 16.67 4.68 15.7 4.4 14.8C4.12 13.9 4.13 12.87 4.3 12.2C4.47 11.53 4.62 11.02 5.4 10.8Z"/>
+  <path class="uva-bruno__cola" d="M5.1 10.9C5.22 11.4 3.97 10.62 3.6 10.3C3.23 9.98 3.02 9.5 2.9 9C2.78 8.5 2.53 6.98 2.9 7.3"/>
+  <path class="uva-bruno__linea" d="M8.6 15.7C8.8 15.85 8.47 14.27 8.2 13.8C7.93 13.33 6.93 12.58 7 12.9"/>
+  <circle class="uva-bruno__ojo" cx="17.2" cy="7.4" r="0.75"/>
+</svg>
+<svg data-nombre="antes (malinois)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-bruno" aria-hidden="true">
+  <style>
+    .uva-bruno{stroke-width:var(--uva-stroke,1.5);overflow:visible;transform-origin:50% 85%}
+    .uva-bruno__ojo{fill:currentColor;stroke:none}
+    /* Dos movimientos, cada uno con su significado y su modificador (el componente lo añade y lo quita en animationend):
+       uva-bruno (modificador contento) · feedback, «Bruno respondió»: mueve la cola dos veces (640 ms).
+       uva-bruno (modificador avisar) · attention, «Bruno tiene un aviso»: ladra dos veces, la mandíbula se abre y se cierra (600 ms). Con moderación. */
+    .uva-bruno--contento{--uva-bruno-cola:uva-bruno-menear}
+    .uva-bruno--avisar{--uva-bruno-cuerpo:uva-bruno-ladrar}
+    .uva-bruno__cola{transform-box:view-box;transform-origin:5.1px 10.9px;animation:var(--uva-bruno-cola,none) 640ms cubic-bezier(.4,0,.6,1) 0s 1}
+    .uva-bruno__cuerpo{animation:var(--uva-bruno-cuerpo,none) 300ms cubic-bezier(.3,0,.4,1) 0s 2}
+    @keyframes uva-bruno-menear{0%{transform:rotate(0)}15%{transform:rotate(32deg)}35%{transform:rotate(-15deg)}55%{transform:rotate(32deg)}75%{transform:rotate(-15deg)}100%{transform:rotate(0)}}
+    @keyframes uva-bruno-ladrar{0%{d:path("M5.4 10.8C6.18 10.58 7.83 10.97 9 10.9C10.17 10.83 11.67 10.75 12.4 10.4C13.13 10.05 13.17 9.38 13.4 8.8C13.63 8.22 13.57 7.97 13.8 6.9C14.03 5.83 14.8 2.4 14.8 2.4C14.8 2.4 16.43 4.52 16.9 5C17.37 5.48 17.35 5.15 17.6 5.3C17.85 5.45 17.9 5.62 18.4 5.9C18.9 6.18 20.18 6.67 20.6 7C21.02 7.33 20.9 7.9 20.9 7.9C20.9 7.9 20.57 8.42 20.2 8.6C19.83 8.78 18.7 9 18.7 9C18.7 9 19.72 9.1 19.5 9.2C19.28 9.3 17.98 9.37 17.4 9.6C16.82 9.83 16.23 10.1 16 10.6C15.77 11.1 16.07 11.97 16 12.6C15.93 13.23 15.63 13.1 15.6 14.4C15.57 15.7 15.8 20.4 15.8 20.4C15.8 20.4 13.6 20.4 13.6 20.4C13.6 20.4 13.7 16.5 13.4 15.6C13.1 14.7 12.48 15.13 11.8 15C11.12 14.87 9.83 14.68 9.3 14.8C8.77 14.92 8.72 14.77 8.6 15.7C8.48 16.63 8.6 20.4 8.6 20.4C8.6 20.4 6.4 20.4 6.4 20.4C6.4 20.4 6.33 18.53 6 17.6C5.67 16.67 4.68 15.7 4.4 14.8C4.12 13.9 4.13 12.87 4.3 12.2C4.47 11.53 4.62 11.02 5.4 10.8Z")}35%{d:path("M5.4 10.8C6.18 10.58 7.83 10.97 9 10.9C10.17 10.83 11.67 10.75 12.4 10.4C13.13 10.05 13.17 9.38 13.4 8.8C13.63 8.22 13.57 7.97 13.8 6.9C14.03 5.83 14.8 2.4 14.8 2.4C14.8 2.4 16.43 4.52 16.9 5C17.37 5.48 17.35 5.15 17.6 5.3C17.85 5.45 17.9 5.62 18.4 5.9C18.9 6.18 20.17 6.73 20.6 7C21.03 7.27 21 7.5 21 7.5C21 7.5 20.53 7.98 20.1 8.2C19.67 8.42 18.4 8.8 18.4 8.8C18.4 8.8 20.13 10.12 20 10.4C19.87 10.68 18.27 10.47 17.6 10.5C16.93 10.53 16.27 10.25 16 10.6C15.73 10.95 16.07 11.97 16 12.6C15.93 13.23 15.63 13.1 15.6 14.4C15.57 15.7 15.8 20.4 15.8 20.4C15.8 20.4 13.6 20.4 13.6 20.4C13.6 20.4 13.7 16.5 13.4 15.6C13.1 14.7 12.48 15.13 11.8 15C11.12 14.87 9.83 14.68 9.3 14.8C8.77 14.92 8.72 14.77 8.6 15.7C8.48 16.63 8.6 20.4 8.6 20.4C8.6 20.4 6.4 20.4 6.4 20.4C6.4 20.4 6.33 18.53 6 17.6C5.67 16.67 4.68 15.7 4.4 14.8C4.12 13.9 4.13 12.87 4.3 12.2C4.47 11.53 4.62 11.02 5.4 10.8Z")}100%{d:path("M5.4 10.8C6.18 10.58 7.83 10.97 9 10.9C10.17 10.83 11.67 10.75 12.4 10.4C13.13 10.05 13.17 9.38 13.4 8.8C13.63 8.22 13.57 7.97 13.8 6.9C14.03 5.83 14.8 2.4 14.8 2.4C14.8 2.4 16.43 4.52 16.9 5C17.37 5.48 17.35 5.15 17.6 5.3C17.85 5.45 17.9 5.62 18.4 5.9C18.9 6.18 20.18 6.67 20.6 7C21.02 7.33 20.9 7.9 20.9 7.9C20.9 7.9 20.57 8.42 20.2 8.6C19.83 8.78 18.7 9 18.7 9C18.7 9 19.72 9.1 19.5 9.2C19.28 9.3 17.98 9.37 17.4 9.6C16.82 9.83 16.23 10.1 16 10.6C15.77 11.1 16.07 11.97 16 12.6C15.93 13.23 15.63 13.1 15.6 14.4C15.57 15.7 15.8 20.4 15.8 20.4C15.8 20.4 13.6 20.4 13.6 20.4C13.6 20.4 13.7 16.5 13.4 15.6C13.1 14.7 12.48 15.13 11.8 15C11.12 14.87 9.83 14.68 9.3 14.8C8.77 14.92 8.72 14.77 8.6 15.7C8.48 16.63 8.6 20.4 8.6 20.4C8.6 20.4 6.4 20.4 6.4 20.4C6.4 20.4 6.33 18.53 6 17.6C5.67 16.67 4.68 15.7 4.4 14.8C4.12 13.9 4.13 12.87 4.3 12.2C4.47 11.53 4.62 11.02 5.4 10.8Z")}}
+    /* Navegadores que no animan la forma (propiedad d): el ladrido se reduce a un leve impulso del icono entero */
+    @supports not (d: path("M0 0")) {
+      .uva-bruno--avisar{animation:uva-bruno-impulso 300ms cubic-bezier(.3,0,.4,1) 0s 2}
+    }
+    @keyframes uva-bruno-impulso{0%{transform:none}35%{transform:translateY(-4%) rotate(-3deg)}100%{transform:none}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-bruno--contento{--uva-bruno-cola:none}
+      .uva-bruno--avisar{--uva-bruno-cuerpo:none;animation:none}
+    }
+  </style>
+  
+  <path class="uva-bruno__cuerpo" d="M5.4 10.8C6.18 10.58 7.83 10.97 9 10.9C10.17 10.83 11.67 10.75 12.4 10.4C13.13 10.05 13.17 9.38 13.4 8.8C13.63 8.22 13.57 7.97 13.8 6.9C14.03 5.83 14.8 2.4 14.8 2.4C14.8 2.4 16.43 4.52 16.9 5C17.37 5.48 17.35 5.15 17.6 5.3C17.85 5.45 17.9 5.62 18.4 5.9C18.9 6.18 20.18 6.67 20.6 7C21.02 7.33 20.9 7.9 20.9 7.9C20.9 7.9 20.57 8.42 20.2 8.6C19.83 8.78 18.7 9 18.7 9C18.7 9 19.72 9.1 19.5 9.2C19.28 9.3 17.98 9.37 17.4 9.6C16.82 9.83 16.23 10.1 16 10.6C15.77 11.1 16.07 11.97 16 12.6C15.93 13.23 15.63 13.1 15.6 14.4C15.57 15.7 15.8 20.4 15.8 20.4C15.8 20.4 13.6 20.4 13.6 20.4C13.6 20.4 13.7 16.5 13.4 15.6C13.1 14.7 12.48 15.13 11.8 15C11.12 14.87 9.83 14.68 9.3 14.8C8.77 14.92 8.72 14.77 8.6 15.7C8.48 16.63 8.6 20.4 8.6 20.4C8.6 20.4 6.4 20.4 6.4 20.4C6.4 20.4 6.33 18.53 6 17.6C5.67 16.67 4.68 15.7 4.4 14.8C4.12 13.9 4.13 12.87 4.3 12.2C4.47 11.53 4.62 11.02 5.4 10.8Z"/>
+  <path class="uva-bruno__cola" d="M5.1 10.9C5.22 11.4 3.97 10.62 3.6 10.3C3.23 9.98 3.02 9.5 2.9 9C2.78 8.5 2.53 6.98 2.9 7.3"/>
+  <path class="uva-bruno__linea" d="M8.6 15.7C8.8 15.85 8.47 14.27 8.2 13.8C7.93 13.33 6.93 12.58 7 12.9"/>
+  <circle class="uva-bruno__ojo" cx="17.4" cy="7.3" r="0.75"/>
+</svg>
+<svg data-nombre="genérico · boca abierta" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-bruno" aria-hidden="true">
+  <style>
+    .uva-bruno{stroke-width:var(--uva-stroke,1.5);overflow:visible;transform-origin:50% 85%}
+    .uva-bruno__ojo{fill:currentColor;stroke:none}
+    /* Dos movimientos, cada uno con su significado y su modificador (el componente lo añade y lo quita en animationend):
+       uva-bruno (modificador contento) · feedback, «Bruno respondió»: mueve la cola dos veces (640 ms).
+       uva-bruno (modificador avisar) · attention, «Bruno tiene un aviso»: ladra dos veces, la mandíbula se abre y se cierra (600 ms). Con moderación. */
+    .uva-bruno--contento{--uva-bruno-cola:uva-bruno-menear}
+    .uva-bruno--avisar{--uva-bruno-cuerpo:uva-bruno-ladrar}
+    .uva-bruno__cola{transform-box:view-box;transform-origin:5.1px 10.9px;animation:var(--uva-bruno-cola,none) 640ms cubic-bezier(.4,0,.6,1) 0s 1}
+    .uva-bruno__cuerpo{animation:var(--uva-bruno-cuerpo,none) 300ms cubic-bezier(.3,0,.4,1) 0s 2}
+    @keyframes uva-bruno-menear{0%{transform:rotate(0)}15%{transform:rotate(32deg)}35%{transform:rotate(-15deg)}55%{transform:rotate(32deg)}75%{transform:rotate(-15deg)}100%{transform:rotate(0)}}
+    @keyframes uva-bruno-ladrar{0%{d:path("M5.4 10.8C6.18 10.58 7.83 10.97 9 10.9C10.17 10.83 11.67 10.75 12.4 10.4C13.13 10.05 13.17 9.38 13.4 8.8C13.63 8.22 13.75 7.58 13.8 6.9C13.85 6.22 13.53 5.33 13.7 4.7C13.87 4.07 14.35 3.32 14.8 3.1C15.25 2.88 16 3.13 16.4 3.4C16.8 3.67 17.2 4.7 17.2 4.7C17.2 4.7 17.28 5.28 17.5 5.5C17.72 5.72 18.08 5.77 18.5 6C18.92 6.23 19.68 6.6 20 6.9C20.32 7.2 20.4 7.8 20.4 7.8C20.4 7.8 20.12 8.32 19.8 8.5C19.48 8.68 18.5 8.9 18.5 8.9C18.5 8.9 19.4 9.08 19.2 9.2C19 9.32 17.83 9.37 17.3 9.6C16.77 9.83 16.22 10.1 16 10.6C15.78 11.1 16.07 11.97 16 12.6C15.93 13.23 15.63 13.1 15.6 14.4C15.57 15.7 15.8 20.4 15.8 20.4C15.8 20.4 13.6 20.4 13.6 20.4C13.6 20.4 13.7 16.5 13.4 15.6C13.1 14.7 12.48 15.13 11.8 15C11.12 14.87 9.83 14.68 9.3 14.8C8.77 14.92 8.72 14.77 8.6 15.7C8.48 16.63 8.6 20.4 8.6 20.4C8.6 20.4 6.4 20.4 6.4 20.4C6.4 20.4 6.33 18.53 6 17.6C5.67 16.67 4.68 15.7 4.4 14.8C4.12 13.9 4.13 12.87 4.3 12.2C4.47 11.53 4.62 11.02 5.4 10.8Z")}35%{d:path("M5.4 10.8C6.18 10.58 7.83 10.97 9 10.9C10.17 10.83 11.67 10.75 12.4 10.4C13.13 10.05 13.17 9.38 13.4 8.8C13.63 8.22 13.75 7.58 13.8 6.9C13.85 6.22 13.53 5.33 13.7 4.7C13.87 4.07 14.35 3.32 14.8 3.1C15.25 2.88 16 3.13 16.4 3.4C16.8 3.67 17.2 4.7 17.2 4.7C17.2 4.7 17.28 5.28 17.5 5.5C17.72 5.72 18.08 5.77 18.5 6C18.92 6.23 19.67 6.67 20 6.9C20.33 7.13 20.5 7.4 20.5 7.4C20.5 7.4 20.08 7.88 19.7 8.1C19.32 8.32 18.2 8.7 18.2 8.7C18.2 8.7 19.72 10 19.6 10.3C19.48 10.6 18.1 10.45 17.5 10.5C16.9 10.55 16.25 10.25 16 10.6C15.75 10.95 16.07 11.97 16 12.6C15.93 13.23 15.63 13.1 15.6 14.4C15.57 15.7 15.8 20.4 15.8 20.4C15.8 20.4 13.6 20.4 13.6 20.4C13.6 20.4 13.7 16.5 13.4 15.6C13.1 14.7 12.48 15.13 11.8 15C11.12 14.87 9.83 14.68 9.3 14.8C8.77 14.92 8.72 14.77 8.6 15.7C8.48 16.63 8.6 20.4 8.6 20.4C8.6 20.4 6.4 20.4 6.4 20.4C6.4 20.4 6.33 18.53 6 17.6C5.67 16.67 4.68 15.7 4.4 14.8C4.12 13.9 4.13 12.87 4.3 12.2C4.47 11.53 4.62 11.02 5.4 10.8Z")}100%{d:path("M5.4 10.8C6.18 10.58 7.83 10.97 9 10.9C10.17 10.83 11.67 10.75 12.4 10.4C13.13 10.05 13.17 9.38 13.4 8.8C13.63 8.22 13.75 7.58 13.8 6.9C13.85 6.22 13.53 5.33 13.7 4.7C13.87 4.07 14.35 3.32 14.8 3.1C15.25 2.88 16 3.13 16.4 3.4C16.8 3.67 17.2 4.7 17.2 4.7C17.2 4.7 17.28 5.28 17.5 5.5C17.72 5.72 18.08 5.77 18.5 6C18.92 6.23 19.68 6.6 20 6.9C20.32 7.2 20.4 7.8 20.4 7.8C20.4 7.8 20.12 8.32 19.8 8.5C19.48 8.68 18.5 8.9 18.5 8.9C18.5 8.9 19.4 9.08 19.2 9.2C19 9.32 17.83 9.37 17.3 9.6C16.77 9.83 16.22 10.1 16 10.6C15.78 11.1 16.07 11.97 16 12.6C15.93 13.23 15.63 13.1 15.6 14.4C15.57 15.7 15.8 20.4 15.8 20.4C15.8 20.4 13.6 20.4 13.6 20.4C13.6 20.4 13.7 16.5 13.4 15.6C13.1 14.7 12.48 15.13 11.8 15C11.12 14.87 9.83 14.68 9.3 14.8C8.77 14.92 8.72 14.77 8.6 15.7C8.48 16.63 8.6 20.4 8.6 20.4C8.6 20.4 6.4 20.4 6.4 20.4C6.4 20.4 6.33 18.53 6 17.6C5.67 16.67 4.68 15.7 4.4 14.8C4.12 13.9 4.13 12.87 4.3 12.2C4.47 11.53 4.62 11.02 5.4 10.8Z")}}
+    /* Navegadores que no animan la forma (propiedad d): el ladrido se reduce a un leve impulso del icono entero */
+    @supports not (d: path("M0 0")) {
+      .uva-bruno--avisar{animation:uva-bruno-impulso 300ms cubic-bezier(.3,0,.4,1) 0s 2}
+    }
+    @keyframes uva-bruno-impulso{0%{transform:none}35%{transform:translateY(-4%) rotate(-3deg)}100%{transform:none}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-bruno--contento{--uva-bruno-cola:none}
+      .uva-bruno--avisar{--uva-bruno-cuerpo:none;animation:none}
+    }
+  </style>
+  
+  <path class="uva-bruno__cuerpo" d="M5.4 10.8C6.18 10.58 7.83 10.97 9 10.9C10.17 10.83 11.67 10.75 12.4 10.4C13.13 10.05 13.17 9.38 13.4 8.8C13.63 8.22 13.75 7.58 13.8 6.9C13.85 6.22 13.53 5.33 13.7 4.7C13.87 4.07 14.35 3.32 14.8 3.1C15.25 2.88 16 3.13 16.4 3.4C16.8 3.67 17.2 4.7 17.2 4.7C17.2 4.7 17.28 5.28 17.5 5.5C17.72 5.72 18.08 5.77 18.5 6C18.92 6.23 19.67 6.67 20 6.9C20.33 7.13 20.5 7.4 20.5 7.4C20.5 7.4 20.08 7.88 19.7 8.1C19.32 8.32 18.2 8.7 18.2 8.7C18.2 8.7 19.72 10 19.6 10.3C19.48 10.6 18.1 10.45 17.5 10.5C16.9 10.55 16.25 10.25 16 10.6C15.75 10.95 16.07 11.97 16 12.6C15.93 13.23 15.63 13.1 15.6 14.4C15.57 15.7 15.8 20.4 15.8 20.4C15.8 20.4 13.6 20.4 13.6 20.4C13.6 20.4 13.7 16.5 13.4 15.6C13.1 14.7 12.48 15.13 11.8 15C11.12 14.87 9.83 14.68 9.3 14.8C8.77 14.92 8.72 14.77 8.6 15.7C8.48 16.63 8.6 20.4 8.6 20.4C8.6 20.4 6.4 20.4 6.4 20.4C6.4 20.4 6.33 18.53 6 17.6C5.67 16.67 4.68 15.7 4.4 14.8C4.12 13.9 4.13 12.87 4.3 12.2C4.47 11.53 4.62 11.02 5.4 10.8Z"/>
+  <path class="uva-bruno__cola" d="M5.1 10.9C5.22 11.4 3.97 10.62 3.6 10.3C3.23 9.98 3.02 9.5 2.9 9C2.78 8.5 2.53 6.98 2.9 7.3"/>
+  <path class="uva-bruno__linea" d="M8.6 15.7C8.8 15.85 8.47 14.27 8.2 13.8C7.93 13.33 6.93 12.58 7 12.9"/>
+  <circle class="uva-bruno__ojo" cx="17.2" cy="7.4" r="0.75"/>
+</svg>
+
+</template>
+
+<template id="confusiones">
+  <svg data-nombre="dog (Lucide)" aria-hidden="true" class="lucide lucide-dog" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="stroke-width:var(--uva-stroke,1.5)" stroke-linecap="round" stroke-linejoin="round"> <path d="M11.25 16.25h1.5L12 17z" /> <path d="M16 14v.5" /> <path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309" /> <path d="M8 14v.5" /> <path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.177-6.53 4-7 1.923-.321 3.651.845 3.651 2.235A7.497 7.497 0 0 1 14 5.277c0-1.39 1.844-2.598 3.767-2.277 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5" /> </svg><svg data-nombre="cat (Lucide)" aria-hidden="true" class="lucide lucide-cat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="stroke-width:var(--uva-stroke,1.5)" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 5c.67 0 1.35.09 2 .26 1.78-2 5.03-2.84 6.42-2.26 1.4.58-.42 7-.42 7 .57 1.07 1 2.24 1 3.44C21 17.9 16.97 21 12 21s-9-3-9-7.56c0-1.25.5-2.4 1-3.44 0 0-1.89-6.42-.5-7 1.39-.58 4.72.23 6.5 2.23A9.04 9.04 0 0 1 12 5Z" /> <path d="M8 14v.5" /> <path d="M16 14v.5" /> <path d="M11.25 16.25h1.5L12 17l-.75-.75Z" /> </svg><svg data-nombre="squirrel (Lucide)" aria-hidden="true" class="lucide lucide-squirrel" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="stroke-width:var(--uva-stroke,1.5)" stroke-linecap="round" stroke-linejoin="round"> <path d="M15.236 22a3 3 0 0 0-2.2-5" /> <path d="M16 20a3 3 0 0 1 3-3h1a2 2 0 0 0 2-2v-2a4 4 0 0 0-4-4V4" /> <path d="M18 13h.01" /> <path d="M18 6a4 4 0 0 0-4 4 7 7 0 0 0-7 7c0-5 4-5 4-10.5a4.5 4.5 0 1 0-9 0 2.5 2.5 0 0 0 5 0C7 10 3 11 3 17c0 2.8 2.2 5 5 5h10" /> </svg>
+</template>
+
+<p class="modo" id="modo"></p>
+
+<h2>Comparación directa a 24 y 20px: variantes · confusiones</h2>
+<div id="comparacion"></div>
+
+<h2>Tamaños de la norma (§10: xs 14 · sm 16 · md 20 · base 24 · lg 32 · xl 48) y 96 de inspección</h2>
+<div id="tamanos"></div>
+
+<h2>Familia a 24px: casa · mano · variante · reloj (peso óptico, R6)</h2>
+<div id="familia"></div>
+
+<h2>Contexto oscuro con color por estado (22 y 44px)</h2>
+<div class="oscuro" id="oscuro"></div>
+
+<h2>Grosor del trazo (--uva-stroke 2 · 1.5 · 1.25 · 1) a 48 y 24px</h2>
+<div id="grosores"></div>
+
+<script>
+  const NS = 'http://www.w3.org/2000/svg';
+  const modo = location.hash.slice(1);
+  const vecinos = {
+    mano: '<path d="M18 11V6a2 2 0 0 0-4 0"/><path d="M14 10V4a2 2 0 0 0-4 0v2"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-6-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>',
+    rama: '<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="16" r="2.5"/><path d="M6 8.5V10a6 6 0 0 0 6 6h3.5"/>',
+    casa: '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>',
+    reloj: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>'
+  };
+  // Compatibilidad: también acepta la plantilla antigua de un solo icono (id="icono").
+  const fuente = document.getElementById('iconos') || document.getElementById('icono');
+  const viejo = document.getElementById('icono');
+  let iconos = [...fuente.content.querySelectorAll('svg')];
+  if (!iconos.length && viejo) iconos = [...viejo.content.querySelectorAll('svg')];
+  const confusiones = [...document.getElementById('confusiones').content.querySelectorAll('svg')];
+
+  if (modo === 'reducido') {
+    // Activa el bloque de movimiento reducido de cada icono reescribiendo su media query.
+    for (const s of [...iconos, ...confusiones]) s.querySelectorAll('style').forEach(st => {
+      st.textContent = st.textContent.replace(/prefers-reduced-motion\s*:\s*reduce/g, 'min-width:0px');
+    });
+  }
+  const nombre = (s, i) => s.dataset.nombre || `variante ${i + 1}`;
+
+  function tam(svg, px, color, extra) {
+    const c = svg.cloneNode(true);
+    c.setAttribute('width', px); c.setAttribute('height', px);
+    if (color) c.style.color = color;
+    if (extra) for (const [k, v] of Object.entries(extra)) c.style.setProperty(k, v);
+    return c;
+  }
+  function vecino(n, px, color) {
+    const s = document.createElementNS(NS, 'svg');
+    s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('class', 'vecino');
+    s.setAttribute('width', px); s.setAttribute('height', px);
+    s.innerHTML = vecinos[n]; if (color) s.style.color = color;
+    return s;
+  }
+  function celda(nodo, texto) {
+    const d = document.createElement('div'); d.className = 'celda';
+    d.append(nodo); if (texto !== undefined) d.append(String(texto)); return d;
+  }
+  function fila(contenedor, etiqueta, nodos) {
+    const f = document.createElement('div'); f.className = 'fila';
+    const n = document.createElement('span'); n.className = 'nombre'; n.textContent = etiqueta;
+    f.append(n, ...nodos); document.getElementById(contenedor).append(f);
+  }
+
+  if (!iconos.length) {
+    document.body.insertAdjacentHTML('afterbegin', '<p style="color:#b4541a">Faltan los SVG: sustituye el comentario UVA:ICONOS.</p>');
+  } else {
+    for (const px of [24, 20]) {
+      fila('comparacion', `${px}px`, [
+        ...iconos.map((s, i) => celda(tam(s, px), nombre(s, i))),
+        ...confusiones.map(c => celda(tam(c, px), c.dataset.nombre || 'confusión'))
+      ]);
+    }
+    iconos.forEach((s, i) => {
+      fila('tamanos', nombre(s, i), [14, 16, 20, 24, 32, 48, 96].map(px => celda(tam(s, px), px)));
+      fila('familia', nombre(s, i), [vecino('casa', 24), vecino('mano', 24), tam(s, 24), vecino('reloj', 24)]);
+      for (const px of [22, 44]) fila('oscuro', `${nombre(s, i)} · ${px}`, [
+        vecino('rama', px, 'var(--lila)'), vecino('mano', px, 'var(--ambar)'),
+        tam(s, px, 'var(--ambar)'), tam(s, px, 'var(--verde)'), tam(s, px, 'var(--lila)'),
+        ...confusiones.map(c => tam(c, px, '#888'))
+      ]);
+      fila('grosores', nombre(s, i), [2, 1.5, 1.25, 1].map(g => {
+        const d = document.createElement('div'); d.className = 'celda';
+        d.append(tam(s, 48, null, {'--uva-stroke': g}), tam(s, 24, null, {'--uva-stroke': g}), g);
+        return d;
+      }));
+    });
+  }
+
+  // Modos de fotograma: se aplican cuando todas las animaciones ya existen.
+  addEventListener('load', () => requestAnimationFrame(() => {
+    const anims = document.getAnimations();
+    if (modo === 'final') anims.forEach(a => { try { a.finish(); } catch (e) { a.cancel(); } });
+    // Un instante común para todas: con animaciones encadenadas (subir → asentar) congelar cada una en su
+    // propio punto medio mezclaría momentos distintos.
+    let instante = null;
+    if (modo === 'medio' && anims.length) {
+      const larga = anims.map(a => a.effect.getComputedTiming()).sort((x, y) => (y.duration || 0) - (x.duration || 0))[0];
+      instante = ((larga.delay || 0) + (larga.duration || 0) / 2) / 1000;
+    }
+    const mt = modo.match(/^t=([\d.]+)$/);
+    if (mt) instante = parseFloat(mt[1]);
+    if (instante !== null) anims.forEach(a => { a.pause(); a.currentTime = instante * 1000; });
+    document.getElementById('modo').textContent = modo
+      ? `Modo: ${modo}${instante !== null ? ` (t = ${instante.toFixed(2)} s)` : ''} · ${anims.length} animaciones`
+      : `Modo: al cargar · ${anims.length} animaciones (usa #final, #medio o #reducido)`;
+  }));
+</script>
+</body></html>

@@ -1,6 +1,6 @@
 # bruno · uso
 
-Icono del agente Bruno: pastor belga malinois de perfil (orejas erguidas, hocico largo, cola alzada), de la familia de `rabbit` y `turtle`. Monocromo (`currentColor`), trazo 1.5, 24×24.
+Icono del agente Bruno: silueta de perro genérica de perfil (oreja semicaída, hocico medio, cola alzada), sin raza, de la familia de `rabbit` y `turtle`. Monocromo (`currentColor`), trazo 1.5, 24×24.
 
 1. **Inline o vía `<use>`**: así hereda el color y se anima. Como `<img>` queda estático y negro.
 2. **Dos movimientos, cada uno con su significado** (nunca en bucle ni decorativo):

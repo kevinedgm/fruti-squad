@@ -1,6 +1,6 @@
 # Brief · bruno
 
-- **Nombre semántico y categoría (§2.1, §3):** `bruno` · brand (identidad propia del agente Bruno; S4 no aplica). Es la mascota del usuario: un pastor belga malinois.
+- **Nombre semántico y categoría (§2.1, §3):** `bruno` · brand (identidad propia del agente Bruno; S4 no aplica). Ronda 2 (usuario): silueta de perro genérica, sin raza; la ronda 1 (malinois) queda en esta carpeta como historial.
 - **¿Ya existe? (§2.2, §4.3–4.4):** `buscar-lucide.mjs dog puppy pet bark wolf fox paw` → `dog` (18; cara de frente, orejas caídas: no es un malinois ni sigue la familia de perfil), `paw-print` (11; dice «mascotas», no «Bruno»). Icono propio; `dog` como referencia en el banco.
 - **Consistencia (§2.4–2.5):** familia de animales de Uva ya existente: `rabbit` y `turtle` (silueta continua de perfil a la derecha, ojo de punto, una línea interior, feedback por modificador). Bruno sigue ese ADN.
 - **Vocabulario del dominio:** malinois = orejas triangulares altas y erguidas, hocico largo y recto, cuerpo atlético, patas largas, cola larga y fina que cuelga en curva suave (≠ zorro: cola tupida; ≠ lobo: más pesado; ≠ gato: hocico corto).
