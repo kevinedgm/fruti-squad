@@ -35,6 +35,11 @@ writeFileSync('presenta.svg', ilustracion({ id: 'presenta', titulo: 'Una persona
 | `agujero({x, y, rx, ry})` | agujero de tinta del que sale o al que entra algo |
 | `rayitas({cx, cy, r, n, de, a, largo})` | rayitas de «¡ta-dá!» en arco |
 | `objeto.grana({cx, base, t, rol, desplaza})` | la cochinilla de Grana (objeto de marca) |
+| `objeto.laptop({cx, y, w, h, lineas, error, rolError})` | laptop de frente sobre una superficie (y); líneas de código y una línea de error resaltada (`error` = índice, -1 sin error) → `{ svg, error, borde }` |
+| `objeto.mesa({x0, x1, y, suelo})` / `objeto.taburete({x, y, suelo, ancho})` | mesa de un pie (no cruza las piernas de quien se sienta a los lados) / taburete |
+| `objeto.bicho({x, y, s, rot, rol})` | el «bug»: insecto pequeño con cuerpo de acento |
+| `objeto.lupa({x, y, r, rot})` | lupa centrada en lo que examina → `{ svg, mango }` (mango = dónde va la mano, con `alcance`) |
+| `figura({…, alcance})` | `alcance: { cerca, lejos }`: la muñeca llega a un punto [x, y] (cinemática inversa, codo abajo), o `{ hacia: [x, y] }` para señalarlo (la mano mira al objetivo). Una pose cuyo muslo va casi horizontal se trata como sentada. El pulgar arriba se dibuja siempre derecho |
 | `ilustracion({id, w, h, titulo, decorativa, fondo, partes})` | envuelve: roles → tokens, accesibilidad, oscuro; `fondo` es `false` por defecto (fondo transparente, especificación); `true` pinta el rol `fondo` |
 
 Orden de pintado = orden de `partes`: torso → cabeza → brazo → objeto sostenido → mano (encima, M5) → rayitas.

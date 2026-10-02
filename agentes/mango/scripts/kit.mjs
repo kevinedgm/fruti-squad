@@ -304,12 +304,13 @@ function tubo(js, ws, rol) {
 const ir = (p, len, ang, dir) => [p[0] + dir * len * Math.cos(rad(ang)), p[1] + len * Math.sin(rad(ang))];
 /** Figura humana 3/4 (dir 1 mira a la derecha, -1 a la izquierda). (x, y) = suelo bajo la cadera. H = alto de cabeza.
  *  pose: nombre de POSES o un objeto con sus ángulos. cara/pelo/expresion: como cabeza(). complexion: slim | average | broad.
- *  enfasis: escala de las manos (CANON.enfasis). Devuelve { svg, manoCerca, manoLejos } (puntos de apoyo de las manos). */
+ *  enfasis: escala de las manos (CANON.enfasis). alcance: { cerca, lejos } = punto [x, y] al que llega cada muñeca, o { hacia: [x, y] } para señalar ese punto (anula la pose del brazo).
+ *  Devuelve { svg, manoCerca, manoLejos } (puntos de apoyo de las manos). */
 export function figura({ x, y, H = 40, dir = 1, pose = 'de-pie', cara = 'a', pelo = 'crop', expresion = 'neutral', complexion = 'average',
-  camisa = 'papel', pantalon = 'papel', zapato = 'tinta', gestos = gesto0, enfasis = 1 }) {
+  camisa = 'papel', pantalon = 'papel', zapato = 'tinta', gestos = gesto0, enfasis = 1, alcance = {} }) {
   const antes = escalaTrazo; escalaTrazo = Math.min(1, H / 54);   // la línea escala con la figura
   const P = typeof pose === 'string' ? POSES[pose] : pose; const C = CANON, g = C.grosor, k = COMPLEXION[complexion] || 1;
-  const sentado = P === POSES.sentado || pose === 'sentado';
+  const sentado = P.sentado ?? Math.abs(P.piernaCerca[0]) < 45;   // muslo casi horizontal = sentado: la cadera va a la altura del asiento
   const altoPierna = (C.muslo + C.pierna) * H * 0.98;
   const cadera = [x, sentado ? y - C.pierna * H * 1.02 : y - altoPierna];
   const inc = (px, py) => { const a = rad(P.inclina); return [cadera[0] + dir * (px * Math.cos(a) - py * Math.sin(a)), cadera[1] + px * Math.sin(a) + py * Math.cos(a)]; };
@@ -319,16 +320,25 @@ export function figura({ x, y, H = 40, dir = 1, pose = 'de-pie', cara = 'a', pel
   const hombroC = inc(-C.hombroAncho * H * k, -t + C.hombroBajo * H), hombroL = inc(C.hombroAncho * H * k * 0.8, -t + C.hombroBajo * H);
   const caderaC = inc(-C.caderaAncho * H * k, 0), caderaL = inc(C.caderaAncho * H * k, 0);
   const cuelloBase = inc(0.02 * H, -t + 0.1 * H);
-  const brazo = (hombro, ang, gesto) => { const e = ir(hombro, C.brazo * H, ang[0], dir), w = ir(e, C.antebrazo * H, ang[1], dir);
+  // alcance: la muñeca va a un punto (cinemática inversa de dos huesos, codo hacia abajo); si no llega, apunta hacia él estirado
+  const ik = (hombro, obj) => { const a = C.brazo * H, b = C.antebrazo * H; const dx = (obj[0] - hombro[0]) * dir, dy = obj[1] - hombro[1];
+    const d = Math.min(Math.hypot(dx, dy), (a + b) * 0.995), base = Math.atan2(dy, dx), al = Math.acos((a * a + d * d - b * b) / (2 * a * d));
+    const up = base + al; const e = [Math.cos(up) * a, Math.sin(up) * a]; const w = [Math.cos(base) * d, Math.sin(base) * d];
+    return [(up * 180) / Math.PI, (Math.atan2(w[1] - e[1], w[0] - e[0]) * 180) / Math.PI]; };
+  // { hacia: [x, y] }: señalar; la muñeca queda en la línea hombro→objetivo, a una mano de distancia (el gesto apunta al objetivo)
+  const hacia = (hombro, [tx, ty]) => { const d = Math.hypot(tx - hombro[0], ty - hombro[1]) || 1, r = Math.min((C.brazo + C.antebrazo) * H * 0.93, d - C.mano * H * enfasis * 0.9);
+    return [hombro[0] + ((tx - hombro[0]) / d) * r, hombro[1] + ((ty - hombro[1]) / d) * r]; };
+  const brazo = (hombro, ang0, gesto, obj0) => { const obj = obj0 && obj0.hacia ? hacia(hombro, obj0.hacia) : obj0; const ang = obj ? ik(hombro, obj) : ang0; const e = ir(hombro, C.brazo * H, ang[0], dir), w = ir(e, C.antebrazo * H, ang[1], dir);
     const largo = Math.max(...MANOS[gesto].contorno.map((p) => p[0]));
-    const m = mano({ x: w[0], y: w[1], rot: dir === 1 ? ang[1] : -ang[1], flip: dir === -1, s: (C.mano * H * enfasis) / largo, gesto });
+    const giro = gesto === 'pulgar' ? -8 : obj0 && obj0.hacia ? (Math.atan2(obj0.hacia[1] - w[1], (obj0.hacia[0] - w[0]) * dir) * 180) / Math.PI : ang[1];   // la mano que señala mira al objetivo; el pulgar arriba va siempre derecho (inclinado puede leerse como otro gesto)
+    const m = mano({ x: w[0], y: w[1], rot: dir === 1 ? giro : -giro, flip: dir === -1, s: (C.mano * H * enfasis) / largo, gesto });
     return { svg: tubo([hombro, e, w], [g.hombro * H * k, g.codo * H * k, g.muneca * H * k], camisa) + m.svg, apoyo: m.apoyo }; };
   const pierna = (cad, ang) => { const kn = ir(cad, C.muslo * H, ang[0], dir), a = ir(kn, C.pierna * H, ang[1], dir);
     const pl = C.pie * H, ph = 0.24 * H;
     const pie = [[-0.25 * pl, -ph * 0.6], [0.35 * pl, -ph * 0.7], [0.85 * pl, -ph * 0.35], [1.0 * pl, 0], [0.9 * pl, ph * 0.3], [-0.3 * pl, ph * 0.3]].map(([px, py]) => [a[0] + dir * px, a[1] + py]);
     return tubo([cad, kn, a], [g.cadera * H * k, g.rodilla * H * k, g.tobillo * H * k], pantalon) + relleno(zapato, pie, { temblor: 0.3 }) + linea(pie, { cerrado: true }); };
   const gL = gestos.lejos || 'manopla', gC = gestos.cerca || 'manopla';
-  const bL = brazo(hombroL, P.brazoLejos, gL), bC = brazo(hombroC, P.brazoCerca, gC);
+  const bL = brazo(hombroL, P.brazoLejos, gL, alcance.lejos), bC = brazo(hombroC, P.brazoCerca, gC, alcance.cerca);
   const torsoSvg = relleno(camisa, torsoPts, { temblor: 0.4 }) + linea(torsoPts, { cerrado: true });
   const s = H / 100, cuelloLargo = 30;
   const cab = cabeza({ x: cuelloBase[0] + dir * 4 * s, y: cuelloBase[1] - (C.cuello * H + 10 * s), s, flip: dir === -1, rot: ((P.cabeza || 0) + P.inclina) * dir, cara, pelo, expresion, cuelloLargo: C.cuello * 100 + 14 });
@@ -352,6 +362,49 @@ export const objeto = {
       pata([10.9, 6.3], [8.3, 2.9]), pata([13.1, 6.3], [15.7, 2.9]), pata([5.4, 13.4], [3.2, 12.4]), pata([5.1, 17.4], [2.9, 18]), pata([18.6, 13.4], [20.8, 12.4]), pata([18.9, 17.4], [21.1, 18])].join('');
   },
 };
+
+// Objetos de trabajo (escena de oficina). Todos con roles; y = la superficie o el suelo donde se apoyan.
+Object.assign(objeto, {
+  /** Laptop de frente: pantalla con líneas de código y, opcional, una línea de error resaltada (rol acento).
+   *  (cx, y) = centro del borde inferior sobre la mesa. Devuelve { svg, error, borde } (error = fin de la línea resaltada; borde = y del canto superior). */
+  laptop: ({ cx, y, w = 96, h = 64, lineas = [0.7, 0.45, 0.8, 0.55, 0.35], error = 2, rolError = 'acento' }) => {
+    const x0 = cx - w / 2, x1 = cx + w / 2, top = y - 7 - h;
+    const tapa = [[x0, y - 7], [x0, top + 4], [x0 + 4, top], [x1 - 4, top], [x1, top + 4], [x1, y - 7]];
+    const base = [[x0 - 2, y - 7], [x1 + 2, y - 7], [x1 + 10, y], [x0 - 10, y]];
+    const o = [relleno('papel', tapa, { temblor: 0.3 }), linea(tapa, { cerrado: true }), relleno('papel', base, { temblor: 0.2 }), linea(base, { cerrado: true })];
+    const ix = x0 + 10, paso = (h - 18) / Math.max(1, lineas.length - 1); let fin = null;
+    lineas.forEach((l, i) => { const ly = top + 10 + i * paso, sangria = i % 3 === 1 ? 10 : 0, lx = ix + sangria + l * (w - 26 - sangria);
+      if (i === error) { o.push(relleno(rolError, [[ix - 4, ly - 5], [lx + 5, ly - 5], [lx + 5, ly + 5], [ix - 4, ly + 5]], { temblor: 0.3 })); fin = [lx, ly]; }
+      o.push(linea([[ix + sangria, ly], [lx, ly]], { fina: true, temblor: 0.1 })); });
+    return { svg: o.join(''), error: fin, borde: top };
+  },
+  /** Mesa de un pie (no cruza las piernas de quien se sienta a los lados): tablero de x0 a x1 a la altura y, suelo en «suelo». */
+  mesa: ({ x0, x1, y, suelo, grueso = 8 }) => {
+    const c = (x0 + x1) / 2, tab = [[x0, y], [x1, y], [x1, y + grueso], [x0, y + grueso]];
+    return [linea([[c, y + grueso], [c, suelo - 3]]), linea([[c - 26, suelo], [c + 26, suelo]]), relleno('papel', tab, { temblor: 0.2 }), linea(tab, { cerrado: true })].join('');
+  },
+  /** Taburete: asiento a la altura y, centrado en x, patas abiertas hasta el suelo. */
+  taburete: ({ x, y, suelo, ancho = 46 }) => {
+    const as = [[x - ancho / 2, y], [x + ancho / 2, y], [x + ancho / 2, y + 7], [x - ancho / 2, y + 7]];
+    return [linea([[x - ancho * 0.32, y + 7], [x - ancho * 0.45, suelo]]), linea([[x + ancho * 0.32, y + 7], [x + ancho * 0.45, suelo]]),
+      linea([[x - ancho * 0.38, y + (suelo - y) * 0.6], [x + ancho * 0.38, y + (suelo - y) * 0.6]], { fina: true }), relleno('papel', as, { temblor: 0.2 }), linea(as, { cerrado: true })].join('');
+  },
+  /** Bicho (el «bug»): cuerpo ovalado de acento, cabeza, 3 patas por lado y antenas. (x, y) = centro; rot en grados (0 = cabeza a la derecha). */
+  bicho: ({ x, y, s = 1, rot = 0, rol = 'acento' }) => {
+    const T = (p) => tf(p, { x, y, s, rot });
+    const cuerpo = T([[-9, 0], [-7, -5], [0, -7], [6, -5], [8, 0], [6, 5], [0, 7], [-7, 5]]);
+    const patas = [-4, 0, 4].flatMap((px) => [[[px, -6], [px - 2, -11]], [[px, 6], [px - 2, 11]]]).map((p) => linea(T(p), { fina: true, temblor: 0 }));
+    return [...patas, linea(T([[11, -2], [16, -7]]), { fina: true, temblor: 0 }), linea(T([[11, 2], [16, 7]]), { fina: true, temblor: 0 }),
+      relleno(rol, cuerpo, { temblor: 0.2 }), linea(cuerpo, { cerrado: true, temblor: 0 }), linea(T([[0, -7], [0, 7]]), { fina: true, temblor: 0 }),
+      `<circle class="{c}__punto" cx="${f(T([[10, 0]])[0][0])}" cy="${f(T([[10, 0]])[0][1])}" r="${f(3.6 * s)}"/>`].join('');
+  },
+  /** Lupa: lente de radio r centrada en (x, y) y mango hacia «rot» grados (90 = abajo). Devuelve { svg, mango } (mango = dónde va la mano). */
+  lupa: ({ x, y, r = 14, rot = 135 }) => {
+    const ang = rad(rot), a = [x + Math.cos(ang) * r, y + Math.sin(ang) * r], b = [x + Math.cos(ang) * (r + 22), y + Math.sin(ang) * (r + 22)];
+    const lente = Array.from({ length: 12 }, (_, i) => [x + r * Math.cos((i * Math.PI) / 6), y + r * Math.sin((i * Math.PI) / 6)]);
+    return { svg: [linea([a, b], { ancho: GROSOR.linea * 1.8 * escalaTrazo }), linea(lente, { cerrado: true }), linea([[x - r * 0.45, y - r * 0.2], [x - r * 0.2, y - r * 0.5]], { fina: true, temblor: 0 })].join(''), mango: b };
+  },
+});
 
 // ---------- envoltorio ----------
 /** Envuelve las piezas: roles → tokens, fondo, accesibilidad y modo oscuro de los valores por defecto. */
