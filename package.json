@@ -11,6 +11,7 @@
     "bin/",
     ".fruti/",
     "!.fruti/icons/",
+    "!.fruti/illustrations/",
     "AGENTS.md",
     "skills/",
     "agentes/",

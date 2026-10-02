@@ -1,6 +1,6 @@
 # Redesign contract
 
-Loaded when redesign intent is detected or `.fruti/redesign/scope.yaml` exists, **before touching any surface**. Every member that can modify a surface (kiwi, lima, coco, mora, uva) reads it. Moved out of the always-loaded policy; the rules are unchanged.
+Loaded when redesign intent is detected or `.fruti/redesign/scope.yaml` exists, **before touching any surface**. Every member that can modify a surface (kiwi, lima, coco, mora, uva, mango) reads it. Moved out of the always-loaded policy; the rules are unchanged.
 
 ## Understand before changing
 

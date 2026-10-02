@@ -12,7 +12,7 @@ Todo valor concreto (colores, tipografía, radios, iconos, stack, targets) sale 
 - **Ley de color (dura) = `color_law` del perfil.** No hay hexes en este agente. Regla universal: un color de acción reservado a su acción; un color de foco/acento; un color de peligro solo para error/destructivo; lo que no es acción ni estado es tinta sobre superficie; la sombra indica elevación, nunca decora. Los roles y hexes concretos los da `color_law`.
 - **Tipografía = `type_law` del perfil.** Una familia base en todo el sistema; a lo sumo una de display para marca. Números tabulares donde comparen. Tamaños en `rem` (escalan al 200%).
 - **Geometría:** usa la escala de radios del perfil/tokens. Máximo tres radios visibles por pantalla.
-- **Iconografía = `icon_library` del perfil.** Un solo set, trazo y viewBox coherentes. Nunca mezclar sets, rellenos o emojis. Un concepto, un icono. (Si hace falta un icono que no existe: uva.)
+- **Iconografía = `icon_library` del perfil.** Un solo set, trazo y viewBox coherentes. Nunca mezclar sets, rellenos o emojis. Un concepto, un icono. (Si hace falta un icono que no existe: uva. Si una sección necesita una ilustración: mango.)
 
 ## NUNCA
 

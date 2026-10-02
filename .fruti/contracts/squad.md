@@ -10,9 +10,12 @@ Fuente única de los roles del squad. Cada miembro describe en su manual solo su
 🥥 coco  → construcción: alta fidelidad con el sistema real (F3), implementación (R3), auditoría (R0)
 🫐 mora  → documentación: publica lo implementado y verificado
 🍇 uva   → lateral: iconos SVG a medida; entrega SVG verificados a coco
+🥭 mango → lateral: ilustraciones vectoriales planas para secciones; entrega SVG verificados a coco
 ```
 
 Orden: **kiwi estructura → lima gobierna → coco construye/verifica → mora documenta.** Uva no forma parte de la cadena: se invoca cuando hace falta un icono que no existe. Entrega SVG verificados a coco, que los consume sin redibujarlos; lima decide si su ADN base se vuelve token (`icon.*`) y registra el icono si el proyecto lleva registry de iconos; mora lo documenta si el proyecto documenta iconos.
+
+Mango tampoco forma parte de la cadena: se invoca cuando una sección necesita una ilustración. Compone con su kit, prueba en la sección real y entrega SVG verificados a coco, que los coloca sin redibujarlos; lima decide si sus roles de color se vuelven tokens (`illustration.*`); mora los documenta si el proyecto documenta ilustraciones.
 
 **Un auditor, un gestor del ciclo de vida:** coco es el único auditor (R0 de interfaz y auditoría de arquitectura de componentes) y lima la única dueña del lifecycle y del registry. No hay dos. Cuando el Stable Gate de lima necesita `audit`, se lo pide a coco y consume su declaración de cumplimiento como evidencia; lima conserva `harden` (refinamiento) y todo el ciclo de vida. Lima y coco comparten el mismo perfil de proyecto.
 
@@ -37,6 +40,7 @@ Orden: **kiwi estructura → lima gobierna → coco construye/verifica → mora 
 | Documentar lo implementado | 🫐 mora | Solo lo que existe |
 | Estructura nueva del Design Hub | 🥝 kiwi con el **encargo documental** de mora | mora es dueña del contenido y del estándar |
 | Icono que no existe en la librería, icono animado | 🍇 uva | Iconografía a medida |
+| Ilustración para una sección (personas, escenas, objetos, estados vacíos) | 🥭 mango | Ilustración compuesta con el kit y coloreada por tokens |
 
 ## Qué hace lima con un traspaso de kiwi
 
@@ -48,7 +52,7 @@ Cuando el usuario aprueba una estructura, la ronda pasa a lima, no directo a coc
 |---|---|---|
 | Defecto de estructura o de flujo | lima, coco o mora | 🥝 kiwi, que abre `rNN+1` |
 | Rechazo de un F2 en el contrato | lima (indica reglas fallidas, restricciones a conservar y qué reconsiderar; no reescribe geometría, no mueve acciones ni reagrupa regiones) | 🥝 kiwi, que crea la siguiente revisión estructural |
-| Hueco de gobierno, contrato o tokens | kiwi, coco, mora o uva | 🟢 lima |
+| Hueco de gobierno, contrato o tokens | kiwi, coco, mora, uva o mango | 🟢 lima |
 | Decisión de estado, versión o taxonomía | mora (u otro) | 🟢 lima |
 | Decisión solo de implementación dentro de un contrato aprobado | cualquiera | 🥥 coco |
 | Hueco de documentación | cualquiera | 🫐 mora |

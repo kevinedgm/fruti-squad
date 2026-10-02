@@ -36,6 +36,7 @@ El Squad resuelve internamente quién debe actuar, qué contexto necesita y qué
 | 3 | 🥥 Coco | Construcción: F3, implementación y auditoría canónica |
 | 4 | 🫐 Mora | Documentación: publica únicamente lo implementado y verificado |
 | — | 🍇 Uva (opcional) | Iconos SVG a medida desde una foto o descripción, con movimiento CSS opcional |
+| — | 🥭 Mango (opcional) | Ilustraciones vectoriales planas para secciones (personas, escenas, objetos), coloreadas por tokens |
 
 Regla principal:
 
@@ -45,7 +46,7 @@ Kiwi estructura → Lima gobierna → Coco construye/verifica → Mora documenta
 
 No hay dos auditores ni dos propietarios del lifecycle.
 
-Uva no forma parte de la cadena: es un miembro lateral que entrega iconos verificados a Coco.
+Uva y Mango no forman parte de la cadena: son miembros laterales que entregan iconos e ilustraciones verificados a Coco.
 
 ---
 
@@ -93,15 +94,15 @@ Con `--target claude` el instalador deja:
 
 Después basta con pedir en lenguaje natural ("rediseña este formulario") o invocar `kiwi`, `lima`, `coco` o `mora-docs`.
 
-### Uva (opcional)
+### Uva y Mango (opcionales)
 
-Uva no se instala por defecto. `--only` reemplaza la lista por defecto, así que nombra a todo el Squad:
+Uva y Mango no se instalan por defecto. `--only` reemplaza la lista por defecto, así que nombra a todo el Squad:
 
 ```bash
-npx github:kevinedgm/fruti-squad install --target claude --only kiwi,lima,coco,mora,uva
+npx github:kevinedgm/fruti-squad install --target claude --only kiwi,lima,coco,mora,uva,mango
 ```
 
-Luego: "hazme un icono de esta tina de fermentación" (con la foto adjunta) o "anima este icono".
+Luego: "hazme un icono de esta tina de fermentación" (con la foto adjunta), "anima este icono" o "hazme una ilustración de una persona dando información para la sección de ayuda".
 
 ---
 
@@ -329,7 +330,8 @@ La capa runtime se organiza así:
 │   ├── lima.yaml
 │   ├── coco.yaml
 │   ├── mora.yaml
-│   └── uva.yaml
+│   ├── uva.yaml
+│   └── mango.yaml
 ├── state/
 │   └── current.json
 ├── handoffs/
@@ -426,6 +428,17 @@ Trabaja por etapas:
 6. **Entregar** la elegida.
 
 Reglas, estándares y patrones: `agentes/uva/references/`. Ejemplo de propuesta: `agentes/uva/examples/propuesta-distilling.html`.
+
+## 🥭 Mango
+
+Parte de la sección y lo que debe contar («una persona explicando un panel, para la sección de ayuda»). No dibuja a mano alzada: **compone** con un kit de piezas geométricas (`agentes/mango/scripts/kit.mjs`: personas en poses, objetos, fondos) y cada forma lleva un **rol de color** (`acento`, `piel`, `forma`…) que los tokens del proyecto rellenan.
+
+1. **Entender** la sección, el mensaje, quién aparece y qué hace.
+2. **Componer** 2–3 escenas con el kit; lo que falta se añade al kit como pieza reutilizable.
+3. **Evaluar** con `check-ilustracion.mjs` y un banco que pone la escena en su sección real: escritorio, móvil, oscuro y tres temas.
+4. **Proponer** una recomendación y **entregar** la elegida.
+
+Reglas y contrato: `agentes/mango/references/`. Ejemplo: `agentes/mango/examples/`.
 
 ---
 

@@ -9,7 +9,7 @@ Do not preload agent/skill reference directories, and do not recursively read `r
 For every request:
 1. Identify the active artifact/surface and requested operation from natural language.
 2. Read `.fruti/state/current.json` when present, then the active Lima project profile and relevant registry entry.
-3. Select the owning agent and phase using `.fruti/runtime/<agent>.yaml` (kiwi, lima, coco, mora, uva); read only the active owner's contract, and open the full AGENT/SKILL manual only if that contract cannot resolve the operation.
+3. Select the owning agent and phase using `.fruti/runtime/<agent>.yaml` (kiwi, lima, coco, mora, uva, mango); read only the active owner's contract, and open the full AGENT/SKILL manual only if that contract cannot resolve the operation.
 4. Read ONLY the references the runtime contract lists for that operation. A filename mentioned in an AGENT/SKILL document is not an instruction to load it.
 5. Prefer machine-readable contracts/manifests and targeted searches over rereading prose standards.
 6. Execute the work.
