@@ -23,3 +23,5 @@ svg.addEventListener('animationend', (e) => {
 3. **Con texto** cuando informe: `[icono] Bruno tiene un aviso` dentro de `role="status"`; el SVG queda oculto (`aria-hidden="true"`).
 4. **Botón solo con icono:** `<button type="button" aria-label="Abrir Bruno">` (área 44×44); el nombre va en el botón, no en el SVG.
 5. **Safari y otros navegadores que no animan la forma** (`d`): el ladrido se convierte en un leve impulso del icono entero; la cola funciona igual (es un giro).
+
+6. **PNG (512×512, icono a 360 px):** `bruno-claro.png` (fondo blanco), `bruno-oscuro.png` (fondo negro) — sirven como avatar con recorte circular — y `bruno-transparente.png` (trazo negro sin fondo, para fondos claros). Como imagen fija no se anima.

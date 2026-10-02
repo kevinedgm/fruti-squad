@@ -40,7 +40,10 @@
       "uso.md",
       "prueba.html",
       "secuencias.png",
-      "propuesta/"
+      "propuesta/",
+      "bruno-claro.png",
+      "bruno-oscuro.png",
+      "bruno-transparente.png"
     ],
     "unresolved": [
       "sin prueba con personas (B1 por banco)"
