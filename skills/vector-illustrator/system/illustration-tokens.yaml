@@ -1,0 +1,12 @@
+illustration:
+  stroke: {primary: "#111111", weight: medium, cap: round, join: round, variation: subtle}
+  surface: {base: "#FFFDF5", use: selective}
+  accent: {primary: "#F8BC32", max_simultaneous: 3}
+  geometry: {precision: organic, symmetry: low, corners: soft, perspective: flat}
+  composition: {negative_space: high, focal_points: 1, depth_layers: 2}
+  effects: {gradient: false, realistic_shadow: false, texture: false, photorealism: false}
+defaults:
+  background: transparent
+  accent: yellow
+  detail: low
+  text: false
