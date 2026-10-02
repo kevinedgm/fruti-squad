@@ -86,7 +86,7 @@ export function trazoOrganico(pts, { cerrado = false, ancho = 4.2, temblor = 0.8
     const nx = -dy / d, ny = dx / d; const s0 = acum[i];
     // presión: entra y sale fino (salida más larga que la entrada) y ondula despacio a lo largo del trazo
     const entrada = cerrado ? 1 : Math.min(1, s0 / ataque), salida = cerrado ? 1 : Math.min(1, (total - s0) / cola);
-    const presion = (0.4 + 0.6 * Math.min(entrada, salida)) * (1 + onda * 0.16 * Math.sin((s0 / 38) * 6.28 + fase));
+    const presion = (0.16 + 0.84 * Math.min(entrada, salida)) * (1 + onda * 0.16 * Math.sin((s0 / 38) * 6.28 + fase));
     const h = (ancho / 2) * presion;
     const grano = () => (rnd() - 0.5) * (0.12 + 0.33 * escala);   // borde áspero
     L.push([c[i][0] + nx * (h + grano()), c[i][1] + ny * (h + grano())]);
