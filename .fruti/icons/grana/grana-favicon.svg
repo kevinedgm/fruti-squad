@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="grana-logo grana-favicon" role="img" aria-label="Grana">
+  <style>.grana-favicon{--grana-c:var(--grana-color,#a3123a)}@supports (color: color(display-p3 1 0 0)){.grana-favicon{--grana-c:var(--grana-color,color(display-p3 .62 .05 .2))}}.grana-favicon__cuerpo{fill:var(--grana-c)}.grana-favicon__trazo{fill:none;stroke:var(--grana-c);stroke-width:1.35;stroke-linecap:round}.grana-favicon__g{fill:none;stroke:var(--grana-c);stroke-width:4.2;stroke-dasharray:17.4 3.2}.grana-favicon__barra{fill:none;stroke:var(--grana-c);stroke-width:4.2}</style>
+  <!-- Grana · versión favicon (≤24 px): sin patitas. Color: la variable CSS grana-color (por defecto carmín) -->
+  <defs><mask id="grana-favicon-m"><rect width="24" height="24" fill="#fff"/><path d="M3 12.00Q12 13.70 21 12.00" stroke="#000" stroke-width="1.1" fill="none"/><path d="M3 15.40Q12 17.10 21 15.40" stroke="#000" stroke-width="1.1" fill="none"/><path d="M3 18.80Q12 20.50 21 18.80" stroke="#000" stroke-width="1.1" fill="none"/></mask></defs>
+  <path class="grana-favicon__cuerpo" d="M12 4.2C12 4.2 19 11.2 19 15.5C19 19.4 15.9 22.2 12 22.2C8.1 22.2 5 19.4 5 15.5C5 11.2 12 4.2 12 4.2Z" mask="url(#grana-favicon-m)"/>
+  <path class="grana-favicon__trazo" d="M10.9 6.3L8.3 2.9M13.1 6.3L15.7 2.9"/>
+</svg>

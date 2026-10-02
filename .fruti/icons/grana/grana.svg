@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="grana-logo grana" role="img" aria-label="Grana">
+  <style>.grana{--grana-c:var(--grana-color,#a3123a)}@supports (color: color(display-p3 1 0 0)){.grana{--grana-c:var(--grana-color,color(display-p3 .62 .05 .2))}}.grana__cuerpo{fill:var(--grana-c)}.grana__trazo{fill:none;stroke:var(--grana-c);stroke-width:1.35;stroke-linecap:round}.grana__g{fill:none;stroke:var(--grana-c);stroke-width:4.2;stroke-dasharray:17.4 3.2}.grana__barra{fill:none;stroke:var(--grana-c);stroke-width:4.2}</style>
+  <!-- Grana · gota de tinte que es la cochinilla. El color lo pone el tema: la variable CSS grana-color (por defecto carmín, Display P3 con respaldo sRGB) -->
+  <defs><mask id="grana-m"><rect width="24" height="24" fill="#fff"/><path d="M3 12.00Q12 13.70 21 12.00" stroke="#000" stroke-width="1.1" fill="none"/><path d="M3 15.40Q12 17.10 21 15.40" stroke="#000" stroke-width="1.1" fill="none"/><path d="M3 18.80Q12 20.50 21 18.80" stroke="#000" stroke-width="1.1" fill="none"/></mask></defs>
+  <path class="grana__cuerpo" d="M12 4.2C12 4.2 19 11.2 19 15.5C19 19.4 15.9 22.2 12 22.2C8.1 22.2 5 19.4 5 15.5C5 11.2 12 4.2 12 4.2Z" mask="url(#grana-m)"/>
+  <path class="grana__trazo" d="M10.9 6.3L8.3 2.9M13.1 6.3L15.7 2.9M5.4 13.4L3.2 12.4M5.1 17.4L2.9 18M18.6 13.4L20.8 12.4M18.9 17.4L21.1 18"/>
+</svg>
