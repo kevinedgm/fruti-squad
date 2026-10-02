@@ -20,7 +20,7 @@
       .uva-turtle--esconder{--uva-turtle-cuerpo:none;--uva-turtle-banda:none;--uva-turtle-ojo:none;animation:none}
     }
   </style>
-  <!-- turtle · se esconde y se asoma (feedback) con la clase uva-turtle--esconder -->
+  <!-- turtle · se esconde y se asoma (feedback) con la clase uva-turtle (modificador esconder) -->
   <path class="uva-turtle__cuerpo" d="M2.0 16.0C3.1 15.8 3.7 15.3 3.8 14.6C3.9 9.0 6.9 5.0 10.7 5.0C14.5 5.0 17.2 8.6 17.4 12.6C18.1 11.4 18.9 10.4 20.1 10.4C21.3 10.4 21.9 11.4 21.7 12.4C21.5 13.4 20.5 14.0 19.3 14.0C18.7 14.1 18.2 14.4 17.9 14.8C18.0 16.2 17.9 17.8 17.5 19.0L15.1 19.0C15.1 17.6 14.9 15.8 14.6 14.8C12.1 14.9 10.1 14.9 8.1 14.7C7.9 16.2 7.8 17.8 7.9 19.0L5.3 19.0C4.9 18.0 4.7 16.8 4.5 15.8C3.9 16.2 2.9 16.4 2.0 16.0Z"/>
   <path class="uva-turtle__banda" d="M4.3 11.4C7.9 10.4 13.5 10.4 17.2 11.3"/>
   <circle class="uva-turtle__ojo" cx="20.5" cy="11.8" r="0.75"/>

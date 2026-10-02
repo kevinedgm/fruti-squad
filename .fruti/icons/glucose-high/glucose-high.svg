@@ -13,7 +13,7 @@
       .uva-glucose-high--caer{--uva-glucose-high-gota:none;--uva-glucose-high-onda:none}
     }
   </style>
-  <!-- glucose-high · cae, se aplasta y suelta una onda al entrar en el estado (clase uva-glucose-high--caer) -->
+  <!-- glucose-high · cae, se aplasta y suelta una onda al entrar en el estado (clase uva-glucose-high (modificador caer)) -->
   <path class="uva-glucose-high__onda" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>
   <g class="uva-glucose-high__cuerpo">
     <path class="uva-glucose-high__gota" d="M12 21.70A7.7 7.7 0 0 0 19.70 14.0C19.70 11.90 18.60 10.00 16.00 8.40S12.50 4.80 12 2.2C11.50 4.80 10.00 7.20 8.00 8.40S4.30 11.90 4.30 14.0A7.7 7.7 0 0 0 12 21.70Z"/>

@@ -13,7 +13,7 @@
       .uva-transcribing--iniciar{--uva-transcribing-onda:none;--uva-transcribing-punto:none}
     }
   </style>
-  <!-- transcribing · al empezar el dictado salen ondas de voz y aparece el punto (clase uva-transcribing--iniciar) -->
+  <!-- transcribing · al empezar el dictado salen ondas de voz y aparece el punto (clase uva-transcribing (modificador iniciar)) -->
   <path class="uva-transcribing__onda" d="M16.45 3.97A7.6 7.6 0 0 1 16.45 12.03M3.55 3.97A7.6 7.6 0 0 0 3.55 12.03"/>
   <rect class="uva-transcribing__mic" x="7.00" y="2.5" width="6" height="11.0" rx="3.0"/>
   <path class="uva-transcribing__soporte" d="M15.50 9.50V10.50A5.50 5.50 0 0 1 4.50 10.50V9.50M10 16.00V20.00"/>

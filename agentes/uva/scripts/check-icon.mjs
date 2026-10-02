@@ -85,6 +85,9 @@ function check(file) {
   const r = [];
   const add = (code, ok, level, msg) => r.push({ code, ok, level, msg });
 
+  // XML prohíbe «--» dentro de un comentario: inline en HTML pasa, pero como <img>, favicon o archivo no se abre.
+  const badComments = [...src.matchAll(/<!--([\s\S]*?)-->/g)].filter((m) => /--|-$/.test(m[1])).length;
+  add('X1', badComments === 0, 'bloqueante', `comentarios XML válidos, sin «--» dentro${badComments ? ` (${badComments} con «--»: el archivo no abre como <img> ni favicon)` : ''}`);
   add('A1', attr(root, 'viewBox') === '0 0 24 24', 'bloqueante', 'viewBox="0 0 24 24"');
   add('A1b', !attr(root, 'width') && !attr(root, 'height'), 'recomendado', 'sin width/height fijos en la raíz');
   add('A3', attr(root, 'stroke-width') !== null && !/<(?!svg\b)[a-z]+\b[^>]*\sstroke-width=/.test(body), 'bloqueante', 'un solo stroke-width, en la raíz');

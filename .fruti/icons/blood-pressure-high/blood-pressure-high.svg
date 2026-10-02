@@ -15,7 +15,7 @@
       .uva-blood-pressure-high--latir{--uva-blood-pressure-high-latido:none;--uva-blood-pressure-high-onda:none;--uva-blood-pressure-high-onda2:none}
     }
   </style>
-  <!-- blood-pressure-high · late y emite ondas al entrar en el estado con la clase uva-blood-pressure-high--latir -->
+  <!-- blood-pressure-high · late y emite ondas al entrar en el estado con la clase uva-blood-pressure-high (modificador latir) -->
   <path class="uva-blood-pressure-high__onda" d="M12 20.01C9.56 17.85 3.07 13.71 3.07 9.29C3.07 6.57 5.14 4.59 7.68 4.59C9.56 4.59 11.06 5.63 12 7.13C12.94 5.63 14.44 4.59 16.32 4.59C18.86 4.59 20.93 6.57 20.93 9.29C20.93 13.71 14.44 17.85 12 20.01Z"/>
   <path class="uva-blood-pressure-high__onda2" d="M12 20.01C9.56 17.85 3.07 13.71 3.07 9.29C3.07 6.57 5.14 4.59 7.68 4.59C9.56 4.59 11.06 5.63 12 7.13C12.94 5.63 14.44 4.59 16.32 4.59C18.86 4.59 20.93 6.57 20.93 9.29C20.93 13.71 14.44 17.85 12 20.01Z"/>
   <path class="uva-blood-pressure-high__corazon" d="M12 20.01C9.56 17.85 3.07 13.71 3.07 9.29C3.07 6.57 5.14 4.59 7.68 4.59C9.56 4.59 11.06 5.63 12 7.13C12.94 5.63 14.44 4.59 16.32 4.59C18.86 4.59 20.93 6.57 20.93 9.29C20.93 13.71 14.44 17.85 12 20.01Z"/>

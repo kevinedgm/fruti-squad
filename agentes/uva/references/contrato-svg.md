@@ -6,6 +6,7 @@ Reglas que cumple todo icono de Uva. La columna **Verifica** indica el código d
 
 | Regla | Verifica |
 |---|---|
+| XML válido: ningún comentario `<!-- -->` contiene `--` (p. ej. el nombre de una clase `uva-<id>--<mod>` o una variable `--uva-…`). Inline en HTML pasa, pero como `<img>`, favicon o archivo no abre | X1 |
 | `viewBox="0 0 24 24"` | A1 |
 | Sin `width`/`height` fijos en el archivo final | A1b (recomendado) |
 | En la raíz: `fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"` | COL1, A3, A4 |
