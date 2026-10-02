@@ -87,6 +87,10 @@ Claude no tiene generador de imagen; dibujar figuras coordenada a coordenada da 
    (dependencias en un venv: `pip install potracer pillow numpy`). Sale un path por capa de color con su token: superficie, gris secundario (solo zonas grandes), acento y tinta.
 4. **Auditar el SVG** renderizado con las seis puntuaciones; si algo queda <4, vuelve a `fix.py` con la causa nombrada.
 
+Trampas del generador ya resueltas en los scripts:
+- **Transparencia falsa:** el fondo «transparente» llega pintado como cuadros grises (RGB sin alfa) → `vectoriza.py --quitar-cuadros`.
+- **Varias en una hoja** (2×2): `scripts/parte-hoja.py` las separa por piezas conectadas (un objeto que cruza la línea media no se parte) y calcula el recorte cuadrado anclado al corte del brazo (`cortes.json` → `--recorte`).
+
 Límites: el SVG agrupa por color, no por `character`/`props`/`motion`; mover una parte exige editar a mano. Un gris fuera de tokens se declara en `palette_tokens`.
 
 ## En Fruti Squad

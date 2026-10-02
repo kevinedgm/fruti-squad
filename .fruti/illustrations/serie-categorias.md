@@ -2,22 +2,30 @@
 
 Marco común para que todas las categorías de la app se lean como una familia en la cuadrícula.
 
-- **Variante:** spot, 1:1, fondo transparente.
-- **Encuadre:** una persona de la cintura hacia arriba, centrada, de tres cuartos; cabeza siempre a la misma altura; cortada solo por el borde inferior.
-- **Señal de categoría:** la herramienta del oficio en la mano comunicativa (1.25×). El amarillo #F8BC32 va **solo en la herramienta**: a tamaño pequeño la categoría se reconoce por el objeto.
-- **Variedad:** cambian cabello (short-wave, crop, curls, bob, long, bun, ponytail), complexión, edad y ropa de trabajo; la presentación de género no depende solo del cabello.
-- **Tamaño mínimo:** 96 px. Por debajo la línea queda bajo 1 px; engrosar la tinta al vectorizar se probó y se descartó (tapa el acento y funde los rasgos).
+- **Variante:** object (sin personaje): la mano del oficio y su herramienta. 1:1, fondo transparente.
+- **Sin manos flotantes:** la mano entra desde la esquina inferior derecha con el antebrazo cortado por el borde real (en «Uñas», la mano de la clienta entra además por la izquierda).
+- **Señal de categoría:** la herramienta, en diagonal y centrada. El amarillo #F8BC32 va **solo en la parte que identifica el oficio**; 2–3 marcas cinéticas negras junto a la herramienta.
+- **Escala pareja:** las manos ocupan lo mismo en todas las tarjetas.
+- **Tamaño mínimo:** 96 px (engrosar la tinta al vectorizar se probó y se descartó: tapa el acento y funde detalles).
+- La versión con persona (`estilista-persona`) queda como alternativa para piezas grandes (hero, onboarding).
 
-## Plantilla de prompt
+## Prompt
+Pegar la base y añadir la línea de la categoría. Pedir varias en una hoja 2×2 ahorra rondas: `parte-hoja.py` las separa.
+
 ```
-Ilustración doodle plana, vector-ready, para la categoría «<CATEGORÍA>» de una app de reservas de servicios. <PERSONA: presentación, edad>, de la cintura hacia arriba, centrada, mirando de tres cuartos, <EXPRESIÓN>. Sostiene <HERRAMIENTA> <CÓMO, bien visible y legible>; la mano de la herramienta un poco más grande de lo normal (1.25×). Lleva <ROPA DE TRABAJO>. Cabello <PEINADO> como masa negra sólida.
+Ilustración doodle plana, vector-ready, icono-ilustración para una categoría de una app de reservas de servicios. Sin personaje completo: solo la mano (o manos) y el objeto del oficio. La mano entra desde la esquina inferior derecha, con el antebrazo cortado exactamente por el borde de la imagen (nunca una mano flotante), y sostiene el objeto en diagonal, centrado. Mano un poco grande y expresiva, dedos simples, juntos y legibles, uñas sin pintar salvo que se indique.
 
-Estilo: contorno negro #111111 grueso, uniforme y redondeado, curvas orgánicas; cabeza ligeramente alargada; nariz como una línea angular; oreja simplificada visible; ojos simples; boca con una curva corta; mandíbula y cuello separados; piel y ropa en blanco cálido #FFFDF5. Un solo acento amarillo #F8BC32: solo en <PARTE DE LA HERRAMIENTA>. Dos o tres marcas cinéticas cortas negras junto a la herramienta.
+Estilo: contorno negro #111111 grueso, uniforme y redondeado, curvas orgánicas; piel y superficies en blanco cálido #FFFDF5; masas sólidas en negro; un solo acento amarillo #F8BC32 (donde se indica abajo). Dos o tres marcas cinéticas cortas negras junto al objeto.
 
-Reglas: fondo transparente; colores planos; sin degradados, sombras, texturas, texto ni símbolos; sin accesorios (aretes, lentes, relojes, joyas); sin fondo ni muebles; detalle bajo; figura completa dentro del cuadro con margen uniforme, cortada solo por el borde inferior a la altura de la cintura. PNG cuadrado 1024×1024.
+Reglas: fondo transparente; colores planos; sin degradados, sombras, texturas, texto ni símbolos; sin accesorios (anillos, relojes, pulseras); sin fondo ni muebles; detalle bajo; margen uniforme. PNG cuadrado 1024×1024.
+
+Tema:
 ```
 
 ## Hechas
-| Categoría | Persona | Herramienta (acento) |
+| Categoría | Tema (línea del prompt) | Acento |
 |---|---|---|
-| estilista | femenina, bob, delantal | tijeras (aros) |
+| estilista | mano con tijeras de peluquería abiertas, pulgar y un dedo en los aros | aros |
+| unas | mano relajada desde la izquierda; otra mano le pinta la uña del índice con el pincel del esmalte | uñas pintadas + punta del pincel |
+| barberia | mano con navaja de barbero clásica abierta | mango |
+| tatuajes | mano con máquina de tatuar clásica de bobinas, aguja hacia abajo | bobinas |

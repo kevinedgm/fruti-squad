@@ -1,5 +1,5 @@
 {
-  "id": "categoria-estilista",
+  "id": "categoria-tatuajes",
   "variant": "object",
   "serie": "categorias-servicios",
   "ratio": "1:1",
@@ -8,11 +8,11 @@
   "palette_tokens": [
     "stroke.primary #111111",
     "surface.base #FFFDF5",
-    "accent.primary #F8BC32 (aros de las tijeras)"
+    "accent.primary #F8BC32 (bobinas de la máquina)"
   ],
-  "alt_text": "Mano sosteniendo unas tijeras de peluquería",
+  "alt_text": "Mano sosteniendo una máquina de tatuar",
   "files": [
-    "categoria-estilista.svg"
+    "categoria-tatuajes.svg"
   ],
   "source": "../categorias-lote-1 (hoja 2×2 de ChatGPT; parte-hoja.py + vectoriza.py)",
   "min_size_px": 96,
@@ -21,7 +21,7 @@
     "composition": 4,
     "narrative_clarity": 5,
     "style_consistency": 5,
-    "small_size_legibility": 4,
+    "small_size_legibility": 5,
     "originality": 4
   }
 }

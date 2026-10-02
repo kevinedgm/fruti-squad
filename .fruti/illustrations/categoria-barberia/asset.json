@@ -1,5 +1,5 @@
 {
-  "id": "categoria-estilista",
+  "id": "categoria-barberia",
   "variant": "object",
   "serie": "categorias-servicios",
   "ratio": "1:1",
@@ -8,18 +8,18 @@
   "palette_tokens": [
     "stroke.primary #111111",
     "surface.base #FFFDF5",
-    "accent.primary #F8BC32 (aros de las tijeras)"
+    "accent.primary #F8BC32 (mango de la navaja)"
   ],
-  "alt_text": "Mano sosteniendo unas tijeras de peluquería",
+  "alt_text": "Mano sosteniendo una navaja de barbero",
   "files": [
-    "categoria-estilista.svg"
+    "categoria-barberia.svg"
   ],
   "source": "../categorias-lote-1 (hoja 2×2 de ChatGPT; parte-hoja.py + vectoriza.py)",
   "min_size_px": 96,
   "scores": {
     "anatomy": 4,
     "composition": 4,
-    "narrative_clarity": 5,
+    "narrative_clarity": 4,
     "style_consistency": 5,
     "small_size_legibility": 4,
     "originality": 4

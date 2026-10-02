@@ -20,7 +20,7 @@ steps:   # cada paso carga solo lo que cita
   5_plan:      [skills/mango/schemas/scene.schema.json, skills/mango/system/scene-grammar.md]
   6_compose:   [skills/mango/system/composition.md]
   7_style:     [skills/mango/system/illustration-tokens.yaml, skills/mango/system/visual-language.md, skills/mango/system/stroke.md, skills/mango/system/color.md]
-  8_render:    [skills/mango/scripts/vectoriza.py, skills/mango/system/svg-rules.md]   # SKILL.md#render-generar-fuera-vectorizar-aquí
+  8_render:    [skills/mango/scripts/vectoriza.py, skills/mango/scripts/parte-hoja.py, skills/mango/system/svg-rules.md]   # SKILL.md#render-generar-fuera-vectorizar-aquí
   9_gates:     [skills/mango/system/quality-gates.md, "skills/mango/examples/{approved,rejected}/*.md"]
   10_deliver:  [skills/mango/schemas/asset.schema.json]
 gates: { scores: [anatomy, composition, narrative_clarity, style_consistency, small_size_legibility, originality], min: 4, verdict_requires: rendered_preview }

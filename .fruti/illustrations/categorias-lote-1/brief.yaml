@@ -1,0 +1,9 @@
+# Lote 1 de la serie de categorías (variante object): una hoja 2×2 generada con ChatGPT.
+serie: categorias-servicios     # ../serie-categorias.md
+variant: object
+categorias: [estilista, unas, barberia, tatuajes]
+background: transparent         # el generador pintó cuadros grises: --quitar-cuadros
+accent: yellow
+# reproducir (desde esta carpeta):
+#   python skills/mango/scripts/parte-hoja.py fuente.png --rejilla 2x2 --nombres estilista,unas,barberia,tatuajes --ancla br,lbr,br,br --quitar-cuadros
+#   python skills/mango/scripts/vectoriza.py fuente-<n>.png categoria-<n>.svg --id categoria-<n> --titulo "<alt>" --recorte=<cortes.json[n]>

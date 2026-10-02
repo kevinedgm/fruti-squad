@@ -1,0 +1,13 @@
+{
+  "id": "estilista-persona",
+  "variant": "spot",
+  "ratio": "1:1",
+  "background": "transparent",
+  "characters": 1,
+  "palette_tokens": ["stroke.primary #111111", "surface.base #FFFDF5", "accent.primary #F8BC32"],
+  "alt_text": "Estilista sonriente con tijeras y peine",
+  "files": ["estilista-persona.svg", "fuente.webp", "brief.yaml"],
+  "source": "generada con ChatGPT (usuario); vectorizada con skills/mango/scripts/vectoriza.py; corrección: recorte cuadrado para que el delantal toque el borde inferior",
+  "min_size_px": 96,
+  "scores": { "anatomy": 4, "composition": 4, "narrative_clarity": 5, "style_consistency": 5, "small_size_legibility": 4, "originality": 4 }
+}

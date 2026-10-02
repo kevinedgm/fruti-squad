@@ -8,4 +8,4 @@ props: [tijeras, peine]
 accent: yellow                  # solo en los aros de las tijeras
 background: transparent
 ratio: "1:1"
-# reproducir: python skills/mango/scripts/vectoriza.py fuente.webp categoria-estilista.svg --id categoria-estilista --titulo "Estilista sonriente con tijeras y peine" --recorte 37,0,1217,1180
+# reproducir: python skills/mango/scripts/vectoriza.py fuente.webp estilista-persona.svg --id estilista-persona --titulo "Estilista sonriente con tijeras y peine" --recorte 37,0,1217,1180

@@ -1,5 +1,5 @@
 {
-  "id": "categoria-estilista",
+  "id": "categoria-unas",
   "variant": "object",
   "serie": "categorias-servicios",
   "ratio": "1:1",
@@ -8,11 +8,11 @@
   "palette_tokens": [
     "stroke.primary #111111",
     "surface.base #FFFDF5",
-    "accent.primary #F8BC32 (aros de las tijeras)"
+    "accent.primary #F8BC32 (uñas pintadas y punta del pincel)"
   ],
-  "alt_text": "Mano sosteniendo unas tijeras de peluquería",
+  "alt_text": "Una mano pinta las uñas de otra con esmalte",
   "files": [
-    "categoria-estilista.svg"
+    "categoria-unas.svg"
   ],
   "source": "../categorias-lote-1 (hoja 2×2 de ChatGPT; parte-hoja.py + vectoriza.py)",
   "min_size_px": 96,
