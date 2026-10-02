@@ -16,7 +16,8 @@ export const ROLES = {
   'acento-2': ['--mango-acento-2', '#9ccf6a'],
 };
 const DARK = { fondo: '#1f1d1b', tinta: '#f3ece0', papel: '#2d2a27' };
-export const GROSOR = { linea: 4.8, fina: 2.8 };   // en unidades de un lienzo de 480 de ancho
+export const GROSOR = { linea: 4.8, fina: 2.8 };
+let escalaTrazo = 1;   // figura() la ajusta a su tamaño: una figura pequeña lleva línea más fina   // en unidades de un lienzo de 480 de ancho
 
 // ---------- trazo con temblor ----------
 let seed = 7;
@@ -26,10 +27,13 @@ export const semilla = (s) => { seed = Math.max(1, Math.floor(s)); };
 
 function catmull(pts, cerrado) {
   const P = cerrado ? [pts[pts.length - 1], ...pts, pts[0], pts[1]] : [pts[0], ...pts, pts[pts.length - 1]];
+  // curvas en coordenadas relativas (c): mismo dibujo, menos bytes
+  const n = (v) => { const t = f(v); return (t >= 0 ? ' ' : '') + t; };
   let d = `M${f(pts[0][0])} ${f(pts[0][1])}`;
   for (let i = 1; i < P.length - 2; i++) {
     const [p0, p1, p2, p3] = [P[i - 1], P[i], P[i + 1], P[i + 2]];
-    d += `C${f(p1[0] + (p2[0] - p0[0]) / 6)} ${f(p1[1] + (p2[1] - p0[1]) / 6)} ${f(p2[0] - (p3[0] - p1[0]) / 6)} ${f(p2[1] - (p3[1] - p1[1]) / 6)} ${f(p2[0])} ${f(p2[1])}`;
+    const o = [f(p1[0]), f(p1[1])];
+    d += 'c' + [p1[0] + (p2[0] - p0[0]) / 6 - o[0], p1[1] + (p2[1] - p0[1]) / 6 - o[1], p2[0] - (p3[0] - p1[0]) / 6 - o[0], p2[1] - (p3[1] - p1[1]) / 6 - o[1], f(p2[0]) - o[0], f(p2[1]) - o[1]].map(n).join('').trimStart();
   }
   return d + (cerrado ? 'Z' : '');
 }
@@ -50,7 +54,7 @@ export function trazo(pts, { cerrado = false, temblor = 0.8, paso = 14 } = {}) {
 }
 
 /** Puntos de una curva Catmull-Rom evaluada cada «paso» unidades (la línea central del trazo). */
-function curva(pts, cerrado, paso = 3.5) {
+function curva(pts, cerrado, paso = 5.5) {
   const P = cerrado ? [pts[pts.length - 1], ...pts, pts[0], pts[1]] : [pts[0], ...pts, pts[pts.length - 1]];
   const out = [];
   for (let i = 1; i < P.length - 2; i++) {
@@ -92,8 +96,11 @@ export function trazoOrganico(pts, { cerrado = false, ancho = 4.2, temblor = 0.8
     L.push([c[i][0] + nx * (h + grano()), c[i][1] + ny * (h + grano())]);
     R.push([c[i][0] - nx * (h + grano()), c[i][1] - ny * (h + grano())]);
   }
-  const p = [...L, ...R.reverse()];
-  return 'M' + p.map(([x, y]) => `${f(x)} ${f(y)}`).join('L') + 'Z';
+  // coordenadas relativas redondeadas: el mismo dibujo en bastantes menos bytes
+  const p = [...L, ...R.reverse()].map(([x, y]) => [f(x), f(y)]);
+  let d = `M${p[0][0]} ${p[0][1]}l`;
+  for (let i = 1; i < p.length; i++) { const dx = f(p[i][0] - p[i - 1][0]), dy = f(p[i][1] - p[i - 1][1]); d += `${i > 1 && dx >= 0 ? ' ' : ''}${dx}${dy >= 0 ? ' ' : ''}${dy}`; }
+  return d + 'Z';
 }
 
 // ---------- geometría ----------
@@ -103,7 +110,7 @@ export function tf(pts, { x = 0, y = 0, s = 1, rot = 0, flip = false } = {}) {
   return pts.map(([px, py]) => { const X = (flip ? -px : px) * s, Y = py * s; return [x + X * c - Y * si, y + X * si + Y * c]; });
 }
 /** Línea de tinta (gruesa o fina). */
-export const linea = (pts, o = {}) => `<path class="{c}__trazo" d="${trazoOrganico(pts, { ancho: o.fina ? GROSOR.fina : GROSOR.linea, temblor: o.fina ? 0.4 : 0.8, ...o })}"/>`;
+export const linea = (pts, o = {}) => `<path class="{c}__trazo" d="${trazoOrganico(pts, { ancho: (o.fina ? GROSOR.fina : GROSOR.linea) * escalaTrazo, temblor: (o.fina ? 0.4 : 0.8) * escalaTrazo, ...o })}"/>`;
 /** Forma rellena de un rol; desplaza = [dx, dy] para el efecto de impresión mal registrada. */
 export const relleno = (rol, pts, o = {}) => { const [dx, dy] = o.desplaza || [0, 0];
   return `<path class="{c}__${rol}" d="${trazo(pts.map(([x, y]) => [x + dx, y + dy]), { cerrado: true, temblor: 1, ...o })}"/>`; };
@@ -138,6 +145,8 @@ const MANOS = {
   // índice extendido, el resto del puño cerrado
   senala: { contorno: [[0, -22], [26, -26], [52, -22], [96, -20], [108, -14], [104, -8], [62, -8], [66, 0], [62, 10], [52, 22], [28, 26], [0, 22]],
     pliegues: [[[50, -8], [56, 4]], [[44, 8], [52, 18]]], apoyo: [108, -14] },
+  // manopla: la mano simple del doodle para figuras enteras (palma + pulgar)
+  manopla: { contorno: [[0, -20], [22, -22], [30, -36], [40, -38], [44, -26], [60, -20], [74, -8], [72, 8], [56, 18], [24, 20], [0, 20]], pliegues: [], apoyo: [52, -14] },
   // mano abierta, dedos hacia delante (saludo, chocar)
   abierta: { contorno: [[0, -22], [20, -30], [30, -44], [40, -50], [44, -44], [38, -30], [60, -34], [96, -34], [102, -28], [96, -22], [64, -20], [100, -16], [106, -10], [100, -4], [66, -6], [96, 2], [100, 8], [94, 12], [62, 10], [84, 18], [86, 24], [78, 26], [40, 26], [0, 22]],
     pliegues: [], apoyo: [100, -30] },
@@ -152,8 +161,8 @@ export function mano({ x, y, rot = 0, s = 1, flip = false, gesto = 'cuenco' }) {
 
 /** Cabeza de perfil mirando a la derecha (flip para la izquierda): cara mínima (ojo de punto, sonrisa, nariz angular).
  *  (x, y) = base del cuello por delante. pelo: corto | largo | barba | ninguno. Devuelve { svg }. */
-export function cabeza({ x, y, s = 1, flip = false, pelo = 'corto', cara = 'sonrie' }) {
-  const T = (p) => tf(p, { x, y, s, flip });
+export function cabeza({ x, y, s = 1, flip = false, rot = 0, pelo = 'corto', cara = 'sonrie' }) {
+  const T = (p) => tf(p, { x, y, s, flip, rot });
   const contorno = T([[-24, 0], [-26, -30], [-34, -58], [-32, -84], [-18, -98], [2, -100], [18, -92], [24, -76], [26, -64], [36, -52], [26, -48], [26, -40], [24, -30], [12, -24], [0, -22], [0, 0]]);
   // el relleno baja 10 por debajo del cuello para solaparse con el torso (el temblor no deja huecos)
   const o = [relleno('papel', [...contorno, ...T([[0, 10], [-24, 10]])], { temblor: 0.5 }), linea(contorno)];
@@ -172,6 +181,68 @@ export function torso({ x, y, s = 1, flip = false, rol = 'papel', alto = 200 }) 
   const T = (p) => tf(p, { x, y, s, flip });
   const espalda = [[-24, 0], [-40, 10], [-62, 26], [-72, 60], [-76, alto]], pecho = [[0, 0], [16, 14], [30, 40], [36, 80], [40, alto]];
   return { svg: [relleno(rol, T([...espalda, ...pecho.slice().reverse()]), { temblor: 0.5 }), linea(T(espalda)), linea(T(pecho))].join(''), hombro: T([[-30, 34]])[0] };
+}
+
+// ---------- figura humana: canon + esqueleto + carne ----------
+// Canon en cabezas (H = alto de la cabeza, de la barbilla a la coronilla). Cuerpo de ~7 cabezas, con las exageraciones
+// del doodle (manos y pies algo grandes, piernas largas) pero con las articulaciones en su sitio.
+export const CANON = {
+  cuello: 0.3, torso: 2.35, hombroAdelante: 0.05, hombroBajo: 0.25,
+  brazo: 1.45, antebrazo: 1.25, mano: 0.8, muslo: 1.85, pierna: 1.75, pie: 0.95,
+  grosor: { hombro: 0.56, codo: 0.42, muneca: 0.32, cadera: 0.78, rodilla: 0.52, tobillo: 0.34 },
+  torsoAncho: { pecho: 0.78, cintura: 0.6, cadera: 0.66, espalda: 0.62 },   // medio ancho (de perfil), en cabezas
+};
+// Poses: ángulos en grados en el sistema de la figura mirando a la derecha (0 = adelante, 90 = abajo, -90 = arriba).
+// brazo: [hombro→codo, codo→muñeca]; pierna: [cadera→rodilla, rodilla→tobillo]; cerca = el lado que ve el espectador.
+export const POSES = {
+  'de-pie':   { inclina: 0,  cabeza: 0,  brazoCerca: [96, 90],   brazoLejos: [86, 84],   piernaCerca: [93, 90],  piernaLejos: [86, 90] },
+  'camina':   { inclina: 4,  cabeza: 0,  brazoCerca: [68, 52],   brazoLejos: [116, 100], piernaCerca: [68, 98],  piernaLejos: [112, 82] },
+  'senala':   { inclina: 2,  cabeza: -4, brazoCerca: [-8, -14],  brazoLejos: [94, 88],   piernaCerca: [96, 90],  piernaLejos: [84, 90] },
+  'sostiene': { inclina: 0,  cabeza: 6,  brazoCerca: [84, 0],    brazoLejos: [80, -4],   piernaCerca: [94, 90],  piernaLejos: [86, 90] },
+  'sentado':  { inclina: -6, cabeza: 0,  brazoCerca: [76, 14],   brazoLejos: [84, 20],   piernaCerca: [-4, 92],  piernaLejos: [4, 88] },
+};
+const gesto0 = { cerca: 'manopla', lejos: 'manopla' };
+/** Tubo que se adelgaza a lo largo de una cadena de articulaciones: relleno + dos contornos orgánicos abiertos
+ *  (los extremos quedan ocultos bajo el torso y la mano/pie, así no aparecen costuras). */
+function tubo(js, ws, rol) {
+  const L = [], R = [];
+  for (let i = 0; i < js.length; i++) {
+    const a = js[Math.max(0, i - 1)], b = js[Math.min(js.length - 1, i + 1)];
+    const dx = b[0] - a[0], dy = b[1] - a[1], d = Math.hypot(dx, dy) || 1, nx = -dy / d, ny = dx / d;
+    L.push([js[i][0] + nx * ws[i] / 2, js[i][1] + ny * ws[i] / 2]); R.push([js[i][0] - nx * ws[i] / 2, js[i][1] - ny * ws[i] / 2]);
+  }
+  return relleno(rol, [...L, ...R.slice().reverse()], { temblor: 0.4 }) + linea(L) + linea(R);
+}
+const ir = (p, len, ang, dir) => [p[0] + dir * len * Math.cos(rad(ang)), p[1] + len * Math.sin(rad(ang))];
+/** Figura humana de perfil (dir 1 mira a la derecha, -1 a la izquierda). (x, y) = suelo bajo la cadera. H = alto de cabeza.
+ *  pose: nombre de POSES o un objeto con sus ángulos. Devuelve { svg, manoCerca, manoLejos } (puntos de apoyo de las manos). */
+export function figura({ x, y, H = 40, dir = 1, pose = 'de-pie', pelo = 'corto', cara = 'sonrie', camisa = 'papel', pantalon = 'papel', zapato = 'papel', gestos = gesto0 }) {
+  const antes = escalaTrazo; escalaTrazo = Math.min(1, H / 54);   // la línea escala con la figura
+  const P = typeof pose === 'string' ? POSES[pose] : pose; const C = CANON, g = C.grosor;
+  const sentado = P === POSES.sentado || pose === 'sentado';
+  // cadera: de pie a la altura de las piernas; sentado, a la altura del asiento (la pierna baja desde la rodilla)
+  const altoPierna = (C.muslo + C.pierna) * H * 0.98;
+  const cadera = [x, sentado ? y - C.pierna * H * 1.02 : y - altoPierna];
+  // torso (perfil), en coordenadas de la figura mirando a la derecha; luego inclinado
+  const inc = (px, py) => { const a = rad(P.inclina); return [cadera[0] + dir * (px * Math.cos(a) - py * Math.sin(a)), cadera[1] + px * Math.sin(a) + py * Math.cos(a)]; };
+  const A = C.torsoAncho, t = C.torso * H;
+  const torsoPts = [[A.cadera * H, 0.15 * H], [A.cintura * H, -0.45 * t], [A.pecho * H, -0.76 * t], [0.6 * H, -0.95 * t], [0.3 * H, -t], [-0.38 * H, -t], [-0.62 * H, -0.94 * t], [-A.espalda * H, -0.8 * t], [-A.espalda * H * 0.9, -0.4 * t], [-A.cadera * H, 0.15 * H]].map(([a, b]) => inc(a, b));
+  const hombro = inc(C.hombroAdelante * H, -t + C.hombroBajo * H);
+  const cuelloBase = inc(0.22 * H, -t - C.cuello * H * 0.4);
+  const caderaJ = inc(0.05 * H, 0);
+  const brazo = (ang, gesto) => { const e = ir(hombro, C.brazo * H, ang[0], dir), w = ir(e, C.antebrazo * H, ang[1], dir);
+    const m = mano({ x: w[0], y: w[1], rot: dir === 1 ? ang[1] : -ang[1], flip: dir === -1, s: H * (gesto === 'manopla' ? 0.0085 : 0.0075), gesto });   // muñeca ≈ 0.33 H, mano ≈ 0.8 H
+    return { svg: tubo([hombro, e, w], [g.hombro * H, g.codo * H, g.muneca * H], camisa) + m.svg, apoyo: m.apoyo }; };
+  const pierna = (ang) => { const k = ir(caderaJ, C.muslo * H, ang[0], dir), a = ir(k, C.pierna * H, ang[1], dir);
+    const pl = C.pie * H, ph = 0.26 * H;
+    const pie = [[-0.25 * pl, -ph * 0.6], [0.35 * pl, -ph * 0.7], [0.85 * pl, -ph * 0.35], [1.0 * pl, 0], [0.9 * pl, ph * 0.3], [-0.3 * pl, ph * 0.3]].map(([px, py]) => [a[0] + dir * px, a[1] + py]);
+    return tubo([caderaJ, k, a], [g.cadera * H, g.rodilla * H, g.tobillo * H], pantalon) + relleno(zapato, pie, { temblor: 0.4 }) + linea(pie, { cerrado: true }); };
+  const bL = brazo(P.brazoLejos, gestos.lejos || 'abierta'), bC = brazo(P.brazoCerca, gestos.cerca || 'abierta');
+  const torsoSvg = relleno(camisa, torsoPts, { temblor: 0.5 }) + linea(torsoPts, { cerrado: true });
+  const cab = cabeza({ x: cuelloBase[0], y: cuelloBase[1] + 0.3 * H, s: H / 78, flip: dir === -1, rot: (P.cabeza || 0) * dir, pelo, cara });
+  const svg = `<g class="{c}__persona">${bL.svg}${pierna(P.piernaLejos)}${pierna(P.piernaCerca)}${torsoSvg}${cab.svg}${bC.svg}</g>`;
+  escalaTrazo = antes;
+  return { svg, manoCerca: bC.apoyo, manoLejos: bL.apoyo };
 }
 
 // ---------- objetos ----------

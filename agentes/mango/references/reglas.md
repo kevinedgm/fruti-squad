@@ -1,4 +1,4 @@
-# Reglas de Mango (M1–M9)
+# Reglas de Mango (M1–M10)
 
 Cada regla: **regla → mecanismo → cómo comprobarlo**. Salieron de construir y renderizar escenas reales en el estilo de línea de rotulador.
 
@@ -35,3 +35,8 @@ Cada regla: **regla → mecanismo → cómo comprobarlo**. Salieron de construir
 
 ## M9 · Sin texto real dentro
 - **Regla:** el texto dentro de la ilustración son trazos de relleno, nunca palabras (no se traduce ni escala con la tipografía; lo que la escena dice va en `<title>` o en el texto de la sección).
+
+## M10 · Orgánico es el trazo, no la proporción
+- **Regla:** toda persona de cuerpo entero sale de `figura()`: canon de ~7 cabezas (`CANON`), articulaciones en su sitio y extremidades que se adelgazan del hombro a la muñeca y de la cadera al tobillo. Las exageraciones del doodle (manos y pies algo grandes, piernas largas) son del canon, no del azar.
+- **Mecanismo:** el temblor y la presión hacen el trazo humano; si además las proporciones fallan (cabeza grande, brazo que sale del pecho, cuello largo), la ilustración se lee como dibujo infantil. Separar canon (fijo) de trazo (orgánico) permite el estilo suelto sin perder el oficio.
+- **Comprobar:** pon la figura junto a la guía de 7 cabezas: ¿la muñeca cae a la altura de la cadera, el codo a la cintura, la rodilla a media pierna?

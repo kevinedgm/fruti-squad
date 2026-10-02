@@ -29,6 +29,8 @@ writeFileSync('presenta.svg', ilustracion({ id: 'presenta', titulo: 'Una persona
 | `mano({x, y, rot, s, flip, gesto})` | `cuenco` (palma arriba, sostiene), `senala` (índice), `abierta` (saludar, chocar) → `{ svg, apoyo }`. Con el brazo hacia la izquierda: `flip: true, rot: angulo - 180` |
 | `cabeza({x, y, s, flip, pelo, cara})` | perfil con cara mínima; (x, y) = base del cuello por delante · `pelo`: `corto`, `largo`, `barba`, `ninguno` · `cara`: `sonrie`, `serio` |
 | `torso({x, y, s, flip, rol, alto})` | hombros y pecho de perfil que salen por abajo → `{ svg, hombro }` |
+| `figura({x, y, H, dir, pose, pelo, cara, camisa, pantalon, zapato, gestos})` | **persona de cuerpo entero con canon** (M10): (x, y) = suelo bajo la cadera, H = alto de la cabeza; `pose` = nombre de `POSES` (`de-pie`, `camina`, `senala`, `sostiene`, `sentado`) u objeto con ángulos; `gestos` = `{ cerca, lejos }` (`manopla` por defecto, `senala`, `cuenco`, `abierta`) → `{ svg, manoCerca, manoLejos }`. La línea se afina sola en figuras pequeñas |
+| `CANON`, `POSES` | proporciones en cabezas y ángulos de articulación; una pose nueva = solo ángulos |
 | `agujero({x, y, rx, ry})` | agujero de tinta del que sale o al que entra algo |
 | `rayitas({cx, cy, r, n, de, a, largo})` | rayitas de «¡ta-dá!» en arco |
 | `objeto.grana({cx, base, t, rol, desplaza})` | la cochinilla de Grana (objeto de marca) |

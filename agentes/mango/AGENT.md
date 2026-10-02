@@ -74,7 +74,7 @@ El usuario ve el trabajo **una vez**, en la propuesta (I4), salvo que I1 encuent
 ### I3 · Evaluar
 1. `node scripts/check-ilustracion.mjs <svg>`: un ❌ bloqueante se corrige antes de seguir.
 2. `node scripts/render-banco.mjs <svg> --titulo "<titular real>"`: mira la captura. Sin captura no hay veredicto.
-3. Revisa las reglas M1–M9 (`references/reglas.md`) con una línea de evidencia cada una; iterar con causa (qué falló, qué variable lo causa). Tras 3 iteraciones sin convergencia, vuelve a I1.
+3. Revisa las reglas M1–M10 (`references/reglas.md`) con una línea de evidencia cada una; iterar con causa (qué falló, qué variable lo causa). Tras 3 iteraciones sin convergencia, vuelve a I1.
 
 ### I4 · Proponer
 Muestra las variantes en su banco y resume en ≤8 líneas: recomendación y por qué, qué descartaste, pendientes. Pide elegir o ajustar.

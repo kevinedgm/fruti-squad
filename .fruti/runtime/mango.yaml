@@ -33,7 +33,7 @@ stages:
     script: agentes/mango/scripts/kit.mjs
     missing_piece: add_to_kit   # nunca suelta en la escena
   I3_evaluate:
-    order: [check_script, rendered_section_bench, rules_M1_M9, iterate_with_cause, choose]
+    order: [check_script, rendered_section_bench, rules_M1_M10, iterate_with_cause, choose]
     script: node agentes/mango/scripts/check-ilustracion.mjs <svg...>
     render: node agentes/mango/scripts/render-banco.mjs <svg> --titulo "<titular real>"
     references: [agentes/mango/references/contrato-svg.md, agentes/mango/references/reglas.md]
@@ -51,7 +51,7 @@ operations:
   extend_kit: [I2_compose, I3_evaluate]
   examples:
     load_only_if: user_asks_for_examples_or_tool_debugging
-    files: [agentes/mango/examples/presenta.svg, agentes/mango/examples/escena-presenta.mjs, agentes/mango/examples/presenta-banco.png, agentes/mango/examples/manos.svg]
+    files: [agentes/mango/examples/presenta.svg, agentes/mango/examples/escena-presenta.mjs, agentes/mango/examples/presenta-banco.png, agentes/mango/examples/manos.svg, agentes/mango/examples/poses.svg, agentes/mango/examples/escena-poses.mjs]
 output:
   dir: profile.illustrations.dir | .fruti/illustrations/<id>/ | carpeta de trabajo (avisar)
   handoff: .fruti/handoffs/current.json#illustration
@@ -62,6 +62,7 @@ rules:
   - marker_line_with_seeded_wobble
   - offset_fill_only_on_the_focus
   - held_objects_rest_centered_on_the_palm
+  - organic_line_canonical_proportions
   - nothing_covers_the_face_or_the_acting_hand
   - judge_in_the_real_section_desktop_mobile_dark_theme
   - color_only_by_roles_mapped_to_project_tokens
