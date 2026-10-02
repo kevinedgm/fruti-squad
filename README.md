@@ -36,7 +36,7 @@ El Squad resuelve internamente quién debe actuar, qué contexto necesita y qué
 | 3 | 🥥 Coco | Construcción: F3, implementación y auditoría canónica |
 | 4 | 🫐 Mora | Documentación: publica únicamente lo implementado y verificado |
 | — | 🍇 Uva (opcional) | Iconos SVG a medida desde una foto o descripción, con movimiento CSS opcional |
-| — | 🥭 Mango (opcional) | Ilustraciones de línea de rotulador para secciones (personas con gesto, manos, escenas, objetos), coloreadas por tokens |
+| — | 🥭 Mango (opcional) | Ilustraciones SVG de una familia doodle propia: escenas, personajes, helpers, empty states, heroes |
 
 Regla principal:
 
@@ -46,7 +46,7 @@ Kiwi estructura → Lima gobierna → Coco construye/verifica → Mora documenta
 
 No hay dos auditores ni dos propietarios del lifecycle.
 
-Uva y Mango no forman parte de la cadena: son miembros laterales que entregan iconos e ilustraciones verificados a Coco.
+Uva y Mango no forman parte de la cadena: son miembros laterales que entregan iconos e ilustraciones auditados a Coco.
 
 ---
 
@@ -431,14 +431,15 @@ Reglas, estándares y patrones: `agentes/uva/references/`. Ejemplo de propuesta:
 
 ## 🥭 Mango
 
-Parte de la sección y lo que debe contar («una persona se asoma y presenta el producto»). **Compone** con un kit de piezas (`agentes/mango/scripts/kit.mjs`: manos con gesto, brazos, cabezas de perfil con cara mínima, torsos, agujeros, rayitas, objetos) en estilo **línea de rotulador**: contorno de tinta con un temblor suave y determinista, rellenos planos, el del foco desplazado como una impresión mal registrada, y fondo de un color. Cada forma lleva un **rol de color** (`fondo`, `tinta`, `papel`, `acento`) que los tokens del proyecto rellenan.
+Mango 2.0 es la **Vector Illustrator Skill** adaptada a Claude (`skills/mango/`): ilustraciones SVG originales de una familia doodle propia (contorno negro orgánico, nariz lineal angular, oreja simplificada, cabello de masa sólida, manos expresivas, 1–3 acentos) para objetos, personajes, helpers, spot, empty states, onboarding, escenas y heroes. No tiene código: Claude dibuja el SVG y lo audita renderizado.
 
-1. **Entender** la sección y el mensaje.
-2. **Buscar la idea** (un gesto o una situación con ingenio) y **componer** 2–3 escenas con el kit; lo que falta se añade al kit.
-3. **Evaluar** con `check-ilustracion.mjs` y un banco que pone la escena en su sección real: escritorio, móvil, oscuro y tres temas.
-4. **Proponer** una recomendación y **entregar** la elegida.
+1. **Normalizar** el pedido a un brief (`variant`, `subject`, `action`, `emotion`, `characters`, `background`, `accent`).
+2. **Elegir la variante** más simple que comunique y armar el **cast** con el Character Bible.
+3. **Planear** la escena (sujeto + acción + objeto + señal) y resolver composición y línea de acción antes del detalle.
+4. **Dibujar** el SVG con los tokens de ilustración y **auditarlo** renderizado: seis puntuaciones ≥4/5.
+5. **Entregar** el SVG con su metadata.
 
-Reglas y contrato: `agentes/mango/references/`. Ejemplo: `agentes/mango/examples/`.
+Sistema visual, variantes y esquemas: `skills/mango/`.
 
 ---
 

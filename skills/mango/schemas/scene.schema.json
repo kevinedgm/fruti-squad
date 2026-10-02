@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ScenePlan",
+  "type": "object",
+  "required": [
+    "story",
+    "composition"
+  ],
+  "properties": {
+    "story": {
+      "type": "object"
+    },
+    "cast": {
+      "type": "array"
+    },
+    "props": {
+      "type": "array"
+    },
+    "composition": {
+      "type": "object"
+    },
+    "style": {
+      "type": "object"
+    }
+  }
+}

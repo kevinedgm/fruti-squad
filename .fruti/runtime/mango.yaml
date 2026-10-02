@@ -1,73 +1,30 @@
 agent: mango
+version: "2.0"
 owns: illustrations
-interface: natural-language
-position: lateral   # no forma parte de la cadena kiwi → lima → coco → mora; entrega SVG verificados a coco
+interface: natural-language   # el lenguaje natural se normaliza siempre a un brief (schemas/request.schema.json)
+position: lateral   # no forma parte de la cadena kiwi → lima → coco → mora; entrega SVG a coco
+source: skills/mango/SKILL.md   # Vector Illustrator Skill adaptada a Claude; sin código propio (Mango 1 descartado)
 decisions:
-  style: "Línea de rotulador según la especificación «Vector Illustrator Skill — Arquitectura y sistema visual» (usuario, Notion): trazo de peso estable con irregularidades sutiles (sin textura de lápiz), rellenos planos, fondo transparente, rostro 3/4 con nariz angular + oreja + pelo sólido, una idea con ingenio por escena."
-  spec: "Notion · Vector Illustrator Skill — Arquitectura y sistema visual. Fase 1 (Foundation) en curso: tokens, rostro, proporciones, cabello, manos, trazo; hoja de validación agentes/mango/examples/fundamentos.mjs."
-  color: "Tokens del proyecto (usuario): cada forma tiene un rol --mango-<rol>; el proyecto los conecta a sus tokens. Sin tokens: base de Mango."
-  method: "Nunca a mano alzada ni calcando fotos: lo que falta se añade al kit como pieza reutilizable (M1)."
-  id: "El id es la función de la ilustración (ayuda-informa, vacio-sin-resultados): archivo <id>.svg, clase mango-<id>."
+  style: "Familia doodle de la Vector Illustrator Skill: contorno negro orgánico, nariz lineal angular, oreja simplificada, cabello de masa sólida, manos expresivas, 1–3 acentos, fondo transparente."
+  render: "Claude escribe el SVG a mano (paths editables) y lo previsualiza renderizado; no hay kit ni generador."
+  color: "system/illustration-tokens.yaml por defecto; variables CSS --mango-* con fallback si el proyecto tiene tokens."
 read_order:
   - .fruti/state/current.json
-  - .fruti/contracts/rediseno.md   # only if redesign intent or .fruti/redesign/scope.yaml exists; before touching any surface
-  - .fruti/tokens.json             # roles → tokens (illustration.* si Lima los materializó; si no, color del proyecto)
-  - active_project_profile#illustrations   # illustrations.dir si existe
-  - user_section_and_message
-style_source_priority: [tokens_illustration, project_color_tokens, mango_base]
-mango_base:
-  canvas: "480x320"
-  line: { main: 4.4, fine: 2.6, kind: "cinta rellena de peso estable (afina poco en los extremos, ±5 % en medio, sin grano)" }
-  wobble: { long: 0.6, short: "0-0.3", seeded: true }
-  tokens: { tinta: "#111111", papel: "#FFFDF5", acento: "#F8BC32", acentos_max: 3, fondo: transparente }
-  canon: { head_to_torso: 0.65, alto_cabezas: 5.6, hombros: compactos, manos: { neutral: 1.0, comunicativo: 1.25 } }
-  fills: "planos; el del foco desplazado ~6 (M4)"
-  roles: [fondo, tinta, papel, acento, acento-2]
-stages:
-  I1_understand:
-    output: brief.md
-    template: agentes/mango/assets/brief-template.md
-    ask_user_only_if: answer_changes_the_scene
-  I2_compose:
-    idea_first: true   # un gesto o situación con ingenio antes que la escena literal (M2)
-    variants: "2–3 composiciones que difieren en idea, encuadre, quién aparece o foco"
-    each_variant_has: hypothesis
-    references: [agentes/mango/references/kit.md, agentes/mango/references/reglas.md]
-    script: agentes/mango/scripts/kit.mjs
-    missing_piece: add_to_kit   # nunca suelta en la escena
-  I3_evaluate:
-    order: [check_script, rendered_section_bench, rules_M1_M10, iterate_with_cause, choose]
-    script: node agentes/mango/scripts/check-ilustracion.mjs <svg...>
-    render: node agentes/mango/scripts/render-banco.mjs <svg> --titulo "<titular real>"
-    references: [agentes/mango/references/contrato-svg.md, agentes/mango/references/reglas.md]
-    verdict_requires: rendered_bench_screenshot
-  I4_propose:
-    chat_summary_max_lines: 8
-    user_checkpoint: true
-  I5_deliver:
-    after: user_choice
-    references: [agentes/mango/references/contrato-svg.md]
-    output: ["<id>.svg", "escena-<id>.mjs", uso.md]
-operations:
-  create_illustration: [I1_understand, I2_compose, I3_evaluate, I4_propose, I5_deliver]
-  review_illustration: [I3_evaluate]
-  extend_kit: [I2_compose, I3_evaluate]
-  examples:
-    load_only_if: user_asks_for_examples_or_tool_debugging
-    files: [agentes/mango/examples/presenta.svg, agentes/mango/examples/escena-presenta.mjs, agentes/mango/examples/presenta-banco.png, agentes/mango/examples/manos.svg, agentes/mango/examples/poses.svg, agentes/mango/examples/escena-poses.mjs, agentes/mango/examples/fundamentos.mjs, agentes/mango/examples/fundamentos.png]
+  - .fruti/contracts/rediseno.md   # only if redesign intent or .fruti/redesign/scope.yaml exists
+  - .fruti/tokens.json             # illustration.* o color de marca, si existen
+  - skills/mango/SKILL.md
+steps:   # cada paso carga solo lo que cita
+  1_normalize: [skills/mango/schemas/request.schema.json]
+  2_variant:   ["skills/mango/variants/<variant>.md"]
+  4_cast:      [skills/mango/system/character-bible.md, skills/mango/system/anatomy.md, skills/mango/system/expressions.md, skills/mango/system/gestures.md]
+  5_plan:      [skills/mango/schemas/scene.schema.json, skills/mango/system/scene-grammar.md]
+  6_compose:   [skills/mango/system/composition.md]
+  7_style:     [skills/mango/system/illustration-tokens.yaml, skills/mango/system/visual-language.md, skills/mango/system/stroke.md, skills/mango/system/color.md]
+  8_render:    [skills/mango/system/svg-rules.md, "skills/mango/templates/<variant>.svg"]
+  9_gates:     [skills/mango/system/quality-gates.md, "skills/mango/examples/{approved,rejected}/*.md"]
+  10_deliver:  [skills/mango/schemas/asset.schema.json]
+gates: { scores: [anatomy, composition, narrative_clarity, style_consistency, small_size_legibility, originality], min: 4, verdict_requires: rendered_preview }
 output:
-  dir: profile.illustrations.dir | .fruti/illustrations/<id>/ | carpeta de trabajo (avisar)
+  dir: profile.illustrations.dir | .fruti/illustrations/<id>/
+  files: ["<id>.svg", asset.json, brief.yaml]
   handoff: .fruti/handoffs/current.json#illustration
-  include: [id, style_source, roles, decorative, sections, files, unresolved]
-rules:
-  - compose_from_kit
-  - one_idea_with_wit_before_literal_scene
-  - marker_line_with_seeded_wobble
-  - offset_fill_only_on_the_focus
-  - held_objects_rest_centered_on_the_palm
-  - organic_line_canonical_proportions
-  - nothing_covers_the_face_or_the_acting_hand
-  - judge_in_the_real_section_desktop_mobile_dark_theme
-  - color_only_by_roles_mapped_to_project_tokens
-  - no_real_text_inside_the_illustration
-  - full_agent_manual_only_if_runtime_contract_is_insufficient

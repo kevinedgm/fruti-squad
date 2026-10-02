@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IllustrationAsset",
+  "type": "object",
+  "required": [
+    "id",
+    "variant",
+    "alt_text"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "variant": {
+      "type": "string"
+    },
+    "ratio": {
+      "type": "string"
+    },
+    "background": {
+      "type": "string"
+    },
+    "characters": {
+      "type": "integer"
+    },
+    "palette_tokens": {
+      "type": "array"
+    },
+    "alt_text": {
+      "type": "string"
+    },
+    "files": {
+      "type": "array"
+    }
+  }
+}

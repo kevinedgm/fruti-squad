@@ -42,7 +42,7 @@ const MEMBERS = {
   impeccable:           { from: 'skills/impeccable',         kind: 'skill', blurb: 'playbooks de refinamiento de UI' },
   'improve-animations': { from: 'skills/improve-animations', kind: 'skill', blurb: 'micro-interacciones y animación' },
   'skill-architect':    { from: 'skills/skill-architect',    kind: 'skill', blurb: 'creación de nuevas skills' },
-  mango:                { from: 'agentes/mango',             kind: 'agent', blurb: 'ilustraciones de línea de rotulador para secciones de página, compuestas con un kit y coloreadas por tokens' },
+  mango:                { from: 'skills/mango',              kind: 'skill', blurb: 'ilustraciones SVG de una familia doodle propia (Vector Illustrator Skill): escenas, personajes, helpers, empty states' },
   uva:                  { from: 'agentes/uva',               kind: 'agent', blurb: 'iconos SVG a medida desde una foto o descripción, con estilo de familia y movimiento CSS opcional' },
   kiwi:                 { from: 'agentes/kiwi',              kind: 'agent', blurb: 'estructura: brief, user flow y wireframes F0–F2 adaptativos con traspaso a lima' },
   coco:                 { from: 'agentes/coco',              kind: 'agent', blurb: 'construye: alta fidelidad con el sistema real, implementación y auditoría' },
