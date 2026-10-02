@@ -1,0 +1,10 @@
+semanticName: vector-grape
+icon: { library: custom, name: uva-vector-grape }
+category: brand            # identidad propia de la skill Uva (sustituye a icon-forge: una función, un icono)
+accessibility: { defaultLabel: Uva }
+direction: { rtl: fixed }
+motion: { allowed: progress, trigger: "uva-vector-grape--dibujar al entrar en «Uva está dibujando»", duration: "0.86 s, una vez", reduced: "estático (fotograma final)" }
+status: proposed
+replaces: icon-forge
+usage: { label: optional, iconOnlyButton: "44x44, nombre en el botón" }
+confusions_tested: [grape, spline, share-2, pen-tool]

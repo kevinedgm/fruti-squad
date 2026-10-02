@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-vector-grape" aria-hidden="true">
+  <style>
+    .uva-vector-grape{stroke-width:var(--uva-stroke,1.5)}
+    /* Al entrar en «Uva está dibujando»: el tallo se traza, aparece el anclaje, sale el manejador y su punta
+       (secuencia encadenada, 0.86 s); luego queda quieto mientras dure el estado. El componente añade
+       uva-vector-grape (modificador dibujar) y la quita en el animationend de la punta (uva-vector-grape-aparecer). */
+    .uva-vector-grape--dibujar{--uva-vector-grape-trazo:uva-vector-grape-trazar;--uva-vector-grape-anclaje:uva-vector-grape-aparecer;--uva-vector-grape-manejador:uva-vector-grape-trazar;--uva-vector-grape-punta:uva-vector-grape-aparecer}
+    .uva-vector-grape__trazado{stroke-dasharray:1;animation:var(--uva-vector-grape-trazo,none) 420ms cubic-bezier(.2,.6,.3,1) 0s 1;animation-fill-mode:both}
+    .uva-vector-grape__anclaje{transform-box:fill-box;transform-origin:center;animation:var(--uva-vector-grape-anclaje,none) 160ms cubic-bezier(.3,1.15,.5,1) 400ms 1;animation-fill-mode:both}
+    .uva-vector-grape__manejador{stroke-dasharray:1;animation:var(--uva-vector-grape-manejador,none) 160ms cubic-bezier(.2,.6,.3,1) 560ms 1;animation-fill-mode:both}
+    .uva-vector-grape__punta{transform-box:fill-box;transform-origin:center;animation:var(--uva-vector-grape-punta,none) 160ms cubic-bezier(.3,1.15,.5,1) 700ms 1;animation-fill-mode:both}
+    @keyframes uva-vector-grape-trazar{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+    @keyframes uva-vector-grape-aparecer{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-vector-grape--dibujar{--uva-vector-grape-trazo:none;--uva-vector-grape-anclaje:none;--uva-vector-grape-manejador:none;--uva-vector-grape-punta:none}
+    }
+  </style>
+  <!-- vector-grape · racimo cuyo tallo es un trazado vectorial con su anclaje seleccionado y su manejador -->
+  <circle class="uva-vector-grape__uva" cx="7.1" cy="12" r="2.4"/>
+  <circle class="uva-vector-grape__uva" cx="14.9" cy="12" r="2.4"/>
+  <circle class="uva-vector-grape__uva" cx="11" cy="18.75" r="2.4"/>
+  <path class="uva-vector-grape__trazado" pathLength="1" d="M11 8.5C11 6 12 5 14.5 5"/>
+  <rect class="uva-vector-grape__anclaje" x="14.5" y="3.5" width="3" height="3" rx=".75" fill="currentColor"/>
+  <path class="uva-vector-grape__manejador" pathLength="1" d="M17.5 5H19"/>
+  <circle class="uva-vector-grape__punta" cx="20" cy="5" r="1"/>
+</svg>

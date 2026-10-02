@@ -4,6 +4,6 @@ category: brand            # identidad propia de la skill Uva (se dibuja: no es 
 accessibility: { defaultLabel: Uva }
 direction: { rtl: fixed }
 motion: { allowed: none }
-status: proposed
+status: superseded   # sustituido por vector-grape (una función, un icono)
 usage: { label: optional, iconOnlyButton: "44x44, nombre en el botón" }
 confusions_tested: [grape, anvil, boxes, pen-tool, toilet, dice-3, enchufe (redibujo)]

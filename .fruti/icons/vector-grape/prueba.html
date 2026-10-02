@@ -1,0 +1,45 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>vector-grape · prueba</title>
+<style>body{margin:0;font:15px/1.5 system-ui,sans-serif;background:#fafaf9;color:#1a1a1a;padding:24px}
+.fila{display:flex;gap:28px;align-items:center;flex-wrap:wrap;margin:16px 0}.oscuro{background:#141414;color:#eee;padding:16px;border-radius:12px}
+.estado{display:inline-flex;gap:8px;align-items:center;border:1px solid #ddd;border-radius:99px;padding:6px 14px;background:#fff}
+button{font:inherit;padding:8px 14px;border-radius:8px;border:1px solid #ccc;background:#fff;cursor:pointer}</style></head><body>
+<h1 style="font-size:18px">vector-grape · prueba</h1>
+<p><button id="b" type="button">Empezar a dibujar</button> · con «reducir movimiento» activo no se anima: se ve el estado final.</p>
+<div class="fila" id="tam"></div>
+<div class="fila oscuro" id="osc"></div>
+<div class="fila"><span class="estado" role="status" id="st"></span></div>
+<template id="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-vector-grape" aria-hidden="true">
+  <style>
+    .uva-vector-grape{stroke-width:var(--uva-stroke,1.5)}
+    /* Al entrar en «Uva está dibujando»: el tallo se traza, aparece el anclaje, sale el manejador y su punta
+       (secuencia encadenada, 0.86 s); luego queda quieto mientras dure el estado. El componente añade
+       uva-vector-grape (modificador dibujar) y la quita en el animationend de la punta (uva-vector-grape-aparecer). */
+    .uva-vector-grape--dibujar{--uva-vector-grape-trazo:uva-vector-grape-trazar;--uva-vector-grape-anclaje:uva-vector-grape-aparecer;--uva-vector-grape-manejador:uva-vector-grape-trazar;--uva-vector-grape-punta:uva-vector-grape-aparecer}
+    .uva-vector-grape__trazado{stroke-dasharray:1;animation:var(--uva-vector-grape-trazo,none) 420ms cubic-bezier(.2,.6,.3,1) 0s 1;animation-fill-mode:both}
+    .uva-vector-grape__anclaje{transform-box:fill-box;transform-origin:center;animation:var(--uva-vector-grape-anclaje,none) 160ms cubic-bezier(.3,1.15,.5,1) 400ms 1;animation-fill-mode:both}
+    .uva-vector-grape__manejador{stroke-dasharray:1;animation:var(--uva-vector-grape-manejador,none) 160ms cubic-bezier(.2,.6,.3,1) 560ms 1;animation-fill-mode:both}
+    .uva-vector-grape__punta{transform-box:fill-box;transform-origin:center;animation:var(--uva-vector-grape-punta,none) 160ms cubic-bezier(.3,1.15,.5,1) 700ms 1;animation-fill-mode:both}
+    @keyframes uva-vector-grape-trazar{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+    @keyframes uva-vector-grape-aparecer{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-vector-grape--dibujar{--uva-vector-grape-trazo:none;--uva-vector-grape-anclaje:none;--uva-vector-grape-manejador:none;--uva-vector-grape-punta:none}
+    }
+  </style>
+  <!-- vector-grape · racimo cuyo tallo es un trazado vectorial con su anclaje seleccionado y su manejador -->
+  <circle class="uva-vector-grape__uva" cx="7.1" cy="12" r="2.4"/>
+  <circle class="uva-vector-grape__uva" cx="14.9" cy="12" r="2.4"/>
+  <circle class="uva-vector-grape__uva" cx="11" cy="18.75" r="2.4"/>
+  <path class="uva-vector-grape__trazado" pathLength="1" d="M11 8.5C11 6 12 5 14.5 5"/>
+  <rect class="uva-vector-grape__anclaje" x="14.5" y="3.5" width="3" height="3" rx=".75" fill="currentColor"/>
+  <path class="uva-vector-grape__manejador" pathLength="1" d="M17.5 5H19"/>
+  <circle class="uva-vector-grape__punta" cx="20" cy="5" r="1"/>
+</svg></template>
+<script>
+const t=document.getElementById('ic').innerHTML.trim(), reducir=matchMedia('(prefers-reduced-motion: reduce)');
+const poner=(id,tams)=>tams.forEach(s=>{const d=document.createElement('div');d.innerHTML=t;const v=d.firstElementChild;v.setAttribute('width',s);v.setAttribute('height',s);document.getElementById(id).append(v)});
+poner('tam',[16,20,24,32,48,96]);poner('osc',[24,48]);
+const st=document.getElementById('st');st.innerHTML=t+'<span>Dibujando…</span>';st.firstElementChild.setAttribute('width',20);st.firstElementChild.setAttribute('height',20);
+const todos=()=>document.querySelectorAll('.uva-vector-grape');
+document.getElementById('b').onclick=()=>{if(reducir.matches)return;todos().forEach(s=>{s.classList.remove('uva-vector-grape--dibujar');void s.getBBox();s.classList.add('uva-vector-grape--dibujar')})};
+document.addEventListener('animationend',e=>{if(e.target.classList.contains('uva-vector-grape__punta'))e.target.ownerSVGElement.classList.remove('uva-vector-grape--dibujar')});
+</script></body></html>

@@ -1,0 +1,17 @@
+{
+  "icon": {
+    "id": "vector-grape",
+    "source": "uva",
+    "next_owner": "coco",
+    "style_source": "uva_base",
+    "sizes": [16, 20, 24, 32, 48],
+    "small_variant": false,
+    "motion": { "category": "progress", "trigger": "uva-vector-grape--dibujar", "total_s": 0.86, "reduced": "static" },
+    "replaces": "icon-forge",
+    "confusions_tested": ["grape", "spline", "share-2", "pen-tool"],
+    "criteria_failed": [],
+    "criteria_warned": ["B6/R6: algo más ligero que casa y mano a 24 px"],
+    "files": ["vector-grape.svg", "registro.yaml", "uso.md", "prueba.html", "propuesta/"],
+    "unresolved": ["sin prueba con personas (B1 por banco)", "exportar PNG claro/oscuro para avatar de GitHub"]
+  }
+}
