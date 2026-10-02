@@ -24,4 +24,4 @@ svg.addEventListener('animationend', (e) => {
    ```html
    <button type="button" aria-label="Abrir Uva"><svg …vector-grape… aria-hidden="true" focusable="false"></svg></button>
    ```
-5. **Fuera de una página** (`<img>`, favicon, avatar) `currentColor` no se hereda y se pinta negro: para fondo oscuro exporta una copia en claro. GitHub no acepta SVG como avatar: PNG cuadrado.
+5. **Fuera de una página** (`<img>`, favicon, avatar) `currentColor` no se hereda y se pinta negro: para fondo oscuro exporta una copia en claro. GitHub no acepta SVG como avatar: usa `avatar-claro.png` o `avatar-oscuro.png` (512×512, icono a 360 px con holgura de 70 px para el recorte circular).
