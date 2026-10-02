@@ -27,8 +27,8 @@
     "confusions_tested": [
       "dog",
       "cat",
-      "chess-knight",
-      "squirrel"
+      "squirrel",
+      "piggy-bank"
     ],
     "criteria_failed": [],
     "criteria_warned": [
@@ -45,6 +45,6 @@
     "unresolved": [
       "sin prueba con personas (B1 por banco)"
     ],
-    "revision": "ronda 2: de malinois a perro genérico (oreja semicaída, hocico medio) por decisión del usuario; margen 1.65 → 2.15"
+    "revision": "ronda 3: estética de rabbit/turtle (masa redondeada, patas cortas y anchas, oreja caída como línea interior); rondas malinois y genérica en propuesta/"
   }
 }

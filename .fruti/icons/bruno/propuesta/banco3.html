@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Uva · banco de prueba</title>
+<!--
+  Banco de prueba de Uva (etapa E3). Compara todas las variantes a la vez.
+  1. Sustituye el comentario UVA:ICONOS por los SVG de las variantes (uno por variante; data-nombre="A · …").
+  2. Sustituye el comentario UVA:CONFUSIONES por 2–4 confusiones del dominio (data-nombre). Para iconos reales de Lucide:
+       node scripts/buscar-lucide.mjs --svg <nombre> --stroke <grosor de la familia>
+  3. Renderiza y mira cada captura (Chromium headless; añade #final, #medio o #reducido a la URL):
+       chromium --headless --no-sandbox --hide-scrollbars --force-device-scale-factor=2 \
+         --window-size=900,1100 --virtual-time-budget=1500 --screenshot=banco.png "file://$PWD/banco.html#final"
+     sin modo  → lo que se ve al cargar (puede caer a mitad de la animación)
+     #final    → fotograma final de la animación (lo que queda tras ≤5 s)
+     #medio    → todas las animaciones congeladas en un mismo instante: la mitad del primer ciclo de la animación
+                 más larga (comprueba R4: la pieza móvil sobre zona libre)
+     #t=1.2    → todas congeladas en el instante indicado, en segundos (para revisar otros momentos)
+     #reducido → bloque prefers-reduced-motion activo (comprueba D2)
+  Los vecinos (casa, mano, reloj, rama) son redibujos simples estilo Lucide (ISC).
+-->
+<style>
+  :root{--fondo:#ffffff;--texto:#1a1a1a;--tenue:#777;--oscuro:#0b0b0b;--lila:#a99cf0;--ambar:#d99a3c;--verde:#5fb98a}
+  body{margin:0;padding:20px 24px;background:var(--fondo);color:var(--texto);font-family:system-ui,sans-serif}
+  h2{font-size:13px;margin:20px 0 8px;color:var(--tenue);font-weight:600}
+  .modo{font-size:12px;color:#5b3fc0;margin:0}
+  .fila{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin:6px 0}
+  .nombre{font-size:11px;color:var(--tenue);width:120px;flex:none}
+  .celda{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11px;color:var(--tenue)}
+  .oscuro{background:var(--oscuro);padding:10px 16px;border-radius:10px}
+  .oscuro .nombre{color:#9a9a9a}
+  .vecino{display:block;fill:none;stroke:currentColor;stroke-width:var(--uva-stroke,1.5);stroke-linecap:round;stroke-linejoin:round}
+  svg{display:block}
+  .celda > svg,.fila > svg{color:var(--texto)}
+  .oscuro .fila > svg{color:inherit}
+</style></head><body>
+
+<template id="iconos">
+  <svg data-nombre="perro (nuevo)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-bruno" aria-hidden="true">
+  <style>
+    .uva-bruno{stroke-width:var(--uva-stroke,1.5);overflow:visible;transform-origin:50% 85%}
+    .uva-bruno__ojo{fill:currentColor;stroke:none}
+    /* Dos movimientos, cada uno con su significado y su modificador (el componente lo añade y lo quita en animationend):
+       uva-bruno (modificador contento) · feedback, «Bruno respondió»: mueve la cola dos veces (640 ms).
+       uva-bruno (modificador avisar) · attention, «Bruno tiene un aviso»: ladra dos veces, la mandíbula se abre y se cierra (600 ms). Con moderación. */
+    .uva-bruno--contento{--uva-bruno-cola:uva-bruno-menear}
+    .uva-bruno--avisar{--uva-bruno-cuerpo:uva-bruno-ladrar}
+    .uva-bruno__cola{transform-box:view-box;transform-origin:5.0px 11.2px;animation:var(--uva-bruno-cola,none) 640ms cubic-bezier(.4,0,.6,1) 0s 1}
+    .uva-bruno__cuerpo{animation:var(--uva-bruno-cuerpo,none) 300ms cubic-bezier(.3,0,.4,1) 0s 2}
+    @keyframes uva-bruno-menear{0%{transform:rotate(0)}15%{transform:rotate(32deg)}35%{transform:rotate(-15deg)}55%{transform:rotate(32deg)}75%{transform:rotate(-15deg)}100%{transform:rotate(0)}}
+    @keyframes uva-bruno-ladrar{0%{d:path("M5.2 11C5.98 10.33 7.67 10.18 9 10C10.33 9.82 12.33 10.37 13.2 9.9C14.07 9.43 13.67 8.05 14.2 7.2C14.73 6.35 15.62 5.18 16.4 4.8C17.18 4.42 18.2 4.55 18.9 4.9C19.6 5.25 20.18 6.32 20.6 6.9C21.02 7.48 21.4 8.4 21.4 8.4C21.4 8.4 21.13 9.18 20.9 9.4C20.67 9.62 20 9.7 20 9.7C20 9.7 20.68 9.8 20.5 10C20.32 10.2 19.42 10.67 18.9 10.9C18.38 11.13 17.7 10.98 17.4 11.4C17.1 11.82 17.15 12.7 17.1 13.4C17.05 14.1 17.07 14.67 17.1 15.6C17.13 16.53 17.3 19 17.3 19C17.3 19 14.8 19 14.8 19C14.8 19 15.27 16.63 14.8 16.2C14.33 15.77 13.03 16.38 12 16.4C10.97 16.42 9.22 16.23 8.6 16.3C7.98 16.37 8.33 16.35 8.3 16.8C8.27 17.25 8.4 19 8.4 19C8.4 19 5.9 19 5.9 19C5.9 19 5.87 17.13 5.6 16.3C5.33 15.47 4.37 14.88 4.3 14C4.23 13.12 4.42 11.67 5.2 11Z")}35%{d:path("M5.2 11C5.98 10.33 7.67 10.18 9 10C10.33 9.82 12.33 10.37 13.2 9.9C14.07 9.43 13.67 8.05 14.2 7.2C14.73 6.35 15.62 5.18 16.4 4.8C17.18 4.42 18.2 4.55 18.9 4.9C19.6 5.25 20.17 6.38 20.6 6.9C21.03 7.42 21.5 8 21.5 8C21.5 8 21.15 8.75 20.8 9C20.45 9.25 19.4 9.5 19.4 9.5C19.4 9.5 20.65 10.93 20.6 11.3C20.55 11.67 19.63 11.68 19.1 11.7C18.57 11.72 17.73 11.12 17.4 11.4C17.07 11.68 17.15 12.7 17.1 13.4C17.05 14.1 17.07 14.67 17.1 15.6C17.13 16.53 17.3 19 17.3 19C17.3 19 14.8 19 14.8 19C14.8 19 15.27 16.63 14.8 16.2C14.33 15.77 13.03 16.38 12 16.4C10.97 16.42 9.22 16.23 8.6 16.3C7.98 16.37 8.33 16.35 8.3 16.8C8.27 17.25 8.4 19 8.4 19C8.4 19 5.9 19 5.9 19C5.9 19 5.87 17.13 5.6 16.3C5.33 15.47 4.37 14.88 4.3 14C4.23 13.12 4.42 11.67 5.2 11Z")}100%{d:path("M5.2 11C5.98 10.33 7.67 10.18 9 10C10.33 9.82 12.33 10.37 13.2 9.9C14.07 9.43 13.67 8.05 14.2 7.2C14.73 6.35 15.62 5.18 16.4 4.8C17.18 4.42 18.2 4.55 18.9 4.9C19.6 5.25 20.18 6.32 20.6 6.9C21.02 7.48 21.4 8.4 21.4 8.4C21.4 8.4 21.13 9.18 20.9 9.4C20.67 9.62 20 9.7 20 9.7C20 9.7 20.68 9.8 20.5 10C20.32 10.2 19.42 10.67 18.9 10.9C18.38 11.13 17.7 10.98 17.4 11.4C17.1 11.82 17.15 12.7 17.1 13.4C17.05 14.1 17.07 14.67 17.1 15.6C17.13 16.53 17.3 19 17.3 19C17.3 19 14.8 19 14.8 19C14.8 19 15.27 16.63 14.8 16.2C14.33 15.77 13.03 16.38 12 16.4C10.97 16.42 9.22 16.23 8.6 16.3C7.98 16.37 8.33 16.35 8.3 16.8C8.27 17.25 8.4 19 8.4 19C8.4 19 5.9 19 5.9 19C5.9 19 5.87 17.13 5.6 16.3C5.33 15.47 4.37 14.88 4.3 14C4.23 13.12 4.42 11.67 5.2 11Z")}}
+    /* Navegadores que no animan la forma (propiedad d): el ladrido se reduce a un leve impulso del icono entero */
+    @supports not (d: path("M0 0")) {
+      .uva-bruno--avisar{animation:uva-bruno-impulso 300ms cubic-bezier(.3,0,.4,1) 0s 2}
+    }
+    @keyframes uva-bruno-impulso{0%{transform:none}35%{transform:translateY(-4%) rotate(-3deg)}100%{transform:none}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-bruno--contento{--uva-bruno-cola:none}
+      .uva-bruno--avisar{--uva-bruno-cuerpo:none;animation:none}
+    }
+  </style>
+  
+  <path class="uva-bruno__cuerpo" d="M5.2 11C5.98 10.33 7.67 10.18 9 10C10.33 9.82 12.33 10.37 13.2 9.9C14.07 9.43 13.67 8.05 14.2 7.2C14.73 6.35 15.62 5.18 16.4 4.8C17.18 4.42 18.2 4.55 18.9 4.9C19.6 5.25 20.18 6.32 20.6 6.9C21.02 7.48 21.4 8.4 21.4 8.4C21.4 8.4 21.13 9.18 20.9 9.4C20.67 9.62 20 9.7 20 9.7C20 9.7 20.68 9.8 20.5 10C20.32 10.2 19.42 10.67 18.9 10.9C18.38 11.13 17.7 10.98 17.4 11.4C17.1 11.82 17.15 12.7 17.1 13.4C17.05 14.1 17.07 14.67 17.1 15.6C17.13 16.53 17.3 19 17.3 19C17.3 19 14.8 19 14.8 19C14.8 19 15.27 16.63 14.8 16.2C14.33 15.77 13.03 16.38 12 16.4C10.97 16.42 9.22 16.23 8.6 16.3C7.98 16.37 8.33 16.35 8.3 16.8C8.27 17.25 8.4 19 8.4 19C8.4 19 5.9 19 5.9 19C5.9 19 5.87 17.13 5.6 16.3C5.33 15.47 4.37 14.88 4.3 14C4.23 13.12 4.42 11.67 5.2 11Z"/>
+  <path class="uva-bruno__cola" d="M5 11.2C5.1 11.47 4.1 10.8 3.8 10.4C3.5 10 3 8.67 3.2 8.8"/>
+  <path class="uva-bruno__oreja" d="M16.7 5C16.58 4.5 15.87 5.92 15.7 6.5C15.53 7.08 15.58 8 15.7 8.5C15.82 9 16.23 10.08 16.4 9.5"/>
+  <circle class="uva-bruno__ojo" cx="18.6" cy="7.2" r="0.75"/>
+</svg>
+<svg data-nombre="conejo (familia)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-rabbit" aria-hidden="true">
+  <style>
+    .uva-rabbit{stroke-width:var(--uva-stroke,1.5);overflow:visible;transform-origin:50% 88%}
+    .uva-rabbit__ojo{fill:currentColor;stroke:none}
+    /* Feedback: salto natural (agacharse → impulso → vuelo → apoyo delantero → asentarse), 650 ms, una vez.
+       El componente añade uva-rabbit--saltar al interactuar y la quita al terminar. */
+    .uva-rabbit--saltar{--uva-rabbit-cuerpo:uva-rabbit-cuerpo;--uva-rabbit-muslo:uva-rabbit-muslo;--uva-rabbit-ojo:uva-rabbit-ojo}
+    .uva-rabbit__cuerpo{animation:var(--uva-rabbit-cuerpo,none) 650ms linear 0s 1}
+    .uva-rabbit__muslo{animation:var(--uva-rabbit-muslo,none) 650ms linear 0s 1}
+    .uva-rabbit__ojo{animation:var(--uva-rabbit-ojo,none) 650ms linear 0s 1}
+    @keyframes uva-rabbit-cuerpo{0%{animation-timing-function:cubic-bezier(.3,0,.5,1);d:path("M20.74 10.1C20.85 8.72 20.21 7.65 19.14 7.12C20.0 5.09 20.21 2.32 19.25 2.0C18.29 1.68 17.44 3.81 17.33 6.26C16.58 3.81 14.45 1.47 13.39 2.11C12.53 2.75 13.39 5.3 14.88 7.01C13.6 8.08 13.17 9.57 13.6 10.85C10.4 10.63 6.56 11.91 5.5 14.47C3.79 14.05 2.73 15.75 3.58 17.03C4.0 17.67 4.64 17.88 5.18 17.67C5.28 19.8 6.56 21.4 8.7 21.4L14.45 21.4C15.09 21.4 15.84 21.4 16.48 21.4L17.01 21.4C17.65 21.4 17.86 20.44 17.44 19.8C17.22 17.67 17.44 15.54 18.29 14.05C19.14 12.77 20.63 11.7 20.74 10.1Z")}14%{animation-timing-function:cubic-bezier(.5,0,.8,.4);d:path("M21.26 12.59C21.58 11.35 21.1 10.29 20.1 9.65C21.08 7.42 21.33 4.88 20.35 4.56C19.37 4.25 18.46 6.19 18.38 8.6C17.58 6.17 15.42 3.97 14.31 4.53C13.43 5.1 14.27 7.47 15.77 8.91C14.3 9.69 13.64 10.98 13.87 12.2C10.57 12.06 6.56 13.03 5.34 15.32C3.61 14.84 2.43 16.35 3.24 17.57C3.65 18.18 4.3 18.41 4.86 18.24C4.87 20.21 6.1 21.74 8.3 21.86L14.22 22.17C14.88 22.2 15.64 22.24 16.3 22.28L16.85 22.31C17.51 22.34 17.77 21.47 17.37 20.86C17.25 18.89 17.57 16.94 18.52 15.62C19.46 14.49 20.9 14.03 21.26 12.59Z")}32%{animation-timing-function:cubic-bezier(.2,.6,.4,1);d:path("M19.4 6.62C19.03 5.28 18.04 4.51 16.81 4.38C15.73 1.33 14.08 -0.92 13.1 -0.54C12.12 -0.15 12.84 2.03 14.75 4.22C11.89 2.77 8.6 2.71 8.3 3.92C8.15 4.99 10.66 6.13 12.6 5.79C11.72 7.24 11.82 8.79 12.68 9.84C9.37 10.4 5.89 12.73 5.53 15.49C3.7 15.57 3.11 17.52 4.31 18.5C4.91 19.0 5.61 19.02 6.09 18.66C5.78 19.47 7.14 21.02 9.35 20.92L15.32 20.66C16.73 18.38 17.48 18.17 21.12 18.32L21.57 18.01C22.11 17.62 21.72 16.72 20.97 16.46C19.51 14.87 18.41 13.03 18.23 11.32C18.18 9.78 19.85 8.16 19.4 6.62Z")}52%{animation-timing-function:cubic-bezier(.5,0,.9,.5);d:path("M21.68 6.31C21.6 4.97 20.78 4.04 19.59 3.68C18.92 0.4 17.58 -1.98 16.54 -1.74C15.49 -1.51 15.91 0.68 17.56 3.12C14.84 1.27 11.53 0.77 11.05 1.9C10.75 2.9 13.12 4.33 15.09 4.18C13.9 5.39 13.66 6.88 14.29 8.05C10.88 8.02 6.93 9.61 6.02 12.18C4.19 11.93 3.21 13.67 4.21 14.83C4.72 15.41 5.41 15.56 5.96 15.3C5.07 14.34 5.57 16.27 7.61 17.13L13.12 19.45C16.52 15.52 17.31 15.45 22.41 17.29L22.87 16.99C23.43 16.63 23.04 15.75 22.28 15.48C20.82 13.92 19.72 12.11 19.57 10.45C19.54 8.96 21.79 7.86 21.68 6.31Z")}70%{animation-timing-function:cubic-bezier(.2,.6,.4,1);d:path("M22.93 11.49C23.42 10.19 23.09 8.99 22.19 8.18C23.42 5.75 23.92 3.02 22.98 2.6C22.04 2.18 20.95 4.21 20.65 6.85C20.09 4.11 18.17 1.55 17.02 2.07C16.09 2.61 16.69 5.25 18.04 6.88C16.49 7.55 15.65 8.87 15.72 10.21C12.51 9.58 8.42 10.09 6.87 12.39C5.24 11.64 3.85 13.11 4.46 14.53C4.76 15.24 5.36 15.58 5.93 15.47C5.28 15.16 5.49 17.2 7.32 18.37L12.25 21.53C15.39 19.81 16.14 19.95 17.31 21.61L17.86 21.66C18.5 21.72 18.8 20.78 18.42 20.1C18.39 17.96 18.79 15.86 19.78 14.45C20.76 13.25 22.38 13.0 22.93 11.49Z")}86%{animation-timing-function:cubic-bezier(.3,0,.4,1);d:path("M21.56 11.15C21.72 9.83 21.1 8.8 20.02 8.26C21.16 6.89 21.87 4.34 20.96 3.88C20.04 3.42 18.8 5.27 18.19 7.39C17.93 5.13 16.19 2.59 14.99 3.01C14.01 3.47 14.42 6.0 15.64 8.02C14.28 8.99 13.79 10.39 14.18 11.62C10.89 11.49 6.94 12.71 5.84 15.14C4.08 14.73 2.98 16.35 3.86 17.57C4.3 18.18 4.96 18.38 5.51 18.18C5.62 20.2 6.94 21.72 9.13 21.72L15.06 21.72C15.72 21.72 16.49 21.72 17.15 21.72L17.7 21.72C18.36 21.72 18.58 20.81 18.14 20.2C17.92 18.18 18.14 16.15 19.01 14.73C19.89 13.52 21.4 12.66 21.56 11.15Z")}100%{d:path("M20.74 10.1C20.85 8.72 20.21 7.65 19.14 7.12C20.0 5.09 20.21 2.32 19.25 2.0C18.29 1.68 17.44 3.81 17.33 6.26C16.58 3.81 14.45 1.47 13.39 2.11C12.53 2.75 13.39 5.3 14.88 7.01C13.6 8.08 13.17 9.57 13.6 10.85C10.4 10.63 6.56 11.91 5.5 14.47C3.79 14.05 2.73 15.75 3.58 17.03C4.0 17.67 4.64 17.88 5.18 17.67C5.28 19.8 6.56 21.4 8.7 21.4L14.45 21.4C15.09 21.4 15.84 21.4 16.48 21.4L17.01 21.4C17.65 21.4 17.86 20.44 17.44 19.8C17.22 17.67 17.44 15.54 18.29 14.05C19.14 12.77 20.63 11.7 20.74 10.1Z")}}
+    @keyframes uva-rabbit-muslo{0%{animation-timing-function:cubic-bezier(.3,0,.5,1);d:path("M14.45 21.4C15.09 18.52 13.6 15.96 10.61 15.96")}14%{animation-timing-function:cubic-bezier(.5,0,.8,.4);d:path("M14.22 22.17C15.01 19.56 13.6 17.13 10.53 16.97")}32%{animation-timing-function:cubic-bezier(.2,.6,.4,1);d:path("M15.32 20.66C15.91 17.74 14.3 15.25 11.05 15.46")}52%{animation-timing-function:cubic-bezier(.5,0,.9,.5);d:path("M13.12 19.45C15.04 17.16 14.78 14.3 11.55 13.15")}70%{animation-timing-function:cubic-bezier(.2,.6,.4,1);d:path("M12.25 21.53C14.39 19.47 14.52 16.51 11.7 14.85")}86%{animation-timing-function:cubic-bezier(.3,0,.4,1);d:path("M15.06 21.72C15.72 18.99 14.18 16.56 11.11 16.56")}100%{d:path("M14.45 21.4C15.09 18.52 13.6 15.96 10.61 15.96")}}
+    @keyframes uva-rabbit-ojo{0%{animation-timing-function:cubic-bezier(.3,0,.5,1);transform:translate(0.0px,0.0px)}14%{animation-timing-function:cubic-bezier(.5,0,.8,.4);transform:translate(0.65px,2.25px)}32%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:translate(-1.65px,-2.63px)}52%{animation-timing-function:cubic-bezier(.5,0,.9,.5);transform:translate(0.68px,-3.43px)}70%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:translate(2.53px,0.8px)}86%{animation-timing-function:cubic-bezier(.3,0,.4,1);transform:translate(0.8px,1.02px)}100%{transform:translate(0.0px,0.0px)}}
+    /* Navegadores que no animan la forma (propiedad d): salto simple del icono entero */
+    @supports not (d: path("M0 0")) {
+      .uva-rabbit--saltar{animation:uva-rabbit-saltar 400ms cubic-bezier(.3,.7,.4,1) 0s 1}
+    }
+    @keyframes uva-rabbit-saltar{0%{transform:none}35%{transform:translateY(-14%) rotate(-8deg)}70%{transform:translateY(0) rotate(3deg)}82%{transform:scale(1.03,.95)}100%{transform:none}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-rabbit--saltar{--uva-rabbit-cuerpo:none;--uva-rabbit-muslo:none;--uva-rabbit-ojo:none;animation:none}
+    }
+  </style>
+  
+  <path class="uva-rabbit__cuerpo" d="M20.74 10.1C20.85 8.72 20.21 7.65 19.14 7.12C20.0 5.09 20.21 2.32 19.25 2.0C18.29 1.68 17.44 3.81 17.33 6.26C16.58 3.81 14.45 1.47 13.39 2.11C12.53 2.75 13.39 5.3 14.88 7.01C13.6 8.08 13.17 9.57 13.6 10.85C10.4 10.63 6.56 11.91 5.5 14.47C3.79 14.05 2.73 15.75 3.58 17.03C4.0 17.67 4.64 17.88 5.18 17.67C5.28 19.8 6.56 21.4 8.7 21.4L14.45 21.4C15.09 21.4 15.84 21.4 16.48 21.4L17.01 21.4C17.65 21.4 17.86 20.44 17.44 19.8C17.22 17.67 17.44 15.54 18.29 14.05C19.14 12.77 20.63 11.7 20.74 10.1Z"/>
+  <path class="uva-rabbit__muslo" d="M14.45 21.4C15.09 18.52 13.6 15.96 10.61 15.96"/>
+  <circle class="uva-rabbit__ojo" cx="18.5" cy="9.04" r="0.75"/>
+</svg><svg data-nombre="tortuga (familia)" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-turtle" aria-hidden="true">
+  <style>
+    .uva-turtle{stroke-width:var(--uva-stroke,1.5);overflow:visible;transform-origin:50% 80%}
+    .uva-turtle__ojo{fill:currentColor;stroke:none}
+    /* Feedback: se esconde en el caparazón y vuelve a asomarse (800 ms, una vez).
+       El componente añade uva-turtle--esconder al interactuar y la quita al terminar. */
+    .uva-turtle--esconder{--uva-turtle-cuerpo:uva-turtle-cuerpo;--uva-turtle-banda:uva-turtle-banda;--uva-turtle-ojo:uva-turtle-ojo}
+    .uva-turtle__cuerpo{animation:var(--uva-turtle-cuerpo,none) 800ms linear 0s 1}
+    .uva-turtle__banda{animation:var(--uva-turtle-banda,none) 800ms linear 0s 1}
+    .uva-turtle__ojo{animation:var(--uva-turtle-ojo,none) 800ms linear 0s 1}
+    @keyframes uva-turtle-cuerpo{0%{animation-timing-function:cubic-bezier(.4,0,.6,1);d:path("M2.0 16.0C3.1 15.8 3.7 15.3 3.8 14.6C3.9 9.0 6.9 5.0 10.7 5.0C14.5 5.0 17.2 8.6 17.4 12.6C18.1 11.4 18.9 10.4 20.1 10.4C21.3 10.4 21.9 11.4 21.7 12.4C21.5 13.4 20.5 14.0 19.3 14.0C18.7 14.1 18.2 14.4 17.9 14.8C18.0 16.2 17.9 17.8 17.5 19.0L15.1 19.0C15.1 17.6 14.9 15.8 14.6 14.8C12.1 14.9 10.1 14.9 8.1 14.7C7.9 16.2 7.8 17.8 7.9 19.0L5.3 19.0C4.9 18.0 4.7 16.8 4.5 15.8C3.9 16.2 2.9 16.4 2.0 16.0Z")}14%{animation-timing-function:cubic-bezier(.5,0,.9,.5);d:path("M2.18 16.18C3.17 16.0 3.71 15.55 3.8 14.9C3.9 9.3 6.9 5.3 10.7 5.3C14.5 5.3 17.2 8.9 17.4 12.9C18.0 11.97 18.67 11.12 19.7 11.12C20.71 11.12 21.22 11.97 21.05 12.82C20.88 13.67 20.04 14.18 19.02 14.18C18.5 14.27 18.08 14.52 17.9 15.1C17.95 16.36 17.85 17.8 17.46 18.88L15.14 18.88C15.14 17.62 14.94 16.0 14.6 15.1C12.1 15.2 10.1 15.2 8.1 15.0C7.86 16.36 7.76 17.8 7.86 18.88L5.34 18.88C4.95 17.98 4.76 16.9 4.56 16.0C3.89 16.36 2.99 16.54 2.18 16.18Z")}36%{animation-timing-function:linear;d:path("M3.44 17.64C3.66 17.6 3.78 17.5 3.8 17.2C3.9 11.6 6.9 7.6 10.7 7.6C14.5 7.6 17.2 11.2 17.4 15.2C17.48 15.58 17.58 15.46 17.72 15.46C17.87 15.46 17.94 15.58 17.92 15.7C17.89 15.82 17.77 15.9 17.63 15.9C17.56 15.91 17.5 15.94 17.9 17.4C17.62 17.75 17.54 18.15 17.23 18.45L15.37 18.45C15.37 18.1 15.21 17.65 14.6 17.4C12.1 17.5 10.1 17.5 8.1 17.3C7.61 17.75 7.53 18.15 7.61 18.45L5.59 18.45C5.28 18.2 5.13 17.9 4.97 17.65C3.82 17.68 3.62 17.72 3.44 17.64Z")}58%{animation-timing-function:cubic-bezier(.2,.6,.4,1);d:path("M3.44 17.64C3.66 17.6 3.78 17.5 3.8 17.2C3.9 11.6 6.9 7.6 10.7 7.6C14.5 7.6 17.2 11.2 17.4 15.2C17.48 15.58 17.58 15.46 17.72 15.46C17.87 15.46 17.94 15.58 17.92 15.7C17.89 15.82 17.77 15.9 17.63 15.9C17.56 15.91 17.5 15.94 17.9 17.4C17.62 17.75 17.54 18.15 17.23 18.45L15.37 18.45C15.37 18.1 15.21 17.65 14.6 17.4C12.1 17.5 10.1 17.5 8.1 17.3C7.61 17.75 7.53 18.15 7.61 18.45L5.59 18.45C5.28 18.2 5.13 17.9 4.97 17.65C3.82 17.68 3.62 17.72 3.44 17.64Z")}78%{animation-timing-function:cubic-bezier(.3,0,.4,1);d:path("M2.72 16.82C3.38 16.7 3.74 16.4 3.8 15.9C3.9 10.3 6.9 6.3 10.7 6.3C14.5 6.3 17.2 9.9 17.4 13.9C17.95 13.1 18.57 12.32 19.51 12.32C20.44 12.32 20.91 13.1 20.75 13.88C20.6 14.66 19.82 15.12 18.88 15.12C18.41 15.2 18.02 15.44 17.9 16.1C17.82 17.01 17.73 18.05 17.37 18.83L15.23 18.83C15.23 17.92 15.05 16.75 14.6 16.1C12.1 16.2 10.1 16.2 8.1 16.0C7.76 17.01 7.67 18.05 7.76 18.83L5.44 18.83C5.08 18.18 4.9 17.4 4.72 16.75C3.86 16.94 3.26 17.06 2.72 16.82Z")}90%{animation-timing-function:cubic-bezier(.3,0,.5,1);d:path("M2.0 16.1C3.1 15.9 3.7 15.4 3.8 14.7C3.9 9.1 6.9 5.1 10.7 5.1C14.5 5.1 17.2 8.7 17.4 12.7C18.13 11.43 18.96 10.39 20.21 10.39C21.46 10.39 22.08 11.43 21.87 12.47C21.66 13.51 20.62 14.13 19.38 14.13C18.75 14.24 18.23 14.55 17.9 14.9C17.98 16.26 17.89 17.81 17.49 18.97L15.11 18.97C15.11 17.62 14.91 15.87 14.6 14.9C12.1 15.0 10.1 15.0 8.1 14.8C7.89 16.26 7.79 17.81 7.89 18.97L5.31 18.97C4.92 18.0 4.72 16.84 4.52 15.87C3.9 16.3 2.9 16.5 2.0 16.1Z")}100%{d:path("M2.0 16.0C3.1 15.8 3.7 15.3 3.8 14.6C3.9 9.0 6.9 5.0 10.7 5.0C14.5 5.0 17.2 8.6 17.4 12.6C18.1 11.4 18.9 10.4 20.1 10.4C21.3 10.4 21.9 11.4 21.7 12.4C21.5 13.4 20.5 14.0 19.3 14.0C18.7 14.1 18.2 14.4 17.9 14.8C18.0 16.2 17.9 17.8 17.5 19.0L15.1 19.0C15.1 17.6 14.9 15.8 14.6 14.8C12.1 14.9 10.1 14.9 8.1 14.7C7.9 16.2 7.8 17.8 7.9 19.0L5.3 19.0C4.9 18.0 4.7 16.8 4.5 15.8C3.9 16.2 2.9 16.4 2.0 16.0Z")}}
+    @keyframes uva-turtle-banda{0%{animation-timing-function:cubic-bezier(.4,0,.6,1);d:path("M4.3 11.4C7.9 10.4 13.5 10.4 17.2 11.3")}14%{animation-timing-function:cubic-bezier(.5,0,.9,.5);d:path("M4.3 11.7C7.9 10.7 13.5 10.7 17.2 11.6")}36%{animation-timing-function:linear;d:path("M4.3 14.0C7.9 13.0 13.5 13.0 17.2 13.9")}58%{animation-timing-function:cubic-bezier(.2,.6,.4,1);d:path("M4.3 14.0C7.9 13.0 13.5 13.0 17.2 13.9")}78%{animation-timing-function:cubic-bezier(.3,0,.4,1);d:path("M4.3 12.7C7.9 11.7 13.5 11.7 17.2 12.6")}90%{animation-timing-function:cubic-bezier(.3,0,.5,1);d:path("M4.3 11.5C7.9 10.5 13.5 10.5 17.2 11.4")}100%{d:path("M4.3 11.4C7.9 10.4 13.5 10.4 17.2 11.3")}}
+    @keyframes uva-turtle-ojo{0%{animation-timing-function:cubic-bezier(.4,0,.6,1);transform:translate(0.0px,0.0px);opacity:1}14%{animation-timing-function:cubic-bezier(.5,0,.9,.5);transform:translate(-0.46px,0.51px);opacity:1}36%{animation-timing-function:linear;transform:translate(-2.73px,3.83px);opacity:0}58%{animation-timing-function:cubic-bezier(.2,.6,.4,1);transform:translate(-2.73px,3.83px);opacity:0}78%{animation-timing-function:cubic-bezier(.3,0,.4,1);transform:translate(-0.68px,1.61px);opacity:1}90%{animation-timing-function:cubic-bezier(.3,0,.5,1);transform:translate(0.12px,0.04px);opacity:1}100%{transform:translate(0.0px,0.0px);opacity:1}}
+    /* Navegadores que no animan la forma (propiedad d): se encoge un instante */
+    @supports not (d: path("M0 0")) {
+      .uva-turtle--esconder{animation:uva-turtle-encoger 360ms cubic-bezier(.3,0,.4,1) 0s 1}
+    }
+    @keyframes uva-turtle-encoger{0%{transform:none}40%{transform:scale(.94,.88)}100%{transform:none}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-turtle--esconder{--uva-turtle-cuerpo:none;--uva-turtle-banda:none;--uva-turtle-ojo:none;animation:none}
+    }
+  </style>
+  
+  <path class="uva-turtle__cuerpo" d="M2.0 16.0C3.1 15.8 3.7 15.3 3.8 14.6C3.9 9.0 6.9 5.0 10.7 5.0C14.5 5.0 17.2 8.6 17.4 12.6C18.1 11.4 18.9 10.4 20.1 10.4C21.3 10.4 21.9 11.4 21.7 12.4C21.5 13.4 20.5 14.0 19.3 14.0C18.7 14.1 18.2 14.4 17.9 14.8C18.0 16.2 17.9 17.8 17.5 19.0L15.1 19.0C15.1 17.6 14.9 15.8 14.6 14.8C12.1 14.9 10.1 14.9 8.1 14.7C7.9 16.2 7.8 17.8 7.9 19.0L5.3 19.0C4.9 18.0 4.7 16.8 4.5 15.8C3.9 16.2 2.9 16.4 2.0 16.0Z"/>
+  <path class="uva-turtle__banda" d="M4.3 11.4C7.9 10.4 13.5 10.4 17.2 11.3"/>
+  <circle class="uva-turtle__ojo" cx="20.5" cy="11.8" r="0.75"/>
+</svg>
+</template>
+
+<template id="confusiones">
+  <svg data-nombre="cat (Lucide)" aria-hidden="true" class="lucide lucide-cat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="stroke-width:var(--uva-stroke,1.5)" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 5c.67 0 1.35.09 2 .26 1.78-2 5.03-2.84 6.42-2.26 1.4.58-.42 7-.42 7 .57 1.07 1 2.24 1 3.44C21 17.9 16.97 21 12 21s-9-3-9-7.56c0-1.25.5-2.4 1-3.44 0 0-1.89-6.42-.5-7 1.39-.58 4.72.23 6.5 2.23A9.04 9.04 0 0 1 12 5Z" /> <path d="M8 14v.5" /> <path d="M16 14v.5" /> <path d="M11.25 16.25h1.5L12 17l-.75-.75Z" /> </svg><svg data-nombre="dog (Lucide)" aria-hidden="true" class="lucide lucide-dog" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="stroke-width:var(--uva-stroke,1.5)" stroke-linecap="round" stroke-linejoin="round"> <path d="M11.25 16.25h1.5L12 17z" /> <path d="M16 14v.5" /> <path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309" /> <path d="M8 14v.5" /> <path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.177-6.53 4-7 1.923-.321 3.651.845 3.651 2.235A7.497 7.497 0 0 1 14 5.277c0-1.39 1.844-2.598 3.767-2.277 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5" /> </svg><svg data-nombre="squirrel (Lucide)" aria-hidden="true" class="lucide lucide-squirrel" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="stroke-width:var(--uva-stroke,1.5)" stroke-linecap="round" stroke-linejoin="round"> <path d="M15.236 22a3 3 0 0 0-2.2-5" /> <path d="M16 20a3 3 0 0 1 3-3h1a2 2 0 0 0 2-2v-2a4 4 0 0 0-4-4V4" /> <path d="M18 13h.01" /> <path d="M18 6a4 4 0 0 0-4 4 7 7 0 0 0-7 7c0-5 4-5 4-10.5a4.5 4.5 0 1 0-9 0 2.5 2.5 0 0 0 5 0C7 10 3 11 3 17c0 2.8 2.2 5 5 5h10" /> </svg><svg data-nombre="piggy-bank (Lucide)" aria-hidden="true" class="lucide lucide-piggy-bank" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="stroke-width:var(--uva-stroke,1.5)" stroke-linecap="round" stroke-linejoin="round"> <path d="M11 17h3v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a3.16 3.16 0 0 0 2-2h1a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-1a5 5 0 0 0-2-4V3a4 4 0 0 0-3.2 1.6l-.3.4H11a6 6 0 0 0-6 6v1a5 5 0 0 0 2 4v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1z" /> <path d="M16 10h.01" /> <path d="M2 8v1a2 2 0 0 0 2 2h1" /> </svg>
+</template>
+
+<p class="modo" id="modo"></p>
+
+<h2>Comparación directa a 24 y 20px: variantes · confusiones</h2>
+<div id="comparacion"></div>
+
+<h2>Tamaños de la norma (§10: xs 14 · sm 16 · md 20 · base 24 · lg 32 · xl 48) y 96 de inspección</h2>
+<div id="tamanos"></div>
+
+<h2>Familia a 24px: casa · mano · variante · reloj (peso óptico, R6)</h2>
+<div id="familia"></div>
+
+<h2>Contexto oscuro con color por estado (22 y 44px)</h2>
+<div class="oscuro" id="oscuro"></div>
+
+<h2>Grosor del trazo (--uva-stroke 2 · 1.5 · 1.25 · 1) a 48 y 24px</h2>
+<div id="grosores"></div>
+
+<script>
+  const NS = 'http://www.w3.org/2000/svg';
+  const modo = location.hash.slice(1);
+  const vecinos = {
+    mano: '<path d="M18 11V6a2 2 0 0 0-4 0"/><path d="M14 10V4a2 2 0 0 0-4 0v2"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-6-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>',
+    rama: '<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="16" r="2.5"/><path d="M6 8.5V10a6 6 0 0 0 6 6h3.5"/>',
+    casa: '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>',
+    reloj: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>'
+  };
+  // Compatibilidad: también acepta la plantilla antigua de un solo icono (id="icono").
+  const fuente = document.getElementById('iconos') || document.getElementById('icono');
+  const viejo = document.getElementById('icono');
+  let iconos = [...fuente.content.querySelectorAll('svg')];
+  if (!iconos.length && viejo) iconos = [...viejo.content.querySelectorAll('svg')];
+  const confusiones = [...document.getElementById('confusiones').content.querySelectorAll('svg')];
+
+  if (modo === 'reducido') {
+    // Activa el bloque de movimiento reducido de cada icono reescribiendo su media query.
+    for (const s of [...iconos, ...confusiones]) s.querySelectorAll('style').forEach(st => {
+      st.textContent = st.textContent.replace(/prefers-reduced-motion\s*:\s*reduce/g, 'min-width:0px');
+    });
+  }
+  const nombre = (s, i) => s.dataset.nombre || `variante ${i + 1}`;
+
+  function tam(svg, px, color, extra) {
+    const c = svg.cloneNode(true);
+    c.setAttribute('width', px); c.setAttribute('height', px);
+    if (color) c.style.color = color;
+    if (extra) for (const [k, v] of Object.entries(extra)) c.style.setProperty(k, v);
+    return c;
+  }
+  function vecino(n, px, color) {
+    const s = document.createElementNS(NS, 'svg');
+    s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('class', 'vecino');
+    s.setAttribute('width', px); s.setAttribute('height', px);
+    s.innerHTML = vecinos[n]; if (color) s.style.color = color;
+    return s;
+  }
+  function celda(nodo, texto) {
+    const d = document.createElement('div'); d.className = 'celda';
+    d.append(nodo); if (texto !== undefined) d.append(String(texto)); return d;
+  }
+  function fila(contenedor, etiqueta, nodos) {
+    const f = document.createElement('div'); f.className = 'fila';
+    const n = document.createElement('span'); n.className = 'nombre'; n.textContent = etiqueta;
+    f.append(n, ...nodos); document.getElementById(contenedor).append(f);
+  }
+
+  if (!iconos.length) {
+    document.body.insertAdjacentHTML('afterbegin', '<p style="color:#b4541a">Faltan los SVG: sustituye el comentario UVA:ICONOS.</p>');
+  } else {
+    for (const px of [24, 20]) {
+      fila('comparacion', `${px}px`, [
+        ...iconos.map((s, i) => celda(tam(s, px), nombre(s, i))),
+        ...confusiones.map(c => celda(tam(c, px), c.dataset.nombre || 'confusión'))
+      ]);
+    }
+    iconos.forEach((s, i) => {
+      fila('tamanos', nombre(s, i), [14, 16, 20, 24, 32, 48, 96].map(px => celda(tam(s, px), px)));
+      fila('familia', nombre(s, i), [vecino('casa', 24), vecino('mano', 24), tam(s, 24), vecino('reloj', 24)]);
+      for (const px of [22, 44]) fila('oscuro', `${nombre(s, i)} · ${px}`, [
+        vecino('rama', px, 'var(--lila)'), vecino('mano', px, 'var(--ambar)'),
+        tam(s, px, 'var(--ambar)'), tam(s, px, 'var(--verde)'), tam(s, px, 'var(--lila)'),
+        ...confusiones.map(c => tam(c, px, '#888'))
+      ]);
+      fila('grosores', nombre(s, i), [2, 1.5, 1.25, 1].map(g => {
+        const d = document.createElement('div'); d.className = 'celda';
+        d.append(tam(s, 48, null, {'--uva-stroke': g}), tam(s, 24, null, {'--uva-stroke': g}), g);
+        return d;
+      }));
+    });
+  }
+
+  // Modos de fotograma: se aplican cuando todas las animaciones ya existen.
+  addEventListener('load', () => requestAnimationFrame(() => {
+    const anims = document.getAnimations();
+    if (modo === 'final') anims.forEach(a => { try { a.finish(); } catch (e) { a.cancel(); } });
+    // Un instante común para todas: con animaciones encadenadas (subir → asentar) congelar cada una en su
+    // propio punto medio mezclaría momentos distintos.
+    let instante = null;
+    if (modo === 'medio' && anims.length) {
+      const larga = anims.map(a => a.effect.getComputedTiming()).sort((x, y) => (y.duration || 0) - (x.duration || 0))[0];
+      instante = ((larga.delay || 0) + (larga.duration || 0) / 2) / 1000;
+    }
+    const mt = modo.match(/^t=([\d.]+)$/);
+    if (mt) instante = parseFloat(mt[1]);
+    if (instante !== null) anims.forEach(a => { a.pause(); a.currentTime = instante * 1000; });
+    document.getElementById('modo').textContent = modo
+      ? `Modo: ${modo}${instante !== null ? ` (t = ${instante.toFixed(2)} s)` : ''} · ${anims.length} animaciones`
+      : `Modo: al cargar · ${anims.length} animaciones (usa #final, #medio o #reducido)`;
+  }));
+</script>
+</body></html>

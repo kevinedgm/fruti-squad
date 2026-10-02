@@ -1,7 +1,7 @@
 # Entrada propuesta del registro semántico de iconos (norma §5.1). El registro del proyecto lo gobierna lima.
 semanticName: bruno
 icon: { library: custom, name: uva-bruno, file: bruno.svg }
-category: brand                   # identidad del agente Bruno: silueta de perro genérica, sin raza (decisión del usuario)
+category: brand                   # identidad del agente Bruno: silueta de perro genérica sin raza, con la estética de rabbit y turtle (decisión del usuario)
 accessibility: { defaultLabel: Bruno, hiddenByDefault: true }
 direction: { rtl: mirror }        # mira a la derecha (supuesto: no se probó en RTL)
 motion:
@@ -12,7 +12,7 @@ motion:
   deviation: "D6 recomendado: la cola usa 640 ms (cuatro vaivenes), como el salto de rabbit (650 ms)"
 style: { source: uva_base, stroke: 1.5, cap: round, join: round }
 sizes: { tested: [14, 16, 20, 24, 32, 48], recommended: [16, 20, 24, 32, 48] }
-confusionsTested: [dog, cat, chess-knight, squirrel]
+confusionsTested: [dog, cat, squirrel, piggy-bank]
 alternatives: { lucide: dog }     # cara de frente: no sigue la familia de perfil
 status: proposed
 usage: { label: recommended, iconOnlyButton: "44x44, nombre «Abrir Bruno» en el <button>" }

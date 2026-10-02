@@ -12,3 +12,5 @@
 - **Confusiones del dominio:** `cat` (por silueta de orejas), `dog` (Lucide, por metáfora), `rabbit` (familia, por silueta), zorro/ardilla (`squirrel`, cola) .
 - **Criterio de éxito:** a 20–24 px se lee «perro de orejas erguidas» y no gato ni zorro; la cola y el ladrido se perciben a 24 px; termina quieto.
 - **Privacidad:** la foto de Bruno muestra una placa con datos personales; no se transcribe ni se dibuja.
+
+- **Ronda 3 (usuario: «no me gustó la forma»):** causa: patas largas y forma angulosa, ajenas a la familia. Nueva receta de rabbit/turtle: masa redondeada, patas cortas y anchas en una línea de suelo, cabeza redonda; la línea interior es la oreja caída. Confusiones: cat, dog, squirrel, piggy-bank.
