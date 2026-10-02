@@ -10,10 +10,10 @@ Cada regla: **regla → mecanismo → cómo comprobarlo**. Salieron de construir
 - **Regla:** la escena cuenta el mensaje con un gesto o una situación con ingenio (alguien que se asoma, un brazo que sale de un agujero, un objeto con vida, rayitas de «¡ta-dá!»). La escena literal es el último recurso.
 - **Comprobar:** ¿se entiende el mensaje sin el titular y tiene algo que sorprende?
 
-## M3 · Temblor de rotulador, determinista
-- **Regla:** todo contorno pasa por `trazo()` con `semilla()` fija en la escena; amplitud 0.8 en trazos largos, 0.2–0.4 en cortos y detalles. Los extremos de un trazo abierto no tiemblan, para que las uniones encajen.
-- **Mecanismo:** el temblor lento (no ruido) imita el pulso de la mano y hace que las imperfecciones parezcan intención; la semilla fija hace que el dibujo no cambie al regenerarlo.
-- **Comprobar:** regenera dos veces: ¿sale idéntico? ¿Alguna unión se abre?
+## M3 · Trazo orgánico, determinista
+- **Regla:** toda línea es un `trazoOrganico()` (vía `linea()`) con `semilla()` fija en la escena: una cinta rellena cuyo grosor sigue la presión de la mano (entra fino en ~6 unidades, sale afinándose en ~9, ondula despacio por el medio), con el borde áspero y los extremos que se pasan un poco; las formas cerradas se solapan al cerrar.
+- **Mecanismo:** un trazo de grosor fijo y borde perfecto se lee como máquina aunque tiemble. La presión variable, el grano y las uniones imperfectas son lo que el ojo reconoce como mano. Temblor y grano se escalan con la longitud: un gesto corto (rayita, antena) es firme y afilado, no retorcido.
+- **Comprobar:** regenera dos veces: ¿sale idéntico? En la captura, ¿las rayitas son trazos firmes y los contornos largos varían de grosor?
 
 ## M4 · Relleno desplazado solo en el foco
 - **Regla:** el relleno de `acento` del objeto foco va desplazado ~6 unidades del contorno (impresión mal registrada); el resto de rellenos (`papel`) coinciden con su contorno.

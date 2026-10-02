@@ -22,7 +22,7 @@ La columna **Verifica** es el código de `scripts/check-ilustracion.mjs`; «manu
 
 ## Roles de color
 
-`fondo` (rectángulo de fondo), `tinta` (líneas, ojos, masas oscuras), `papel` (relleno de personas y objetos claros), `acento` (el foco), `acento-2` (segundo color, opcional). Token: `--mango-<rol>`. Valores por defecto y de modo oscuro: `ROLES` y `DARK` en `scripts/kit.mjs`. Las líneas usan las clases `mango-<id>__linea` (4.2) y `mango-<id>__fina` (2.6), siempre en `tinta`. El proyecto conecta los roles a sus tokens:
+`fondo` (rectángulo de fondo), `tinta` (líneas, ojos, masas oscuras), `papel` (relleno de personas y objetos claros), `acento` (el foco), `acento-2` (segundo color, opcional). Token: `--mango-<rol>`. Valores por defecto y de modo oscuro: `ROLES` y `DARK` en `scripts/kit.mjs`. Las líneas son formas rellenas de grosor variable con la clase `mango-<id>__trazo` (relleno `tinta`; grosor base 4.8, fina 2.8). El proyecto conecta los roles a sus tokens:
 
 ```css
 :root { --mango-fondo: var(--color-brand-soft); --mango-acento: var(--color-brand); --mango-tinta: var(--color-ink); }

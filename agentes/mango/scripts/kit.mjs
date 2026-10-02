@@ -16,7 +16,7 @@ export const ROLES = {
   'acento-2': ['--mango-acento-2', '#9ccf6a'],
 };
 const DARK = { fondo: '#1f1d1b', tinta: '#f3ece0', papel: '#2d2a27' };
-export const GROSOR = { linea: 4.2, fina: 2.6 };   // en unidades de un lienzo de 480 de ancho
+export const GROSOR = { linea: 4.8, fina: 2.8 };   // en unidades de un lienzo de 480 de ancho
 
 // ---------- trazo con temblor ----------
 let seed = 7;
@@ -49,6 +49,53 @@ export function trazo(pts, { cerrado = false, temblor = 0.8, paso = 14 } = {}) {
   return catmull(q, cerrado);
 }
 
+/** Puntos de una curva Catmull-Rom evaluada cada «paso» unidades (la línea central del trazo). */
+function curva(pts, cerrado, paso = 3.5) {
+  const P = cerrado ? [pts[pts.length - 1], ...pts, pts[0], pts[1]] : [pts[0], ...pts, pts[pts.length - 1]];
+  const out = [];
+  for (let i = 1; i < P.length - 2; i++) {
+    const [p0, p1, p2, p3] = [P[i - 1], P[i], P[i + 1], P[i + 2]];
+    const n = Math.max(2, Math.ceil(Math.hypot(p2[0] - p1[0], p2[1] - p1[1]) / paso));
+    for (let k = 0; k < n; k++) { const t = k / n, t2 = t * t, t3 = t2 * t;
+      out.push([0, 1].map((d) => 0.5 * (2 * p1[d] + (-p0[d] + p2[d]) * t + (2 * p0[d] - 5 * p1[d] + 4 * p2[d] - p3[d]) * t2 + (-p0[d] + 3 * p1[d] - 3 * p2[d] + p3[d]) * t3))); }
+  }
+  out.push(cerrado ? pts[0] : pts[pts.length - 1]);
+  return out;
+}
+/** Trazo orgánico: una cinta rellena cuyo ancho sigue la presión de la mano (entra y sale fino, varía en medio),
+ *  con el borde áspero (grano) y los extremos que se pasan un poco. Devuelve el «d» de una forma rellena. */
+export function trazoOrganico(pts, { cerrado = false, ancho = 4.2, temblor = 0.8 } = {}) {
+  let c = curva(pts, cerrado);
+  // un gesto corto tiembla menos: temblor y grano se escalan con la longitud del trazo
+  let largo = 0; for (let i = 1; i < c.length; i++) largo += Math.hypot(c[i][0] - c[i - 1][0], c[i][1] - c[i - 1][1]);
+  const escala = Math.min(1, largo / 70);
+  // temblor lento de la línea central
+  const ph1 = rnd() * 6.28, ph2 = rnd() * 6.28, tb = temblor * escala;
+  c = c.map(([x, y], i) => { const t = (i / c.length) * 6.28; return [x + tb * Math.sin(t * 2.3 + ph1), y + tb * Math.sin(t * 3.1 + ph2)]; });
+  // la mano no cierra exacto: una forma cerrada se solapa al terminar; un trazo abierto se pasa un poco
+  const ext = (a, b, l) => { const d = Math.hypot(b[0] - a[0], b[1] - a[1]) || 1; return [b[0] + ((b[0] - a[0]) / d) * l, b[1] + ((b[1] - a[1]) / d) * l]; };
+  if (cerrado) c = [...c, ...c.slice(1, 4).map(([x, y]) => [x + 0.8, y + 0.8])];
+  else { c = [ext(c[1], c[0], 1 + rnd() * 2.5), ...c, ext(c[c.length - 2], c[c.length - 1], 1 + rnd() * 3)]; }
+  const n = c.length, L = [], R = [];
+  const acum = [0]; for (let i = 1; i < n; i++) acum.push(acum[i - 1] + Math.hypot(c[i][0] - c[i - 1][0], c[i][1] - c[i - 1][1]));
+  const total = acum[n - 1] || 1;
+  const fase = rnd() * 6.28, ataque = 5 + rnd() * 3, cola = 7 + rnd() * 4;   // en unidades: la mano afina igual en un trazo corto que en uno largo
+  const onda = Math.min(1, total / 60);                                     // los trazos cortos no ondulan su grosor
+  for (let i = 0; i < n; i++) {
+    const a = c[Math.max(0, i - 1)], b = c[Math.min(n - 1, i + 1)]; const dx = b[0] - a[0], dy = b[1] - a[1]; const d = Math.hypot(dx, dy) || 1;
+    const nx = -dy / d, ny = dx / d; const s0 = acum[i];
+    // presión: entra y sale fino (salida más larga que la entrada) y ondula despacio a lo largo del trazo
+    const entrada = cerrado ? 1 : Math.min(1, s0 / ataque), salida = cerrado ? 1 : Math.min(1, (total - s0) / cola);
+    const presion = (0.4 + 0.6 * Math.min(entrada, salida)) * (1 + onda * 0.16 * Math.sin((s0 / 38) * 6.28 + fase));
+    const h = (ancho / 2) * presion;
+    const grano = () => (rnd() - 0.5) * (0.12 + 0.33 * escala);   // borde áspero
+    L.push([c[i][0] + nx * (h + grano()), c[i][1] + ny * (h + grano())]);
+    R.push([c[i][0] - nx * (h + grano()), c[i][1] - ny * (h + grano())]);
+  }
+  const p = [...L, ...R.reverse()];
+  return 'M' + p.map(([x, y]) => `${f(x)} ${f(y)}`).join('L') + 'Z';
+}
+
 // ---------- geometría ----------
 /** Transforma puntos: escala s, rotación rot (grados), espejo horizontal flip, y los lleva a (x, y). */
 export function tf(pts, { x = 0, y = 0, s = 1, rot = 0, flip = false } = {}) {
@@ -56,7 +103,7 @@ export function tf(pts, { x = 0, y = 0, s = 1, rot = 0, flip = false } = {}) {
   return pts.map(([px, py]) => { const X = (flip ? -px : px) * s, Y = py * s; return [x + X * c - Y * si, y + X * si + Y * c]; });
 }
 /** Línea de tinta (gruesa o fina). */
-export const linea = (pts, o = {}) => `<path class="{c}__${o.fina ? 'fina' : 'linea'}" d="${trazo(pts, { temblor: o.fina ? 0.4 : 0.8, ...o })}"/>`;
+export const linea = (pts, o = {}) => `<path class="{c}__trazo" d="${trazoOrganico(pts, { ancho: o.fina ? GROSOR.fina : GROSOR.linea, temblor: o.fina ? 0.4 : 0.8, ...o })}"/>`;
 /** Forma rellena de un rol; desplaza = [dx, dy] para el efecto de impresión mal registrada. */
 export const relleno = (rol, pts, o = {}) => { const [dx, dy] = o.desplaza || [0, 0];
   return `<path class="{c}__${rol}" d="${trazo(pts.map(([x, y]) => [x + dx, y + dy]), { cerrado: true, temblor: 1, ...o })}"/>`; };
@@ -146,14 +193,12 @@ export const objeto = {
 /** Envuelve las piezas: roles → tokens, fondo, accesibilidad y modo oscuro de los valores por defecto. */
 export function ilustracion({ id, w = 480, h = 320, titulo, decorativa = false, fondo = true, partes }) {
   const c = `mango-${id}`;
-  const k = w / 480;   // el grosor se escala con el lienzo
   const cuerpo = (fondo ? [`<rect class="{c}__fondo" width="${w}" height="${h}"/>`] : []).concat(partes).join('\n  ');
   const usados = new Set(['tinta', ...[...cuerpo.matchAll(/\{c\}__([a-z0-9-]+)/g)].map((m) => m[1]).filter((r) => ROLES[r])]);
   const vars = [...usados].map((r) => `--m-${r}:var(${ROLES[r][0]},${ROLES[r][1]})`).join(';');
   const osc = [...usados].filter((r) => DARK[r]).map((r) => `--m-${r}:var(${ROLES[r][0]},${DARK[r]})`).join(';');
   const reglas = [...usados].map((r) => `.${c}__${r}{fill:var(--m-${r})}`).join('')
-    + `.${c}__linea{fill:none;stroke:var(--m-tinta);stroke-width:${f(GROSOR.linea * k)};stroke-linecap:round;stroke-linejoin:round}`
-    + `.${c}__fina{fill:none;stroke:var(--m-tinta);stroke-width:${f(GROSOR.fina * k)};stroke-linecap:round;stroke-linejoin:round}`
+    + `.${c}__trazo{fill:var(--m-tinta)}`   // los trazos son cintas rellenas (grosor variable), no líneas con stroke
     + `.${c}__punto{fill:var(--m-tinta)}`;
   const css = `.${c}{${vars}}${osc ? `@media (prefers-color-scheme:dark){.${c}{${osc}}}` : ''}${reglas}`;
   const a11y = decorativa ? 'aria-hidden="true"' : `role="img" aria-labelledby="${c}-t"`;

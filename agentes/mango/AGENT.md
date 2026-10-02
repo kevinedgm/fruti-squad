@@ -49,7 +49,7 @@ Responde en el idioma del usuario.
 
 1. Tokens `illustration.*` en `.fruti/tokens.json` si Lima los materializó (roles → valores).
 2. Tokens de color del proyecto (`.fruti/tokens.json`, perfil): Mango mapea sus roles a ellos (`--mango-acento: var(--color-brand)`).
-3. **Base de Mango:** los valores por defecto de `ROLES` en `scripts/kit.mjs` (lienzo 480×320, línea 4.2 y fina 2.6 escaladas con el lienzo, temblor 0.8 en trazos largos y 0.2–0.4 en cortos, fondo cálido, papel crema, tinta casi negra, acento carmín). Sin tokens propios se registra `style_source: mango-base`; convertirlo en token lo decide Lima.
+3. **Base de Mango:** los valores por defecto de `ROLES` en `scripts/kit.mjs` (lienzo 480×320, línea de grosor variable 4.8 (fina 2.8) con presión, grano y extremos que se pasan, fondo cálido, papel crema, tinta casi negra, acento carmín). Sin tokens propios se registra `style_source: mango-base`; convertirlo en token lo decide Lima.
 
 ## Proceso (I1 → I5)
 

@@ -16,7 +16,7 @@ read_order:
 style_source_priority: [tokens_illustration, project_color_tokens, mango_base]
 mango_base:
   canvas: "480x320"
-  line: { main: 4.2, fine: 2.6, scales_with_canvas: true }
+  line: { main: 4.8, fine: 2.8, kind: "cinta rellena de grosor variable (presión, grano, extremos que se pasan)" }
   wobble: { long: 0.8, short: "0.2-0.4", seeded: true }
   fills: "planos; el del foco desplazado ~6 (M4)"
   roles: [fondo, tinta, papel, acento, acento-2]

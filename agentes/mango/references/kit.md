@@ -21,8 +21,9 @@ writeFileSync('presenta.svg', ilustracion({ id: 'presenta', titulo: 'Una persona
 | Pieza | Parámetros y retorno |
 |---|---|
 | `semilla(n)` | fija el temblor (M3) |
-| `trazo(pts, {cerrado, temblor, paso})` | camino suave con temblor por los puntos de control |
-| `linea(pts, {fina, cerrado, temblor})` / `relleno(rol, pts, {desplaza})` | línea de tinta / forma rellena (con desplazamiento opcional, M4) |
+| `trazoOrganico(pts, {cerrado, ancho, temblor})` | la línea de mano: cinta rellena con presión variable, grano y extremos que se pasan (M3); `linea()` la usa |
+| `trazo(pts, {cerrado, temblor, paso})` | contorno suave con temblor, para los rellenos |
+| `linea(pts, {fina, cerrado, temblor})` / `relleno(rol, pts, {desplaza})` | línea de tinta (gruesa 4.8 o fina 2.8) / forma rellena (con desplazamiento opcional, M4) |
 | `tf(pts, {x, y, s, rot, flip})` | transforma puntos antes del temblor (el temblor no se escala) |
 | `brazo({desde, hasta, ancho, curva, puno})` | manga de papel con puño → `{ svg, muneca, angulo }` |
 | `mano({x, y, rot, s, flip, gesto})` | `cuenco` (palma arriba, sostiene), `senala` (índice), `abierta` (saludar, chocar) → `{ svg, apoyo }`. Con el brazo hacia la izquierda: `flip: true, rot: angulo - 180` |
