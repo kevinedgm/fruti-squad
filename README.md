@@ -36,7 +36,7 @@ El Squad resuelve internamente quién debe actuar, qué contexto necesita y qué
 | 3 | 🥥 Coco | Construcción: F3, implementación y auditoría canónica |
 | 4 | 🫐 Mora | Documentación: publica únicamente lo implementado y verificado |
 | — | 🍇 Uva (opcional) | Iconos SVG a medida desde una foto o descripción, con movimiento CSS opcional |
-| — | 🥭 Mango (opcional) | Ilustraciones vectoriales planas para secciones (personas, escenas, objetos), coloreadas por tokens |
+| — | 🥭 Mango (opcional) | Ilustraciones de línea de rotulador para secciones (personas con gesto, manos, escenas, objetos), coloreadas por tokens |
 
 Regla principal:
 
@@ -431,10 +431,10 @@ Reglas, estándares y patrones: `agentes/uva/references/`. Ejemplo de propuesta:
 
 ## 🥭 Mango
 
-Parte de la sección y lo que debe contar («una persona explicando un panel, para la sección de ayuda»). No dibuja a mano alzada: **compone** con un kit de piezas geométricas (`agentes/mango/scripts/kit.mjs`: personas en poses, objetos, fondos) y cada forma lleva un **rol de color** (`acento`, `piel`, `forma`…) que los tokens del proyecto rellenan.
+Parte de la sección y lo que debe contar («una persona se asoma y presenta el producto»). **Compone** con un kit de piezas (`agentes/mango/scripts/kit.mjs`: manos con gesto, brazos, cabezas de perfil con cara mínima, torsos, agujeros, rayitas, objetos) en estilo **línea de rotulador**: contorno de tinta con un temblor suave y determinista, rellenos planos, el del foco desplazado como una impresión mal registrada, y fondo de un color. Cada forma lleva un **rol de color** (`fondo`, `tinta`, `papel`, `acento`) que los tokens del proyecto rellenan.
 
-1. **Entender** la sección, el mensaje, quién aparece y qué hace.
-2. **Componer** 2–3 escenas con el kit; lo que falta se añade al kit como pieza reutilizable.
+1. **Entender** la sección y el mensaje.
+2. **Buscar la idea** (un gesto o una situación con ingenio) y **componer** 2–3 escenas con el kit; lo que falta se añade al kit.
 3. **Evaluar** con `check-ilustracion.mjs` y un banco que pone la escena en su sección real: escritorio, móvil, oscuro y tres temas.
 4. **Proponer** una recomendación y **entregar** la elegida.
 

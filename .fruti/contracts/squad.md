@@ -10,7 +10,7 @@ Fuente única de los roles del squad. Cada miembro describe en su manual solo su
 🥥 coco  → construcción: alta fidelidad con el sistema real (F3), implementación (R3), auditoría (R0)
 🫐 mora  → documentación: publica lo implementado y verificado
 🍇 uva   → lateral: iconos SVG a medida; entrega SVG verificados a coco
-🥭 mango → lateral: ilustraciones vectoriales planas para secciones; entrega SVG verificados a coco
+🥭 mango → lateral: ilustraciones de línea para secciones; entrega SVG verificados a coco
 ```
 
 Orden: **kiwi estructura → lima gobierna → coco construye/verifica → mora documenta.** Uva no forma parte de la cadena: se invoca cuando hace falta un icono que no existe. Entrega SVG verificados a coco, que los consume sin redibujarlos; lima decide si su ADN base se vuelve token (`icon.*`) y registra el icono si el proyecto lleva registry de iconos; mora lo documenta si el proyecto documenta iconos.

@@ -20,11 +20,11 @@ const salida = resolve(salidaArg || dirname(resolve(svgPath)));
 const base = basename(svgPath).replace(/\.svg$/, '');
 copyFileSync(svgPath, join(salida, basename(svgPath)));
 const temas = [
-  ['claro (por defecto)', ''],
-  ['tema verde', '--mango-acento:#0f8a5f;--mango-acento-2:#e76f51;--mango-forma:#e3f1ea;--mango-linea:#b9dccb'],
-  ['tema coral', '--mango-acento:#e5484d;--mango-acento-2:#3e63dd;--mango-forma:#fde8e8;--mango-linea:#f3c2c2;--mango-piel:#8d5a3c'],
+  ['por defecto', ''],
+  ['tema lila', '--mango-fondo:#d9b8ea;--mango-acento:#3f2d8f'],
+  ['tema celeste', '--mango-fondo:#a9dcff;--mango-acento:#e5484d;--mango-papel:#f8f6f1'],
 ];
-const oscuro = '--mango-superficie:#23243a;--mango-forma:#2e3050;--mango-linea:#4b4e78;--mango-tinta:#0e0f1c';
+const oscuro = '--mango-fondo:#1f1d1b;--mango-tinta:#f3ece0;--mango-papel:#2d2a27';
 const texto = (c) => `<div class="tx"><span class="eti" style="color:${c}">Ayuda</span><h2>${titulo}</h2><p>Texto de ejemplo de la sección: dos líneas que acompañan a la ilustración para juzgar el equilibrio.</p><span class="btn">Empezar</span></div>`;
 const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Mango · banco</title><style>
 body{margin:0;padding:20px;background:#eceef3;font:15px/1.5 system-ui,sans-serif;color:#1b1c2b}h1{font-size:15px;margin:0 0 8px;color:#555}

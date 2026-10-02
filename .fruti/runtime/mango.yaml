@@ -3,7 +3,7 @@ owns: illustrations
 interface: natural-language
 position: lateral   # no forma parte de la cadena kiwi → lima → coco → mora; entrega SVG verificados a coco
 decisions:
-  style: "Plano geométrico, compuesto con el kit de piezas (usuario). Caras sin rasgos; la acción la cuenta la pose."
+  style: "Línea de rotulador (usuario, sustituye al plano geométrico): contorno de tinta con temblor determinista, rellenos planos, fondo de un color, caras mínimas con gesto, una idea con ingenio por escena."
   color: "Tokens del proyecto (usuario): cada forma tiene un rol --mango-<rol>; el proyecto los conecta a sus tokens. Sin tokens: base de Mango."
   method: "Nunca a mano alzada ni calcando fotos: lo que falta se añade al kit como pieza reutilizable (M1)."
   id: "El id es la función de la ilustración (ayuda-informa, vacio-sin-resultados): archivo <id>.svg, clase mango-<id>."
@@ -16,23 +16,24 @@ read_order:
 style_source_priority: [tokens_illustration, project_color_tokens, mango_base]
 mango_base:
   canvas: "480x320"
-  person_height: 190
-  shapes: flat_geometric
-  outline: "solo superficies claras (M3)"
-  roles: [acento, acento-2, tinta, tinta-2, piel, piel-2, piel-3, superficie, forma, linea]
+  line: { main: 4.2, fine: 2.6, scales_with_canvas: true }
+  wobble: { long: 0.8, short: "0.2-0.4", seeded: true }
+  fills: "planos; el del foco desplazado ~6 (M4)"
+  roles: [fondo, tinta, papel, acento, acento-2]
 stages:
   I1_understand:
     output: brief.md
     template: agentes/mango/assets/brief-template.md
     ask_user_only_if: answer_changes_the_scene
   I2_compose:
-    variants: "2–3 composiciones que difieren en encuadre, metáfora, número de personas o foco"
+    idea_first: true   # un gesto o situación con ingenio antes que la escena literal (M2)
+    variants: "2–3 composiciones que difieren en idea, encuadre, quién aparece o foco"
     each_variant_has: hypothesis
     references: [agentes/mango/references/kit.md, agentes/mango/references/reglas.md]
     script: agentes/mango/scripts/kit.mjs
     missing_piece: add_to_kit   # nunca suelta en la escena
   I3_evaluate:
-    order: [check_script, rendered_section_bench, rules_M1_M8, iterate_with_cause, choose]
+    order: [check_script, rendered_section_bench, rules_M1_M9, iterate_with_cause, choose]
     script: node agentes/mango/scripts/check-ilustracion.mjs <svg...>
     render: node agentes/mango/scripts/render-banco.mjs <svg> --titulo "<titular real>"
     references: [agentes/mango/references/contrato-svg.md, agentes/mango/references/reglas.md]
@@ -50,17 +51,18 @@ operations:
   extend_kit: [I2_compose, I3_evaluate]
   examples:
     load_only_if: user_asks_for_examples_or_tool_debugging
-    files: [agentes/mango/examples/ayuda-informa.svg, agentes/mango/examples/escena-ayuda-informa.mjs, agentes/mango/examples/ayuda-informa-banco.png]
+    files: [agentes/mango/examples/presenta.svg, agentes/mango/examples/escena-presenta.mjs, agentes/mango/examples/presenta-banco.png, agentes/mango/examples/manos.svg]
 output:
   dir: profile.illustrations.dir | .fruti/illustrations/<id>/ | carpeta de trabajo (avisar)
   handoff: .fruti/handoffs/current.json#illustration
   include: [id, style_source, roles, decorative, sections, files, unresolved]
 rules:
-  - compose_from_kit_never_freehand
-  - pose_tells_the_action_faces_have_no_features
-  - light_surface_over_page_gets_an_outline
-  - nothing_covers_the_head_or_the_acting_hand
-  - one_focus_in_accent
+  - compose_from_kit
+  - one_idea_with_wit_before_literal_scene
+  - marker_line_with_seeded_wobble
+  - offset_fill_only_on_the_focus
+  - held_objects_rest_centered_on_the_palm
+  - nothing_covers_the_face_or_the_acting_hand
   - judge_in_the_real_section_desktop_mobile_dark_theme
   - color_only_by_roles_mapped_to_project_tokens
   - no_real_text_inside_the_illustration

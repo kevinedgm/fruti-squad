@@ -1,165 +1,162 @@
-// Mango · kit de piezas para ilustraciones planas geométricas.
-// Cada pieza devuelve SVG como texto. El color nunca es fijo: cada forma usa una clase de rol
-// (mango-<id>__<rol>) y el <style> de la ilustración traduce los roles a tokens del proyecto.
-// Uso: import { persona, objeto, ilustracion } from './kit.mjs'
+// Mango · kit de piezas en estilo línea de rotulador.
+// Contorno de tinta con un temblor suave y determinista, rellenos planos (a veces desplazados del contorno,
+// como una impresión mal registrada), fondo de un color. El color nunca es fijo: cada forma usa una clase de
+// rol (mango-<id>__<rol>) y el <style> de la ilustración traduce los roles a tokens del proyecto.
+// Uso: import { semilla, linea, relleno, brazo, mano, cabeza, torso, agujero, rayitas, objeto, ilustracion } from './kit.mjs'
 
-const r1 = (v) => Math.round(v * 10) / 10;
+const f = (v) => Math.round(v * 10) / 10;
 const rad = (g) => (g * Math.PI) / 180;
-const pt = (x, y, len, ang) => [x + len * Math.cos(rad(ang)), y + len * Math.sin(rad(ang))];
 
-// Roles de color (nombre del rol → token del proyecto y valor por defecto si el token no existe).
+// Roles de color: nombre → [token del proyecto, valor por defecto]. DARK: valores por defecto en modo oscuro.
 export const ROLES = {
-  acento:     ['--mango-acento',     '#5b5bd6'],
-  'acento-2': ['--mango-acento-2',   '#f5a524'],
-  tinta:      ['--mango-tinta',      '#2b2d42'],
-  'tinta-2':  ['--mango-tinta-2',    '#4a4e69'],
-  piel:       ['--mango-piel',       '#c98e6b'],
-  'piel-2':   ['--mango-piel-2',     '#8d5a3c'],
-  'piel-3':   ['--mango-piel-3',     '#f1c9a5'],
-  superficie: ['--mango-superficie', '#ffffff'],
-  forma:      ['--mango-forma',      '#e8e9f7'],
-  linea:      ['--mango-linea',      '#c7c9e0'],
+  fondo:      ['--mango-fondo',    '#f4b54a'],
+  tinta:      ['--mango-tinta',    '#1d1b1a'],
+  papel:      ['--mango-papel',    '#fbf3e4'],
+  acento:     ['--mango-acento',   '#b3123f'],
+  'acento-2': ['--mango-acento-2', '#9ccf6a'],
 };
-const DARK = { superficie: '#23243a', forma: '#2e3050', linea: '#4b4e78', tinta: '#11121f' };
+const DARK = { fondo: '#1f1d1b', tinta: '#f3ece0', papel: '#2d2a27' };
+export const GROSOR = { linea: 4.2, fina: 2.6 };   // en unidades de un lienzo de 480 de ancho
 
-// Poses: ángulos en grados (0 = derecha, 90 = abajo) para brazo [hombro→codo, codo→mano] y piernas.
-export const POSES = {
-  'de-pie':    { bi: [100, 95],  bd: [80, 85],   pi: [94, 91],  pd: [86, 89] },
-  'senala':    { bi: [100, 92],  bd: [-40, -28], pi: [94, 91],  pd: [86, 89] },
-  'saluda':    { bi: [100, 95],  bd: [-60, -100], pi: [94, 91], pd: [86, 89] },
-  'sostiene':  { bi: [110, 10],  bd: [70, 170],  pi: [94, 91],  pd: [86, 89] },
-  'explica':   { bi: [102, 92],  bd: [35, -20],  pi: [94, 91],  pd: [86, 89] },
-};
+// ---------- trazo con temblor ----------
+let seed = 7;
+const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+/** Fija la semilla del temblor: el mismo valor da siempre el mismo dibujo. */
+export const semilla = (s) => { seed = Math.max(1, Math.floor(s)); };
 
-const PELO = {
-  corto: (cx, cy) => `M${r1(cx - 18.8)} ${r1(cy)}A18.8 18.8 0 0 1 ${r1(cx + 18.8)} ${r1(cy)}Q${r1(cx + 9)} ${r1(cy - 7)} ${r1(cx - 4)} ${r1(cy - 8.5)}Q${r1(cx - 13)} ${r1(cy - 6.5)} ${r1(cx - 18.8)} ${r1(cy)}Z`,
-  largo: (cx, cy) => `M${r1(cx - 21)} ${r1(cy + 30)}V${r1(cy - 2)}A21 21 0 0 1 ${r1(cx + 21)} ${r1(cy - 2)}V${r1(cy + 30)}Q${r1(cx)} ${r1(cy + 36)} ${r1(cx - 21)} ${r1(cy + 30)}Z`,
-  rizado: (cx, cy) => [[-15, -6, 9], [-6, -14, 10], [6, -14, 10], [15, -6, 9], [-18, 4, 7], [18, 4, 7]]
-    .map(([dx, dy, r]) => `M${r1(cx + dx + r)} ${r1(cy + dy)}A${r} ${r} 0 1 0 ${r1(cx + dx - r)} ${r1(cy + dy)}A${r} ${r} 0 1 0 ${r1(cx + dx + r)} ${r1(cy + dy)}Z`).join(''),
-};
-
-// persona({ x, y (suelo), escala, pose, piel: 'piel'|'piel-2'|'piel-3', pelo: 'corto'|'largo'|'rizado'|'moño', ropa: rol, pantalon: rol })
-export function persona({ x = 0, y = 0, escala = 1, pose = 'de-pie', piel = 'piel', pelo = 'corto', ropa = 'acento', pantalon = 'tinta', zapato = 'tinta-2' } = {}) {
-  const P = POSES[pose] || POSES['de-pie'];
-  const ys = -144, yh = -82;                  // hombros y caderas (origen en el suelo, centro de la figura)
-  const sI = [-21, ys + 9], sD = [21, ys + 9];
-  const brazo = (s, [a1, a2]) => {
-    const c = pt(s[0], s[1], 33, a1), m = pt(c[0], c[1], 29, a2);
-    return { d: `M${r1(s[0])} ${r1(s[1])}L${r1(c[0])} ${r1(c[1])}L${r1(m[0])} ${r1(m[1])}`, mano: m };
-  };
-  const pierna = (h, [a1, a2]) => {
-    const k = pt(h[0], h[1], 40, a1), p = pt(k[0], k[1], 38, a2);
-    return { d: `M${r1(h[0])} ${r1(h[1])}L${r1(k[0])} ${r1(k[1])}L${r1(p[0])} ${r1(p[1])}`, pie: p };
-  };
-  const bI = brazo(sI, P.bi), bD = brazo(sD, P.bd);
-  const pI = pierna([-10, yh], P.pi), pD = pierna([10, yh], P.pd);
-  const cx = 0, cy = ys - 25;
-  const o = [];
-  if (pelo === 'largo') o.push(`<path class="{c}__${'tinta'}" d="${PELO.largo(cx, cy)}"/>`);
-  // piernas y zapatos
-  for (const [p, dir] of [[pI, -1], [pD, 1]]) {
-    o.push(`<path class="{c}__trazo-${pantalon}" stroke-width="18" d="${p.d}"/>`);
-    o.push(`<path class="{c}__trazo-${zapato}" stroke-width="10" d="M${r1(p.pie[0])} ${r1(p.pie[1] + 3)}H${r1(p.pie[0] + dir * 11)}"/>`);
+function catmull(pts, cerrado) {
+  const P = cerrado ? [pts[pts.length - 1], ...pts, pts[0], pts[1]] : [pts[0], ...pts, pts[pts.length - 1]];
+  let d = `M${f(pts[0][0])} ${f(pts[0][1])}`;
+  for (let i = 1; i < P.length - 2; i++) {
+    const [p0, p1, p2, p3] = [P[i - 1], P[i], P[i + 1], P[i + 2]];
+    d += `C${f(p1[0] + (p2[0] - p0[0]) / 6)} ${f(p1[1] + (p2[1] - p0[1]) / 6)} ${f(p2[0] - (p3[0] - p1[0]) / 6)} ${f(p2[1] - (p3[1] - p1[1]) / 6)} ${f(p2[0])} ${f(p2[1])}`;
   }
-  // brazo de atrás (izquierdo) primero
-  o.push(`<path class="{c}__trazo-${ropa}" stroke-width="13" d="${bI.d}"/>`);
-  o.push(`<circle class="{c}__${piel}" cx="${r1(bI.mano[0])}" cy="${r1(bI.mano[1])}" r="6.5"/>`);
-  // torso
-  o.push(`<path class="{c}__${ropa}" d="M-23 ${ys + 14}Q-23 ${ys} -9 ${ys}H9Q23 ${ys} 23 ${ys + 14}L19 ${yh + 6}Q19 ${yh + 10} 15 ${yh + 10}H-15Q-19 ${yh + 10} -19 ${yh + 6}Z"/>`);
-  // cuello y cabeza
-  o.push(`<rect class="{c}__${piel}" x="-6" y="${ys - 9}" width="12" height="12" rx="3"/>`);
-  o.push(`<circle class="{c}__${piel}" cx="${cx}" cy="${cy}" r="18"/>`);
-  if (pelo === 'corto' || pelo === 'moño') o.push(`<path class="{c}__tinta" d="${PELO.corto(cx, cy)}"/>`);
-  if (pelo === 'moño') o.push(`<circle class="{c}__tinta" cx="${cx}" cy="${cy - 22}" r="8"/>`);
-  if (pelo === 'largo') o.push(`<path class="{c}__tinta" d="${PELO.corto(cx, cy)}"/>`);
-  if (pelo === 'rizado') o.push(`<path class="{c}__tinta" d="${PELO.rizado(cx, cy)}"/>`);
-  // brazo de delante (derecho) al final
-  o.push(`<path class="{c}__trazo-${ropa}" stroke-width="13" d="${bD.d}"/>`);
-  o.push(`<circle class="{c}__${piel}" cx="${r1(bD.mano[0])}" cy="${r1(bD.mano[1])}" r="6.5"/>`);
-  const t = `translate(${r1(x)} ${r1(y)})${escala !== 1 ? ` scale(${escala})` : ''}`;
-  return { svg: `<g class="{c}__persona" transform="${t}">${o.join('')}</g>`,
-    manoD: [x + bD.mano[0] * escala, y + bD.mano[1] * escala], manoI: [x + bI.mano[0] * escala, y + bI.mano[1] * escala] };
+  return d + (cerrado ? 'Z' : '');
+}
+/** Camino suave por los puntos de control, remuestreado y con un temblor lento (la mano tiembla despacio, no a saltos). */
+export function trazo(pts, { cerrado = false, temblor = 0.8, paso = 14 } = {}) {
+  const out = []; const n = pts.length; const segs = cerrado ? n : n - 1;
+  for (let i = 0; i < segs; i++) {
+    const a = pts[i], b = pts[(i + 1) % n]; const k = Math.max(1, Math.round(Math.hypot(b[0] - a[0], b[1] - a[1]) / paso));
+    for (let j = 0; j < k; j++) out.push([a[0] + (b[0] - a[0]) * j / k, a[1] + (b[1] - a[1]) * j / k]);
+  }
+  if (!cerrado) out.push(pts[n - 1]);
+  const ph1 = rnd() * 6.28, ph2 = rnd() * 6.28;
+  const q = out.map(([x, y], i) => {
+    if (!cerrado && (i === 0 || i === out.length - 1)) return [x, y];   // los extremos no se mueven: las uniones encajan
+    const t = (i / out.length) * 6.28; return [x + temblor * Math.sin(t * 2.3 + ph1), y + temblor * Math.sin(t * 3.1 + ph2)];
+  });
+  return catmull(q, cerrado);
 }
 
+// ---------- geometría ----------
+/** Transforma puntos: escala s, rotación rot (grados), espejo horizontal flip, y los lleva a (x, y). */
+export function tf(pts, { x = 0, y = 0, s = 1, rot = 0, flip = false } = {}) {
+  const c = Math.cos(rad(rot)), si = Math.sin(rad(rot));
+  return pts.map(([px, py]) => { const X = (flip ? -px : px) * s, Y = py * s; return [x + X * c - Y * si, y + X * si + Y * c]; });
+}
+/** Línea de tinta (gruesa o fina). */
+export const linea = (pts, o = {}) => `<path class="{c}__${o.fina ? 'fina' : 'linea'}" d="${trazo(pts, { temblor: o.fina ? 0.4 : 0.8, ...o })}"/>`;
+/** Forma rellena de un rol; desplaza = [dx, dy] para el efecto de impresión mal registrada. */
+export const relleno = (rol, pts, o = {}) => { const [dx, dy] = o.desplaza || [0, 0];
+  return `<path class="{c}__${rol}" d="${trazo(pts.map(([x, y]) => [x + dx, y + dy]), { cerrado: true, temblor: 1, ...o })}"/>`; };
 
-// persona de perfil, solo torso, que se asoma por un borde. Mira a la derecha (dir 1) o a la izquierda (dir -1).
-// Origen = hombro. brazo: [hombro→codo, codo→mano] en grados (mirando a la derecha). Devuelve { svg, mano }.
-export function personaPerfil({ x = 0, y = 0, escala = 1, dir = 1, inclina = 0, piel = 'piel', pelo = 'corto', ropa = 'tinta-2', brazo = [-20, -60] } = {}) {
-  const hx = 6, hy = -46, R = 20;                                   // centro de la cabeza
-  const a = (g) => [hx + R * Math.cos(rad(g)), hy + R * Math.sin(rad(g))];
-  const o = [];
-  // torso: espalda curva y pecho; sale del lienzo por abajo
-  o.push(`<path class="{c}__${ropa}" d="M-30 -2C-36 40 -36 90 -34 150H40C42 96 38 46 26 6C18 -10 -18 -14 -30 -2Z"/>`);
-  o.push(`<rect class="{c}__${piel}" x="-10" y="-32" width="16" height="26" rx="5"/>`);  // cuello detrás de la mandíbula
-  if (pelo === 'largo') { const p1 = a(-80), p2 = a(150); o.push(`<path class="{c}__tinta" d="M${r1(p1[0])} ${r1(p1[1])}A${R + 1} ${R + 1} 0 1 0 ${r1(p2[0] - 2)} ${r1(p2[1])}L-20 -6Q-8 -2 -4 -14L-2 -30Z"/>`); }
-  o.push(`<circle class="{c}__${piel}" cx="${hx}" cy="${hy}" r="${R}"/>`);
-  o.push(`<circle class="{c}__${piel}" cx="${hx + R - 1}" cy="${hy + 3}" r="4.5"/>`);  // nariz: dice hacia dónde mira
-  { const p1 = a(-75), p2 = a(165); // pelo: de la frente por arriba hasta la nuca
-    o.push(`<path class="{c}__tinta" d="M${r1(p1[0])} ${r1(p1[1])}A${R + 0.8} ${R + 0.8} 0 0 0 ${r1(p2[0] - 0.8)} ${r1(p2[1])}Q${r1(hx - 6)} ${r1(hy + 2)} ${r1(hx - 2)} ${r1(hy - 8)}Q${r1(hx + 4)} ${r1(hy - 16)} ${r1(p1[0])} ${r1(p1[1])}Z"/>`);
-    if (pelo === 'moño') o.push(`<circle class="{c}__tinta" cx="${hx - 16}" cy="${hy - 12}" r="8"/>`); }
-  const s0 = [10, 6], c = pt(s0[0], s0[1], 40, brazo[0]), m = pt(c[0], c[1], 36, brazo[1]);
-  o.push(`<path class="{c}__trazo-${ropa}" stroke-width="15" d="M${s0[0]} ${s0[1]}L${r1(c[0])} ${r1(c[1])}"/>`);
-  o.push(`<path class="{c}__trazo-${piel}" stroke-width="12" d="M${r1(c[0])} ${r1(c[1])}L${r1(m[0])} ${r1(m[1])}"/>`);
-  o.push(`<circle class="{c}__${piel}" cx="${r1(m[0])}" cy="${r1(m[1])}" r="7.5"/>`);
-  const t = `translate(${r1(x)} ${r1(y)})${dir === -1 ? ' scale(-1 1)' : ''}${escala !== 1 ? ` scale(${escala})` : ''}${inclina ? ` rotate(${inclina})` : ''}`;
-  // posición absoluta de la mano (aplica la misma transformación)
-  const rot = (px, py) => { const g = rad(inclina); return [px * Math.cos(g) - py * Math.sin(g), px * Math.sin(g) + py * Math.cos(g)]; };
-  const [mx, my] = rot(m[0] * escala, m[1] * escala);
-  return { svg: `<g class="{c}__persona" transform="${t}">${o.join('')}</g>`, mano: [x + dir * mx, y + my] };
+// ---------- piezas ----------
+/** Agujero oscuro (pared, suelo, techo) del que sale o al que entra algo. */
+export const agujero = ({ x, y, rx, ry }) => relleno('tinta', [[0, -1], [0.7, -0.7], [1, 0], [0.7, 0.7], [0, 1], [-0.7, 0.7], [-1, 0], [-0.7, -0.7]].map(([a, b]) => [x + a * rx, y + b * ry]), { temblor: 1 });
+
+/** Rayitas de «¡ta-dá!» alrededor de (cx, cy), en un arco de «de» a «a» grados. */
+export function rayitas({ cx, cy, r, n = 5, de = -150, a = -30, largo = 18 }) {
+  return Array.from({ length: n }, (_, i) => { const g = rad(de + ((a - de) * i) / Math.max(1, n - 1)); const l = largo * (i % 2 ? 0.8 : 1);
+    return linea([[cx + r * Math.cos(g), cy + r * Math.sin(g)], [cx + (r + l) * Math.cos(g), cy + (r + l) * Math.sin(g)]], { temblor: 0.2 }); }).join('');
 }
 
-// Objetos: devuelven SVG en coordenadas absolutas.
+/** Brazo (manga de papel) desde «desde» hasta la muñeca «hasta». Devuelve { svg, muneca, angulo }. */
+export function brazo({ desde, hasta, ancho = 44, curva = 0.12, puno = true }) {
+  const [x1, y1] = desde, [x2, y2] = hasta; const L = Math.hypot(x2 - x1, y2 - y1); const ux = (x2 - x1) / L, uy = (y2 - y1) / L; const nx = -uy, ny = ux;
+  const h = ancho / 2, mid = [(x1 + x2) / 2 + nx * L * curva, (y1 + y2) / 2 + ny * L * curva];
+  const lado = (s, w0, w1) => [[x1 + nx * w0 * s, y1 + ny * w0 * s], [mid[0] + nx * ((w0 + w1) / 2) * s, mid[1] + ny * ((w0 + w1) / 2) * s], [x2 + nx * w1 * s, y2 + ny * w1 * s]];
+  const a = lado(-1, h * 1.08, h), b = lado(1, h * 1.08, h);
+  const svg = [relleno('papel', [...a, ...b.slice().reverse()], { temblor: 0.5 }), linea(a), linea(b)];
+  if (puno) { const p = 0.84; const c = [x1 + (x2 - x1) * p + nx * L * curva * 0.5, y1 + (y2 - y1) * p + ny * L * curva * 0.5];
+    svg.push(linea([[c[0] - nx * h * 1.05, c[1] - ny * h * 1.05], [c[0] + nx * h * 1.05, c[1] + ny * h * 1.05]], { temblor: 0.5 })); }
+  return { svg: svg.join(''), muneca: hasta, angulo: (Math.atan2(uy, ux) * 180) / Math.PI };
+}
+
+// Manos: puntos con la muñeca en (0, 0), mirando a la derecha, muñeca de 44 de ancho (de -22 a 22).
+const MANOS = {
+  // palma arriba en forma de cuenco: el objeto se apoya en «apoyo»
+  cuenco: { contorno: [[0, -22], [14, -24], [26, -32], [34, -34], [40, -26], [36, -14], [48, -6], [78, -4], [100, -12], [112, -24], [120, -26], [124, -18], [118, 0], [100, 18], [70, 28], [34, 28], [0, 22]],
+    pliegues: [[[90, 4], [108, -10]], [[78, 14], [100, 2]]], apoyo: [66, -6] },
+  // índice extendido, el resto del puño cerrado
+  senala: { contorno: [[0, -22], [26, -26], [52, -22], [96, -20], [108, -14], [104, -8], [62, -8], [66, 0], [62, 10], [52, 22], [28, 26], [0, 22]],
+    pliegues: [[[50, -8], [56, 4]], [[44, 8], [52, 18]]], apoyo: [108, -14] },
+  // mano abierta, dedos hacia delante (saludo, chocar)
+  abierta: { contorno: [[0, -22], [20, -30], [30, -44], [40, -50], [44, -44], [38, -30], [60, -34], [96, -34], [102, -28], [96, -22], [64, -20], [100, -16], [106, -10], [100, -4], [66, -6], [96, 2], [100, 8], [94, 12], [62, 10], [84, 18], [86, 24], [78, 26], [40, 26], [0, 22]],
+    pliegues: [], apoyo: [100, -30] },
+};
+/** Mano en la muñeca (x, y), girada «rot» grados (usa el ángulo que devuelve brazo), escala s, espejo flip.
+ *  Devuelve { svg, apoyo } (apoyo = dónde se coloca lo que sostiene o señala). */
+export function mano({ x, y, rot = 0, s = 1, flip = false, gesto = 'cuenco' }) {
+  const g = MANOS[gesto] || MANOS.cuenco; const T = (p) => tf(p, { x, y, s, rot, flip });
+  const c = T(g.contorno);
+  return { svg: [relleno('papel', c, { temblor: 0.5 }), linea(c, { cerrado: true }), ...g.pliegues.map((p) => linea(T(p), { fina: true }))].join(''), apoyo: T([g.apoyo])[0] };
+}
+
+/** Cabeza de perfil mirando a la derecha (flip para la izquierda): cara mínima (ojo de punto, sonrisa, nariz angular).
+ *  (x, y) = base del cuello por delante. pelo: corto | largo | barba | ninguno. Devuelve { svg }. */
+export function cabeza({ x, y, s = 1, flip = false, pelo = 'corto', cara = 'sonrie' }) {
+  const T = (p) => tf(p, { x, y, s, flip });
+  const contorno = T([[-24, 0], [-26, -30], [-34, -58], [-32, -84], [-18, -98], [2, -100], [18, -92], [24, -76], [26, -64], [36, -52], [26, -48], [26, -40], [24, -30], [12, -24], [0, -22], [0, 0]]);
+  // el relleno baja 10 por debajo del cuello para solaparse con el torso (el temblor no deja huecos)
+  const o = [relleno('papel', [...contorno, ...T([[0, 10], [-24, 10]])], { temblor: 0.5 }), linea(contorno)];
+  if (pelo === 'corto' || pelo === 'barba') o.push(relleno('tinta', T([[-34, -58], [-34, -82], [-20, -98], [4, -102], [20, -94], [16, -82], [4, -84], [-6, -78], [-14, -66], [-22, -54]]), { temblor: 0.6 }));
+  if (pelo === 'largo') o.push(relleno('tinta', T([[-26, -20], [-38, -50], [-36, -82], [-20, -100], [4, -104], [22, -94], [18, -82], [2, -86], [-10, -74], [-16, -52], [-14, -24]]), { temblor: 0.6 }));
+  if (pelo === 'barba') o.push(relleno('tinta', T([[-6, -52], [0, -38], [12, -26], [24, -30], [26, -40], [16, -42], [8, -50]]), { temblor: 0.5 }));
+  o.push(`<circle class="{c}__punto" cx="${f(T([[14, -68]])[0][0])}" cy="${f(T([[14, -68]])[0][1])}" r="${f(3.4 * s)}"/>`);
+  if (cara === 'sonrie') o.push(linea(T([[16, -40], [20, -37], [24, -40]]), { fina: true, temblor: 0.2 }));
+  o.push(linea(T([[-6, -40], [-11, -45], [-9, -51], [-3, -50]]), { fina: true, temblor: 0.2 }));   // oreja, bajo el pelo
+  return { svg: o.join('') };
+}
+
+/** Torso de perfil (hombros y pecho) que sale del lienzo por abajo. (x, y) = base del cuello por delante, como cabeza.
+ *  Devuelve { svg, hombro } (hombro = de dónde sale el brazo). */
+export function torso({ x, y, s = 1, flip = false, rol = 'papel', alto = 200 }) {
+  const T = (p) => tf(p, { x, y, s, flip });
+  const espalda = [[-24, 0], [-40, 10], [-62, 26], [-72, 60], [-76, alto]], pecho = [[0, 0], [16, 14], [30, 40], [36, 80], [40, alto]];
+  return { svg: [relleno(rol, T([...espalda, ...pecho.slice().reverse()]), { temblor: 0.5 }), linea(T(espalda)), linea(T(pecho))].join(''), hombro: T([[-30, 34]])[0] };
+}
+
+// ---------- objetos ----------
 export const objeto = {
-  // La cochinilla de Grana (gota de tinte con bandas, antenas y patitas). cx, base = centro y punto de apoyo; t = tamaño (alto ≈ 20·t).
-  grana: ({ cx, base, t = 6, rol = 'acento' }) => {
-    const X = (v) => r1(cx + (v - 12) * t), Y = (v) => r1(base + (v - 22.2) * t);
-    const gota = `M${X(12)} ${Y(4.2)}C${X(12)} ${Y(4.2)} ${X(19)} ${Y(11.2)} ${X(19)} ${Y(15.5)}C${X(19)} ${Y(19.4)} ${X(15.9)} ${Y(22.2)} ${X(12)} ${Y(22.2)}C${X(8.1)} ${Y(22.2)} ${X(5)} ${Y(19.4)} ${X(5)} ${Y(15.5)}C${X(5)} ${Y(11.2)} ${X(12)} ${Y(4.2)} ${X(12)} ${Y(4.2)}Z`;
-    const bandas = [12.0, 15.4, 18.8].map((v) => `M${X(3)} ${Y(v)}Q${X(12)} ${Y(v + 1.7)} ${X(21)} ${Y(v)}`).join('');
-    const patas = `M${X(10.9)} ${Y(6.3)}L${X(8.3)} ${Y(2.9)}M${X(13.1)} ${Y(6.3)}L${X(15.7)} ${Y(2.9)}M${X(5.4)} ${Y(13.4)}L${X(3.2)} ${Y(12.4)}M${X(5.1)} ${Y(17.4)}L${X(2.9)} ${Y(18)}M${X(18.6)} ${Y(13.4)}L${X(20.8)} ${Y(12.4)}M${X(18.9)} ${Y(17.4)}L${X(21.1)} ${Y(18)}`;
-    return `<mask id="{c}-grana-m" maskUnits="userSpaceOnUse"><rect x="${X(0)}" y="${Y(0)}" width="${r1(24 * t)}" height="${r1(24 * t)}" fill="#fff"/><path d="${bandas}" stroke="#000" stroke-width="${r1(1.1 * t)}" fill="none"/></mask>`
-      + `<path class="{c}__${rol}" d="${gota}" mask="url(#{c}-grana-m)"/><path class="{c}__trazo-${rol}" stroke-width="${r1(1.35 * t)}" d="${patas}"/>`;
+  /** La cochinilla de Grana: gota con bandas (recortadas al contorno), antenas y patitas; relleno de acento desplazado. */
+  grana: ({ cx, base, t = 5.6, rol = 'acento', desplaza = [6, 4] }) => {
+    const X = (v) => cx + (v - 12) * t, Y = (v) => base + (v - 22.2) * t;
+    const G = [[12, 4.2], [14.6, 7.6], [17.6, 11.4], [19, 15.5], [18, 19.4], [15.6, 21.6], [12, 22.2], [8.4, 21.6], [6, 19.4], [5, 15.5], [6.4, 11.4], [9.4, 7.6]];
+    const gota = G.map(([x, y]) => [X(x), Y(y)]);
+    const der = G.slice(0, 7); const ancho = (v) => { for (let i = 0; i < der.length - 1; i++) { const [x1, y1] = der[i], [x2, y2] = der[i + 1]; if (v >= y1 && v <= y2) return x1 + ((x2 - x1) * (v - y1)) / (y2 - y1) - 12; } return 0; };
+    const banda = (v) => { const w = ancho(v) - 0.6; return linea([[X(12 - w), Y(v)], [X(12), Y(v + 1.1)], [X(12 + w), Y(v)]], { temblor: 0.5 }); };
+    const pata = (a, b) => linea([[X(a[0]), Y(a[1])], [X(b[0]), Y(b[1])]], { temblor: 0.3 });
+    return [relleno(rol, gota, { desplaza, temblor: 1.4 }), linea([...gota, gota[0]]), ...[12.0, 15.4, 18.8].map(banda),
+      pata([10.9, 6.3], [8.3, 2.9]), pata([13.1, 6.3], [15.7, 2.9]), pata([5.4, 13.4], [3.2, 12.4]), pata([5.1, 17.4], [2.9, 18]), pata([18.6, 13.4], [20.8, 12.4]), pata([18.9, 17.4], [21.1, 18])].join('');
   },
-  pizarra: ({ x, y, w = 170, h = 120 }) => [
-    `<rect class="{c}__superficie" x="${x}" y="${y}" width="${w}" height="${h}" rx="10"/>`,
-    `<rect class="{c}__trazo-linea" stroke-width="2" fill="none" x="${x}" y="${y}" width="${w}" height="${h}" rx="10"/>`,
-    `<rect class="{c}__forma" x="${x + 14}" y="${y + 14}" width="${w * 0.45}" height="10" rx="5"/>`,
-    ...[0, 1, 2, 3].map((i) => { const bh = [34, 52, 26, 64][i]; return `<rect class="{c}__${i === 3 ? 'acento' : 'acento-2'}" x="${x + 18 + i * 26}" y="${y + h - 16 - bh}" width="16" height="${bh}" rx="3"/>`; }),
-    `<rect class="{c}__forma" x="${x + w - 52}" y="${y + 40}" width="38" height="8" rx="4"/>`,
-    `<rect class="{c}__forma" x="${x + w - 52}" y="${y + 56}" width="28" height="8" rx="4"/>`,
-  ].join(''),
-  burbuja: ({ x, y, w = 96, h = 56, cola = 'izq' }) => {
-    // Una sola forma (caja + cola) con borde: una superficie clara puede caer sobre el fondo de la página.
-    const r = 14, b = y + h, t = cola === 'izq' ? x + 18 : x + w - 18, s = cola === 'izq' ? -1 : 1;
-    const tail = cola === 'izq'
-      ? `H${t + 12}L${t + s * 10} ${b + 16}L${t} ${b}`
-      : `H${t}L${t + s * 10} ${b + 16}L${t - 12} ${b}`;
-    const d = `M${x + r} ${y}H${x + w - r}A${r} ${r} 0 0 1 ${x + w} ${y + r}V${b - r}A${r} ${r} 0 0 1 ${x + w - r} ${b}`
-      + (cola === 'izq' ? `H${t + 12}L${t - 10} ${b + 16}L${t} ${b}` : `H${t}L${t + 10} ${b + 16}L${t - 12} ${b}`)
-      + `H${x + r}A${r} ${r} 0 0 1 ${x} ${b - r}V${y + r}A${r} ${r} 0 0 1 ${x + r} ${y}Z`;
-    return [`<path class="{c}__superficie" d="${d}"/>`, `<path class="{c}__trazo-linea" stroke-width="2" d="${d}"/>`,
-      `<rect class="{c}__acento" x="${x + 14}" y="${y + 15}" width="${w - 28}" height="8" rx="4"/>`,
-      `<rect class="{c}__forma" x="${x + 14}" y="${y + 31}" width="${(w - 28) * 0.62}" height="8" rx="4"/>`].join('');
-  },
-  planta: ({ x, y }) => [
-    `<path class="{c}__acento" d="M${x} ${y - 30}C${x - 26} ${y - 46} ${x - 30} ${y - 74} ${x - 18} ${y - 86}C${x - 6} ${y - 70} ${x - 2} ${y - 52} ${x} ${y - 30}Z"/>`,
-    `<path class="{c}__acento" d="M${x} ${y - 30}C${x + 24} ${y - 52} ${x + 34} ${y - 70} ${x + 22} ${y - 90}C${x + 6} ${y - 76} ${x} ${y - 56} ${x} ${y - 30}Z"/>`,
-    `<path class="{c}__tinta-2" d="M${x - 18} ${y - 34}H${x + 18}L${x + 13} ${y}H${x - 13}Z"/>`,
-  ].join(''),
-  mancha: ({ x, y, w, h }) => `<path class="{c}__forma" d="M${x + w * 0.1} ${y + h * 0.35}C${x + w * 0.05} ${y + h * 0.05} ${x + w * 0.45} ${y - h * 0.04} ${x + w * 0.7} ${y + h * 0.08}C${x + w * 0.98} ${y + h * 0.2} ${x + w * 1.02} ${y + h * 0.62} ${x + w * 0.82} ${y + h * 0.86}C${x + w * 0.6} ${y + h * 1.04} ${x + w * 0.2} ${y + h * 0.98} ${x + w * 0.06} ${y + h * 0.74}C${x - w * 0.02} ${y + h * 0.6} ${x + w * 0.12} ${y + h * 0.5} ${x + w * 0.1} ${y + h * 0.35}Z"/>`,
-  suelo: ({ x, y, w }) => `<rect class="{c}__forma" x="${x}" y="${y}" width="${w}" height="6" rx="3"/>`,
-  puntos: ({ x, y }) => [[0, 0], [14, 0], [28, 0], [0, 14], [14, 14], [28, 14]].map(([dx, dy]) => `<circle class="{c}__acento-2" cx="${x + dx}" cy="${y + dy}" r="3"/>`).join(''),
 };
 
-// Envuelve las piezas en el SVG final: roles → tokens, accesibilidad y modo oscuro de los valores por defecto.
-export function ilustracion({ id, w = 480, h = 320, titulo, decorativa = false, partes }) {
+// ---------- envoltorio ----------
+/** Envuelve las piezas: roles → tokens, fondo, accesibilidad y modo oscuro de los valores por defecto. */
+export function ilustracion({ id, w = 480, h = 320, titulo, decorativa = false, fondo = true, partes }) {
   const c = `mango-${id}`;
-  const usados = new Set([...partes.join('').matchAll(/\{c\}__(?:trazo-)?([a-z0-9-]+)/g)].map((m) => m[1]).filter((r) => ROLES[r]));
+  const k = w / 480;   // el grosor se escala con el lienzo
+  const cuerpo = (fondo ? [`<rect class="{c}__fondo" width="${w}" height="${h}"/>`] : []).concat(partes).join('\n  ');
+  const usados = new Set(['tinta', ...[...cuerpo.matchAll(/\{c\}__([a-z0-9-]+)/g)].map((m) => m[1]).filter((r) => ROLES[r])]);
   const vars = [...usados].map((r) => `--m-${r}:var(${ROLES[r][0]},${ROLES[r][1]})`).join(';');
-  const varsOsc = [...usados].filter((r) => DARK[r]).map((r) => `--m-${r}:var(${ROLES[r][0]},${DARK[r]})`).join(';');
-  const reglas = [...usados].map((r) => `.${c}__${r}{fill:var(--m-${r})}.${c}__trazo-${r}{fill:none;stroke:var(--m-${r});stroke-linecap:round;stroke-linejoin:round}`).join('');
-  const css = `.${c}{${vars}}${varsOsc ? `@media (prefers-color-scheme:dark){.${c}{${varsOsc}}}` : ''}${reglas}`;
+  const osc = [...usados].filter((r) => DARK[r]).map((r) => `--m-${r}:var(${ROLES[r][0]},${DARK[r]})`).join(';');
+  const reglas = [...usados].map((r) => `.${c}__${r}{fill:var(--m-${r})}`).join('')
+    + `.${c}__linea{fill:none;stroke:var(--m-tinta);stroke-width:${f(GROSOR.linea * k)};stroke-linecap:round;stroke-linejoin:round}`
+    + `.${c}__fina{fill:none;stroke:var(--m-tinta);stroke-width:${f(GROSOR.fina * k)};stroke-linecap:round;stroke-linejoin:round}`
+    + `.${c}__punto{fill:var(--m-tinta)}`;
+  const css = `.${c}{${vars}}${osc ? `@media (prefers-color-scheme:dark){.${c}{${osc}}}` : ''}${reglas}`;
   const a11y = decorativa ? 'aria-hidden="true"' : `role="img" aria-labelledby="${c}-t"`;
   const tit = decorativa ? '' : `<title id="${c}-t">${titulo}</title>`;
-  const body = partes.join('\n  ').replaceAll('{c}', c);
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" class="mango-ilu ${c}" ${a11y}>\n  ${tit}<style>${css}</style>\n  ${body}\n</svg>\n`;
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h}" class="mango-ilu ${c}" ${a11y}>\n  ${tit}<style>${css}</style>\n  ${cuerpo.replaceAll('{c}', c)}\n</svg>\n`;
 }

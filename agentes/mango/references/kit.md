@@ -1,40 +1,42 @@
-# Kit de Mango (`scripts/kit.mjs`)
+# Kit de Mango (`scripts/kit.mjs`) · estilo línea de rotulador
 
-Escena = un archivo `.mjs` que importa el kit y escribe el SVG:
+Escena = un `.mjs` que importa el kit, fija la semilla y escribe el SVG:
 
 ```js
-import { persona, objeto, ilustracion } from '<ruta>/scripts/kit.mjs';
+import { semilla, cabeza, torso, brazo, mano, rayitas, objeto, ilustracion } from '<ruta>/scripts/kit.mjs';
 import { writeFileSync } from 'node:fs';
-const suelo = 292;
-const p = persona({ x: 150, y: suelo, pose: 'senala', pelo: 'largo', piel: 'piel', ropa: 'acento' });
-writeFileSync('ayuda-informa.svg', ilustracion({ id: 'ayuda-informa', titulo: 'Una persona señala un panel con una gráfica', partes: [
-  objeto.mancha({ x: 40, y: 40, w: 400, h: 250 }), objeto.suelo({ x: 30, y: suelo + 2, w: 420 }),
-  objeto.pizarra({ x: 222, y: 70, w: 196, h: 136 }), objeto.planta({ x: 430, y: suelo }),
-  p.svg, objeto.burbuja({ x: 30, y: 40, w: 88, h: 50, cola: 'der' }),
-]}));
+semilla(23);                                                    // mismo dibujo en cada regeneración
+const cuello = [372, 214], s = 1.15;
+const t = torso({ x: cuello[0], y: cuello[1], s, flip: true });  // se asoma por la derecha, mira a la izquierda
+const c = cabeza({ x: cuello[0], y: cuello[1], s, flip: true, pelo: 'corto' });
+const b = brazo({ desde: t.hombro, hasta: [236, 214], ancho: 46, curva: -0.08 });
+const m = mano({ x: b.muneca[0], y: b.muneca[1], rot: b.angulo - 180, flip: true, gesto: 'cuenco', s: 1.05 });
+writeFileSync('presenta.svg', ilustracion({ id: 'presenta', titulo: 'Una persona se asoma y presenta algo', partes: [
+  t.svg, c.svg, b.svg, objeto.grana({ cx: m.apoyo[0], base: m.apoyo[1] + 4, t: 5 }), m.svg,
+  rayitas({ cx: m.apoyo[0], cy: m.apoyo[1] - 60, r: 70 }) ] }));
 ```
 
 ## Piezas
 
-| Pieza | Parámetros |
+| Pieza | Parámetros y retorno |
 |---|---|
-| `persona` | `x`, `y` (suelo), `escala`, `pose` (`de-pie`, `senala`, `saluda`, `sostiene`, `explica`), `pelo` (`corto`, `largo`, `rizado`, `moño`), `piel` (`piel`, `piel-2`, `piel-3`), `ropa`, `pantalon`, `zapato` (roles). Devuelve `{ svg, manoD, manoI }` (posición de las manos para colocar objetos) |
-| `personaPerfil` | torso de perfil que se asoma por un borde · `x`, `y` (hombro), `escala`, `dir` (1 mira a la derecha, -1 a la izquierda), `inclina` (grados), `piel`, `pelo` (`corto`, `moño`; `largo` aún no funciona de perfil), `ropa`, `brazo` `[hombro→codo, codo→mano]`. Devuelve `{ svg, mano }` |
-| `objeto.grana` | la cochinilla de Grana (objeto de marca) · `cx`, `base` (punto de apoyo), `t` (alto ≈ 20·t), `rol`. Usa una máscara con id `mango-<id>-grana-m` |
-| `objeto.pizarra` | panel con gráfica de barras · `x, y, w, h` |
-| `objeto.burbuja` | bocadillo con borde · `x, y, w, h, cola: 'izq'|'der'` |
-| `objeto.planta` | maceta con dos hojas · `x, y` (suelo) |
-| `objeto.mancha` | forma de fondo orgánica · `x, y, w, h` |
-| `objeto.suelo` | línea de suelo · `x, y, w` |
-| `objeto.puntos` | 6 puntos decorativos · `x, y` |
-| `ilustracion` | `id`, `w`, `h`, `titulo`, `decorativa`, `partes`: envuelve, traduce roles a tokens, accesibilidad y oscuro |
+| `semilla(n)` | fija el temblor (M3) |
+| `trazo(pts, {cerrado, temblor, paso})` | camino suave con temblor por los puntos de control |
+| `linea(pts, {fina, cerrado, temblor})` / `relleno(rol, pts, {desplaza})` | línea de tinta / forma rellena (con desplazamiento opcional, M4) |
+| `tf(pts, {x, y, s, rot, flip})` | transforma puntos antes del temblor (el temblor no se escala) |
+| `brazo({desde, hasta, ancho, curva, puno})` | manga de papel con puño → `{ svg, muneca, angulo }` |
+| `mano({x, y, rot, s, flip, gesto})` | `cuenco` (palma arriba, sostiene), `senala` (índice), `abierta` (saludar, chocar) → `{ svg, apoyo }`. Con el brazo hacia la izquierda: `flip: true, rot: angulo - 180` |
+| `cabeza({x, y, s, flip, pelo, cara})` | perfil con cara mínima; (x, y) = base del cuello por delante · `pelo`: `corto`, `largo`, `barba`, `ninguno` · `cara`: `sonrie`, `serio` |
+| `torso({x, y, s, flip, rol, alto})` | hombros y pecho de perfil que salen por abajo → `{ svg, hombro }` |
+| `agujero({x, y, rx, ry})` | agujero de tinta del que sale o al que entra algo |
+| `rayitas({cx, cy, r, n, de, a, largo})` | rayitas de «¡ta-dá!» en arco |
+| `objeto.grana({cx, base, t, rol, desplaza})` | la cochinilla de Grana (objeto de marca) |
+| `ilustracion({id, w, h, titulo, decorativa, fondo, partes})` | envuelve: fondo, roles → tokens, grosores, accesibilidad, oscuro |
 
-Para que algo quede **sostenido**, apóyalo centrado sobre la mano (`base` = parte alta de la mano), no en su borde: si no, parece flotar.
-
-Orden de pintado = orden de `partes`: fondo → suelo → objetos de atrás → personas → objetos de delante.
+Orden de pintado = orden de `partes`: torso → cabeza → brazo → objeto sostenido → mano (encima, M5) → rayitas.
 
 ## Ampliar el kit
 
-- **Pose nueva:** añade a `POSES` los ángulos `[hombro→codo, codo→mano]` de cada brazo (0° = derecha, 90° = abajo) y de cada pierna. Pruébala en una fila de poses antes de usarla.
-- **Objeto nuevo:** función en `objeto` que devuelve formas con clases `{c}__<rol>` (relleno) o `{c}__trazo-<rol>` (trazo). Nunca un color.
-- **Rol nuevo:** solo si ninguno existente sirve; añádelo a `ROLES` (y a `DARK` si cambia en oscuro) y a `references/contrato-svg.md`.
+- **Gesto de mano nuevo:** añade a `MANOS` el contorno (muñeca en (0,0), mirando a la derecha, de -22 a 22), los pliegues y el `apoyo`. Pruébalo en una hoja de manos que salen de agujeros antes de usarlo.
+- **Objeto nuevo:** función en `objeto` que combina `linea` y `relleno` con roles; nunca un color.
+- **Rol nuevo:** solo si ninguno sirve; añádelo a `ROLES` (y a `DARK`) y a `references/contrato-svg.md`.

@@ -5,7 +5,7 @@ La columna **Verifica** es el código de `scripts/check-ilustracion.mjs`; «manu
 | Regla | Verifica |
 |---|---|
 | XML válido: ningún comentario contiene `--` (si no, no abre como `<img>`) | X1 (+ banco: «abre como imagen») |
-| `viewBox="0 0 w h"` (lienzo base 480×320; otras proporciones según la sección) | A1 |
+| `viewBox="0 0 w h"` (lienzo base 480×320; otras proporciones según la sección; el grosor de línea escala con el ancho) | A1 |
 | Sin `width`/`height` en la raíz: la sección decide el tamaño | A2 |
 | Raíz con clases `mango-ilu mango-<id>` | ID |
 | Color solo por roles: `.mango-<id>{--m-<rol>:var(--mango-<rol>,<defecto>)}` y formas con `.mango-<id>__<rol>`; ningún color fijo fuera de esos valores por defecto | COL1 |
@@ -22,8 +22,8 @@ La columna **Verifica** es el código de `scripts/check-ilustracion.mjs`; «manu
 
 ## Roles de color
 
-`acento`, `acento-2`, `tinta`, `tinta-2`, `piel`, `piel-2`, `piel-3`, `superficie`, `forma`, `linea`. Token: `--mango-<rol>`. Valores por defecto y de modo oscuro: `ROLES` y `DARK` en `scripts/kit.mjs`. El proyecto los conecta a sus tokens:
+`fondo` (rectángulo de fondo), `tinta` (líneas, ojos, masas oscuras), `papel` (relleno de personas y objetos claros), `acento` (el foco), `acento-2` (segundo color, opcional). Token: `--mango-<rol>`. Valores por defecto y de modo oscuro: `ROLES` y `DARK` en `scripts/kit.mjs`. Las líneas usan las clases `mango-<id>__linea` (4.2) y `mango-<id>__fina` (2.6), siempre en `tinta`. El proyecto conecta los roles a sus tokens:
 
 ```css
-:root { --mango-acento: var(--color-brand); --mango-superficie: var(--color-surface); }
+:root { --mango-fondo: var(--color-brand-soft); --mango-acento: var(--color-brand); --mango-tinta: var(--color-ink); }
 ```
