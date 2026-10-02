@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="uva-icon uva-bruno-c">
+  <style>.uva-bruno-c{stroke-width:var(--uva-stroke,1.5)}.uva-bruno-c__ojo{fill:currentColor;stroke:none}</style>
+  <!-- C · cabeza de perfil (busto) -->
+  <path class="uva-bruno-c__cuerpo" d="M4.6 21C3.4 20.13 4.93 17.37 5.4 15.8C5.87 14.23 6.87 12.8 7.4 11.6C7.93 10.4 8.3 9.6 8.6 8.6C8.9 7.6 8.87 6.73 9.2 5.6C9.53 4.47 10.6 1.8 10.6 1.8C10.6 1.8 12.87 4.73 13.6 5.4C14.33 6.07 14.53 5.57 15 5.8C15.47 6.03 15.57 6.25 16.4 6.8C17.23 7.35 19.32 8.47 20 9.1C20.68 9.73 20.5 10.6 20.5 10.6C20.5 10.6 20.25 11.53 19.4 11.9C18.55 12.27 16.47 12.35 15.4 12.8C14.33 13.25 13.5 13.8 13 14.6C12.5 15.4 12.47 16.53 12.4 17.6C12.33 18.67 12.6 21 12.6 21C12.6 21 5.8 21.87 4.6 21Z"/>
+  <path class="uva-bruno-c__cola" d="M4.6 21C4.6 21 4.6 21 4.6 21"/>
+  <path class="uva-bruno-c__linea" d="M7.6 17.4C7.27 17.5 8.43 16 9 15.6C9.57 15.2 11.23 14.7 11 15"/>
+  <circle class="uva-bruno-c__ojo" cx="14.4" cy="8.6" r="0.75"/>
+</svg>

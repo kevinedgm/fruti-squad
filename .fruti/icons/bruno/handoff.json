@@ -1,0 +1,51 @@
+{
+  "icon": {
+    "id": "bruno",
+    "source": "uva",
+    "next_owner": "coco",
+    "style_source": "uva_base",
+    "sizes": [
+      16,
+      20,
+      24,
+      32,
+      48
+    ],
+    "small_variant": false,
+    "motion": [
+      {
+        "modifier": "uva-bruno--contento",
+        "category": "feedback",
+        "total_s": 0.64
+      },
+      {
+        "modifier": "uva-bruno--avisar",
+        "category": "attention",
+        "total_s": 0.6
+      }
+    ],
+    "confusions_tested": [
+      "dog",
+      "cat",
+      "chess-knight",
+      "squirrel"
+    ],
+    "criteria_failed": [],
+    "criteria_warned": [
+      "A2: margen 1.65 (recomendado 2)",
+      "D6: cola 640 ms > motion.slow"
+    ],
+    "files": [
+      "bruno.svg",
+      "registro.yaml",
+      "uso.md",
+      "prueba.html",
+      "secuencias.png",
+      "propuesta/"
+    ],
+    "unresolved": [
+      "sin prueba con personas (B1 por banco)",
+      "parecido con Bruno: silueta genérica de malinois, no un retrato"
+    ]
+  }
+}

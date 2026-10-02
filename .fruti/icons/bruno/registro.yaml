@@ -1,0 +1,18 @@
+# Entrada propuesta del registro semántico de iconos (norma §5.1). El registro del proyecto lo gobierna lima.
+semanticName: bruno
+icon: { library: custom, name: uva-bruno, file: bruno.svg }
+category: brand                   # identidad del agente Bruno (pastor belga malinois del usuario)
+accessibility: { defaultLabel: Bruno, hiddenByDefault: true }
+direction: { rtl: mirror }        # mira a la derecha (supuesto: no se probó en RTL)
+motion:
+  - { modifier: uva-bruno--contento, category: feedback, meaning: "Bruno respondió / tarea hecha", piece: cola, duration: 640ms, repeats: 1 }
+  - { modifier: uva-bruno--avisar, category: attention, meaning: "Bruno tiene un aviso (con moderación)", piece: mandíbula (forma d), duration: "2 × 300ms" }
+  reducedMotion: "sin movimiento; el estado lo da el texto o el control"
+  fallback: "sin animación de la propiedad d: el ladrido se reduce a un leve impulso del icono entero"
+  deviation: "D6 recomendado: la cola usa 640 ms (cuatro vaivenes), como el salto de rabbit (650 ms)"
+style: { source: uva_base, stroke: 1.5, cap: round, join: round }
+sizes: { tested: [14, 16, 20, 24, 32, 48], recommended: [16, 20, 24, 32, 48] }
+confusionsTested: [dog, cat, chess-knight, squirrel]
+alternatives: { lucide: dog }     # cara de frente con orejas caídas: no es un malinois ni sigue la familia de perfil
+status: proposed
+usage: { label: recommended, iconOnlyButton: "44x44, nombre «Abrir Bruno» en el <button>" }

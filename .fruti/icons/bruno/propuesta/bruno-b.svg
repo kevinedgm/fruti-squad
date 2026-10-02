@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="uva-icon uva-bruno-b">
+  <style>.uva-bruno-b{stroke-width:var(--uva-stroke,1.5)}.uva-bruno-b__ojo{fill:currentColor;stroke:none}</style>
+  <!-- B · sentado, cola en el suelo -->
+  <path class="uva-bruno-b__cuerpo" d="M9.6 11.2C10.2 10.43 10.52 9.52 10.9 8.8C11.28 8.08 11.62 7.97 11.9 6.9C12.18 5.83 12.6 2.4 12.6 2.4C12.6 2.4 14.23 4.52 14.7 5C15.17 5.48 15.15 5.15 15.4 5.3C15.65 5.45 15.7 5.62 16.2 5.9C16.7 6.18 17.98 6.67 18.4 7C18.82 7.33 18.7 7.9 18.7 7.9C18.7 7.9 18.48 8.53 17.9 8.8C17.32 9.07 15.88 9.2 15.2 9.5C14.52 9.8 13.97 10.08 13.8 10.6C13.63 11.12 14.22 11.93 14.2 12.6C14.18 13.27 13.75 13.3 13.7 14.6C13.65 15.9 13.9 20.4 13.9 20.4C13.9 20.4 11.8 20.4 11.8 20.4C11.8 20.4 6.4 20.4 6.4 20.4C6.4 20.4 5.53 19.33 5.4 18.6C5.27 17.87 5.28 16.87 5.6 16C5.92 15.13 6.63 14.2 7.3 13.4C7.97 12.6 9 11.97 9.6 11.2Z"/>
+  <path class="uva-bruno-b__cola" d="M5.8 19.6C6 19.7 4.67 20.03 4.2 20C3.73 19.97 2.73 19.47 3 19.4"/>
+  <path class="uva-bruno-b__linea" d="M11.2 20C11.75 20.27 11.23 18.02 10.9 17.3C10.57 16.58 9.75 15.97 9.2 15.7C8.65 15.43 7.27 14.98 7.6 15.7"/>
+  <circle class="uva-bruno-b__ojo" cx="15.3" cy="7.3" r="0.75"/>
+</svg>
