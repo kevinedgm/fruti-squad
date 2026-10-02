@@ -1,0 +1,11 @@
+variant: spot
+serie: categorias-servicios     # ver ../serie-categorias.md
+subject: estilista de cabello para mujeres
+action: sostener tijeras abiertas y un peine
+emotion: happy
+characters: [{ presentation: feminine, hair: bob, outfit: delantal de estilista }]
+props: [tijeras, peine]
+accent: yellow                  # solo en los aros de las tijeras
+background: transparent
+ratio: "1:1"
+# reproducir: python skills/mango/scripts/vectoriza.py fuente.webp categoria-estilista.svg --id categoria-estilista --titulo "Estilista sonriente con tijeras y peine" --recorte 37,0,1217,1180
