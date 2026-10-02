@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="uva-icon uva-vector-grape-c">
+  <style>.uva-vector-grape-c{stroke-width:var(--uva-stroke,1.5)}</style>
+  <!-- C · uva seleccionada: la uva de abajo es un anclaje y la cruza su manejador bézier -->
+  <circle class="uva-vector-grape-c__uva" cx="7.5" cy="11.75" r="2.25"/>
+  <circle class="uva-vector-grape-c__uva" cx="15" cy="11.75" r="2.25"/>
+  <path class="uva-vector-grape-c__tallo" d="M11.25 8.5V6.75c0-1.5 1.25-2.5 2.75-2.5"/>
+  <rect class="uva-vector-grape-c__anclaje" x="9.25" y="17" width="4" height="4" rx="1"/>
+  <path class="uva-vector-grape-c__manejador" d="M5.75 19h3.5M13.25 19h3.5"/>
+  <circle class="uva-vector-grape-c__punta" cx="4.75" cy="19" r="1"/>
+  <circle class="uva-vector-grape-c__punta" cx="17.75" cy="19" r="1"/>
+</svg>

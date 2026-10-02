@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Uva · propuesta</title>
+<!--
+  Propuesta de Uva (fase E5). El usuario compara variantes y prueba la que quiera.
+  1. Rellena el JSON del script con id "meta". Los colores *Oscuro (opcionales) se usan con fondo oscuro:
+     un mismo color rara vez cumple 3:1 sobre blanco y sobre negro a la vez.
+  2. Sustituye el comentario UVA:VARIANTES (dentro de main) por una plantilla de variante por opción:
+     elemento template con clase "variante" y atributos data-id, data-nombre y data-recomendada (opcional), que contiene:
+     - el <svg> (clases uva-icon uva-<id>-<variante>, para que las variantes no compartan estilos),
+     - <p class="hipotesis"> por qué podría funcionar,
+     - <table class="evaluacion"> con la rúbrica de references/estandares.md (criterio · ✅/❌/➖ · evidencia).
+  Cada icono se monta en su propio shadow root: los <style> internos no se pisan entre copias.
+-->
+<style>
+  :root{--fondo:#fafaf9;--panel:#fff;--texto:#1a1a1a;--tenue:#6b6b6b;--linea:#e5e4e2;--marca:#7c5cd6}
+  *{box-sizing:border-box}
+  [hidden]{display:none !important}
+  body{margin:0;background:var(--fondo);color:var(--texto);font:14px/1.5 system-ui,sans-serif}
+  main{max-width:1080px;margin:0 auto;padding:24px 16px 48px}
+  h1{font-size:20px;margin:0 0 4px}
+  .sub{color:var(--tenue);margin:0 0 20px}
+  h2{font-size:15px;margin:28px 0 10px}
+  .variantes{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+  .tarjeta{background:var(--panel);border:1px solid var(--linea);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:4px}
+  .tarjeta.activa{outline:2px solid var(--marca);outline-offset:-1px}
+  .elegir{align-self:flex-start;margin-top:8px;font:inherit;font-size:13px;border:1px solid var(--linea);background:#fff;border-radius:8px;padding:6px 12px;cursor:pointer}
+  .elegir[aria-pressed="true"]{background:#efeafd;border-color:var(--marca);color:#3d2a8a}
+  .elegir:focus-visible{outline:2px solid var(--marca);outline-offset:2px}
+  .tarjeta .cab{display:flex;gap:12px;align-items:center}
+  .tarjeta .nom{font-weight:600}
+  .supuestos{background:#fff7e6;border:1px solid #f0d9a8;border-radius:10px;padding:10px 14px;font-size:13px;margin:0 0 16px}
+  .supuestos:empty{display:none}
+  .supuestos ul{margin:4px 0 0;padding-left:18px}
+  .badge{display:inline-block;font-size:11px;padding:1px 8px;border-radius:99px;background:#efeafd;color:#5b3fc0;margin-left:6px}
+  .hipotesis{color:var(--tenue);margin:8px 0}
+  table{border-collapse:collapse;width:100%;font-size:12px}
+  td{border-top:1px solid var(--linea);padding:4px 4px;vertical-align:top}
+  .lab{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px}
+  @media (max-width:760px){.lab{grid-template-columns:1fr}}
+  .escena{border:1px solid var(--linea);border-radius:12px;min-height:320px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:20px;transition:background .2s}
+  .escena.oscuro{background:#0b0b0b;color:#e8e8e8}
+  .escena.claro{background:#fff;color:var(--texto)}
+  .contexto{display:flex;gap:18px;align-items:center}
+  .chip{display:inline-flex;align-items:center;gap:6px;border:1px solid currentColor;border-radius:99px;padding:3px 10px 3px 6px;font-size:13px;opacity:.9}
+  .controles{background:var(--panel);border:1px solid var(--linea);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:12px}
+  .controles label{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:13px}
+  .controles input[type=range]{width:130px}
+  button.accion{font:inherit;border:1px solid var(--linea);background:#fff;border-radius:8px;padding:6px 10px;cursor:pointer}
+  .medida{font-size:12px;color:var(--tenue)}
+  .ok{color:#1d7a4f}.mal{color:#b3261e}.aviso{color:#9a5b00}
+  .uso{display:flex;gap:18px;align-items:center;flex-wrap:wrap;font-size:12px}
+  .uso figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .uso figcaption{opacity:.7}
+  .btn-icono{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;border:1px solid currentColor;background:transparent;color:inherit;cursor:pointer;padding:0}
+  .btn-icono.foco,.btn-icono:focus-visible{outline:2px solid #7c5cd6;outline-offset:2px}
+  .btn-etiqueta{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 14px;border-radius:10px;border:1px solid currentColor;background:transparent;color:inherit;font:inherit;cursor:pointer}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .vecino{fill:none;stroke:currentColor;stroke-width:var(--uva-stroke,1.5);stroke-linecap:round;stroke-linejoin:round;display:block}
+</style></head><body>
+<main>
+<script type="application/json" id="meta">
+{
+  "concepto": "Racimo vectorial (vector-grape)",
+  "significado": "Uva: iconos dibujados como vectores. Racimo + primitivas de editor vectorial (trazado, anclaje, manejador).",
+  "etiqueta": "Uva",
+  "colorTrazo": "#1a1a1a",
+  "colorAcento": "#1a1a1a",
+  "colorTrazoOscuro": "#e8e8e8",
+  "colorAcentoOscuro": "#e8e8e8",
+  "supuestos": [
+    "Nombre de trabajo vector-grape; si sustituye a icon-forge como marca de Uva, hereda ese id (una función, un icono).",
+    "Sin etiqueta junto al avatar; decorativo cuando acompaña al nombre «Uva».",
+    "Sin prueba con personas: el veredicto sale de los bancos renderizados (B1)."
+  ]
+}
+</script>
+
+<template class="variante" data-id="a2" data-nombre="A2 · tallo bézier + masa" data-recomendada><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="uva-icon uva-vector-grape-a2">
+  <style>.uva-vector-grape-a2{stroke-width:var(--uva-stroke,1.5)}</style>
+  
+  <circle class="uva-vector-grape-a2__uva" cx="7.1" cy="12" r="2.4"/>
+  <circle class="uva-vector-grape-a2__uva" cx="14.9" cy="12" r="2.4"/>
+  <circle class="uva-vector-grape-a2__uva" cx="11" cy="18.75" r="2.4"/>
+  <path class="uva-vector-grape-a2__trazado" d="M11 8.5C11 6 12 5 14.5 5"/>
+  <rect class="uva-vector-grape-a2__anclaje" x="14.5" y="3.5" width="3" height="3" rx=".75" fill="currentColor"/>
+  <path class="uva-vector-grape-a2__manejador" d="M17.5 5H19"/>
+  <circle class="uva-vector-grape-a2__punta" cx="20" cy="5" r="1"/>
+</svg>
+<p class="hipotesis">El tallo del racimo es un trazado que acaba en un anclaje seleccionado (relleno) con su manejador: se lee «uva» por las tres esferas y «vector» por el anclaje.</p><table class="evaluacion"><tr><td>A2 margen</td><td>✅</td><td>mín. 2.1 (abajo)</td></tr><tr><td>A6 separación</td><td>✅</td><td>uva-uva 1.5; anclaje-uva 1.6 (medido)</td></tr><tr><td>B1 reconocible</td><td>✅</td><td>racimo y anclaje legibles a 20–24; a 16 el manejador se simplifica pero el anclaje relleno se ve</td></tr><tr><td>B3 silueta mínima</td><td>✅</td><td>7 primitivas</td></tr><tr><td>B4 confusiones</td><td>✅</td><td>distinto de grape (lleno), spline (sin racimo), share-2 (sin uniones), pen-tool</td></tr><tr><td>B6 familia / peso (R6)</td><td>⚠️</td><td>algo más ligero que casa y mano a 24; aceptable</td></tr><tr><td>S1 nombre y categoría</td><td>✅</td><td>vector-grape · brand propia (brief.md)</td></tr><tr><td>S2 Lucide</td><td>✅</td><td>spline, pen-tool, vector-polygon, grape: parciales</td></tr><tr><td>S3 consistencia</td><td>✅</td><td>sustituye a icon-forge si gana; no conviven</td></tr><tr><td>S4 marca de tercero</td><td>➖</td><td>marca propia</td></tr><tr><td>A1/A3/A4 lienzo, trazo, uniones</td><td>✅</td><td>check-icon.mjs sin errores</td></tr><tr><td>A10 trazo fijo</td><td>✅</td><td>--uva-stroke único</td></tr><tr><td>C1 contraste</td><td>✅</td><td>trazo #1a1a1a ≈17:1 sobre blanco; #e8e8e8 sobre negro</td></tr><tr><td>C2 oculto por defecto</td><td>✅</td><td>aria-hidden="true"</td></tr><tr><td>C3 no solo color</td><td>✅</td><td>monocromo</td></tr><tr><td>C4/C5 botón y nombre</td><td>✅</td><td>nombre en el botón: «Abrir Uva»</td></tr><tr><td>D1–D7 movimiento</td><td>➖</td><td>estático</td></tr></table></template>
+<template class="variante" data-id="a" data-nombre="A · tallo bézier"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="uva-icon uva-vector-grape-a">
+  <style>.uva-vector-grape-a{stroke-width:var(--uva-stroke,1.5)}</style>
+  
+  <circle class="uva-vector-grape-a__uva" cx="7.5" cy="12.5" r="2.25"/>
+  <circle class="uva-vector-grape-a__uva" cx="15" cy="12.5" r="2.25"/>
+  <circle class="uva-vector-grape-a__uva" cx="11.25" cy="18.99" r="2.25"/>
+  <path class="uva-vector-grape-a__trazado" d="M11.25 9.25C11.25 6.75 12.5 5.5 14.75 5.5"/>
+  <rect class="uva-vector-grape-a__anclaje" x="14.75" y="4" width="3" height="3" rx=".75"/>
+  <path class="uva-vector-grape-a__manejador" d="M17.75 5.5h1.5"/>
+  <circle class="uva-vector-grape-a__punta" cx="20.25" cy="5.5" r="1"/>
+</svg>
+<p class="hipotesis">Misma idea con uvas menores y anclaje hueco.</p><table class="evaluacion"><tr><td>A6 separación</td><td>✅</td><td>uva-uva 1.5; anclaje-uva 1.75</td></tr><tr><td>B1 reconocible</td><td>❌</td><td>a 16 el anclaje hueco y la punta se pierden</td></tr><tr><td>B6 peso (R6)</td><td>❌</td><td>claramente más ligero que sus vecinos</td></tr><tr><td>S1 nombre y categoría</td><td>✅</td><td>vector-grape · brand propia (brief.md)</td></tr><tr><td>S2 Lucide</td><td>✅</td><td>spline, pen-tool, vector-polygon, grape: parciales</td></tr><tr><td>S3 consistencia</td><td>✅</td><td>sustituye a icon-forge si gana; no conviven</td></tr><tr><td>S4 marca de tercero</td><td>➖</td><td>marca propia</td></tr><tr><td>A1/A3/A4 lienzo, trazo, uniones</td><td>✅</td><td>check-icon.mjs sin errores</td></tr><tr><td>A10 trazo fijo</td><td>✅</td><td>--uva-stroke único</td></tr><tr><td>C1 contraste</td><td>✅</td><td>trazo #1a1a1a ≈17:1 sobre blanco; #e8e8e8 sobre negro</td></tr><tr><td>C2 oculto por defecto</td><td>✅</td><td>aria-hidden="true"</td></tr><tr><td>C3 no solo color</td><td>✅</td><td>monocromo</td></tr><tr><td>C4/C5 botón y nombre</td><td>✅</td><td>nombre en el botón: «Abrir Uva»</td></tr><tr><td>D1–D7 movimiento</td><td>➖</td><td>estático</td></tr></table></template>
+<template class="variante" data-id="c" data-nombre="C · uva seleccionada"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="uva-icon uva-vector-grape-c">
+  <style>.uva-vector-grape-c{stroke-width:var(--uva-stroke,1.5)}</style>
+  
+  <circle class="uva-vector-grape-c__uva" cx="7.5" cy="11.75" r="2.25"/>
+  <circle class="uva-vector-grape-c__uva" cx="15" cy="11.75" r="2.25"/>
+  <path class="uva-vector-grape-c__tallo" d="M11.25 8.5V6.75c0-1.5 1.25-2.5 2.75-2.5"/>
+  <rect class="uva-vector-grape-c__anclaje" x="9.25" y="17" width="4" height="4" rx="1"/>
+  <path class="uva-vector-grape-c__manejador" d="M5.75 19h3.5M13.25 19h3.5"/>
+  <circle class="uva-vector-grape-c__punta" cx="4.75" cy="19" r="1"/>
+  <circle class="uva-vector-grape-c__punta" cx="17.75" cy="19" r="1"/>
+</svg>
+<p class="hipotesis">La uva de abajo es un anclaje con su manejador bézier atravesándola.</p><table class="evaluacion"><tr><td>A6 separación</td><td>✅</td><td>1.5 tras bajar el anclaje (antes 0.75)</td></tr><tr><td>B1 reconocible</td><td>✅</td><td>señal vectorial muy clara</td></tr><tr><td>B4 confusiones</td><td>❌</td><td>se lee como cara (ojos + bigote) o mancuerna; solo 2 uvas debilitan el racimo</td></tr><tr><td>S1 nombre y categoría</td><td>✅</td><td>vector-grape · brand propia (brief.md)</td></tr><tr><td>S2 Lucide</td><td>✅</td><td>spline, pen-tool, vector-polygon, grape: parciales</td></tr><tr><td>S3 consistencia</td><td>✅</td><td>sustituye a icon-forge si gana; no conviven</td></tr><tr><td>S4 marca de tercero</td><td>➖</td><td>marca propia</td></tr><tr><td>A1/A3/A4 lienzo, trazo, uniones</td><td>✅</td><td>check-icon.mjs sin errores</td></tr><tr><td>A10 trazo fijo</td><td>✅</td><td>--uva-stroke único</td></tr><tr><td>C1 contraste</td><td>✅</td><td>trazo #1a1a1a ≈17:1 sobre blanco; #e8e8e8 sobre negro</td></tr><tr><td>C2 oculto por defecto</td><td>✅</td><td>aria-hidden="true"</td></tr><tr><td>C3 no solo color</td><td>✅</td><td>monocromo</td></tr><tr><td>C4/C5 botón y nombre</td><td>✅</td><td>nombre en el botón: «Abrir Uva»</td></tr><tr><td>D1–D7 movimiento</td><td>➖</td><td>estático</td></tr></table></template>
+<template class="variante" data-id="b" data-nombre="B · silueta como trazado"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="uva-icon uva-vector-grape-b">
+  <style>.uva-vector-grape-b{stroke-width:var(--uva-stroke,1.5)}</style>
+  
+  <path class="uva-vector-grape-b__contorno" d="M7.26 11.74A2.75 2.75 0 1 1 9.5 7.85A2.75 2.75 0 0 1 14.5 7.85A2.75 2.75 0 1 1 16.74 11.74A2.75 2.75 0 0 1 14.24 16.07A2.75 2.75 0 1 1 9.76 16.07A2.75 2.75 0 0 1 7.26 11.74Z"/>
+  <path class="uva-vector-grape-b__tallo" d="M12 6.25V3.5"/>
+  <rect class="uva-vector-grape-b__anclaje" x="8.25" y="6.6" width="2.5" height="2.5" rx=".5" fill="currentColor"/>
+  <rect class="uva-vector-grape-b__anclaje" x="13.25" y="6.6" width="2.5" height="2.5" rx=".5" fill="currentColor"/>
+</svg>
+<p class="hipotesis">El contorno festoneado del racimo es un trazado con anclajes en sus cúspides.</p><table class="evaluacion"><tr><td>A2 margen</td><td>✅</td><td>mín. 2.84</td></tr><tr><td>B4 confusiones</td><td>❌</td><td>festones + anclajes rellenos = cabeza de toro / diente</td></tr><tr><td>S1 nombre y categoría</td><td>✅</td><td>vector-grape · brand propia (brief.md)</td></tr><tr><td>S2 Lucide</td><td>✅</td><td>spline, pen-tool, vector-polygon, grape: parciales</td></tr><tr><td>S3 consistencia</td><td>✅</td><td>sustituye a icon-forge si gana; no conviven</td></tr><tr><td>S4 marca de tercero</td><td>➖</td><td>marca propia</td></tr><tr><td>A1/A3/A4 lienzo, trazo, uniones</td><td>✅</td><td>check-icon.mjs sin errores</td></tr><tr><td>A10 trazo fijo</td><td>✅</td><td>--uva-stroke único</td></tr><tr><td>C1 contraste</td><td>✅</td><td>trazo #1a1a1a ≈17:1 sobre blanco; #e8e8e8 sobre negro</td></tr><tr><td>C2 oculto por defecto</td><td>✅</td><td>aria-hidden="true"</td></tr><tr><td>C3 no solo color</td><td>✅</td><td>monocromo</td></tr><tr><td>C4/C5 botón y nombre</td><td>✅</td><td>nombre en el botón: «Abrir Uva»</td></tr><tr><td>D1–D7 movimiento</td><td>➖</td><td>estático</td></tr></table></template>
+
+
+<h1 id="titulo"></h1>
+<p class="sub" id="subtitulo"></p>
+<div class="supuestos" id="supuestos"></div>
+
+<h2>Variantes evaluadas</h2>
+<div class="variantes" id="variantes"></div>
+
+<h2>Pruébala</h2>
+<div class="lab">
+  <div class="escena claro" id="escena">
+    <div id="grande"></div>
+    <div class="contexto" id="contexto"></div>
+    <div class="uso" id="uso"></div>
+  </div>
+  <div class="controles">
+    <label>Tamaño <span><input type="range" id="tam" min="16" max="128" value="96"> <span id="tamV">96</span>px</span></label>
+    <label>Grosor <span><input type="range" id="gro" min="1" max="2" step=".25" value="1.5"> <span id="groV">1.5</span></span></label>
+    <label>Color <input type="color" id="col"></label>
+    <label>Acento <input type="color" id="acc"></label>
+    <label>Fondo oscuro <input type="checkbox" id="osc"></label>
+    <label id="redLabel">Simular movimiento reducido <input type="checkbox" id="red"></label>
+    <button class="accion" id="play" type="button">▶ Reproducir animación</button>
+    <div class="medida" id="sinMovimiento" hidden>Esta variante es estática: no tiene animación.</div>
+    <div class="medida" id="contraste"></div>
+    <div class="medida" id="contrasteAcento"></div>
+    <div class="medida" id="margen"></div>
+    <button class="accion" id="copiar" type="button">Copiar SVG</button>
+  </div>
+</div>
+</main>
+
+<script>
+  const meta = JSON.parse(document.getElementById('meta').textContent);
+  const vars = [...document.querySelectorAll('template.variante')].map(t => ({
+    id: t.dataset.id, nombre: t.dataset.nombre || t.dataset.id, recomendada: 'recomendada' in t.dataset,
+    svg: t.content.querySelector('svg').outerHTML,
+    hip: t.content.querySelector('.hipotesis')?.outerHTML || '',
+    eva: t.content.querySelector('.evaluacion')?.outerHTML || ''
+  }));
+  const $ = id => document.getElementById(id);
+  $('titulo').textContent = `Icono: ${meta.concepto}`;
+  $('subtitulo').textContent = `Debe comunicar: ${meta.significado}`;
+  // Supuestos de E1 que el usuario debe confirmar (p. ej. el significado, si no lo dijo).
+  if (meta.supuestos && meta.supuestos.length) {
+    const ul = document.createElement('ul');
+    meta.supuestos.forEach(t => { const li = document.createElement('li'); li.textContent = t; ul.append(li); });
+    $('supuestos').append(Object.assign(document.createElement('strong'), {textContent: 'Supuestos que conviene confirmar:'}), ul);
+  }
+  const colores = oscuro => oscuro
+    ? [meta.colorTrazoOscuro || meta.colorTrazo || '#e8e8e8', meta.colorAcentoOscuro || meta.colorAcento || meta.colorTrazoOscuro || '#e8e8e8']
+    : [meta.colorTrazo || '#1a1a1a', meta.colorAcento || meta.colorTrazo || '#1a1a1a'];
+  [$('col').value, $('acc').value] = colores(false);
+
+  // Monta un SVG en su propio shadow root; con `reducido` convierte el bloque reduced-motion en siempre activo.
+  function montar(host, svgText, px, reducido) {
+    const root = host.shadowRoot || host.attachShadow({mode: 'open'});
+    const txt = reducido ? svgText.replace(/prefers-reduced-motion\s*:\s*reduce/g, 'min-width:0px') : svgText;
+    root.innerHTML = `<style>:host{display:inline-block;line-height:0}svg{width:${px}px;height:${px}px;display:block}</style>${txt}`;
+    return root.querySelector('svg');
+  }
+  function vecino(d, px) {
+    return `<svg class="vecino" viewBox="0 0 24 24" width="${px}" height="${px}">${d}</svg>`;
+  }
+  const MANO = '<path d="M18 11V6a2 2 0 0 0-4 0"/><path d="M14 10V4a2 2 0 0 0-4 0v2"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-6-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>';
+  const RELOJ = '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>';
+
+  if (!vars.length) {
+    document.querySelector('main').insertAdjacentHTML('afterbegin', '<p class="mal">Faltan variantes: añade al menos un &lt;template class="variante"&gt;.</p>');
+    throw new Error('propuesta sin variantes');
+  }
+  let actual = vars.find(v => v.recomendada) || vars[0];
+
+  // Cada variante es un <article>; solo el botón "Probar" es interactivo (nombre corto y válido, norma §13–15).
+  vars.forEach(v => {
+    const a = document.createElement('article');
+    a.className = 'tarjeta';
+    a.innerHTML = `<div class="cab"><span class="ic"></span><span class="ic24"></span><h3 class="nom" style="margin:0;font-size:14px">${v.nombre}${v.recomendada ? ' <span class="badge">recomendada</span>' : ''}</h3></div>${v.hip}${v.eva}`;
+    montar(a.querySelector('.ic'), v.svg, 56, true);
+    montar(a.querySelector('.ic24'), v.svg, 24, true);
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'elegir'; b.textContent = `Probar ${v.id}`;
+    b.onclick = () => { actual = v; pintar(); document.getElementById('escena').scrollIntoView({behavior: 'smooth', block: 'center'}); };
+    a.append(b); v.boton = b; v.tarjeta = a; $('variantes').append(a);
+  });
+
+  function luminancia(hex) {
+    const c = hex.replace('#', '').match(/../g).map(x => parseInt(x, 16) / 255)
+      .map(x => x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4);
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+  function contraste(a, b) {
+    const [x, y] = [luminancia(a), luminancia(b)].sort((m, n) => n - m);
+    return (x + 0.05) / (y + 0.05);
+  }
+  // Mide el fotograma estático (bloque reducido activo) en una copia oculta: no depende de nombres de clase.
+  const medidor = document.createElement('div');
+  medidor.style.cssText = 'position:absolute;left:-9999px;top:0';
+  document.body.append(medidor);
+  // Margen al borde en unidades de la cuadrícula: rectángulos en pantalla (incluyen transformaciones
+  // animadas) + medio trazo. Se mide en el fotograma estático y en instantes de toda la animación (≤5 s).
+  function margenEn(svg) {
+    const caja = svg.getBoundingClientRect(); const u = caja.width / 24;
+    const sw = parseFloat(getComputedStyle(svg).strokeWidth) || 1.5;
+    let m = Infinity;
+    svg.querySelectorAll('path,circle,ellipse,rect,line,polyline,polygon').forEach(el => {
+      const cs = getComputedStyle(el);
+      if (parseFloat(cs.opacity) < 0.05 || cs.display === 'none' || cs.visibility === 'hidden') return;
+      const r = el.getBoundingClientRect(); const pad = cs.stroke === 'none' ? 0 : sw / 2;
+      m = Math.min(m, (r.left - caja.left) / u - pad, (r.top - caja.top) / u - pad, (caja.right - r.right) / u - pad, (caja.bottom - r.bottom) / u - pad);
+    });
+    return m;
+  }
+  function margenMinimo(svgText, grosor) {
+    medidor.style.setProperty('--uva-stroke', grosor);
+    const estatico = margenEn(montar(medidor, svgText, 96, true));
+    const svg = montar(medidor, svgText, 96, false);
+    const anims = svg.getAnimations ? svg.getAnimations({subtree: true}) : [];
+    let enMovimiento = Infinity;
+    for (let t = 0; t <= 5000 && anims.length; t += 100) {
+      anims.forEach(a => { a.pause(); a.currentTime = t; });
+      enMovimiento = Math.min(enMovimiento, margenEn(svg));
+    }
+    return {estatico, enMovimiento: anims.length ? enMovimiento : null};
+  }
+
+  function pintar() {
+    vars.forEach(v => { v.boton.setAttribute('aria-pressed', v === actual); v.tarjeta.classList.toggle('activa', v === actual); });
+    const anima = /@keyframes/.test(actual.svg);
+    $('play').hidden = !anima; $('redLabel').hidden = !anima; $('sinMovimiento').hidden = anima;
+    const px = +$('tam').value, g = $('gro').value, oscuro = $('osc').checked, red = $('red').checked;
+    if (oscuro !== pintar.oscuro) { [$('col').value, $('acc').value] = colores(oscuro); pintar.oscuro = oscuro; }
+    $('tamV').textContent = px; $('groV').textContent = g;
+    const esc = $('escena');
+    esc.className = 'escena ' + (oscuro ? 'oscuro' : 'claro');
+    esc.style.setProperty('--uva-stroke', g);
+    esc.style.setProperty('--uva-accent', $('acc').value);
+    const color = $('col').value;
+    const grande = $('grande'); grande.style.color = color;
+    const svg = montar(grande, actual.svg, px, red);
+    const ctx = $('contexto'); ctx.innerHTML = '';
+    const chip = document.createElement('span'); chip.className = 'chip'; chip.style.color = color;
+    const ic = document.createElement('span'); chip.append(ic, meta.etiqueta || '');
+    ctx.insertAdjacentHTML('beforeend', vecino(MANO, 24));
+    const solo = document.createElement('span'); solo.style.color = color; ctx.append(solo);
+    ctx.insertAdjacentHTML('beforeend', vecino(RELOJ, 24));
+    ctx.append(chip);
+    montar(solo, actual.svg, 24, red); montar(ic, actual.svg, 20, red);
+    // Uso recomendado (norma §11–17, §24): el SVG va dentro de <button>, oculto; el nombre es del botón.
+    const uso = $('uso'); uso.innerHTML = '';
+    uso.style.color = oscuro ? '#e8e8e8' : '#1a1a1a';
+    const etiqueta = meta.etiqueta || meta.significado;
+    const fig = (btn, cap) => { const f = document.createElement('figure'); const c = document.createElement('figcaption'); c.textContent = cap; f.append(btn, c); uso.append(f); };
+    const b1 = document.createElement('button'); b1.type = 'button'; b1.className = 'btn-etiqueta';
+    const i1 = document.createElement('span'); b1.append(i1, etiqueta); i1.style.color = color;
+    fig(b1, 'icono + etiqueta (icono oculto)');
+    const b2 = document.createElement('button'); b2.type = 'button'; b2.className = 'btn-icono';
+    const i2 = document.createElement('span'); i2.style.color = color; const sr = document.createElement('span'); sr.className = 'sr-only'; sr.textContent = etiqueta;
+    b2.append(i2, sr); fig(b2, 'solo icono · 44×44 · nombre en el botón');
+    const b3 = b2.cloneNode(true); b3.classList.add('foco'); fig(b3, 'con foco visible');
+    montar(i1, actual.svg, 20, red); montar(b2.firstChild, actual.svg, 20, red); montar(b3.firstChild, actual.svg, 20, red);
+    const fondo = oscuro ? '#0b0b0b' : '#ffffff';
+    const nivel = cr => cr >= 4.5 ? ['ok', '✅', 'cumple WCAG (≥3:1) y el objetivo de la norma (≥4.5:1)'] : cr >= 3 ? ['aviso', '⚠️', 'cumple WCAG (≥3:1); por debajo del objetivo 4.5:1'] : ['mal', '❌', 'no cumple WCAG 1.4.11 (≥3:1)'];
+    const linea = (txt, cr) => { const n = nivel(cr); return `${txt}: <b class="${n[0]}">${cr.toFixed(2)}:1</b> ${n[1]} ${n[2]}`; };
+    $('contraste').innerHTML = linea('Contraste del trazo', contraste(color, fondo));
+    // El acento cuenta si la variante lo usa: a menudo es la pieza que lleva el significado (burbujas, gotas, flujo).
+    $('contrasteAcento').innerHTML = actual.svg.includes('--uva-accent') ? linea('Contraste del acento', contraste($('acc').value, fondo)) : 'Esta variante no usa acento (C1 se evalúa solo con el trazo).';
+    requestAnimationFrame(() => {
+      const m = margenMinimo(actual.svg, g);
+      const f = v => `<b class="${v >= 1 ? 'ok' : 'mal'}">${v.toFixed(2)}</b> ${v >= 1 ? '✅' : '❌'}`;
+      $('margen').innerHTML = `Margen mínimo al borde (≥1; recomendado 2): estático ${f(m.estatico)}` +
+        (m.enMovimiento !== null ? ` · durante la animación ${f(m.enMovimiento)}` : '');
+    });
+  }
+  ['tam', 'gro', 'col', 'acc', 'osc', 'red'].forEach(id => $(id).addEventListener('input', pintar));
+  $('play').onclick = pintar;
+  $('copiar').onclick = () => navigator.clipboard?.writeText(actual.svg);
+  pintar();
+</script>
+</body></html>

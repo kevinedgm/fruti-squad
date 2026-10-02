@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="uva-icon uva-vector-grape-b">
+  <style>.uva-vector-grape-b{stroke-width:var(--uva-stroke,1.5)}</style>
+  <!-- B · silueta como trazado: el contorno festoneado del racimo es un trazado vectorial con sus anclajes -->
+  <path class="uva-vector-grape-b__contorno" d="M7.26 11.74A2.75 2.75 0 1 1 9.5 7.85A2.75 2.75 0 0 1 14.5 7.85A2.75 2.75 0 1 1 16.74 11.74A2.75 2.75 0 0 1 14.24 16.07A2.75 2.75 0 1 1 9.76 16.07A2.75 2.75 0 0 1 7.26 11.74Z"/>
+  <path class="uva-vector-grape-b__tallo" d="M12 6.25V3.5"/>
+  <rect class="uva-vector-grape-b__anclaje" x="8.25" y="6.6" width="2.5" height="2.5" rx=".5" fill="currentColor"/>
+  <rect class="uva-vector-grape-b__anclaje" x="13.25" y="6.6" width="2.5" height="2.5" rx=".5" fill="currentColor"/>
+</svg>

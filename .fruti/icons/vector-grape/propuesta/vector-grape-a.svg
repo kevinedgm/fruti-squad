@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="uva-icon uva-vector-grape-a">
+  <style>.uva-vector-grape-a{stroke-width:var(--uva-stroke,1.5)}</style>
+  <!-- A · tallo bézier: el tallo del racimo es un trazado que termina en un anclaje con su manejador -->
+  <circle class="uva-vector-grape-a__uva" cx="7.5" cy="12.5" r="2.25"/>
+  <circle class="uva-vector-grape-a__uva" cx="15" cy="12.5" r="2.25"/>
+  <circle class="uva-vector-grape-a__uva" cx="11.25" cy="18.99" r="2.25"/>
+  <path class="uva-vector-grape-a__trazado" d="M11.25 9.25C11.25 6.75 12.5 5.5 14.75 5.5"/>
+  <rect class="uva-vector-grape-a__anclaje" x="14.75" y="4" width="3" height="3" rx=".75"/>
+  <path class="uva-vector-grape-a__manejador" d="M17.75 5.5h1.5"/>
+  <circle class="uva-vector-grape-a__punta" cx="20.25" cy="5.5" r="1"/>
+</svg>
