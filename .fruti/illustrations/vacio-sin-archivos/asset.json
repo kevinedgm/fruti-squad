@@ -1,0 +1,33 @@
+{
+  "id": "vacio-sin-archivos",
+  "variant": "empty-state",
+  "ratio": "3:2",
+  "background": "transparent",
+  "characters": 1,
+  "palette_tokens": [
+    "stroke.primary #111111",
+    "surface.base #FFFDF5",
+    "accent.primary #F8BC32",
+    "superficie secundaria #CFC6B8 (interior de la caja, sin token)"
+  ],
+  "alt_text": "Una mujer de rodillas busca dentro de una caja vacía, confundida, con papeles sueltos en el suelo",
+  "files": [
+    "vacio-sin-archivos.svg",
+    "fuente.webp",
+    "fix.py",
+    "brief.yaml"
+  ],
+  "source": "generada con ChatGPT (usuario); vectorizada con skills/mango/scripts/vectoriza.py y corregida (fix.py)",
+  "corrections": [
+    "arete que se leía como segundo ojo: eliminado",
+    "pico en V de la mandíbula (segunda nariz): suavizado"
+  ],
+  "scores": {
+    "anatomy": 4,
+    "composition": 5,
+    "narrative_clarity": 5,
+    "style_consistency": 4,
+    "small_size_legibility": 4,
+    "originality": 4
+  }
+}

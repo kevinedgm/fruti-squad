@@ -1,0 +1,32 @@
+{
+  "id": "helper-pulgar",
+  "variant": "helper",
+  "ratio": "1254:885",
+  "background": "transparent",
+  "characters": 1,
+  "palette_tokens": [
+    "stroke.primary #111111",
+    "surface.base #FFFDF5",
+    "accent.primary #F8BC32"
+  ],
+  "alt_text": "Un hombre se asoma por el borde derecho, sonríe y hace un pulgar arriba",
+  "files": [
+    "helper-pulgar.svg",
+    "fuente.png",
+    "fix.py",
+    "brief.yaml"
+  ],
+  "source": "generada con ChatGPT (usuario); vectorizada con skills/mango/scripts/vectoriza.py y corregida (fix.py)",
+  "corrections": [
+    "segunda oreja en el lado de la cara: eliminada",
+    "crop: el pantalón acababa en punta dentro de la imagen; el borde inferior corta manga y torso"
+  ],
+  "scores": {
+    "anatomy": 4,
+    "composition": 4,
+    "narrative_clarity": 5,
+    "style_consistency": 4,
+    "small_size_legibility": 5,
+    "originality": 4
+  }
+}

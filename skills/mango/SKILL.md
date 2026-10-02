@@ -46,7 +46,7 @@ Si el usuario escribe lenguaje natural, inferir silenciosamente los campos falta
 5. Define el plan con `schemas/scene.schema.json` y `system/scene-grammar.md`.
 6. Resuelve composición y línea de acción antes del detalle.
 7. Aplica tokens, lenguaje visual, stroke y color.
-8. Renderiza: escribe el SVG a mano siguiendo `system/svg-rules.md` y la plantilla de `templates/` de la variante. Previsualízalo antes de auditar (ver «En Claude Code»).
+8. Renderiza en dos tiempos (ver «Render: generar fuera, vectorizar aquí»): un generador de imagen dibuja el raster y Mango lo vectoriza con `scripts/vectoriza.py`. Dibujar el SVG a mano (`system/svg-rules.md`, `templates/`) queda solo para object y spot muy simples.
 9. Ejecuta `system/quality-gates.md`.
 10. Entrega activo + metadata según `schemas/asset.schema.json`.
 
@@ -74,11 +74,22 @@ Incluir variante, ratio, background, personajes, tokens usados, alt text y archi
 ## En Claude Code
 - **Brief primero:** el YAML de entrada se escribe siempre (y se muestra al usuario en una línea si se infirió). Pregunta con AskUserQuestion solo cuando la respuesta cambia la escena (p. ej. quién protagoniza); lo demás se infiere y se marca «(supuesto)».
 - **Carga progresiva:** lee cada archivo de `system/`, `variants/` o `schemas/` en el paso del flujo que lo cita, no todos al empezar. `examples/` solo para contrastar en el paso 9.
-- **Render:** Claude escribe el SVG directamente (paths editables, sin raster). No hay generación de imagen: la vista previa se obtiene renderizando el SVG (Chromium headless, preinstalado en el entorno web: `chrome --headless --screenshot=<png> <html>`) y mirando la captura. Sin captura no hay auditoría: la puntuación de `system/quality-gates.md` se da sobre lo renderizado, también a tamaño pequeño (≈160 px de ancho).
+- **Vista previa:** renderiza el SVG (Chromium headless, preinstalado en el entorno web: `chrome --headless --screenshot=<png> <html>`) y mira la captura. Sin captura no hay auditoría: la puntuación de `system/quality-gates.md` se da sobre lo renderizado, también a tamaño pequeño (≈160–200 px de ancho) y en su contexto (tarjeta, sección).
 - **Iterar con causa:** si una puntuación queda <4, nombra qué falla y qué lo causa (articulación, tangencia, crop) antes de corregir. Tras 3 rondas sin llegar a 4 en todo, vuelve al brief.
 - **Variantes:** para scene y hero ofrece 2 composiciones que difieran en una decisión de fondo (idea, encuadre, foco) y recomienda una; para helper, object y spot basta una.
 
+## Render: generar fuera, vectorizar aquí
+Claude no tiene generador de imagen; dibujar figuras coordenada a coordenada da poses rígidas. El flujo probado:
+1. **Prompt:** con el brief y el plan, escribe para el usuario un prompt listo para un generador de imagen (p. ej. ChatGPT) que incluya la firma visual (nariz lineal angular, oreja simplificada, cabello de masa sólida, manos expresivas 1.15–1.35×, contorno #111111 redondeado, superficie #FFFDF5, acento #F8BC32 y dónde va) y las condiciones para vectorizar limpio: fondo transparente, colores planos, sin degradados, sombras, texturas, texto ni accesorios, detalle bajo, crop en el borde real y espacio negativo hacia el contenido.
+2. **Auditar el raster** (paso 9) antes de vectorizar: anota cada fallo con su zona en píxeles (rejilla ampliada). Fallos típicos del generador: rasgo duplicado (segunda oreja o nariz), accesorio que se lee como ojo, crop que termina dentro de la imagen.
+3. **Corregir y vectorizar:** escribe `fix.py` con `corrige(im)` (borrar a alfa 0, cubrir con superficie solo los píxeles del rasgo sin tocar el pelo ni el contorno, redibujar un trazo) y ejecuta
+   `python scripts/vectoriza.py fuente.png <id>.svg --id <id> --titulo "<alt>" [--recorte x0,y0,x1,y1] --correcciones fix.py`
+   (dependencias en un venv: `pip install potracer pillow numpy`). Sale un path por capa de color con su token: superficie, gris secundario (solo zonas grandes), acento y tinta.
+4. **Auditar el SVG** renderizado con las seis puntuaciones; si algo queda <4, vuelve a `fix.py` con la causa nombrada.
+
+Límites: el SVG agrupa por color, no por `character`/`props`/`motion`; mover una parte exige editar a mano. Un gris fuera de tokens se declara en `palette_tokens`.
+
 ## En Fruti Squad
 - **Color:** sin tokens del proyecto se usan los de `system/illustration-tokens.yaml`. Si `.fruti/tokens.json` tiene `illustration.*` o colores de marca, el SVG usa variables CSS con fallback (`stroke="var(--mango-stroke, #111111)"`, `fill="var(--mango-accent, #F8BC32)"`); convertirlas en tokens lo decide lima.
-- **Salida:** `.fruti/illustrations/<id>/` con `<id>.svg`, `asset.json` (según `schemas/asset.schema.json`) y `brief.yaml`. El id es la función: `ayuda-informa`, `vacio-sin-resultados`.
+- **Salida:** `.fruti/illustrations/<id>/` con `<id>.svg`, `asset.json` (según `schemas/asset.schema.json`), `brief.yaml` y, si se vectorizó, `fuente.*` + `fix.py` para poder reproducirlo. El id es la función: `ayuda-informa`, `vacio-sin-resultados`.
 - **Traspaso:** miembro lateral; entrega a coco, que coloca el SVG sin redibujarlo. Handoff compacto en `.fruti/handoffs/current.json` (campo `illustration`): `{ id, source: "mango", variant, files, alt_text, palette_tokens, unresolved }`.

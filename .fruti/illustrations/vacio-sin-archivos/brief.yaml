@@ -1,0 +1,7 @@
+variant: empty-state
+subject: mujer buscando archivos en una caja vacía
+action: buscar dentro de una caja abierta
+emotion: confused-friendly
+characters: [feminine]
+background: transparent
+accent: yellow

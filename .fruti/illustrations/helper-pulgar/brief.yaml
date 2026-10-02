@@ -1,0 +1,9 @@
+variant: helper
+subject: hombre asomándose de lado
+action: asomarse inclinado y hacer pulgar arriba
+emotion: happy
+characters: [masculine]
+anchor: right                # (supuesto)
+crop: cintura hacia arriba, cortado en el borde
+background: transparent
+accent: yellow               # marcas cinéticas junto al pulgar (supuesto)

@@ -6,7 +6,7 @@ position: lateral   # no forma parte de la cadena kiwi → lima → coco → mor
 source: skills/mango/SKILL.md   # Vector Illustrator Skill adaptada a Claude; sin código propio (Mango 1 descartado)
 decisions:
   style: "Familia doodle de la Vector Illustrator Skill: contorno negro orgánico, nariz lineal angular, oreja simplificada, cabello de masa sólida, manos expresivas, 1–3 acentos, fondo transparente."
-  render: "Claude escribe el SVG a mano (paths editables) y lo previsualiza renderizado; no hay kit ni generador."
+  render: "Generar fuera, vectorizar aquí: prompt para un generador de imagen → auditoría del raster → fix.py + scripts/vectoriza.py (potrace por capas de color) → auditoría del SVG renderizado. A mano solo object/spot muy simples."
   color: "system/illustration-tokens.yaml por defecto; variables CSS --mango-* con fallback si el proyecto tiene tokens."
 read_order:
   - .fruti/state/current.json
@@ -20,11 +20,11 @@ steps:   # cada paso carga solo lo que cita
   5_plan:      [skills/mango/schemas/scene.schema.json, skills/mango/system/scene-grammar.md]
   6_compose:   [skills/mango/system/composition.md]
   7_style:     [skills/mango/system/illustration-tokens.yaml, skills/mango/system/visual-language.md, skills/mango/system/stroke.md, skills/mango/system/color.md]
-  8_render:    [skills/mango/system/svg-rules.md, "skills/mango/templates/<variant>.svg"]
+  8_render:    [skills/mango/scripts/vectoriza.py, skills/mango/system/svg-rules.md]   # SKILL.md#render-generar-fuera-vectorizar-aquí
   9_gates:     [skills/mango/system/quality-gates.md, "skills/mango/examples/{approved,rejected}/*.md"]
   10_deliver:  [skills/mango/schemas/asset.schema.json]
 gates: { scores: [anatomy, composition, narrative_clarity, style_consistency, small_size_legibility, originality], min: 4, verdict_requires: rendered_preview }
 output:
   dir: profile.illustrations.dir | .fruti/illustrations/<id>/
-  files: ["<id>.svg", asset.json, brief.yaml]
+  files: ["<id>.svg", asset.json, brief.yaml, "fuente.* + fix.py si se vectorizó"]
   handoff: .fruti/handoffs/current.json#illustration
