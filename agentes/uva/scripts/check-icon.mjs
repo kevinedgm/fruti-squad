@@ -79,7 +79,7 @@ function check(file) {
   const css = styleText(src);
   const body = src.replace(/<style[\s\S]*?<\/style>/g, '');
   const cls = attr(root, 'class') || '';
-  const id = (cls.match(/\buva-(?!icon\b)([\w-]+)/) || [])[1];
+  const id = (cls.match(/\buva-(?!icon(?![\w-]))([\w-]+)/) || [])[1];   // excluye la clase base «uva-icon», no un id que empiece por «icon-»
   const referencia = /\blucide\b/.test(cls) || attr(root, 'data-referencia') !== null;
   const motion = motionTotals(css);
   const r = [];

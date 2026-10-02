@@ -1,0 +1,9 @@
+semanticName: icon-forge
+icon: { library: custom, name: uva-icon-forge }
+category: brand            # identidad propia de la skill Uva (se dibuja: no es marca de un tercero)
+accessibility: { defaultLabel: Uva }
+direction: { rtl: fixed }
+motion: { allowed: none }
+status: proposed
+usage: { label: optional, iconOnlyButton: "44x44, nombre en el botón" }
+confusions_tested: [grape, anvil, boxes, pen-tool, toilet, dice-3, enchufe (redibujo)]

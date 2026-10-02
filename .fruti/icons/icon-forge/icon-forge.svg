@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="uva-icon uva-icon-forge">
+  <style>.uva-icon-forge{stroke-width:var(--uva-stroke,1.5)}</style>
+  <!-- Uva · icon-forge: retícula de icono con un racimo de nodos unidos por el tallo (construcción precisa de iconos) -->
+  <rect class="uva-icon-forge__reticula" x="3" y="3" width="18" height="18" rx="4"/>
+  <path class="uva-icon-forge__tallo" d="M12 6v2.25M12 8.25l-1.9 1.44M12 8.25l1.9 1.44"/>
+  <circle class="uva-icon-forge__nodo" cx="8.9" cy="10.75" r="1.6"/>
+  <circle class="uva-icon-forge__nodo" cx="15.1" cy="10.75" r="1.6"/>
+  <circle class="uva-icon-forge__nodo" cx="12" cy="16.12" r="1.6"/>
+</svg>
