@@ -3,7 +3,8 @@ owns: illustrations
 interface: natural-language
 position: lateral   # no forma parte de la cadena kiwi → lima → coco → mora; entrega SVG verificados a coco
 decisions:
-  style: "Línea de rotulador (usuario, sustituye al plano geométrico): contorno de tinta con temblor determinista, rellenos planos, fondo de un color, caras mínimas con gesto, una idea con ingenio por escena."
+  style: "Línea de rotulador según la especificación «Vector Illustrator Skill — Arquitectura y sistema visual» (usuario, Notion): trazo de peso estable con irregularidades sutiles (sin textura de lápiz), rellenos planos, fondo transparente, rostro 3/4 con nariz angular + oreja + pelo sólido, una idea con ingenio por escena."
+  spec: "Notion · Vector Illustrator Skill — Arquitectura y sistema visual. Fase 1 (Foundation) en curso: tokens, rostro, proporciones, cabello, manos, trazo; hoja de validación agentes/mango/examples/fundamentos.mjs."
   color: "Tokens del proyecto (usuario): cada forma tiene un rol --mango-<rol>; el proyecto los conecta a sus tokens. Sin tokens: base de Mango."
   method: "Nunca a mano alzada ni calcando fotos: lo que falta se añade al kit como pieza reutilizable (M1)."
   id: "El id es la función de la ilustración (ayuda-informa, vacio-sin-resultados): archivo <id>.svg, clase mango-<id>."
@@ -16,8 +17,10 @@ read_order:
 style_source_priority: [tokens_illustration, project_color_tokens, mango_base]
 mango_base:
   canvas: "480x320"
-  line: { main: 4.8, fine: 2.8, kind: "cinta rellena de grosor variable (presión, grano, extremos que se pasan)" }
-  wobble: { long: 0.8, short: "0.2-0.4", seeded: true }
+  line: { main: 4.4, fine: 2.6, kind: "cinta rellena de peso estable (afina poco en los extremos, ±5 % en medio, sin grano)" }
+  wobble: { long: 0.6, short: "0-0.3", seeded: true }
+  tokens: { tinta: "#111111", papel: "#FFFDF5", acento: "#F8BC32", acentos_max: 3, fondo: transparente }
+  canon: { head_to_torso: 0.65, alto_cabezas: 5.6, hombros: compactos, manos: { neutral: 1.0, comunicativo: 1.25 } }
   fills: "planos; el del foco desplazado ~6 (M4)"
   roles: [fondo, tinta, papel, acento, acento-2]
 stages:
@@ -51,7 +54,7 @@ operations:
   extend_kit: [I2_compose, I3_evaluate]
   examples:
     load_only_if: user_asks_for_examples_or_tool_debugging
-    files: [agentes/mango/examples/presenta.svg, agentes/mango/examples/escena-presenta.mjs, agentes/mango/examples/presenta-banco.png, agentes/mango/examples/manos.svg, agentes/mango/examples/poses.svg, agentes/mango/examples/escena-poses.mjs]
+    files: [agentes/mango/examples/presenta.svg, agentes/mango/examples/escena-presenta.mjs, agentes/mango/examples/presenta-banco.png, agentes/mango/examples/manos.svg, agentes/mango/examples/poses.svg, agentes/mango/examples/escena-poses.mjs, agentes/mango/examples/fundamentos.mjs, agentes/mango/examples/fundamentos.png]
 output:
   dir: profile.illustrations.dir | .fruti/illustrations/<id>/ | carpeta de trabajo (avisar)
   handoff: .fruti/handoffs/current.json#illustration

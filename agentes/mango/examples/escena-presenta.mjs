@@ -1,4 +1,4 @@
-import { semilla, cabeza, torso, brazo, mano, agujero, rayitas, objeto, ilustracion, linea } from '../scripts/kit.mjs';
+import { semilla, cabezaPerfil as cabeza, torso, brazo, mano, agujero, rayitas, objeto, ilustracion, linea } from '../scripts/kit.mjs';
 import { writeFileSync } from 'node:fs';
 semilla(23);
 const cuello = [372, 214], s = 1.15;

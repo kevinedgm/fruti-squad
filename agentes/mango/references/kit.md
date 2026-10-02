@@ -3,7 +3,7 @@
 Escena = un `.mjs` que importa el kit, fija la semilla y escribe el SVG:
 
 ```js
-import { semilla, cabeza, torso, brazo, mano, rayitas, objeto, ilustracion } from '<ruta>/scripts/kit.mjs';
+import { semilla, cabezaPerfil as cabeza, torso, brazo, mano, rayitas, objeto, ilustracion } from '<ruta>/scripts/kit.mjs';
 import { writeFileSync } from 'node:fs';
 semilla(23);                                                    // mismo dibujo en cada regeneración
 const cuello = [372, 214], s = 1.15;
@@ -23,18 +23,19 @@ writeFileSync('presenta.svg', ilustracion({ id: 'presenta', titulo: 'Una persona
 | `semilla(n)` | fija el temblor (M3) |
 | `trazoOrganico(pts, {cerrado, ancho, temblor})` | la línea de mano: cinta rellena con presión variable, grano y extremos que se pasan (M3); `linea()` la usa |
 | `trazo(pts, {cerrado, temblor, paso})` | contorno suave con temblor, para los rellenos |
-| `linea(pts, {fina, cerrado, temblor})` / `relleno(rol, pts, {desplaza})` | línea de tinta (gruesa 4.8 o fina 2.8) / forma rellena (con desplazamiento opcional, M4) |
+| `linea(pts, {fina, cerrado, temblor})` / `relleno(rol, pts, {desplaza})` | línea de tinta (gruesa 4.4 o fina 2.6, peso estable) / forma rellena (con desplazamiento opcional, M4) |
 | `tf(pts, {x, y, s, rot, flip})` | transforma puntos antes del temblor (el temblor no se escala) |
 | `brazo({desde, hasta, ancho, curva, puno})` | manga de papel con puño → `{ svg, muneca, angulo }` |
 | `mano({x, y, rot, s, flip, gesto})` | `cuenco` (palma arriba, sostiene), `senala` (índice), `abierta` (saludar, chocar) → `{ svg, apoyo }`. Con el brazo hacia la izquierda: `flip: true, rot: angulo - 180` |
-| `cabeza({x, y, s, flip, pelo, cara})` | perfil con cara mínima; (x, y) = base del cuello por delante · `pelo`: `corto`, `largo`, `barba`, `ninguno` · `cara`: `sonrie`, `serio` |
+| `cabeza({x, y, s, flip, rot, cara, pelo, expresion})` | **rostro 3/4 de la especificación**: (x, y) = barbilla, s = alto/100 · `cara`: `a`–`d` (`CARAS`) · `pelo`: `short-wave`, `crop`, `curls`, `bob`, `long`, `bun`, `ponytail`, `ninguno` (`PEINADOS`) · `expresion`: `neutral`, `happy`, `focused`, `curious`, `surprised`, `confused`, `concerned`, `relieved`, `proud`, `excited` (`EXPRESIONES`) → `{ atras, cuello, svg }` (pinta `atras`, luego `cuello`, el torso y `svg`) |
+| `cabezaPerfil({x, y, s, flip, pelo, cara})` | cabeza de perfil anterior a la especificación (escenas existentes); `pelo`: `corto`, `largo`, `barba`, `ninguno` |
 | `torso({x, y, s, flip, rol, alto})` | hombros y pecho de perfil que salen por abajo → `{ svg, hombro }` |
-| `figura({x, y, H, dir, pose, pelo, cara, camisa, pantalon, zapato, gestos})` | **persona de cuerpo entero con canon** (M10): (x, y) = suelo bajo la cadera, H = alto de la cabeza; `pose` = nombre de `POSES` (`de-pie`, `camina`, `senala`, `sostiene`, `sentado`) u objeto con ángulos; `gestos` = `{ cerca, lejos }` (`manopla` por defecto, `senala`, `cuenco`, `abierta`) → `{ svg, manoCerca, manoLejos }`. La línea se afina sola en figuras pequeñas |
+| `figura({x, y, H, dir, pose, cara, pelo, expresion, complexion, camisa, pantalon, zapato, gestos, enfasis})` | **persona 3/4 de cuerpo entero con el canon de la especificación** (M10): (x, y) = suelo bajo la cadera, H = alto de la cabeza; `pose` = nombre de `POSES` (`de-pie`, `camina`, `senala`, `sostiene`, `sentado`, `pulgar`) u objeto con ángulos; `complexion`: `slim`, `average`, `broad`; `gestos` = `{ cerca, lejos }` (`manopla` por defecto, `pulgar`, `senala`, `cuenco`, `abierta`); `enfasis` = escala de las manos (1 neutra, `CANON.enfasis.comunicativo` = 1,25) → `{ svg, manoCerca, manoLejos }`. La línea se afina sola en figuras pequeñas |
 | `CANON`, `POSES` | proporciones en cabezas y ángulos de articulación; una pose nueva = solo ángulos |
 | `agujero({x, y, rx, ry})` | agujero de tinta del que sale o al que entra algo |
 | `rayitas({cx, cy, r, n, de, a, largo})` | rayitas de «¡ta-dá!» en arco |
 | `objeto.grana({cx, base, t, rol, desplaza})` | la cochinilla de Grana (objeto de marca) |
-| `ilustracion({id, w, h, titulo, decorativa, fondo, partes})` | envuelve: fondo, roles → tokens, grosores, accesibilidad, oscuro |
+| `ilustracion({id, w, h, titulo, decorativa, fondo, partes})` | envuelve: roles → tokens, accesibilidad, oscuro; `fondo` es `false` por defecto (fondo transparente, especificación); `true` pinta el rol `fondo` |
 
 Orden de pintado = orden de `partes`: torso → cabeza → brazo → objeto sostenido → mano (encima, M5) → rayitas.
 

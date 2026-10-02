@@ -11,9 +11,9 @@ Cada regla: **regla → mecanismo → cómo comprobarlo**. Salieron de construir
 - **Comprobar:** ¿se entiende el mensaje sin el titular y tiene algo que sorprende?
 
 ## M3 · Trazo orgánico, determinista
-- **Regla:** toda línea es un `trazoOrganico()` (vía `linea()`) con `semilla()` fija en la escena: una cinta rellena cuyo grosor sigue la presión de la mano (entra fino en ~6 unidades, sale afinándose en ~9, ondula despacio por el medio), con el borde áspero y los extremos que se pasan un poco; las formas cerradas se solapan al cerrar.
-- **Mecanismo:** un trazo de grosor fijo y borde perfecto se lee como máquina aunque tiemble. La presión variable, el grano y las uniones imperfectas son lo que el ojo reconoce como mano. Temblor y grano se escalan con la longitud: un gesto corto (rayita, antena) es firme y afilado, no retorcido.
-- **Comprobar:** regenera dos veces: ¿sale idéntico? En la captura, ¿las rayitas son trazos firmes y los contornos largos varían de grosor?
+- **Regla (especificación «Vector Illustrator Skill»: `stroke.variation: subtle`, `texture: false`):** toda línea es un `trazoOrganico()` (vía `linea()`) con `semilla()` fija en la escena: una cinta de **peso estable** (tinta `#111111`, extremos redondeados) que solo afina un poco al entrar y salir, apenas ondula (±5 %) y tiembla despacio; sin grano ni textura de lápiz. Los extremos se pasan apenas.
+- **Mecanismo:** la mano se nota en irregularidades sutiles y deliberadas (temblor lento, extremos), no en un borde áspero: el grano y la presión exagerada leen como lápiz falso y ensucian a tamaño pequeño. Temblor escalado con la longitud: un gesto corto (rayita, antena) es firme.
+- **Comprobar:** regenera dos veces: ¿sale idéntico? En la captura, ¿el grosor se ve constante en los contornos largos y el borde limpio?
 
 ## M4 · Relleno desplazado solo en el foco
 - **Regla:** el relleno de `acento` del objeto foco va desplazado ~6 unidades del contorno (impresión mal registrada); el resto de rellenos (`papel`) coinciden con su contorno.
@@ -37,6 +37,6 @@ Cada regla: **regla → mecanismo → cómo comprobarlo**. Salieron de construir
 - **Regla:** el texto dentro de la ilustración son trazos de relleno, nunca palabras (no se traduce ni escala con la tipografía; lo que la escena dice va en `<title>` o en el texto de la sección).
 
 ## M10 · Orgánico es el trazo, no la proporción
-- **Regla:** toda persona de cuerpo entero sale de `figura()`: canon de ~7 cabezas (`CANON`), articulaciones en su sitio y extremidades que se adelgazan del hombro a la muñeca y de la cadera al tobillo. Las exageraciones del doodle (manos y pies algo grandes, piernas largas) son del canon, no del azar.
+- **Regla:** toda persona sale de `figura()` y `cabeza()`: canon de la especificación (`CANON`): cabeza/torso ≈ 0,65 (rango 0,55–0,75), ~5,6 cabezas de alto, hombros compactos, extremidades alargadas y suaves que se adelgazan del hombro a la muñeca y de la cadera al tobillo; manos 1,0 neutras y 1,15–1,35 (`CANON.enfasis.comunicativo`) solo en la mano que hace la acción importante. Rostro 3/4 con el ADN de la hoja: nariz lineal angular, ojos con marcas simples, boca breve, oreja visible, mandíbula y cuello separados; pelo como masa negra sólida (`PEINADOS`); variantes de cara a–d (`CARAS`) para una población coherente; expresiones de la lista (`EXPRESIONES`), leídas primero en el giro de cabeza y la postura.
 - **Mecanismo:** el temblor y la presión hacen el trazo humano; si además las proporciones fallan (cabeza grande, brazo que sale del pecho, cuello largo), la ilustración se lee como dibujo infantil. Separar canon (fijo) de trazo (orgánico) permite el estilo suelto sin perder el oficio.
-- **Comprobar:** pon la figura junto a la guía de 7 cabezas: ¿la muñeca cae a la altura de la cadera, el codo a la cintura, la rodilla a media pierna?
+- **Comprobar:** pon la figura junto a la guía de cabezas (`examples/fundamentos.mjs`): ¿mide ~5,6 cabezas, la muñeca cae bajo la cadera, el codo a la cintura? ¿La pose se lee sin intersecciones ambiguas?
