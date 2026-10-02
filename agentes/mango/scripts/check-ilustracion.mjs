@@ -11,6 +11,7 @@ function check(file) {
   const root = (src.match(/<svg\b[^>]*>/) || [''])[0];
   const css = [...src.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)].map((m) => m[1]).join('\n');
   const body = src.replace(/<style[\s\S]*?<\/style>/g, '');
+  const visible = body.replace(/<mask\b[\s\S]*?<\/mask>/g, ''); // en una máscara el color es luminancia, no color visible
   const cls = attr(root, 'class') || '';
   const id = (cls.match(/\bmango-(?!ilu\b)([\w-]+)/) || [])[1];
   const r = []; const add = (code, ok, level, msg) => r.push({ code, ok, level, msg });
@@ -22,7 +23,7 @@ function check(file) {
   add('A2', !attr(root, 'width') && !attr(root, 'height'), 'bloqueante', 'sin width/height en la raíz: la sección decide el tamaño');
   add('ID', /\bmango-ilu\b/.test(cls) && !!id, 'bloqueante', 'clases "mango-ilu mango-<id>"');
   // Color: ningún color fijo fuera de los valores por defecto de var(--mango-…, valor)
-  const fixedAttr = [...body.matchAll(/\s(?:fill|stroke|stop-color|color)\s*=\s*"([^"]*)"/g)].map((m) => m[1]).filter((v) => !/^(none|currentColor|inherit|transparent)$/i.test(v));
+  const fixedAttr = [...visible.matchAll(/\s(?:fill|stroke|stop-color|color)\s*=\s*"([^"]*)"/g)].map((m) => m[1]).filter((v) => !/^(none|currentColor|inherit|transparent)$/i.test(v));
   const cssSinDefecto = css.replace(/var\(--mango-[\w-]+\s*,\s*[^)]*\)/g, '');
   const fixedCss = cssSinDefecto.match(/#[0-9a-f]{3,8}\b|rgba?\(|hsla?\(/gi) || [];
   add('COL1', fixedAttr.length === 0 && fixedCss.length === 0, 'bloqueante', `color solo por roles (var(--mango-…)); sin colores fijos${fixedAttr.length + fixedCss.length ? ` (encontrados: ${[...fixedAttr, ...fixedCss].slice(0, 5).join(', ')})` : ''}`);

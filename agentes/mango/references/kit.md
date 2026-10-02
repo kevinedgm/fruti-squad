@@ -19,6 +19,8 @@ writeFileSync('ayuda-informa.svg', ilustracion({ id: 'ayuda-informa', titulo: 'U
 | Pieza | Parámetros |
 |---|---|
 | `persona` | `x`, `y` (suelo), `escala`, `pose` (`de-pie`, `senala`, `saluda`, `sostiene`, `explica`), `pelo` (`corto`, `largo`, `rizado`, `moño`), `piel` (`piel`, `piel-2`, `piel-3`), `ropa`, `pantalon`, `zapato` (roles). Devuelve `{ svg, manoD, manoI }` (posición de las manos para colocar objetos) |
+| `personaPerfil` | torso de perfil que se asoma por un borde · `x`, `y` (hombro), `escala`, `dir` (1 mira a la derecha, -1 a la izquierda), `inclina` (grados), `piel`, `pelo` (`corto`, `moño`; `largo` aún no funciona de perfil), `ropa`, `brazo` `[hombro→codo, codo→mano]`. Devuelve `{ svg, mano }` |
+| `objeto.grana` | la cochinilla de Grana (objeto de marca) · `cx`, `base` (punto de apoyo), `t` (alto ≈ 20·t), `rol`. Usa una máscara con id `mango-<id>-grana-m` |
 | `objeto.pizarra` | panel con gráfica de barras · `x, y, w, h` |
 | `objeto.burbuja` | bocadillo con borde · `x, y, w, h, cola: 'izq'|'der'` |
 | `objeto.planta` | maceta con dos hojas · `x, y` (suelo) |
@@ -26,6 +28,8 @@ writeFileSync('ayuda-informa.svg', ilustracion({ id: 'ayuda-informa', titulo: 'U
 | `objeto.suelo` | línea de suelo · `x, y, w` |
 | `objeto.puntos` | 6 puntos decorativos · `x, y` |
 | `ilustracion` | `id`, `w`, `h`, `titulo`, `decorativa`, `partes`: envuelve, traduce roles a tokens, accesibilidad y oscuro |
+
+Para que algo quede **sostenido**, apóyalo centrado sobre la mano (`base` = parte alta de la mano), no en su borde: si no, parece flotar.
 
 Orden de pintado = orden de `partes`: fondo → suelo → objetos de atrás → personas → objetos de delante.
 

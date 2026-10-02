@@ -10,6 +10,7 @@ La columna **Verifica** es el código de `scripts/check-ilustracion.mjs`; «manu
 | Raíz con clases `mango-ilu mango-<id>` | ID |
 | Color solo por roles: `.mango-<id>{--m-<rol>:var(--mango-<rol>,<defecto>)}` y formas con `.mango-<id>__<rol>`; ningún color fijo fuera de esos valores por defecto | COL1 |
 | Paleta de 2–8 roles | COL2 (recomendado) |
+| Dentro de un `<mask>` los colores (`#fff`/`#000`) son luminancia, no color visible: se permiten | COL1 los ignora |
 | Una clase por regla, sin combinadores (sobrevive a `<use>` y a empaquetados) | SEL |
 | Clases e ids con prefijo `mango-<id>` (dos ilustraciones en una página no chocan) | ID2, ID3 |
 | Decorativa: `aria-hidden="true"`. Informativa: `role="img"` + `<title id="mango-<id>-t">` que describe la escena (`aria-labelledby`). Nunca las dos | C1 |

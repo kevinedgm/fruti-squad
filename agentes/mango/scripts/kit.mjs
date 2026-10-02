@@ -81,8 +81,44 @@ export function persona({ x = 0, y = 0, escala = 1, pose = 'de-pie', piel = 'pie
     manoD: [x + bD.mano[0] * escala, y + bD.mano[1] * escala], manoI: [x + bI.mano[0] * escala, y + bI.mano[1] * escala] };
 }
 
+
+// persona de perfil, solo torso, que se asoma por un borde. Mira a la derecha (dir 1) o a la izquierda (dir -1).
+// Origen = hombro. brazo: [hombro→codo, codo→mano] en grados (mirando a la derecha). Devuelve { svg, mano }.
+export function personaPerfil({ x = 0, y = 0, escala = 1, dir = 1, inclina = 0, piel = 'piel', pelo = 'corto', ropa = 'tinta-2', brazo = [-20, -60] } = {}) {
+  const hx = 6, hy = -46, R = 20;                                   // centro de la cabeza
+  const a = (g) => [hx + R * Math.cos(rad(g)), hy + R * Math.sin(rad(g))];
+  const o = [];
+  // torso: espalda curva y pecho; sale del lienzo por abajo
+  o.push(`<path class="{c}__${ropa}" d="M-30 -2C-36 40 -36 90 -34 150H40C42 96 38 46 26 6C18 -10 -18 -14 -30 -2Z"/>`);
+  o.push(`<rect class="{c}__${piel}" x="-10" y="-32" width="16" height="26" rx="5"/>`);  // cuello detrás de la mandíbula
+  if (pelo === 'largo') { const p1 = a(-80), p2 = a(150); o.push(`<path class="{c}__tinta" d="M${r1(p1[0])} ${r1(p1[1])}A${R + 1} ${R + 1} 0 1 0 ${r1(p2[0] - 2)} ${r1(p2[1])}L-20 -6Q-8 -2 -4 -14L-2 -30Z"/>`); }
+  o.push(`<circle class="{c}__${piel}" cx="${hx}" cy="${hy}" r="${R}"/>`);
+  o.push(`<circle class="{c}__${piel}" cx="${hx + R - 1}" cy="${hy + 3}" r="4.5"/>`);  // nariz: dice hacia dónde mira
+  { const p1 = a(-75), p2 = a(165); // pelo: de la frente por arriba hasta la nuca
+    o.push(`<path class="{c}__tinta" d="M${r1(p1[0])} ${r1(p1[1])}A${R + 0.8} ${R + 0.8} 0 0 0 ${r1(p2[0] - 0.8)} ${r1(p2[1])}Q${r1(hx - 6)} ${r1(hy + 2)} ${r1(hx - 2)} ${r1(hy - 8)}Q${r1(hx + 4)} ${r1(hy - 16)} ${r1(p1[0])} ${r1(p1[1])}Z"/>`);
+    if (pelo === 'moño') o.push(`<circle class="{c}__tinta" cx="${hx - 16}" cy="${hy - 12}" r="8"/>`); }
+  const s0 = [10, 6], c = pt(s0[0], s0[1], 40, brazo[0]), m = pt(c[0], c[1], 36, brazo[1]);
+  o.push(`<path class="{c}__trazo-${ropa}" stroke-width="15" d="M${s0[0]} ${s0[1]}L${r1(c[0])} ${r1(c[1])}"/>`);
+  o.push(`<path class="{c}__trazo-${piel}" stroke-width="12" d="M${r1(c[0])} ${r1(c[1])}L${r1(m[0])} ${r1(m[1])}"/>`);
+  o.push(`<circle class="{c}__${piel}" cx="${r1(m[0])}" cy="${r1(m[1])}" r="7.5"/>`);
+  const t = `translate(${r1(x)} ${r1(y)})${dir === -1 ? ' scale(-1 1)' : ''}${escala !== 1 ? ` scale(${escala})` : ''}${inclina ? ` rotate(${inclina})` : ''}`;
+  // posición absoluta de la mano (aplica la misma transformación)
+  const rot = (px, py) => { const g = rad(inclina); return [px * Math.cos(g) - py * Math.sin(g), px * Math.sin(g) + py * Math.cos(g)]; };
+  const [mx, my] = rot(m[0] * escala, m[1] * escala);
+  return { svg: `<g class="{c}__persona" transform="${t}">${o.join('')}</g>`, mano: [x + dir * mx, y + my] };
+}
+
 // Objetos: devuelven SVG en coordenadas absolutas.
 export const objeto = {
+  // La cochinilla de Grana (gota de tinte con bandas, antenas y patitas). cx, base = centro y punto de apoyo; t = tamaño (alto ≈ 20·t).
+  grana: ({ cx, base, t = 6, rol = 'acento' }) => {
+    const X = (v) => r1(cx + (v - 12) * t), Y = (v) => r1(base + (v - 22.2) * t);
+    const gota = `M${X(12)} ${Y(4.2)}C${X(12)} ${Y(4.2)} ${X(19)} ${Y(11.2)} ${X(19)} ${Y(15.5)}C${X(19)} ${Y(19.4)} ${X(15.9)} ${Y(22.2)} ${X(12)} ${Y(22.2)}C${X(8.1)} ${Y(22.2)} ${X(5)} ${Y(19.4)} ${X(5)} ${Y(15.5)}C${X(5)} ${Y(11.2)} ${X(12)} ${Y(4.2)} ${X(12)} ${Y(4.2)}Z`;
+    const bandas = [12.0, 15.4, 18.8].map((v) => `M${X(3)} ${Y(v)}Q${X(12)} ${Y(v + 1.7)} ${X(21)} ${Y(v)}`).join('');
+    const patas = `M${X(10.9)} ${Y(6.3)}L${X(8.3)} ${Y(2.9)}M${X(13.1)} ${Y(6.3)}L${X(15.7)} ${Y(2.9)}M${X(5.4)} ${Y(13.4)}L${X(3.2)} ${Y(12.4)}M${X(5.1)} ${Y(17.4)}L${X(2.9)} ${Y(18)}M${X(18.6)} ${Y(13.4)}L${X(20.8)} ${Y(12.4)}M${X(18.9)} ${Y(17.4)}L${X(21.1)} ${Y(18)}`;
+    return `<mask id="{c}-grana-m" maskUnits="userSpaceOnUse"><rect x="${X(0)}" y="${Y(0)}" width="${r1(24 * t)}" height="${r1(24 * t)}" fill="#fff"/><path d="${bandas}" stroke="#000" stroke-width="${r1(1.1 * t)}" fill="none"/></mask>`
+      + `<path class="{c}__${rol}" d="${gota}" mask="url(#{c}-grana-m)"/><path class="{c}__trazo-${rol}" stroke-width="${r1(1.35 * t)}" d="${patas}"/>`;
+  },
   pizarra: ({ x, y, w = 170, h = 120 }) => [
     `<rect class="{c}__superficie" x="${x}" y="${y}" width="${w}" height="${h}" rx="10"/>`,
     `<rect class="{c}__trazo-linea" stroke-width="2" fill="none" x="${x}" y="${y}" width="${w}" height="${h}" rx="10"/>`,
