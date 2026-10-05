@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" role="img" aria-label="Manik Impulsa">
+  <!-- Manik Impulsa · favicon V3 mínima: globo con el pulso recortado (máscara: el fondo se ve a través) -->
+  <defs><mask id="p" maskUnits="userSpaceOnUse" x="0" y="0" width="32" height="32"><rect width="32" height="32" fill="#fff"/>
+    <polyline points="4,16 11.5,16 15,8 18.6,21.6 21.2,16 29,16" fill="none" stroke="#000" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></mask></defs>
+  <g fill="#8f8fc6" mask="url(#p)"><circle cx="16.5" cy="14.5" r="12.5"/><path d="M8.2 22.6 6.4 29.8 13.4 26.4Z"/></g>
+</svg>
