@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Uva · banco de prueba</title>
+<!--
+  Banco de prueba de Uva (etapa E3). Compara todas las variantes a la vez.
+  1. Sustituye el comentario UVA:ICONOS por los SVG de las variantes (uno por variante; data-nombre="A · …").
+  2. Sustituye el comentario UVA:CONFUSIONES por 2–4 confusiones del dominio (data-nombre). Para iconos reales de Lucide:
+       node scripts/buscar-lucide.mjs --svg <nombre> --stroke <grosor de la familia>
+  3. Renderiza y mira cada captura (Chromium headless; añade #final, #medio o #reducido a la URL):
+       chromium --headless --no-sandbox --hide-scrollbars --force-device-scale-factor=2 \
+         --window-size=900,1100 --virtual-time-budget=1500 --screenshot=banco.png "file://$PWD/banco.html#final"
+     sin modo  → lo que se ve al cargar (puede caer a mitad de la animación)
+     #final    → fotograma final de la animación (lo que queda tras ≤5 s)
+     #medio    → todas las animaciones congeladas en un mismo instante: la mitad del primer ciclo de la animación
+                 más larga (comprueba R4: la pieza móvil sobre zona libre)
+     #t=1.2    → todas congeladas en el instante indicado, en segundos (para revisar otros momentos)
+     #reducido → bloque prefers-reduced-motion activo (comprueba D2)
+  Los vecinos (casa, mano, reloj, rama) son redibujos simples estilo Lucide (ISC).
+-->
+<style>
+  :root{--fondo:#ffffff;--texto:#1a1a1a;--tenue:#777;--oscuro:#0b0b0b;--lila:#a99cf0;--ambar:#d99a3c;--verde:#5fb98a}
+  body{margin:0;padding:20px 24px;background:var(--fondo);color:var(--texto);font-family:system-ui,sans-serif}
+  h2{font-size:13px;margin:20px 0 8px;color:var(--tenue);font-weight:600}
+  .modo{font-size:12px;color:#5b3fc0;margin:0}
+  .fila{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin:6px 0}
+  .nombre{font-size:11px;color:var(--tenue);width:120px;flex:none}
+  .celda{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11px;color:var(--tenue)}
+  .oscuro{background:var(--oscuro);padding:10px 16px;border-radius:10px}
+  .oscuro .nombre{color:#9a9a9a}
+  .vecino{display:block;fill:none;stroke:currentColor;stroke-width:var(--uva-stroke,1.5);stroke-linecap:round;stroke-linejoin:round}
+  svg{display:block}
+  .celda > svg,.fila > svg{color:var(--texto)}
+  .oscuro .fila > svg{color:inherit}
+  body{--uva-accent:#0891b2}.oscuro{--uva-accent:#22d3ee}  /* neón provisional: signal no recibido */
+</style></head><body>
+
+<template id="iconos">
+  <svg data-nombre="A · cohete" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="uva-icon uva-apollo-a">
+  <style>.uva-apollo-a{stroke-width:var(--uva-stroke,1.5)}.uva-apollo-a__senal{fill:var(--uva-accent,currentColor);stroke:none}</style>
+  
+  <path class="uva-apollo-a__cohete" d="M12 2.5C14.5 4.5 15 7.5 15 10.5V16H9V10.5C9 7.5 9.5 4.5 12 2.5Z"/>
+  <circle class="uva-apollo-a__ventana" cx="12" cy="9" r="1.5"/>
+  <path class="uva-apollo-a__aleta" d="M9 12.75 7 15.25V17.5L9 16.5M15 12.75l2 2.5V17.5L15 16.5"/>
+  <circle class="uva-apollo-a__senal" cx="12" cy="19.55" r="1.25"/>
+</svg>
+<svg data-nombre="B · prompt en órbita" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="uva-icon uva-apollo-b">
+  <style>.uva-apollo-b{stroke-width:var(--uva-stroke,1.5)}.uva-apollo-b__senal{fill:var(--uva-accent,currentColor);stroke:none}</style>
+  
+  <ellipse class="uva-apollo-b__orbita" cx="12" cy="12" rx="9.6" ry="6.1" transform="rotate(-22 12 12)"/>
+  <path class="uva-apollo-b__prompt" d="M9.7 10.3 11.5 11.8 9.7 13.3M12.7 13.7h2"/>
+  <circle class="uva-apollo-b__senal" cx="15.23" cy="5.30" r="1.6"/>
+</svg>
+<svg data-nombre="C · trayectoria" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="uva-icon uva-apollo-c">
+  <style>.uva-apollo-c{stroke-width:var(--uva-stroke,1.5)}.uva-apollo-c__senal{fill:var(--uva-accent,currentColor);stroke:none}</style>
+  
+  <path class="uva-apollo-c__trayectoria" d="M3.5 20.5h3.5C8.5 13 12 7.75 17.3 5.6"/>
+  <circle class="uva-apollo-c__senal" cx="20.4" cy="3.8" r="1.3"/>
+</svg>
+
+</template>
+
+<template id="confusiones">
+  <svg data-nombre="rocket (Lucide)" aria-hidden="true" class="lucide lucide-rocket" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="stroke-width:var(--uva-stroke,1.5)" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" /> <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09" /> <path d="M9 12a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.4 22.4 0 0 1-4 2z" /> <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 .05 5 .05" /> </svg><svg data-nombre="orbit (Lucide)" aria-hidden="true" class="lucide lucide-orbit" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="stroke-width:var(--uva-stroke,1.5)" stroke-linecap="round" stroke-linejoin="round"> <path d="M20.341 6.484A10 10 0 0 1 10.266 21.85" /> <path d="M3.659 17.516A10 10 0 0 1 13.74 2.152" /> <circle cx="12" cy="12" r="3" /> <circle cx="19" cy="5" r="2" /> <circle cx="5" cy="19" r="2" /> </svg><svg data-nombre="trending-up (Lucide)" aria-hidden="true" class="lucide lucide-trending-up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="stroke-width:var(--uva-stroke,1.5)" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 7h6v6" /> <path d="m22 7-8.5 8.5-5-5L2 17" /> </svg><svg data-nombre="square-terminal (Lucide)" aria-hidden="true" class="lucide lucide-square-terminal" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="stroke-width:var(--uva-stroke,1.5)" stroke-linecap="round" stroke-linejoin="round"> <path d="m7 11 2-2-2-2" /> <path d="M11 13h4" /> <rect width="18" height="18" x="3" y="3" rx="2" ry="2" /> </svg>
+</template>
+
+<p class="modo" id="modo"></p>
+
+<h2>Comparación directa a 24 y 20px: variantes · confusiones</h2>
+<div id="comparacion"></div>
+
+<h2>Tamaños de la norma (§10: xs 14 · sm 16 · md 20 · base 24 · lg 32 · xl 48) y 96 de inspección</h2>
+<div id="tamanos"></div>
+
+<h2>Familia a 24px: casa · mano · variante · reloj (peso óptico, R6)</h2>
+<div id="familia"></div>
+
+<h2>Contexto oscuro con color por estado (22 y 44px)</h2>
+<div class="oscuro" id="oscuro"></div>
+
+<h2>Grosor del trazo (--uva-stroke 2 · 1.5 · 1.25 · 1) a 48 y 24px</h2>
+<div id="grosores"></div>
+
+<script>
+  const NS = 'http://www.w3.org/2000/svg';
+  const modo = location.hash.slice(1);
+  const vecinos = {
+    mano: '<path d="M18 11V6a2 2 0 0 0-4 0"/><path d="M14 10V4a2 2 0 0 0-4 0v2"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-6-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>',
+    rama: '<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="16" r="2.5"/><path d="M6 8.5V10a6 6 0 0 0 6 6h3.5"/>',
+    casa: '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>',
+    reloj: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>'
+  };
+  // Compatibilidad: también acepta la plantilla antigua de un solo icono (id="icono").
+  const fuente = document.getElementById('iconos') || document.getElementById('icono');
+  const viejo = document.getElementById('icono');
+  let iconos = [...fuente.content.querySelectorAll('svg')];
+  if (!iconos.length && viejo) iconos = [...viejo.content.querySelectorAll('svg')];
+  const confusiones = [...document.getElementById('confusiones').content.querySelectorAll('svg')];
+
+  if (modo === 'reducido') {
+    // Activa el bloque de movimiento reducido de cada icono reescribiendo su media query.
+    for (const s of [...iconos, ...confusiones]) s.querySelectorAll('style').forEach(st => {
+      st.textContent = st.textContent.replace(/prefers-reduced-motion\s*:\s*reduce/g, 'min-width:0px');
+    });
+  }
+  const nombre = (s, i) => s.dataset.nombre || `variante ${i + 1}`;
+
+  function tam(svg, px, color, extra) {
+    const c = svg.cloneNode(true);
+    c.setAttribute('width', px); c.setAttribute('height', px);
+    if (color) c.style.color = color;
+    if (extra) for (const [k, v] of Object.entries(extra)) c.style.setProperty(k, v);
+    return c;
+  }
+  function vecino(n, px, color) {
+    const s = document.createElementNS(NS, 'svg');
+    s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('class', 'vecino');
+    s.setAttribute('width', px); s.setAttribute('height', px);
+    s.innerHTML = vecinos[n]; if (color) s.style.color = color;
+    return s;
+  }
+  function celda(nodo, texto) {
+    const d = document.createElement('div'); d.className = 'celda';
+    d.append(nodo); if (texto !== undefined) d.append(String(texto)); return d;
+  }
+  function fila(contenedor, etiqueta, nodos) {
+    const f = document.createElement('div'); f.className = 'fila';
+    const n = document.createElement('span'); n.className = 'nombre'; n.textContent = etiqueta;
+    f.append(n, ...nodos); document.getElementById(contenedor).append(f);
+  }
+
+  if (!iconos.length) {
+    document.body.insertAdjacentHTML('afterbegin', '<p style="color:#b4541a">Faltan los SVG: sustituye el comentario UVA:ICONOS.</p>');
+  } else {
+    for (const px of [24, 20]) {
+      fila('comparacion', `${px}px`, [
+        ...iconos.map((s, i) => celda(tam(s, px), nombre(s, i))),
+        ...confusiones.map(c => celda(tam(c, px), c.dataset.nombre || 'confusión'))
+      ]);
+    }
+    iconos.forEach((s, i) => {
+      fila('tamanos', nombre(s, i), [14, 16, 20, 24, 32, 48, 96].map(px => celda(tam(s, px), px)));
+      fila('familia', nombre(s, i), [vecino('casa', 24), vecino('mano', 24), tam(s, 24), vecino('reloj', 24)]);
+      for (const px of [22, 44]) fila('oscuro', `${nombre(s, i)} · ${px}`, [
+        vecino('rama', px, 'var(--lila)'), vecino('mano', px, 'var(--ambar)'),
+        tam(s, px, 'var(--ambar)'), tam(s, px, 'var(--verde)'), tam(s, px, 'var(--lila)'),
+        ...confusiones.map(c => tam(c, px, '#888'))
+      ]);
+      fila('grosores', nombre(s, i), [2, 1.5, 1.25, 1].map(g => {
+        const d = document.createElement('div'); d.className = 'celda';
+        d.append(tam(s, 48, null, {'--uva-stroke': g}), tam(s, 24, null, {'--uva-stroke': g}), g);
+        return d;
+      }));
+    });
+  }
+
+  // Modos de fotograma: se aplican cuando todas las animaciones ya existen.
+  addEventListener('load', () => requestAnimationFrame(() => {
+    const anims = document.getAnimations();
+    if (modo === 'final') anims.forEach(a => { try { a.finish(); } catch (e) { a.cancel(); } });
+    // Un instante común para todas: con animaciones encadenadas (subir → asentar) congelar cada una en su
+    // propio punto medio mezclaría momentos distintos.
+    let instante = null;
+    if (modo === 'medio' && anims.length) {
+      const larga = anims.map(a => a.effect.getComputedTiming()).sort((x, y) => (y.duration || 0) - (x.duration || 0))[0];
+      instante = ((larga.delay || 0) + (larga.duration || 0) / 2) / 1000;
+    }
+    const mt = modo.match(/^t=([\d.]+)$/);
+    if (mt) instante = parseFloat(mt[1]);
+    if (instante !== null) anims.forEach(a => { a.pause(); a.currentTime = instante * 1000; });
+    document.getElementById('modo').textContent = modo
+      ? `Modo: ${modo}${instante !== null ? ` (t = ${instante.toFixed(2)} s)` : ''} · ${anims.length} animaciones`
+      : `Modo: al cargar · ${anims.length} animaciones (usa #final, #medio o #reducido)`;
+  }));
+</script>
+</body></html>
