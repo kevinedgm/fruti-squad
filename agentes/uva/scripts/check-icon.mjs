@@ -96,7 +96,10 @@ function check(file) {
   const fixedAttr = [...body.matchAll(/\s(?:fill|stroke|stop-color|color)\s*=\s*"([^"]*)"/g)]
     .map((m) => m[1]).filter((v) => !/^(none|currentColor|inherit|transparent)$/i.test(v));
   const fixedCss = (css.match(/#[0-9a-f]{3,8}\b|rgba?\(|hsla?\(/gi) || []);
-  add('COL2', fixedAttr.length === 0 && fixedCss.length === 0, 'bloqueante', `sin colores fijos${fixedAttr.length + fixedCss.length ? ` (encontrados: ${[...fixedAttr, ...fixedCss].join(', ')})` : ''}`);
+  // colores dentro de atributos style="…" (exportaciones de Inkscape/Illustrator: style="fill:#8f8fc6")
+  const fixedStyle = [...body.matchAll(/\sstyle\s*=\s*"([^"]*)"/g)].flatMap((m) => [...m[1].matchAll(/(?:^|;)\s*(?:fill|stroke|stop-color|color)\s*:\s*([^;]+)/g)].map((x) => x[1].trim()))
+    .filter((v) => !/^(none|currentColor|inherit|transparent)$/i.test(v) && !/^var\(/.test(v));
+  add('COL2', fixedAttr.length === 0 && fixedCss.length === 0 && fixedStyle.length === 0, 'bloqueante', `sin colores fijos${fixedAttr.length + fixedCss.length + fixedStyle.length ? ` (encontrados: ${[...new Set([...fixedAttr, ...fixedCss, ...fixedStyle])].join(', ')})` : ''}`);
   if (!referencia) add('COL3', /var\(--uva-stroke/.test(css), 'recomendado', 'grosor ajustable con --uva-stroke');
   // Lucide: oculto por defecto; nombre accesible solo si el icono informa por sí solo.
   const named = !!attr(root, 'aria-label') || /<title\b[^>]*>[^<]+<\/title>/.test(body);
