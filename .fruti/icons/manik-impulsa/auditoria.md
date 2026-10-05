@@ -40,6 +40,6 @@ Alcance: Uva no diseña logotipos; aquí se aplican sus criterios de construcci�
 
 ## Pendiente (decisiones de marca, no técnicas)
 
-- `#6e6eb5` para fondos claros: **adoptado en los iconos de app** (`app/`). Sigue pendiente decidir si el logotipo completo y el favicon también cambian.
+- `#6e6eb5`: **adoptado (2026-10-05) en todo** — logotipo, favicon e iconos de app. Contraste: 4.6:1 sobre blanco, 3.5:1 sobre `#202124` (pestaña oscura de Chrome), 2.62:1 sobre `#35363a` (pestaña oscura activa). Ver `evidencia/logo-6e6eb5-claro-oscuro.png`.
 - Fijar tamaño mínimo y área de respeto en la guía.
 - Favicon: **resuelto** con la variante V2c en `favicon/` (ver `favicon/LEEME.md`). Aprobado: sin línea base a 16–32 px.
