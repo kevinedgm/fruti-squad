@@ -28,7 +28,10 @@ A 16 px cada unidad del lienzo de 32 vale medio píxel. Un hueco recortado neces
 
 A ≥48 px (apple-touch-icon, PWA, splash) usa el símbolo completo de `../manik-impulsa.svg`: ahí la línea base sí se lee.
 
-## Pendiente (decisión tuya)
+## Decisiones
 
-- Aceptar que el favicon no lleve la línea base del pulso.
+- **Aprobado (2026-10-05):** el favicon (16–32 px) va sin la línea base del pulso; a ≥48 px se usa el símbolo completo.
+
+## Notas
+
 - El color `#8f8fc6` sobre blanco da 3.04:1 sobre blanco (hallazgo 1 de la auditoría); en el favicon no bloquea porque la pestaña lleva el nombre en texto.

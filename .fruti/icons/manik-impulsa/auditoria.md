@@ -42,4 +42,4 @@ Alcance: Uva no diseña logotipos; aquí se aplican sus criterios de construcci�
 
 - Adoptar o no la variante `#6e6eb5` para fondos claros.
 - Fijar tamaño mínimo y área de respeto en la guía.
-- Favicon: **resuelto** con la variante V2c en `favicon/` (ver `favicon/LEEME.md`). Pendiente de tu aprobación: perder la línea base a 16–32 px.
+- Favicon: **resuelto** con la variante V2c en `favicon/` (ver `favicon/LEEME.md`). Aprobado: sin línea base a 16–32 px.
