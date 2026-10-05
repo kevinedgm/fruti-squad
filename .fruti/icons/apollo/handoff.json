@@ -1,0 +1,46 @@
+{
+  "icon": {
+    "id": "apollo",
+    "source": "uva",
+    "next_owner": "coco",
+    "style_source": "uva_base",
+    "sizes": [
+      16,
+      20,
+      24,
+      32,
+      48
+    ],
+    "small_variant": false,
+    "motion": {
+      "modifier": "uva-apollo--ignicion",
+      "category": "state_transition",
+      "total_s": 0.9,
+      "reduced": "static"
+    },
+    "confusions_tested": [
+      "rocket",
+      "orbit",
+      "trending-up",
+      "square-terminal"
+    ],
+    "criteria_failed": [],
+    "criteria_warned": [
+      "C1: el neón cian claro no llega a 3:1 sobre blanco; en Día usar el signal del tema claro",
+      "D6: 900 ms > motion.slow"
+    ],
+    "files": [
+      "apollo.svg",
+      "registro.yaml",
+      "uso.md",
+      "prueba.html",
+      "secuencia.png",
+      "propuesta/"
+    ],
+    "unresolved": [
+      "hex de signal y void (Órbita y Día) no recibidos: vistas y prueba con valores provisionales",
+      "icono de app sobre fondo void y PNG pendientes de esos hex",
+      "sin prueba con personas (B1 por banco)"
+    ]
+  }
+}

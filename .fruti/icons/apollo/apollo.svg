@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-apollo" aria-hidden="true">
+  <style>
+    .uva-apollo{stroke-width:var(--uva-stroke,1.5)}
+    .uva-apollo__senal{fill:var(--uva-accent,currentColor);stroke:none}
+    /* Estado Ignición → En órbita: al arrancar un entorno, el satélite da una vuelta completa a la órbita (900 ms,
+       una vez) y queda en su sitio. Sin brillo ni movimiento en reposo. El componente añade uva-apollo (modificador
+       ignicion) al empezar el arranque y la quita en animationend. */
+    .uva-apollo--ignicion{--uva-apollo-senal:uva-apollo-orbitar}
+    .uva-apollo__senal{animation:var(--uva-apollo-senal,none) 900ms cubic-bezier(.45,0,.25,1) 0s 1}
+    @keyframes uva-apollo-orbitar{0.00%{transform:translate(0.00px,0.00px)}2.78%{transform:translate(1.44px,0.15px)}5.56%{transform:translate(2.75px,0.51px)}8.33%{transform:translate(3.87px,1.05px)}11.11%{transform:translate(4.77px,1.76px)}13.89%{transform:translate(5.43px,2.62px)}16.67%{transform:translate(5.83px,3.61px)}19.44%{transform:translate(5.96px,4.69px)}22.22%{transform:translate(5.80px,5.83px)}25.00%{transform:translate(5.37px,6.99px)}27.78%{transform:translate(4.68px,8.15px)}30.56%{transform:translate(3.74px,9.27px)}33.33%{transform:translate(2.60px,10.30px)}36.11%{transform:translate(1.28px,11.23px)}38.89%{transform:translate(-0.18px,12.02px)}41.67%{transform:translate(-1.73px,12.64px)}44.44%{transform:translate(-3.33px,13.09px)}47.22%{transform:translate(-4.92px,13.34px)}50.00%{transform:translate(-6.47px,13.39px)}52.78%{transform:translate(-7.91px,13.24px)}55.56%{transform:translate(-9.21px,12.89px)}58.33%{transform:translate(-10.33px,12.35px)}61.11%{transform:translate(-11.24px,11.63px)}63.89%{transform:translate(-11.90px,10.77px)}66.67%{transform:translate(-12.30px,9.79px)}69.44%{transform:translate(-12.42px,8.71px)}72.22%{transform:translate(-12.27px,7.56px)}75.00%{transform:translate(-11.84px,6.40px)}77.78%{transform:translate(-11.14px,5.24px)}80.56%{transform:translate(-10.21px,4.13px)}83.33%{transform:translate(-9.07px,3.09px)}86.11%{transform:translate(-7.74px,2.16px)}88.89%{transform:translate(-6.29px,1.37px)}91.67%{transform:translate(-4.73px,0.75px)}94.44%{transform:translate(-3.14px,0.30px)}97.22%{transform:translate(-1.54px,0.05px)}100.00%{transform:translate(-0.00px,0.00px)}}
+    @media (prefers-reduced-motion:reduce){
+      .uva-apollo--ignicion{--uva-apollo-senal:none}
+    }
+  </style>
+  <!-- apollo · prompt en órbita; un solo neón (el satélite) · ignición con la clase uva-apollo (modificador ignicion) -->
+  <ellipse class="uva-apollo__orbita" cx="12" cy="12" rx="9.6" ry="6.1" transform="rotate(-22 12 12)"/>
+  <path class="uva-apollo__prompt" d="M9.7 10.3 11.5 11.8 9.7 13.3M12.7 13.7h2"/>
+  <circle class="uva-apollo__senal" cx="15.23" cy="5.30" r="1.6"/>
+</svg>

@@ -1,0 +1,20 @@
+# Entrada propuesta del registro semántico de iconos (norma §5.1). El registro del proyecto lo gobierna lima.
+semanticName: apollo
+icon: { library: custom, name: uva-apollo, file: apollo.svg }
+category: brand                   # icono de la app dev-launcher (marca propia)
+accessibility: { defaultLabel: Apollo, hiddenByDefault: true }
+direction: { rtl: fixed }
+color: { stroke: currentColor (ink), accent: "--uva-accent → signal (un solo neón: el satélite)" }
+motion:
+  modifier: uva-apollo--ignicion
+  category: state_transition      # Ignición → En órbita
+  meaning: "un entorno arranca: el satélite da una vuelta a la órbita y queda en su sitio"
+  duration: 900ms
+  repeats: 1
+  reducedMotion: "sin movimiento; el estado lo dicen la palabra y el glifo del badge"
+  deviation: "D6 recomendado: 900 ms > motion.slow (240–400); una vuelta completa no cabe en menos"
+style: { source: uva_base, stroke: 1.5, cap: round, join: round }
+sizes: { tested: [14, 16, 20, 24, 32, 48], recommended: [20, 24, 32, 48] }   # a 16 se lee la órbita con el satélite; el >_ se reduce
+confusionsTested: [rocket, orbit, trending-up, square-terminal]
+status: proposed
+usage: { label: recommended, iconOnlyButton: "44x44, nombre «Abrir Apollo» en el <button>" }
