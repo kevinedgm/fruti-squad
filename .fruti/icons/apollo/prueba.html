@@ -1,6 +1,6 @@
 <!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>apollo · prueba</title>
 <style>
-:root{--void:#0b0f14;--hull:#111821;--ink:#e6edf3;--signal:#22d3ee}  /* provisionales: sustituye por tus tokens */
+:root{--void:#070a14;--hull:#0e1424;--ink:#e8edf7;--signal:#22e4f5}  /* tokens de Apollo · Órbita */
 .dia{--void:#f6f8fa;--hull:#ffffff;--ink:#0d1117;--signal:#0891b2}
 body{margin:0;font:15px/1.5 system-ui,sans-serif;background:var(--void);color:var(--ink);padding:24px}
 .uva-apollo{--uva-accent:var(--signal)}
@@ -9,7 +9,7 @@ button{font:inherit;padding:8px 14px;border-radius:8px;border:1px solid var(--si
 .mono{font-family:ui-monospace,monospace;font-size:13px;opacity:.75}</style></head><body>
 <p><button type="button" id="b">Lanzar</button> <span class="mono">· con «reducir movimiento» activo no se anima</span></p>
 <div class="panel" id="orbita"></div>
-<div class="panel dia" id="dia" style="background:#ffffff;color:#0d1117"></div>
+<div class="panel dia" id="dia" style="background:var(--hull);color:var(--ink)"></div>
 <template id="ic"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-apollo" aria-hidden="true">
   <style>
     .uva-apollo{stroke-width:var(--uva-stroke,1.5)}

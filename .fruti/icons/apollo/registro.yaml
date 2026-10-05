@@ -4,7 +4,7 @@ icon: { library: custom, name: uva-apollo, file: apollo.svg }
 category: brand                   # icono de la app dev-launcher (marca propia)
 accessibility: { defaultLabel: Apollo, hiddenByDefault: true }
 direction: { rtl: fixed }
-color: { stroke: currentColor (ink), accent: "--uva-accent → signal (un solo neón: el satélite)" }
+color: { stroke: "currentColor → ink", accent: "--uva-accent → signal (un solo neón: el satélite)", contrast: "ink ≥14:1; signal ≥10.6:1 Órbita, ≥4.9:1 Día" }
 motion:
   modifier: uva-apollo--ignicion
   category: state_transition      # Ignición → En órbita

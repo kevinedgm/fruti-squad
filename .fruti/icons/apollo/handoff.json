@@ -26,8 +26,8 @@
     ],
     "criteria_failed": [],
     "criteria_warned": [
-      "C1: el neón cian claro no llega a 3:1 sobre blanco; en Día usar el signal del tema claro",
-      "D6: 900 ms > motion.slow"
+      "D6: 900 ms > motion.slow (una vuelta no cabe en menos)",
+      "a 16 px el satélite mide ~1 px: en pestañas usar favicon.svg"
     ],
     "files": [
       "apollo.svg",
@@ -35,12 +35,12 @@
       "uso.md",
       "prueba.html",
       "secuencia.png",
-      "propuesta/"
+      "propuesta/",
+      "app/"
     ],
     "unresolved": [
-      "hex de signal y void (Órbita y Día) no recibidos: vistas y prueba con valores provisionales",
-      "icono de app sobre fondo void y PNG pendientes de esos hex",
       "sin prueba con personas (B1 por banco)"
-    ]
+    ],
+    "tokens_source": "https://claude.ai/artifact/Aft3JFy8hn2YzECUPyocc6 (project/tokens.json)"
   }
 }

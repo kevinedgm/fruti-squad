@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Apollo">
+  <!-- Apollo · icono de app (tema orbita). Derivado de exportación con los hex del design system; el icono de interfaz es apollo.svg -->
+  <rect width="512" height="512" rx="112" fill="#070a14"/>
+  <g transform="translate(106 106) scale(12.5)" fill="none" stroke="#e8edf7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="12" cy="12" rx="9.6" ry="6.1" transform="rotate(-22 12 12)"/>
+    <path d="M9.7 10.3 11.5 11.8 9.7 13.3M12.7 13.7h2"/>
+    <circle cx="15.23" cy="5.30" r="1.6" fill="#22e4f5" stroke="none"/>
+  </g>
+</svg>

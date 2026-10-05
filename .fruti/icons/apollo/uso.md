@@ -6,7 +6,7 @@ Icono de Apollo (dev-launcher): un prompt `>_` dentro de una órbita; el satéli
    ```css
    .uva-apollo{ --uva-accent: var(--signal); color: var(--ink); }
    ```
-   En el tema Día usa el `signal` del tema claro: un cian claro sobre blanco no llega a 3:1.
+   Contraste con los tokens de Apollo: `ink` 14–19:1 y `signal` 10.6–12.7:1 (Órbita) / 4.9–5.8:1 (Día) sobre void, hull y hull-2.
 2. **En reposo, plano:** sin halo ni movimiento (el brillo es estado, no decoración).
 3. **Ignición → En órbita:** al arrancar un entorno (o la app), el satélite da una vuelta a la órbita (900 ms, una vez) y queda en su sitio. No lo repitas en bucle mientras el entorno corre: el estado «En órbita» lo dicen el badge (palabra + glifo ●) y, si aplica, `glow-go` en el componente, no el icono.
 
@@ -22,3 +22,5 @@ svg.addEventListener('animationend', () => svg.classList.remove('uva-apollo--ign
 
 4. **Accesibilidad:** el SVG va oculto (`aria-hidden="true"`). Junto al nombre «Apollo», decorativo; en un botón solo con icono, el nombre va en el botón: `<button type="button" aria-label="Abrir Apollo">` (área 44×44).
 5. **Tamaños:** 20–48 px recomendado; a 16 px (favicon) se reconoce la órbita con el satélite y el `>_` queda como marca.
+
+6. **Icono de app y favicon** (`app/`, derivados con los hex del design system): ver `app/LEEME.md`.
