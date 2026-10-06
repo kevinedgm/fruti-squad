@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="112 72 314 317" aria-hidden="true" focusable="false" class="manik-loader manik-loader--latido">
+  <!-- Manik Impulsa · loader «Latido»: el símbolo exacto late dos veces y descansa (1.2 s por ciclo). -->
+  <style>
+    .manik-loader__simbolo{fill:var(--manik-color,#6e6eb5);transform-box:fill-box;transform-origin:50% 50%;animation:manik-latido 1200ms ease-in-out infinite}
+    @keyframes manik-latido{0%{transform:scale(1)}12%{transform:scale(1.08)}22%{transform:scale(.98)}32%{transform:scale(1.04)}44%,100%{transform:scale(1)}}
+    @keyframes manik-respira{from{opacity:1}to{opacity:.55}}
+    @media (prefers-reduced-motion:reduce){.manik-loader__simbolo{animation:manik-respira 1600ms ease-in-out infinite alternate}}
+  </style>
+  <g class="manik-loader__simbolo"><path d="M 0,0 C 2.365,0 4.434,1.594 5.036,3.882 L 23.69,74.698 c 0.603,2.288 2.671,3.882 5.037,3.882 h 12.576 c 2.468,0 4.598,-1.733 5.099,-4.151 l 17.882,-86.178 c 2.189,-10.548 6.712,-10.798 10.051,-0.556 L 95.494,52.58 c 0.698,2.143 2.697,3.593 4.951,3.593 h 13.348 c 2.036,0 4.249,-1.572 4.918,-3.495 l 17.132,-58.019 c 0.729,-2.093 2.702,-3.495 4.918,-3.495 h 29.72 C 177.732,33.487 157.466,78.021 116.885,99.031 60.845,128.044 -7.436,100.156 -27.532,39.748 -31.875,26.692 -33.522,13.186 -32.566,0 Z" transform="matrix(1.3333333,0,0,-1.3333333,173.1124,237.41067)"/><path d="m 0,0 0.006,-0.021 h -12.437 c -2.303,0 -4.334,1.513 -4.991,3.721 l -10.822,36.316 c -2.638,8.851 -7.114,8.901 -9.949,0.112 l -21.769,-67.51 c -0.694,-2.151 -2.697,-3.61 -4.957,-3.61 h -12.797 c -2.469,0 -4.598,1.733 -5.1,4.151 l -17.183,82.813 c -2.573,12.399 -7.144,12.481 -10.159,0.182 L -122.954,3.947 c -0.571,-2.33 -2.66,-3.968 -5.059,-3.968 h -11.366 l 0.005,0.021 -29.232,-0.023 c 5.06,-17.15 14.847,-32.949 29.152,-45.467 1.193,-2.497 1.355,-6.747 1.125,-9.625 l -1.459,-18.265 c -0.105,-1.309 1.015,-4.102 1.899,-5.066 0.884,-0.964 4.643,-1.804 5.951,-1.316 l 15.545,5.79 13.341,4.41 c 42.359,-12.578 88.641,2.784 114.893,37.878 7.412,9.909 12.702,20.625 16.022,31.666 z" transform="matrix(1.3333333,0,0,-1.3333333,359.51733,265.09587)"/></g>
+</svg>
