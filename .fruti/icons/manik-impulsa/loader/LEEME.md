@@ -1,36 +1,53 @@
 # Manik Impulsa · loader
 
-Dos propuestas con el símbolo **exacto** del logotipo (las dos piezas originales, sin redibujar). El pulso es el hueco entre ellas.
+Ronda 2. La ronda 1 (Latido y Barrido, en `descartadas/`) se rechazó por poco original: solo animaba el logo desde fuera.
 
-| Variante | Qué hace | Ciclo | Técnica |
-|---|---|---|---|
-| **Latido** | El símbolo late dos veces (crece al 108 %, rebota, 104 %) y descansa | 1.2 s | `transform: scale` (funciona en todos los navegadores) |
-| **Barrido** | El símbolo «se enciende» de izquierda a derecha como un monitor y se apaga por la derecha | 1.6 s | `clip-path: inset()`; si el navegador no lo soporta, se ve el logo quieto |
+En esta ronda la animación sale de la estructura del logo. El pulso no es un dibujo encima de la burbuja: es el **hueco** que la parte en dos piezas.
 
-Vista previa: `manik-loader-latido.gif`, `manik-loader-barrido.gif`; en vivo: `prueba.html` (incluye simulación de «reducir movimiento»).
+| Concepto | Idea | Ciclo |
+|---|---|---|
+| **Monitor** | La burbuja es una ventana a una señal continua. El pulso entra por la derecha, la cruza, sale por la izquierda y se detiene justo cuando la M coincide con el logo. Fuera de la burbuja la señal se ve en color; dentro, como hueco. | 1.8 s (0.54 s quieto + 1.26 s de recorrido) |
+| **Nace** | Primero se dibuja la línea del pulso sola; la burbuja nace desde la punta de su cola alrededor de ella; se sostiene como logo y se recoge en la cola. | 2.4 s |
+| **Habla** | La burbuja se abre por el pulso como una boca: la pieza de arriba sube, la de abajo baja, y por dentro corre una señal. Luego se cierra. | 1.6 s |
 
-Verificado solo en Chromium. Safari y Firefox: sin probar.
+Vista previa: `manik-loader-*.gif`. En vivo, en claro y oscuro y con «reducir movimiento» simulado: `prueba.html`.
+
+## Cómo se construyó (para reproducirlo)
+
+1. Las dos piezas del logo se renderizaron por separado a 4 px por unidad.
+2. Se ajustó el círculo de la burbuja con mínimos cuadrados: centro (265.97, 226.1), radio 136.1, residuo máximo 0.5 unidades.
+3. El hueco del pulso = dentro del círculo, fuera de las dos piezas y cerca de ambas. Se vectorizó con potrace.
+   - Un trazo uniforme no sirve: en los picos el hueco tiene la parte de arriba plana y es más alto que un trazo. Con trazo, el fotograma de reposo difería un 7 % del logo.
+4. Fidelidad del fotograma de reposo frente al logo original, en píxeles dentro de la burbuja:
+   - Monitor: 0.08 % distinto.
+   - Nace: 0.16 % distinto.
+   - Habla: usa las piezas originales, sin cambios.
 
 ## Uso
 
+Monitor y Nace recortan el hueco pintándolo del color del fondo, así que necesitan conocerlo:
+
 ```html
-<div role="status" class="loader" style="width:48px;height:48px">
-  <img src="/manik-loader-latido.svg" alt="">
+<div role="status" style="height:48px; --manik-color:#6e6eb5; --manik-bg:#ffffff">
+  <!-- pegar aquí el SVG en línea -->
   <span class="sr-only">Cargando…</span>
 </div>
 ```
 
-- El SVG va oculto (`aria-hidden` / `alt=""`); el aviso «Cargando…» lo da el contenedor con `role="status"`.
-- Color: `#6e6eb5` por defecto. En fondo oscuro, `--manik-color: #8f8fc6` (solo si el SVG va en línea; con `<img>` las variables CSS no entran).
-- El lienzo tiene margen para que el latido no se recorte: el símbolo ocupa ~90 % del cuadro.
+- Con `<img src="…svg">` las variables CSS no entran: el fondo queda en blanco y el color en `#6e6eb5`. Sirve solo sobre fondo blanco.
+- En fondo oscuro: `--manik-color:#8f8fc6; --manik-bg:<color del fondo>`.
+- Los estilos están acotados a cada loader (`.manik-loader--monitor .b`…), así que pueden convivir en la misma página.
+- Habla no necesita `--manik-bg`.
 
 ## Normas aplicadas
 
-- **Bucle infinito:** permitido porque es progreso real (norma de Uva §29, `loop` solo para progreso) y porque WCAG 2.2.2 exime la animación de una fase de carga en la que no se puede interactuar. Si la carga deja la página usable, el loader debe desaparecer al terminar.
-- **Reducir movimiento:** sin escala ni barrido; el símbolo solo cambia de opacidad (100 % ↔ 55 %, 1.6 s), que sigue indicando «trabajando» (norma §31).
-- **Sin destellos:** ningún cambio supera 3 por segundo (WCAG 2.3.1).
-- **Un solo movimiento a la vez** (norma §30).
+- **Bucle infinito:** permitido porque es progreso real (norma de Uva §29) y porque WCAG 2.2.2 exime la animación de una fase de carga. El loader debe desaparecer al terminar la carga.
+- **Reducir movimiento:** sin desplazamiento ni escala; el logo queda quieto y solo cambia de opacidad (100 % ↔ 55 %, 1.6 s) (norma §31).
+- **Sin destellos:** WCAG 2.3.1.
+- **Movimientos encadenados**, nunca dos distintos a la vez (norma §30). En Nace, la línea y la burbuja se solapan unos 0.5 s.
+
+Verificado solo en Chromium. Safari y Firefox: sin probar. Ninguno de los tres usa animaciones dentro de `<mask>` o `<clipPath>`, que es lo que más falla en Safari.
 
 ## Pendiente (decisión tuya)
 
-- Elegir Latido o Barrido.
+- Elegir concepto.
