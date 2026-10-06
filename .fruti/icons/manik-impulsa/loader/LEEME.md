@@ -6,7 +6,7 @@ En esta ronda la animación sale de la estructura del logo. El pulso no es un di
 
 | Concepto | Idea | Ciclo |
 |---|---|---|
-| **Monitor** | La burbuja es una ventana a una señal continua. El pulso entra por la derecha, la cruza, sale por la izquierda y se detiene justo cuando la M coincide con el logo. Fuera de la burbuja la señal se ve en color; dentro, como hueco. | 1.8 s (0.54 s quieto + 1.26 s de recorrido) |
+| **Monitor** ✅ elegido | La burbuja es una ventana a una señal continua. El pulso entra por la derecha, la cruza, sale por la izquierda y se detiene justo cuando la M coincide con el logo. Fuera de la burbuja la señal es una línea fina; al cruzarla se ensancha en el hueco exacto del logo. | 1.8 s (0.54 s quieto + 1.26 s de recorrido) |
 | **Nace** | Primero se dibuja la línea del pulso sola; la burbuja nace desde la punta de su cola alrededor de ella; se sostiene como logo y se recoge en la cola. | 2.4 s |
 | **Habla** | La burbuja se abre por el pulso como una boca: la pieza de arriba sube, la de abajo baja, y por dentro corre una señal. Luego se cierra. | 1.6 s |
 
@@ -48,6 +48,11 @@ Monitor y Nace recortan el hueco pintándolo del color del fondo, así que neces
 
 Verificado solo en Chromium. Safari y Firefox: sin probar. Ninguno de los tres usa animaciones dentro de `<mask>` o `<clipPath>`, que es lo que más falla en Safari.
 
-## Pendiente (decisión tuya)
+## Decisiones
 
-- Elegir concepto.
+- **Elegido (2026-10-06):** Monitor.
+- **Pulido 1:** fuera de la burbuja se veía raro: allí la señal era el propio hueco del logo, una barra gruesa de 27.5 unidades a la izquierda y 15.75 a la derecha, con un quiebre donde cambiaba de alto. Ahora es una línea fina (9 unidades) por el centro del hueco, y el regreso entre pulsos es una curva suave. Ver `monitor-antes-despues.png`.
+
+## Fuente
+
+`fuente/`: `gap.py` vectoriza el hueco (`gap.d`) a partir de las dos piezas del logo (`paths.txt`); `gen.py` genera los tres SVG. Necesitan Python con numpy, scipy, scikit-image, pillow y potracer, y Chromium para renderizar las piezas.
