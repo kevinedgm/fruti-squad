@@ -1,0 +1,16 @@
+<!-- @dsCard group="Estado" height=120 subtitle="En proceso, listo, revisar, falta" -->
+<!doctype html><html lang="es"><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap"><style>html,body{margin:0;background:var(--canvas,#f2f2f6);color:var(--ink,#121217);font:16px/24px var(--font-ui,"Atkinson Hyperlegible Next",system-ui,sans-serif)}.wrap{padding:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.chip{height:var(--size-tag,32px);border-radius:var(--radius-tag,8px);padding:0 12px;display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:14px;border:2px solid transparent}
+.chip i{width:8px;height:8px;border-radius:50%;background:currentColor}
+.proceso{background:var(--anil-soft,#e4e7fc);color:var(--anil,#3346e0)}
+.listo{background:var(--verde-soft,#d9f2e8);color:var(--verde,#0a7354)}
+.revisar{background:var(--cempasuchil-soft,#fde6d6);color:var(--cempasuchil,#a8410c)}
+.falta{background:var(--grana-soft,#fbe3ea);color:var(--grana,#b3123e)}
+@media (forced-colors:active){.chip{border-color:CanvasText}}
+@media (pointer:fine){.chip{height:28px;border-radius:7px}}
+</style></head><body><div class="wrap">
+<span class="chip proceso"><i></i>Fermentando</span>
+<span class="chip listo"><i></i>Listo para destilar</span>
+<span class="chip revisar"><i></i>Revisar temperatura</span>
+<span class="chip falta"><i></i>Sin registrar</span>
+</div></body></html>

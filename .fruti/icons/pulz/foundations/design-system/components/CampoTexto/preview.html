@@ -1,0 +1,13 @@
+<!-- @dsCard group="Formularios" height=240 subtitle="Etiqueta, campo numérico y error en línea" -->
+<!doctype html><html lang="es"><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap"><style>html,body{margin:0;background:var(--canvas,#f2f2f6);color:var(--ink,#121217);font:16px/24px var(--font-ui,"Atkinson Hyperlegible Next",system-ui,sans-serif)}.wrap{padding:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.wrap{display:grid;gap:16px;max-width:360px}
+label{display:grid;gap:8px;font-weight:700}
+input{height:var(--size-control,48px);border:2px solid var(--control,#7f8196);border-radius:var(--radius-control,12px);padding:0 14px;font:400 16px var(--font-ui,"Atkinson Hyperlegible Next",system-ui,sans-serif);background:var(--surface,#fff);color:var(--ink,#121217);font-variant-numeric:tabular-nums;width:100%;box-sizing:border-box}
+input:focus-visible{outline:3px solid var(--focus,#3346e0);outline-offset:3px;border-color:var(--anil,#3346e0)}
+.err input{border-color:var(--grana,#b3123e)} .msg{font:400 14px/20px var(--font-ui,"Atkinson Hyperlegible Next",system-ui,sans-serif);color:var(--grana,#b3123e);font-weight:700}
+.sub{font:400 14px/20px var(--font-ui,"Atkinson Hyperlegible Next",system-ui,sans-serif);color:var(--muted,#55576a);font-weight:400}
+@media (pointer:fine){input{height:var(--size-control-fine,40px);border-radius:var(--radius-control-fine,10px)}}
+</style></head><body><div class="wrap">
+<label>°Brix <input type="text" inputmode="decimal" value="8.2"><span class="sub">Medido hoy a las 07:40</span></label>
+<label class="err">Temperatura (°C) <input type="text" inputmode="decimal" value="" placeholder="29.0"><span class="msg">Falta la medición de hoy: regístrala para seguir.</span></label>
+</div></body></html>

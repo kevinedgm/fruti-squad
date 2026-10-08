@@ -1,0 +1,29 @@
+<!-- @dsCard height=288 -->
+<!doctype html><html lang="es"><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap"><style>
+html,body{margin:0;background:var(--canvas,#f2f2f6);color:var(--ink,#121217)}
+.cover{position:relative;width:960px;height:288px;overflow:hidden}
+svg{position:absolute;inset:0;width:960px;height:288px;display:block}
+.ink{fill:var(--ink,#121217)} .anil{fill:var(--anil,#3346e0)} .pericon{fill:var(--pericon,#f2b630)} .verde{fill:var(--verde,#0a7354)} .grana{fill:var(--grana,#b3123e)} .ground{fill:var(--canvas,#f2f2f6)}
+.slab{rx:var(--radius-surface,16px)} .bar{rx:var(--radius-tank,3px)}
+.name{position:absolute;left:48px;bottom:44px;width:440px;font:800 120px/.92 var(--font-display,"Unbounded",system-ui,sans-serif);letter-spacing:-.01em;color:var(--ink,#121217)}
+.tag{position:absolute;left:52px;bottom:22px;width:440px;font:400 14px/18px var(--font-ui,"Atkinson Hyperlegible Next",system-ui,sans-serif);color:var(--muted,#55576a)}
+</style></head><body><div class="cover">
+<!-- Derivación:
+ blocks: anil 304×288 (space-16×4.75, bleeds top/right) · ink 160×288 (space-16×2.5) · pericon 160×96 (space-16×1.5) at the ink slab's foot · verde 48×48 and grana 48×48 (space-12) stacked at the ink slab's head; corners radius-surface 16, the small two radius-tank 3
+ arrangement: one tall slab (añil) with a satellite column (ink) at x=480; the two state squares small because they only ever mean a state
+ pattern: the literal motif row, the Z of the logo built from radii: five tank bars (height 24 = size-tank×2, rx radius-tank 3, pitch space-12 48) in the ground cut out of the añil slab, the third bar replaced by the diagonal of the Z in pericon. Chosen because the whole system derives its radius rule from this bar.
+ scales: space-12 48 (pitch, small squares), space-16 64 (slab widths), radius-surface 16, radius-tank 3 -->
+<svg viewBox="0 0 960 288" aria-hidden="true">
+ <rect class="anil slab" x="656" y="-16" width="320" height="320"/>
+ <rect class="ink slab" x="480" y="0" width="160" height="288"/>
+ <rect class="verde bar" x="496" y="16" width="48" height="48"/>
+ <rect class="grana bar" x="560" y="16" width="48" height="48"/>
+ <rect class="pericon" x="480" y="192" width="160" height="96"/>
+ <rect class="ground bar" x="704" y="36" width="208" height="24"/>
+ <rect class="ground bar" x="704" y="84" width="208" height="24"/>
+ <polygon class="pericon" points="860,132 912,132 756,204 704,204"/>
+ <rect class="ground bar" x="704" y="228" width="208" height="24"/>
+</svg>
+<div class="name">PULZ</div>
+<div class="tag">Del maguey al granel. Producción de mezcal, trazada.</div>
+</div></body></html>

@@ -1,0 +1,12 @@
+<!-- @dsCard group="Estado" height=180 subtitle="Nivel de una tina y avance de un lote" -->
+<!doctype html><html lang="es"><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Atkinson+Hyperlegible+Next:wght@400;700&display=swap"><style>html,body{margin:0;background:var(--canvas,#f2f2f6);color:var(--ink,#121217);font:16px/24px var(--font-ui,"Atkinson Hyperlegible Next",system-ui,sans-serif)}.wrap{padding:16px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.wrap{display:grid;gap:20px;max-width:420px}
+.fila{display:grid;gap:8px} .t{font:700 17px/22px var(--font-display,"Unbounded",system-ui,sans-serif)}
+.tanque{height:var(--size-tank,12px);border-radius:var(--radius-tank,3px);background:var(--ink,#121217);position:relative}
+.tanque i{position:absolute;left:3.5px;top:3.5px;bottom:3.5px;width:calc((100% - 7px) * var(--nivel));border-radius:2.5px;background:var(--anil,#3346e0)}
+.n{font:400 14px/20px var(--font-ui,"Atkinson Hyperlegible Next",system-ui,sans-serif);color:var(--muted,#55576a);font-variant-numeric:tabular-nums}
+@media (forced-colors:active){.tanque{border:1px solid CanvasText}.tanque i{background:Highlight}}
+</style></head><body><div class="wrap">
+<div class="fila"><span class="t">Tina 3</span><div class="tanque" role="meter" aria-valuenow="62" aria-valuemin="0" aria-valuemax="100" aria-label="Capacidad de la tina 3"><i style="--nivel:.62"></i></div><span class="n">62 % de capacidad · 1,240 L</span></div>
+<div class="fila"><span class="t">Lote M-0142</span><div class="tanque" role="progressbar" aria-valuenow="3" aria-valuemin="0" aria-valuemax="5" aria-label="Etapa 3 de 5: fermentación"><i style="--nivel:.6"></i></div><span class="n">Etapa 3 de 5 · fermentación</span></div>
+</div></body></html>

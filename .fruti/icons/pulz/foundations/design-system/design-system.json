@@ -1,0 +1,143 @@
+{
+ "v": 3,
+ "layout": "files",
+ "createdOnFiles": {
+  "v": 1,
+  "at": "2026-10-08T19:38:35Z"
+ },
+ "title": "PULZ Design System",
+ "namespace": "PULZ",
+ "libraries": [],
+ "sections": {},
+ "groups": [
+  "Marca",
+  "Iconos"
+ ],
+ "assetGroups": {
+  "Marca": {
+   "name": "Marca",
+   "tile": "m",
+   "order": [
+    "simbolo.svg",
+    "simbolo-oscuro.svg",
+    "simbolo-16.svg",
+    "wordmark.svg",
+    "wordmark-oscuro.svg",
+    "favicon.svg",
+    "app-icon-redondeado.svg",
+    "firma.svg",
+    "firma-oscuro.svg"
+   ],
+   "files": {
+    "simbolo.svg": {
+     "name": "simbolo.svg",
+     "blob": "c0e2e27f3f7ce11bdc77f180bdbcc575",
+     "size": 451,
+     "type": "image/svg+xml"
+    },
+    "simbolo-oscuro.svg": {
+     "name": "simbolo-oscuro.svg",
+     "blob": "3be0b87fbc705c4c28dd5e9353a7dbf0",
+     "size": 472,
+     "type": "image/svg+xml"
+    },
+    "simbolo-16.svg": {
+     "name": "simbolo-16.svg",
+     "blob": "30f8a9464e6858787195c2744c7620a5",
+     "size": 356,
+     "type": "image/svg+xml"
+    },
+    "wordmark.svg": {
+     "name": "wordmark.svg",
+     "blob": "ad3c439fa040a762dacb98db3b9c1182",
+     "size": 1668,
+     "type": "image/svg+xml"
+    },
+    "wordmark-oscuro.svg": {
+     "name": "wordmark-oscuro.svg",
+     "blob": "deb758008690c8c3de46e81fe2206835",
+     "size": 1689,
+     "type": "image/svg+xml"
+    },
+    "favicon.svg": {
+     "name": "favicon.svg",
+     "blob": "713f8998c0a374a6cca5151b979c5b18",
+     "size": 330,
+     "type": "image/svg+xml"
+    },
+    "app-icon-redondeado.svg": {
+     "name": "app-icon-redondeado.svg",
+     "blob": "7ab16a516db042e0f8dd4b91747189f6",
+     "size": 445,
+     "type": "image/svg+xml"
+    },
+    "firma.svg": {
+     "name": "firma.svg",
+     "blob": "e226e9cb703cecedbe8f5602964de493",
+     "size": 8427,
+     "type": "image/svg+xml"
+    },
+    "firma-oscuro.svg": {
+     "name": "firma-oscuro.svg",
+     "blob": "851fc8f1555f28ddb1cb1698705ad1f7",
+     "size": 8448,
+     "type": "image/svg+xml"
+    }
+   }
+  },
+  "Iconos": {
+   "name": "Iconos",
+   "tile": "s",
+   "order": [
+    "agave.svg",
+    "earth-oven.svg",
+    "masonry-oven.svg",
+    "stone-mill.svg",
+    "fermenting.svg"
+   ],
+   "files": {
+    "agave.svg": {
+     "name": "agave.svg",
+     "blob": "b7e9bb27f5f25ec705763417ae45ce44",
+     "size": 368,
+     "type": "image/svg+xml"
+    },
+    "earth-oven.svg": {
+     "name": "earth-oven.svg",
+     "blob": "5b0e1ba02b439d21187619505ae14f8a",
+     "size": 426,
+     "type": "image/svg+xml"
+    },
+    "masonry-oven.svg": {
+     "name": "masonry-oven.svg",
+     "blob": "c3b1b965429222ab3c7fcfcd516c5876",
+     "size": 483,
+     "type": "image/svg+xml"
+    },
+    "stone-mill.svg": {
+     "name": "stone-mill.svg",
+     "blob": "98ca0bbe8ddcda513163ac469d8013d7",
+     "size": 350,
+     "type": "image/svg+xml"
+    },
+    "fermenting.svg": {
+     "name": "fermenting.svg",
+     "blob": "048d91a64cd7743a3f9b4a71146f96b0",
+     "size": 698,
+     "type": "image/svg+xml"
+    }
+   }
+  }
+ },
+ "blobs": {},
+ "docs": {
+  "readme": "project/README.md",
+  "sections": []
+ },
+ "lastChange": {
+  "by": "Kevin",
+  "at": "2026-10-08T19:38:35Z",
+  "via": "Claude Code",
+  "note": "Foundations 2.0: color, tipografía, geometría, iconos, movimiento, adaptativo y accesibilidad aprobados."
+ }
+}
