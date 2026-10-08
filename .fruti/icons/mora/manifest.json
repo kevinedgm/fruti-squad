@@ -1,0 +1,42 @@
+{
+  "id": "mora",
+  "name": "Mora",
+  "role": "documentation",
+  "verb": "catalogar",
+  "symbol": "🫐",
+  "accent": "#8468E8",
+  "accentLight": "#7D5FE7",
+  "tile": "#161616",
+  "rtl": "fixed",
+  "stroke": {
+    "interfaz": 2,
+    "avatar": 2,
+    "avatarTile": 2
+  },
+  "icon": "svg/mora.svg",
+  "iconSmall": "svg/mora.small.svg",
+  "iconLarge": "svg/mora.large.svg",
+  "iconLight": "svg/mora-claro.svg",
+  "iconDark": "svg/mora-oscuro.svg",
+  "iconAuto": "svg/mora-auto.svg",
+  "avatar": "svg/mora-tile.svg",
+  "avatarAnimated": "svg/mora-tile-animado.svg",
+  "png": {
+    "avatar512": "png/mora-avatar-512.png",
+    "avatar256": "png/mora-avatar-256.png",
+    "light512": "png/mora-claro-512.png",
+    "dark512": "png/mora-oscuro-512.png",
+    "animation": "png/mora-catalogar.gif"
+  },
+  "animation": {
+    "name": "catalogar",
+    "category": "state_transition",
+    "durationMs": 660,
+    "modifier": "uva-mora--catalogar",
+    "reducedMotion": "estado final"
+  },
+  "checks": {
+    "interfaz": "check-icon.mjs ✅ (small: aviso no bloqueante COL3)",
+    "avatares": "derivados de marca: colores fijos y cuadro; fuera del contrato de icono de interfaz"
+  }
+}

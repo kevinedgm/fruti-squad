@@ -1,0 +1,42 @@
+{
+  "id": "coco",
+  "name": "Coco",
+  "role": "visual-construction",
+  "verb": "inspeccionar",
+  "symbol": "🥥",
+  "accent": "#C89A68",
+  "accentLight": "#9C6D39",
+  "tile": "#161616",
+  "rtl": "fixed",
+  "stroke": {
+    "interfaz": 2,
+    "avatar": 2,
+    "avatarTile": 2
+  },
+  "icon": "svg/coco.svg",
+  "iconSmall": "svg/coco.small.svg",
+  "iconLarge": "svg/coco.large.svg",
+  "iconLight": "svg/coco-claro.svg",
+  "iconDark": "svg/coco-oscuro.svg",
+  "iconAuto": "svg/coco-auto.svg",
+  "avatar": "svg/coco-tile.svg",
+  "avatarAnimated": "svg/coco-tile-animado.svg",
+  "png": {
+    "avatar512": "png/coco-avatar-512.png",
+    "avatar256": "png/coco-avatar-256.png",
+    "light512": "png/coco-claro-512.png",
+    "dark512": "png/coco-oscuro-512.png",
+    "animation": "png/coco-inspeccionar.gif"
+  },
+  "animation": {
+    "name": "inspeccionar",
+    "category": "state_transition",
+    "durationMs": 700,
+    "modifier": "uva-coco--inspeccionar",
+    "reducedMotion": "estado final"
+  },
+  "checks": {
+    "interfaz": "check-icon.mjs ✅ (small: aviso no bloqueante COL3)",
+    "avatares": "derivados de marca: colores fijos y cuadro; fuera del contrato de icono de interfaz"
+  }
+}

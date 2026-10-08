@@ -1,0 +1,9 @@
+semanticName: mora
+icon: {library: custom, file: .fruti/icons/mora/svg/mora.svg}
+category: brand
+accessibility: {defaultLabel: Mora}
+color: {oscuro: "#8468E8", claro: "#7D5FE7"}
+direction: {rtl: fixed}
+motion: {allowed: state_transition, modifier: uva-mora--catalogar}
+status: stable
+decided: 2026-10-08

@@ -1,0 +1,9 @@
+semanticName: bruno-builder
+icon: {library: custom, file: .fruti/icons/bruno-builder/svg/bruno-builder.svg}
+category: brand
+accessibility: {defaultLabel: Bruno}
+color: {oscuro: "#E5A447", claro: "#A46A17"}
+direction: {rtl: fixed}
+motion: {allowed: state_transition, modifier: uva-bruno-builder--conectar}
+status: stable
+decided: 2026-10-08

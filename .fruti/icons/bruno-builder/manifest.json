@@ -1,0 +1,42 @@
+{
+  "id": "bruno-builder",
+  "name": "Bruno",
+  "role": "functional-builder",
+  "verb": "conectar",
+  "symbol": "🥐",
+  "accent": "#E5A447",
+  "accentLight": "#A46A17",
+  "tile": "#161616",
+  "rtl": "fixed",
+  "stroke": {
+    "interfaz": 2,
+    "avatar": 2.5,
+    "avatarTile": 2.75
+  },
+  "icon": "svg/bruno-builder.svg",
+  "iconSmall": "svg/bruno-builder.small.svg",
+  "iconLarge": "svg/bruno-builder.large.svg",
+  "iconLight": "svg/bruno-builder-claro.svg",
+  "iconDark": "svg/bruno-builder-oscuro.svg",
+  "iconAuto": "svg/bruno-builder-auto.svg",
+  "avatar": "svg/bruno-builder-tile.svg",
+  "avatarAnimated": "svg/bruno-builder-tile-animado.svg",
+  "png": {
+    "avatar512": "png/bruno-builder-avatar-512.png",
+    "avatar256": "png/bruno-builder-avatar-256.png",
+    "light512": "png/bruno-builder-claro-512.png",
+    "dark512": "png/bruno-builder-oscuro-512.png",
+    "animation": "png/bruno-builder-conectar.gif"
+  },
+  "animation": {
+    "name": "conectar",
+    "category": "state_transition",
+    "durationMs": 660,
+    "modifier": "uva-bruno-builder--conectar",
+    "reducedMotion": "estado final"
+  },
+  "checks": {
+    "interfaz": "check-icon.mjs ✅ (small: aviso no bloqueante COL3)",
+    "avatares": "derivados de marca: colores fijos y cuadro; fuera del contrato de icono de interfaz"
+  }
+}

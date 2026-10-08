@@ -1,0 +1,46 @@
+{
+  "id": "fruti-squad",
+  "name": "Fruti Squad",
+  "role": "orchestrator",
+  "verb": "orquestar",
+  "symbol": "🍓",
+  "accent": "#F8F8F5",
+  "accentLight": "#161616",
+  "tile": "#161616",
+  "rtl": "fixed",
+  "stroke": {
+    "interfaz": 2.62,
+    "avatar": 2.62,
+    "avatarTile": 2.62
+  },
+  "icon": "svg/fruti-squad.svg",
+  "iconSmall": "svg/fruti-squad.small.svg",
+  "iconLarge": "svg/fruti-squad.large.svg",
+  "iconLight": "svg/fruti-squad-claro.svg",
+  "iconDark": "svg/fruti-squad-oscuro.svg",
+  "iconAuto": "svg/fruti-squad-auto.svg",
+  "avatar": "svg/fruti-squad-tile.svg",
+  "avatarAnimated": "svg/fruti-squad-tile-animado.svg",
+  "png": {
+    "avatar512": "png/fruti-squad-avatar-512.png",
+    "avatar256": "png/fruti-squad-avatar-256.png",
+    "light512": "png/fruti-squad-claro-512.png",
+    "dark512": "png/fruti-squad-oscuro-512.png",
+    "animation": "png/fruti-squad-orquestar.gif",
+    "multicolor512": "png/fruti-squad-multicolor-512.png"
+  },
+  "animation": {
+    "name": "orquestar",
+    "category": "state_transition",
+    "durationMs": 1040,
+    "modifier": "uva-fruti-squad--orquestar",
+    "reducedMotion": "estado final"
+  },
+  "checks": {
+    "interfaz": "check-icon.mjs ✅ (small: aviso no bloqueante COL3)",
+    "avatares": "derivados de marca: colores fijos y cuadro; fuera del contrato de icono de interfaz"
+  },
+  "core": "#B7F34D",
+  "iconMulticolor": "svg/fruti-squad-multicolor.svg",
+  "brand512": "fruti-squad.svg"
+}

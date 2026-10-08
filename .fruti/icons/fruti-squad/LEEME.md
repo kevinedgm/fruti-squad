@@ -60,3 +60,7 @@ Colores, modificables con variables CSS si el SVG va en línea: `--fs-fondo:#161
 
 - La identidad de Kiro (fantasma, morado) queda fuera a propósito: «for Kiro» va en texto.
 - ~~Tarjeta para redes~~ hecha: tipografía Sora, logotipo y tarjetas en `logotipo/`.
+
+## Icono 24 px (contrato de la squad)
+
+Ver `LEEME-24.md` y `manifest.json`.

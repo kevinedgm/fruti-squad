@@ -1,0 +1,9 @@
+semanticName: coco
+icon: {library: custom, file: .fruti/icons/coco/svg/coco.svg}
+category: brand
+accessibility: {defaultLabel: Coco}
+color: {oscuro: "#C89A68", claro: "#9C6D39"}
+direction: {rtl: fixed}
+motion: {allowed: state_transition, modifier: uva-coco--inspeccionar}
+status: stable
+decided: 2026-10-08
