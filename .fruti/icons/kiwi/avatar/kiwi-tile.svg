@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-label="Kiwi"><rect width="24" height="24" rx="5.25" fill="#161616"/><g transform="translate(12 12) scale(.72) translate(-12 -12)" fill="none" stroke="#7FCF5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse class="uva-kiwi__contorno" cx="12" cy="12" rx="9" ry="7.25"/>
+  <path class="uva-kiwi__eje" d="M9 5.51V18.49"/>
+  <path class="uva-kiwi__fila" d="M9 11H20.56"/>
+  <path class="uva-kiwi__secundaria" d="M15 11V18.49"/>
+</g></svg>

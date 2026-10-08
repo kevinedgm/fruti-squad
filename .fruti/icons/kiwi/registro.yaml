@@ -1,0 +1,19 @@
+semanticName: kiwi
+icon:
+  library: custom
+  file: .fruti/icons/kiwi/kiwi.svg
+  sizes: {16: kiwi.small.svg, 20-32: kiwi.svg, 48+: kiwi.large.svg}
+category: brand          # avatar del agente Kiwi (Structure / UX Architect)
+accessibility:
+  defaultLabel: Kiwi
+  note: oculto (aria-hidden) cuando va junto al nombre del agente; role="img" + "Kiwi" cuando va solo
+color:
+  oscuro: "#7FCF5B"      # 9.46:1 sobre #161616
+  claro: "#448427"       # 4.59:1 sobre blanco (#7FCF5B da 1.91:1: no se usa en claro)
+stroke: 2                # decisión del brief (2026-10-08), distinta del 1.5 base de Uva
+direction:
+  rtl: mirror            # recomendación (no decidida): la columna lateral cambia de lado en idiomas RTL
+motion:
+  allowed: none
+status: stable
+decided: 2026-10-08
