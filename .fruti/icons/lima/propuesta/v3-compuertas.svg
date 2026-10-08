@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-v3-compuertas" aria-hidden="true">
+  <style>.uva-v3-compuertas{stroke-width:var(--uva-stroke,2)}</style>
+  <path class="uva-v3-compuertas__contenedor" d="M12.00 3.00 L19.79 7.50 L19.79 16.50 L12.00 21.00 L4.21 16.50 L4.21 7.50Z"/>
+  <path class="uva-v3-compuertas__eje" d="M12 3V21"/>
+  <path class="uva-v3-compuertas__entrada" d="M9.5 9.5H14.5"/>
+  <path class="uva-v3-compuertas__salida" d="M9.5 14.5H14.5"/>
+</svg>

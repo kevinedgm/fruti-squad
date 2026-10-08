@@ -1,0 +1,21 @@
+# lima · avatar del agente Lima (E1)
+
+- semanticName: lima · categoría: brand (avatar de agente: Governance / System Architect).
+- Significado: reglas, contratos, clasificación y gates. «Cada pieza tiene un contrato y un lugar dentro del sistema». Flujo: entrada → regla → salida.
+- Estilo (brief del usuario, 2026-10-08):
+  - lienzo 24, margen 2, trazo 2;
+  - máximo 1 contenedor, 1 eje vertical y 2 barras horizontales;
+  - simetría marcada; preferencia: hexágono suave;
+  - 16 px: contenedor + eje; 48 px o más: sin decoración.
+- Color: `#C9F36B`; monocromo en `currentColor`.
+- Heredado de Kiwi (decisiones del usuario):
+  - avatares con trazo más grueso;
+  - movimiento con significado.
+  - RTL: `fixed`, porque la figura es simétrica y reflejarla no cambia nada.
+- Vecinos que pueden confundirse:
+  - `hexagon` y `nut`: hexágono vacío o tuerca;
+  - `box`: hexágono con líneas internas, se lee como cubo;
+  - `text-cursor`: la «I»;
+  - `smartphone`: rectángulo vertical con una línea;
+  - `shield`: el brief lo pide evitar.
+- Nombre accesible: «Lima».

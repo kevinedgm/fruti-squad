@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-v2-squircle" aria-hidden="true">
+  <style>.uva-v2-squircle{stroke-width:var(--uva-stroke,2)}</style>
+  <rect class="uva-v2-squircle__contenedor" x="5" y="3" width="14" height="18" rx="5.5"/>
+  <path class="uva-v2-squircle__entrada" d="M9.25 8.5H14.75"/>
+  <path class="uva-v2-squircle__eje" d="M12 8.5V15.5"/>
+  <path class="uva-v2-squircle__salida" d="M9.25 15.5H14.75"/>
+</svg>
