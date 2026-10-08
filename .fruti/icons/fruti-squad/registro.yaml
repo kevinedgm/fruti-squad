@@ -1,0 +1,16 @@
+semanticName: fruti-squad
+category: brand
+icon:
+  library: custom
+  file: .fruti/icons/fruti-squad/fruti-squad.svg
+accessibility:
+  defaultLabel: Fruti Squad
+motion:
+  allowed: state_transition   # entrada única al aparecer; sin bucle
+  reducedMotion: estado final inmediato
+tokens:
+  fondo: "#161616"
+  claro: "#F8F8F5"
+  acento: "#B7F34D"
+status: stable
+decided: 2026-10-08
