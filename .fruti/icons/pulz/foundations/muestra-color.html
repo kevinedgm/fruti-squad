@@ -1,0 +1,43 @@
+<!doctype html><meta charset="utf-8">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Unbounded:wght@700;800&display=swap">
+<style>
+.t{--canvas:#f2f2f6;--surface:#fff;--ink:#121217;--muted:#55576a;--line:#dcdce6;--control:#7f8196;
+ --anil:#3346e0;--on-anil:#fff;--anil-s:#e4e7fc;--grana:#b3123e;--grana-s:#fbe3ea;--pericon:#8a5800;--pericon-f:#f2b630;--pericon-s:#fcf0cc;--verde:#0a7354;--verde-s:#d9f2e8;--on-sem:#fff}
+.d{--canvas:#121217;--surface:#1b1b23;--ink:#f2f2f6;--muted:#a6a8bb;--line:#2a2a36;--control:#6b6d82;
+ --anil:#7d8bff;--on-anil:#121217;--anil-s:#1d2350;--grana:#ff7096;--grana-s:#3b1220;--pericon:#f2b630;--pericon-f:#f2b630;--pericon-s:#372a08;--verde:#3fcf9f;--verde-s:#0d3326;--on-sem:#121217}
+body{margin:0;font:15px/1.45 "Atkinson Hyperlegible",system-ui,sans-serif;display:grid;grid-template-columns:1fr 1fr;width:1100px}
+.t,.d{background:var(--canvas);color:var(--ink);padding:26px;display:grid;gap:18px;align-content:start}
+h2{margin:0;font:800 15px "Unbounded",sans-serif}
+.sw{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.sw div{border-radius:10px;padding:10px;height:78px;display:flex;flex-direction:column;justify-content:flex-end;font-size:12px;line-height:1.25}
+.sw b{font:700 13px "Unbounded",sans-serif}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px;display:grid;gap:12px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{border-radius:10px;height:44px;padding:0 18px;display:inline-flex;align-items:center;font-weight:700;border:0}
+.p{background:var(--anil);color:var(--on-anil)}.s{background:transparent;color:var(--anil);box-shadow:inset 0 0 0 2px var(--anil)}
+.chip{border-radius:999px;padding:4px 10px;font-size:13px;font-weight:700;display:inline-flex;gap:6px;align-items:center}
+.chip i{width:8px;height:8px;border-radius:50%;background:currentColor}
+.ca{background:var(--anil-s);color:var(--anil)}.cg{background:var(--grana-s);color:var(--grana)}.cp{background:var(--pericon-s);color:var(--pericon)}.cv{background:var(--verde-s);color:var(--verde)}
+.f{border:2px solid var(--control);border-radius:10px;height:44px;display:flex;align-items:center;padding:0 12px;color:var(--muted)}
+.lote{display:flex;justify-content:space-between;align-items:center}.lote small{color:var(--muted)}
+.num{font:800 28px "Unbounded",sans-serif;font-variant-numeric:tabular-nums}
+.err{color:var(--grana);font-size:13px;font-weight:700}
+</style>
+<div class="t"><h2>Tintes de Oaxaca</h2>
+<div class="sw"><div style="background:var(--anil);color:var(--on-anil)"><b>Añil</b>acción, selección</div>
+<div style="background:var(--grana);color:var(--on-sem)"><b>Grana</b>error, peligro</div>
+<div style="background:var(--pericon-f);color:#121217"><b>Pericón</b>aviso, revisar</div>
+<div style="background:var(--verde);color:var(--on-sem)"><b>Verde</b>listo, correcto</div></div>
+<div class="card"><div class="lote"><div><b>Lote M-0142 · Espadín</b><br><small>Tina 3 · día 4 de fermentación</small></div><span class="chip ca"><i></i>Fermentando</span></div>
+<div class="row"><span class="num">8.2</span><small style="color:var(--muted)">°Brix · medido 07:40</small></div>
+<div class="row"><span class="chip cv"><i></i>Listo para destilar</span><span class="chip cp"><i></i>Revisar temperatura</span><span class="chip cg"><i></i>Sin registrar</span></div>
+<div class="f">Temperatura (°C)</div><span class="err">Falta la medición de hoy: regístrala para seguir.</span>
+<div class="row"><span class="btn p">Registrar medición</span><span class="btn s">Ver lote</span></div></div></div><div class="d"><h2>Tintes de Oaxaca</h2>
+<div class="sw"><div style="background:var(--anil);color:var(--on-anil)"><b>Añil</b>acción, selección</div>
+<div style="background:var(--grana);color:var(--on-sem)"><b>Grana</b>error, peligro</div>
+<div style="background:var(--pericon-f);color:#121217"><b>Pericón</b>aviso, revisar</div>
+<div style="background:var(--verde);color:var(--on-sem)"><b>Verde</b>listo, correcto</div></div>
+<div class="card"><div class="lote"><div><b>Lote M-0142 · Espadín</b><br><small>Tina 3 · día 4 de fermentación</small></div><span class="chip ca"><i></i>Fermentando</span></div>
+<div class="row"><span class="num">8.2</span><small style="color:var(--muted)">°Brix · medido 07:40</small></div>
+<div class="row"><span class="chip cv"><i></i>Listo para destilar</span><span class="chip cp"><i></i>Revisar temperatura</span><span class="chip cg"><i></i>Sin registrar</span></div>
+<div class="f">Temperatura (°C)</div><span class="err">Falta la medición de hoy: regístrala para seguir.</span>
+<div class="row"><span class="btn p">Registrar medición</span><span class="btn s">Ver lote</span></div></div></div>
