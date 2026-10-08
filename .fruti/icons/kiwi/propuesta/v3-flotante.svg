@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-v3-flotante" aria-hidden="true">
+  <style>.uva-v3-flotante{stroke-width:var(--uva-stroke,2)}</style>
+  <ellipse class="uva-v3-flotante__contorno" cx="12" cy="12" rx="9" ry="7.25"/>
+  <path class="uva-v3-flotante__eje" d="M9.5 9V15"/>
+  <path class="uva-v3-flotante__fila" d="M9.5 12H15.5"/>
+</svg>
