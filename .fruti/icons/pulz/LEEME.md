@@ -65,3 +65,14 @@ Misma Z del trasiego; 3 paletas × 3 tipografías (`ronda-4/banco.png`). Contras
 | **Añil** | `#121217` / `#3346e0` (oscuro `#7d8bff`) / `#f2f2f6` | 6.08:1 | 6.23:1 | La única que pasa holgada en los dos modos. Viene del tinte de añil oaxaqueño |
 
 Tipografías del nombre: Unbounded 800 (ancha y redonda, mucha presencia), Syne 800 (extendida, la más artística y la que más ocupa), Space Grotesk 700 (técnica, compacta).
+
+## Decisión final (usuario: «tu recomendación»)
+
+- **Añil + Unbounded 800.** Es la única paleta que pasa holgada en claro y en oscuro, y Unbounded da presencia sin perder lectura.
+- **Paquete:** `final/` (ver `final/LEEME.md`).
+- **Ajustes al cerrar:**
+  - la Z se acerca al «PUL» al espacio de una letra (0.08 del alto de mayúscula): con 0.24 se leía «PUL Z»;
+  - en el icono de app, la diagonal pasa a cal: en tinta sobre añil daba 2.75:1.
+- **Pendiente:**
+  - la letra del cuerpo de la interfaz (decisión aparte);
+  - llevar el paquete al repo `kevinedgm/pulz`.
