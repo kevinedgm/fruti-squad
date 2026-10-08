@@ -57,3 +57,14 @@ Lo que distingue a la marmota de un globo o una pelota, sin dibujarla literal:
 | L1 · barra | `HECHO / MADE  EN / IN` encima de `OAXACA`; el inglés va en el color del tema | Compacta, en una línea; se lee con un poco de esfuerzo porque empareja palabras sueltas |
 | **L2 · apilado** | «HECHO EN» en tinta y «MADE IN» en color, unidos por una llave a un solo OAXACA | La más clara: dos idiomas, una sola Oaxaca |
 | **L3 · giro** | «HECHO EN» y «MADE IN» se turnan girando sobre su eje horizontal, como las caras de la marmota; OAXACA no se mueve. Ciclo de 6 s, en bucle (`l3-giro.gif`). Con «reducir movimiento», se queda en «MADE IN» | El juego más propio; sin movimiento depende de L2 |
+
+## Ronda 5 · «en fondos oscuros, si no se define bien el palo, parece cebolla» (prueba con personas, reportada por el usuario)
+
+Causa: en la versión oscura, contorno, espiga y manta salen del mismo color crema. La espiga de arriba se lee como el tallo que brota de un bulbo, y la de abajo como raíces. Variantes (`ronda-5/banco.png`):
+
+| Variante | Cambio | Lectura en oscuro |
+|---|---|---|
+| D0 | La actual | Bulbo con tallo y raíces: la cebolla |
+| D1 | Espiga y discos en `--oaxaca-color` | Se separa de la manta por color, pero sigue siendo fina |
+| D2 | Espiga más gruesa (×1.9) y larga, discos más anchos, pequeño hueco entre disco y esfera | Se lee como una pieza mecánica, no como algo que crece de la esfera. Funciona en una tinta |
+| **D3** | D2 + espiga y discos en `--oaxaca-color` | La separación más clara: la madera de la espiga es otra pieza, distinta de la manta |
