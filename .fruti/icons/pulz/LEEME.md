@@ -39,3 +39,17 @@ Ideas del producto, no objetos (`ronda-2/banco.png`):
 | **Z · movimiento** | «Todo es lote, recurso y movimiento»: dos barras (recursos) unidas por una diagonal en cobre (movimiento). Es la Z del nombre | La más fuerte: clara a 16 px, geométrica, propia. Sobre tierra, las barras desaparecen: necesita una versión oscura con barras en cal |
 | Cortes | Puntas, corazón y colas de la destilación: la banda gruesa de cobre es el corazón | ❌ Se lee como hamburguesa o como icono de menú |
 | Primitivas | Recurso (cuadrado), lote (círculo) y movimiento (flecha) | Se lee como el icono de «abrir enlace externo»; sobre oscuro se pierde la flecha |
+
+## Ronda 3 · la Z del trasiego (usuario: «más complejo, dinámico, como Grana y Hecho en Oaxaca»)
+
+- **Historia:** *trasiego* es pasar líquido de un tanque a otro: lote, recurso y movimiento en un solo gesto.
+  - La barra de arriba es un tanque con el lote en cobre.
+  - Se vacía, el líquido corre por la diagonal y llena la barra de abajo.
+- **Reposo:** tanque de arriba vacío, trasiego en cobre y lote ya en el tanque de abajo. El logo quieto conserva la historia.
+- **Animación:** `trasiego-simbolo.gif`, `trasiego-wordmark.gif`; ~2.2 s, una vez. Con «reducir movimiento», reposo directo.
+  - 0.5–1.2 s: se vacía el tanque de arriba.
+  - 0.9–1.6 s: corre el trasiego.
+  - 1.4–2.2 s: se llena el de abajo.
+- **Color de cada palenque:** el cobre es la variable `--pulz-color`. En el portal de una empresa, la firma «hecho con PULZ» toma su color (probado con azul, verde y vino). Las barras toman `currentColor`.
+- **Nombre:** «PUL» en Archivo (peso 820, ancho 112) y la Z es el símbolo, como la O de Oaxaca.
+- **Versión oscura:** barras en cal.
