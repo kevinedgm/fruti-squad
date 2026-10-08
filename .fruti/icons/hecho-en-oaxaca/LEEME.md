@@ -23,3 +23,13 @@ Se toma la idea estructural de la marmota, no su dibujo: gira, tiene 12 costilla
 | **K · esfera cinética** | Las 12 costillas se vuelven husos de color que crean volumen, al estilo op-art. Animada, la esfera gira como la marmota en la calenda (`k-giro.gif`, bucle de 1.4 s; con «reducir movimiento», quieta) | El giro funciona y es lo más propio. Quieta, se lee como pelota de playa o paleta |
 | **O · la O es la marmota** | Sello tipográfico: la «O» de «Oaxaca» es la marmota (anillo, una costilla en rosa mexicano) y su mástil baja por debajo de la línea | La más moderna y disruptiva: texto y símbolo son lo mismo. La O sola funciona como icono hasta 20 px. Riesgo: leerse como «Φ» o como una piruleta |
 | **T · papel picado** | Un círculo hecho solo de triángulos recortados, con huecos entre ellos, sostenido por el mástil | Vibrante y muy de Oaxaca. Por debajo de 32 px los triángulos se vuelven ruido. Riesgo: árbol o piruleta |
+
+### Corrección «parece paleta» (usuario, ronda 2)
+
+Causa común a los tres conceptos: un círculo encima de un palo se lee como paleta, se dibuje como se dibuje. Se probaron dos salidas (`ronda-2/banco-eje.png`):
+
+| | Sin mástil | Eje que atraviesa (discos arriba y abajo, como la espiga real) |
+|---|---|---|
+| K · cinética | Pelota de playa o esfera de adorno | **Se lee como algo que gira sobre su eje**; deja de ser paleta. Con el giro animado es la marmota en movimiento |
+| O · la O | Una «O» con un óvalo; pierde la marmota | Se lee como la letra griega «Φ» |
+| T · papel picado | Bola de mosaico, como una bola de discoteca | Adorno o piñata; a 32 px, ruido |
