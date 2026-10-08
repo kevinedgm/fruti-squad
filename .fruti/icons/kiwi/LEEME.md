@@ -6,18 +6,23 @@ Elegida la V1 «columna» (2026-10-08). Propuestas, banco y contraste: `propuest
 
 ## Archivos
 
+Misma estructura en el repo y en el ZIP: `svg/`, `png/`, `manifest.json` (contrato común de la squad: `small` / estándar / `large`, colores, animación).
+
+`svg/kiwi.small.svg` es el asset mínimo: solo la forma, sin estilos, variables ni animación.
+
+
 | Archivo | Uso |
 |---|---|
-| `kiwi.small.svg` | 16 px: óvalo + eje |
-| `kiwi.svg` | 20–32 px: versión estándar |
-| `kiwi.large.svg` | 48 px o más: añade la división secundaria |
-| `avatar/kiwi-oscuro.svg` | `#7FCF5B`, para fondo oscuro |
-| `avatar/kiwi-claro.svg` | `#448427`, para fondo claro |
-| `avatar/kiwi-auto.svg` | Elige el color según el tema del sistema (`prefers-color-scheme`) |
-| `avatar/kiwi-tile.svg`, `avatar/kiwi-avatar-{256,512}.png` | Avatar en cuadro `#161616`, de la misma familia que el icono de Fruti Squad |
-| `avatar/kiwi-tile-animado.svg`, `avatar/kiwi-organizar.gif` | Avatar con la animación «organizar» activada |
-| `kiwi-animado-ejemplo.svg` | Versión de interfaz con la animación activada (ejemplo de uso de la clase) |
-| `avatar/kiwi-{oscuro,claro}-512.png` | PNG transparentes |
+| `svg/kiwi.small.svg` | 16 px: óvalo + eje |
+| `svg/kiwi.svg` | 20–32 px: versión estándar |
+| `svg/kiwi.large.svg` | 48 px o más: añade la división secundaria |
+| `svg/kiwi-oscuro.svg` | `#7FCF5B`, para fondo oscuro |
+| `svg/kiwi-claro.svg` | `#448427`, para fondo claro |
+| `svg/kiwi-auto.svg` | Elige el color según el tema del sistema (`prefers-color-scheme`) |
+| `svg/kiwi-tile.svg`, `png/kiwi-avatar-{256,512}.png` | Avatar en cuadro `#161616`, de la misma familia que el icono de Fruti Squad |
+| `svg/kiwi-tile-animado.svg`, `png/kiwi-organizar.gif` | Avatar con la animación «organizar» activada |
+| `svg/kiwi-animado-ejemplo.svg` | Versión de interfaz con la animación activada (ejemplo de uso de la clase) |
+| `png/kiwi-{oscuro,claro}-512.png` | PNG transparentes |
 
 - Los tres SVG base usan `currentColor`, así que toman el color del texto, y pasan `check-icon.mjs`.
 - Contraste: `#7FCF5B` da 9.46:1 sobre `#161616`; `#448427` da 4.59:1 sobre blanco.
@@ -27,13 +32,13 @@ Evidencia: `evidencia-familia.png` (Fruti Squad, avatar de Kiwi y Kiwi sobre bla
 ## Uso en interfaz
 
 - Junto al nombre «Kiwi»: el icono queda oculto (`aria-hidden="true"`, como viene).
-- Solo, como avatar: usar los de `avatar/`, que llevan `role="img"` y `aria-label="Kiwi"`.
+- Solo, como avatar: usar los de `svg/` (avatares), que llevan `role="img"` y `aria-label="Kiwi"`.
 
 ## Grosor de los avatares (corregido 2026-10-08)
 
-- `avatar/kiwi-{oscuro,claro,auto}.svg`: trazo 2.5, con el óvalo reducido (rx 8.75, ry 7.05) para conservar el margen de 2.
-- `avatar/kiwi-tile.svg`: trazo 2.75 y escala 0.82 dentro del cuadro. Así su peso visual queda cerca de las cápsulas del icono de Fruti Squad.
-- La versión de interfaz (`kiwi*.svg`) sigue con trazo 2, como pide el brief.
+- `svg/kiwi-{oscuro,claro,auto}.svg`: trazo 2.5, con el óvalo reducido (rx 8.75, ry 7.05) para conservar el margen de 2.
+- `svg/kiwi-tile.svg`: trazo 2.75 y escala 0.82 dentro del cuadro. Así su peso visual queda cerca de las cápsulas del icono de Fruti Squad.
+- La versión de interfaz (`svg/kiwi*.svg`) sigue con trazo 2, como pide el brief.
 
 ## Idiomas de derecha a izquierda
 

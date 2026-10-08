@@ -1,7 +1,7 @@
 semanticName: kiwi
 icon:
   library: custom
-  file: .fruti/icons/kiwi/kiwi.svg
+  file: .fruti/icons/kiwi/svg/kiwi.svg
   sizes: {16: kiwi.small.svg, 20-32: kiwi.svg, 48+: kiwi.large.svg}
 category: brand          # avatar del agente Kiwi (Structure / UX Architect)
 accessibility:

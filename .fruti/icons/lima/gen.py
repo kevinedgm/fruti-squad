@@ -35,13 +35,23 @@ if __name__=='__main__':
     for n,g,sw in (('UI',UI,2),('AV',AV,2.25)):
         print(n,'hueco barra–contenedor %.2f (≥ %s)'%(gap(*g,sw),sw),'hueco entre barras %.2f'%(2*g[2]-sw),'margen %.2f'%(12-g[0]-sw/2))
     w=lambda p,s: open(p,'w').write(s)
-    w('lima.small.svg', svg(UI,['eje']))
-    w('lima.svg',       svg(UI,['entrada','eje','salida']))
-    w('lima.large.svg', svg(UI,['entrada','eje','salida']))
-    w('lima-animado-ejemplo.svg', svg(UI,['entrada','eje','salida'],cls=' uva-lima--validar'))
+    w('svg/lima.small.svg', svg(UI,['eje']))
+    w('svg/lima.svg',       svg(UI,['entrada','eje','salida']))
+    w('svg/lima.large.svg', svg(UI,['entrada','eje','salida']))
+    w('svg/lima-animado-ejemplo.svg', svg(UI,['entrada','eje','salida'],cls=' uva-lima--validar'))
     lbl='role="img" aria-label="Lima"'
-    w('avatar/lima-oscuro.svg', svg(AV,['entrada','eje','salida'],2.25,'#C9F36B',lbl))
-    w('avatar/lima-claro.svg',  svg(AV,['entrada','eje','salida'],2.25,'#5D820B',lbl))
-    w('avatar/lima-auto.svg',   svg(AV,['entrada','eje','salida'],2.25,'#5D820B',lbl).replace('</style>','.uva-lima{stroke:#5D820B}@media (prefers-color-scheme:dark){.uva-lima{stroke:#C9F36B}}</style>'))
-    w('avatar/lima-tile.svg',         svg(TL,['entrada','eje','salida'],2.25,'#C9F36B',lbl,tile=True,escala=.92))
-    w('avatar/lima-tile-animado.svg', svg(TL,['entrada','eje','salida'],2.25,'#C9F36B',lbl,' uva-lima--validar',tile=True,escala=.92))
+    w('svg/lima-oscuro.svg', svg(AV,['entrada','eje','salida'],2.25,'#C9F36B',lbl))
+    w('svg/lima-claro.svg',  svg(AV,['entrada','eje','salida'],2.25,'#5D820B',lbl))
+    w('svg/lima-auto.svg',   svg(AV,['entrada','eje','salida'],2.25,'#5D820B',lbl).replace('</style>','.uva-lima{stroke:#5D820B}@media (prefers-color-scheme:dark){.uva-lima{stroke:#C9F36B}}</style>'))
+    w('svg/lima-tile.svg',         svg(TL,['entrada','eje','salida'],2.25,'#C9F36B',lbl,tile=True,escala=.92))
+    w('svg/lima-tile-animado.svg', svg(TL,['entrada','eje','salida'],2.25,'#C9F36B',lbl,' uva-lima--validar',tile=True,escala=.92))
+
+def small_svg(svg_text):
+    import re
+    s=re.sub(r'\s*<style>.*?</style>','',svg_text,flags=re.S)
+    s=re.sub(r'\s*<!--.*?-->','',s,flags=re.S)
+    s=re.sub(r' class="uva-lima__[\w-]+"','',s)
+    s=s.replace(' pathLength="1"','')
+    return s
+if __name__=='__main__':
+    w('svg/lima.small.svg', small_svg(open('svg/lima.small.svg').read()))

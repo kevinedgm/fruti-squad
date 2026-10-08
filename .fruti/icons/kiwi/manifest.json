@@ -1,0 +1,42 @@
+{
+  "id": "kiwi",
+  "name": "Kiwi",
+  "role": "structure",
+  "verb": "organizar",
+  "symbol": "🥝",
+  "accent": "#7FCF5B",
+  "accentLight": "#448427",
+  "tile": "#161616",
+  "rtl": "mirror",
+  "stroke": {
+    "interfaz": 2,
+    "avatar": 2.5,
+    "avatarTile": 2.75
+  },
+  "icon": "svg/kiwi.svg",
+  "iconSmall": "svg/kiwi.small.svg",
+  "iconLarge": "svg/kiwi.large.svg",
+  "iconLight": "svg/kiwi-claro.svg",
+  "iconDark": "svg/kiwi-oscuro.svg",
+  "iconAuto": "svg/kiwi-auto.svg",
+  "avatar": "svg/kiwi-tile.svg",
+  "avatarAnimated": "svg/kiwi-tile-animado.svg",
+  "png": {
+    "avatar512": "png/kiwi-avatar-512.png",
+    "avatar256": "png/kiwi-avatar-256.png",
+    "light512": "png/kiwi-claro-512.png",
+    "dark512": "png/kiwi-oscuro-512.png",
+    "animation": "png/kiwi-organizar.gif"
+  },
+  "animation": {
+    "name": "organizar",
+    "category": "state_transition",
+    "durationMs": 920,
+    "modifier": "uva-kiwi--organizar",
+    "reducedMotion": "estado final"
+  },
+  "checks": {
+    "interfaz": "check-icon.mjs ✅ (small: aviso no bloqueante COL3, sin --uva-stroke por ser el asset mínimo)",
+    "avatares": "derivados de marca: colores fijos y cuadro; fuera del contrato de icono de interfaz"
+  }
+}

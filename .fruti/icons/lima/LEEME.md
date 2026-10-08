@@ -6,15 +6,20 @@ Hexágono de punta arriba con una «I» dentro: barra de entrada, eje (la regla)
 
 ## Archivos
 
+Misma estructura en el repo y en el ZIP: `svg/`, `png/`, `manifest.json` (contrato común de la squad: `small` / estándar / `large`, colores, animación).
+
+`svg/lima.small.svg` es el asset mínimo: solo la forma, sin estilos, variables ni animación.
+
+
 | Archivo | Uso |
 |---|---|
-| `lima.small.svg` | 16 px: contenedor + eje |
-| `lima.svg`, `lima.large.svg` | 20 px en adelante. A 48 px o más no se añade nada (brief: «estricta y limpia») |
-| `lima-animado-ejemplo.svg` | Interfaz con la animación activada |
-| `avatar/lima-oscuro.svg` / `lima-claro.svg` / `lima-auto.svg` | `#C9F36B` en oscuro, `#5D820B` en claro, o automático según el tema |
-| `avatar/lima-tile.svg`, `avatar/lima-avatar-{256,512}.png` | Avatar en cuadro `#161616` |
-| `avatar/lima-tile-animado.svg`, `avatar/lima-validar.gif` | Avatar con la animación |
-| `avatar/lima-{oscuro,claro}-512.png` | PNG transparentes |
+| `svg/lima.small.svg` | 16 px: contenedor + eje |
+| `svg/lima.svg`, `svg/lima.large.svg` | 20 px en adelante. A 48 px o más no se añade nada (brief: «estricta y limpia») |
+| `svg/lima-animado-ejemplo.svg` | Interfaz con la animación activada |
+| `svg/lima-oscuro.svg` / `svg/lima-claro.svg` / `svg/lima-auto.svg` | `#C9F36B` en oscuro, `#5D820B` en claro, o automático según el tema |
+| `svg/lima-tile.svg`, `png/lima-avatar-{256,512}.png` | Avatar en cuadro `#161616` |
+| `svg/lima-tile-animado.svg`, `png/lima-validar.gif` | Avatar con la animación |
+| `png/lima-{oscuro,claro}-512.png` | PNG transparentes |
 
 ## Medidas
 
@@ -44,6 +49,6 @@ Dura unos 0.80 s, una vez.
 ## Uso
 
 - Junto al nombre «Lima»: el icono queda oculto (`aria-hidden`).
-- Solo, como avatar: usar `avatar/`, que lleva `role="img"` y `aria-label="Lima"`.
+- Solo, como avatar: usar `svg/` (avatares), que lleva `role="img"` y `aria-label="Lima"`.
 
 Evidencia: `evidencia-familia.png` (Fruti Squad, Kiwi y Lima en cuadro; Kiwi y Lima sobre blanco).

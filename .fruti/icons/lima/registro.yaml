@@ -1,7 +1,7 @@
 semanticName: lima
 icon:
   library: custom
-  file: .fruti/icons/lima/lima.svg
+  file: .fruti/icons/lima/svg/lima.svg
   sizes: {16: lima.small.svg, 20+: lima.svg}
 category: brand          # avatar del agente Lima (Governance / System Architect)
 accessibility:

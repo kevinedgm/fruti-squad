@@ -1,0 +1,42 @@
+{
+  "id": "lima",
+  "name": "Lima",
+  "role": "governance",
+  "verb": "validar",
+  "symbol": "🟢",
+  "accent": "#C9F36B",
+  "accentLight": "#5D820B",
+  "tile": "#161616",
+  "rtl": "fixed",
+  "stroke": {
+    "interfaz": 2,
+    "avatar": 2.25,
+    "avatarTile": 2.25
+  },
+  "icon": "svg/lima.svg",
+  "iconSmall": "svg/lima.small.svg",
+  "iconLarge": "svg/lima.large.svg",
+  "iconLight": "svg/lima-claro.svg",
+  "iconDark": "svg/lima-oscuro.svg",
+  "iconAuto": "svg/lima-auto.svg",
+  "avatar": "svg/lima-tile.svg",
+  "avatarAnimated": "svg/lima-tile-animado.svg",
+  "png": {
+    "avatar512": "png/lima-avatar-512.png",
+    "avatar256": "png/lima-avatar-256.png",
+    "light512": "png/lima-claro-512.png",
+    "dark512": "png/lima-oscuro-512.png",
+    "animation": "png/lima-validar.gif"
+  },
+  "animation": {
+    "name": "validar",
+    "category": "state_transition",
+    "durationMs": 800,
+    "modifier": "uva-lima--validar",
+    "reducedMotion": "estado final"
+  },
+  "checks": {
+    "interfaz": "check-icon.mjs ✅ (small: aviso no bloqueante COL3, sin --uva-stroke por ser el asset mínimo)",
+    "avatares": "derivados de marca: colores fijos y cuadro; fuera del contrato de icono de interfaz"
+  }
+}

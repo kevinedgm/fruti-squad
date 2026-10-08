@@ -31,15 +31,25 @@ def svg(g,piezas,sw=2,color='currentColor',a11y='aria-hidden="true"',extra_cls='
 UI=geo(9,7.25)            # trazo 2, margen 2
 AV=geo(8.75,7.05)         # trazo 2.5, margen 2 (avatares)
 w=lambda p,s: open(p,'w').write(s)
-w('kiwi.small.svg', svg(UI,['eje']))
-w('kiwi.svg',       svg(UI,['eje','fila']))
-w('kiwi.large.svg', svg(UI,['eje','fila','sec']).replace('uva-kiwi__sec"','uva-kiwi__secundaria"'))
+w('svg/kiwi.small.svg', svg(UI,['eje']))
+w('svg/kiwi.svg',       svg(UI,['eje','fila']))
+w('svg/kiwi.large.svg', svg(UI,['eje','fila','sec']).replace('uva-kiwi__sec"','uva-kiwi__secundaria"'))
 lbl='role="img" aria-label="Kiwi"'
-w('avatar/kiwi-oscuro.svg', svg(AV,['eje','fila'],2.5,'#7FCF5B',lbl))
-w('avatar/kiwi-claro.svg',  svg(AV,['eje','fila'],2.5,'#448427',lbl))
+w('svg/kiwi-oscuro.svg', svg(AV,['eje','fila'],2.5,'#7FCF5B',lbl))
+w('svg/kiwi-claro.svg',  svg(AV,['eje','fila'],2.5,'#448427',lbl))
 auto=svg(AV,['eje','fila'],2.5,'#448427',lbl).replace('</style>','.uva-kiwi{stroke:#448427}@media (prefers-color-scheme:dark){.uva-kiwi{stroke:#7FCF5B}}</style>')
-w('avatar/kiwi-auto.svg', auto)
+w('svg/kiwi-auto.svg', auto)
 tl=lambda cls='': svg(AV,['eje','fila','sec'],2.75,'#7FCF5B',lbl,cls,tile=True,escala=.82).replace('uva-kiwi__sec"','uva-kiwi__secundaria"')
-w('avatar/kiwi-tile.svg', tl())
-w('avatar/kiwi-tile-animado.svg', tl(' uva-kiwi--organizar'))
-w('kiwi-animado-ejemplo.svg', svg(UI,['eje','fila'],extra_cls=' uva-kiwi--organizar'))
+w('svg/kiwi-tile.svg', tl())
+w('svg/kiwi-tile-animado.svg', tl(' uva-kiwi--organizar'))
+w('svg/kiwi-animado-ejemplo.svg', svg(UI,['eje','fila'],extra_cls=' uva-kiwi--organizar'))
+
+def small_svg(svg_text):
+    import re
+    s=re.sub(r'\s*<style>.*?</style>','',svg_text,flags=re.S)
+    s=re.sub(r'\s*<!--.*?-->','',s,flags=re.S)
+    s=re.sub(r' class="uva-kiwi__[\w-]+"','',s)
+    s=s.replace(' pathLength="1"','')
+    return s
+if __name__=='__main__':
+    w('svg/kiwi.small.svg', small_svg(open('svg/kiwi.small.svg').read()))
