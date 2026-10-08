@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Grana" class="grana-c-componentes">
+  <!-- Grana · componentes: el insecto está hecho de cuatro píldoras apiladas, como botones y campos; antenas en tinta y una gota al final -->
+  <rect x="16" y="7" width="16" height="7" rx="3.5" fill="var(--g-color-brand,#a3123a)"/>
+  <rect x="10" y="15" width="28" height="7" rx="3.5" fill="var(--g-color-brand,#a3123a)"/>
+  <rect x="9" y="23" width="30" height="7" rx="3.5" fill="var(--g-color-brand,#a3123a)"/>
+  <rect x="13" y="31" width="22" height="7" rx="3.5" fill="var(--g-color-brand,#a3123a)"/>
+  <path d="M20.5 6.5 17.5 2.8M27.5 6.5 30.5 2.8" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+  <circle cx="24" cy="42.5" r="2.6" fill="currentColor"/>
+</svg>

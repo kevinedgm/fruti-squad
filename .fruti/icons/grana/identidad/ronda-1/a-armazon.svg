@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Grana" class="grana-a-armazon">
+  <!-- Grana · armazón: la estructura en tinta es fija; el tinte del tema va detrás, desplazado como una impresión -->
+  <path d="M24 9C31.5 9 36.5 15.5 36.5 25.5C36.5 35 31 41 24 41C17 41 11.5 35 11.5 25.5C11.5 15.5 16.5 9 24 9Z" fill="var(--g-color-brand,#a3123a)" transform="translate(2.6 2.6)"/>
+  <g fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M24 9C31.5 9 36.5 15.5 36.5 25.5C36.5 35 31 41 24 41C17 41 11.5 35 11.5 25.5C11.5 15.5 16.5 9 24 9Z"/>
+    <path d="M12.6 20.5Q24 23.5 35.4 20.5M11.8 28Q24 31 36.2 28M13.6 35Q24 37.8 34.4 35"/>
+    <path d="M20.5 9.6 17.5 4.5M27.5 9.6 30.5 4.5"/>
+  </g>
+</svg>

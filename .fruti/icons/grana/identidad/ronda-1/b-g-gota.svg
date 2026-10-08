@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Grana" class="grana-b-g-gota">
+  <!-- Grana · g-gota: la «g» de grana; su panza es la cochinilla con bandas y su cola suelta una gota de tinte -->
+  <defs><mask id="grana-b-bandas"><rect width="48" height="48" fill="#fff"/><path d="M8 16.5H32M8 22.5H32" stroke="#000" stroke-width="2.4"/></mask></defs>
+  <circle cx="20" cy="19.5" r="11" fill="var(--g-color-brand,#a3123a)" mask="url(#grana-b-bandas)"/>
+  <path d="M34.5 9V30.5C34.5 38.5 29.5 42.5 22.5 42.5C18 42.5 15 41 13.2 38.6" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+  <path d="M9.6 34.2C9.6 34.2 6.4 38.2 6.4 40.3A3.2 3.2 0 0 0 12.8 40.3C12.8 38.2 9.6 34.2 9.6 34.2Z" fill="var(--g-color-brand,#a3123a)"/>
+</svg>
