@@ -12,8 +12,9 @@ color:
   claro: "#448427"       # 4.59:1 sobre blanco (#7FCF5B da 1.91:1: no se usa en claro)
 stroke: 2                # decisión del brief (2026-10-08), distinta del 1.5 base de Uva
 direction:
-  rtl: mirror            # recomendación (no decidida): la columna lateral cambia de lado en idiomas RTL
+  rtl: mirror            # decidido 2026-10-08: :dir(rtl) refleja el icono
 motion:
-  allowed: none
+  allowed: state_transition
+  modifier: uva-kiwi--organizar   # ~0.92 s, una vez; reduced-motion: estado final
 status: stable
 decided: 2026-10-08
