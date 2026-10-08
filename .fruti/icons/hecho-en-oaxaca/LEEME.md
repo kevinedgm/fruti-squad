@@ -46,3 +46,14 @@ Lo que distingue a la marmota de un globo o una pelota, sin dibujarla literal:
 | K1 | Husos de color + banda en tinta + espiga | Fuerte a cualquier tamaño, pero los husos de color la acercan a una pelota de playa |
 | **K2** | Manta blanca, 12 costillas finas de colores, banda rosa mexicano, espiga | La que más se lee como marmota; se mantiene clara de 24 a 120 px. Riesgo: farol de papel |
 | K3 | K2 + guirnalda de papel picado bajo la banda | Los triángulos casi no se ven; añade ruido sin sumar lectura |
+
+## Ronda 4 · K2 en un solo color + un solo OAXACA (usuario: «sí K2», sin arcoíris; color intercambiable como Grana; juego con hecho/made)
+
+- **Color:** costillas y banda leen `--oaxaca-color` (por defecto rosa mexicano `#e4007c`); la manta lee `--oaxaca-manta` (`#fff8ee`); el contorno y la espiga toman `currentColor`. Probado con rosa mexicano, grana, turquesa, añil y cempasúchil.
+- **Un solo OAXACA:**
+
+| Juego | Cómo | Lectura |
+|---|---|---|
+| L1 · barra | `HECHO / MADE  EN / IN` encima de `OAXACA`; el inglés va en el color del tema | Compacta, en una línea; se lee con un poco de esfuerzo porque empareja palabras sueltas |
+| **L2 · apilado** | «HECHO EN» en tinta y «MADE IN» en color, unidos por una llave a un solo OAXACA | La más clara: dos idiomas, una sola Oaxaca |
+| **L3 · giro** | «HECHO EN» y «MADE IN» se turnan girando sobre su eje horizontal, como las caras de la marmota; OAXACA no se mueve. Ciclo de 6 s, en bucle (`l3-giro.gif`). Con «reducir movimiento», se queda en «MADE IN» | El juego más propio; sin movimiento depende de L2 |
