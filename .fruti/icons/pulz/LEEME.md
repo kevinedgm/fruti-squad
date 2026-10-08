@@ -53,3 +53,15 @@ Ideas del producto, no objetos (`ronda-2/banco.png`):
 - **Color de cada palenque:** el cobre es la variable `--pulz-color`. En el portal de una empresa, la firma «hecho con PULZ» toma su color (probado con azul, verde y vino). Las barras toman `currentColor`.
 - **Nombre:** «PUL» en Archivo (peso 820, ancho 112) y la Z es el símbolo, como la O de Oaxaca.
 - **Versión oscura:** barras en cal.
+
+## Ronda 4 · color y tipografía (usuario: «me gusta, pero los colores y la fuente no tanto»)
+
+Misma Z del trasiego; 3 paletas × 3 tipografías (`ronda-4/banco.png`). Contraste del acento como gráfico (mínimo 3:1):
+
+| Paleta | Tinta / acento / fondo | Acento sobre claro | Sobre oscuro | Nota |
+|---|---|---|---|---|
+| Noche y agave | `#0e1a1c` / `#1fbf95` (oscuro `#33d3a6`) / `#eef4f1` | ❌ 2.11:1 | 9.30:1 | Solo funciona en oscuro; en campo, al sol, la interfaz clara es la que se lee |
+| Brasa | `#17161a` / `#e8501a` (oscuro `#ff6a33`) / `#f6f2ee` | 3.37:1 | 6.31:1 | Pasa justo como gráfico; no sirve para texto en claro |
+| **Añil** | `#121217` / `#3346e0` (oscuro `#7d8bff`) / `#f2f2f6` | 6.08:1 | 6.23:1 | La única que pasa holgada en los dos modos. Viene del tinte de añil oaxaqueño |
+
+Tipografías del nombre: Unbounded 800 (ancha y redonda, mucha presencia), Syne 800 (extendida, la más artística y la que más ocupa), Space Grotesk 700 (técnica, compacta).
