@@ -1,0 +1,19 @@
+semanticName: lima
+icon:
+  library: custom
+  file: .fruti/icons/lima/lima.svg
+  sizes: {16: lima.small.svg, 20+: lima.svg}
+category: brand          # avatar del agente Lima (Governance / System Architect)
+accessibility:
+  defaultLabel: Lima
+color:
+  oscuro: "#C9F36B"      # 14.23:1 sobre #161616
+  claro: "#5D820B"       # 4.50:1 sobre blanco (#C9F36B da 1.27:1)
+stroke: {interfaz: 2, avatar: 2.25}
+direction:
+  rtl: fixed             # simétrico
+motion:
+  allowed: state_transition
+  modifier: uva-lima--validar   # ~0.80 s, una vez; reduced-motion: estado final
+status: stable
+decided: 2026-10-08
