@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-masonry-oven-b" aria-hidden="true">
+  <!-- masonry-oven · b: cuarto de mampostería con juntas de piedra, boca y chimenea -->
+  <style>.uva-masonry-oven-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 20H22"/>
+  <path d="M4 20V9h16V20"/>
+  <path d="M9 20v-3a3 3 0 0 1 6 0v3"/>
+  <path d="M4 13.5H9"/>
+  <path d="M15 13.5H20"/>
+  <path d="M12 9V13.5"/>
+  <path d="M16 9V5h2.5V9"/>
+</svg>

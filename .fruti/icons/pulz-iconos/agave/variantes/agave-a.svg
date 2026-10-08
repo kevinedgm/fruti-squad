@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-agave-a" aria-hidden="true">
+  <!-- agave · a: un solo contorno en zigzag: cinco pencas rectas y punzantes de alturas distintas, sin manchas en la base -->
+  <style>.uva-agave-a{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M3 21H21"/>
+  <path d="M4.5 21L2.5 14L7.5 18L5.5 6L10 14.5L12 2.5L14 14.5L18.5 6L16.5 18L21.5 14L19.5 21"/>
+</svg>

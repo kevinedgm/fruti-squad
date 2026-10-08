@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-masonry-oven-c" aria-hidden="true">
+  <!-- masonry-oven · c: horno de obra sobre el suelo cociendo a vapor: el vapor lo separa de una casa -->
+  <style>.uva-masonry-oven-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 20H22"/>
+  <path d="M4 20V12a2 2 0 0 1 2-2H18a2 2 0 0 1 2 2V20"/>
+  <path d="M9 20v-3a3 3 0 0 1 6 0v3"/>
+  <path d="M9 7c-.8-1 .8-2 0-3"/>
+  <path d="M12 7c-.8-1 .8-2 0-3"/>
+  <path d="M15 7c-.8-1 .8-2 0-3"/>
+</svg>

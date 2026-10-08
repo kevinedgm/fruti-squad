@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-earth-oven-a" aria-hidden="true">
+  <!-- earth-oven · a: corte a toda la altura: el cono bajo el suelo con el fuego al fondo y el montículo de piñas tapadas encima -->
+  <style>.uva-earth-oven-a{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 11.5H22"/>
+  <path d="M4.5 11.5L9.5 21H14.5L19.5 11.5"/>
+  <path d="M5.5 11.5C5.5 2.5 18.5 2.5 18.5 11.5"/>
+  <path d="M12 19c-1.4-1-1.4-2.9 0-4c1.4 1.1 1.4 3 0 4z"/>
+</svg>

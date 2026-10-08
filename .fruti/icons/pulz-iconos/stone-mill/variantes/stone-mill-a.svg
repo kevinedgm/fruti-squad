@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-stone-mill-a" aria-hidden="true">
+  <!-- stone-mill · a: de lado: la rueda de piedra en la fosa, unida por la vara al poste del centro -->
+  <style>.uva-stone-mill-a{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 21H22"/>
+  <path d="M5 7V21"/>
+  <path d="M5 15H9"/>
+  <path d="M19 15H22"/>
+  <circle cx="14" cy="15" r="5"/>
+  <circle cx="14" cy="15" r="2"/>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-agave-c" aria-hidden="true">
+  <!-- agave · c: como a, con las pencas bajas arqueadas hacia afuera: la roseta madura del espadín -->
+  <style>.uva-agave-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M3 21H21"/>
+  <path d="M5 21C4 19 3 17.5 2 16.5C4.5 16.5 6.5 17.5 8 18.5L5.5 6L10 14.5L12 2.5L14 14.5L18.5 6L16 18.5C17.5 17.5 19.5 16.5 22 16.5C21 17.5 20 19 19 21"/>
+</svg>

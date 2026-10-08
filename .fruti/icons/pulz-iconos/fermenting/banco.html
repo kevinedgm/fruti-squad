@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Uva · banco de prueba</title>
+<!--
+  Banco de prueba de Uva (etapa E3). Compara todas las variantes a la vez.
+  1. Sustituye el comentario UVA:ICONOS por los SVG de las variantes (uno por variante; data-nombre="A · …").
+  2. Sustituye el comentario UVA:CONFUSIONES por 2–4 confusiones del dominio (data-nombre). Para iconos reales de Lucide:
+       node scripts/buscar-lucide.mjs --svg <nombre> --stroke <grosor de la familia>
+  3. Renderiza y mira cada captura (Chromium headless; añade #final, #medio o #reducido a la URL):
+       chromium --headless --no-sandbox --hide-scrollbars --force-device-scale-factor=2 \
+         --window-size=900,1100 --virtual-time-budget=1500 --screenshot=banco.png "file://$PWD/banco.html#final"
+     sin modo  → lo que se ve al cargar (puede caer a mitad de la animación)
+     #final    → fotograma final de la animación (lo que queda tras ≤5 s)
+     #medio    → todas las animaciones congeladas en un mismo instante: la mitad del primer ciclo de la animación
+                 más larga (comprueba R4: la pieza móvil sobre zona libre)
+     #t=1.2    → todas congeladas en el instante indicado, en segundos (para revisar otros momentos)
+     #reducido → bloque prefers-reduced-motion activo (comprueba D2)
+  Los vecinos (casa, mano, reloj, rama) son redibujos simples estilo Lucide (ISC).
+-->
+<style>
+  :root{--fondo:#ffffff;--texto:#1a1a1a;--tenue:#777;--oscuro:#0b0b0b;--lila:#a99cf0;--ambar:#d99a3c;--verde:#5fb98a}
+  body{margin:0;padding:20px 24px;background:var(--fondo);color:var(--texto);font-family:system-ui,sans-serif}
+  h2{font-size:13px;margin:20px 0 8px;color:var(--tenue);font-weight:600}
+  .modo{font-size:12px;color:#5b3fc0;margin:0}
+  .fila{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin:6px 0}
+  .nombre{font-size:11px;color:var(--tenue);width:120px;flex:none}
+  .celda{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11px;color:var(--tenue)}
+  .oscuro{background:var(--oscuro);padding:10px 16px;border-radius:10px}
+  .oscuro .nombre{color:#9a9a9a}
+  .vecino{display:block;fill:none;stroke:currentColor;stroke-width:var(--uva-stroke,1.5);stroke-linecap:round;stroke-linejoin:round}
+  svg{display:block}
+  .celda > svg,.fila > svg{color:var(--texto)}
+  .oscuro .fila > svg{color:inherit}
+</style></head><body>
+
+<template id="iconos">
+  <svg data-nombre="A · fermenting-a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-fermenting-a" aria-hidden="true">
+  <!-- semanticName: fermenting · a: la tina existente de Uva adaptada a trazo 2 (cuerpo más bajo para dejar aire a las burbujas) · category: status · objeto: tina de fermentación.
+       Oculto por defecto (lo acompaña la etiqueta "Fermentando"). Si va solo y comunica algo esencial:
+       quita aria-hidden y añade role="img" aria-label="Fermentando". -->
+  <style>
+    .uva-fermenting-a{stroke-width:var(--uva-stroke,2)}
+    .uva-fermenting-a__acento{fill:var(--uva-accent,currentColor);stroke:none}
+    /* progress: 2 ciclos de subida y la burbuja se asienta visible. Total 4.8 s (WCAG 2.2.2) */
+    .uva-fermenting-a__burbuja{opacity:0;animation:uva-fermenting-a-subir 1.6s cubic-bezier(.2,.6,.3,1) 0s 2,uva-fermenting-a-asentar .4s ease-out 3.2s forwards}
+    .uva-fermenting-a__burbuja:nth-of-type(2){animation:uva-fermenting-a-subir 1.6s cubic-bezier(.2,.6,.3,1) .6s 2,uva-fermenting-a-asentar .4s ease-out 3.8s forwards}
+    .uva-fermenting-a__burbuja:nth-of-type(3){animation:uva-fermenting-a-subir 1.6s cubic-bezier(.2,.6,.3,1) 1.2s 2,uva-fermenting-a-asentar .4s ease-out 4.4s forwards}
+    @keyframes uva-fermenting-a-subir{0%{transform:translateY(2px);opacity:0}30%{opacity:1}100%{transform:translateY(-3px);opacity:0}}
+    @keyframes uva-fermenting-a-asentar{to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.uva-fermenting-a__burbuja,.uva-fermenting-a__burbuja:nth-of-type(n){animation:none;opacity:1}}
+  </style>
+  <g class="uva-fermenting-a__cuerpo">
+    <ellipse cx="12" cy="9.8" rx="8" ry="2.2"/>
+    <path d="M4 9.8 3.3 17.2q-.25 2.2 2 2.9Q12 21.9 18.7 20.1q2.25-.7 2-2.9L20 9.8"/>
+    <path d="M3.55 15.2q8.45 2.6 16.9 0"/>
+  </g>
+  <g class="uva-fermenting-a__acento">
+    <circle class="uva-fermenting-a__burbuja" cx="8.8" cy="4" r="1.15"/>
+    <circle class="uva-fermenting-a__burbuja" cx="13.2" cy="3" r="1"/>
+    <circle class="uva-fermenting-a__burbuja" cx="17" cy="4.4" r=".85"/>
+  </g>
+</svg>
+<svg data-nombre="B · fermenting-b" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-fermenting-b" aria-hidden="true">
+  <!-- semanticName: fermenting · b: sin el aro del medio (a trazo 2 los tres óvalos se leían como pastel de capas); la tina existente de Uva adaptada a trazo 2 (cuerpo más bajo para dejar aire a las burbujas) · category: status · objeto: tina de fermentación.
+       Oculto por defecto (lo acompaña la etiqueta "Fermentando"). Si va solo y comunica algo esencial:
+       quita aria-hidden y añade role="img" aria-label="Fermentando". -->
+  <style>
+    .uva-fermenting-b{stroke-width:var(--uva-stroke,2)}
+    .uva-fermenting-b__acento{fill:var(--uva-accent,currentColor);stroke:none}
+    /* progress: 2 ciclos de subida y la burbuja se asienta visible. Total 4.8 s (WCAG 2.2.2) */
+    .uva-fermenting-b__burbuja{opacity:0;animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 0s 2,uva-fermenting-b-asentar .4s ease-out 3.2s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(2){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) .6s 2,uva-fermenting-b-asentar .4s ease-out 3.8s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(3){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 1.2s 2,uva-fermenting-b-asentar .4s ease-out 4.4s forwards}
+    @keyframes uva-fermenting-b-subir{0%{transform:translateY(2px);opacity:0}30%{opacity:1}100%{transform:translateY(-3px);opacity:0}}
+    @keyframes uva-fermenting-b-asentar{to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.uva-fermenting-b__burbuja,.uva-fermenting-b__burbuja:nth-of-type(n){animation:none;opacity:1}}
+  </style>
+  <g class="uva-fermenting-b__cuerpo">
+    <ellipse cx="12" cy="9.8" rx="8" ry="2.2"/>
+    <path d="M4 9.8 3.3 17.2q-.25 2.2 2 2.9Q12 21.9 18.7 20.1q2.25-.7 2-2.9L20 9.8"/>
+      </g>
+  <g class="uva-fermenting-b__acento">
+    <circle class="uva-fermenting-b__burbuja" cx="8.8" cy="4" r="1.15"/>
+    <circle class="uva-fermenting-b__burbuja" cx="13.2" cy="3" r="1"/>
+    <circle class="uva-fermenting-b__burbuja" cx="17" cy="4.4" r=".85"/>
+  </g>
+</svg>
+
+</template>
+
+<template id="confusiones">
+  <svg data-nombre="Lucide · barrel" data-nombre="barrel" aria-hidden="true" class="lucide lucide-barrel" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M10 3a41 41 0 000 18" /> <path d="M14 3a41 41 0 010 18" /> <path d="M16.997 21a2 2 0 001.68-.92 15.25 15.25 0 000-16.16 2 2 0 00-1.68-.92h-10a2 2 0 00-1.681.92 15.25 15.25 0 000 16.16 2 2 0 001.681.92z" /> <path d="M3.54 16h16.914" /> <path d="M3.54 8h16.914" /> </svg>
+<svg data-nombre="Lucide · database" data-nombre="database" aria-hidden="true" class="lucide lucide-database" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <ellipse cx="12" cy="5" rx="9" ry="3" /> <path d="M3 5V19A9 3 0 0 0 21 19V5" /> <path d="M3 12A9 3 0 0 0 21 12" /> </svg>
+<svg data-nombre="Lucide · trash" data-nombre="trash" aria-hidden="true" class="lucide lucide-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M10 11v6" /> <path d="M14 11v6" /> <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /> <path d="M3 6h18" /> <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /> </svg>
+<svg data-nombre="Lucide · cylinder" data-nombre="cylinder" aria-hidden="true" class="lucide lucide-cylinder" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <ellipse cx="12" cy="5" rx="9" ry="3" /> <path d="M3 5v14a9 3 0 0 0 18 0V5" /> </svg>
+
+</template>
+
+<p class="modo" id="modo"></p>
+
+<h2>Comparación directa a 24 y 20px: variantes · confusiones</h2>
+<div id="comparacion"></div>
+
+<h2>Tamaños de la norma (§10: xs 14 · sm 16 · md 20 · base 24 · lg 32 · xl 48) y 96 de inspección</h2>
+<div id="tamanos"></div>
+
+<h2>Familia a 24px: casa · mano · variante · reloj (peso óptico, R6)</h2>
+<div id="familia"></div>
+
+<h2>Contexto oscuro con color por estado (22 y 44px)</h2>
+<div class="oscuro" id="oscuro"></div>
+
+<h2>Grosor del trazo (--uva-stroke 2 · 1.5 · 1.25 · 1) a 48 y 24px</h2>
+<div id="grosores"></div>
+
+<script>
+  const NS = 'http://www.w3.org/2000/svg';
+  const modo = location.hash.slice(1);
+  const vecinos = {
+    mano: '<path d="M18 11V6a2 2 0 0 0-4 0"/><path d="M14 10V4a2 2 0 0 0-4 0v2"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-6-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>',
+    rama: '<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="16" r="2.5"/><path d="M6 8.5V10a6 6 0 0 0 6 6h3.5"/>',
+    casa: '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>',
+    reloj: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>'
+  };
+  // Compatibilidad: también acepta la plantilla antigua de un solo icono (id="icono").
+  const fuente = document.getElementById('iconos') || document.getElementById('icono');
+  const viejo = document.getElementById('icono');
+  let iconos = [...fuente.content.querySelectorAll('svg')];
+  if (!iconos.length && viejo) iconos = [...viejo.content.querySelectorAll('svg')];
+  const confusiones = [...document.getElementById('confusiones').content.querySelectorAll('svg')];
+
+  if (modo === 'reducido') {
+    // Activa el bloque de movimiento reducido de cada icono reescribiendo su media query.
+    for (const s of [...iconos, ...confusiones]) s.querySelectorAll('style').forEach(st => {
+      st.textContent = st.textContent.replace(/prefers-reduced-motion\s*:\s*reduce/g, 'min-width:0px');
+    });
+  }
+  const nombre = (s, i) => s.dataset.nombre || `variante ${i + 1}`;
+
+  function tam(svg, px, color, extra) {
+    const c = svg.cloneNode(true);
+    c.setAttribute('width', px); c.setAttribute('height', px);
+    if (color) c.style.color = color;
+    if (extra) for (const [k, v] of Object.entries(extra)) c.style.setProperty(k, v);
+    return c;
+  }
+  function vecino(n, px, color) {
+    const s = document.createElementNS(NS, 'svg');
+    s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('class', 'vecino');
+    s.setAttribute('width', px); s.setAttribute('height', px);
+    s.innerHTML = vecinos[n]; if (color) s.style.color = color;
+    return s;
+  }
+  function celda(nodo, texto) {
+    const d = document.createElement('div'); d.className = 'celda';
+    d.append(nodo); if (texto !== undefined) d.append(String(texto)); return d;
+  }
+  function fila(contenedor, etiqueta, nodos) {
+    const f = document.createElement('div'); f.className = 'fila';
+    const n = document.createElement('span'); n.className = 'nombre'; n.textContent = etiqueta;
+    f.append(n, ...nodos); document.getElementById(contenedor).append(f);
+  }
+
+  if (!iconos.length) {
+    document.body.insertAdjacentHTML('afterbegin', '<p style="color:#b4541a">Faltan los SVG: sustituye el comentario UVA:ICONOS.</p>');
+  } else {
+    for (const px of [24, 20]) {
+      fila('comparacion', `${px}px`, [
+        ...iconos.map((s, i) => celda(tam(s, px), nombre(s, i))),
+        ...confusiones.map(c => celda(tam(c, px), c.dataset.nombre || 'confusión'))
+      ]);
+    }
+    iconos.forEach((s, i) => {
+      fila('tamanos', nombre(s, i), [14, 16, 20, 24, 32, 48, 96].map(px => celda(tam(s, px), px)));
+      fila('familia', nombre(s, i), [vecino('casa', 24), vecino('mano', 24), tam(s, 24), vecino('reloj', 24)]);
+      for (const px of [22, 44]) fila('oscuro', `${nombre(s, i)} · ${px}`, [
+        vecino('rama', px, 'var(--lila)'), vecino('mano', px, 'var(--ambar)'),
+        tam(s, px, 'var(--ambar)'), tam(s, px, 'var(--verde)'), tam(s, px, 'var(--lila)'),
+        ...confusiones.map(c => tam(c, px, '#888'))
+      ]);
+      fila('grosores', nombre(s, i), [2, 1.5, 1.25, 1].map(g => {
+        const d = document.createElement('div'); d.className = 'celda';
+        d.append(tam(s, 48, null, {'--uva-stroke': g}), tam(s, 24, null, {'--uva-stroke': g}), g);
+        return d;
+      }));
+    });
+  }
+
+  // Modos de fotograma: se aplican cuando todas las animaciones ya existen.
+  addEventListener('load', () => requestAnimationFrame(() => {
+    const anims = document.getAnimations();
+    if (modo === 'final') anims.forEach(a => { try { a.finish(); } catch (e) { a.cancel(); } });
+    // Un instante común para todas: con animaciones encadenadas (subir → asentar) congelar cada una en su
+    // propio punto medio mezclaría momentos distintos.
+    let instante = null;
+    if (modo === 'medio' && anims.length) {
+      const larga = anims.map(a => a.effect.getComputedTiming()).sort((x, y) => (y.duration || 0) - (x.duration || 0))[0];
+      instante = ((larga.delay || 0) + (larga.duration || 0) / 2) / 1000;
+    }
+    const mt = modo.match(/^t=([\d.]+)$/);
+    if (mt) instante = parseFloat(mt[1]);
+    if (instante !== null) anims.forEach(a => { a.pause(); a.currentTime = instante * 1000; });
+    document.getElementById('modo').textContent = modo
+      ? `Modo: ${modo}${instante !== null ? ` (t = ${instante.toFixed(2)} s)` : ''} · ${anims.length} animaciones`
+      : `Modo: al cargar · ${anims.length} animaciones (usa #final, #medio o #reducido)`;
+  }));
+</script>
+</body></html>

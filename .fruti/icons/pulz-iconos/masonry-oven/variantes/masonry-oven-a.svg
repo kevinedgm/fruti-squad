@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-masonry-oven-a" aria-hidden="true">
+  <!-- masonry-oven · a: bóveda de piedra sobre el suelo con boca en arco: la forma clásica de un horno -->
+  <style>.uva-masonry-oven-a{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 20H22"/>
+  <path d="M4 20V14a8 8 0 0 1 16 0V20"/>
+  <path d="M9 20v-3a3 3 0 0 1 6 0v3"/>
+</svg>

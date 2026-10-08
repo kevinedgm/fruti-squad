@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-earth-oven-b" aria-hidden="true">
+  <!-- earth-oven · b: cono hondo y montículo bajo: lo «cónico» domina -->
+  <style>.uva-earth-oven-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 9H22"/>
+  <path d="M5 9L11 21H13L19 9"/>
+  <path d="M6.5 9C7 6 17 6 17.5 9"/>
+  <path d="M12 19c-1.3-.9-1.3-2.6 0-3.6c1.3 1 1.3 2.7 0 3.6z"/>
+</svg>

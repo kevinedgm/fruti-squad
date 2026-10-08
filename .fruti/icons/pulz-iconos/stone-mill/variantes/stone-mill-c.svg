@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-stone-mill-c" aria-hidden="true">
+  <!-- stone-mill · c: la rueda grande sola con su eje: lo mínimo, la piedra que muele -->
+  <style>.uva-stone-mill-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 21H22"/>
+  <circle cx="12" cy="13" r="6.5"/>
+  <circle cx="12" cy="13" r="1.5"/>
+  <path d="M2 13H9"/>
+  <path d="M15 13H22"/>
+</svg>

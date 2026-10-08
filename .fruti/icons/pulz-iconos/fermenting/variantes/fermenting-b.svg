@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-fermenting-b" aria-hidden="true">
+  <!-- semanticName: fermenting · b: sin el aro del medio (a trazo 2 los tres óvalos se leían como pastel de capas); la tina existente de Uva adaptada a trazo 2 (cuerpo más bajo para dejar aire a las burbujas) · category: status · objeto: tina de fermentación.
+       Oculto por defecto (lo acompaña la etiqueta "Fermentando"). Si va solo y comunica algo esencial:
+       quita aria-hidden y añade role="img" aria-label="Fermentando". -->
+  <style>
+    .uva-fermenting-b{stroke-width:var(--uva-stroke,2)}
+    .uva-fermenting-b__acento{fill:var(--uva-accent,currentColor);stroke:none}
+    /* progress: 2 ciclos de subida y la burbuja se asienta visible. Total 4.8 s (WCAG 2.2.2) */
+    .uva-fermenting-b__burbuja{opacity:0;animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 0s 2,uva-fermenting-b-asentar .4s ease-out 3.2s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(2){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) .6s 2,uva-fermenting-b-asentar .4s ease-out 3.8s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(3){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 1.2s 2,uva-fermenting-b-asentar .4s ease-out 4.4s forwards}
+    @keyframes uva-fermenting-b-subir{0%{transform:translateY(2px);opacity:0}30%{opacity:1}100%{transform:translateY(-3px);opacity:0}}
+    @keyframes uva-fermenting-b-asentar{to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.uva-fermenting-b__burbuja,.uva-fermenting-b__burbuja:nth-of-type(n){animation:none;opacity:1}}
+  </style>
+  <g class="uva-fermenting-b__cuerpo">
+    <ellipse cx="12" cy="9.8" rx="8" ry="2.2"/>
+    <path d="M4 9.8 3.3 17.2q-.25 2.2 2 2.9Q12 21.9 18.7 20.1q2.25-.7 2-2.9L20 9.8"/>
+      </g>
+  <g class="uva-fermenting-b__acento">
+    <circle class="uva-fermenting-b__burbuja" cx="8.8" cy="4" r="1.15"/>
+    <circle class="uva-fermenting-b__burbuja" cx="13.2" cy="3" r="1"/>
+    <circle class="uva-fermenting-b__burbuja" cx="17" cy="4.4" r=".85"/>
+  </g>
+</svg>

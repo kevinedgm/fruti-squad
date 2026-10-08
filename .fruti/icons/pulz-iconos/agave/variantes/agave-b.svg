@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-agave-b" aria-hidden="true">
+  <!-- agave · b: tres pencas rectas muy abiertas: la roseta ancha y baja del espadín -->
+  <style>.uva-agave-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M3 21H21"/>
+  <path d="M10.5 21L12 4L13.5 21"/>
+  <path d="M9.5 21L3 11L11 19"/>
+  <path d="M14.5 21L21 11L13 19"/>
+</svg>

@@ -1,0 +1,612 @@
+<title>Iconos de PULZ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Una columna: primero la barra de navegación antes/después, luego una ficha por icono. Colores de la marca PULZ. */
+:root{--fondo:#f2f2f6;--tinta:#121217;--anil:#3346e0;--suave:#55576a;--linea:#dcdce6;--panel:#ffffff;
+--display:"Unbounded",ui-sans-serif,system-ui,sans-serif;--texto:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--fondo:#121217;--tinta:#f2f2f6;--anil:#7d8bff;--suave:#a6a8bb;--linea:#2a2a36;--panel:#1b1b23;color-scheme:dark}}
+:root[data-theme="dark"]{--fondo:#121217;--tinta:#f2f2f6;--anil:#7d8bff;--suave:#a6a8bb;--linea:#2a2a36;--panel:#1b1b23;color-scheme:dark}
+body{background:var(--fondo);color:var(--tinta);font:17px/1.55 var(--texto);--uva-accent:var(--anil)}
+main{max-width:920px;margin:0 auto;padding-inline:20px;padding-block:28px 80px;display:grid;gap:48px}
+h1,h2,h3{margin:0;font-family:var(--display);line-height:1.15;text-wrap:balance} h1{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:800} h2{font-size:1.25rem;font-weight:800} h3{font-size:1.02rem;font-weight:700}
+h4{margin:0;font:500 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--suave)}
+p{margin:0;max-width:64ch} code{font:500 .85em var(--mono)} .sub{color:var(--suave)}
+.eyebrow{font:500 .74rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--anil)}
+section{display:grid;gap:16px;min-width:0}
+svg{display:block}
+.nav{display:grid;gap:10px}
+.nav ul{list-style:none;margin:0;padding:10px 8px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;border-radius:14px;border:1px solid var(--linea);background:var(--panel)}
+.nav li{display:grid;justify-items:center;gap:6px;padding:6px 2px;min-width:0}
+.nav li svg{width:24px;height:24px}
+.nav li span{font-size:.74rem;text-align:center;line-height:1.2;hyphens:auto;overflow-wrap:break-word}
+.nav.oscuro ul{background:#121217;border-color:#121217;color:#f2f2f6}
+.nav .etq{font:500 .72rem var(--mono);color:var(--suave)}
+.icono{display:grid;gap:22px;padding:22px;border-radius:16px;background:var(--panel);border:1px solid var(--linea);min-width:0}
+.cab{display:flex;gap:22px;flex-wrap:wrap;align-items:center}
+.grande{width:120px;height:120px;flex:none;border-radius:12px;background:var(--fondo);display:grid;place-items:center}
+.grande svg{width:96px;height:96px}
+.txt{display:grid;gap:8px;flex:1 1 280px;min-width:0}
+.tamanos{display:flex;gap:14px;align-items:flex-end;flex-wrap:wrap}
+.tamanos .sz svg{width:100%;height:100%} .tamanos small{font:500 .72rem var(--mono);color:var(--suave)}
+.fila{display:grid;gap:10px}
+.conf,.alts{display:flex;gap:16px;flex-wrap:wrap}
+figure{margin:0;display:grid;justify-items:center;gap:6px;min-width:0}
+figcaption{font:500 .7rem var(--mono);color:var(--suave);text-align:center;max-width:16ch}
+.cf svg{width:24px;height:24px} .cf{padding:10px;border-radius:10px;border:1px solid var(--linea);min-width:84px}
+.cf.rec{border-color:var(--anil)} .cf.rec figcaption{color:var(--anil)}
+.alts figure{justify-items:start;grid-template-columns:auto 1fr;align-items:center;gap:10px;max-width:280px}
+.alts svg{width:32px;height:32px;opacity:.75} .alts figcaption{text-align:left;max-width:none}
+.reglas{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.reglas>div{border-top:6px solid var(--tinta);border-radius:2px;padding-top:10px;display:grid;gap:4px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+<main lang="es">
+<header style="display:grid;gap:12px">
+ <span class="eyebrow">Uva · propuesta</span>
+ <h1>Iconos de PULZ</h1>
+ <p>Cinco iconos para las etapas del palenque, dibujados a trazo 2 para que convivan con Lucide, que es la familia de la app. Cada uno se probó a 24 y 20 px junto a los iconos con los que se puede confundir. Elige uno por etapa; si no dices nada, van las recomendadas.</p>
+ <p class="sub">Sin prueba con personas: el veredicto sale de los bancos de prueba. Las proporciones vienen del oficio, no de fotos tuyas; si tienes fotos de tu horno o tu tahona, se ajustan.</p>
+</header>
+
+<section aria-labelledby="h-nav"><h2 id="h-nav">En la navegación</h2>
+<div class="nav"><span class="etq">Hoy · iconos genéricos de Lucide</span><ul><li><svg data-nombre="sprout" aria-hidden="true" class="lucide lucide-sprout" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3" /> <path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4" /> <path d="M5 21h14" /> </svg><span>Maguey</span></li><li><svg data-nombre="flame" aria-hidden="true" class="lucide lucide-flame" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /> </svg><span>Horno cónico</span></li><li><svg data-nombre="flame" aria-hidden="true" class="lucide lucide-flame" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /> </svg><span>Mampostería</span></li><li><svg data-nombre="cog" aria-hidden="true" class="lucide lucide-cog" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M11 10.27 7 3.34" /> <path d="m11 13.73-4 6.93" /> <path d="M12 22v-2" /> <path d="M12 2v2" /> <path d="M14 12h8" /> <path d="m17 20.66-1-1.73" /> <path d="m17 3.34-1 1.73" /> <path d="M2 12h2" /> <path d="m20.66 17-1.73-1" /> <path d="m20.66 7-1.73 1" /> <path d="m3.34 17 1.73-1" /> <path d="m3.34 7 1.73 1" /> <circle cx="12" cy="12" r="2" /> <circle cx="12" cy="12" r="8" /> </svg><span>Tahona</span></li><li><svg data-nombre="barrel" aria-hidden="true" class="lucide lucide-barrel" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M10 3a41 41 0 000 18" /> <path d="M14 3a41 41 0 010 18" /> <path d="M16.997 21a2 2 0 001.68-.92 15.25 15.25 0 000-16.16 2 2 0 00-1.68-.92h-10a2 2 0 00-1.681.92 15.25 15.25 0 000 16.16 2 2 0 001.681.92z" /> <path d="M3.54 16h16.914" /> <path d="M3.54 8h16.914" /> </svg><span>Fermentación</span></li></ul></div>
+<div class="nav"><span class="etq">Propuesta · claro</span><ul><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-agave-b" aria-hidden="true">
+  <!-- agave · b: tres pencas rectas muy abiertas: la roseta ancha y baja del espadín -->
+  <style>.uva-agave-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M3 21H21"/>
+  <path d="M10.5 21L12 4L13.5 21"/>
+  <path d="M9.5 21L3 11L11 19"/>
+  <path d="M14.5 21L21 11L13 19"/>
+</svg><span>Maguey</span></li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-earth-oven-c" aria-hidden="true">
+  <!-- earth-oven · c: el montículo cociendo, con humo, sobre un cono más bajo: lo que se ve en el palenque -->
+  <style>.uva-earth-oven-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 14H22"/>
+  <path d="M5.5 14L10 21H14L18.5 14"/>
+  <path d="M5 14C5 7 19 7 19 14"/>
+  <path d="M9.5 5.5c-.8-1 .8-2 0-3"/>
+  <path d="M14.5 5.5c-.8-1 .8-2 0-3"/>
+</svg><span>Horno cónico</span></li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-masonry-oven-c" aria-hidden="true">
+  <!-- masonry-oven · c: horno de obra sobre el suelo cociendo a vapor: el vapor lo separa de una casa -->
+  <style>.uva-masonry-oven-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 20H22"/>
+  <path d="M4 20V12a2 2 0 0 1 2-2H18a2 2 0 0 1 2 2V20"/>
+  <path d="M9 20v-3a3 3 0 0 1 6 0v3"/>
+  <path d="M9 7c-.8-1 .8-2 0-3"/>
+  <path d="M12 7c-.8-1 .8-2 0-3"/>
+  <path d="M15 7c-.8-1 .8-2 0-3"/>
+</svg><span>Mampostería</span></li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-stone-mill-b" aria-hidden="true">
+  <!-- stone-mill · b: como a, con el poste alto y la vara saliendo de la rueda: la vara de la que tira el animal -->
+  <style>.uva-stone-mill-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 21H22"/>
+  <path d="M4 3V21"/>
+  <path d="M4 13H22"/>
+  <circle cx="14" cy="14" r="6"/>
+</svg><span>Tahona</span></li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-fermenting-b" aria-hidden="true">
+  <!-- semanticName: fermenting · b: sin el aro del medio (a trazo 2 los tres óvalos se leían como pastel de capas); la tina existente de Uva adaptada a trazo 2 (cuerpo más bajo para dejar aire a las burbujas) · category: status · objeto: tina de fermentación.
+       Oculto por defecto (lo acompaña la etiqueta "Fermentando"). Si va solo y comunica algo esencial:
+       quita aria-hidden y añade role="img" aria-label="Fermentando". -->
+  <style>
+    .uva-fermenting-b{stroke-width:var(--uva-stroke,2)}
+    .uva-fermenting-b__acento{fill:var(--uva-accent,currentColor);stroke:none}
+    /* progress: 2 ciclos de subida y la burbuja se asienta visible. Total 4.8 s (WCAG 2.2.2) */
+    .uva-fermenting-b__burbuja{opacity:0;animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 0s 2,uva-fermenting-b-asentar .4s ease-out 3.2s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(2){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) .6s 2,uva-fermenting-b-asentar .4s ease-out 3.8s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(3){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 1.2s 2,uva-fermenting-b-asentar .4s ease-out 4.4s forwards}
+    @keyframes uva-fermenting-b-subir{0%{transform:translateY(2px);opacity:0}30%{opacity:1}100%{transform:translateY(-3px);opacity:0}}
+    @keyframes uva-fermenting-b-asentar{to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.uva-fermenting-b__burbuja,.uva-fermenting-b__burbuja:nth-of-type(n){animation:none;opacity:1}}
+  </style>
+  <g class="uva-fermenting-b__cuerpo">
+    <ellipse cx="12" cy="9.8" rx="8" ry="2.2"/>
+    <path d="M4 9.8 3.3 17.2q-.25 2.2 2 2.9Q12 21.9 18.7 20.1q2.25-.7 2-2.9L20 9.8"/>
+      </g>
+  <g class="uva-fermenting-b__acento">
+    <circle class="uva-fermenting-b__burbuja" cx="8.8" cy="4" r="1.15"/>
+    <circle class="uva-fermenting-b__burbuja" cx="13.2" cy="3" r="1"/>
+    <circle class="uva-fermenting-b__burbuja" cx="17" cy="4.4" r=".85"/>
+  </g>
+</svg><span>Fermentación</span></li></ul></div>
+<div class="nav oscuro"><span class="etq">Propuesta · oscuro</span><ul><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-agave-b" aria-hidden="true">
+  <!-- agave · b: tres pencas rectas muy abiertas: la roseta ancha y baja del espadín -->
+  <style>.uva-agave-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M3 21H21"/>
+  <path d="M10.5 21L12 4L13.5 21"/>
+  <path d="M9.5 21L3 11L11 19"/>
+  <path d="M14.5 21L21 11L13 19"/>
+</svg><span>Maguey</span></li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-earth-oven-c" aria-hidden="true">
+  <!-- earth-oven · c: el montículo cociendo, con humo, sobre un cono más bajo: lo que se ve en el palenque -->
+  <style>.uva-earth-oven-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 14H22"/>
+  <path d="M5.5 14L10 21H14L18.5 14"/>
+  <path d="M5 14C5 7 19 7 19 14"/>
+  <path d="M9.5 5.5c-.8-1 .8-2 0-3"/>
+  <path d="M14.5 5.5c-.8-1 .8-2 0-3"/>
+</svg><span>Horno cónico</span></li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-masonry-oven-c" aria-hidden="true">
+  <!-- masonry-oven · c: horno de obra sobre el suelo cociendo a vapor: el vapor lo separa de una casa -->
+  <style>.uva-masonry-oven-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 20H22"/>
+  <path d="M4 20V12a2 2 0 0 1 2-2H18a2 2 0 0 1 2 2V20"/>
+  <path d="M9 20v-3a3 3 0 0 1 6 0v3"/>
+  <path d="M9 7c-.8-1 .8-2 0-3"/>
+  <path d="M12 7c-.8-1 .8-2 0-3"/>
+  <path d="M15 7c-.8-1 .8-2 0-3"/>
+</svg><span>Mampostería</span></li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-stone-mill-b" aria-hidden="true">
+  <!-- stone-mill · b: como a, con el poste alto y la vara saliendo de la rueda: la vara de la que tira el animal -->
+  <style>.uva-stone-mill-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 21H22"/>
+  <path d="M4 3V21"/>
+  <path d="M4 13H22"/>
+  <circle cx="14" cy="14" r="6"/>
+</svg><span>Tahona</span></li><li><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-fermenting-b" aria-hidden="true">
+  <!-- semanticName: fermenting · b: sin el aro del medio (a trazo 2 los tres óvalos se leían como pastel de capas); la tina existente de Uva adaptada a trazo 2 (cuerpo más bajo para dejar aire a las burbujas) · category: status · objeto: tina de fermentación.
+       Oculto por defecto (lo acompaña la etiqueta "Fermentando"). Si va solo y comunica algo esencial:
+       quita aria-hidden y añade role="img" aria-label="Fermentando". -->
+  <style>
+    .uva-fermenting-b{stroke-width:var(--uva-stroke,2)}
+    .uva-fermenting-b__acento{fill:var(--uva-accent,currentColor);stroke:none}
+    /* progress: 2 ciclos de subida y la burbuja se asienta visible. Total 4.8 s (WCAG 2.2.2) */
+    .uva-fermenting-b__burbuja{opacity:0;animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 0s 2,uva-fermenting-b-asentar .4s ease-out 3.2s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(2){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) .6s 2,uva-fermenting-b-asentar .4s ease-out 3.8s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(3){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 1.2s 2,uva-fermenting-b-asentar .4s ease-out 4.4s forwards}
+    @keyframes uva-fermenting-b-subir{0%{transform:translateY(2px);opacity:0}30%{opacity:1}100%{transform:translateY(-3px);opacity:0}}
+    @keyframes uva-fermenting-b-asentar{to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.uva-fermenting-b__burbuja,.uva-fermenting-b__burbuja:nth-of-type(n){animation:none;opacity:1}}
+  </style>
+  <g class="uva-fermenting-b__cuerpo">
+    <ellipse cx="12" cy="9.8" rx="8" ry="2.2"/>
+    <path d="M4 9.8 3.3 17.2q-.25 2.2 2 2.9Q12 21.9 18.7 20.1q2.25-.7 2-2.9L20 9.8"/>
+      </g>
+  <g class="uva-fermenting-b__acento">
+    <circle class="uva-fermenting-b__burbuja" cx="8.8" cy="4" r="1.15"/>
+    <circle class="uva-fermenting-b__burbuja" cx="13.2" cy="3" r="1"/>
+    <circle class="uva-fermenting-b__burbuja" cx="17" cy="4.4" r=".85"/>
+  </g>
+</svg><span>Fermentación</span></li></ul></div>
+</section>
+
+<section aria-labelledby="h-fichas"><h2 id="h-fichas">Una ficha por icono</h2>
+<article class="icono" aria-labelledby="t-agave">
+ <div class="cab"><div class="grande"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-agave-b" aria-hidden="true">
+  <!-- agave · b: tres pencas rectas muy abiertas: la roseta ancha y baja del espadín -->
+  <style>.uva-agave-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M3 21H21"/>
+  <path d="M10.5 21L12 4L13.5 21"/>
+  <path d="M9.5 21L3 11L11 19"/>
+  <path d="M14.5 21L21 11L13 19"/>
+</svg></div><div class="txt"><span class="eyebrow">Maguey · <code>agave</code></span><h3 id="t-agave">Recomendada: B</h3><p>Tres pencas rectas muy abiertas: la roseta ancha y baja del espadín. Lo rígido y puntiagudo la separa del brote, que hoy usa la app.</p><div class="tamanos"><span class="sz" style="width:16px;height:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-agave-b" aria-hidden="true">
+  <!-- agave · b: tres pencas rectas muy abiertas: la roseta ancha y baja del espadín -->
+  <style>.uva-agave-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M3 21H21"/>
+  <path d="M10.5 21L12 4L13.5 21"/>
+  <path d="M9.5 21L3 11L11 19"/>
+  <path d="M14.5 21L21 11L13 19"/>
+</svg></span><span class="sz" style="width:20px;height:20px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-agave-b" aria-hidden="true">
+  <!-- agave · b: tres pencas rectas muy abiertas: la roseta ancha y baja del espadín -->
+  <style>.uva-agave-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M3 21H21"/>
+  <path d="M10.5 21L12 4L13.5 21"/>
+  <path d="M9.5 21L3 11L11 19"/>
+  <path d="M14.5 21L21 11L13 19"/>
+</svg></span><span class="sz" style="width:24px;height:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-agave-b" aria-hidden="true">
+  <!-- agave · b: tres pencas rectas muy abiertas: la roseta ancha y baja del espadín -->
+  <style>.uva-agave-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M3 21H21"/>
+  <path d="M10.5 21L12 4L13.5 21"/>
+  <path d="M9.5 21L3 11L11 19"/>
+  <path d="M14.5 21L21 11L13 19"/>
+</svg></span><span class="sz" style="width:32px;height:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-agave-b" aria-hidden="true">
+  <!-- agave · b: tres pencas rectas muy abiertas: la roseta ancha y baja del espadín -->
+  <style>.uva-agave-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M3 21H21"/>
+  <path d="M10.5 21L12 4L13.5 21"/>
+  <path d="M9.5 21L3 11L11 19"/>
+  <path d="M14.5 21L21 11L13 19"/>
+</svg></span><small>16 · 20 · 24 · 32 px</small></div></div></div>
+ <div class="fila"><h4>Junto a sus confusiones, a 24 px</h4><div class="conf"><figure class="cf rec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-agave-b" aria-hidden="true">
+  <!-- agave · b: tres pencas rectas muy abiertas: la roseta ancha y baja del espadín -->
+  <style>.uva-agave-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M3 21H21"/>
+  <path d="M10.5 21L12 4L13.5 21"/>
+  <path d="M9.5 21L3 11L11 19"/>
+  <path d="M14.5 21L21 11L13 19"/>
+</svg><figcaption>agave</figcaption></figure><figure class="cf"><svg data-nombre="sprout" aria-hidden="true" class="lucide lucide-sprout" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3" /> <path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4" /> <path d="M5 21h14" /> </svg><figcaption>sprout</figcaption></figure><figure class="cf"><svg data-nombre="tree-palm" aria-hidden="true" class="lucide lucide-tree-palm" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M13 8c0-2.76-2.46-5-5.5-5S2 5.24 2 8h2l1-1 1 1h4" /> <path d="M13 7.14A5.82 5.82 0 0 1 16.5 6c3.04 0 5.5 2.24 5.5 5h-3l-1-1-1 1h-3" /> <path d="M5.89 9.71c-2.15 2.15-2.3 5.47-.35 7.43l4.24-4.25.7-.7.71-.71 2.12-2.12c-1.95-1.96-5.27-1.8-7.42.35" /> <path d="M11 15.5c.5 2.5-.17 4.5-1 6.5h4c2-5.5-.5-12-1-14" /> </svg><figcaption>tree-palm</figcaption></figure><figure class="cf"><svg data-nombre="flame" aria-hidden="true" class="lucide lucide-flame" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /> </svg><figcaption>flame</figcaption></figure><figure class="cf"><svg data-nombre="crown" aria-hidden="true" class="lucide lucide-crown" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 8.87a1 1 0 0 0 1.516.294L21.183 5.5a.5.5 0 0 1 .798.519l-2.834 10.246a1 1 0 0 1-.956.734H5.81a1 1 0 0 1-.957-.734L2.02 6.02a.5.5 0 0 1 .798-.519l4.276 3.664a1 1 0 0 0 1.516-.294z" /> <path d="M5 21h14" /> </svg><figcaption>crown</figcaption></figure></div></div>
+ <div class="fila"><h4>Descartadas</h4><div class="alts"><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-agave-a" aria-hidden="true">
+  <!-- agave · a: un solo contorno en zigzag: cinco pencas rectas y punzantes de alturas distintas, sin manchas en la base -->
+  <style>.uva-agave-a{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M3 21H21"/>
+  <path d="M4.5 21L2.5 14L7.5 18L5.5 6L10 14.5L12 2.5L14 14.5L18.5 6L16.5 18L21.5 14L19.5 21"/>
+</svg><figcaption><b>A</b> · un solo contorno en zigzag: se lee corona o fuego</figcaption></figure><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-agave-c" aria-hidden="true">
+  <!-- agave · c: como a, con las pencas bajas arqueadas hacia afuera: la roseta madura del espadín -->
+  <style>.uva-agave-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M3 21H21"/>
+  <path d="M5 21C4 19 3 17.5 2 16.5C4.5 16.5 6.5 17.5 8 18.5L5.5 6L10 14.5L12 2.5L14 14.5L18.5 6L16 18.5C17.5 17.5 19.5 16.5 22 16.5C21 17.5 20 19 19 21"/>
+</svg><figcaption><b>C</b> · pencas bajas arqueadas: también corona</figcaption></figure></div></div>
+</article><article class="icono" aria-labelledby="t-earth-oven">
+ <div class="cab"><div class="grande"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-earth-oven-c" aria-hidden="true">
+  <!-- earth-oven · c: el montículo cociendo, con humo, sobre un cono más bajo: lo que se ve en el palenque -->
+  <style>.uva-earth-oven-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 14H22"/>
+  <path d="M5.5 14L10 21H14L18.5 14"/>
+  <path d="M5 14C5 7 19 7 19 14"/>
+  <path d="M9.5 5.5c-.8-1 .8-2 0-3"/>
+  <path d="M14.5 5.5c-.8-1 .8-2 0-3"/>
+</svg></div><div class="txt"><span class="eyebrow">Horno cónico · <code>earth-oven</code></span><h3 id="t-earth-oven">Recomendada: C</h3><p>El montículo de piñas cociendo sobre el hoyo, con humo. La línea de suelo que sobresale por los dos lados dice «está enterrado».</p><div class="tamanos"><span class="sz" style="width:16px;height:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-earth-oven-c" aria-hidden="true">
+  <!-- earth-oven · c: el montículo cociendo, con humo, sobre un cono más bajo: lo que se ve en el palenque -->
+  <style>.uva-earth-oven-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 14H22"/>
+  <path d="M5.5 14L10 21H14L18.5 14"/>
+  <path d="M5 14C5 7 19 7 19 14"/>
+  <path d="M9.5 5.5c-.8-1 .8-2 0-3"/>
+  <path d="M14.5 5.5c-.8-1 .8-2 0-3"/>
+</svg></span><span class="sz" style="width:20px;height:20px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-earth-oven-c" aria-hidden="true">
+  <!-- earth-oven · c: el montículo cociendo, con humo, sobre un cono más bajo: lo que se ve en el palenque -->
+  <style>.uva-earth-oven-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 14H22"/>
+  <path d="M5.5 14L10 21H14L18.5 14"/>
+  <path d="M5 14C5 7 19 7 19 14"/>
+  <path d="M9.5 5.5c-.8-1 .8-2 0-3"/>
+  <path d="M14.5 5.5c-.8-1 .8-2 0-3"/>
+</svg></span><span class="sz" style="width:24px;height:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-earth-oven-c" aria-hidden="true">
+  <!-- earth-oven · c: el montículo cociendo, con humo, sobre un cono más bajo: lo que se ve en el palenque -->
+  <style>.uva-earth-oven-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 14H22"/>
+  <path d="M5.5 14L10 21H14L18.5 14"/>
+  <path d="M5 14C5 7 19 7 19 14"/>
+  <path d="M9.5 5.5c-.8-1 .8-2 0-3"/>
+  <path d="M14.5 5.5c-.8-1 .8-2 0-3"/>
+</svg></span><span class="sz" style="width:32px;height:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-earth-oven-c" aria-hidden="true">
+  <!-- earth-oven · c: el montículo cociendo, con humo, sobre un cono más bajo: lo que se ve en el palenque -->
+  <style>.uva-earth-oven-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 14H22"/>
+  <path d="M5.5 14L10 21H14L18.5 14"/>
+  <path d="M5 14C5 7 19 7 19 14"/>
+  <path d="M9.5 5.5c-.8-1 .8-2 0-3"/>
+  <path d="M14.5 5.5c-.8-1 .8-2 0-3"/>
+</svg></span><small>16 · 20 · 24 · 32 px</small></div></div></div>
+ <div class="fila"><h4>Junto a sus confusiones, a 24 px</h4><div class="conf"><figure class="cf rec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-earth-oven-c" aria-hidden="true">
+  <!-- earth-oven · c: el montículo cociendo, con humo, sobre un cono más bajo: lo que se ve en el palenque -->
+  <style>.uva-earth-oven-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 14H22"/>
+  <path d="M5.5 14L10 21H14L18.5 14"/>
+  <path d="M5 14C5 7 19 7 19 14"/>
+  <path d="M9.5 5.5c-.8-1 .8-2 0-3"/>
+  <path d="M14.5 5.5c-.8-1 .8-2 0-3"/>
+</svg><figcaption>earth-oven</figcaption></figure><figure class="cf"><svg data-nombre="flame" aria-hidden="true" class="lucide lucide-flame" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /> </svg><figcaption>flame</figcaption></figure><figure class="cf"><svg data-nombre="ice-cream-cone" aria-hidden="true" class="lucide lucide-ice-cream-cone" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="m7 11 4.08 10.35a1 1 0 0 0 1.84 0L17 11" /> <path d="M17 7A5 5 0 0 0 7 7" /> <path d="M17 7a2 2 0 0 1 0 4H7a2 2 0 0 1 0-4" /> </svg><figcaption>ice-cream-cone</figcaption></figure><figure class="cf"><svg data-nombre="martini" aria-hidden="true" class="lucide lucide-martini" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 12 4.207 4.207A.707.707 0 0 1 4.707 3h14.586a.707.707 0 0 1 .5 1.207z" /> <path d="M12 12v10" /> <path d="M7 22h10" /> </svg><figcaption>martini</figcaption></figure><figure class="cf"><svg data-nombre="cooking-pot" aria-hidden="true" class="lucide lucide-cooking-pot" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M2 12h20" /> <path d="M20 12v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8" /> <path d="m4 8 16-4" /> <path d="m8.86 6.78-.45-1.81a2 2 0 0 1 1.45-2.43l1.94-.48a2 2 0 0 1 2.43 1.46l.45 1.8" /> </svg><figcaption>cooking-pot</figcaption></figure></div></div>
+ <div class="fila"><h4>Descartadas</h4><div class="alts"><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-earth-oven-a" aria-hidden="true">
+  <!-- earth-oven · a: corte a toda la altura: el cono bajo el suelo con el fuego al fondo y el montículo de piñas tapadas encima -->
+  <style>.uva-earth-oven-a{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 11.5H22"/>
+  <path d="M4.5 11.5L9.5 21H14.5L19.5 11.5"/>
+  <path d="M5.5 11.5C5.5 2.5 18.5 2.5 18.5 11.5"/>
+  <path d="M12 19c-1.4-1-1.4-2.9 0-4c1.4 1.1 1.4 3 0 4z"/>
+</svg><figcaption><b>A</b> · montículo alto sobre cono: es un cono de helado</figcaption></figure><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-earth-oven-b" aria-hidden="true">
+  <!-- earth-oven · b: cono hondo y montículo bajo: lo «cónico» domina -->
+  <style>.uva-earth-oven-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 9H22"/>
+  <path d="M5 9L11 21H13L19 9"/>
+  <path d="M6.5 9C7 6 17 6 17.5 9"/>
+  <path d="M12 19c-1.3-.9-1.3-2.6 0-3.6c1.3 1 1.3 2.7 0 3.6z"/>
+</svg><figcaption><b>B</b> · cono hondo: helado o copa</figcaption></figure></div></div>
+</article><article class="icono" aria-labelledby="t-masonry-oven">
+ <div class="cab"><div class="grande"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-masonry-oven-c" aria-hidden="true">
+  <!-- masonry-oven · c: horno de obra sobre el suelo cociendo a vapor: el vapor lo separa de una casa -->
+  <style>.uva-masonry-oven-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 20H22"/>
+  <path d="M4 20V12a2 2 0 0 1 2-2H18a2 2 0 0 1 2 2V20"/>
+  <path d="M9 20v-3a3 3 0 0 1 6 0v3"/>
+  <path d="M9 7c-.8-1 .8-2 0-3"/>
+  <path d="M12 7c-.8-1 .8-2 0-3"/>
+  <path d="M15 7c-.8-1 .8-2 0-3"/>
+</svg></div><div class="txt"><span class="eyebrow">Mampostería · <code>masonry-oven</code></span><h3 id="t-masonry-oven">Recomendada: C</h3><p>Horno de obra sobre el suelo con boca en arco y vapor. El vapor lo separa de una casa.</p><div class="tamanos"><span class="sz" style="width:16px;height:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-masonry-oven-c" aria-hidden="true">
+  <!-- masonry-oven · c: horno de obra sobre el suelo cociendo a vapor: el vapor lo separa de una casa -->
+  <style>.uva-masonry-oven-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 20H22"/>
+  <path d="M4 20V12a2 2 0 0 1 2-2H18a2 2 0 0 1 2 2V20"/>
+  <path d="M9 20v-3a3 3 0 0 1 6 0v3"/>
+  <path d="M9 7c-.8-1 .8-2 0-3"/>
+  <path d="M12 7c-.8-1 .8-2 0-3"/>
+  <path d="M15 7c-.8-1 .8-2 0-3"/>
+</svg></span><span class="sz" style="width:20px;height:20px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-masonry-oven-c" aria-hidden="true">
+  <!-- masonry-oven · c: horno de obra sobre el suelo cociendo a vapor: el vapor lo separa de una casa -->
+  <style>.uva-masonry-oven-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 20H22"/>
+  <path d="M4 20V12a2 2 0 0 1 2-2H18a2 2 0 0 1 2 2V20"/>
+  <path d="M9 20v-3a3 3 0 0 1 6 0v3"/>
+  <path d="M9 7c-.8-1 .8-2 0-3"/>
+  <path d="M12 7c-.8-1 .8-2 0-3"/>
+  <path d="M15 7c-.8-1 .8-2 0-3"/>
+</svg></span><span class="sz" style="width:24px;height:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-masonry-oven-c" aria-hidden="true">
+  <!-- masonry-oven · c: horno de obra sobre el suelo cociendo a vapor: el vapor lo separa de una casa -->
+  <style>.uva-masonry-oven-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 20H22"/>
+  <path d="M4 20V12a2 2 0 0 1 2-2H18a2 2 0 0 1 2 2V20"/>
+  <path d="M9 20v-3a3 3 0 0 1 6 0v3"/>
+  <path d="M9 7c-.8-1 .8-2 0-3"/>
+  <path d="M12 7c-.8-1 .8-2 0-3"/>
+  <path d="M15 7c-.8-1 .8-2 0-3"/>
+</svg></span><span class="sz" style="width:32px;height:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-masonry-oven-c" aria-hidden="true">
+  <!-- masonry-oven · c: horno de obra sobre el suelo cociendo a vapor: el vapor lo separa de una casa -->
+  <style>.uva-masonry-oven-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 20H22"/>
+  <path d="M4 20V12a2 2 0 0 1 2-2H18a2 2 0 0 1 2 2V20"/>
+  <path d="M9 20v-3a3 3 0 0 1 6 0v3"/>
+  <path d="M9 7c-.8-1 .8-2 0-3"/>
+  <path d="M12 7c-.8-1 .8-2 0-3"/>
+  <path d="M15 7c-.8-1 .8-2 0-3"/>
+</svg></span><small>16 · 20 · 24 · 32 px</small></div></div></div>
+ <div class="fila"><h4>Junto a sus confusiones, a 24 px</h4><div class="conf"><figure class="cf rec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-masonry-oven-c" aria-hidden="true">
+  <!-- masonry-oven · c: horno de obra sobre el suelo cociendo a vapor: el vapor lo separa de una casa -->
+  <style>.uva-masonry-oven-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 20H22"/>
+  <path d="M4 20V12a2 2 0 0 1 2-2H18a2 2 0 0 1 2 2V20"/>
+  <path d="M9 20v-3a3 3 0 0 1 6 0v3"/>
+  <path d="M9 7c-.8-1 .8-2 0-3"/>
+  <path d="M12 7c-.8-1 .8-2 0-3"/>
+  <path d="M15 7c-.8-1 .8-2 0-3"/>
+</svg><figcaption>masonry-oven</figcaption></figure><figure class="cf"><svg data-nombre="flame" aria-hidden="true" class="lucide lucide-flame" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M12 3q1 4 4 6.5t3 5.5a1 1 0 0 1-14 0 5 5 0 0 1 1-3 1 1 0 0 0 5 0c0-2-1.5-3-1.5-5q0-2 2.5-4" /> </svg><figcaption>flame</figcaption></figure><figure class="cf"><svg data-nombre="house" aria-hidden="true" class="lucide lucide-house" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /> <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /> </svg><figcaption>house</figcaption></figure><figure class="cf"><svg data-nombre="warehouse" aria-hidden="true" class="lucide lucide-warehouse" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M18 21V10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1v11" /> <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 1.132-1.803l7.95-3.974a2 2 0 0 1 1.837 0l7.948 3.974A2 2 0 0 1 22 8z" /> <path d="M6 13h12" /> <path d="M6 17h12" /> </svg><figcaption>warehouse</figcaption></figure><figure class="cf"><svg data-nombre="brick-wall-fire" aria-hidden="true" class="lucide lucide-brick-wall-fire" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M16 3v2.107" /> <path d="M17 9c1 3 2.5 3.5 3.5 4.5A5 5 0 0 1 22 17a5 5 0 0 1-10 0c0-.3 0-.6.1-.9a2 2 0 1 0 3.3-2C13 11.5 16 9 17 9" /> <path d="M21 8.274V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3.938" /> <path d="M3 15h5.253" /> <path d="M3 9h8.228" /> <path d="M8 15v6" /> <path d="M8 3v6" /> </svg><figcaption>brick-wall-fire</figcaption></figure></div></div>
+ <div class="fila"><h4>Descartadas</h4><div class="alts"><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-masonry-oven-a" aria-hidden="true">
+  <!-- masonry-oven · a: bóveda de piedra sobre el suelo con boca en arco: la forma clásica de un horno -->
+  <style>.uva-masonry-oven-a{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 20H22"/>
+  <path d="M4 20V14a8 8 0 0 1 16 0V20"/>
+  <path d="M9 20v-3a3 3 0 0 1 6 0v3"/>
+</svg><figcaption><b>A</b> · bóveda sola: se lee iglú o túnel</figcaption></figure><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-masonry-oven-b" aria-hidden="true">
+  <!-- masonry-oven · b: cuarto de mampostería con juntas de piedra, boca y chimenea -->
+  <style>.uva-masonry-oven-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 20H22"/>
+  <path d="M4 20V9h16V20"/>
+  <path d="M9 20v-3a3 3 0 0 1 6 0v3"/>
+  <path d="M4 13.5H9"/>
+  <path d="M15 13.5H20"/>
+  <path d="M12 9V13.5"/>
+  <path d="M16 9V5h2.5V9"/>
+</svg><figcaption><b>B</b> · juntas y chimenea: fábrica, y a 16 px es ruido</figcaption></figure></div></div>
+</article><article class="icono" aria-labelledby="t-stone-mill">
+ <div class="cab"><div class="grande"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-stone-mill-b" aria-hidden="true">
+  <!-- stone-mill · b: como a, con el poste alto y la vara saliendo de la rueda: la vara de la que tira el animal -->
+  <style>.uva-stone-mill-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 21H22"/>
+  <path d="M4 3V21"/>
+  <path d="M4 13H22"/>
+  <circle cx="14" cy="14" r="6"/>
+</svg></div><div class="txt"><span class="eyebrow">Tahona · <code>stone-mill</code></span><h3 id="t-stone-mill">Recomendada: B</h3><p>La rueda de piedra unida por la vara al poste del centro: la estructura de la tahona. El engrane de hoy dice «maquinaria».</p><div class="tamanos"><span class="sz" style="width:16px;height:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-stone-mill-b" aria-hidden="true">
+  <!-- stone-mill · b: como a, con el poste alto y la vara saliendo de la rueda: la vara de la que tira el animal -->
+  <style>.uva-stone-mill-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 21H22"/>
+  <path d="M4 3V21"/>
+  <path d="M4 13H22"/>
+  <circle cx="14" cy="14" r="6"/>
+</svg></span><span class="sz" style="width:20px;height:20px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-stone-mill-b" aria-hidden="true">
+  <!-- stone-mill · b: como a, con el poste alto y la vara saliendo de la rueda: la vara de la que tira el animal -->
+  <style>.uva-stone-mill-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 21H22"/>
+  <path d="M4 3V21"/>
+  <path d="M4 13H22"/>
+  <circle cx="14" cy="14" r="6"/>
+</svg></span><span class="sz" style="width:24px;height:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-stone-mill-b" aria-hidden="true">
+  <!-- stone-mill · b: como a, con el poste alto y la vara saliendo de la rueda: la vara de la que tira el animal -->
+  <style>.uva-stone-mill-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 21H22"/>
+  <path d="M4 3V21"/>
+  <path d="M4 13H22"/>
+  <circle cx="14" cy="14" r="6"/>
+</svg></span><span class="sz" style="width:32px;height:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-stone-mill-b" aria-hidden="true">
+  <!-- stone-mill · b: como a, con el poste alto y la vara saliendo de la rueda: la vara de la que tira el animal -->
+  <style>.uva-stone-mill-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 21H22"/>
+  <path d="M4 3V21"/>
+  <path d="M4 13H22"/>
+  <circle cx="14" cy="14" r="6"/>
+</svg></span><small>16 · 20 · 24 · 32 px</small></div></div></div>
+ <div class="fila"><h4>Junto a sus confusiones, a 24 px</h4><div class="conf"><figure class="cf rec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-stone-mill-b" aria-hidden="true">
+  <!-- stone-mill · b: como a, con el poste alto y la vara saliendo de la rueda: la vara de la que tira el animal -->
+  <style>.uva-stone-mill-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 21H22"/>
+  <path d="M4 3V21"/>
+  <path d="M4 13H22"/>
+  <circle cx="14" cy="14" r="6"/>
+</svg><figcaption>stone-mill</figcaption></figure><figure class="cf"><svg data-nombre="cog" aria-hidden="true" class="lucide lucide-cog" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M11 10.27 7 3.34" /> <path d="m11 13.73-4 6.93" /> <path d="M12 22v-2" /> <path d="M12 2v2" /> <path d="M14 12h8" /> <path d="m17 20.66-1-1.73" /> <path d="m17 3.34-1 1.73" /> <path d="M2 12h2" /> <path d="m20.66 17-1.73-1" /> <path d="m20.66 7-1.73 1" /> <path d="m3.34 17 1.73-1" /> <path d="m3.34 7 1.73 1" /> <circle cx="12" cy="12" r="2" /> <circle cx="12" cy="12" r="8" /> </svg><figcaption>cog</figcaption></figure><figure class="cf"><svg data-nombre="ferris-wheel" aria-hidden="true" class="lucide lucide-ferris-wheel" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="2" /> <path d="M12 2v4" /> <path d="m6.8 15-3.5 2" /> <path d="m20.7 7-3.5 2" /> <path d="M6.8 9 3.3 7" /> <path d="m20.7 17-3.5-2" /> <path d="m9 22 3-8 3 8" /> <path d="M8 22h8" /> <path d="M18 18.7a9 9 0 1 0-12 0" /> </svg><figcaption>ferris-wheel</figcaption></figure><figure class="cf"><svg data-nombre="disc" aria-hidden="true" class="lucide lucide-disc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10" /> <circle cx="12" cy="12" r="2" /> </svg><figcaption>disc</figcaption></figure><figure class="cf"><svg data-nombre="tractor" aria-hidden="true" class="lucide lucide-tractor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="m10 11 11 .9a1 1 0 0 1 .8 1.1l-.665 4.158a1 1 0 0 1-.988.842H20" /> <path d="M16 18h-5" /> <path d="M18 5a1 1 0 0 0-1 1v5.573" /> <path d="M3 4h8.129a1 1 0 0 1 .99.863L13 11.246" /> <path d="M4 11V4" /> <path d="M7 15h.01" /> <path d="M8 10.1V4" /> <circle cx="18" cy="18" r="2" /> <circle cx="7" cy="15" r="5" /> </svg><figcaption>tractor</figcaption></figure></div></div>
+ <div class="fila"><h4>Descartadas</h4><div class="alts"><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-stone-mill-a" aria-hidden="true">
+  <!-- stone-mill · a: de lado: la rueda de piedra en la fosa, unida por la vara al poste del centro -->
+  <style>.uva-stone-mill-a{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 21H22"/>
+  <path d="M5 7V21"/>
+  <path d="M5 15H9"/>
+  <path d="M19 15H22"/>
+  <circle cx="14" cy="15" r="5"/>
+  <circle cx="14" cy="15" r="2"/>
+</svg><figcaption><b>A</b> · el centro de la rueda se lee como ojo</figcaption></figure><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-stone-mill-c" aria-hidden="true">
+  <!-- stone-mill · c: la rueda grande sola con su eje: lo mínimo, la piedra que muele -->
+  <style>.uva-stone-mill-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 21H22"/>
+  <circle cx="12" cy="13" r="6.5"/>
+  <circle cx="12" cy="13" r="1.5"/>
+  <path d="M2 13H9"/>
+  <path d="M15 13H22"/>
+</svg><figcaption><b>C</b> · rueda sola en el suelo: disco o rodillo</figcaption></figure></div></div>
+</article><article class="icono" aria-labelledby="t-fermenting">
+ <div class="cab"><div class="grande"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-fermenting-b" aria-hidden="true">
+  <!-- semanticName: fermenting · b: sin el aro del medio (a trazo 2 los tres óvalos se leían como pastel de capas); la tina existente de Uva adaptada a trazo 2 (cuerpo más bajo para dejar aire a las burbujas) · category: status · objeto: tina de fermentación.
+       Oculto por defecto (lo acompaña la etiqueta "Fermentando"). Si va solo y comunica algo esencial:
+       quita aria-hidden y añade role="img" aria-label="Fermentando". -->
+  <style>
+    .uva-fermenting-b{stroke-width:var(--uva-stroke,2)}
+    .uva-fermenting-b__acento{fill:var(--uva-accent,currentColor);stroke:none}
+    /* progress: 2 ciclos de subida y la burbuja se asienta visible. Total 4.8 s (WCAG 2.2.2) */
+    .uva-fermenting-b__burbuja{opacity:0;animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 0s 2,uva-fermenting-b-asentar .4s ease-out 3.2s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(2){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) .6s 2,uva-fermenting-b-asentar .4s ease-out 3.8s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(3){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 1.2s 2,uva-fermenting-b-asentar .4s ease-out 4.4s forwards}
+    @keyframes uva-fermenting-b-subir{0%{transform:translateY(2px);opacity:0}30%{opacity:1}100%{transform:translateY(-3px);opacity:0}}
+    @keyframes uva-fermenting-b-asentar{to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.uva-fermenting-b__burbuja,.uva-fermenting-b__burbuja:nth-of-type(n){animation:none;opacity:1}}
+  </style>
+  <g class="uva-fermenting-b__cuerpo">
+    <ellipse cx="12" cy="9.8" rx="8" ry="2.2"/>
+    <path d="M4 9.8 3.3 17.2q-.25 2.2 2 2.9Q12 21.9 18.7 20.1q2.25-.7 2-2.9L20 9.8"/>
+      </g>
+  <g class="uva-fermenting-b__acento">
+    <circle class="uva-fermenting-b__burbuja" cx="8.8" cy="4" r="1.15"/>
+    <circle class="uva-fermenting-b__burbuja" cx="13.2" cy="3" r="1"/>
+    <circle class="uva-fermenting-b__burbuja" cx="17" cy="4.4" r=".85"/>
+  </g>
+</svg></div><div class="txt"><span class="eyebrow">Fermentación · <code>fermenting</code></span><h3 id="t-fermenting">Recomendada: B</h3><p>La tina de Uva que ya teníamos, a trazo 2 y sin el aro del medio. Las burbujas la separan de la base de datos; el barril de hoy dice «vino».</p><div class="tamanos"><span class="sz" style="width:16px;height:16px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-fermenting-b" aria-hidden="true">
+  <!-- semanticName: fermenting · b: sin el aro del medio (a trazo 2 los tres óvalos se leían como pastel de capas); la tina existente de Uva adaptada a trazo 2 (cuerpo más bajo para dejar aire a las burbujas) · category: status · objeto: tina de fermentación.
+       Oculto por defecto (lo acompaña la etiqueta "Fermentando"). Si va solo y comunica algo esencial:
+       quita aria-hidden y añade role="img" aria-label="Fermentando". -->
+  <style>
+    .uva-fermenting-b{stroke-width:var(--uva-stroke,2)}
+    .uva-fermenting-b__acento{fill:var(--uva-accent,currentColor);stroke:none}
+    /* progress: 2 ciclos de subida y la burbuja se asienta visible. Total 4.8 s (WCAG 2.2.2) */
+    .uva-fermenting-b__burbuja{opacity:0;animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 0s 2,uva-fermenting-b-asentar .4s ease-out 3.2s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(2){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) .6s 2,uva-fermenting-b-asentar .4s ease-out 3.8s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(3){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 1.2s 2,uva-fermenting-b-asentar .4s ease-out 4.4s forwards}
+    @keyframes uva-fermenting-b-subir{0%{transform:translateY(2px);opacity:0}30%{opacity:1}100%{transform:translateY(-3px);opacity:0}}
+    @keyframes uva-fermenting-b-asentar{to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.uva-fermenting-b__burbuja,.uva-fermenting-b__burbuja:nth-of-type(n){animation:none;opacity:1}}
+  </style>
+  <g class="uva-fermenting-b__cuerpo">
+    <ellipse cx="12" cy="9.8" rx="8" ry="2.2"/>
+    <path d="M4 9.8 3.3 17.2q-.25 2.2 2 2.9Q12 21.9 18.7 20.1q2.25-.7 2-2.9L20 9.8"/>
+      </g>
+  <g class="uva-fermenting-b__acento">
+    <circle class="uva-fermenting-b__burbuja" cx="8.8" cy="4" r="1.15"/>
+    <circle class="uva-fermenting-b__burbuja" cx="13.2" cy="3" r="1"/>
+    <circle class="uva-fermenting-b__burbuja" cx="17" cy="4.4" r=".85"/>
+  </g>
+</svg></span><span class="sz" style="width:20px;height:20px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-fermenting-b" aria-hidden="true">
+  <!-- semanticName: fermenting · b: sin el aro del medio (a trazo 2 los tres óvalos se leían como pastel de capas); la tina existente de Uva adaptada a trazo 2 (cuerpo más bajo para dejar aire a las burbujas) · category: status · objeto: tina de fermentación.
+       Oculto por defecto (lo acompaña la etiqueta "Fermentando"). Si va solo y comunica algo esencial:
+       quita aria-hidden y añade role="img" aria-label="Fermentando". -->
+  <style>
+    .uva-fermenting-b{stroke-width:var(--uva-stroke,2)}
+    .uva-fermenting-b__acento{fill:var(--uva-accent,currentColor);stroke:none}
+    /* progress: 2 ciclos de subida y la burbuja se asienta visible. Total 4.8 s (WCAG 2.2.2) */
+    .uva-fermenting-b__burbuja{opacity:0;animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 0s 2,uva-fermenting-b-asentar .4s ease-out 3.2s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(2){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) .6s 2,uva-fermenting-b-asentar .4s ease-out 3.8s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(3){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 1.2s 2,uva-fermenting-b-asentar .4s ease-out 4.4s forwards}
+    @keyframes uva-fermenting-b-subir{0%{transform:translateY(2px);opacity:0}30%{opacity:1}100%{transform:translateY(-3px);opacity:0}}
+    @keyframes uva-fermenting-b-asentar{to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.uva-fermenting-b__burbuja,.uva-fermenting-b__burbuja:nth-of-type(n){animation:none;opacity:1}}
+  </style>
+  <g class="uva-fermenting-b__cuerpo">
+    <ellipse cx="12" cy="9.8" rx="8" ry="2.2"/>
+    <path d="M4 9.8 3.3 17.2q-.25 2.2 2 2.9Q12 21.9 18.7 20.1q2.25-.7 2-2.9L20 9.8"/>
+      </g>
+  <g class="uva-fermenting-b__acento">
+    <circle class="uva-fermenting-b__burbuja" cx="8.8" cy="4" r="1.15"/>
+    <circle class="uva-fermenting-b__burbuja" cx="13.2" cy="3" r="1"/>
+    <circle class="uva-fermenting-b__burbuja" cx="17" cy="4.4" r=".85"/>
+  </g>
+</svg></span><span class="sz" style="width:24px;height:24px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-fermenting-b" aria-hidden="true">
+  <!-- semanticName: fermenting · b: sin el aro del medio (a trazo 2 los tres óvalos se leían como pastel de capas); la tina existente de Uva adaptada a trazo 2 (cuerpo más bajo para dejar aire a las burbujas) · category: status · objeto: tina de fermentación.
+       Oculto por defecto (lo acompaña la etiqueta "Fermentando"). Si va solo y comunica algo esencial:
+       quita aria-hidden y añade role="img" aria-label="Fermentando". -->
+  <style>
+    .uva-fermenting-b{stroke-width:var(--uva-stroke,2)}
+    .uva-fermenting-b__acento{fill:var(--uva-accent,currentColor);stroke:none}
+    /* progress: 2 ciclos de subida y la burbuja se asienta visible. Total 4.8 s (WCAG 2.2.2) */
+    .uva-fermenting-b__burbuja{opacity:0;animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 0s 2,uva-fermenting-b-asentar .4s ease-out 3.2s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(2){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) .6s 2,uva-fermenting-b-asentar .4s ease-out 3.8s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(3){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 1.2s 2,uva-fermenting-b-asentar .4s ease-out 4.4s forwards}
+    @keyframes uva-fermenting-b-subir{0%{transform:translateY(2px);opacity:0}30%{opacity:1}100%{transform:translateY(-3px);opacity:0}}
+    @keyframes uva-fermenting-b-asentar{to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.uva-fermenting-b__burbuja,.uva-fermenting-b__burbuja:nth-of-type(n){animation:none;opacity:1}}
+  </style>
+  <g class="uva-fermenting-b__cuerpo">
+    <ellipse cx="12" cy="9.8" rx="8" ry="2.2"/>
+    <path d="M4 9.8 3.3 17.2q-.25 2.2 2 2.9Q12 21.9 18.7 20.1q2.25-.7 2-2.9L20 9.8"/>
+      </g>
+  <g class="uva-fermenting-b__acento">
+    <circle class="uva-fermenting-b__burbuja" cx="8.8" cy="4" r="1.15"/>
+    <circle class="uva-fermenting-b__burbuja" cx="13.2" cy="3" r="1"/>
+    <circle class="uva-fermenting-b__burbuja" cx="17" cy="4.4" r=".85"/>
+  </g>
+</svg></span><span class="sz" style="width:32px;height:32px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-fermenting-b" aria-hidden="true">
+  <!-- semanticName: fermenting · b: sin el aro del medio (a trazo 2 los tres óvalos se leían como pastel de capas); la tina existente de Uva adaptada a trazo 2 (cuerpo más bajo para dejar aire a las burbujas) · category: status · objeto: tina de fermentación.
+       Oculto por defecto (lo acompaña la etiqueta "Fermentando"). Si va solo y comunica algo esencial:
+       quita aria-hidden y añade role="img" aria-label="Fermentando". -->
+  <style>
+    .uva-fermenting-b{stroke-width:var(--uva-stroke,2)}
+    .uva-fermenting-b__acento{fill:var(--uva-accent,currentColor);stroke:none}
+    /* progress: 2 ciclos de subida y la burbuja se asienta visible. Total 4.8 s (WCAG 2.2.2) */
+    .uva-fermenting-b__burbuja{opacity:0;animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 0s 2,uva-fermenting-b-asentar .4s ease-out 3.2s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(2){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) .6s 2,uva-fermenting-b-asentar .4s ease-out 3.8s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(3){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 1.2s 2,uva-fermenting-b-asentar .4s ease-out 4.4s forwards}
+    @keyframes uva-fermenting-b-subir{0%{transform:translateY(2px);opacity:0}30%{opacity:1}100%{transform:translateY(-3px);opacity:0}}
+    @keyframes uva-fermenting-b-asentar{to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.uva-fermenting-b__burbuja,.uva-fermenting-b__burbuja:nth-of-type(n){animation:none;opacity:1}}
+  </style>
+  <g class="uva-fermenting-b__cuerpo">
+    <ellipse cx="12" cy="9.8" rx="8" ry="2.2"/>
+    <path d="M4 9.8 3.3 17.2q-.25 2.2 2 2.9Q12 21.9 18.7 20.1q2.25-.7 2-2.9L20 9.8"/>
+      </g>
+  <g class="uva-fermenting-b__acento">
+    <circle class="uva-fermenting-b__burbuja" cx="8.8" cy="4" r="1.15"/>
+    <circle class="uva-fermenting-b__burbuja" cx="13.2" cy="3" r="1"/>
+    <circle class="uva-fermenting-b__burbuja" cx="17" cy="4.4" r=".85"/>
+  </g>
+</svg></span><small>16 · 20 · 24 · 32 px</small></div></div></div>
+ <div class="fila"><h4>Junto a sus confusiones, a 24 px</h4><div class="conf"><figure class="cf rec"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-fermenting-b" aria-hidden="true">
+  <!-- semanticName: fermenting · b: sin el aro del medio (a trazo 2 los tres óvalos se leían como pastel de capas); la tina existente de Uva adaptada a trazo 2 (cuerpo más bajo para dejar aire a las burbujas) · category: status · objeto: tina de fermentación.
+       Oculto por defecto (lo acompaña la etiqueta "Fermentando"). Si va solo y comunica algo esencial:
+       quita aria-hidden y añade role="img" aria-label="Fermentando". -->
+  <style>
+    .uva-fermenting-b{stroke-width:var(--uva-stroke,2)}
+    .uva-fermenting-b__acento{fill:var(--uva-accent,currentColor);stroke:none}
+    /* progress: 2 ciclos de subida y la burbuja se asienta visible. Total 4.8 s (WCAG 2.2.2) */
+    .uva-fermenting-b__burbuja{opacity:0;animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 0s 2,uva-fermenting-b-asentar .4s ease-out 3.2s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(2){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) .6s 2,uva-fermenting-b-asentar .4s ease-out 3.8s forwards}
+    .uva-fermenting-b__burbuja:nth-of-type(3){animation:uva-fermenting-b-subir 1.6s cubic-bezier(.2,.6,.3,1) 1.2s 2,uva-fermenting-b-asentar .4s ease-out 4.4s forwards}
+    @keyframes uva-fermenting-b-subir{0%{transform:translateY(2px);opacity:0}30%{opacity:1}100%{transform:translateY(-3px);opacity:0}}
+    @keyframes uva-fermenting-b-asentar{to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.uva-fermenting-b__burbuja,.uva-fermenting-b__burbuja:nth-of-type(n){animation:none;opacity:1}}
+  </style>
+  <g class="uva-fermenting-b__cuerpo">
+    <ellipse cx="12" cy="9.8" rx="8" ry="2.2"/>
+    <path d="M4 9.8 3.3 17.2q-.25 2.2 2 2.9Q12 21.9 18.7 20.1q2.25-.7 2-2.9L20 9.8"/>
+      </g>
+  <g class="uva-fermenting-b__acento">
+    <circle class="uva-fermenting-b__burbuja" cx="8.8" cy="4" r="1.15"/>
+    <circle class="uva-fermenting-b__burbuja" cx="13.2" cy="3" r="1"/>
+    <circle class="uva-fermenting-b__burbuja" cx="17" cy="4.4" r=".85"/>
+  </g>
+</svg><figcaption>fermenting</figcaption></figure><figure class="cf"><svg data-nombre="barrel" aria-hidden="true" class="lucide lucide-barrel" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M10 3a41 41 0 000 18" /> <path d="M14 3a41 41 0 010 18" /> <path d="M16.997 21a2 2 0 001.68-.92 15.25 15.25 0 000-16.16 2 2 0 00-1.68-.92h-10a2 2 0 00-1.681.92 15.25 15.25 0 000 16.16 2 2 0 001.681.92z" /> <path d="M3.54 16h16.914" /> <path d="M3.54 8h16.914" /> </svg><figcaption>barrel</figcaption></figure><figure class="cf"><svg data-nombre="database" aria-hidden="true" class="lucide lucide-database" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <ellipse cx="12" cy="5" rx="9" ry="3" /> <path d="M3 5V19A9 3 0 0 0 21 19V5" /> <path d="M3 12A9 3 0 0 0 21 12" /> </svg><figcaption>database</figcaption></figure><figure class="cf"><svg data-nombre="trash" aria-hidden="true" class="lucide lucide-trash" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M10 11v6" /> <path d="M14 11v6" /> <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6" /> <path d="M3 6h18" /> <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /> </svg><figcaption>trash</figcaption></figure><figure class="cf"><svg data-nombre="cylinder" aria-hidden="true" class="lucide lucide-cylinder" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <ellipse cx="12" cy="5" rx="9" ry="3" /> <path d="M3 5v14a9 3 0 0 0 18 0V5" /> </svg><figcaption>cylinder</figcaption></figure></div></div>
+ <div class="fila"><h4>Descartadas</h4><div class="alts"><figure><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-fermenting-a" aria-hidden="true">
+  <!-- semanticName: fermenting · a: la tina existente de Uva adaptada a trazo 2 (cuerpo más bajo para dejar aire a las burbujas) · category: status · objeto: tina de fermentación.
+       Oculto por defecto (lo acompaña la etiqueta "Fermentando"). Si va solo y comunica algo esencial:
+       quita aria-hidden y añade role="img" aria-label="Fermentando". -->
+  <style>
+    .uva-fermenting-a{stroke-width:var(--uva-stroke,2)}
+    .uva-fermenting-a__acento{fill:var(--uva-accent,currentColor);stroke:none}
+    /* progress: 2 ciclos de subida y la burbuja se asienta visible. Total 4.8 s (WCAG 2.2.2) */
+    .uva-fermenting-a__burbuja{opacity:0;animation:uva-fermenting-a-subir 1.6s cubic-bezier(.2,.6,.3,1) 0s 2,uva-fermenting-a-asentar .4s ease-out 3.2s forwards}
+    .uva-fermenting-a__burbuja:nth-of-type(2){animation:uva-fermenting-a-subir 1.6s cubic-bezier(.2,.6,.3,1) .6s 2,uva-fermenting-a-asentar .4s ease-out 3.8s forwards}
+    .uva-fermenting-a__burbuja:nth-of-type(3){animation:uva-fermenting-a-subir 1.6s cubic-bezier(.2,.6,.3,1) 1.2s 2,uva-fermenting-a-asentar .4s ease-out 4.4s forwards}
+    @keyframes uva-fermenting-a-subir{0%{transform:translateY(2px);opacity:0}30%{opacity:1}100%{transform:translateY(-3px);opacity:0}}
+    @keyframes uva-fermenting-a-asentar{to{opacity:1}}
+    @media (prefers-reduced-motion:reduce){.uva-fermenting-a__burbuja,.uva-fermenting-a__burbuja:nth-of-type(n){animation:none;opacity:1}}
+  </style>
+  <g class="uva-fermenting-a__cuerpo">
+    <ellipse cx="12" cy="9.8" rx="8" ry="2.2"/>
+    <path d="M4 9.8 3.3 17.2q-.25 2.2 2 2.9Q12 21.9 18.7 20.1q2.25-.7 2-2.9L20 9.8"/>
+    <path d="M3.55 15.2q8.45 2.6 16.9 0"/>
+  </g>
+  <g class="uva-fermenting-a__acento">
+    <circle class="uva-fermenting-a__burbuja" cx="8.8" cy="4" r="1.15"/>
+    <circle class="uva-fermenting-a__burbuja" cx="13.2" cy="3" r="1"/>
+    <circle class="uva-fermenting-a__burbuja" cx="17" cy="4.4" r=".85"/>
+  </g>
+</svg><figcaption><b>A</b> · con el aro del medio, a trazo 2 se lee pastel de capas</figcaption></figure></div></div>
+</article>
+</section>
+
+<section aria-labelledby="h-uso"><h2 id="h-uso">Cómo se usan</h2>
+<div class="reglas">
+ <div><h3>Con etiqueta</h3><p>En la navegación van siempre con su nombre visible. El icono queda oculto para el lector de pantalla y el nombre lo da la etiqueta.</p></div>
+ <div><h3>Mismo grosor</h3><p>Trazo 2, igual que Lucide. No se engrosa al achicarlo.</p></div>
+ <div><h3>Color heredado</h3><p>Toman el color del texto (<code>currentColor</code>). Como <code>&lt;img&gt;</code> no lo heredan: van en línea o por <code>&lt;use&gt;</code>.</p></div>
+ <div><h3>Burbujas</h3><p>La tina anima sus burbujas una vez (4.8 s) al entrar en «fermentando». Con «reducir movimiento» quedan quietas.</p></div>
+</div>
+</section>
+</main>

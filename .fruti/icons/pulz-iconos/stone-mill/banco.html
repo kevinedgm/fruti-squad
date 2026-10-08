@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Uva · banco de prueba</title>
+<!--
+  Banco de prueba de Uva (etapa E3). Compara todas las variantes a la vez.
+  1. Sustituye el comentario UVA:ICONOS por los SVG de las variantes (uno por variante; data-nombre="A · …").
+  2. Sustituye el comentario UVA:CONFUSIONES por 2–4 confusiones del dominio (data-nombre). Para iconos reales de Lucide:
+       node scripts/buscar-lucide.mjs --svg <nombre> --stroke <grosor de la familia>
+  3. Renderiza y mira cada captura (Chromium headless; añade #final, #medio o #reducido a la URL):
+       chromium --headless --no-sandbox --hide-scrollbars --force-device-scale-factor=2 \
+         --window-size=900,1100 --virtual-time-budget=1500 --screenshot=banco.png "file://$PWD/banco.html#final"
+     sin modo  → lo que se ve al cargar (puede caer a mitad de la animación)
+     #final    → fotograma final de la animación (lo que queda tras ≤5 s)
+     #medio    → todas las animaciones congeladas en un mismo instante: la mitad del primer ciclo de la animación
+                 más larga (comprueba R4: la pieza móvil sobre zona libre)
+     #t=1.2    → todas congeladas en el instante indicado, en segundos (para revisar otros momentos)
+     #reducido → bloque prefers-reduced-motion activo (comprueba D2)
+  Los vecinos (casa, mano, reloj, rama) son redibujos simples estilo Lucide (ISC).
+-->
+<style>
+  :root{--fondo:#ffffff;--texto:#1a1a1a;--tenue:#777;--oscuro:#0b0b0b;--lila:#a99cf0;--ambar:#d99a3c;--verde:#5fb98a}
+  body{margin:0;padding:20px 24px;background:var(--fondo);color:var(--texto);font-family:system-ui,sans-serif}
+  h2{font-size:13px;margin:20px 0 8px;color:var(--tenue);font-weight:600}
+  .modo{font-size:12px;color:#5b3fc0;margin:0}
+  .fila{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin:6px 0}
+  .nombre{font-size:11px;color:var(--tenue);width:120px;flex:none}
+  .celda{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:11px;color:var(--tenue)}
+  .oscuro{background:var(--oscuro);padding:10px 16px;border-radius:10px}
+  .oscuro .nombre{color:#9a9a9a}
+  .vecino{display:block;fill:none;stroke:currentColor;stroke-width:var(--uva-stroke,1.5);stroke-linecap:round;stroke-linejoin:round}
+  svg{display:block}
+  .celda > svg,.fila > svg{color:var(--texto)}
+  .oscuro .fila > svg{color:inherit}
+</style></head><body>
+
+<template id="iconos">
+  <svg data-nombre="A · stone-mill-a" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-stone-mill-a" aria-hidden="true">
+  <!-- stone-mill · a: de lado: la rueda de piedra en la fosa, unida por la vara al poste del centro -->
+  <style>.uva-stone-mill-a{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 21H22"/>
+  <path d="M5 7V21"/>
+  <path d="M5 15H9"/>
+  <path d="M19 15H22"/>
+  <circle cx="14" cy="15" r="5"/>
+  <circle cx="14" cy="15" r="2"/>
+</svg>
+<svg data-nombre="B · stone-mill-b" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-stone-mill-b" aria-hidden="true">
+  <!-- stone-mill · b: como a, con el poste alto y la vara saliendo de la rueda: la vara de la que tira el animal -->
+  <style>.uva-stone-mill-b{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 21H22"/>
+  <path d="M4 3V21"/>
+  <path d="M4 13H22"/>
+  <circle cx="14" cy="14" r="6"/>
+</svg>
+<svg data-nombre="C · stone-mill-c" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-stone-mill-c" aria-hidden="true">
+  <!-- stone-mill · c: la rueda grande sola con su eje: lo mínimo, la piedra que muele -->
+  <style>.uva-stone-mill-c{stroke-width:var(--uva-stroke,2)}</style>
+  <path d="M2 21H22"/>
+  <circle cx="12" cy="13" r="6.5"/>
+  <circle cx="12" cy="13" r="1.5"/>
+  <path d="M2 13H9"/>
+  <path d="M15 13H22"/>
+</svg>
+
+</template>
+
+<template id="confusiones">
+  <svg data-nombre="Lucide · cog" data-nombre="cog" aria-hidden="true" class="lucide lucide-cog" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="M11 10.27 7 3.34" /> <path d="m11 13.73-4 6.93" /> <path d="M12 22v-2" /> <path d="M12 2v2" /> <path d="M14 12h8" /> <path d="m17 20.66-1-1.73" /> <path d="m17 3.34-1 1.73" /> <path d="M2 12h2" /> <path d="m20.66 17-1.73-1" /> <path d="m20.66 7-1.73 1" /> <path d="m3.34 17 1.73-1" /> <path d="m3.34 7 1.73 1" /> <circle cx="12" cy="12" r="2" /> <circle cx="12" cy="12" r="8" /> </svg>
+<svg data-nombre="Lucide · ferris-wheel" data-nombre="ferris-wheel" aria-hidden="true" class="lucide lucide-ferris-wheel" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="2" /> <path d="M12 2v4" /> <path d="m6.8 15-3.5 2" /> <path d="m20.7 7-3.5 2" /> <path d="M6.8 9 3.3 7" /> <path d="m20.7 17-3.5-2" /> <path d="m9 22 3-8 3 8" /> <path d="M8 22h8" /> <path d="M18 18.7a9 9 0 1 0-12 0" /> </svg>
+<svg data-nombre="Lucide · disc" data-nombre="disc" aria-hidden="true" class="lucide lucide-disc" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <circle cx="12" cy="12" r="10" /> <circle cx="12" cy="12" r="2" /> </svg>
+<svg data-nombre="Lucide · tractor" data-nombre="tractor" aria-hidden="true" class="lucide lucide-tractor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="stroke-width:var(--uva-stroke,2)" stroke-linecap="round" stroke-linejoin="round"> <path d="m10 11 11 .9a1 1 0 0 1 .8 1.1l-.665 4.158a1 1 0 0 1-.988.842H20" /> <path d="M16 18h-5" /> <path d="M18 5a1 1 0 0 0-1 1v5.573" /> <path d="M3 4h8.129a1 1 0 0 1 .99.863L13 11.246" /> <path d="M4 11V4" /> <path d="M7 15h.01" /> <path d="M8 10.1V4" /> <circle cx="18" cy="18" r="2" /> <circle cx="7" cy="15" r="5" /> </svg>
+
+</template>
+
+<p class="modo" id="modo"></p>
+
+<h2>Comparación directa a 24 y 20px: variantes · confusiones</h2>
+<div id="comparacion"></div>
+
+<h2>Tamaños de la norma (§10: xs 14 · sm 16 · md 20 · base 24 · lg 32 · xl 48) y 96 de inspección</h2>
+<div id="tamanos"></div>
+
+<h2>Familia a 24px: casa · mano · variante · reloj (peso óptico, R6)</h2>
+<div id="familia"></div>
+
+<h2>Contexto oscuro con color por estado (22 y 44px)</h2>
+<div class="oscuro" id="oscuro"></div>
+
+<h2>Grosor del trazo (--uva-stroke 2 · 1.5 · 1.25 · 1) a 48 y 24px</h2>
+<div id="grosores"></div>
+
+<script>
+  const NS = 'http://www.w3.org/2000/svg';
+  const modo = location.hash.slice(1);
+  const vecinos = {
+    mano: '<path d="M18 11V6a2 2 0 0 0-4 0"/><path d="M14 10V4a2 2 0 0 0-4 0v2"/><path d="M10 10.5V6a2 2 0 0 0-4 0v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-6-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>',
+    rama: '<circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="16" r="2.5"/><path d="M6 8.5V10a6 6 0 0 0 6 6h3.5"/>',
+    casa: '<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/>',
+    reloj: '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>'
+  };
+  // Compatibilidad: también acepta la plantilla antigua de un solo icono (id="icono").
+  const fuente = document.getElementById('iconos') || document.getElementById('icono');
+  const viejo = document.getElementById('icono');
+  let iconos = [...fuente.content.querySelectorAll('svg')];
+  if (!iconos.length && viejo) iconos = [...viejo.content.querySelectorAll('svg')];
+  const confusiones = [...document.getElementById('confusiones').content.querySelectorAll('svg')];
+
+  if (modo === 'reducido') {
+    // Activa el bloque de movimiento reducido de cada icono reescribiendo su media query.
+    for (const s of [...iconos, ...confusiones]) s.querySelectorAll('style').forEach(st => {
+      st.textContent = st.textContent.replace(/prefers-reduced-motion\s*:\s*reduce/g, 'min-width:0px');
+    });
+  }
+  const nombre = (s, i) => s.dataset.nombre || `variante ${i + 1}`;
+
+  function tam(svg, px, color, extra) {
+    const c = svg.cloneNode(true);
+    c.setAttribute('width', px); c.setAttribute('height', px);
+    if (color) c.style.color = color;
+    if (extra) for (const [k, v] of Object.entries(extra)) c.style.setProperty(k, v);
+    return c;
+  }
+  function vecino(n, px, color) {
+    const s = document.createElementNS(NS, 'svg');
+    s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('class', 'vecino');
+    s.setAttribute('width', px); s.setAttribute('height', px);
+    s.innerHTML = vecinos[n]; if (color) s.style.color = color;
+    return s;
+  }
+  function celda(nodo, texto) {
+    const d = document.createElement('div'); d.className = 'celda';
+    d.append(nodo); if (texto !== undefined) d.append(String(texto)); return d;
+  }
+  function fila(contenedor, etiqueta, nodos) {
+    const f = document.createElement('div'); f.className = 'fila';
+    const n = document.createElement('span'); n.className = 'nombre'; n.textContent = etiqueta;
+    f.append(n, ...nodos); document.getElementById(contenedor).append(f);
+  }
+
+  if (!iconos.length) {
+    document.body.insertAdjacentHTML('afterbegin', '<p style="color:#b4541a">Faltan los SVG: sustituye el comentario UVA:ICONOS.</p>');
+  } else {
+    for (const px of [24, 20]) {
+      fila('comparacion', `${px}px`, [
+        ...iconos.map((s, i) => celda(tam(s, px), nombre(s, i))),
+        ...confusiones.map(c => celda(tam(c, px), c.dataset.nombre || 'confusión'))
+      ]);
+    }
+    iconos.forEach((s, i) => {
+      fila('tamanos', nombre(s, i), [14, 16, 20, 24, 32, 48, 96].map(px => celda(tam(s, px), px)));
+      fila('familia', nombre(s, i), [vecino('casa', 24), vecino('mano', 24), tam(s, 24), vecino('reloj', 24)]);
+      for (const px of [22, 44]) fila('oscuro', `${nombre(s, i)} · ${px}`, [
+        vecino('rama', px, 'var(--lila)'), vecino('mano', px, 'var(--ambar)'),
+        tam(s, px, 'var(--ambar)'), tam(s, px, 'var(--verde)'), tam(s, px, 'var(--lila)'),
+        ...confusiones.map(c => tam(c, px, '#888'))
+      ]);
+      fila('grosores', nombre(s, i), [2, 1.5, 1.25, 1].map(g => {
+        const d = document.createElement('div'); d.className = 'celda';
+        d.append(tam(s, 48, null, {'--uva-stroke': g}), tam(s, 24, null, {'--uva-stroke': g}), g);
+        return d;
+      }));
+    });
+  }
+
+  // Modos de fotograma: se aplican cuando todas las animaciones ya existen.
+  addEventListener('load', () => requestAnimationFrame(() => {
+    const anims = document.getAnimations();
+    if (modo === 'final') anims.forEach(a => { try { a.finish(); } catch (e) { a.cancel(); } });
+    // Un instante común para todas: con animaciones encadenadas (subir → asentar) congelar cada una en su
+    // propio punto medio mezclaría momentos distintos.
+    let instante = null;
+    if (modo === 'medio' && anims.length) {
+      const larga = anims.map(a => a.effect.getComputedTiming()).sort((x, y) => (y.duration || 0) - (x.duration || 0))[0];
+      instante = ((larga.delay || 0) + (larga.duration || 0) / 2) / 1000;
+    }
+    const mt = modo.match(/^t=([\d.]+)$/);
+    if (mt) instante = parseFloat(mt[1]);
+    if (instante !== null) anims.forEach(a => { a.pause(); a.currentTime = instante * 1000; });
+    document.getElementById('modo').textContent = modo
+      ? `Modo: ${modo}${instante !== null ? ` (t = ${instante.toFixed(2)} s)` : ''} · ${anims.length} animaciones`
+      : `Modo: al cargar · ${anims.length} animaciones (usa #final, #medio o #reducido)`;
+  }));
+</script>
+</body></html>
