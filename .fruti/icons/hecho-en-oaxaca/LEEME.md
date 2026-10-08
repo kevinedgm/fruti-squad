@@ -33,3 +33,16 @@ Causa común a los tres conceptos: un círculo encima de un palo se lee como pal
 | K · cinética | Pelota de playa o esfera de adorno | **Se lee como algo que gira sobre su eje**; deja de ser paleta. Con el giro animado es la marmota en movimiento |
 | O · la O | Una «O» con un óvalo; pierde la marmota | Se lee como la letra griega «Φ» |
 | T · papel picado | Bola de mosaico, como una bola de discoteca | Adorno o piñata; a 32 px, ruido |
+
+## Ronda 3 · K con eje, banda y manta (el usuario elige K; requisito: que funcione con y sin texto y se entienda la referencia)
+
+Lo que distingue a la marmota de un globo o una pelota, sin dibujarla literal:
+- **la banda** horizontal, donde va el nombre del pueblo;
+- **la espiga con sus dos discos**, visible solo arriba y abajo: dentro de la esfera, el eje formaba una cruz y la esfera se leía como punto de mira;
+- **la manta blanca**, con el color en las costillas.
+
+| Variante | Construcción | Lectura (`ronda-3/banco.png`) |
+|---|---|---|
+| K1 | Husos de color + banda en tinta + espiga | Fuerte a cualquier tamaño, pero los husos de color la acercan a una pelota de playa |
+| **K2** | Manta blanca, 12 costillas finas de colores, banda rosa mexicano, espiga | La que más se lee como marmota; se mantiene clara de 24 a 120 px. Riesgo: farol de papel |
+| K3 | K2 + guirnalda de papel picado bajo la banda | Los triángulos casi no se ven; añade ruido sin sumar lectura |
