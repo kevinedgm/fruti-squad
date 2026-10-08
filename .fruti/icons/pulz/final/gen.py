@@ -42,9 +42,11 @@ OUT['wordmark-animado-oscuro']=doc(W,72,wm(True,'wao'),True,style=CSS)
 # favicon: versión de 16 px, sigue el tema del navegador
 OUT['favicon']=(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="PULZ"><style>svg{{color:{INK};--pulz-color:{ANIL}}}@media (prefers-color-scheme:dark){{svg{{color:{INK_N};--pulz-color:{ANIL_N}}}}}</style>{marca("f",lote=False)}</svg>\n')
 # icono de app: tile añil, Z en cal (6.08:1) y lote en tinta; la diagonal en tinta daba 2.75:1
+# en una tinta la Z es un solo trazado: sin costura entre piezas y con esquinas vivas donde la diagonal toca cada barra
+ZMONO='M11 9H53a3 3 0 0 1 3 3V21L26 43H53a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H11a3 3 0 0 1-3-3V43L38 21H11a3 3 0 0 1-3-3v-6a3 3 0 0 1 3-3Z'
 def tile(pad,rx):
     s=64*(1-2*pad)/64
-    m=marca('t').replace(f'fill="{CUR}"',f'fill="{FONDO}"').replace(f'<polygon points="38,21 56,21 26,43 8,43" fill="{C}"',f'<polygon points="38,21 56,21 26,43 8,43" fill="{FONDO}"').replace(f'fill="{C}"',f'fill="{INK}"')
+    m=f'<path d="{ZMONO}" fill="{FONDO}"/><rect x="11.5" y="46.5" width="41" height="5" rx="2.5" fill="{INK}"/>'
     return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="PULZ"><rect width="64" height="64" rx="{rx}" fill="{ANIL}"/><g transform="translate({64*pad:.2f} {64*pad:.2f}) scale({s:.4f})">{m}</g></svg>\n'
 OUT['app-icon']=tile(.18,0); OUT['app-icon-maskable']=tile(.26,0); OUT['app-icon-redondeado']=tile(.18,14)
 # firma «hecho con PULZ»: toma el color de cada palenque por --pulz-color
