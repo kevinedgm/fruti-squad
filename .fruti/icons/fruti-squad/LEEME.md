@@ -59,4 +59,4 @@ Colores, modificables con variables CSS si el SVG va en línea: `--fs-fondo:#161
 ## Pendiente
 
 - La identidad de Kiro (fantasma, morado) queda fuera a propósito: «for Kiro» va en texto.
-- Tarjeta para redes (1280×640) con el nombre: falta elegir tipografía de marca.
+- ~~Tarjeta para redes~~ hecha: tipografía Sora, logotipo y tarjetas en `logotipo/`.

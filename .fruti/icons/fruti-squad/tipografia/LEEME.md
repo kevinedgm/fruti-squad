@@ -1,4 +1,6 @@
-# Fruti Squad · tipografía de marca (propuesta)
+# Fruti Squad · tipografía de marca
+
+**Elegida (2026-10-08): Sora.** Entrega en `../logotipo/`.
 
 Tres candidatas, todas con licencia SIL Open Font License (Google Fonts): libres para uso comercial y para empaquetar con el proyecto.
 
