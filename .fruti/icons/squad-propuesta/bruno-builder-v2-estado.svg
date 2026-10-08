@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-bruno-builder-v2-estado" aria-hidden="true">
+  <style>.uva-bruno-builder-v2-estado{stroke-width:var(--uva-stroke,2)}</style>
+  <rect class="uva-bruno-builder-v2-estado__modulo" x="4" y="3" width="16" height="12" rx="4.5"/>
+  <path class="uva-bruno-builder-v2-estado__entrada" d="M9 15L9 21"/>
+  <path class="uva-bruno-builder-v2-estado__salida" d="M15 15L15 21"/>
+  <circle class="uva-bruno-builder-v2-estado__estado" cx="12" cy="9" r="0.75" fill="currentColor"/>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-mora-v3-capsulas" aria-hidden="true">
+  <style>.uva-mora-v3-capsulas{stroke-width:var(--uva-stroke,3)}</style>
+  <path class="uva-mora-v3-capsulas__documento" d="M5 7L14 7"/>
+  <path class="uva-mora-v3-capsulas__evidencia" d="M8 12L19 12"/>
+  <path class="uva-mora-v3-capsulas__registro" d="M5 17L16 17"/>
+</svg>

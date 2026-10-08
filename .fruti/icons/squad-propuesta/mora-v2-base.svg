@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-mora-v2-base" aria-hidden="true">
+  <style>.uva-mora-v2-base{stroke-width:var(--uva-stroke,2)}</style>
+  <circle class="uva-mora-v2-base__documento" cx="7.5" cy="13.75" r="2.5"/>
+  <circle class="uva-mora-v2-base__evidencia" cx="16.5" cy="13.75" r="2.5"/>
+  <circle class="uva-mora-v2-base__registro" cx="12" cy="5.95" r="2.5"/>
+  <path class="uva-mora-v2-base__base" d="M4.5 20.5L19.5 20.5"/>
+</svg>

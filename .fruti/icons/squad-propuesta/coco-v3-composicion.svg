@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-coco-v3-composicion" aria-hidden="true">
+  <style>.uva-coco-v3-composicion{stroke-width:var(--uva-stroke,2)}</style>
+  <circle class="uva-coco-v3-composicion__circulo" cx="12" cy="12" r="9"/>
+  <circle class="uva-coco-v3-composicion__foco" cx="12" cy="8" r="0.75" fill="currentColor"/>
+  <path class="uva-coco-v3-composicion__nodo" d="M8.5 14.5h0"/>
+  <path class="uva-coco-v3-composicion__nodo" d="M15.5 14.5h0"/>
+</svg>

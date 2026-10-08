@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-mora-v1-racimo" aria-hidden="true">
+  <style>.uva-mora-v1-racimo{stroke-width:var(--uva-stroke,2)}</style>
+  <circle class="uva-mora-v1-racimo__documento" cx="7.2" cy="8.82872" r="2.75"/>
+  <circle class="uva-mora-v1-racimo__evidencia" cx="16.8" cy="8.82872" r="2.75"/>
+  <circle class="uva-mora-v1-racimo__registro" cx="12" cy="17.1426" r="2.75"/>
+</svg>

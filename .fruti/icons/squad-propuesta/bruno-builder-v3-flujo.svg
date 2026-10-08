@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-bruno-builder-v3-flujo" aria-hidden="true">
+  <style>.uva-bruno-builder-v3-flujo{stroke-width:var(--uva-stroke,2)}</style>
+  <rect class="uva-bruno-builder-v3-flujo__modulo" x="7" y="5" width="10" height="14" rx="4"/>
+  <path class="uva-bruno-builder-v3-flujo__entrada" d="M3 12L7 12"/>
+  <path class="uva-bruno-builder-v3-flujo__salida" d="M17 12L21 12"/>
+</svg>
