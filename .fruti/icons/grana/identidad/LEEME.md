@@ -21,3 +21,15 @@ Exploración desde cero (decisión del usuario, 2026-10-08). Tesis de la marca: 
 | **A5 · 16 px** (`ronda-2/a5-16.svg`, `a5-16-tinta.svg`) | Óvalo, una banda y trazo grueso, sin antenas |
 
 Comparativa: `ronda-2/banco2.png`.
+
+## Ronda 3 · wordmark (Instrument Sans, texto convertido a trazados)
+
+Símbolo aprobado: A5, con la versión de contorno fino para una tinta (2026-10-08).
+
+| Composición | Construcción | Banco (`ronda-3/banco.png`) |
+|---|---|---|
+| **W1 · limpio** | «grana» en minúsculas, peso 600, espaciado −1 % | Legible a 20 px; neutra. La identidad la pone el símbolo |
+| **W2 · fuera de registro** | Peso 700 en tinta, con su tinte del tema desplazado detrás: la firma del símbolo llevada al nombre | La más propia. A 20–32 px el desplazamiento parece sombra o borrosidad |
+| W3 · semicondensado + lema | Ancho 85 y peso 650, con el lema debajo | Compacta y técnica. El lema solo se lee a partir de unos 48 px de alto; por debajo, es ruido |
+
+Recomendación: un solo wordmark con dos modos. W1 en tamaños de interfaz (por debajo de 48 px de alto) y W2 en tamaños de exhibición (portada de docs, tarjetas, README). El lema va como texto aparte, no fijado al logotipo.
