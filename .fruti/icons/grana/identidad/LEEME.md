@@ -33,3 +33,24 @@ Símbolo aprobado: A5, con la versión de contorno fino para una tinta (2026-10-
 | W3 · semicondensado + lema | Ancho 85 y peso 650, con el lema debajo | Compacta y técnica. El lema solo se lee a partir de unos 48 px de alto; por debajo, es ruido |
 
 Recomendación: un solo wordmark con dos modos. W1 en tamaños de interfaz (por debajo de 48 px de alto) y W2 en tamaños de exhibición (portada de docs, tarjetas, README). El lema va como texto aparte, no fijado al logotipo.
+
+**Aprobado (2026-10-08):** W1 en tamaños de interfaz (menos de 48 px de alto), W2 en tamaños de exhibición; el lema va aparte.
+
+## Color de marca (`color/`)
+
+La paleta es de Grana: docs, README, sitio y valor por defecto del logo. No es el tema de `@grana/vue`: cada proyecto pone su color en `--g-color-brand` y el logo lo sigue.
+
+| Nombre | Claro | Oscuro | Historia | Uso |
+|---|---|---|---|---|
+| Carmín | `#a3123a` · oklch(46.2% .175 13.9) | `#d74b63` · oklch(61.1% .175 13.9) | El tinte que sale del insecto | Color principal; en pantallas P3, `color(display-p3 .62 .05 .2)` |
+| Nopal | `#2f6a3d` | `#4e895a` | La planta donde vive | Acento escaso |
+| Cera | `#f7f2ea` | `#151012` (noche) | La cera blanca que cubre a la cochinilla | Fondo |
+| Tinta | `#1d1517` | `#efe7dd` | — | Texto y estructura del símbolo |
+
+Contraste (mínimos de la propia Grana: texto 4.5:1, controles 3:1):
+- Claro: carmín 6.97, nopal 5.80, tinta 16.08 sobre cera.
+- Oscuro: carmín 4.55, nopal 4.53, tinta 15.38 sobre noche.
+- En oscuro, el carmín se aclara (mismo tono y croma en OKLCH, más luz) hasta pasar 4.5:1. Un botón carmín en oscuro lleva texto oscuro.
+- Carmín y nopal tienen luminosidad parecida: con deuteranopía se confunden. Regla: nunca distinguir dos estados solo por carmín frente a nopal.
+
+Archivos: `color/grana-marca.css` (variables listas), `color/paleta.json`, `color/color.py` (cálculo reproducible), `color/muestra.png` (paleta y cabecera de docs en claro y oscuro).
