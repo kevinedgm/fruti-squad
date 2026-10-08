@@ -29,3 +29,13 @@ Encargo del usuario (2026-10-08): nueva identidad para la PWA PULZ (registro y t
 | A · pencas-datos | Roseta de maguey con pencas de alturas distintas, como barras | Se lee como planta en maceta; la lectura de «datos» casi no aparece |
 | **B · traza** | Una «P» dibujada como la ruta de un lote, con paradas; la última, en cobre, es el lote | La más propia y la única que cuenta la trazabilidad. Moderna. A 16 px las paradas se vuelven ruido: necesitará una versión simplificada. Riesgo: plano de metro o circuito |
 | C · piña | Piña jimada con rombos y muñones | Granada o piña tropical |
+
+## Ronda 2 · abstractos (la ronda 1 se rechazó por literal: «algo disruptivo, moderno»)
+
+Ideas del producto, no objetos (`ronda-2/banco.png`):
+
+| Concepto | Idea | Lectura |
+|---|---|---|
+| **Z · movimiento** | «Todo es lote, recurso y movimiento»: dos barras (recursos) unidas por una diagonal en cobre (movimiento). Es la Z del nombre | La más fuerte: clara a 16 px, geométrica, propia. Sobre tierra, las barras desaparecen: necesita una versión oscura con barras en cal |
+| Cortes | Puntas, corazón y colas de la destilación: la banda gruesa de cobre es el corazón | ❌ Se lee como hamburguesa o como icono de menú |
+| Primitivas | Recurso (cuadrado), lote (círculo) y movimiento (flecha) | Se lee como el icono de «abrir enlace externo»; sobre oscuro se pierde la flecha |
