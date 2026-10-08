@@ -1,0 +1,170 @@
+<title>Marca PULZ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Una columna; la página usa los colores de la propia marca: fondo, tinta y añil. Los tanques (barras) marcan las secciones. */
+:root{--fondo:#f2f2f6;--tinta:#121217;--anil:#3346e0;--suave:#55576a;--linea:#dcdce6;--panel:#ffffff;
+--display:"Unbounded",ui-sans-serif,system-ui,sans-serif;--texto:"Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--fondo:#121217;--tinta:#f2f2f6;--anil:#7d8bff;--suave:#a6a8bb;--linea:#2a2a36;--panel:#1b1b23;color-scheme:dark}}
+:root[data-theme="dark"]{--fondo:#121217;--tinta:#f2f2f6;--anil:#7d8bff;--suave:#a6a8bb;--linea:#2a2a36;--panel:#1b1b23;color-scheme:dark}
+body{background:var(--fondo);color:var(--tinta);font:17px/1.6 var(--texto);--pulz-color:var(--anil)}
+main{max-width:920px;margin:0 auto;padding-inline:20px;padding-block:28px 80px;display:grid;gap:64px}
+h1,h2,h3{margin:0;line-height:1.1;text-wrap:balance;font-family:var(--display)} h2{font-size:clamp(1.45rem,4vw,2.1rem);font-weight:800;letter-spacing:-.01em} h3{font-size:.98rem;font-weight:700}
+p{margin:0;max-width:64ch} code{font:500 .82em var(--mono)} .sub{color:var(--suave)}
+.eyebrow{display:flex;align-items:center;gap:10px;font:500 .74rem/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--anil)}
+.eyebrow::before{content:"";flex:none;width:28px;height:8px;border-radius:2px;background:linear-gradient(var(--anil),var(--anil)) center/72% 3px no-repeat,var(--tinta)}
+section{display:grid;gap:18px;min-width:0}
+.hero{display:grid;gap:22px;padding-block:24px 34px;border-bottom:12px solid var(--tinta);border-radius:0 0 3px 3px}
+.hero .wm{width:min(100%,640px);height:auto;color:var(--tinta);cursor:pointer;display:block}
+.hero .big{font:700 clamp(1.15rem,3vw,1.5rem)/1.3 var(--display);max-width:30ch} .hero .big span{color:var(--anil)}
+.tile{background:var(--panel);border:1px solid var(--linea);border-radius:12px;padding:18px;display:grid;gap:10px;justify-items:center;align-content:center;min-width:0}
+.tile small{font:500 .72rem var(--mono);color:var(--suave);text-align:center}
+.tile svg{display:block;max-width:100%;height:auto}
+.clara{background:#f2f2f6;border-color:#dcdce6;color:#121217;--pulz-color:#3346e0}.clara small{color:#55576a}
+.oscura{background:#121217;border-color:#121217;color:#f2f2f6;--pulz-color:#7d8bff}.oscura small{color:#a6a8bb}
+.blanca{background:#ffffff;border-color:#dcdce6;color:#121217}.blanca small{color:#55576a}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px}
+.pasos{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;counter-reset:p}
+.pasos .tile{justify-items:start;color:var(--tinta)} .pasos svg{width:96px} .pasos b{font-family:var(--display);font-size:.9rem}
+.pasos .tile::before{counter-increment:p;content:counter(p);font:500 .72rem var(--mono);color:var(--suave)}
+.muestras{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.muestra{border-radius:12px;overflow:hidden;border:1px solid var(--linea);display:grid}
+.muestra .c{height:92px;display:flex;align-items:flex-end;padding:12px;font:800 1rem var(--display)}
+.muestra .d{padding:12px;display:grid;gap:2px;background:var(--panel);font-size:.92rem} .muestra .d code{color:var(--suave)}
+.regla{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px} .regla>div{border-top:6px solid var(--tinta);border-radius:2px;padding-top:10px;display:grid;gap:4px} .regla .no{border-color:var(--anil)}
+table{border-collapse:collapse;width:100%;font-size:.94rem} th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--linea);vertical-align:top} th{font:500 .72rem var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--suave)} .num{font-family:var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.wrap{overflow-x:auto;min-width:0}
+.temas{display:flex;flex-wrap:wrap;gap:8px;align-items:center} .temas button{font:700 .86rem var(--texto);border:1.5px solid var(--linea);background:var(--panel);color:var(--tinta);border-radius:999px;padding:6px 12px 6px 8px;display:inline-flex;gap:8px;align-items:center;cursor:pointer}
+.temas button[aria-pressed="true"]{border-color:var(--tinta)} .temas i{width:16px;height:16px;border-radius:50%;background:var(--sw)} .temas input{width:36px;height:30px;border:0;padding:0;background:none}
+.portal{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.portal .tile{justify-items:start;gap:14px} .portal .firma{width:100%;max-width:300px;height:auto}
+.portal .barra{width:100%;height:10px;border-radius:3px;background:var(--empresa)}
+.lectura{font:500 .85rem var(--mono);display:flex;gap:6px 16px;flex-wrap:wrap} .mal{color:var(--anil);font-weight:700}
+button.replay{font:700 .9rem var(--texto);background:var(--tinta);color:var(--fondo);border:0;border-radius:8px;padding:10px 16px;cursor:pointer;justify-self:start}
+button:focus-visible,input:focus-visible,.hero .wm:focus-visible{outline:3px solid var(--anil);outline-offset:3px}
+.apps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px} .apps img{border-radius:0}
+.fav{display:flex;gap:18px;align-items:flex-end;justify-content:center;flex-wrap:wrap}
+.fav span svg{display:block;width:100%;height:auto}
+.tarjeta{border-radius:12px;overflow:hidden;border:1px solid var(--linea);max-width:100%}
+.tipo{display:grid;gap:6px;padding:20px;border-radius:12px;background:var(--panel);border:1px solid var(--linea)}
+.tipo .u{font:800 clamp(2rem,8vw,3.6rem)/1 var(--display);letter-spacing:-.01em} .tipo .a{font:400 1.05rem/1.5 var(--texto)}
+@media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+<main>
+<header class="hero">
+ <span class="eyebrow">Identidad · PULZ</span>
+ <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">PULZ</h1>
+ <div id="hero" tabindex="0" role="button" aria-label="Repetir la animación del logo">{{HERO}}</div>
+ <p class="big">Del maguey al granel. <span>Producción de mezcal, trazada.</span></p>
+ <p class="sub">PWA para registrar y trazar la producción de mezcal en el palenque. El nombre no significa nada: el símbolo cuenta el trabajo. Toca el logo para ver el trasiego otra vez.</p>
+</header>
+
+<section aria-labelledby="h-idea"><span class="eyebrow">El símbolo</span><h2 id="h-idea">La Z del trasiego</h2>
+<p>Trasegar es pasar líquido de un tanque a otro. Las dos barras son tanques (los recursos), la diagonal es el movimiento y la franja de color es el lote. En PULZ todo es eso: lote, recurso y movimiento.</p>
+<div class="pasos">
+ <div class="tile">{{PASO1}}<b>El lote en el tanque</b><small>la barra de arriba está llena</small></div>
+ <div class="tile">{{PASO2}}<b>Corre por la diagonal</b><small>el tanque de arriba se vacía</small></div>
+ <div class="tile">{{PASO3}}<b>Llega abajo</b><small>este es el logo en reposo</small></div>
+</div>
+<p class="sub">El logo quieto conserva la historia: tanque de arriba vacío, trasiego en color y el lote ya abajo.</p>
+</section>
+
+<section aria-labelledby="h-color"><span class="eyebrow">Color</span><h2 id="h-color">Añil</h2>
+<p>El acento viene del tinte de añil que se usa en Oaxaca. La tinta casi negra y el fondo gris frío dejan que el añil sea lo único con color.</p>
+<div class="muestras">
+ <div class="muestra"><div class="c" style="background:#121217;color:#f2f2f6">Tinta</div><div class="d"><b>Barras y «PUL»</b><code>#121217 · oscuro #f2f2f6</code></div></div>
+ <div class="muestra"><div class="c" style="background:#3346e0;color:#f2f2f6">Añil</div><div class="d"><b>Diagonal y lote</b><code>#3346e0 · oscuro #7d8bff</code></div></div>
+ <div class="muestra"><div class="c" style="background:#f2f2f6;color:#121217;box-shadow:inset 0 -1px 0 #dcdce6">Fondo</div><div class="d"><b>Fondo de marca</b><code>#f2f2f6 · oscuro #121217</code></div></div>
+</div>
+<div class="wrap"><table><thead><tr><th>Par</th><th>Ratio</th><th>Sirve para</th></tr></thead><tbody>
+<tr><td>Tinta sobre fondo</td><td class="num">16.72:1</td><td>Texto</td></tr>
+<tr><td>Añil <code>#3346e0</code> sobre fondo claro</td><td class="num">6.08:1</td><td>Texto y dibujo (6.79:1 sobre blanco)</td></tr>
+<tr><td>Añil <code>#7d8bff</code> sobre fondo oscuro</td><td class="num">6.23:1</td><td>Texto y dibujo</td></tr>
+<tr><td>Cal sobre añil (icono de app)</td><td class="num">6.08:1</td><td>Dibujo</td></tr>
+<tr><td>Tinta sobre añil</td><td class="num mal">2.75:1</td><td>Nada: por eso en el icono la Z va en claro</td></tr>
+</tbody></table></div>
+<p class="sub">Mínimos: 4.5:1 para texto y 3:1 para dibujo.</p>
+</section>
+
+<section aria-labelledby="h-blanca"><span class="eyebrow">Marca blanca</span><h2 id="h-blanca">Cada palenque pone su color</h2>
+<p>En el portal de cada empresa (<code>pulz.mx/e/&lt;slug&gt;</code>) la marca es la del palenque. PULZ aparece solo como firma, y la diagonal y el lote toman el color de la empresa con <code>--pulz-color</code>. Si ese color no llega a 3:1 sobre el fondo, la firma se queda en tinta.</p>
+<div class="temas" role="group" aria-label="Color de la empresa">
+ <button type="button" aria-pressed="true" data-c="#3346e0" data-o="#7d8bff"><i style="--sw:#3346e0"></i>Añil (PULZ)</button>
+ <button type="button" aria-pressed="false" data-c="#2f5d58"><i style="--sw:#2f5d58"></i>Maguey</button>
+ <button type="button" aria-pressed="false" data-c="#b4582f"><i style="--sw:#b4582f"></i>Cobre</button>
+ <button type="button" aria-pressed="false" data-c="#7a1f3d"><i style="--sw:#7a1f3d"></i>Vino</button>
+ <button type="button" aria-pressed="false" data-c="#e0a82e"><i style="--sw:#e0a82e"></i>Ámbar</button>
+ <label style="display:inline-flex;align-items:center;gap:6px;font-size:.9rem">Otro <input id="otro" type="color" value="#6a3fb5" aria-label="Color propio de la empresa"></label>
+</div>
+<div class="portal" id="portal">
+ <div class="tile blanca"><div class="barra"></div><small>Portal claro · pie de página</small>{{FIRMA}}</div>
+ <div class="tile oscura" id="portalOscuro"><div class="barra"></div><small>Portal oscuro · pie de página</small>{{FIRMA}}</div>
+</div>
+<p class="lectura" aria-live="polite" id="lectura"></p>
+</section>
+
+<section aria-labelledby="h-mov"><span class="eyebrow">Movimiento</span><h2 id="h-mov">El trasiego</h2>
+<p>El lote se vacía del tanque de arriba, corre por la diagonal y llena el de abajo. Dura 2.2 segundos, una sola vez, al abrir la app o en una espera. Con «reducir movimiento» el logo aparece en reposo.</p>
+<button type="button" class="replay" id="replay">Ver el trasiego otra vez</button>
+<div class="wrap"><table><thead><tr><th>Tramo</th><th>Tiempo</th></tr></thead><tbody>
+<tr><td>Se vacía el tanque de arriba</td><td class="num">0.5–1.2 s</td></tr>
+<tr><td>Corre el trasiego por la diagonal</td><td class="num">0.9–1.6 s</td></tr>
+<tr><td>Se llena el tanque de abajo</td><td class="num">1.4–2.2 s</td></tr>
+</tbody></table></div>
+</section>
+
+<section aria-labelledby="h-app"><span class="eyebrow">Aplicaciones</span><h2 id="h-app">En el teléfono y en la pestaña</h2>
+<div class="apps">
+ <div class="tile">{{APP}}<small>PWA · 192 y 512</small></div>
+ <div class="tile">{{APPSQ}}<small>iOS · 180 (el sistema redondea)</small></div>
+ <div class="tile">{{MASK}}<small>Android maskable · zona segura</small></div>
+</div>
+<div class="grid">
+ <div class="tile blanca"><div class="fav"><span style="width:16px">{{S16}}</span><span style="width:32px">{{S16}}</span><span style="width:48px">{{S16}}</span></div><small>Favicon 16 · 32 · 48 en claro</small></div>
+ <div class="tile oscura"><div class="fav"><span style="width:16px">{{S16}}</span><span style="width:32px">{{S16}}</span><span style="width:48px">{{S16}}</span></div><small>En oscuro: el SVG cambia solo</small></div>
+</div>
+<p class="sub">A 16 px el lote desaparece: dos barras y la diagonal bastan para leer la Z.</p>
+<div class="tarjeta">{{TARJETA}}</div>
+<p class="sub">Tarjeta de 1200 × 630 para la vista previa de enlaces en WhatsApp y redes.</p>
+</section>
+
+<section aria-labelledby="h-tipo"><span class="eyebrow">Tipografía</span><h2 id="h-tipo">Unbounded para la marca</h2>
+<div class="tipo"><span class="u">PUL</span><span class="a">El nombre usa Unbounded 800, ancha y redonda. En los archivos va en trazados, así que no depende de la fuente instalada. Es solo para la marca: el texto de la app necesita una letra legible al sol, como la de esta página, y se decide aparte.</span></div>
+<div class="grid">
+ <div class="tile clara">{{WMSTAT}}<small>wordmark · claro</small></div>
+ <div class="tile oscura">{{WMSTAT}}<small>wordmark · oscuro</small></div>
+</div>
+</section>
+
+<section aria-labelledby="h-uso"><span class="eyebrow">Uso</span><h2 id="h-uso">Reglas cortas</h2>
+<div class="regla">
+ <div><h3>Tamaño mínimo</h3><p>Símbolo completo: 24 px. Por debajo, la versión de 16 px sin lote. Wordmark: 72 px de ancho.</p></div>
+ <div><h3>Espacio libre</h3><p>Alrededor del logo, al menos el alto de una barra.</p></div>
+ <div><h3>Una vez</h3><p>La animación corre una sola vez, nunca en bucle.</p></div>
+ <div class="no"><h3>No</h3><p>No pongas la diagonal en tinta sobre añil. No separes la Z del «PUL»: va al espacio de una letra. No uses el wordmark grande dentro de un portal.</p></div>
+</div>
+<p class="sub">Archivos en <code>docs/marca/</code> del repo de PULZ (SVG, PNG, favicon, iconos de app y <code>gen.py</code>).</p>
+</section>
+</main>
+<script>
+(function(){
+ var portal=document.getElementById('portal'),out=document.getElementById('lectura'),btns=[].slice.call(document.querySelectorAll('.temas button')),otro=document.getElementById('otro');
+ function lum(h){var c=[1,3,5].map(function(i){return parseInt(h.slice(i,i+2),16)/255}).map(function(v){return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2]}
+ function cr(a,b){var x=lum(a),y=lum(b);return (Math.max(x,y)+.05)/(Math.min(x,y)+.05)}
+ function pon(c,o){
+  o=o||c; var claro=cr(c,'#ffffff'),osc=cr(o,'#121217');
+  portal.style.setProperty('--empresa',c);
+  portal.querySelector('.blanca').style.setProperty('--pulz-color',claro>=3?c:'currentColor');
+  document.getElementById('portalOscuro').style.setProperty('--pulz-color',osc>=3?o:'currentColor');
+  out.innerHTML='<span class="'+(claro>=3?'':'mal')+'">Sobre blanco: '+claro.toFixed(2)+':1 · '+(claro>=3?'la firma usa el color':'no llega a 3:1, la firma queda en tinta')+'</span><span class="'+(osc>=3?'':'mal')+'">Sobre oscuro: '+osc.toFixed(2)+':1 · '+(osc>=3?'la firma usa el color':'no llega a 3:1, la firma queda en claro')+'</span>';
+ }
+ btns.forEach(function(b){b.addEventListener('click',function(){btns.forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});pon(b.dataset.c,b.dataset.o)})});
+ otro.addEventListener('input',function(){btns.forEach(function(x){x.setAttribute('aria-pressed','false')});pon(otro.value)});
+ pon('#3346e0','#7d8bff');
+ var hero=document.getElementById('hero');
+ function replay(){hero.querySelector('svg').getAnimations({subtree:true}).forEach(function(a){a.cancel();a.play()})}
+ hero.addEventListener('click',replay);
+ hero.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();replay()}});
+ document.getElementById('replay').addEventListener('click',function(){hero.scrollIntoView({behavior:'smooth',block:'center'});replay()});
+})();
+</script>
