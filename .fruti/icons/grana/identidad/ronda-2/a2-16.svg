@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="Grana" class="grana-a216">
+  <!-- Grana · versión de 16 px: grano, una banda, trazo grueso -->
+  <defs><mask id="a216-hueco" maskUnits="userSpaceOnUse" x="0" y="0" width="48" height="48"><rect width="48" height="48" fill="#fff"/><g fill="none" stroke="#000" stroke-width="8.1" stroke-linecap="round" stroke-linejoin="round"><path d="M23 10.5C30.98 10.5 40.00 17.22 40.00 25.50C40.00 33.78 32.39 40.5 23 40.5C13.61 40.5 6.00 33.78 6.00 25.50C6.00 17.22 15.02 10.5 23 10.5Z"/><path d="M6.30 25.50Q23 28.50 39.70 25.50"/></g></mask></defs>
+  <g mask="url(#a216-hueco)"><path class="grana__tinte" d="M23 10.5C30.98 10.5 40.00 17.22 40.00 25.50C40.00 33.78 32.39 40.5 23 40.5C13.61 40.5 6.00 33.78 6.00 25.50C6.00 17.22 15.02 10.5 23 10.5Z" transform="translate(3.4 3.4)" fill="var(--g-color-brand,#a3123a)"/></g>
+  <g class="grana__armazon" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"><path d="M23 10.5C30.98 10.5 40.00 17.22 40.00 25.50C40.00 33.78 32.39 40.5 23 40.5C13.61 40.5 6.00 33.78 6.00 25.50C6.00 17.22 15.02 10.5 23 10.5Z"/><path d="M6.30 25.50Q23 28.50 39.70 25.50"/></g>
+</svg>
