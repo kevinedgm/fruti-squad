@@ -68,3 +68,11 @@ Causa: en la versión oscura, contorno, espiga y manta salen del mismo color cre
 | D1 | Espiga y discos en `--oaxaca-color` | Se separa de la manta por color, pero sigue siendo fina |
 | D2 | Espiga más gruesa (×1.9) y larga, discos más anchos, pequeño hueco entre disco y esfera | Se lee como una pieza mecánica, no como algo que crece de la esfera. Funciona en una tinta |
 | **D3** | D2 + espiga y discos en `--oaxaca-color` | La separación más clara: la madera de la espiga es otra pieza, distinta de la manta |
+
+**Decisión del usuario:** mantener la espiga actual (D0), que es discreta, y arreglar solo las versiones oscuras. Variantes con el mismo grosor (`ronda-5/banco-oscuro.png`):
+
+| Variante | Cambio (solo en oscuro) | Lectura |
+|---|---|---|
+| E1 | Espiga y discos en madera `#b98e5e` (6.23:1 sobre el fondo oscuro, 2.81:1 frente a la manta) | Se lee como otro material, como la espiga real de madera |
+| E2 | Mismo crema, con un hueco de 0.07·R entre disco y esfera | Rompe la continuidad bulbo → tallo; el material sigue siendo el mismo |
+| **E3** | E1 + E2 | La separación más clara sin engrosar nada |
