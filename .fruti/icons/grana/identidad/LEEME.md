@@ -54,3 +54,24 @@ Contraste (mínimos de la propia Grana: texto 4.5:1, controles 3:1):
 - Carmín y nopal tienen luminosidad parecida: con deuteranopía se confunden. Regla: nunca distinguir dos estados solo por carmín frente a nopal.
 
 Archivos: `color/grana-marca.css` (variables listas), `color/paleta.json`, `color/color.py` (cálculo reproducible), `color/muestra.png` (paleta y cabecera de docs en claro y oscuro).
+
+**Aprobada (2026-10-08).**
+
+## Movimiento de marca · «la impresión» (`movimiento/`)
+
+Un solo gesto, repetido donde haya logo:
+1. Se traza el armazón en tinta.
+2. El tinte aparece alineado debajo.
+3. Al final se desliza, con un pequeño rebote, a su posición fuera de registro.
+
+La estructura llega primero y el color se asienta después: es la tesis de Grana contada en un segundo.
+
+| Archivo | Secuencia | Duración |
+|---|---|---|
+| `grana-simbolo-animado.svg` / `.gif` | contorno 0–420 ms · bandas 240–660 · antenas 360–560 · tinte aparece 420–680 · se desliza 620–1140 | ~1.14 s, una vez |
+| `grana-w2-animado.svg` / `.gif` | el símbolo hace el gesto; después, la copia en tinte del nombre aparece y se desliza (700–1380 ms) | ~1.38 s, una vez |
+
+- Curva del deslizamiento: `cubic-bezier(.2,1.5,.45,1)` (variable `--grana-mov-ease`).
+- Con «reducir movimiento», todo aparece en su estado final.
+- Sin bucle. Se usa al cargar la portada de las docs o el README; nunca en cada navegación.
+- El deslizamiento se hace con la propiedad CSS `translate`, que se suma al `transform` del tinte. Probado en Chromium.
