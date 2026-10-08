@@ -1,0 +1,80 @@
+<title>Movimiento PULZ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Atkinson+Hyperlegible+Next:wght@400;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Demo de una columna: cada comportamiento en su tarjeta con botón para repetirlo. Tokens de PULZ Foundations 2.0. */
+:root{--canvas:#f2f2f6;--surface:#ffffff;--ink:#121217;--muted:#55576a;--line:#dcdce6;--anil:#3346e0;--on-anil:#ffffff;--anil-s:#e4e7fc;--pericon:#f2b630;--verde:#0a7354;--verde-s:#d9f2e8;
+--display:"Unbounded",ui-sans-serif,system-ui,sans-serif;--ui:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",ui-sans-serif,system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;
+--rapido:120ms;--base:200ms;--lento:320ms;--vaciar:cubic-bezier(.5,0,.75,0);--llenar:cubic-bezier(.2,.8,.3,1);--estandar:cubic-bezier(.2,.8,.2,1)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--canvas:#121217;--surface:#1b1b23;--ink:#f2f2f6;--muted:#a6a8bb;--line:#2a2a36;--anil:#7d8bff;--on-anil:#121217;--anil-s:#1d2350;--verde:#3fcf9f;--verde-s:#0d3326;color-scheme:dark}}
+:root[data-theme="dark"]{--canvas:#121217;--surface:#1b1b23;--ink:#f2f2f6;--muted:#a6a8bb;--line:#2a2a36;--anil:#7d8bff;--on-anil:#121217;--anil-s:#1d2350;--verde:#3fcf9f;--verde-s:#0d3326;color-scheme:dark}
+body{background:var(--canvas);color:var(--ink);font:17px/1.5 var(--ui)}
+main{max-width:860px;margin:0 auto;padding-inline:20px;padding-block:28px 72px;display:grid;gap:28px}
+h1,h2{margin:0;font-family:var(--display);line-height:1.15;text-wrap:balance} h1{font-size:clamp(1.5rem,5vw,2.2rem);font-weight:800} h2{font-size:1.05rem;font-weight:700}
+p{margin:0;max-width:64ch} .sub{color:var(--muted)} code{font:500 .82em var(--mono)}
+.demo{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px;display:grid;gap:14px;min-width:0}
+.cab{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.rep{font:700 .9rem var(--ui);height:40px;padding:0 14px;border-radius:10px;border:2px solid var(--anil);background:transparent;color:var(--anil);cursor:pointer}
+button:focus-visible{outline:3px solid var(--anil);outline-offset:3px}
+.tanque{height:12px;border-radius:3px;background:var(--ink);position:relative;max-width:520px}
+.tanque i{position:absolute;left:3.5px;top:3.5px;bottom:3.5px;width:calc(100% - 7px);border-radius:2.5px;background:var(--anil);transform-origin:left center;transform:scaleX(var(--nivel,.62));transition:transform var(--lento) var(--llenar)}
+.nums{font:500 .8rem var(--mono);color:var(--muted)}
+.chips{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.chip{position:relative;overflow:hidden;height:32px;border-radius:8px;padding:0 12px;display:inline-flex;align-items:center;font-weight:700;font-size:.92rem;border:2px solid var(--line);color:var(--muted)}
+.chip::before{content:"";position:absolute;inset:0;transform-origin:var(--o,left) center;transform:scaleX(0);z-index:0}
+.chip span{position:relative;z-index:1}
+.chip.ferm::before{background:var(--anil-s)} .chip.listo::before{background:var(--verde-s)}
+.chip.on{border-color:transparent} .chip.ferm.on{color:var(--anil)} .chip.listo.on{color:var(--verde)}
+.chip.on::before{transform:scaleX(1)}
+.chip.sale::before{--o:right;transform:scaleX(0);transition:transform var(--base) var(--vaciar)}
+.chip.entra::before{transition:transform var(--lento) var(--llenar) 120ms}
+.btnp{position:relative;overflow:hidden;height:56px;border-radius:14px;border:0;padding:0 22px;font:700 1rem var(--ui);background:var(--anil);color:var(--on-anil);cursor:pointer;justify-self:start;min-width:240px}
+.btnp i{position:absolute;inset:0;background:var(--verde);transform-origin:left center;transform:scaleX(0)}
+.btnp span{position:relative}
+.btnp.ok i{transform:scaleX(1);transition:transform var(--lento) var(--llenar)}
+.btnp.ok{color:#fff}
+.tabla{display:grid;grid-template-columns:auto auto 1fr;gap:6px 18px;font-size:.95rem}
+.tabla b{font-weight:700} .tabla code{color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.tanque i,.chip::before,.btnp i{transition:none!important}}
+</style>
+<main>
+<header style="display:grid;gap:10px"><h1>Movimiento PULZ</h1>
+<p>La firma es el trasiego del logo: lo que cambia de estado se vacía de un lado y se llena del otro. Toca «Repetir» en cada ejemplo. Con «reducir movimiento» activado en tu sistema, todo cambia sin animación.</p></header>
+
+<section class="demo" aria-labelledby="d1"><div class="cab"><h2 id="d1">El tanque sube o baja</h2><button class="rep" id="r1" type="button">Repetir</button></div>
+<p class="sub">El nivel de una tina se llena desde la izquierda con la curva «llenar» (320 ms). Nunca rebota: un nivel no es un juguete.</p>
+<div class="tanque" id="t1"><i></i></div><span class="nums" id="n1">62 % · 1,240 L</span></section>
+
+<section class="demo" aria-labelledby="d2"><div class="cab"><h2 id="d2">Un lote cambia de etapa</h2><button class="rep" id="r2" type="button">Repetir</button></div>
+<p class="sub">El estado anterior se vacía hacia la derecha (200 ms, «vaciar») y el nuevo se llena desde la izquierda (320 ms, «llenar»): el mismo gesto que el lote pasando de un tanque al otro en el logo.</p>
+<div class="chips"><span class="chip ferm on" id="c1"><span>Fermentando</span></span><span aria-hidden="true">→</span><span class="chip listo" id="c2"><span>Listo para destilar</span></span></div></section>
+
+<section class="demo" aria-labelledby="d3"><div class="cab"><h2 id="d3">Registrar una medición</h2><button class="rep" id="r3" type="button">Repetir</button></div>
+<p class="sub">Al guardar, el botón se llena de verde y su texto cambia a «Guardado». Es la confirmación en el mismo sitio donde tocaste, sin ventana encima.</p>
+<button class="btnp" id="b3" type="button"><i></i><span id="b3t">Registrar medición</span></button></section>
+
+<section class="demo" aria-labelledby="d4"><h2 id="d4">Tokens</h2>
+<div class="tabla">
+<b>rápido</b><code>120 ms</code><span>Respuesta al tocar o pasar el ratón</span>
+<b>base</b><code>200 ms</code><span>Aparecer, desaparecer, vaciar</span>
+<b>lento</b><code>320 ms</code><span>Llenar, cambiar de pantalla</span>
+<b>firma</b><code>2.2 s</code><span>Solo el logo al abrir la app; una vez</span>
+<b>vaciar</b><code>cubic-bezier(.5,0,.75,0)</code><span>Arranca lento y sale rápido</span>
+<b>llenar</b><code>cubic-bezier(.2,.8,.3,1)</code><span>Entra rápido y se asienta</span>
+<b>estándar</b><code>cubic-bezier(.2,.8,.2,1)</code><span>Todo lo demás</span>
+</div></section>
+</main>
+<script>
+(function(){
+ var t=document.getElementById('t1'),n=document.getElementById('n1'),alto=false;
+ document.getElementById('r1').addEventListener('click',function(){alto=!alto;t.style.setProperty('--nivel',alto?.91:.62);n.textContent=alto?'91 % · 1,820 L':'62 % · 1,240 L'});
+ var c1=document.getElementById('c1'),c2=document.getElementById('c2'),paso=0;
+ function etapa(){c1.className='chip ferm on';c2.className='chip listo';void c1.offsetWidth;
+   setTimeout(function(){c1.className='chip ferm sale';c2.className='chip listo entra on'},250)}
+ document.getElementById('r2').addEventListener('click',etapa);
+ var b=document.getElementById('b3'),bt=document.getElementById('b3t');
+ function guardar(){b.classList.remove('ok');bt.textContent='Registrar medición';void b.offsetWidth;setTimeout(function(){b.classList.add('ok');bt.textContent='Guardado'},150)}
+ b.addEventListener('click',guardar);document.getElementById('r3').addEventListener('click',guardar);
+ setTimeout(function(){alto=true;t.style.setProperty('--nivel',.91);n.textContent='91 % · 1,820 L';etapa();guardar()},600);
+})();
+</script>
