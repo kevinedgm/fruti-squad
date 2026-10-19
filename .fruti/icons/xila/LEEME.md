@@ -43,3 +43,12 @@ Cambio de técnica: del brocado (telar) al bordado. Hecho clave: el punto de cru
 | I · flor bordada | flor de ocho puntas en punto de cruz, centro en cobalto | la más «ropa indígena»; a 16 px se confunde con copo de nieve o asterisco |
 | J · greca bordada | la greca escalonada de Mitla en punto de cruz; la última X es el último valor | une bordado y anatomía de Xila; a 16 px se lee «escalera» |
 | K · cadenilla | el hilo de cadeneta del Istmo como línea que termina en flor de puntos | la más literal; la cadeneta a 16 px es un garabato |
+
+## Decisión: J · greca bordada (usuario, 2026-10-19)
+
+## Ronda 5 · paleta y tipografía (`ronda-5/muestra.png`)
+
+- **Paleta Cobalto (propuesta):** manta `#f6f1e8` (fondo; en oscuro la tinta `#15171f`), tinta `#15171f` / `#f6f1e8`, cobalto `#1f4bd8` / `#7a9bff` (6.1:1 · 6.8:1), hilo `#d14e0a` / `#ff8a3d` (acento del bordado; como texto en claro `#ad3f09`, 5.35:1).
+- **Categórica de siete** (≥3:1 como gráfico en los dos modos): cobalto, hilo, jade `#0b6f71`/`#3fc1c3`, morado `#7b4fd1`/`#b49cff`, ocre `#7d6300`/`#e3c23a`, grana `#c2275d`/`#ff6b9a`, piedra `#6b7280`/`#9aa0ad`. Tonos derivados de Okabe-Ito; la validación para daltonismo con simulador queda pendiente.
+- **Heatmap:** manta → `#9fb3e8` → cobalto → marino `#0b1f5c`.
+- **Par 1 «Editorial»:** Fraunces (título del hallazgo) + Instrument Sans (interfaz) + JetBrains Mono (cifras). **Par 2 «Periódico»:** Newsreader + Space Grotesk (interfaz y cifras tabulares).
