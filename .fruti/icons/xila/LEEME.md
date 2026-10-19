@@ -18,3 +18,17 @@ Regla de la ronda: cada concepto se dibuja con la anatomía de la librería (2 p
 | B · la greca que es gráfica | la greca de Mitla como línea escalonada con último valor marcado | se lee «escalera» o «subida»; genérica de analítica |
 | C · la franja de barras | la banda de brocado hecha de barras redondeadas con hueco, silueta de rombo | se lee «ecualizador»; a 16 px la silueta se pierde |
 | D · la puntada | el zigzag de la costura como serie de tiempo con el pico en color | se lee «gráfica de línea»: cualquier producto de datos |
+
+## Ronda 2 · patrón de hilos (usuario: «más como un patrón, hilos»)
+
+El brocado se teje con hileras horizontales de distinto largo; una barra horizontal es exactamente eso (`ronda-2/banco.png`): A rombo de hilos, B trama y urdimbre, C greca de hileras, D retícula de rombos. Correctas pero quietas: ornamento, no dato.
+
+## Ronda 3 · disruptivo (usuario: «algo innovador, disruptivo»)
+
+El brocado no es ornamento, es dato (`ronda-3/banco.png`):
+
+| Concepto | Idea |
+|---|---|
+| E · el hilo que se sale | el rombo tejido; un hilo en cobalto abandona la trama y sigue como línea de 2 px hasta su último valor, con punto y anillo y la cifra al final. La tesis de Xila («formas que salen de la línea y la barra») con su propia anatomía |
+| F · telar generativo | el rombo es una distribución real: `xila.weave(data)` teje el logo con los datos de cada dashboard; el canónico es una muestra congelada |
+| G · xila tejida | el nombre se teje con hileras de hilo; el punto de la i en cobalto; wordmark = patrón |
