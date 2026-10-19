@@ -32,3 +32,14 @@ El brocado no es ornamento, es dato (`ronda-3/banco.png`):
 | E · el hilo que se sale | el rombo tejido; un hilo en cobalto abandona la trama y sigue como línea de 2 px hasta su último valor, con punto y anillo y la cifra al final. La tesis de Xila («formas que salen de la línea y la barra») con su propia anatomía |
 | F · telar generativo | el rombo es una distribución real: `xila.weave(data)` teje el logo con los datos de cada dashboard; el canónico es una muestra congelada |
 | G · xila tejida | el nombre se teje con hileras de hilo; el punto de la i en cobalto; wordmark = patrón |
+
+## Ronda 4 · bordado (usuario: «más como un bordado, como los textiles de la ropa indígena»)
+
+Cambio de técnica: del brocado (telar) al bordado. Hecho clave: el punto de cruz es una X, la inicial de Xila, y una cuadrícula de puntos es una matriz de datos (`ronda-4/banco.png`).
+
+| Concepto | Idea | Lectura (Claude) |
+|---|---|---|
+| H · rombo en punto de cruz | el motivo mínimo del huipil hecho de X; una X en cobalto es el dato | la más propia: la X es a la vez puntada, inicial y punto de datos; a 16 px se vuelve textura |
+| I · flor bordada | flor de ocho puntas en punto de cruz, centro en cobalto | la más «ropa indígena»; a 16 px se confunde con copo de nieve o asterisco |
+| J · greca bordada | la greca escalonada de Mitla en punto de cruz; la última X es el último valor | une bordado y anatomía de Xila; a 16 px se lee «escalera» |
+| K · cadenilla | el hilo de cadeneta del Istmo como línea que termina en flor de puntos | la más literal; la cadeneta a 16 px es un garabato |
