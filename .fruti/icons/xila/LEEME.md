@@ -52,3 +52,9 @@ Cambio de técnica: del brocado (telar) al bordado. Hecho clave: el punto de cru
 - **Categórica de siete** (≥3:1 como gráfico en los dos modos): cobalto, hilo, jade `#0b6f71`/`#3fc1c3`, morado `#7b4fd1`/`#b49cff`, ocre `#7d6300`/`#e3c23a`, grana `#c2275d`/`#ff6b9a`, piedra `#6b7280`/`#9aa0ad`. Tonos derivados de Okabe-Ito; la validación para daltonismo con simulador queda pendiente.
 - **Heatmap:** manta → `#9fb3e8` → cobalto → marino `#0b1f5c`.
 - **Par 1 «Editorial»:** Fraunces (título del hallazgo) + Instrument Sans (interfaz) + JetBrains Mono (cifras). **Par 2 «Periódico»:** Newsreader + Space Grotesk (interfaz y cifras tabulares).
+
+## Decisión final (usuario, 2026-10-19): J + paleta Cobalto + par «Editorial»
+
+- Paquete en `final/` (ver `final/LEEME.md`, `final/tema.json`).
+- La categórica de la ronda 5 **no pasaba** la simulación de daltonismo (hilo–ocre ΔE 2 en protanopia; jade–piedra 5). Se rehízo con búsqueda en Lab bajo las tres simulaciones de Machado 2009, con cobalto e hilo fijos y los tonos oscuros en la misma familia de tono que los claros: mínimo ΔE 24.3 (claro) y 21.2 (oscuro).
+- Pendiente: llevar `tema.json` al repo de la librería.

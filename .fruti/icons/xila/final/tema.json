@@ -1,0 +1,30 @@
+{
+  "$schema": "https://xila.dev/tema.schema.json",
+  "nombre": "Cobalto",
+  "version": "1.0.0",
+  "fuente": ".fruti/icons/xila/LEEME.md (aprobado 2026-10-19)",
+  "color": {
+    "manta":   { "claro": "#f6f1e8", "oscuro": "#15171f", "uso": "fondo del gráfico" },
+    "superficie": { "claro": "#fffdf9", "oscuro": "#1e2130", "uso": "tarjeta, tooltip, panel de resumen" },
+    "tinta":   { "claro": "#15171f", "oscuro": "#f6f1e8", "uso": "título del hallazgo, etiquetas, puntadas; 15.9:1" },
+    "tinta2":  { "claro": "#5b5f6e", "oscuro": "#a9adbd", "uso": "subtítulo, ejes, nombre de serie; 5.6:1 · 8.0:1" },
+    "grid":    { "claro": "#5b5f6e", "oscuro": "#a9adbd", "opacidad": 0.35, "uso": "grid solo horizontal, 1 px" },
+    "cobalto": { "claro": "#1f4bd8", "oscuro": "#7a9bff", "uso": "principal: línea, selección, el dato; 6.1:1 · 6.8:1" },
+    "hilo":    { "claro": "#d14e0a", "oscuro": "#ff8a3d", "texto_claro": "#ad3f09", "uso": "acento de marca (el naranja del bordado); como texto en claro usar texto_claro (5.35:1)" },
+    "anillo":  { "claro": "#fffdf9", "oscuro": "#1e2130", "uso": "anillo de superficie de los puntos (2 px) y hueco entre barras vecinas" }
+  },
+  "categorica": {
+    "nota": "Siete series. Validada con simulación de protanopia, deuteranopia y tritanopia (Machado 2009): distancia mínima ΔE76 entre pares 24.3 en claro y 21.2 en oscuro, en las cuatro visiones. Todas ≥3.3:1 sobre manta como gráfico.",
+    "claro":  ["#1f4bd8", "#d14e0a", "#986bb8", "#6b3361", "#533295", "#1f9380", "#13582a"],
+    "oscuro": ["#7a9bff", "#ff8a3d", "#9691ca", "#c78aa3", "#d1d4fa", "#47c27b", "#99f288"],
+    "nombres": ["cobalto", "hilo", "jacaranda", "ciruela", "índigo", "jade", "nopal"]
+  },
+  "heatmap": { "claro": ["#f6f1e8", "#9fb3e8", "#1f4bd8", "#0b1f5c"], "oscuro": ["#1e2130", "#2f4aa3", "#7a9bff", "#d1d4fa"], "uso": "secuencial de manta a marino; en oscuro, de superficie a lila claro" },
+  "tipografia": {
+    "hallazgo": { "familia": "Fraunces", "peso": 600, "opsz": 72, "uso": "título que dice el hallazgo (titlePlugin)" },
+    "interfaz": { "familia": "Instrument Sans", "peso": 400, "uso": "etiquetas, ejes, nombre de serie, tooltip" },
+    "cifras":   { "familia": "JetBrains Mono", "peso": 600, "uso": "último valor al final de la línea, tooltips, tablas" },
+    "marca":    { "familia": "Instrument Sans", "peso": 700, "uso": "el nombre xila; en los SVG va en trazados" }
+  },
+  "anatomia": { "linea_px": 2, "barra_radio": "la mitad del ancho", "barra_hueco_px": 4, "punto_radio_px": 4, "punto_anillo_px": 2, "grid": "solo horizontal, 1 px" }
+}
