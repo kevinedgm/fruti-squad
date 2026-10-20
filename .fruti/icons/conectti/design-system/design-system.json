@@ -1,0 +1,148 @@
+{
+  "v": 3,
+  "assetGroups": {
+    "Marca": {
+      "name": "Marca",
+      "tile": "m",
+      "order": [
+        "simbolo.svg",
+        "simbolo-tinta.svg",
+        "simbolo-inverso.svg",
+        "simbolo-16.svg",
+        "favicon.svg",
+        "app-icon.svg",
+        "app-icon-redondeado.svg",
+        "wordmark.svg",
+        "wordmark-tinta.svg",
+        "wordmark-inverso.svg",
+        "lockup.svg",
+        "lockup-inverso.svg",
+        "icon-512.png",
+        "icon-192.png",
+        "login-desktop.png",
+        "lamina.png"
+      ],
+      "files": {
+        "simbolo.svg": {
+          "name": "simbolo.svg",
+          "blob": "d2deaec5b73efe5e73a481153b11b7d6",
+          "size": 335,
+          "type": "image/svg+xml"
+        },
+        "simbolo-tinta.svg": {
+          "name": "simbolo-tinta.svg",
+          "blob": "4b026f3b6ef096569cb12bfd74b3bbeb",
+          "size": 335,
+          "type": "image/svg+xml"
+        },
+        "simbolo-inverso.svg": {
+          "name": "simbolo-inverso.svg",
+          "blob": "ad013351258ee88176ae102b934dbe58",
+          "size": 335,
+          "type": "image/svg+xml"
+        },
+        "simbolo-16.svg": {
+          "name": "simbolo-16.svg",
+          "blob": "19cb1ff1adf840c7726c53c40abe911b",
+          "size": 339,
+          "type": "image/svg+xml"
+        },
+        "favicon.svg": {
+          "name": "favicon.svg",
+          "blob": "b394e9a6da1c857004be6e2436cfb7f6",
+          "size": 452,
+          "type": "image/svg+xml"
+        },
+        "app-icon.svg": {
+          "name": "app-icon.svg",
+          "blob": "b2c6615c28dc161c3d0bc6e02926930f",
+          "size": 436,
+          "type": "image/svg+xml"
+        },
+        "app-icon-redondeado.svg": {
+          "name": "app-icon-redondeado.svg",
+          "blob": "bfed699d2077adc35f2da13e54008571",
+          "size": 438,
+          "type": "image/svg+xml"
+        },
+        "wordmark.svg": {
+          "name": "wordmark.svg",
+          "blob": "8fc82f6e4379161de48893751ff7038a",
+          "size": 4660,
+          "type": "image/svg+xml"
+        },
+        "wordmark-tinta.svg": {
+          "name": "wordmark-tinta.svg",
+          "blob": "f9c94059c245a7c91467722822f784ab",
+          "size": 4660,
+          "type": "image/svg+xml"
+        },
+        "wordmark-inverso.svg": {
+          "name": "wordmark-inverso.svg",
+          "blob": "17dd9478f8be27510c1d1b41b432474e",
+          "size": 4660,
+          "type": "image/svg+xml"
+        },
+        "lockup.svg": {
+          "name": "lockup.svg",
+          "blob": "714f03ca86201be7b53121e2ccd113c2",
+          "size": 4952,
+          "type": "image/svg+xml"
+        },
+        "lockup-inverso.svg": {
+          "name": "lockup-inverso.svg",
+          "blob": "7e10ace9203255f745b9fbe1d16121fe",
+          "size": 4952,
+          "type": "image/svg+xml"
+        },
+        "icon-512.png": {
+          "name": "icon-512.png",
+          "blob": "cacb1ce2af2e68c815fcc829d197e619",
+          "size": 5294,
+          "type": "image/png"
+        },
+        "icon-192.png": {
+          "name": "icon-192.png",
+          "blob": "e00a9a56fca16529a5f8bad7e7f973c9",
+          "size": 2349,
+          "type": "image/png"
+        },
+        "login-desktop.png": {
+          "name": "login-desktop.png",
+          "blob": "d50a84556a610a9793ede643a86c3291",
+          "size": 457259,
+          "type": "image/png"
+        },
+        "lamina.png": {
+          "name": "lamina.png",
+          "blob": "008d331d28d584ca1b2bb26a1c994749",
+          "size": 152915,
+          "type": "image/png"
+        }
+      }
+    }
+  },
+  "blobs": {},
+  "createdOnFiles": {
+    "at": "2026-10-20T02:55:21Z",
+    "v": 1
+  },
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "groups": [
+    "Marca"
+  ],
+  "lastChange": {
+    "at": "2026-10-20T03:47:22Z",
+    "by": "Kevin",
+    "via": "Claude Code",
+    "note": "Logotipo aprobado: la ligadura tt. Grupo de assets Marca, sección Marca, README y portada con el logotipo."
+  },
+  "layout": "files",
+  "libraries": [],
+  "namespace": "Conectti",
+  "sections": {},
+  "title": "Conectti"
+}

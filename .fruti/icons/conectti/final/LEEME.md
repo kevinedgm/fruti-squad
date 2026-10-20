@@ -15,4 +15,4 @@ Colores y tipografía vienen del Design System Conectti (sin tema oscuro): cobal
 | `lamina.html` / `lamina.png` | App icon en pantalla de inicio, favicon en pestaña clara y oscura, logotipo. |
 | `gen.py` | Genera los SVG: `python gen.py <carpeta con IBMPlexSans.ttf>` |
 
-Pendiente: aprobación del usuario; después, actualizar la línea «Conectti aún no tiene logotipo» del README del DS y subir los assets al artifact.
+Aprobado. Llevado al Design System de Conectti (grupo de assets «Marca», sección `marca.md`, README y portada): https://claude.ai/artifact/HZXXi7qbLBVxJXySU16efT. Guía de marca: https://claude.ai/artifact/EnFG4Ym3KCdipq3FsrSYde (`guia/gen-guia.py`). Copia de los archivos del DS en `design-system/`.
