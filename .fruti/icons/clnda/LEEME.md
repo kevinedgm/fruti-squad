@@ -42,3 +42,7 @@ La marca nace de cómo se escribe el nombre y del gesto del código; el color de
 ## Ronda 4 · desarrollo de C y E (usuario: «me gustaron la C y la E»)
 
 `ronda-4/banco.png`. Variantes de la llave (C1 llave en color, C2 punto grande, C3 par de llaves), del bloque cursor (E1 bloque con C, E2 proporción de cursor 1:2, E3 bloque tinta con C rosa) y dos híbridos con la llave recortada dentro del bloque (H1 punto en papel, H2 punto turquesa). Cada celda muestra color, una tinta, 24 y 16 px, sobre tinta, lockup «CLNDA▮» y la firma «hecho por CLNDA Studio».
+
+## Ronda 5 · desarrollo de C1 (usuario: «trabajemos sobre C1»)
+
+`ronda-5/muestra.png`: símbolo afinado (llave rosa #e4007c, punto tinta; sobre tinta la llave usa #ff5fb0), versión chica 16–24 px con trazo más grueso, app icon en papel/rosa/tinta, cuatro opciones de logotipo (Space Grotesk 700 + cursor, Syne 800, JetBrains Mono 700 con guion bajo, Unbounded 700), paleta (papel, tinta, rosa de marca; turquesa y amarillo solo de fiesta) y contexto: avatar de GitHub, firma de producto, tarjeta y cabecera web. Contrastes verificados: rosa/papel 4.1:1, tinta/papel 16:1, rosa claro/tinta 6.5:1.
