@@ -16,9 +16,20 @@ atip=[d for d in R if d['exceso']>0]; med=st.median(d['mt'] for d in R)
 perd=sum(d['litros']*d['exceso']/(1-d['mt']) for d in atip); cpl=C/L
 esp=[d for d in R if d['agave']=='Espadín']; silv=[d for d in R if d['agave']!='Espadín']
 def margen(g): return sum((d['precio_venta_litro_mxn']-d['costo_total_mxn']/d['litros'])*d['litros'] for d in g)/sum(d['litros'] for d in g)
-pf=max(R,key=lambda d:d['merma_fermentacion']); ph=max(R,key=lambda d:d['merma_horneado'])
-medF=st.median(d['merma_fermentacion'] for d in R)
 n=lambda v:f'{v:,.0f}'; p=lambda v:f'{v*100:.0f} %'; p1=lambda v:f'{v*100:.1f} %'
+# las dos etapas peores: por litros perdidos (exceso sobre la mediana × litros del lote), sumados en todos los lotes
+ETAPA={'merma_horneado':('Horneado','horno','revisar sellado y temperatura del horno antes del siguiente lote','Una merma de horneado arriba de lo normal casi siempre es sellado, lectura de temperatura o tiempo de cocción, no el agave. Anotar temperatura de piedra y horas de horneado por lote.'),
+ 'merma_molienda':('Molienda','molienda','revisar la tahona o el molino y el lavado del bagazo','Una merma de molienda alta suele ser bagazo que se va con jugo: revisar el desgarre y el lavado, y pesar bagazo húmedo a la salida.'),
+ 'merma_fermentacion':('Fermentación','tina','registrar temperatura y días de tina por lote','Sin registro de tina no se sabe si fue clima, agua o tiempo; con él, se ve antes de destilar y se decide si vale la pena pasar el lote al alambique.'),
+ 'merma_destilacion':('Destilación','alambique','revisar cortes de cabeza y cola y fugas en el alambique','Una merma de destilación alta es corte demasiado conservador o fuga de vapor: anotar litros y grado por cada corte.')}
+def peor(k): return max(R,key=lambda d:d[k]-MED[k])
+rank=sorted(ET,key=lambda k:-sum(max(0,d[k]-MED[k])*d['litros'] for d in R))
+E1,E2=rank[0],rank[1]
+def rec(num,k):
+    nom,lugar,accion,expl=ETAPA[k]; d=peor(k)
+    return f'<div class="rec"><b class="num">{num}</b><div><h2>{nom}: {accion}.</h2><p>El lote {d["lote"]} perdió {p(d[k])} en {lugar} contra una mediana de {p(MED[k])}. {expl}</p><p class="ev">Evidencia: columna «{nom}» de mermas por etapa, lote {d["lote"]}.</p></div></div>'
+rec1,rec2=rec(1,E1),rec(2,E2)
+filas=''.join(f'<tr{" class=alerta" if d["exceso"]>0 else ""}><td>{d["lote"]}</td><td>{d["agave"]}</td><td>{n(d["kg_agave"])}</td><td>{n(d["litros"])}</td><td>{d["rendimiento_kg_por_l"]:.1f}</td><td>{p1(d[E1])}</td><td>{p1(d[E2])}</td><td>{p1(d["mt"])}</td><td>${n(d["costo_por_litro_mxn"])}</td></tr>' for d in R)
 # --- gráficas SVG
 def barras(key,fmt,color,W=330,H=150):
     ml=44; mx=max(d[key] for d in R)*1.1; bw=(W-ml-6)/len(R); s=f'<svg viewBox="0 0 {W} {H}" width="{W}" height="{H}" font-family="Space Grotesk, sans-serif" font-size="9">'
@@ -40,7 +51,6 @@ def apiladas(W=330,H=150):
     leg=' '.join(f'<span><i style="background:{c}"></i>{nm}</span>' for _,nm,c in et)
     return s+'</svg>',leg
 g_merma,leg=apiladas(); g_costo=barras('costo_por_litro_mxn',lambda v:f'${v:,.0f}',lambda d:IND if d['agave']=='Espadín' else GRIS)
-filas=''.join(f'<tr{" class=alerta" if d["exceso"]>0 else ""}><td>{d["lote"]}</td><td>{d["agave"]}</td><td>{n(d["kg_agave"])}</td><td>{n(d["litros"])}</td><td>{d["rendimiento_kg_por_l"]:.1f}</td><td>{p1(d["merma_fermentacion"])}</td><td>{p1(d["merma_horneado"])}</td><td>{p1(d["mt"])}</td><td>${n(d["costo_por_litro_mxn"])}</td></tr>' for d in R)
 lock=open('/home/user/fruti-squad/.fruti/icons/clnda/final/svg/lockup.svg').read(); firma=open('/home/user/fruti-squad/.fruti/icons/clnda/final/svg/firma.svg').read()
 ms,me=margen(silv),margen(esp)
 if ms>me: rec3=f'<div class="rec"><b class="num">3</b><div><h2>Mezcla de productos: un lote más de silvestre al año deja más que uno de espadín.</h2><p>El margen bruto por litro de silvestre ({len(silv)} lotes) es de ${n(ms)} contra ${n(me)} en espadín, aun con el costo por litro más alto. La restricción es el agave, no el mercado: conviene planear la compra de silvestre con un año de anticipación.</p><p class="ev">Evidencia: costo por litro y precio de venta por lote; margen = (precio − costo por litro) × litros ÷ litros.</p></div></div>'
@@ -84,12 +94,12 @@ table{{border-collapse:collapse;width:100%;font-size:8.5pt;font-variant-numeric:
 <header class="cab"><div class="lk">{lock}</div><div class="meta"><b>{CLIENTE}</b>Tres recomendaciones y los doce lotes</div></header>
 <main>
 <h3>Qué cambiar primero</h3>
-<div class="rec"><b class="num">1</b><div><h2>Fermentación: registrar temperatura y días de tina por lote.</h2><p>El lote {pf['lote']} perdió {p(pf['merma_fermentacion'])} en tina contra una mediana de {p(medF)}. Sin registro de tina no se puede saber si fue clima, agua o tiempo; con él, se ve antes de destilar y se decide si vale la pena pasar el lote al alambique.</p><p class="ev">Evidencia: columna «Merma ferm.» de la tabla; gráfica de mermas, lote {pf['lote']}.</p></div></div>
-<div class="rec"><b class="num">2</b><div><h2>Horneado: revisar sellado y temperatura del horno antes del siguiente silvestre.</h2><p>El lote {ph['lote']} perdió {p(ph['merma_horneado'])} en el horno. Una merma de horneado arriba de 10 % casi siempre es sellado o lectura de temperatura, no el agave. En un lote de silvestre, ese 10 % vale varias veces más que en espadín.</p><p class="ev">Evidencia: columna «Merma horno», lote {ph['lote']}.</p></div></div>
+{rec1}
+{rec2}
 {rec3}
 <div class="reg"><b>Qué registrar a partir del próximo lote</b> (una hoja por lote, cinco minutos):<ul><li>Kilos de agave al entrar y al salir del horno.</li><li>Litros de jugo al salir de la molienda y al entrar a tina.</li><li>Temperatura y días de tina; fecha de inicio y fin.</li><li>Litros a la salida de cada destilación y grado.</li><li>Leña, jornales y otros gastos del lote.</li></ul></div>
 <h2 style="margin-top:10pt">Los {len(R)} lotes</h2>
-<table><thead><tr><th>Lote</th><th>Agave</th><th>kg agave</th><th>Litros</th><th>kg/L</th><th>Merma ferm.</th><th>Merma horno</th><th>Merma total</th><th>$/L</th></tr></thead><tbody>{filas}</tbody></table>
+<table><thead><tr><th>Lote</th><th>Agave</th><th>kg agave</th><th>Litros</th><th>kg/L</th><th>{ETAPA[E1][0]}</th><th>{ETAPA[E2][0]}</th><th>Merma total</th><th>$/L</th></tr></thead><tbody>{filas}</tbody></table>
 </main>
 <footer class="pie"><span>Página 2 de 2 · siguiente paso: tablero con estos datos, actualizado cada mes</span><div class="f">{firma}</div></footer>
 </section>
