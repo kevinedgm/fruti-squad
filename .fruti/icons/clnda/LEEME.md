@@ -38,3 +38,7 @@ La marca nace de cómo se escribe el nombre y del gesto del código; el color de
 | C · la llave | la C dibujada como `{` cerrada por un punto (el dato) | monograma de código; riesgo: se lee «snippet» genérico |
 | D · confeti con ajuste | confeti de colores atravesado por la recta de regresión | la más festiva; a 16 px es mancha de color |
 | E · CLNDA▮ | el nombre con cursor de bloque rosa; símbolo: bloque con C recortada | la más minimalista y la mejor como app icon; el bloque puede parpadear en web |
+
+## Ronda 4 · desarrollo de C y E (usuario: «me gustaron la C y la E»)
+
+`ronda-4/banco.png`. Variantes de la llave (C1 llave en color, C2 punto grande, C3 par de llaves), del bloque cursor (E1 bloque con C, E2 proporción de cursor 1:2, E3 bloque tinta con C rosa) y dos híbridos con la llave recortada dentro del bloque (H1 punto en papel, H2 punto turquesa). Cada celda muestra color, una tinta, 24 y 16 px, sobre tinta, lockup «CLNDA▮» y la firma «hecho por CLNDA Studio».
