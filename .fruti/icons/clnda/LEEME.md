@@ -46,3 +46,7 @@ La marca nace de cómo se escribe el nombre y del gesto del código; el color de
 ## Ronda 5 · desarrollo de C1 (usuario: «trabajemos sobre C1»)
 
 `ronda-5/muestra.png`: símbolo afinado (llave rosa #e4007c, punto tinta; sobre tinta la llave usa #ff5fb0), versión chica 16–24 px con trazo más grueso, app icon en papel/rosa/tinta, cuatro opciones de logotipo (Space Grotesk 700 + cursor, Syne 800, JetBrains Mono 700 con guion bajo, Unbounded 700), paleta (papel, tinta, rosa de marca; turquesa y amarillo solo de fiesta) y contexto: avatar de GitHub, firma de producto, tarjeta y cabecera web. Contrastes verificados: rosa/papel 4.1:1, tinta/papel 16:1, rosa claro/tinta 6.5:1.
+
+## Ronda 6 · paletas sobrias (usuario: «el rosa, el cian y el amarillo no; algo más elegante, minimalista»)
+
+`ronda-6/banco.png`: cinco paletas de fondo + tinta + un acento (llave y cursor), con columna clara y oscura y contraste calculado. 1 Grafito y cobre (#b4541f), 2 Hueso y bosque (#1e5c47), 3 Marfil y petróleo (#1c4a5e), 4 Niebla y ciruela (#5a3d73), 5 Monocromo (gris #8a8a86). Los colores de fiesta quedan fuera de la marca.
