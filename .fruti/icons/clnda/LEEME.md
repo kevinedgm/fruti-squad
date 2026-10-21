@@ -54,3 +54,7 @@ La marca nace de cómo se escribe el nombre y del gesto del código; el color de
 ## Ronda 7 · paletas vivas de tecnología (usuario: «las sobrias se sienten opacas para el sector»)
 
 `ronda-7/banco.png`, oscura primero: 1 Índigo eléctrico (#4338ca / #8b8cf8), 2 Violeta (#6d28d9 / #b094f7), 3 Esmeralda (#047857 / #34d399), 4 Naranja señal (#ea580c / #fb923c), 5 Tinta y lima (#4d7c0f en claro / #c6f23d en oscuro).
+
+## Ronda 8 · índigo + lima (usuario: «me gustan la 1 y la 5»)
+
+`ronda-8/banco.png`: tres repartos de índigo (#4338ca / #8b8cf8) y lima (#c6f23d / #4d7c0f en claro) sobre tinta #0e0f1c y fondo #f5f6fb. A índigo llave y lima dato (solo en oscuro); B un color por modo (lima en oscuro, índigo en claro); C índigo marca en ambos modos y lima solo en cursor e interfaz. Con botones, enlace, avatar de GitHub y firma.
