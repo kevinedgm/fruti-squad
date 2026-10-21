@@ -1,0 +1,30 @@
+{
+  "nombre": "CLNDA Studio",
+  "simbolo": "la llave: { en color de marca y el dato en tinta",
+  "color": {
+    "tinta": "#0e0f1c",
+    "fondo": "#f5f6fb",
+    "indigo": "#4338ca",
+    "indigo-oscuro": "#8b8cf8",
+    "lima": "#c6f23d",
+    "lima-claro": "#4d7c0f"
+  },
+  "reglas": {
+    "simbolo": "índigo en claro (#4338ca) e índigo claro sobre tinta (#8b8cf8); lima (#c6f23d) permitida solo sobre tinta como variante de pantalla: avatar, app icon, portadas",
+    "dato": "siempre tinta en claro y fondo en oscuro",
+    "cursor": "lima en oscuro, oliva #4d7c0f en claro",
+    "interfaz": "índigo = acción primaria en claro; lima = acción primaria en oscuro; enlaces índigo/lima"
+  },
+  "tipografia": {
+    "marca": "Space Grotesk 700 (trazados)",
+    "interfaz": "Space Grotesk 400/500",
+    "codigo": "JetBrains Mono 500"
+  },
+  "contraste": {
+    "indigo/fondo": 7.3,
+    "indigo-oscuro/tinta": 6.5,
+    "lima/tinta": 14.6,
+    "oliva/fondo": 4.6,
+    "tinta/fondo": 17.6
+  }
+}

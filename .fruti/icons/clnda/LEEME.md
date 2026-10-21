@@ -58,3 +58,7 @@ La marca nace de cómo se escribe el nombre y del gesto del código; el color de
 ## Ronda 8 · índigo + lima (usuario: «me gustan la 1 y la 5»)
 
 `ronda-8/banco.png`: tres repartos de índigo (#4338ca / #8b8cf8) y lima (#c6f23d / #4d7c0f en claro) sobre tinta #0e0f1c y fondo #f5f6fb. A índigo llave y lima dato (solo en oscuro); B un color por modo (lima en oscuro, índigo en claro); C índigo marca en ambos modos y lima solo en cursor e interfaz. Con botones, enlace, avatar de GitHub y firma.
+
+## Final (usuario: «me gustan B y C»)
+
+C es la regla (símbolo índigo en ambos modos) y B la variante permitida sobre tinta (llave lima en avatar, app icon y portadas). Paquete en `final/` (ver `final/LEEME.md`), guía de marca: https://claude.ai/artifact/GjzYnJQJAAh8tbqEoXuTQj (`guia/gen-guia.py`).
