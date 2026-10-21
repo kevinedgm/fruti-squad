@@ -50,3 +50,7 @@ La marca nace de cómo se escribe el nombre y del gesto del código; el color de
 ## Ronda 6 · paletas sobrias (usuario: «el rosa, el cian y el amarillo no; algo más elegante, minimalista»)
 
 `ronda-6/banco.png`: cinco paletas de fondo + tinta + un acento (llave y cursor), con columna clara y oscura y contraste calculado. 1 Grafito y cobre (#b4541f), 2 Hueso y bosque (#1e5c47), 3 Marfil y petróleo (#1c4a5e), 4 Niebla y ciruela (#5a3d73), 5 Monocromo (gris #8a8a86). Los colores de fiesta quedan fuera de la marca.
+
+## Ronda 7 · paletas vivas de tecnología (usuario: «las sobrias se sienten opacas para el sector»)
+
+`ronda-7/banco.png`, oscura primero: 1 Índigo eléctrico (#4338ca / #8b8cf8), 2 Violeta (#6d28d9 / #b094f7), 3 Esmeralda (#047857 / #34d399), 4 Naranja señal (#ea580c / #fb923c), 5 Tinta y lima (#4d7c0f en claro / #c6f23d en oscuro).
