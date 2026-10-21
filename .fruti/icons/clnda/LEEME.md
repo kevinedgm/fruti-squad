@@ -27,3 +27,14 @@ La calenda queda como capa oculta; el primer plano es código y datos (`ronda-2/
 | B · la distribución que suena | cinco barras: histograma, ecualizador de la banda y cinco letras; la moda en color | la más limpia a 16 px; riesgo: se lee «señal de audio» o «estadísticas» (ícono de app de música) |
 | C · la intersección | el bit (cuadrado) y el dato (círculo): donde se cruzan está el estudio | la más conceptual; a 16 px la lente se pierde |
 | D · la C de puntos | nube de datos que forma la inicial; un punto en color es el hallazgo; la curva, el ajuste | la más propia (inicial + datos); a 16 px se vuelve mancha: necesitaría versión pequeña |
+
+## Ronda 3 · tipográfica (usuario: ninguna de las anteriores)
+
+La marca nace de cómo se escribe el nombre y del gesto del código; el color de fiesta es el único guiño a la calenda (`ronda-3/banco.png`).
+
+| Concepto | Idea | Lectura (Claude) |
+|---|---|---|
+| A · C_ y C_L_ND_ | los guiones bajos ocupan el lugar de las vocales que faltan; también son el cursor de una terminal | la más propia: cuenta el nombre y el oficio en un solo gesto; símbolo C_ limpio a 16 px |
+| C · la llave | la C dibujada como `{` cerrada por un punto (el dato) | monograma de código; riesgo: se lee «snippet» genérico |
+| D · confeti con ajuste | confeti de colores atravesado por la recta de regresión | la más festiva; a 16 px es mancha de color |
+| E · CLNDA▮ | el nombre con cursor de bloque rosa; símbolo: bloque con C recortada | la más minimalista y la mejor como app icon; el bloque puede parpadear en web |
