@@ -96,7 +96,7 @@ def write(name,svg):
 seed=int(sys.argv[1]) if len(sys.argv)>1 else 7
 seed_t=int(sys.argv[2]) if len(sys.argv)>2 else 15
 # grande: trazo 3.5 px en 2560; el stroke se escala con el motivo, así que doy sw por motivo ≈ 3.5/scale medio
-g,n1=build(2560,1440,seed,n_target=95,sw=3.5,center_free=840,accents=(3,1),scale_rng=(1.0,1.9))
+g,n1=build(2560,1440,seed,n_target=95,sw=3.5,center_free=1000,accents=(3,1),scale_rng=(1.0,1.9))
 write('doodle-hero',g)
 t,n2=build(600,600,seed_t,n_target=16,sw=4,torus=True,accents=(1,0),scale_rng=(0.75,1.2))
 write('doodle-mosaico',t)

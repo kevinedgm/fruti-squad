@@ -8,5 +8,5 @@ background: transparent
 palette: hueso (#F6F4EF) sobre foto oscura · tinta (#111013) sobre foto clara; acento: 3 lóbulos en brand + 1 en accent (supuesto)
 detail: low
 formats:
-  grande: 2560x1440 PNG, trazo 3.5 px, centro libre (≈ 840 px)
+  grande: 2560x1440 PNG, trazo 3.5 px, centro libre (≈ 1000 px)
   pequeno: 600x600 PNG, mosaico sin costuras; se muestra a la mitad (300 px), trazo 4 px

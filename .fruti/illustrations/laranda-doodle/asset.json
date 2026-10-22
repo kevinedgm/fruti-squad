@@ -11,7 +11,7 @@
   ],
   "alt_text": "Garabatos a una línea de flores abiertas, capullos, pétalos y ramitas de Laranda, repartidos hacia los lados sobre la fotografía",
   "files": [
-    "doodle-hero-hueso.png (2560×1440, trazo 3.5 px, centro libre de 840 px)",
+    "doodle-hero-hueso.png (2560×1440, trazo 3.5 px, centro libre de 1000 px)",
     "doodle-hero-tinta.png",
     "doodle-mosaico-hueso.png (600×600 sin costuras; mostrar a 300×300)",
     "doodle-mosaico-tinta.png",
@@ -29,7 +29,7 @@
     "originality": 4
   },
   "notes": [
-    "Grande: densidad crece con la distancia al eje central (d^0.8); nada en una franja de 840 px al centro salvo puntos. Más denso a la derecha por azar de la semilla 7.",
+    "Grande: densidad crece con la distancia al eje central (d^0.8); nada en una franja de 1000 px al centro salvo puntos. Más denso a la derecha por azar de la semilla 7.",
     "Mosaico: 16 motivos en rejilla 4×4 con jitter, colocados en un toro (cada motivo se dibuja en 9 posiciones) para que empalme por los cuatro bordes. Es una sola tinta: sin acentos, para que la repetición cada 300 px no marque ritmo.",
     "Trazo uniforme con vector-effect non-scaling-stroke; a 300 px el mosaico queda a 2 px de línea."
   ]
