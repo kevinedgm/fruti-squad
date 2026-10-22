@@ -34,3 +34,7 @@ El usuario mandó tres referencias: tinta suelta con mancha violeta plana desfas
 | B · campana de frente | la que funciona: cinco lóbulos sueltos, garganta vacía, mancha desfasada; aguanta a 40 px y en app icon |
 | C · campana que cae | dos piezas, pero las dos se leen pez |
 | silueta 16–32 px | gota con hueco; sirve de base pero necesita la forma de B |
+
+## Ronda 5 · desarrollo de B con línea en tinta (`ronda-5/muestra.png`)
+
+Lóbulo superior derecho separado (4 unidades), mancha violeta desfasada fija, garganta vacía con anillo de tinta. Tres variantes: B1 línea fina (2.4) y desfase corto (5,4); B2 línea media (3.2) y desfase largo (8,7); B3 línea gruesa (4.2) y desfase corto. Silueta sólida de cinco lóbulos con uno separado para 16–32 px. Wordmark Fraunces 600 caja baja (el brote en la l salió como corazón: rehacer). App icon violeta con línea crema y mancha lila; chips de categoría; folio con la flor como sello; cabecera con botón Reservar en oro.
