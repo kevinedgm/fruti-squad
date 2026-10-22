@@ -19,3 +19,18 @@ Florecer sin flor: algo cerrado que se abre, una pieza que se separa, un centro 
 | C · cuadrantes | cuatro pastillas alrededor de un centro vacío; una se desplaza | se lee braille o dado; descartar |
 | D · la l que brota | el asta de la l y un brote separado con punto | se lee «i»; descartar como marca principal, sirve de monograma |
 | E · dos arcos | un paréntesis cerrado que se abre; punto al centro | la más abstracta y elegante; a 16 px aguanta; riesgo: icono de «foco» o «target» |
+
+## Ronda 3 · orgánica (`ronda-3/banco.png`) · usuario: «se ve muy rígido»
+
+Formas blandas y asimétricas: pétalo suelto, yema, forma partida, trazo que se abre. Lectura: blandas pero sin carácter; el pétalo suelto se lee hoja, la yema orejas. Descartada.
+
+## Ronda 4 · dibujada (`ronda-4/banco.png`) · referencias del usuario
+
+El usuario mandó tres referencias: tinta suelta con mancha violeta plana desfasada (impresión mal registrada), flores ilustradas planas y un patrón de jacarandas de línea. Lenguaje: línea de tinta a mano + mancha de color desfasada; la jacaranda como campana.
+
+| Concepto | Lectura (Claude) |
+|---|---|
+| A · campana de lado | el dibujo no sostiene: se lee pez o escarabajo |
+| B · campana de frente | la que funciona: cinco lóbulos sueltos, garganta vacía, mancha desfasada; aguanta a 40 px y en app icon |
+| C · campana que cae | dos piezas, pero las dos se leen pez |
+| silueta 16–32 px | gota con hueco; sirve de base pero necesita la forma de B |
