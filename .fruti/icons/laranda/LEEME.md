@@ -58,3 +58,7 @@ B2 + paleta intensa + Bricolage Grotesque / Onest (el usuario cambió de par en 
 ## Design System (2026-10-22)
 
 Artifact del tipo Design System: https://claude.ai/artifact/UViLit1eXFzCmpAKLN2V7P. Fuentes en `design-system/`: tokens (claro y oscuro; estados en oscuro provisionales), README (brand book), `marca.md`, 22 assets en el grupo «Marca», componentes Boton, ChipCategoria, Campo, TarjetaProfesional, Estado, NavInferior y Cover.
+
+## Ronda 9 · superficie y botones (`ronda-9/banco.png`) · usuario: «más pulcro, moderno, editorial»
+
+Misma pantalla de perfil en tres direcciones: A Blanco editorial (blanco, líneas finas, primario en tinta, radios 6–8, versalitas), B Papel frío (gris muy claro #F2F2F0 con tarjetas blancas, primario violeta, radios 8–10), C Tinta y aire (sin radios, reglas de 1 px en tinta, versalitas). Marca, violeta, naranja y oro no cambian.
