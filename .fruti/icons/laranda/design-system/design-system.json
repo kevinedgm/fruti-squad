@@ -177,10 +177,10 @@
     "Marca"
   ],
   "lastChange": {
-    "at": "2026-10-22T17:37:12Z",
+    "at": "2026-10-22T22:07:06Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "Reseñas, calificación y guardados: sección resenas.md y componentes Calificacion, Vuelven, Guardar, Resena y FlujoResena."
+    "note": "SelloCategoria: riel de sellos para filtrar por categoría (md 44 / lg 56, Todos, Más con punto en accent) y tokens cat-1..8-tinta/fondo."
   },
   "layout": "files",
   "libraries": [],

@@ -26,6 +26,7 @@ Blanco y tinta como base; un violeta para la marca y los enlaces, un naranja de 
 - `reserve` #D9A400 solo en Reservar y en la confirmación de cita, con texto en `on-reserve` (8.2:1). Nunca blanco sobre oro.
 - `success` y `danger` siempre con icono y etiqueta; sus avisos usan `*-soft` con `on-*-soft`.
 - Oscuro: fondo tinta, superficies #1A191D, `primary` pasa a hueso; `brand` sube a lila #C4B5F0 y `accent` a #F2A074; la línea de la flor pasa de tinta a hueso (`ink-draw`). Los estados en oscuro son provisionales: cumplen contraste, pero no se han probado en campo.
+- `cat-1..8-tinta` y `cat-1..8-fondo` son la paleta categórica: ocho tintas validadas por pares adyacentes (visión normal y daltonismo) y su esmalte al 12 % sobre `bg` (22 % en oscuro). Se asignan en orden fijo a las categorías de servicio (azul, naranja, aqua, bronce, magenta, verde, violeta, rojo) y nunca se reciclan; cada sello lleva además icono y nombre. El oro de Reservar y `brand` no son tintas de categoría.
 
 ![Simulación de daltonismo](/_blob/3cbe572c65ceb949265ee4091efea6f6)
 

@@ -66,3 +66,7 @@ Misma pantalla de perfil en tres direcciones: A Blanco editorial (blanco, línea
 ## Design System · dirección A aplicada (2026-10-22)
 
 Usuario eligió A (blanco editorial). Tokens: bg y surface blancos, surface-sunken #F3F3F1, text #111013, text-muted #5C5A61, border #E4E3E0, border-control #8A8894; nuevo `primary` en tinta con `on-primary`; `brand` queda para marca, enlaces, foco y chip seleccionado; radios 6/8/12; sin sombras salvo hoja inferior; estilo `overline` 11/16 versalitas. Oscuro: bg #111013, surface #1A191D, primary hueso. Componentes y portada actualizados.
+
+## Componentes
+
+- `componentes/CategorySelloFilter.vue`: versión Laranda del filtro de sellos de categoría (ronda categoria-sellos/r06). Misma lógica y plantilla; el CSS consume tokens de Laranda (`text`, `surface`, `border-control`, `brand`, `focus`, `space-N`, `radius-sm/xl`, `shadow-sheet`) y los ocho pares `cat-N-tinta` / `cat-N-fondo`. El punto de «Más» con filtro oculto activo va en `accent`. Tarjeta en el design system: `SelloCategoria`.
