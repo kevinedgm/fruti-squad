@@ -50,3 +50,7 @@ Validado con el validador de paletas (OKLab, CVD) contra violeta y los tres rese
 ## Ronda 8 · paleta intensa y neutra en género (`ronda-8/banco.png`) · usuario: «más intensos, para hombres y mujeres»
 
 Conjunto validado (visión normal ΔE ≥ 15.7, daltonismo ≥ 7.4 con icono y texto en estados): violeta intenso #5B3BB5 (presionado #4A2DA8), naranja de acento #E0611A (tinte #F2C9B2; en oscuro #F2A074), oro #D9A400 solo reservar, verde éxito #0E8F5E, rojo error #A8202F, tinta #15121C, hueso #F6F4EF, arena #EAE6DE; lila y niebla recalculadas #C4B5F0 y #ECE7FA. Cambia tres valores del brief (violeta, salvia, terracota) y el fondo de crema a hueso. Mostrado en marca, app icon, interfaz clara y oscura, y antes/después.
+
+## Final · aprobado (2026-10-22)
+
+B2 + paleta intensa + Bricolage Grotesque / Onest (el usuario cambió de par en el cierre). Paquete en `final/` (ver `final/LEEME.md`, `final/pruebas.md`); manual en `guia/gen-guia.py` publicado como artifact.

@@ -1,0 +1,49 @@
+{
+  "nombre": "laranda",
+  "historia": "la jacaranda sin la jota: el instante de florecer",
+  "simbolo": "flor dibujada a mano: línea de tinta, mancha violeta desfasada (8,7), el lóbulo superior derecho separado en naranja, garganta vacía",
+  "color": {
+    "violeta": "#5B3BB5",
+    "violeta-presionado": "#4A2DA8",
+    "lila": "#C4B5F0",
+    "niebla": "#ECE7FA",
+    "naranja": "#E0611A",
+    "naranja-tinte": "#F2C9B2",
+    "naranja-oscuro": "#F2A074",
+    "oro-reservar": "#D9A400",
+    "verde-exito": "#0E8F5E",
+    "rojo-error": "#A8202F",
+    "tinta": "#15121C",
+    "tinta-suave": "#4F4B57",
+    "hueso": "#F6F4EF",
+    "arena": "#EAE6DE",
+    "superficie-oscura": "#221E2E"
+  },
+  "reglas": {
+    "oro": "solo botón Reservar y confirmación de cita; texto en tinta",
+    "estados": "siempre color + icono + texto",
+    "naranja": "acento de marca: lóbulo separado, enlaces, destacados, ilustración; como texto solo en tamaño grande (3.2:1)",
+    "oscuro": "violeta sube a lila, naranja a naranja-oscuro, mancha en lila"
+  },
+  "tipografia": {
+    "primaria": "Bricolage Grotesque 600, opsz 96 (wordmark en trazados; títulos)",
+    "secundaria": "Onest 400/500/700 (interfaz y cuerpo)",
+    "mono": "IBM Plex Mono 500 (folios)"
+  },
+  "tamanos_minimos": {
+    "simbolo": "40 px; de 16 a 32 px, la silueta",
+    "lockup-h": "120 px",
+    "lockup-v": "80 px",
+    "wordmark": "80 px"
+  },
+  "area_de_respeto": "la altura del punto central de la flor (r = 4.5 en 128)",
+  "contraste": {
+    "violeta/hueso": 7.0,
+    "naranja/hueso": 3.2,
+    "verde/hueso": 3.7,
+    "rojo/hueso": 6.6,
+    "tinta/oro": 8.2,
+    "lila/tinta": 10.4,
+    "naranja-oscuro/tinta": 7.7
+  }
+}
