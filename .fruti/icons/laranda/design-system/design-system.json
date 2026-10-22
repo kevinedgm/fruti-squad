@@ -1,0 +1,190 @@
+{
+  "v": 3,
+  "layout": "files",
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-22T17:20:36Z"
+  },
+  "title": "Laranda",
+  "namespace": "Laranda",
+  "libraries": [],
+  "sections": {},
+  "groups": [
+    "Marca"
+  ],
+  "assetGroups": {
+    "Marca": {
+      "name": "Marca",
+      "tile": "m",
+      "order": [
+        "simbolo.svg",
+        "simbolo-oscuro.svg",
+        "simbolo-tinta.svg",
+        "silueta.svg",
+        "silueta-oscuro.svg",
+        "favicon.svg",
+        "app-icon.svg",
+        "app-icon-maskable.svg",
+        "avatar.svg",
+        "wordmark.svg",
+        "wordmark-oscuro.svg",
+        "lockup-h.svg",
+        "lockup-h-oscuro.svg",
+        "lockup-v.svg",
+        "sello.svg",
+        "sello-emitido.svg",
+        "simbolo-bloom.svg",
+        "tarjeta-redes.svg",
+        "icon-512.png",
+        "icon-192.png",
+        "simbolo-bloom.gif",
+        "daltonismo.png"
+      ],
+      "files": {
+        "simbolo.svg": {
+          "name": "simbolo.svg",
+          "blob": "ac11e159f7c987ba4310814f49a9796b",
+          "size": 1126,
+          "type": "image/svg+xml"
+        },
+        "simbolo-oscuro.svg": {
+          "name": "simbolo-oscuro.svg",
+          "blob": "8f08ef44dbf94043c63cef4e7534f2d9",
+          "size": 1126,
+          "type": "image/svg+xml"
+        },
+        "simbolo-tinta.svg": {
+          "name": "simbolo-tinta.svg",
+          "blob": "3ceeea8855e0dfaec6a39ba0762e4dea",
+          "size": 812,
+          "type": "image/svg+xml"
+        },
+        "silueta.svg": {
+          "name": "silueta.svg",
+          "blob": "2d125af3a4191f8382f739df0319e9d2",
+          "size": 428,
+          "type": "image/svg+xml"
+        },
+        "silueta-oscuro.svg": {
+          "name": "silueta-oscuro.svg",
+          "blob": "70e964f3fa91ada022b65ffc5c6096b9",
+          "size": 428,
+          "type": "image/svg+xml"
+        },
+        "favicon.svg": {
+          "name": "favicon.svg",
+          "blob": "fa6eb9e9f1acdb9d5f481a6fc6daaae0",
+          "size": 509,
+          "type": "image/svg+xml"
+        },
+        "app-icon.svg": {
+          "name": "app-icon.svg",
+          "blob": "f8d1c1456ebf1edb10d0f7fdfc69929c",
+          "size": 1229,
+          "type": "image/svg+xml"
+        },
+        "app-icon-maskable.svg": {
+          "name": "app-icon-maskable.svg",
+          "blob": "595acb4bed0caab36c3a1a824ad52c38",
+          "size": 1231,
+          "type": "image/svg+xml"
+        },
+        "avatar.svg": {
+          "name": "avatar.svg",
+          "blob": "b8ab3922aaa7b05cd31babca1dff79b3",
+          "size": 1231,
+          "type": "image/svg+xml"
+        },
+        "wordmark.svg": {
+          "name": "wordmark.svg",
+          "blob": "078aac584ed8a05cd22e3d404b3e3802",
+          "size": 7777,
+          "type": "image/svg+xml"
+        },
+        "wordmark-oscuro.svg": {
+          "name": "wordmark-oscuro.svg",
+          "blob": "1a3a7b117ea669812d216feb8effab81",
+          "size": 7777,
+          "type": "image/svg+xml"
+        },
+        "lockup-h.svg": {
+          "name": "lockup-h.svg",
+          "blob": "9cabaca099c454bb0284a894cb38bee7",
+          "size": 8861,
+          "type": "image/svg+xml"
+        },
+        "lockup-h-oscuro.svg": {
+          "name": "lockup-h-oscuro.svg",
+          "blob": "26c4180a2e7013f44021fba4b2ba20b7",
+          "size": 8861,
+          "type": "image/svg+xml"
+        },
+        "lockup-v.svg": {
+          "name": "lockup-v.svg",
+          "blob": "20d18afe295eedd632b167699fad6948",
+          "size": 11472,
+          "type": "image/svg+xml"
+        },
+        "sello.svg": {
+          "name": "sello.svg",
+          "blob": "8709252364afc36e8e2b7190ecda8182",
+          "size": 812,
+          "type": "image/svg+xml"
+        },
+        "sello-emitido.svg": {
+          "name": "sello-emitido.svg",
+          "blob": "159d6d393a507c09d09ea5db815cdc39",
+          "size": 918,
+          "type": "image/svg+xml"
+        },
+        "simbolo-bloom.svg": {
+          "name": "simbolo-bloom.svg",
+          "blob": "9969a4584da77a8271cdcf24b1e18ea7",
+          "size": 2004,
+          "type": "image/svg+xml"
+        },
+        "tarjeta-redes.svg": {
+          "name": "tarjeta-redes.svg",
+          "blob": "2938d4feacf27e64537e023ad192b38e",
+          "size": 8231,
+          "type": "image/svg+xml"
+        },
+        "icon-512.png": {
+          "name": "icon-512.png",
+          "blob": "6a8f62f33120394d4c0c36d01bfe9f69",
+          "size": 23485,
+          "type": "image/png"
+        },
+        "icon-192.png": {
+          "name": "icon-192.png",
+          "blob": "9caa6b468f10ef119ea683468a4aa0fe",
+          "size": 8185,
+          "type": "image/png"
+        },
+        "simbolo-bloom.gif": {
+          "name": "simbolo-bloom.gif",
+          "blob": "6d0098676610c87b34af960f1c5c0f20",
+          "size": 98245,
+          "type": "image/gif"
+        },
+        "daltonismo.png": {
+          "name": "daltonismo.png",
+          "blob": "3cbe572c65ceb949265ee4091efea6f6",
+          "size": 501849,
+          "type": "image/png"
+        }
+      }
+    }
+  },
+  "blobs": {},
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "lastChange": {
+    "at": "2026-10-22T17:20:36Z",
+    "by": "Kevin",
+    "via": "Claude Code",
+    "note": "Sistema inicial desde el paquete de marca de Laranda: tokens claro/oscuro, brand book, sección Marca, 22 assets y seis componentes."
+  }
+}

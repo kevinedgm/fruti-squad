@@ -54,3 +54,7 @@ Conjunto validado (visión normal ΔE ≥ 15.7, daltonismo ≥ 7.4 con icono y t
 ## Final · aprobado (2026-10-22)
 
 B2 + paleta intensa + Bricolage Grotesque / Onest (el usuario cambió de par en el cierre). Paquete en `final/` (ver `final/LEEME.md`, `final/pruebas.md`); manual en `guia/gen-guia.py` publicado como artifact.
+
+## Design System (2026-10-22)
+
+Artifact del tipo Design System: https://claude.ai/artifact/UViLit1eXFzCmpAKLN2V7P. Fuentes en `design-system/`: tokens (claro y oscuro; estados en oscuro provisionales), README (brand book), `marca.md`, 22 assets en el grupo «Marca», componentes Boton, ChipCategoria, Campo, TarjetaProfesional, Estado, NavInferior y Cover.
