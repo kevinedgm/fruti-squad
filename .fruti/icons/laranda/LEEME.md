@@ -42,3 +42,7 @@ Lóbulo superior derecho separado (4 unidades), mancha violeta desfasada fija, g
 ## Ronda 6 · tipografía (`ronda-6/banco.png`) · usuario eligió B2 y pidió primaria + secundaria
 
 Cuatro pares con B2 en lockup, tagline bilingüe, alfabeto, cabecera de perfil, folio (IBM Plex Mono, fijo por el brief) y aviso: 1 Fraunces + Manrope · 2 Fraunces + Atkinson Hyperlegible Next · 3 Lora + DM Sans · 4 Bricolage Grotesque + Onest.
+
+## Ronda 7 · color de acento (`ronda-7/banco.png`) · usuario: «hace falta un color de acento»
+
+Validado con el validador de paletas (OKLab, CVD) contra violeta y los tres reservados (oro, salvia, terracota). Todo acento saturado de tono medio choca con uno de los reservados: coral/naranja con terracota, verdes con salvia, azul-violeta con violeta. Candidatos mostrados: 1 Durazno #F2B48C (acento de relleno, texto siempre en tinta), 2 Coral #E0674B (vivo; exige oscurecer el error a #8A2E1E), 3 Cielo #3F86C9 (pasa contra todos; enfría). Recomendación: Durazno.
