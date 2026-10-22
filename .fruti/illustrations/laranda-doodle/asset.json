@@ -1,0 +1,36 @@
+{
+  "id": "laranda-doodle",
+  "variant": "hero",
+  "ratio": "16:9 (grande) · 1:1 (mosaico)",
+  "background": "transparent",
+  "characters": 0,
+  "palette_tokens": [
+    "ink-draw hueso #F6F4EF (sobre foto oscura) · tinta #111013 (sobre foto clara)",
+    "brand #C4B5F0 / #5B3BB5 (mancha de 3 flores, solo en el hero)",
+    "accent #F2A074 / #E0611A (lóbulo suelto de 1 flor, solo en el hero)"
+  ],
+  "alt_text": "Garabatos a una línea de flores abiertas, capullos, pétalos y ramitas de Laranda, repartidos hacia los lados sobre la fotografía",
+  "files": [
+    "doodle-hero-hueso.png (2560×1440, trazo 3.5 px, centro libre de 840 px)",
+    "doodle-hero-tinta.png",
+    "doodle-mosaico-hueso.png (600×600 sin costuras; mostrar a 300×300)",
+    "doodle-mosaico-tinta.png",
+    "doodle-hero-*.svg, doodle-mosaico-*.svg (fuente)",
+    "gen.py (python3 gen.py 7 16 regenera todo)",
+    "brief.yaml"
+  ],
+  "source": "dibujado a mano en SVG a partir de los lóbulos de la flor de Laranda (icons/laranda/final/gen.py); variación orgánica determinista ±1.6 u",
+  "scores": {
+    "anatomy": 4,
+    "composition": 4,
+    "narrative_clarity": 5,
+    "style_consistency": 5,
+    "small_size_legibility": 4,
+    "originality": 4
+  },
+  "notes": [
+    "Grande: densidad crece con la distancia al eje central (d^0.8); nada en una franja de 840 px al centro salvo puntos. Más denso a la derecha por azar de la semilla 7.",
+    "Mosaico: 16 motivos en rejilla 4×4 con jitter, colocados en un toro (cada motivo se dibuja en 9 posiciones) para que empalme por los cuatro bordes. Es una sola tinta: sin acentos, para que la repetición cada 300 px no marque ritmo.",
+    "Trazo uniforme con vector-effect non-scaling-stroke; a 300 px el mosaico queda a 2 px de línea."
+  ]
+}

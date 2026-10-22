@@ -1,0 +1,12 @@
+variant: hero                  # patrón doodle sobre la foto del hero (object/spot simples repetidos; dibujado a mano en SVG)
+subject: la floración de Laranda
+action: flores abiertas, capullos, pétalos que caen, ramitas y puntos sueltos, dibujados a una sola línea
+emotion: ligero, en flor
+context: encima de la fotografía del hero; el centro queda libre para el titular
+anchor: left-right             # grande: los trazos se reparten hacia los lados
+background: transparent
+palette: hueso (#F6F4EF) sobre foto oscura · tinta (#111013) sobre foto clara; acento: 3 lóbulos en brand + 1 en accent (supuesto)
+detail: low
+formats:
+  grande: 2560x1440 PNG, trazo 3.5 px, centro libre (≈ 840 px)
+  pequeno: 600x600 PNG, mosaico sin costuras; se muestra a la mitad (300 px), trazo 4 px

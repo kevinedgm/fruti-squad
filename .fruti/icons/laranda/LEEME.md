@@ -70,3 +70,10 @@ Usuario eligió A (blanco editorial). Tokens: bg y surface blancos, surface-sunk
 ## Componentes
 
 - `componentes/CategorySelloFilter.vue`: versión Laranda del filtro de sellos de categoría (ronda categoria-sellos/r06). Misma lógica y plantilla; el CSS consume tokens de Laranda (`text`, `surface`, `border-control`, `brand`, `focus`, `space-N`, `radius-sm/xl`, `shadow-sheet`) y los ocho pares `cat-N-tinta` / `cat-N-fondo`. El punto de «Más» con filtro oculto activo va en `accent`. Tarjeta en el design system: `SelloCategoria`.
+
+## Doodle del hero
+
+`.fruti/illustrations/laranda-doodle/`: patrón de garabatos a una línea (flores abiertas, capullos, pétalos, ramitas, puntos) que va encima de la foto del hero, PNG con fondo transparente.
+- Grande (≥ 1200 px de ancho): `doodle-hero-hueso.png` o `-tinta.png`, 2560 × 1440, cubre el hero igual que la foto (`object-fit: cover`); los trazos van a los lados y el centro queda libre para el titular. Tres flores llevan la mancha `brand` y una el lóbulo `accent`.
+- Pequeño (< 1200 px): `doodle-mosaico-*.png`, 600 × 600 sin costuras, mostrado a la mitad: `background: url(doodle-mosaico-hueso.png) repeat; background-size: 300px 300px`.
+- Hueso sobre foto oscura; tinta sobre foto clara. Si la foto es media, oscurécela con un velo de `text` al 35 % y usa hueso.
