@@ -62,3 +62,7 @@ Artifact del tipo Design System: https://claude.ai/artifact/UViLit1eXFzCmpAKLN2V
 ## Ronda 9 · superficie y botones (`ronda-9/banco.png`) · usuario: «más pulcro, moderno, editorial»
 
 Misma pantalla de perfil en tres direcciones: A Blanco editorial (blanco, líneas finas, primario en tinta, radios 6–8, versalitas), B Papel frío (gris muy claro #F2F2F0 con tarjetas blancas, primario violeta, radios 8–10), C Tinta y aire (sin radios, reglas de 1 px en tinta, versalitas). Marca, violeta, naranja y oro no cambian.
+
+## Design System · dirección A aplicada (2026-10-22)
+
+Usuario eligió A (blanco editorial). Tokens: bg y surface blancos, surface-sunken #F3F3F1, text #111013, text-muted #5C5A61, border #E4E3E0, border-control #8A8894; nuevo `primary` en tinta con `on-primary`; `brand` queda para marca, enlaces, foco y chip seleccionado; radios 6/8/12; sin sombras salvo hoja inferior; estilo `overline` 11/16 versalitas. Oscuro: bg #111013, surface #1A191D, primary hueso. Componentes y portada actualizados.

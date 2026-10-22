@@ -7,7 +7,7 @@ Plataforma para profesionales independientes de belleza y cuidado personal en M�
 ## Principios
 
 - **Artesanal sin ser rústico.** La flor es un dibujo a mano con una mancha de color desfasada; todo lo demás es limpio y preciso. El carácter vive en la marca y en la tipografía de títulos, no en texturas ni ornamentos.
-- **Neutro en género.** Violeta intenso, naranja, fondo hueso frío. Nada de rosas, nada de degradados violeta-rosa, nada de pétalos genéricos.
+- **Neutro en género y editorial.** Violeta intenso, naranja, blanco y tinta. Superficies blancas separadas por líneas finas, botón primario en tinta, etiquetas en versalitas. Nada de rosas, nada de degradados violeta-rosa, nada de pétalos genéricos.
 - **El oro se gana.** `reserve` aparece una sola vez por pantalla: el botón Reservar y la confirmación de cita. Si aparece en otro lugar, está mal.
 - **Nada depende solo del color.** Cada categoría y cada estado lleva color, icono y texto.
 - **Florece en público.** La flor es un símbolo de estado: aparece y se abre cuando el negocio florece (perfil publicado, folio emitido, primera reseña).
@@ -18,13 +18,14 @@ Frases cortas, verbos concretos: florece, ordena, cobra, vuelve. Nunca «potenci
 
 ## Color
 
-Un violeta para la acción y la marca, un naranja de acento, un oro reservado, dos estados y neutros. Validado con simulación de daltonismo: todas las parejas se distinguen con visión normal, y bajo protanopia, deuteranopia y tritanopia con el apoyo de icono y texto en los estados.
+Blanco y tinta como base; un violeta para la marca y los enlaces, un naranja de acento, un oro reservado y dos estados. Validado con simulación de daltonismo: todas las parejas se distinguen con visión normal, y bajo protanopia, deuteranopia y tritanopia con el apoyo de icono y texto en los estados.
 
-- `brand` #5B3BB5 es la acción primaria, el foco y la mancha de la flor; `brand-strong` para hover y presionado; `brand-soft` y `brand-tint` para fondos de foco y chips. Sobre `brand` siempre `on-brand`.
+- `primary` es tinta: el botón principal de la pantalla cuando no es Reservar. Así el oro de Reservar es el único color fuerte en la pantalla.
+- `brand` #5B3BB5 es la marca, los enlaces, el foco, el chip seleccionado y la mancha de la flor; `brand-soft` para fondos marcados. Sobre `brand` siempre `on-brand`.
 - `accent` #E0611A es el acento de marca: el lóbulo que se abre, enlaces y destacados. Como texto solo a 18 px o más (3.2:1 sobre `bg`); texto chico va en `text` sobre `accent-soft`.
 - `reserve` #D9A400 solo en Reservar y en la confirmación de cita, con texto en `on-reserve` (8.2:1). Nunca blanco sobre oro.
 - `success` y `danger` siempre con icono y etiqueta; sus avisos usan `*-soft` con `on-*-soft`.
-- Oscuro: `brand` sube a lila #C4B5F0 y `accent` a #F2A074; la línea de la flor pasa de tinta a hueso (`ink-draw`). Los estados en oscuro son provisionales: cumplen contraste, pero no se han probado en campo.
+- Oscuro: fondo tinta, superficies #1A191D, `primary` pasa a hueso; `brand` sube a lila #C4B5F0 y `accent` a #F2A074; la línea de la flor pasa de tinta a hueso (`ink-draw`). Los estados en oscuro son provisionales: cumplen contraste, pero no se han probado en campo.
 
 ![Simulación de daltonismo](/_blob/3cbe572c65ceb949265ee4091efea6f6)
 
@@ -37,7 +38,7 @@ Un violeta para la acción y la marca, un naranja de acento, un oro reservado, d
 
 ## Espacio, forma y elevación
 
-Escala de 4 px. Gutter lateral de 16 px en móvil (`space-4`). Controles de 44 px de alto (`control-h`); Reservar en cabecera, 52 px. Radios: 8 chips chicos, 12 campos y tarjetas, 14 botones y hojas, 20 hojas inferiores, píldora para chips de categoría y avatar. Tarjetas delimitadas por `border`; `shadow-sm` solo cuando el borde no basta; `shadow-sheet` para la hoja inferior.
+Escala de 4 px. Gutter lateral de 16 px en móvil (`space-4`). Controles de 44 px de alto (`control-h`); Reservar en cabecera, 52 px. Radios chicos: 6 en chips y botones, 8 en campos y tarjetas, 12 en hojas; píldora solo para el avatar. Sin sombras: las tarjetas se separan con `border` de 1 px, y los planos de la pantalla con `surface-sunken` cuando hace falta. Solo la hoja inferior lleva `shadow-sheet`. Las etiquetas sobre datos y secciones van en `overline`, versalitas con tracking.
 
 ## Movimiento
 
