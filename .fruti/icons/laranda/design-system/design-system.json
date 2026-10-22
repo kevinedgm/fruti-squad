@@ -177,10 +177,10 @@
     "Marca"
   ],
   "lastChange": {
-    "at": "2026-10-22T17:25:58Z",
+    "at": "2026-10-22T17:37:12Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "Superficies y botones a la dirección A (blanco editorial): fondo blanco, líneas finas, primario en tinta, radios 6/8, overline en versalitas."
+    "note": "Reseñas, calificación y guardados: sección resenas.md y componentes Calificacion, Vuelven, Guardar, Resena y FlujoResena."
   },
   "layout": "files",
   "libraries": [],

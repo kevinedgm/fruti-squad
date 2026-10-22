@@ -9,4 +9,4 @@
 5. **Reseña publicada** con sello, etiquetas, fecha y si volvió; una respuesta pública del profesional; no se borran, se reportan.
 6. **Primera reseña = florece** (bloom) y resumen en el perfil: promedio, vuelven y etiquetas agregadas con conteo.
 
-Pendiente: aprobación; después, componentes Calificacion, Vuelven, Guardar, Resena y FlujoResena en el design system.
+Aprobado y llevado al design system: sección `resenas.md` y componentes Calificacion, Vuelven, Guardar, Resena y FlujoResena.
