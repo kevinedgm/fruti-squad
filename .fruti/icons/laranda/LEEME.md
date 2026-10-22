@@ -46,3 +46,7 @@ Cuatro pares con B2 en lockup, tagline bilingüe, alfabeto, cabecera de perfil, 
 ## Ronda 7 · color de acento (`ronda-7/banco.png`) · usuario: «hace falta un color de acento»
 
 Validado con el validador de paletas (OKLab, CVD) contra violeta y los tres reservados (oro, salvia, terracota). Todo acento saturado de tono medio choca con uno de los reservados: coral/naranja con terracota, verdes con salvia, azul-violeta con violeta. Candidatos mostrados: 1 Durazno #F2B48C (acento de relleno, texto siempre en tinta), 2 Coral #E0674B (vivo; exige oscurecer el error a #8A2E1E), 3 Cielo #3F86C9 (pasa contra todos; enfría). Recomendación: Durazno.
+
+## Ronda 8 · paleta intensa y neutra en género (`ronda-8/banco.png`) · usuario: «más intensos, para hombres y mujeres»
+
+Conjunto validado (visión normal ΔE ≥ 15.7, daltonismo ≥ 7.4 con icono y texto en estados): violeta intenso #5B3BB5 (presionado #4A2DA8), naranja de acento #E0611A (tinte #F2C9B2; en oscuro #F2A074), oro #D9A400 solo reservar, verde éxito #0E8F5E, rojo error #A8202F, tinta #15121C, hueso #F6F4EF, arena #EAE6DE; lila y niebla recalculadas #C4B5F0 y #ECE7FA. Cambia tres valores del brief (violeta, salvia, terracota) y el fondo de crema a hueso. Mostrado en marca, app icon, interfaz clara y oscura, y antes/después.
