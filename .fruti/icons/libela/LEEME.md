@@ -4,3 +4,6 @@ Idea madre: la libélula no persigue; calcula, se detiene y acierta. Libela es e
 
 ## Ronda 1 · símbolo en blanco y negro (`ronda-1/`)
 `gen.py` construye el ala con un perfil de libélula (estrecha en la base, más ancha hacia la punta, redondeada) y genera cinco rutas sobre la misma anatomía: A Huella (sólidas), B Contorno (línea + anillo), C Tinta (ala a mano abierta + ala llena), D Ala mínima (una ala + línea de vuelo punteada), E Posada (alas finas que se cruzan en el punto). `banco.png` muestra cada una a 200, 32 y 16 px y en negativo.
+
+## Ronda 2 · gesto abstracto, trazo orgánico (`ronda-2/`)
+El usuario rechazó la ronda 1 (demasiado literal). `gen.py` dibuja trazos de pincel con ancho variable (línea central Catmull-Rom + perfil de presión): A Pausa (gesto con rizo y punto), B Cuatro vientos (cuatro trazos desde un vacío), C Posarse (un solo trazo que dobla y se afina), D Mirada (arco abierto y punto descentrado), E Aleteo (tres trazos desiguales y un punto).
