@@ -4,3 +4,6 @@ Brief: plataforma de belleza y cuidado personal; nombre SUUMA (evolución gráfi
 
 ## Ronda 1 · símbolo en blanco y negro (`ronda-1/`)
 Trazo de pincel con presión (línea central Catmull-Rom + perfil de ancho; `gen.py`). A Doble U (dos U desfasadas), B Nodos (tres formas orgánicas que hacen una silueta + un punto), C Onda (un solo trazo que escribe «uu»), D Fila (puntos que crecen por una trayectoria), E Encuentro (dos trazos se funden en uno; el punto es el encuentro).
+
+## Ronda 2 · cambiar el mecanismo (`ronda-2/`)
+El usuario pidió algo más disruptivo. Cambia el mecanismo del símbolo, no el trazo: A Hueco (masa de tinta con la U vaciada), B Enjambre (nueve lugares, ocho formas: falta una; sistema generativo), C Suma (dos formas superpuestas, la intersección rayada es la tercera), D Bloque (bloque con dos U mordidas), E Fragmentos (una U de piezas desiguales que no se tocan).
