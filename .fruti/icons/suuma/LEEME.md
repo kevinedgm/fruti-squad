@@ -22,3 +22,6 @@ El usuario eligió B1 y B4 y pidió que la u interior sea una sonrisa. S1 Línea
 
 ## Ronda 7 · S3 en color (`ronda-7/`)
 El usuario eligió S3 (sonrisa con ojos). Cuatro paletas naturales + contraste funcional, con contrastes WCAG calculados en `gen.py`: P1 Salvia y arcilla (#5E7F63 #B8694A #FAF6EF #E8743C), P2 Oliva y miel (#6B7A3A #C98B2E #F8F4EA #7A3E6E), P3 Bosque y terracota (#2F5D4A #C9633D #F4EFE6 #F2C14E), P4 Menta y cacao (#7FA38E #5C3F33 #F8F5F0 #F06A4E). Wordmark claro/oscuro e icono de app sobre verde, neutro y tierra.
+
+## Ronda 8 · color vivo y editorial (`ronda-8/`)
+El usuario pidió colores más vivos, unisex, elegantes y editoriales. Base blanco #FFFFFF y tinta #121212; un cromático intenso (ojos, marca, acciones) y un acento (sonrisa): Q1 Esmeralda #0F8A5F + mandarina #FF6A2B, Q2 Cobalto #1F3BE0 + mandarina, Q3 Ciruela #5A2A86 + coral #FF5A4E, Q4 Petróleo #0E6E7A + ámbar #F5A623. Contrastes en el banco.
