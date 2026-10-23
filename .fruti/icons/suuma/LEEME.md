@@ -40,3 +40,6 @@ Wordmark: Bricolage Grotesque 600, opsz 96, caja baja, tracking −1 %. Interfaz
 
 ## Ronda 12 · color sobre el wordmark definitivo (`ronda-12/`)
 Las seis familias R1–R6 aplicadas a la B1 en Bricolage 600, con iconos y contrastes. Color aún sin decidir.
+
+## Decisión de color y cierre
+R6 Cadmio y tinta aprobada. Paquete final en `final/` (ver `final/LEEME.md`); manual en `guia/guia.html` → https://claude.ai/artifact/3CdHEhfrwNCkxAo6XkB3j6

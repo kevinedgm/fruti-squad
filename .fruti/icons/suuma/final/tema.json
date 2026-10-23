@@ -1,0 +1,47 @@
+{
+ "nombre": "SUUMA",
+ "simbolo": "la doble U anidada: una u fina dentro de la u de la palabra; el nombre se lee «suma» y la segunda u vive dentro de la primera",
+ "tipografia": {
+  "wordmark": "Bricolage Grotesque 600, opsz 96, caja baja, tracking −1 %; en trazados",
+  "interfaz": "Onest 400/500/700",
+  "datos": "IBM Plex Mono 500 (provisional)"
+ },
+ "color": {
+  "tinta": "#121212",
+  "blanco": "#FFFFFF",
+  "papel": "#F5F4F0",
+  "cadmio": "#FFD400",
+  "cadmio-suave": "#FFF3B0",
+  "texto-secundario": "#5F5E5A",
+  "borde": "#E3E2DD",
+  "exito": "#0E7C4A",
+  "error": "#C8102E"
+ },
+ "reglas": [
+  "El cadmio nunca es texto: va en la u interior, en fondos con texto en tinta, en chips y en destacados.",
+  "La acción primaria va en tinta con texto blanco; el cadmio marca, no ordena.",
+  "Nada depende solo del color: estados con icono y texto.",
+  "Los estados (éxito/error) son provisionales hasta el design system."
+ ],
+ "archivos": [
+  "app-icon",
+  "app-icon-cadmio",
+  "app-icon-claro",
+  "app-icon-maskable",
+  "avatar",
+  "favicon",
+  "lockup-h",
+  "lockup-h-oscuro",
+  "lockup-h-tinta",
+  "lockup-v",
+  "lockup-v-oscuro",
+  "simbolo",
+  "simbolo-blanco",
+  "simbolo-blanco-tinta",
+  "simbolo-tinta",
+  "tarjeta-redes",
+  "wordmark",
+  "wordmark-oscuro",
+  "wordmark-tinta"
+ ]
+}
