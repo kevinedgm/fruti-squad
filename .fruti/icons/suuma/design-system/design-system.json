@@ -1,0 +1,141 @@
+{
+  "v": 3,
+  "layout": "files",
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-23T19:06:08Z"
+  },
+  "title": "SUUMA",
+  "namespace": "SUUMA",
+  "libraries": [],
+  "sections": {},
+  "groups": [
+    "Marca"
+  ],
+  "assetGroups": {
+    "Marca": {
+      "name": "Marca",
+      "tile": "m",
+      "order": [
+        "simbolo.svg",
+        "simbolo-tinta.svg",
+        "simbolo-blanco.svg",
+        "wordmark.svg",
+        "wordmark-oscuro.svg",
+        "lockup-h.svg",
+        "lockup-h-oscuro.svg",
+        "lockup-v.svg",
+        "app-icon.svg",
+        "app-icon-maskable.svg",
+        "avatar.svg",
+        "favicon.svg",
+        "tarjeta-redes.svg",
+        "icon-512.png",
+        "icon-192.png"
+      ],
+      "files": {
+        "simbolo.svg": {
+          "name": "simbolo.svg",
+          "blob": "e7d0edbd77acfa940de3d694ae4b06ce",
+          "size": 291,
+          "type": "image/svg+xml"
+        },
+        "simbolo-tinta.svg": {
+          "name": "simbolo-tinta.svg",
+          "blob": "6a03144e54c06e9cb63774a27f3dae2f",
+          "size": 291,
+          "type": "image/svg+xml"
+        },
+        "simbolo-blanco.svg": {
+          "name": "simbolo-blanco.svg",
+          "blob": "09068b62bf49aed5fb83832d45b80f9a",
+          "size": 291,
+          "type": "image/svg+xml"
+        },
+        "wordmark.svg": {
+          "name": "wordmark.svg",
+          "blob": "bea87782a5d98a6e072891f7fe55c49c",
+          "size": 4810,
+          "type": "image/svg+xml"
+        },
+        "wordmark-oscuro.svg": {
+          "name": "wordmark-oscuro.svg",
+          "blob": "b536e145fefdac9cb844af8035139731",
+          "size": 4810,
+          "type": "image/svg+xml"
+        },
+        "lockup-h.svg": {
+          "name": "lockup-h.svg",
+          "blob": "30d7f9a23e529153954322c52142ecc9",
+          "size": 5098,
+          "type": "image/svg+xml"
+        },
+        "lockup-h-oscuro.svg": {
+          "name": "lockup-h-oscuro.svg",
+          "blob": "6c042687573c60a9cc077e1f44e6c53f",
+          "size": 5098,
+          "type": "image/svg+xml"
+        },
+        "lockup-v.svg": {
+          "name": "lockup-v.svg",
+          "blob": "8ad3f1f79ec11122d0b80c2f7eb27302",
+          "size": 5082,
+          "type": "image/svg+xml"
+        },
+        "app-icon.svg": {
+          "name": "app-icon.svg",
+          "blob": "ddc8141a4eab047baf21c71093f29fa7",
+          "size": 375,
+          "type": "image/svg+xml"
+        },
+        "app-icon-maskable.svg": {
+          "name": "app-icon-maskable.svg",
+          "blob": "c55c45c6cc173e1daf3ee60aceed8b1c",
+          "size": 374,
+          "type": "image/svg+xml"
+        },
+        "avatar.svg": {
+          "name": "avatar.svg",
+          "blob": "db4becb4f59372b6bf17d5cbee21eec7",
+          "size": 348,
+          "type": "image/svg+xml"
+        },
+        "favicon.svg": {
+          "name": "favicon.svg",
+          "blob": "a518d0f1aca3f79f57138ccd35a4be3d",
+          "size": 382,
+          "type": "image/svg+xml"
+        },
+        "tarjeta-redes.svg": {
+          "name": "tarjeta-redes.svg",
+          "blob": "552f6dc4643ec9f16edeb0399eb3777b",
+          "size": 5278,
+          "type": "image/svg+xml"
+        },
+        "icon-512.png": {
+          "name": "icon-512.png",
+          "blob": "6a9c052f738f0ad94f968d0082a6c301",
+          "size": 14004,
+          "type": "image/png"
+        },
+        "icon-192.png": {
+          "name": "icon-192.png",
+          "blob": "2359ae35b90b237cbfabd9f0ef1377e1",
+          "size": 4961,
+          "type": "image/png"
+        }
+      }
+    }
+  },
+  "blobs": {},
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "lastChange": {
+    "at": "2026-10-23T19:06:08Z",
+    "by": "Kevin",
+    "via": "Claude Code",
+    "note": "Sistema inicial de SUUMA: tokens cadmio y tinta en claro y oscuro, tipografía Bricolage + Onest, marca y siete componentes."
+  }
+}

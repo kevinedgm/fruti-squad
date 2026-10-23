@@ -43,3 +43,6 @@ Las seis familias R1–R6 aplicadas a la B1 en Bricolage 600, con iconos y contr
 
 ## Decisión de color y cierre
 R6 Cadmio y tinta aprobada. Paquete final en `final/` (ver `final/LEEME.md`); manual en `guia/guia.html` → https://claude.ai/artifact/3CdHEhfrwNCkxAo6XkB3j6
+
+## Design system
+Artefacto: https://claude.ai/artifact/Y4TcSr2vinUQAT9VLZiVM7 (tipo Design System). Fuentes en `design-system/` (`build.py <scratchpad>` regenera tokens, README, marca y componentes; los ids de assets están en el script). Componentes: Cover, Boton, Campo, ChipCategoria, TarjetaProfesional, Calificacion (cuencos), Estado, NavInferior. Pendiente: hoja inferior, buscador, selector de fecha.
