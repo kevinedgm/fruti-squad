@@ -13,3 +13,6 @@ Rechazada la ronda 2. A Senda (camino que se abre y se junta), B Une los puntos,
 
 ## Ronda 4 · tipográfico con giro (`ronda-4/`)
 El usuario eligió «tipográfico con giro» (AskUserQuestion). Manrope 700 para s, m, a (`/tmp/suuma-manrope700.ttf`, instancia de `fuentes/Manrope[wght].ttf`); la doble U se construye a mano como trazo de línea central con el grosor del tallo de Manrope. A Pegadas (las u se tocan; lee «swma», descartable), B Anidada (u chica dentro de la grande), C Hueca (segunda u en contorno), D Desnivel (segunda u baja de la línea base), E Gesto (las dos u a pincel, cada una distinta).
+
+## Ronda 5 · desarrollo de B Anidada (`ronda-5/`)
+El usuario eligió B. Cinco variaciones del encaje y la «uu» sola como símbolo (favicon 16/32/64 e icono de app): B1 Centrada (interior fina), B2 Mismo peso, B3 Descentrada (interior a la derecha), B4 Llena (interior maciza), B5 Cuenco ancho. `*-simbolo.svg` por variante.
