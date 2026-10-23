@@ -19,3 +19,6 @@ El usuario eligió B. Cinco variaciones del encaje y la «uu» sola como símbol
 
 ## Ronda 6 · la u interior como sonrisa (`ronda-6/`)
 El usuario eligió B1 y B4 y pidió que la u interior sea una sonrisa. S1 Línea (trazo afinado), S2 Maciza (media luna), S3 Con ojos (carita completa, mostrada como límite), S4 Comisuras (u chica con puntas abiertas), S5 Asimétrica (media luna más gruesa de un lado). Símbolo solo y app icon por variante.
+
+## Ronda 7 · S3 en color (`ronda-7/`)
+El usuario eligió S3 (sonrisa con ojos). Cuatro paletas naturales + contraste funcional, con contrastes WCAG calculados en `gen.py`: P1 Salvia y arcilla (#5E7F63 #B8694A #FAF6EF #E8743C), P2 Oliva y miel (#6B7A3A #C98B2E #F8F4EA #7A3E6E), P3 Bosque y terracota (#2F5D4A #C9633D #F4EFE6 #F2C14E), P4 Menta y cacao (#7FA38E #5C3F33 #F8F5F0 #F06A4E). Wordmark claro/oscuro e icono de app sobre verde, neutro y tierra.
