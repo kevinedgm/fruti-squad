@@ -34,3 +34,9 @@ Rechazadas Q1–Q4. Seis parejas sobre blanco y tinta: R1 Bermellón #C8102E + m
 
 ## Ronda 11 · tipografía (`ronda-11/`)
 El usuario pidió probar Bricolage Grotesque y Onest. `gen.py` reconstruye la B1 con el tallo y el cuenco de cada fuente (clase `F`): Bricolage 600/700 (opsz 96), Onest 600/700 y Manrope 700 como referencia. Interior: ancho = cuenco − 2 tallos − 0.9 tallo, grosor 0.6 del tallo.
+
+## Decisión tipográfica
+Wordmark: Bricolage Grotesque 600, opsz 96, caja baja, tracking −1 %. Interfaz: Onest. (El usuario eligió 600 en la ronda 11.)
+
+## Ronda 12 · color sobre el wordmark definitivo (`ronda-12/`)
+Las seis familias R1–R6 aplicadas a la B1 en Bricolage 600, con iconos y contrastes. Color aún sin decidir.
