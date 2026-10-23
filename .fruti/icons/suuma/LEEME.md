@@ -7,3 +7,6 @@ Trazo de pincel con presión (línea central Catmull-Rom + perfil de ancho; `gen
 
 ## Ronda 2 · cambiar el mecanismo (`ronda-2/`)
 El usuario pidió algo más disruptivo. Cambia el mecanismo del símbolo, no el trazo: A Hueco (masa de tinta con la U vaciada), B Enjambre (nueve lugares, ocho formas: falta una; sistema generativo), C Suma (dos formas superpuestas, la intersección rayada es la tercera), D Bloque (bloque con dos U mordidas), E Fragmentos (una U de piezas desiguales que no se tocan).
+
+## Ronda 3 · ideas desde la narrativa (`ronda-3/`)
+Rechazada la ronda 2. A Senda (camino que se abre y se junta), B Une los puntos, C Cuencos (U dentro de U, descentrada), D Trenza (dos hebras que se cruzan), E Eco (anillos abiertos alrededor de un punto). Auditoría propia: A lee como pluma, D como X, E como diana; solo C y B sostienen la idea. Tres rondas sin acierto: se pide al usuario una referencia o el tipo de «disruptivo» que busca antes de seguir.
