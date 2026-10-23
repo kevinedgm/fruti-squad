@@ -10,3 +10,6 @@ El usuario rechazó la ronda 1 (demasiado literal). `gen.py` dibuja trazos de pi
 
 ## Ronda 3 · desarrollo de E y B (`ronda-3/`)
 El usuario eligió E (Aleteo) y B (Cuatro vientos). Cuatro variaciones de cada una: E1 Aleteo, E2 Abanico (trazos desde el punto), E3 Suelto (trazos rectos, punto al lado), E4 Cuatro alas; B1 Cuatro vientos, B2 Giro (mismo sentido), B3 Punto (centro lleno), B4 Tres y uno (el punto ocupa el cuarto rumbo).
+
+## Estado
+Descartada por el usuario tras la ronda 3; la segunda propuesta pasa a SUUMA (`.fruti/icons/suuma/`).

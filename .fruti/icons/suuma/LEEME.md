@@ -1,0 +1,6 @@
+# SUUMA · identidad (segunda propuesta, alternativa a Laranda)
+
+Brief: plataforma de belleza y cuidado personal; nombre SUUMA (evolución gráfica de «suma», la doble U es el rasgo distintivo); narrativa de las hormigas: individuos que conservan su autonomía y juntos llegan más lejos. Dirección visual: formas simples, geometría orgánica, conexiones/crecimiento/colaboración; paleta natural y cálida (verdes suaves, tierras, neutros claros) + un color de contraste funcional; nada de tijeras, rostros, flores ni abejas literales. Gusto del usuario (de Laranda y Libela): abstracto, innovador, trazo orgánico, nada rígido ni literal.
+
+## Ronda 1 · símbolo en blanco y negro (`ronda-1/`)
+Trazo de pincel con presión (línea central Catmull-Rom + perfil de ancho; `gen.py`). A Doble U (dos U desfasadas), B Nodos (tres formas orgánicas que hacen una silueta + un punto), C Onda (un solo trazo que escribe «uu»), D Fila (puntos que crecen por una trayectoria), E Encuentro (dos trazos se funden en uno; el punto es el encuentro).
