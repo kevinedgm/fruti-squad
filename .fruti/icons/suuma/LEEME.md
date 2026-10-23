@@ -16,3 +16,6 @@ El usuario eligió «tipográfico con giro» (AskUserQuestion). Manrope 700 para
 
 ## Ronda 5 · desarrollo de B Anidada (`ronda-5/`)
 El usuario eligió B. Cinco variaciones del encaje y la «uu» sola como símbolo (favicon 16/32/64 e icono de app): B1 Centrada (interior fina), B2 Mismo peso, B3 Descentrada (interior a la derecha), B4 Llena (interior maciza), B5 Cuenco ancho. `*-simbolo.svg` por variante.
+
+## Ronda 6 · la u interior como sonrisa (`ronda-6/`)
+El usuario eligió B1 y B4 y pidió que la u interior sea una sonrisa. S1 Línea (trazo afinado), S2 Maciza (media luna), S3 Con ojos (carita completa, mostrada como límite), S4 Comisuras (u chica con puntas abiertas), S5 Asimétrica (media luna más gruesa de un lado). Símbolo solo y app icon por variante.
