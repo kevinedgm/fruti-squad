@@ -28,3 +28,6 @@ El usuario pidió colores más vivos, unisex, elegantes y editoriales. Base blan
 
 ## Ronda 9 · B1 en color vivo (`ronda-9/`)
 El usuario prefirió la B1 (u interior fina, sin ojos) sobre la S3. Mismas paletas Q1–Q4 de la ronda 8; la u interior lleva el cromático en el wordmark claro y el acento en oscuro y en los iconos.
+
+## Ronda 10 · otras familias de color (`ronda-10/`)
+Rechazadas Q1–Q4. Seis parejas sobre blanco y tinta: R1 Bermellón #C8102E + mostaza #E9B824, R2 Índigo noche #2A2A72 + mandarina #FF7A1A, R3 Naranja quemado #D4541A + botella #0B4F3F, R4 Lila eléctrico #6A4CFF + limón #FFD23F, R5 Frambuesa #B5174E + menta #2EC4A6, R6 Cadmio #FFD400 + tinta.
