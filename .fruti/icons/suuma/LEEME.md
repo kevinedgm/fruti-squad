@@ -25,3 +25,6 @@ El usuario eligió S3 (sonrisa con ojos). Cuatro paletas naturales + contraste f
 
 ## Ronda 8 · color vivo y editorial (`ronda-8/`)
 El usuario pidió colores más vivos, unisex, elegantes y editoriales. Base blanco #FFFFFF y tinta #121212; un cromático intenso (ojos, marca, acciones) y un acento (sonrisa): Q1 Esmeralda #0F8A5F + mandarina #FF6A2B, Q2 Cobalto #1F3BE0 + mandarina, Q3 Ciruela #5A2A86 + coral #FF5A4E, Q4 Petróleo #0E6E7A + ámbar #F5A623. Contrastes en el banco.
+
+## Ronda 9 · B1 en color vivo (`ronda-9/`)
+El usuario prefirió la B1 (u interior fina, sin ojos) sobre la S3. Mismas paletas Q1–Q4 de la ronda 8; la u interior lleva el cromático en el wordmark claro y el acento en oscuro y en los iconos.
