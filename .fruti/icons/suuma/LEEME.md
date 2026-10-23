@@ -31,3 +31,6 @@ El usuario prefirió la B1 (u interior fina, sin ojos) sobre la S3. Mismas palet
 
 ## Ronda 10 · otras familias de color (`ronda-10/`)
 Rechazadas Q1–Q4. Seis parejas sobre blanco y tinta: R1 Bermellón #C8102E + mostaza #E9B824, R2 Índigo noche #2A2A72 + mandarina #FF7A1A, R3 Naranja quemado #D4541A + botella #0B4F3F, R4 Lila eléctrico #6A4CFF + limón #FFD23F, R5 Frambuesa #B5174E + menta #2EC4A6, R6 Cadmio #FFD400 + tinta.
+
+## Ronda 11 · tipografía (`ronda-11/`)
+El usuario pidió probar Bricolage Grotesque y Onest. `gen.py` reconstruye la B1 con el tallo y el cuenco de cada fuente (clase `F`): Bricolage 600/700 (opsz 96), Onest 600/700 y Manrope 700 como referencia. Interior: ancho = cuenco − 2 tallos − 0.9 tallo, grosor 0.6 del tallo.
