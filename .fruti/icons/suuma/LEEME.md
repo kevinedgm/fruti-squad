@@ -10,3 +10,6 @@ El usuario pidió algo más disruptivo. Cambia el mecanismo del símbolo, no el 
 
 ## Ronda 3 · ideas desde la narrativa (`ronda-3/`)
 Rechazada la ronda 2. A Senda (camino que se abre y se junta), B Une los puntos, C Cuencos (U dentro de U, descentrada), D Trenza (dos hebras que se cruzan), E Eco (anillos abiertos alrededor de un punto). Auditoría propia: A lee como pluma, D como X, E como diana; solo C y B sostienen la idea. Tres rondas sin acierto: se pide al usuario una referencia o el tipo de «disruptivo» que busca antes de seguir.
+
+## Ronda 4 · tipográfico con giro (`ronda-4/`)
+El usuario eligió «tipográfico con giro» (AskUserQuestion). Manrope 700 para s, m, a (`/tmp/suuma-manrope700.ttf`, instancia de `fuentes/Manrope[wght].ttf`); la doble U se construye a mano como trazo de línea central con el grosor del tallo de Manrope. A Pegadas (las u se tocan; lee «swma», descartable), B Anidada (u chica dentro de la grande), C Hueca (segunda u en contorno), D Desnivel (segunda u baja de la línea base), E Gesto (las dos u a pincel, cada una distinta).
