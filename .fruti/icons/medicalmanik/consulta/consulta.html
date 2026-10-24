@@ -107,6 +107,14 @@ summary .c{margin-left:auto;font:500 13px/18px var(--sans);color:var(--muted)}
 .nt{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 18px;display:grid;gap:6px;align-content:start}
 .nt h3{margin:0;font:600 17px/24px var(--display)}.nt p{margin:0;font-size:15px;color:var(--muted)}.nt ul{margin:0;padding-left:18px;font-size:15px;color:var(--muted);display:grid;gap:4px}
 .note2{font-size:14px;color:var(--muted);margin:0}
+.dxs{display:grid;gap:12px}.dxc{border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:10px;background:#FBFCFE}
+.dxh{display:flex;align-items:center;gap:10px}.dxh .x{border:0;background:transparent;border-radius:8px;width:36px;height:36px;display:grid;place-items:center;color:var(--muted);cursor:pointer}.dxh .x:hover{background:var(--soft)}.dxh code{font:600 14px/20px var(--sans);color:var(--manik)}.dxh b{font-weight:600}
+.dxh .tag{font:600 12px/16px var(--sans);padding:2px 8px;border-radius:999px;background:var(--soft);color:var(--muted)}.dxh .tag.pr{background:var(--manik-soft);color:var(--manik)}
+.it.med{background:var(--surface)}.it.med.bad{border:2px solid var(--error)}
+.alr{grid-column:1/-1;display:flex;gap:10px;align-items:start;border-radius:10px;padding:10px 12px;font-size:14px;line-height:20px}.alr svg{margin-top:2px}
+.alr.contra{background:var(--error-soft);color:var(--on-error)}.alr.prec{background:var(--aviso-soft);color:var(--on-aviso)}.alr b{font-weight:700}.alr .just{margin:6px 0 0;color:var(--ink)}
+.srch.sm input{height:40px;font-size:15px}.srch.sm>svg{top:11px}
+.frec{gap:6px}.chip2{border:1px dashed var(--control);background:var(--surface);border-radius:999px;padding:4px 12px;font:600 13px/18px var(--sans);color:var(--manik);cursor:pointer;min-height:32px}.chip2:hover{background:var(--manik-soft)}
 .hj{grid-column:2/4;display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:4px}
 .seg.sm button{min-height:34px;padding:0 10px;font-size:13px}
 .lockc{display:inline-flex;align-items:center;gap:6px;font:600 13px/18px var(--sans);color:#4E3F86;background:#ECE5F8;padding:4px 10px;border-radius:999px}.lockc svg{width:14px;height:14px}
@@ -122,8 +130,8 @@ summary .c{margin-left:auto;font:500 13px/18px var(--sans);color:var(--muted)}
   <div class="frame"><div class="app" id="app"></div></div>
   <div class="notes">
     <div class="nt"><h3>Antes: tres navegaciones</h3><ul><li>Pestañas Antecedentes / Consulta.</li><li>Cuatro pasos tipo asistente.</li><li>Regresar / Continuar.</li><li>Diez herramientas fijas a la izquierda.</li><li>Medicamentos en dos lugares: Tratamiento y Receta.</li></ul></div>
-    <div class="nt"><h3>Ahora: una nota y un índice</h3><ul><li>Seis secciones en una página; el índice marca lo hecho y lleva a cada una.</li><li>Cada dato se captura una vez: el medicamento que se agrega en Tratamiento ya está en la receta.</li><li>Antecedentes, historial y gráficas en un cajón lateral.</li><li>Hojas: los controlados se separan solos; lo demás se manda a otra hoja desde el propio medicamento.</li></ul></div>
-    <div class="nt"><h3>Ayuda donde se equivoca</h3><ul><li>Los signos se comparan con rangos para la edad y explican el problema: «1.78 m es alto para 9 meses, ¿quisiste 78 cm?».</li><li>Solo se piden las medidas que aplican a la edad.</li><li>Las alergias sin registrar se ven como pendiente, no como texto gris.</li></ul></div>
+    <div class="nt"><h3>Ahora: una nota y un índice</h3><ul><li>Seis secciones en una página; el índice marca lo hecho y lleva a cada una.</li><li>Cada medicamento se receta dentro de su diagnóstico CIE-10 y ya queda en la receta.</li><li>Antecedentes, historial y gráficas en un cajón lateral.</li><li>Hojas: los controlados se separan solos; lo demás se manda a otra hoja desde el propio medicamento.</li><li>Prueba: en la infección respiratoria agrega «ácido acetil»; en la epilepsia, «ácido valproico».</li></ul></div>
+    <div class="nt"><h3>Ayuda donde se equivoca</h3><ul><li>Los signos se comparan con rangos para la edad y explican el problema: «1.78 m es alto para 9 meses, ¿quisiste 78 cm?».</li><li>Solo se piden las medidas que aplican a la edad.</li><li>Las alergias sin registrar se ven como pendiente, no como texto gris.</li><li>Contraindicaciones al agregar el medicamento: por edad, embarazo, lactancia o interacción. Contraindicado pide quitarlo o justificarlo.</li></ul></div>
   </div>
   <p class="note2">Ejemplo con el paciente de tus capturas. Los rangos de referencia son ilustrativos: en producto salen de las tablas por edad que ya use el sistema.</p>
 </div>
@@ -146,26 +154,54 @@ const VIT=[
  {k:'fr',l:'Frecuencia respiratoria',u:'rpm',v:'34',r:[25,45]},
  {k:'ta',l:'Tensión arterial',u:'mmHg',v:'50/20',r:[[70,100],[35,65]]},
  {k:'spo2',l:'SpO₂',u:'%',v:'97',r:[95,100]}];
-const DX=[['Z23','Inmunización, necesidad de'],['Z00.1','Control de salud de rutina del niño'],['J06.9','Infección aguda de vías respiratorias superiores'],['R51','Cefalea'],['M79.1','Mialgia'],['L20.9','Dermatitis atópica, no especificada'],['B08.1','Molusco contagioso']];
-const MEDS=[['Paracetamol','Suspensión 160 mg/5 mL','2.5 mL','cada 6 h','3 días','oral'],['Aciclovir tópico','Crema 5 %','Aplicar capa fina','cada 8 h','7 días','tópica'],['Óxido de zinc','Pasta 20 %','Aplicar en el área','en cada cambio de pañal','5 días','tópica'],['Amoxicilina','Suspensión 250 mg/5 mL','3 mL','cada 8 h','7 días','oral'],['Fenobarbital','Elixir 20 mg/5 mL','2 mL','cada 12 h','30 días','oral',true]];
-const EST=['Biometría hemática completa','Examen general de orina','Química sanguínea de 6 elementos','Radiografía de tórax PA'];
-let S={pad:'El paciente presenta dolor muscular constante y cefalea recurrente desde hace alrededor de 7 días.',vit:Object.fromEntries(VIT.map(v=>[v.k,v.v])),dx:[['Z23','Inmunización, necesidad de']],meds:[{n:'Aciclovir tópico',p:'Crema 5 %',d:'Aplicar capa fina',f:'cada 8 h',t:'7 días',h:1},{n:'Fenobarbital',p:'Elixir 20 mg/5 mL',d:'2 mL',f:'cada 12 h',t:'30 días',h:'C',ctrl:true}],est:[{n:'Biometría hemática completa'}],estInd:'Enviar resultados al correo del tutor.',ind:{1:'Reposo relativo. Volver si hay fiebre mayor de 38.5 °C.',C:'No suspender de golpe. Traer el frasco a la próxima consulta.'},ref:'Ninguna',q:{dx:'',med:'',est:''},drawer:null,dtab:'ant',ia:false};
+const DX=[['J06.9','Infección aguda de vías respiratorias superiores'],['G40.9','Epilepsia, no especificada'],['L20.9','Dermatitis atópica, no especificada'],['Z23','Inmunización, necesidad de'],['Z00.1','Control de salud de rutina del niño'],['R51','Cefalea'],['M79.1','Mialgia'],['B08.1','Molusco contagioso']];
+// Catálogo de ejemplo: bandera de controlado (ya existe en el catálogo validado con COFEPRIS) y reglas de contraindicación
+const MEDS=[
+ {n:'Paracetamol',p:'Suspensión 160 mg/5 mL',d:'2.5 mL',f:'cada 6 h',t:'3 días',dx:['J06.9','R51','M79.1']},
+ {n:'Ibuprofeno',p:'Suspensión 100 mg/5 mL',d:'4 mL',f:'cada 8 h',t:'3 días',dx:['J06.9','R51','M79.1'],minM:6},
+ {n:'Ácido acetilsalicílico',p:'Tabletas 100 mg',d:'1 tableta',f:'cada 8 h',t:'3 días',dx:['J06.9','R51'],minM:144,why:'riesgo de síndrome de Reye en infecciones virales'},
+ {n:'Loratadina',p:'Jarabe 5 mg/5 mL',d:'2.5 mL',f:'cada 24 h',t:'5 días',dx:['J06.9','L20.9'],minM:24},
+ {n:'Fenobarbital',p:'Elixir 20 mg/5 mL',d:'2 mL',f:'cada 12 h',t:'30 días',dx:['G40.9'],ctrl:true},
+ {n:'Ácido valproico',p:'Solución 250 mg/5 mL',d:'1.5 mL',f:'cada 12 h',t:'30 días',dx:['G40.9'],inter:{con:'Fenobarbital',t:'el ácido valproico eleva los niveles de fenobarbital: ajusta la dosis y vigila somnolencia'}},
+ {n:'Levetiracetam',p:'Solución 100 mg/mL',d:'0.9 mL',f:'cada 12 h',t:'30 días',dx:['G40.9']},
+ {n:'Óxido de zinc',p:'Pasta 20 %',d:'Aplicar en el área',f:'en cada cambio de pañal',t:'5 días',dx:['L20.9']},
+ {n:'Hidrocortisona',p:'Crema 1 %',d:'Capa fina',f:'cada 12 h',t:'5 días',dx:['L20.9']}];
+const EDAD_M=9; // meses
+const EST=['Biometría hemática completa','Examen general de orina','Química sanguínea de 6 elementos','Radiografía de tórax PA','Electroencefalograma'];
+const mk=n=>{const m=MEDS.find(x=>x.n===n);return {...m,h:m.ctrl?'C':1}};
+let S={pad:'El paciente presenta dolor muscular constante y cefalea recurrente desde hace alrededor de 7 días.',vit:Object.fromEntries(VIT.map(v=>[v.k,v.v])),
+ dx:[{c:'J06.9',n:'Infección aguda de vías respiratorias superiores',meds:[mk('Paracetamol')]},{c:'G40.9',n:'Epilepsia, no especificada',meds:[mk('Fenobarbital')]}],
+ est:[{n:'Biometría hemática completa'}],estInd:'Enviar resultados al correo del tutor.',ind:{1:'Reposo relativo. Volver si hay fiebre mayor de 38.5 °C.',C:'No suspender de golpe. Traer el frasco a la próxima consulta.'},ref:'Ninguna',q:{dx:'',est:''},qm:{},drawer:null,ia:false};
+const allMeds=()=>S.dx.flatMap(d=>d.meds);
+function alertas(m){const a=[];
+  if(m.minM&&EDAD_M<m.minM)a.push({lv:'contra',t:`Antes de los ${m.minM>=24?(m.minM/12)+' años':m.minM+' meses'}${m.why?': '+m.why:''}. El paciente tiene 9 meses.`});
+  if(m.inter&&allMeds().some(x=>x.n===m.inter.con))a.push({lv:'prec',t:`Interacción con ${m.inter.con}: ${m.inter.t}.`});
+  allMeds().forEach(x=>{if(x!==m&&x.inter&&x.inter.con===m.n)a.push({lv:'prec',t:`Interacción con ${x.n}: ${x.inter.t}.`})});
+  return a;}
+const pendContra=()=>allMeds().filter(m=>alertas(m).some(a=>a.lv==='contra')&&!m.just).length;
 function chkVital(v){const val=S.vit[v.k];if(!val)return {c:'',m:''};
   if(v.k==='ta'){const [a,b]=val.split('/').map(Number);if(!a||!b)return {c:'warn',m:'Escribe sistólica/diastólica'};const lo=a<v.r[0][0]||b<v.r[1][0],hi=a>v.r[0][1]||b>v.r[1][1];return lo?{c:'bad',m:'Baja para 9 meses. Confirma la medición.'}:hi?{c:'bad',m:'Alta para 9 meses'}:{c:'',m:''};}
   const n=parseFloat(val);if(isNaN(n))return {c:'warn',m:'Solo números'};
   if(v.sug&&n>v.r[1]*1.8) return {c:'bad',m:`${val} ${v.u} es muy alto para 9 meses. ${v.sug}`};
   if(n<v.r[0])return {c:'warn',m:'Debajo del rango para la edad'}; if(n>v.r[1])return {c:'warn',m:'Arriba del rango para la edad'}; return {c:'',m:''};}
 const rangoTxt=v=>v.k==='ta'?`Ref. 9 meses: ${v.r[0][0]}–${v.r[0][1]} / ${v.r[1][0]}–${v.r[1][1]}`:`Ref. 9 meses: ${v.r[0]}–${v.r[1]} ${v.u}`;
-const done={pad:()=>S.pad.trim().length>10,sig:()=>VIT.every(v=>!chkVital(v).c),dx:()=>S.dx.length>0,tx:()=>S.meds.length>0,est:()=>true,ind:()=>Object.values(S.ind).some(t=>t.trim().length>0)};
-const SECS=[['pad','Padecimiento'],['sig','Signos y exploración'],['dx','Diagnóstico'],['tx','Tratamiento'],['est','Estudios'],['ind','Indicaciones']];
-const hojas=()=>{const n=[...new Set(S.meds.filter(m=>!m.ctrl).map(m=>m.h).concat([1]).concat(S.extra||[]))].sort();return n.concat(S.meds.some(m=>m.ctrl)?['C']:[])};
+const done={pad:()=>S.pad.trim().length>10,sig:()=>VIT.every(v=>!chkVital(v).c),dx:()=>S.dx.length>0&&S.dx.every(d=>d.meds.length||d.c==='Z00.1')&&!pendContra(),est:()=>true,ind:()=>Object.values(S.ind).some(t=>t.trim().length>0)};
+const SECS=[['pad','Padecimiento'],['sig','Signos y exploración'],['dx','Diagnóstico y tratamiento'],['est','Estudios'],['ind','Indicaciones']];
+const hojas=()=>{const n=[...new Set(allMeds().filter(m=>!m.ctrl).map(m=>m.h).concat([1]))].sort();return n.concat(allMeds().some(m=>m.ctrl)?['C']:[])};
 const hojaN=h=>h==='C'?'Controlados':'Hoja '+h;
 function sug(kind){const q=S.q[kind].toLowerCase();if(q.length<2)return '';
   let L=kind==='dx'?DX.filter(d=>(d[0]+' '+d[1]).toLowerCase().includes(q)).map(d=>`<button type="button" data-add-dx="${d[0]}"><code>${d[0]}</code><span>${d[1]}</span></button>`)
-   :kind==='med'?MEDS.filter(m=>(m[0]+' '+m[1]).toLowerCase().includes(q)).map(m=>`<button type="button" data-add-med="${m[0]}"><b>${m[0]}</b><small>${m[1]}</small></button>`)
    :EST.filter(e=>e.toLowerCase().includes(q)).map(e=>`<button type="button" data-add-est="${e}">${e}</button>`);
   if(kind==='dx'&&!L.length) L=[`<button type="button" data-add-dx="libre"><code>Escrito</code><span>Usar «${S.q.dx}» como diagnóstico escrito</span></button>`];
   return L.length?`<div class="sug" role="listbox">${L.join('')}</div>`:'';}
+function sugMed(i){const q=(S.qm[i]||'').toLowerCase();if(q.length<2)return '';const d=S.dx[i];
+  const L=MEDS.filter(m=>m.n.toLowerCase().includes(q)||m.p.toLowerCase().includes(q)).sort((a,b)=>(b.dx.includes(d.c))-(a.dx.includes(d.c)));
+  return L.length?`<div class="sug" role="listbox">${L.map(m=>`<button type="button" data-add-med="${i}:${m.n}"><b>${m.n}</b><small>${m.p}${m.ctrl?' · controlado':''}</small></button>`).join('')}</div>`:'';}
+function medHTML(m,i,j){const al=alertas(m), contra=al.some(a=>a.lv==='contra');
+  return `<div class="it med${contra&&!m.just?' bad':''}">${ic('pill')}<b>${m.n} <span style="font-weight:400;color:var(--muted)">· ${m.p}</span></b><button class="x" type="button" data-rm-med="${i}:${j}" aria-label="Quitar ${m.n}">${ic('x')}</button>
+   ${al.map(a=>`<div class="alr ${a.lv}" role="${a.lv==='contra'?'alert':'status'}">${ic('alert')}<div><b>${a.lv==='contra'?'Contraindicado':'Precaución'}</b> · ${a.t}${a.lv==='contra'?(m.just?`<p class="just">Recetado con justificación: «${m.just}»</p>`:`<div class="row" style="margin-top:8px"><button class="btn s" type="button" data-rm-med="${i}:${j}">Quitar ${m.n.toLowerCase()}</button><input type="text" id="j-${i}-${j}" placeholder="Motivo para recetarlo de todos modos" style="flex:1;min-width:200px;height:36px;padding:0 10px;font-size:14px"><button class="btn s" type="button" data-just="${i}:${j}">Recetar con justificación</button></div>`):''}</div></div>`).join('')}
+   <div class="dose"><label>Dosis<input type="text" value="${m.d}"></label><label>Frecuencia<input type="text" value="${m.f}"></label><label>Duración<input type="text" value="${m.t}"></label><label>Vía<input type="text" value="${/Crema|Pasta/.test(m.p)?'Tópica':'Oral'}"></label></div>
+   <div class="hj">${m.ctrl?`<span class="lockc">${ic('lock')}Receta de controlados</span><span class="small">Marcado como controlado en el catálogo.</span>`:`<span class="small">Imprimir en</span><div class="seg sm" role="group" aria-label="Hoja de ${m.n}">${hojas().filter(h=>h!=='C').map(h=>`<button type="button" data-hoja="${i}:${j}:${h}" aria-pressed="${m.h===h}">${hojaN(h)}</button>`).join('')}<button type="button" data-hoja="${i}:${j}:+">+ Hoja nueva</button></div>`}</div></div>`;}
 function render(){
   const sel=document.activeElement&&document.activeElement.id, pos=document.activeElement&&document.activeElement.selectionStart;
   const flags=VIT.map(chkVital).filter(x=>x.c).length;
@@ -181,16 +217,14 @@ function render(){
   h+=`<section class="sec" id="s-sig"><div class="sh"><h3>Signos vitales y exploración</h3><span class="hint">Tomados por Ana (asistente) a las 13:22 · se comparan con rangos para 9 meses.</span></div><div class="vs">`;
   VIT.forEach(v=>{const c=chkVital(v);h+=`<div class="v ${c.c}"><label class="l" for="v-${v.k}">${v.l}</label><div class="in"><input id="v-${v.k}" data-v="${v.k}" value="${S.vit[v.k]}" inputmode="decimal" ${c.c?`aria-invalid="true" aria-describedby="m-${v.k}"`:''}><span>${v.u}</span></div>${c.m?`<span class="m" id="m-${v.k}">${ic('alert')}${c.m}</span>`:`<span class="r">${rangoTxt(v)}</span>`}</div>`;});
   h+=`</div><div class="more"><details><summary>Exploración física por aparatos <span class="c">Opcional</span></summary><textarea aria-label="Exploración física">Activo, reactivo, bien hidratado. Piel con lesiones papulares en tronco.</textarea></details><details><summary>Glucosa y colesterol <span class="c">Opcional</span></summary><p class="small">Capturas de glucometría y perfil de lípidos.</p></details><details><summary>Cintura y cadera <span class="c">No se piden a los 9 meses</span></summary><p class="small">Aparecen a partir de los 6 años.</p></details></div></section>`;
-  h+=`<section class="sec" id="s-dx"><div class="sh"><h3>Diagnóstico</h3><span class="rq">Obligatorio</span><span class="hint">Busca por nombre o código CIE-10, o escríbelo libre.</span></div>
-   <div class="srch">${ic('search')}<input type="text" id="q-dx" data-q="dx" placeholder="Ej. dermatitis, J06.9" value="${S.q.dx}" autocomplete="off">${sug('dx')}</div>
-   <div class="items">${S.dx.map((d,i)=>`<div class="it"><span class="tag${i===0?' pr':''}">${i===0?'Principal':d[0]}</span><b>${i===0?d[0]+' · ':''}${d[1]}</b><button class="x" type="button" data-rm-dx="${i}" aria-label="Quitar ${d[1]}">${ic('x')}</button></div>`).join('')||'<div class="empty">Sin diagnóstico todavía.</div>'}</div></section>`;
-  h+=`<section class="sec" id="s-tx"><div class="sh"><h3>Tratamiento</h3><span class="hint">Lo que agregues aquí es la receta: no hay que capturarlo otra vez.</span></div>
-   <div class="srch">${ic('search')}<input type="text" id="q-med" data-q="med" placeholder="Buscar medicamento: paracetamol, amoxicilina…" value="${S.q.med}" autocomplete="off">${sug('med')}</div>
-   <div class="items">${S.meds.map((m,i)=>`<div class="it">${ic('pill')}<b>${m.n} <span style="font-weight:400;color:var(--muted)">· ${m.p}</span></b><button class="x" type="button" data-rm-med="${i}" aria-label="Quitar ${m.n}">${ic('x')}</button>
-     <div class="dose"><label>Dosis<input type="text" value="${m.d}"></label><label>Frecuencia<input type="text" value="${m.f}"></label><label>Duración<input type="text" value="${m.t}"></label><label>Vía<input type="text" value="${m.n.includes('tópico')||m.p.includes('Crema')||m.p.includes('Pasta')?'Tópica':'Oral'}"></label></div>
-     <div class="hj">${m.ctrl?`<span class="lockc">${ic('lock')}Va en la receta de controlados</span><span class="small">Medicamento controlado: el sistema lo separa solo.</span>`:`<span class="small">Imprimir en</span><div class="seg sm" role="group" aria-label="Hoja de ${m.n}">${hojas().filter(h=>h!=='C').map(h=>`<button type="button" data-hoja="${i}:${h}" aria-pressed="${m.h===h}">${hojaN(h)}</button>`).join('')}<button type="button" data-hoja="${i}:+">+ Hoja nueva</button></div>`}</div></div>`).join('')||'<div class="empty">Sin medicamentos.</div>'}</div>
-   <div class="row"><button class="btn s" type="button" id="ia">${ic('spark')}Revisar receta con IA</button><span class="small">Busca interacciones, dosis por peso y alergias.</span></div>
-   ${S.ia?`<div class="ai" role="status">${ic('info')}<span><b>Sin interacciones entre los medicamentos.</b> Dosis de paracetamol para 8.8 kg: 130 mg (4 mL) cada 6 h como máximo. No hay alergias registradas: confírmalas con el tutor.</span></div>`:''}</section>`;
+  h+=`<section class="sec" id="s-dx"><div class="sh"><h3>Diagnóstico y tratamiento</h3><span class="rq">Obligatorio</span><span class="hint">Busca el diagnóstico (CIE-10) y receta dentro de él: cada medicamento queda ligado a su diagnóstico.</span></div>
+   <div class="srch">${ic('search')}<input type="text" id="q-dx" data-q="dx" placeholder="Agregar diagnóstico: dermatitis, J06.9…" value="${S.q.dx}" autocomplete="off">${sug('dx')}</div>
+   <div class="dxs">${S.dx.map((d,i)=>`<div class="dxc"><div class="dxh"><span class="tag${i===0?' pr':''}">${i===0?'Principal':'Secundario'}</span><code>${d.c}</code><b>${d.n}</b><span class="grow"></span><button class="x" type="button" data-rm-dx="${i}" aria-label="Quitar diagnóstico ${d.n}">${ic('x')}</button></div>
+     <div class="items">${d.meds.map((m,j)=>medHTML(m,i,j)).join('')}</div>
+     <div class="srch sm">${ic('search')}<input type="text" id="qm-${i}" data-qm="${i}" placeholder="Agregar medicamento para ${d.n.split(',')[0].toLowerCase()}" value="${S.qm[i]||''}" autocomplete="off">${sugMed(i)}</div>
+     <div class="row frec"><span class="small">Frecuentes para ${d.c} (aptos para la edad):</span>${MEDS.filter(m=>m.dx.includes(d.c)&&!d.meds.some(x=>x.n===m.n)&&!(m.minM&&EDAD_M<m.minM)).slice(0,3).map(m=>`<button class="chip2" type="button" data-add-med="${i}:${m.n}">+ ${m.n}</button>`).join('')}</div></div>`).join('')||'<div class="empty">Agrega un diagnóstico para empezar a recetar.</div>'}</div>
+   <div class="row"><button class="btn s" type="button" id="ia">${ic('spark')}Revisar receta con IA</button><span class="small">Las contraindicaciones del catálogo se revisan solas al agregar cada medicamento; la IA revisa dosis por peso.</span></div>
+   ${S.ia?`<div class="ai" role="status">${ic('info')}<span><b>Dosis por peso (8.8 kg):</b> paracetamol hasta 130 mg (4 mL) cada 6 h. Confirma las alergias con el tutor: no hay registro.</span></div>`:''}</section>`;
   h+=`<section class="sec" id="s-est"><div class="sh"><h3>Estudios y procedimientos</h3><span class="hint">Opcional.</span></div>
    <div class="srch">${ic('search')}<input type="text" id="q-est" data-q="est" placeholder="Buscar estudio: biometría, orina, radiografía…" value="${S.q.est}" autocomplete="off">${sug('est')}</div>
    <div class="items">${S.est.map((e,i)=>`<div class="it">${ic('flask')}<b>${e.n}</b><button class="x" type="button" data-rm-est="${i}" aria-label="Quitar ${e.n}">${ic('x')}</button></div>`).join('')}</div>
@@ -199,9 +233,9 @@ function render(){
   h+=`<section class="sec" id="s-ind"><div class="sh"><h3>Indicaciones para el paciente</h3><span class="hint">${hojas().length>1?'Cada hoja lleva sus propias indicaciones.':'Aparecen en la receta.'}</span></div>${hojas().map(h=>`${hojas().length>1?`<label class="l" for="ind-${h}">${hojaN(h)}</label>`:''}<textarea id="ind-${h}" data-ind="${h}" style="min-height:72px">${S.ind[h]||''}</textarea>`).join('')}
    <details><summary>${ic('lock')}Anotaciones privadas del médico <span class="c">No aparecen en el expediente</span></summary><textarea aria-label="Anotaciones privadas"></textarea></details></section>`;
   h+=`</div><aside class="out" aria-label="Lo que se va a entregar">
-   ${hojas().map(h=>{const ms=S.meds.filter(m=>m.h===h);return `<div class="card${h==='C'?' ctrl':''}"><h4>${ic(h==='C'?'lock':'pill')}Receta · ${hojaN(h)} <span class="ct">${ms.length} med.</span></h4>${h==='C'?'<span class="small">Se imprime en el recetario especial con el folio del médico.</span>':''}<div class="rx">${ms.map(m=>`<div><b>${m.n}</b> · ${m.p}<small>${m.d} ${m.f} por ${m.t}</small></div>`).join('')||'<span class="small">Sin medicamentos en esta hoja.</span>'}${S.ind[h]?`<div><b>Indicaciones</b><small>${S.ind[h]}</small></div>`:''}</div></div>`}).join('')}<button class="btn s" type="button">${ic('eye')}Vista previa de ${hojas().length>1?'las '+hojas().length+' hojas':'la receta'}</button>
+   ${hojas().map(h=>{const ms=allMeds().filter(m=>m.h===h);return `<div class="card${h==='C'?' ctrl':''}"><h4>${ic(h==='C'?'lock':'pill')}Receta · ${hojaN(h)} <span class="ct">${ms.length} med.</span></h4>${h==='C'?'<span class="small">Se imprime en el recetario especial con el folio del médico.</span>':''}<div class="rx">${ms.map(m=>`<div><b>${m.n}</b> · ${m.p}<small>${m.d} ${m.f} por ${m.t} · ${S.dx.find(d=>d.meds.includes(m)).c}</small></div>`).join('')||'<span class="small">Sin medicamentos en esta hoja.</span>'}${S.ind[h]?`<div><b>Indicaciones</b><small>${S.ind[h]}</small></div>`:''}</div></div>`}).join('')}<button class="btn s" type="button">${ic('eye')}Vista previa de ${hojas().length>1?'las '+hojas().length+' hojas':'la receta'}</button>
    <div class="card"><h4>${ic('flask')}Solicitud de estudios <span class="ct">${S.est.length}</span></h4><div class="rx">${S.est.map(e=>`<div>${e.n}</div>`).join('')||'<span class="small">Sin estudios.</span>'}${S.ref!=='Ninguna'?`<div><b>Referencia</b><small>Cirugía ${S.ref.toLowerCase()}</small></div>`:''}</div></div>
-   <div class="card"><h4>Antes de terminar</h4><div class="chk">${[['Padecimiento',done.pad()],['Diagnóstico',done.dx()],['Signos sin pendientes',done.sig()],['Alergias confirmadas',false]].map(([l,o])=>`<div class="${o?'ok':'no'}">${ic(o?'check':'alert')}${l}${o?'':' · pendiente'}</div>`).join('')}</div>
+   <div class="card"><h4>Antes de terminar</h4><div class="chk">${[['Padecimiento',done.pad()],['Diagnóstico con tratamiento',S.dx.length>0],[pendContra()?`${pendContra()} contraindicación sin resolver`:'Contraindicaciones revisadas',!pendContra()],['Signos sin pendientes',done.sig()],['Alergias confirmadas',false]].map(([l,o])=>`<div class="${o?'ok':'no'}">${ic(o?'check':'alert')}${l}${o?'':' · pendiente'}</div>`).join('')}</div>
    <button class="btn p" type="button">Terminar y entregar receta</button><span class="small">Se guarda la nota, se genera la receta y la cita pasa a «Terminada» en la agenda.</span></div></aside></div>`;
   if(S.drawer){h+=`<div class="drawer" role="dialog" aria-label="${{ant:'Antecedentes',his:'Historial',gra:'Gráficas'}[S.drawer]}"><div class="dw"><header><h3>${{ant:'Antecedentes',his:'Historial de consultas',gra:'Gráficas de crecimiento'}[S.drawer]}</h3><span class="grow"></span><button class="ib" type="button" id="cd" aria-label="Cerrar">${ic('x')}</button></header><div class="dc">`+
    (S.drawer==='ant'?`<div class="hist"><b>Perinatales</b><small>Nacido a término, 38 SDG, peso al nacer 3.2 kg. Sin complicaciones.</small></div><div class="hist"><b>Vacunas</b><small>Esquema completo a los 6 meses. Pendiente: SRP a los 12 meses.</small></div><div class="hist"><b>Heredofamiliares</b><small>Madre con asma. Abuelo con diabetes tipo 2.</small></div><div class="hist"><b>Alergias</b><small style="color:var(--on-aviso)">Sin registrar. Pregunta al tutor y registra.</small></div>`
@@ -218,12 +252,14 @@ function bind(){
   q('[data-q]',e=>e.oninput=()=>{S.q[e.dataset.q]=e.value;render()});
   document.getElementById('pad').oninput=e=>{S.pad=e.target.value;render()};
   q('[data-ind]',e=>e.oninput=()=>{S.ind[e.dataset.ind]=e.value;render()});
-  q('[data-hoja]',b=>b.onclick=()=>{const [i,h]=b.dataset.hoja.split(':');let n=h==='+'?Math.max(...hojas().filter(x=>x!=='C'))+1:+h;S.meds[+i].h=n;render()});
-  q('[data-add-dx]',b=>b.onclick=()=>{const c=b.dataset.addDx;S.dx.push(c==='libre'?['Escrito',S.q.dx]:DX.find(d=>d[0]===c));S.q.dx='';render()});
-  q('[data-add-med]',b=>b.onclick=()=>{const m=MEDS.find(x=>x[0]===b.dataset.addMed);S.meds.push({n:m[0],p:m[1],d:m[2],f:m[3],t:m[4],h:m[6]?'C':1,ctrl:!!m[6]});S.q.med='';S.ia=false;render()});
+  q('[data-qm]',e=>e.oninput=()=>{S.qm[e.dataset.qm]=e.value;render()});
+  q('[data-hoja]',b=>b.onclick=()=>{const [i,j,h]=b.dataset.hoja.split(':');S.dx[+i].meds[+j].h=h==='+'?Math.max(...hojas().filter(x=>x!=='C'))+1:+h;render()});
+  q('[data-add-dx]',b=>b.onclick=()=>{const c=b.dataset.addDx;const d=c==='libre'?['Escrito',S.q.dx]:DX.find(x=>x[0]===c);S.dx.push({c:d[0],n:d[1],meds:[]});S.q.dx='';render()});
+  q('[data-add-med]',b=>b.onclick=()=>{const [i,n]=b.dataset.addMed.split(':');S.dx[+i].meds.push(mk(n));S.qm[i]='';S.ia=false;render()});
   q('[data-add-est]',b=>b.onclick=()=>{S.est.push({n:b.dataset.addEst});S.q.est='';render()});
   q('[data-rm-dx]',b=>b.onclick=()=>{S.dx.splice(+b.dataset.rmDx,1);render()});
-  q('[data-rm-med]',b=>b.onclick=()=>{S.meds.splice(+b.dataset.rmMed,1);render()});
+  q('[data-rm-med]',b=>b.onclick=()=>{const [i,j]=b.dataset.rmMed.split(':');S.dx[+i].meds.splice(+j,1);render()});
+  q('[data-just]',b=>b.onclick=()=>{const [i,j]=b.dataset.just.split(':');const v=document.getElementById(`j-${i}-${j}`).value.trim();if(!v){document.getElementById(`j-${i}-${j}`).focus();return}S.dx[+i].meds[+j].just=v;render()});
   q('[data-rm-est]',b=>b.onclick=()=>{S.est.splice(+b.dataset.rmEst,1);render()});
   q('[data-ref]',b=>b.onclick=()=>{S.ref=b.dataset.ref;render()});
   q('[data-dr]',b=>b.onclick=()=>{S.drawer=S.drawer===b.dataset.dr?null:b.dataset.dr;render()});
