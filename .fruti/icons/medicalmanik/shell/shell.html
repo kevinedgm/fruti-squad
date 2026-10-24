@@ -1,0 +1,189 @@
+<title>Shell Ecosistema Manik</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap">
+<style>
+/* Una sola capa de shell para seis apps: la densidad de navegación decide el patrón (pestañas · sidebar plano · sidebar por grupos). Tema claro, como el sistema. */
+:root{
+  --canvas:#F5F7FB;--surface:#FFFFFF;--soft:#EEF1F7;--pressed:#E4E9F2;--ink:#14213D;--muted:#4A5674;--subtle:#7A849C;--line:#E1E6F0;--control:#858EA5;
+  --manik:#234899;--manik-hover:#1C3A79;--manik-soft:#E9EDF5;
+  --exito:#15814B;--exito-soft:#E8F2ED;--on-exito:#106239;--aviso:#A75F00;--aviso-soft:#F6EFE6;--on-aviso:#7F4A08;--error:#C33F4E;--error-soft:#F9ECED;--on-error:#9C3443;--info:#3F7695;--info-soft:#ECF1F4;--on-info:#335F7A;
+  --display:"Sora","Segoe UI",system-ui,sans-serif;--sans:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r-sm:10px;--r-md:14px;--r-lg:18px;--r-2xl:24px;--pop:0 2px 8px rgba(20,33,61,.08),0 18px 44px rgba(20,33,61,.16);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--canvas);color:var(--ink);font:16px/24px var(--sans);padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1360px;margin:0 auto;display:grid;gap:20px}
+h1{margin:0;font:600 28px/36px var(--display);letter-spacing:-.02em;text-wrap:balance}
+.lead{margin:4px 0 0;color:var(--muted);max-width:72ch}
+.ctrl{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.apps{display:flex;gap:6px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:6px}
+.apps button{display:flex;align-items:center;gap:8px;border:0;background:transparent;border-radius:12px;padding:6px 12px 6px 6px;font:600 14px/20px var(--sans);color:var(--ink);cursor:pointer;min-height:44px}
+.apps button svg{width:30px;height:30px;display:block}
+.apps button[aria-pressed="true"]{background:var(--manik-soft);color:var(--manik)}
+.apps button:hover{background:var(--soft)}
+.seg{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px}
+.seg button{border:0;background:transparent;border-radius:9px;padding:8px 14px;font:600 14px/20px var(--sans);color:var(--muted);cursor:pointer;min-height:40px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+button:focus-visible,a:focus-visible{outline:2px solid var(--manik);outline-offset:2px}
+.frame{overflow-x:auto;border-radius:var(--r-2xl);border:1px solid var(--line);background:#DCE2EC;padding:14px}
+/* ── shell ── */
+.shell{margin:0 auto;background:var(--canvas);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:64px 1fr;height:760px;box-shadow:0 1px 2px rgba(20,33,61,.06)}
+.nav{display:flex;align-items:center;gap:12px;padding:0 16px 0 12px;background:var(--surface);border-bottom:1px solid var(--line);min-width:0}
+.ib{width:44px;height:44px;display:grid;place-items:center;border:0;background:transparent;border-radius:12px;color:var(--muted);cursor:pointer;flex:none;position:relative}
+.ib:hover{background:var(--soft)}
+.ib svg,.it svg,.cta svg,.sb-b svg,.mini svg{width:20px;height:20px;display:block;flex:none}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--muted);white-space:nowrap;font:16px/24px var(--display)}
+.brand svg{width:34px;height:34px;display:block}.brand b{font-weight:600;color:var(--ink)}
+.tabs{display:flex;gap:4px;margin-left:12px;height:100%}
+.tab{display:flex;align-items:center;gap:8px;padding:0 14px;border:0;background:transparent;font:600 15px/20px var(--sans);color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;border-top:3px solid transparent}
+.tab[aria-current="page"]{color:var(--manik);border-bottom-color:var(--manik)}
+.tab svg{width:18px;height:18px}
+.grow{flex:1;min-width:0}
+.search{display:flex;align-items:center;gap:8px;height:40px;border:1px solid var(--control);border-radius:var(--r-md);padding:0 12px;color:var(--muted);font-size:14px;width:min(420px,100%);background:var(--surface);white-space:nowrap;overflow:hidden}
+.search svg{width:18px;height:18px;flex:none}
+.clin{display:flex;align-items:center;gap:6px;height:40px;padding:0 10px 0 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);font:600 14px/20px var(--sans);color:var(--ink);cursor:pointer;white-space:nowrap}
+.clin svg{width:16px;height:16px;color:var(--muted)}
+.dot{position:absolute;top:10px;right:11px;width:8px;height:8px;border-radius:50%;background:var(--error);border:2px solid var(--surface)}
+.eco svg{width:24px;height:24px}.eco[aria-expanded="true"]{background:var(--manik-soft)}
+.av{width:36px;height:36px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font:600 13px/1 var(--sans);flex:none}
+.body{display:grid;grid-template-columns:var(--sbw,248px) minmax(0,1fr);min-height:0}
+.body.nosb{grid-template-columns:minmax(0,1fr)}
+.sb{background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;padding:14px 12px 10px;gap:4px;overflow:auto}
+.cta{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border:0;border-radius:var(--r-md);background:var(--manik);color:#fff;font:600 15px/20px var(--sans);cursor:pointer;margin-bottom:10px;white-space:nowrap}
+.cta:hover{background:var(--manik-hover)}
+.gh{margin:12px 10px 4px;font:700 11.5px/16px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.it{display:flex;align-items:center;gap:12px;min-height:40px;padding:0 10px;border-radius:12px;color:var(--ink);text-decoration:none;font:500 15px/20px var(--sans);white-space:nowrap}
+.it:hover{background:var(--soft)}
+.it[aria-current="page"]{background:var(--manik-soft);color:var(--manik);font-weight:600}
+.it .ct{margin-left:auto;min-width:22px;height:22px;padding:0 7px;border-radius:999px;background:var(--soft);color:var(--ink);font:600 12px/22px var(--sans);text-align:center;font-variant-numeric:tabular-nums}
+.it[aria-current="page"] .ct{background:var(--surface);color:var(--manik)}
+.sb-f{margin-top:auto;border-top:1px solid var(--line);padding-top:8px;display:grid;gap:2px}
+.rail .gh,.rail .lbl,.rail .ct,.rail .cta span{display:none}
+.rail .it,.rail .cta{justify-content:center;padding:0}
+.rail .it{position:relative}
+.rail .it .ctdot{display:block}
+.ctdot{display:none;position:absolute;top:7px;right:12px;width:8px;height:8px;border-radius:50%;background:var(--manik)}
+.rail .gsep{display:block}.gsep{display:none;height:1px;background:var(--line);margin:8px 6px}
+.main{display:flex;flex-direction:column;min-height:0;overflow:auto}
+.content{padding:24px 28px;display:grid;gap:18px;align-content:start;flex:1}
+.ph{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.ph h2{margin:0;font:600 24px/32px var(--display);letter-spacing:-.01em}
+.ph p{margin:2px 0 0;color:var(--muted);font-size:15px}
+.btn2{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border-radius:var(--r-md);border:1px solid var(--control);background:var(--surface);color:var(--manik);font:600 14px/20px var(--sans);cursor:pointer}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th{background:var(--soft);color:var(--muted);font:600 13px/18px var(--sans);text-align:left;padding:10px 14px;white-space:nowrap}
+td{padding:11px 14px;border-top:1px solid var(--line);white-space:nowrap}
+.num{font-variant-numeric:tabular-nums}.r{text-align:right}.mut{color:var(--muted)}
+.est{display:inline-flex;align-items:center;gap:6px;padding:2px 10px 2px 8px;border-radius:999px;font:600 13px/18px var(--sans)}
+.est svg{width:15px;height:15px}
+.e-ok{background:var(--exito-soft);color:var(--on-exito)}.e-warn{background:var(--aviso-soft);color:var(--on-aviso)}.e-bad{background:var(--error-soft);color:var(--on-error)}.e-info{background:var(--info-soft);color:var(--on-info)}.e-neu{background:var(--soft);color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px 18px;display:grid;gap:2px}
+.kpi span{font:700 12px/16px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kpi b{font:600 30px/36px var(--sans);font-variant-numeric:tabular-nums}
+.kpi small{color:var(--on-exito);font-size:13px}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:12px 28px;border-top:1px solid var(--line);background:var(--surface);font-size:13px;line-height:18px;color:var(--muted)}
+.foot a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.foot .l{display:flex;gap:14px;flex-wrap:wrap}.foot .ok{display:inline-flex;align-items:center;gap:6px}.foot .ok i{width:8px;height:8px;border-radius:50%;background:var(--exito);display:inline-block}
+/* ── reglas ── */
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.rule{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;display:grid;gap:6px;align-content:start}
+.rule h3{margin:0;font:600 17px/24px var(--display)}
+.rule p{margin:0;font-size:15px;color:var(--muted)}
+.rule .who{font:600 13px/18px var(--sans);color:var(--ink)}
+.anat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px 20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.anat h3{margin:0 0 6px;font:600 17px/24px var(--display)}
+.anat ul{margin:0;padding-left:18px;color:var(--ink);font-size:15px;display:grid;gap:4px}
+.note{font-size:14px;color:var(--muted);margin:0}
+@media (max-width:900px){.rules,.anat{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>El shell de cada app</h1>
+    <p class="lead">Barra superior, barra lateral y pie: una sola estructura para las seis apps del Ecosistema Manik. Lo que cambia es cuánta navegación necesita cada una.</p>
+  </header>
+  <div class="ctrl">
+    <div class="apps" id="apps" role="group" aria-label="App"></div>
+    <div class="seg" role="group" aria-label="Ancho">
+      <button type="button" id="w-desk" aria-pressed="true">Escritorio</button>
+      <button type="button" id="w-tab" aria-pressed="false">Tableta · riel</button>
+    </div>
+  </div>
+  <div class="frame"><div class="shell" id="shell"></div></div>
+
+  <div class="rules">
+    <div class="rule"><h3>Pestañas en la barra</h3><p class="who">≤ 3 destinos · Impulsa</p><p>Sin barra lateral: las pestañas viven en la barra superior y el contenido usa todo el ancho.</p></div>
+    <div class="rule"><h3>Barra lateral plana</h3><p class="who">4 a 7 destinos · Agenda, Farmacia, Grupos</p><p>Una lista sin títulos de grupo. El botón de la acción principal va arriba.</p></div>
+    <div class="rule"><h3>Barra lateral por grupos</h3><p class="who">8 o más destinos · Expediente, Compras</p><p>Títulos de grupo en mayúsculas; se pliega a un riel de iconos. Facturación electrónica es su propio grupo en Compras.</p></div>
+  </div>
+  <div class="anat">
+    <div><h3>Barra superior · 64 px</h3><ul><li>Sello y «Producto Manik»: lleva al inicio de la app.</li><li>Búsqueda propia de la app, al centro.</li><li>Clínica activa: cambia de sucursal sin salir.</li><li>Avisos, mosaico del ecosistema y avatar, siempre en ese orden.</li></ul></div>
+    <div><h3>Barra lateral · 248 px o riel de 72</h3><ul><li>Arriba, la acción principal de la app en azul Manik.</li><li>Activo: fondo «manik-soft», texto azul y en 600.</li><li>Contadores solo donde hay trabajo pendiente.</li><li>Abajo: Configuración y Ayuda.</li></ul></div>
+    <div><h3>Pie · 42 px</h3><ul><li>Aviso de privacidad, términos y soporte (datos de salud: el aviso siempre a un clic).</li><li>Clínica, versión y estado de sincronización.</li><li>Va al final del contenido, no fijo: no roba alto de pantalla.</li></ul></div>
+  </div>
+  <p class="note">Las opciones de cada barra lateral son una propuesta a partir de lo que hace cada app; los nombres y el orden se confirman con quien la usa.</p>
+</div>
+
+<script>
+const APPS={"expediente": {"n": "Expediente", "cta": "Nueva consulta", "busca": "Buscar paciente por nombre, CURP o expediente", "patron": "grupos", "nav": [["Atención", [["home", "Hoy", 6], ["users", "Pacientes", 0], ["steth", "Consultas", 0], ["clock", "Lista de espera", 3]]], ["Clínico", [["pill", "Recetas", 0], ["flask", "Órdenes de estudios", 0], ["chart", "Resultados", 2], ["syringe", "Vacunas", 0]]], ["Documentos", [["file", "Consentimientos", 0], ["award", "Certificados", 0], ["layout", "Plantillas", 0]]], ["Análisis", [["bars", "Reportes", 0]]]], "activo": "Hoy"}, "agenda": {"n": "Agenda", "cta": "Nueva cita", "busca": "Buscar paciente o cita", "patron": "plano", "nav": [["", [["home", "Hoy", 0], ["cal", "Calendario", 0], ["door", "Sala de espera", 4], ["users", "Pacientes", 0], ["bell", "Recordatorios", 0]]]], "activo": "Hoy"}, "compras": {"n": "Compras", "cta": "Nueva orden", "busca": "Buscar folio, UUID, RFC o proveedor", "patron": "grupos", "nav": [["Compras", [["cart", "Requisiciones", 5], ["clip", "Órdenes de compra", 0], ["truck", "Recepción", 2], ["store", "Proveedores", 0]]], ["Facturación electrónica", [["receipt", "Facturas emitidas", 0], ["inbox", "Facturas recibidas", 0], ["coins", "Complementos de pago", 0], ["ban", "Cancelaciones", 1]]], ["Finanzas", [["wallet", "Cuentas por pagar", 0], ["bars", "Reportes", 0]]]], "activo": "Facturas emitidas"}, "farmacia": {"n": "Farmacia", "cta": "Surtir receta", "busca": "Buscar producto, receta o lote", "patron": "plano", "nav": [["", [["pill", "Recetas por surtir", 8], ["pos", "Punto de venta", 0], ["box", "Inventario", 0], ["in", "Entradas", 0], ["hourglass", "Lotes y caducidades", 3], ["bars", "Reportes", 0]]]], "activo": "Recetas por surtir"}, "impulsa": {"n": "Impulsa", "cta": "Nueva campaña", "busca": "", "patron": "pestanas", "nav": [["", [["bars", "Resultados", 0], ["plus", "Nueva campaña", 0]]]], "activo": "Resultados"}, "grupos": {"n": "Grupos", "cta": "Invitar usuario", "busca": "Buscar clínica o usuario", "patron": "plano", "nav": [["", [["building", "Clínicas y sucursales", 0], ["users", "Usuarios", 0], ["shield", "Roles y permisos", 0], ["grid", "Apps y licencias", 0], ["sliders", "Configuración del grupo", 0], ["list", "Bitácora de auditoría", 0]]]], "activo": "Clínicas y sucursales"}};const ICON={"home": "<path d=\"M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z\"/>", "users": "<circle cx=\"9\" cy=\"8\" r=\"4\"/><path d=\"M2 21a7 7 0 0 1 14 0M17 3.5a4 4 0 0 1 0 9M22 21a7 7 0 0 0-4-6.3\"/>", "steth": "<path d=\"M5 3v6a5 5 0 0 0 10 0V3M10 14v2a5 5 0 0 0 10 0v-3\"/><circle cx=\"20\" cy=\"11\" r=\"2\"/>", "clock": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5l3 2\"/>", "pill": "<path d=\"m10.5 20.5 10-10a5 5 0 1 0-7-7l-10 10a5 5 0 1 0 7 7zM8.5 8.5l7 7\"/>", "flask": "<path d=\"M9 3h6M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3M7 15h10\"/>", "chart": "<path d=\"M3 3v18h18M7 15l4-4 3 3 5-6\"/>", "syringe": "<path d=\"m18 2 4 4M17 7l3-3M19 9 8.5 19.5 4.5 15.5 15 5zM9 11l4 4M5 19l-3 3M14 4l6 6\"/>", "file": "<path d=\"M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z\"/><path d=\"M14 3v5h5M9 13h6M9 17h6\"/>", "award": "<circle cx=\"12\" cy=\"8\" r=\"6\"/><path d=\"M8.5 13 7 22l5-3 5 3-1.5-9\"/>", "layout": "<rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M3 9h18M9 21V9\"/>", "bars": "<path d=\"M3 3v18h18\"/><path d=\"M8 17v-5M13 17V8M18 17v-9\"/>", "cal": "<rect x=\"3\" y=\"4\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M16 2v4M8 2v4M3 10h18\"/>", "door": "<path d=\"M13 4h3a2 2 0 0 1 2 2v14M2 20h3M13 20h9M10 12v.01M13 4.6v16.8a.6.6 0 0 1-.7.6L5 20V5.6a1 1 0 0 1 .8-1l6.4-1.6a.6.6 0 0 1 .8.6z\"/>", "bell": "<path d=\"M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9\"/><path d=\"M10 21h4\"/>", "cart": "<circle cx=\"8\" cy=\"21\" r=\"1\"/><circle cx=\"19\" cy=\"21\" r=\"1\"/><path d=\"M2 2h3l2.7 12.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6\"/>", "clip": "<rect x=\"8\" y=\"2\" width=\"8\" height=\"4\" rx=\"1\"/><path d=\"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2M9 12h6M9 16h6\"/>", "truck": "<path d=\"M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.6a1 1 0 0 0-.2-.6l-3.5-4.4A1 1 0 0 0 17.5 8H14\"/><circle cx=\"17\" cy=\"18\" r=\"2\"/><circle cx=\"7\" cy=\"18\" r=\"2\"/>", "store": "<path d=\"M3 9 4.5 4h15L21 9M3 9v11h18V9M3 9h18M9 20v-6h6v6\"/>", "receipt": "<path d=\"M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1zM8 8h8M8 12h8M8 16h5\"/>", "inbox": "<path d=\"M22 12h-6l-2 3h-4l-2-3H2\"/><path d=\"M5.5 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.9A2 2 0 0 0 16.8 4H7.2a2 2 0 0 0-1.7 1.1z\"/>", "coins": "<circle cx=\"8\" cy=\"8\" r=\"6\"/><path d=\"M18.1 10.4A6 6 0 1 1 10.3 18M7 6h1v4M16.7 13.9l.7.7-2.8 2.8\"/>", "ban": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"m5.6 5.6 12.8 12.8\"/>", "wallet": "<path d=\"M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1\"/><path d=\"M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4\"/>", "pos": "<rect x=\"4\" y=\"2\" width=\"16\" height=\"20\" rx=\"2\"/><path d=\"M8 6h8M8 10h8M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01\"/>", "box": "<path d=\"M21 8 12 3 3 8v8l9 5 9-5z\"/><path d=\"m3 8 9 5 9-5M12 13v8\"/>", "in": "<path d=\"M12 3v12M7 10l5 5 5-5M5 21h14\"/>", "hourglass": "<path d=\"M5 22h14M5 2h14M17 22v-4.2a2 2 0 0 0-.6-1.4L12 12l-4.4 4.4a2 2 0 0 0-.6 1.4V22M7 2v4.2a2 2 0 0 0 .6 1.4L12 12l4.4-4.4a2 2 0 0 0 .6-1.4V2\"/>", "plus": "<path d=\"M12 5v14M5 12h14\"/>", "building": "<rect x=\"4\" y=\"2\" width=\"16\" height=\"20\" rx=\"2\"/><path d=\"M9 22v-4h6v4M8 6h.01M16 6h.01M12 6h.01M12 10h.01M12 14h.01M16 10h.01M16 14h.01M8 10h.01M8 14h.01\"/>", "shield": "<path d=\"M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.6 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z\"/>", "grid": "<rect x=\"3\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"3\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"3\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/><rect x=\"14\" y=\"14\" width=\"7\" height=\"7\" rx=\"1\"/>", "sliders": "<path d=\"M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M2 14h4M10 8h4M18 16h4\"/>", "list": "<path d=\"M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01\"/>", "search": "<circle cx=\"11\" cy=\"11\" r=\"7\"/><path d=\"m20 20-3.5-3.5\"/>", "menu": "<path d=\"M4 6h16M4 12h16M4 18h16\"/>", "chev": "<path d=\"m6 9 6 6 6-6\"/>", "help": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01\"/>", "gear": "<circle cx=\"12\" cy=\"12\" r=\"3\"/><path d=\"M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z\"/>", "panel": "<rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\"/><path d=\"M9 3v18\"/>", "ok": "<path d=\"M5 12.5l4.5 4.5L19 7.5\"/>", "warn": "<path d=\"M12 3.5l9.5 16.5h-19z\"/><path d=\"M12 10v4M12 17h.01\"/>", "x": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M15 9l-6 6M9 9l6 6\"/>"};const SELLO={"expediente": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-8 -18 126 126\" role=\"img\" aria-label=\"Expediente Manik\"><title>Expediente Manik</title><defs><clipPath id=\"c-expediente\"><path d=\"M0 -2 A10 10 0 0 1 10 -12 H38 C44 -12 46 -10 49 -6 L52 -2 C54 0 56 0 60 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H21 A21 21 0 0 1 0 79 Z\"/></clipPath><mask id=\"m-expediente\" maskUnits=\"userSpaceOnUse\" x=\"-8\" y=\"-18\" width=\"126\" height=\"126\"><rect x=\"-8\" y=\"-18\" width=\"126\" height=\"126\" fill=\"#fff\"/></mask></defs><g mask=\"url(#m-expediente)\"><path d=\"M0 -2 A10 10 0 0 1 10 -12 H38 C44 -12 46 -10 49 -6 L52 -2 C54 0 56 0 60 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H21 A21 21 0 0 1 0 79 Z\" fill=\"#234899\"/><path clip-path=\"url(#c-expediente)\" d=\"M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64\" fill=\"none\" stroke=\"#F6F8FC\" stroke-width=\"13\" stroke-linejoin=\"round\"/></g></svg>", "agenda": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-8 -18 126 126\" role=\"img\" aria-label=\"Agenda Manik\"><title>Agenda Manik</title><defs><clipPath id=\"c-agenda\"><path d=\"M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z\"/></clipPath><mask id=\"m-agenda\" maskUnits=\"userSpaceOnUse\" x=\"-8\" y=\"-18\" width=\"126\" height=\"126\"><rect x=\"-8\" y=\"-18\" width=\"126\" height=\"126\" fill=\"#fff\"/><path d=\"M14 -10 V8 M86 -10 V8\" fill=\"none\" stroke=\"#000\" stroke-width=\"20\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></mask></defs><g mask=\"url(#m-agenda)\"><path d=\"M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z\" fill=\"#007C8C\"/><path clip-path=\"url(#c-agenda)\" d=\"M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64\" fill=\"none\" stroke=\"#F6F8FC\" stroke-width=\"13\" stroke-linejoin=\"round\"/></g><path d=\"M14 -10 V8 M86 -10 V8\" fill=\"none\" stroke=\"#007C8C\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>", "compras": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-8 -18 126 126\" role=\"img\" aria-label=\"Compras Manik\"><title>Compras Manik</title><defs><clipPath id=\"c-compras\"><path d=\"M21 0 H79 A21 21 0 0 1 100 21 V100 L87.5 90 L75 100 L62.5 90 L50 100 L37.5 90 L25 100 L12.5 90 L0 100 V21 A21 21 0 0 1 21 0 Z\"/></clipPath><mask id=\"m-compras\" maskUnits=\"userSpaceOnUse\" x=\"-8\" y=\"-18\" width=\"126\" height=\"126\"><rect x=\"-8\" y=\"-18\" width=\"126\" height=\"126\" fill=\"#fff\"/></mask></defs><g mask=\"url(#m-compras)\"><path d=\"M21 0 H79 A21 21 0 0 1 100 21 V100 L87.5 90 L75 100 L62.5 90 L50 100 L37.5 90 L25 100 L12.5 90 L0 100 V21 A21 21 0 0 1 21 0 Z\" fill=\"#A15C07\"/><path clip-path=\"url(#c-compras)\" d=\"M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64\" fill=\"none\" stroke=\"#F6F8FC\" stroke-width=\"13\" stroke-linejoin=\"round\"/></g></svg>", "farmacia": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-8 -18 126 126\" role=\"img\" aria-label=\"Farmacia Manik\"><title>Farmacia Manik</title><defs><clipPath id=\"c-farmacia\"><path d=\"M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z\"/></clipPath><mask id=\"m-farmacia\" maskUnits=\"userSpaceOnUse\" x=\"-8\" y=\"-18\" width=\"126\" height=\"126\"><rect x=\"-8\" y=\"-18\" width=\"126\" height=\"126\" fill=\"#fff\"/><path d=\"M96 -7 V15 M85 4 H107\" fill=\"none\" stroke=\"#000\" stroke-width=\"20\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></mask></defs><g mask=\"url(#m-farmacia)\"><path d=\"M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z\" fill=\"#1B7F52\"/><path clip-path=\"url(#c-farmacia)\" d=\"M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64\" fill=\"none\" stroke=\"#F6F8FC\" stroke-width=\"13\" stroke-linejoin=\"round\"/></g><path d=\"M96 -7 V15 M85 4 H107\" fill=\"none\" stroke=\"#1B7F52\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>", "impulsa": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-8 -18 126 126\" role=\"img\" aria-label=\"Impulsa Manik\"><title>Impulsa Manik</title><defs><clipPath id=\"c-impulsa\"><path d=\"M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z\"/></clipPath><mask id=\"m-impulsa\" maskUnits=\"userSpaceOnUse\" x=\"-8\" y=\"-18\" width=\"126\" height=\"126\"><rect x=\"-8\" y=\"-18\" width=\"126\" height=\"126\" fill=\"#fff\"/><path d=\"M88 12 L104 -4 M92 -4 H104 V8\" fill=\"none\" stroke=\"#000\" stroke-width=\"20\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></mask></defs><g mask=\"url(#m-impulsa)\"><path d=\"M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z\" fill=\"#504CA1\"/><path clip-path=\"url(#c-impulsa)\" d=\"M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64\" fill=\"none\" stroke=\"#F6F8FC\" stroke-width=\"13\" stroke-linejoin=\"round\"/></g><path d=\"M88 12 L104 -4 M92 -4 H104 V8\" fill=\"none\" stroke=\"#504CA1\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>", "grupos": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"-8 -18 126 126\" role=\"img\" aria-label=\"Grupos Manik\"><title>Grupos Manik</title><defs><clipPath id=\"c-grupos\"><path d=\"M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z\"/></clipPath><mask id=\"m-grupos\" maskUnits=\"userSpaceOnUse\" x=\"-8\" y=\"-18\" width=\"126\" height=\"126\"><rect x=\"-8\" y=\"-18\" width=\"126\" height=\"126\" fill=\"#fff\"/></mask><mask id=\"g-grupos\" maskUnits=\"userSpaceOnUse\" x=\"-8\" y=\"-18\" width=\"126\" height=\"126\"><rect x=\"-8\" y=\"-18\" width=\"126\" height=\"126\" fill=\"#fff\"/><path d=\"M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z\" fill=\"#000\" stroke=\"#000\" stroke-width=\"10\"/></mask></defs><g mask=\"url(#g-grupos)\"><path transform=\"translate(12 -12)\" d=\"M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z\" fill=\"#C73A55\"/></g><g mask=\"url(#m-grupos)\"><path d=\"M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z\" fill=\"#C73A55\"/><path clip-path=\"url(#c-grupos)\" d=\"M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64\" fill=\"none\" stroke=\"#F6F8FC\" stroke-width=\"13\" stroke-linejoin=\"round\"/></g></svg>", "ecosistema": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><rect x=\"2.80\" y=\"5.60\" width=\"5.6\" height=\"5.6\" rx=\"1.6\" fill=\"#234899\"/><rect x=\"10.00\" y=\"5.60\" width=\"5.6\" height=\"5.6\" rx=\"1.6\" fill=\"#007C8C\"/><rect x=\"17.20\" y=\"5.60\" width=\"5.6\" height=\"5.6\" rx=\"1.6\" fill=\"#A15C07\"/><rect x=\"2.80\" y=\"12.80\" width=\"5.6\" height=\"5.6\" rx=\"1.6\" fill=\"#1B7F52\"/><rect x=\"10.00\" y=\"12.80\" width=\"5.6\" height=\"5.6\" rx=\"1.6\" fill=\"#504CA1\"/><rect x=\"17.20\" y=\"12.80\" width=\"5.6\" height=\"5.6\" rx=\"1.6\" fill=\"#C73A55\"/></svg>"};
+const CONT = {
+ expediente:{t:'Hoy',s:'Martes 27 de octubre · 6 consultas',acc:'Ver agenda',
+  tabla:[['Hora','Paciente','Motivo','Expediente','Estado'],[['09:00','Mariana Ruiz Ortega','Control de hipertensión','MR-0107-II1',['ok','Atendida']],['09:40','Jorge Hernández Lara','Dolor lumbar','JH-2210-0O8',['info','En consulta']],['10:20','Ana Sofía Méndez','Primera vez · pediatría','AM-3301-1L4',['neu','En sala']],['11:00','Ricardo Villa','Resultados de laboratorio','RV-0912-7A2',['neu','Confirmada']],['11:40','Lucía Torres','Seguimiento posoperatorio','LT-1188-5K9',['warn','Sin confirmar']]]]},
+ agenda:{t:'Hoy',s:'Martes 27 de octubre · Dra. Ramírez, Dr. Ortega',acc:'Ver semana',
+  tabla:[['Hora','Paciente','Médico','Consultorio','Estado'],[['09:00','Mariana Ruiz Ortega','Dra. Ramírez','1',['ok','Llegó']],['09:40','Jorge Hernández Lara','Dra. Ramírez','1',['info','En consulta']],['10:00','Pedro Salinas','Dr. Ortega','2',['neu','Confirmada']],['10:20','Ana Sofía Méndez','Dra. Ramírez','1',['warn','Sin confirmar']],['10:40','Carmen Ríos','Dr. Ortega','2',['bad','Canceló']]]]},
+ compras:{t:'Facturas emitidas',s:'CFDI 4.0 · octubre 2026',acc:'Exportar XML',
+  tabla:[['Folio','Cliente','RFC','Total','Estado'],[['F-2026-0412','Aseguradora del Valle','AVA950101AB1','$ 18,420.00',['ok','Timbrada']],['F-2026-0413','Juan Pérez García','PEGJ800612H21','$ 1,250.00',['ok','Timbrada']],['F-2026-0414','Hospital San Ángel','HSA010203XY9','$ 64,980.50',['warn','Pago pendiente']],['F-2026-0409','Laboratorios Norte','LNO120405MN3','$ 7,300.00',['bad','Cancelada']],['F-2026-0415','Público en general','XAXX010101000','$ 890.00',['info','Por timbrar']]]]},
+ farmacia:{t:'Recetas por surtir',s:'Sucursal Santa Lucía · 8 pendientes',acc:'Escanear receta',
+  tabla:[['Receta','Paciente','Medicamento','Cant.','Estado'],[['RX-88120','Mariana Ruiz Ortega','Losartán 50 mg · tabletas','30',['ok','Lista']],['RX-88121','Jorge Hernández Lara','Diclofenaco 100 mg','10',['warn','Existencia baja']],['RX-88122','Ana Sofía Méndez','Amoxicilina 250 mg/5 mL','1',['bad','Sin existencia']],['RX-88123','Ricardo Villa','Metformina 850 mg','60',['ok','Lista']],['RX-88124','Lucía Torres','Paracetamol 500 mg','20',['info','Por validar']]]]},
+ impulsa:{t:'Resultados',s:'Últimos 30 días · 4 campañas',acc:'Descargar reporte',kpis:[['Pacientes nuevos','553','+12 %'],['Recurrentes','1,208','+4 %'],['Citas agendadas','341','+9 %'],['Asistencia','87 %','+2 pts']],
+  tabla:[['Campaña','Audiencia','Enviados','Citas','Estado'],[['Chequeo cardiovascular','Mayores de 45','4,120','118',['ok','En curso']],['Vacunación influenza','Todos','9,860','164',['ok','En curso']],['Papanicolaou','Mujeres 25–64','2,310','59',['neu','Terminada']],['Control de diabetes','Pacientes con DM2','1,040','—',['info','Programada']]]]},
+ grupos:{t:'Clínicas y sucursales',s:'Grupo Médico del Valle · 4 clínicas',acc:'Agregar clínica',
+  tabla:[['Clínica','Ciudad','Usuarios','Apps','Estado'],[['Clínica Santa Lucía','Puebla','42','6 de 6',['ok','Activa']],['Clínica del Valle Norte','Puebla','28','4 de 6',['ok','Activa']],['Centro Médico Atlixco','Atlixco','15','3 de 6',['warn','Licencia vence en 12 días']],['Unidad Cholula','Cholula','0','—',['neu','En configuración']]]]},
+};
+const EI={ok:'ok',warn:'warn',bad:'x',info:'clock',neu:'clock'};
+const ic=(k)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[k]}</svg>`;
+let app='expediente', rail=false;
+const $=(id)=>document.getElementById(id);
+function renderApps(){
+  $('apps').innerHTML=Object.entries(APPS).map(([k,a])=>`<button type="button" data-k="${k}" aria-pressed="${k===app}">${SELLO[k]}${a.n}</button>`).join('');
+  $('apps').querySelectorAll('button').forEach(b=>b.onclick=()=>{app=b.dataset.k;renderApps();render()});
+}
+function render(){
+  const a=APPS[app], c=CONT[app], tabs=a.patron==='pestanas';
+  const items=a.nav;
+  let nav=`<div class="nav">${tabs?'':`<button class="ib" type="button" aria-label="${rail?'Expandir':'Plegar'} menú" id="tg">${ic('panel')}</button>`}
+   <a class="brand" href="#${app}">${SELLO[app]}<span><b>${a.n}</b> Manik</span></a>`;
+  if(tabs) nav+=`<nav class="tabs" aria-label="Secciones">${items[0][1].map(([i,l])=>`<button class="tab" type="button"${l===a.activo?' aria-current="page"':''}>${ic(i)}${l}</button>`).join('')}</nav><span class="grow"></span>`;
+  else nav+=`<span class="grow"></span>${a.busca?`<span class="search">${ic('search')}${a.busca}</span>`:''}<span class="grow"></span>`;
+  nav+=`<button class="clin" type="button" aria-label="Clínica activa: Clínica Santa Lucía. Cambiar">Clínica Santa Lucía ${ic('chev')}</button>
+   <button class="ib" type="button" aria-label="Avisos, 3 nuevos">${ic('bell')}<span class="dot"></span></button>
+   <button class="ib eco" type="button" aria-label="Ecosistema Manik: cambiar de app">${SELLO.ecosistema}</button><span class="av" aria-label="Dra. Ramírez">DR</span></div>`;
+  let sb='';
+  if(!tabs){
+    sb=`<aside class="sb${rail?' rail':''}" aria-label="Menú de ${a.n}"><button class="cta" type="button" title="${a.cta}">${ic('plus')}<span>${a.cta}</span></button>`;
+    items.forEach(([g,its],gi)=>{
+      if(g) sb+=`${gi?'<div class="gsep"></div>':''}<p class="gh">${g}</p>`;
+      sb+=its.map(([i,l,n])=>`<a class="it" href="#${app}" title="${l}"${l===a.activo?' aria-current="page"':''}>${ic(i)}<span class="lbl">${l}</span>${n?`<span class="ct">${n}</span><span class="ctdot"></span>`:''}</a>`).join('');
+    });
+    sb+=`<div class="sb-f"><a class="it" href="#${app}" title="Configuración">${ic('gear')}<span class="lbl">Configuración</span></a><a class="it" href="#${app}" title="Ayuda">${ic('help')}<span class="lbl">Ayuda</span></a></div></aside>`;
+  }
+  const [h,rows]=c.tabla, rnum=new Set([3]);
+  let main=`<main class="main"><div class="content"><div class="ph"><div><h2>${c.t}</h2><p>${c.s}</p></div><button class="btn2" type="button">${c.acc}</button></div>`;
+  if(c.kpis) main+=`<div class="kpis">${c.kpis.map(([l,v,d])=>`<div class="kpi"><span>${l}</span><b>${v}</b><small>${d} vs. mes anterior</small></div>`).join('')}</div>`;
+  main+=`<div class="card"><table><thead><tr>${h.map((x,i)=>`<th${rnum.has(i)?' class="r"':''}>${x}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map((v,i)=>Array.isArray(v)?`<td><span class="est e-${v[0]}">${ic(EI[v[0]])}${v[1]}</span></td>`:`<td class="${i===0||i>=2?'num':''}${rnum.has(i)?' r':''}${i===2?' mut':''}">${v}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>`;
+  main+=`<footer class="foot"><span class="l">© 2026 MedicalManik<a href="#${app}">Aviso de privacidad</a><a href="#${app}">Términos de uso</a><a href="#${app}">Soporte</a></span><span class="ok"><i></i>Clínica Santa Lucía · v3.4.1 · Sincronizado hace 1 min</span></footer></main>`;
+  const shell=$('shell');
+  shell.style.width=rail?'960px':'1300px';
+  shell.innerHTML=nav+`<div class="body${tabs?' nosb':''}" style="--sbw:${rail?'72px':'248px'}">${sb}${main}</div>`;
+  const tg=$('tg'); if(tg) tg.onclick=()=>{rail=!rail;setW();render()};
+}
+function setW(){ $('w-desk').setAttribute('aria-pressed',!rail); $('w-tab').setAttribute('aria-pressed',rail); }
+$('w-desk').onclick=()=>{rail=false;setW();render()};
+$('w-tab').onclick=()=>{rail=true;setW();render()};
+try{ const h=location.hash.slice(1); if(APPS[h]) app=h; }catch(e){}
+renderApps(); render();
+window.addEventListener('hashchange',()=>{const h=location.hash.slice(1); if(APPS[h]&&h!==app){app=h;renderApps();render();}});
+</script>

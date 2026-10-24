@@ -1,0 +1,189 @@
+<title>Shell Ecosistema Manik</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap">
+<style>
+/* Una sola capa de shell para seis apps: la densidad de navegación decide el patrón (pestañas · sidebar plano · sidebar por grupos). Tema claro, como el sistema. */
+:root{
+  --canvas:#F5F7FB;--surface:#FFFFFF;--soft:#EEF1F7;--pressed:#E4E9F2;--ink:#14213D;--muted:#4A5674;--subtle:#7A849C;--line:#E1E6F0;--control:#858EA5;
+  --manik:#234899;--manik-hover:#1C3A79;--manik-soft:#E9EDF5;
+  --exito:#15814B;--exito-soft:#E8F2ED;--on-exito:#106239;--aviso:#A75F00;--aviso-soft:#F6EFE6;--on-aviso:#7F4A08;--error:#C33F4E;--error-soft:#F9ECED;--on-error:#9C3443;--info:#3F7695;--info-soft:#ECF1F4;--on-info:#335F7A;
+  --display:"Sora","Segoe UI",system-ui,sans-serif;--sans:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --r-sm:10px;--r-md:14px;--r-lg:18px;--r-2xl:24px;--pop:0 2px 8px rgba(20,33,61,.08),0 18px 44px rgba(20,33,61,.16);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--canvas);color:var(--ink);font:16px/24px var(--sans);padding-block:28px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1360px;margin:0 auto;display:grid;gap:20px}
+h1{margin:0;font:600 28px/36px var(--display);letter-spacing:-.02em;text-wrap:balance}
+.lead{margin:4px 0 0;color:var(--muted);max-width:72ch}
+.ctrl{display:flex;gap:16px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.apps{display:flex;gap:6px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:6px}
+.apps button{display:flex;align-items:center;gap:8px;border:0;background:transparent;border-radius:12px;padding:6px 12px 6px 6px;font:600 14px/20px var(--sans);color:var(--ink);cursor:pointer;min-height:44px}
+.apps button svg{width:30px;height:30px;display:block}
+.apps button[aria-pressed="true"]{background:var(--manik-soft);color:var(--manik)}
+.apps button:hover{background:var(--soft)}
+.seg{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px}
+.seg button{border:0;background:transparent;border-radius:9px;padding:8px 14px;font:600 14px/20px var(--sans);color:var(--muted);cursor:pointer;min-height:40px}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+button:focus-visible,a:focus-visible{outline:2px solid var(--manik);outline-offset:2px}
+.frame{overflow-x:auto;border-radius:var(--r-2xl);border:1px solid var(--line);background:#DCE2EC;padding:14px}
+/* ── shell ── */
+.shell{margin:0 auto;background:var(--canvas);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:64px 1fr;height:760px;box-shadow:0 1px 2px rgba(20,33,61,.06)}
+.nav{display:flex;align-items:center;gap:12px;padding:0 16px 0 12px;background:var(--surface);border-bottom:1px solid var(--line);min-width:0}
+.ib{width:44px;height:44px;display:grid;place-items:center;border:0;background:transparent;border-radius:12px;color:var(--muted);cursor:pointer;flex:none;position:relative}
+.ib:hover{background:var(--soft)}
+.ib svg,.it svg,.cta svg,.sb-b svg,.mini svg{width:20px;height:20px;display:block;flex:none}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--muted);white-space:nowrap;font:16px/24px var(--display)}
+.brand svg{width:34px;height:34px;display:block}.brand b{font-weight:600;color:var(--ink)}
+.tabs{display:flex;gap:4px;margin-left:12px;height:100%}
+.tab{display:flex;align-items:center;gap:8px;padding:0 14px;border:0;background:transparent;font:600 15px/20px var(--sans);color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;border-top:3px solid transparent}
+.tab[aria-current="page"]{color:var(--manik);border-bottom-color:var(--manik)}
+.tab svg{width:18px;height:18px}
+.grow{flex:1;min-width:0}
+.search{display:flex;align-items:center;gap:8px;height:40px;border:1px solid var(--control);border-radius:var(--r-md);padding:0 12px;color:var(--muted);font-size:14px;width:min(420px,100%);background:var(--surface);white-space:nowrap;overflow:hidden}
+.search svg{width:18px;height:18px;flex:none}
+.clin{display:flex;align-items:center;gap:6px;height:40px;padding:0 10px 0 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);font:600 14px/20px var(--sans);color:var(--ink);cursor:pointer;white-space:nowrap}
+.clin svg{width:16px;height:16px;color:var(--muted)}
+.dot{position:absolute;top:10px;right:11px;width:8px;height:8px;border-radius:50%;background:var(--error);border:2px solid var(--surface)}
+.eco svg{width:24px;height:24px}.eco[aria-expanded="true"]{background:var(--manik-soft)}
+.av{width:36px;height:36px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font:600 13px/1 var(--sans);flex:none}
+.body{display:grid;grid-template-columns:var(--sbw,248px) minmax(0,1fr);min-height:0}
+.body.nosb{grid-template-columns:minmax(0,1fr)}
+.sb{background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0;padding:14px 12px 10px;gap:4px;overflow:auto}
+.cta{display:flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border:0;border-radius:var(--r-md);background:var(--manik);color:#fff;font:600 15px/20px var(--sans);cursor:pointer;margin-bottom:10px;white-space:nowrap}
+.cta:hover{background:var(--manik-hover)}
+.gh{margin:12px 10px 4px;font:700 11.5px/16px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.it{display:flex;align-items:center;gap:12px;min-height:40px;padding:0 10px;border-radius:12px;color:var(--ink);text-decoration:none;font:500 15px/20px var(--sans);white-space:nowrap}
+.it:hover{background:var(--soft)}
+.it[aria-current="page"]{background:var(--manik-soft);color:var(--manik);font-weight:600}
+.it .ct{margin-left:auto;min-width:22px;height:22px;padding:0 7px;border-radius:999px;background:var(--soft);color:var(--ink);font:600 12px/22px var(--sans);text-align:center;font-variant-numeric:tabular-nums}
+.it[aria-current="page"] .ct{background:var(--surface);color:var(--manik)}
+.sb-f{margin-top:auto;border-top:1px solid var(--line);padding-top:8px;display:grid;gap:2px}
+.rail .gh,.rail .lbl,.rail .ct,.rail .cta span{display:none}
+.rail .it,.rail .cta{justify-content:center;padding:0}
+.rail .it{position:relative}
+.rail .it .ctdot{display:block}
+.ctdot{display:none;position:absolute;top:7px;right:12px;width:8px;height:8px;border-radius:50%;background:var(--manik)}
+.rail .gsep{display:block}.gsep{display:none;height:1px;background:var(--line);margin:8px 6px}
+.main{display:flex;flex-direction:column;min-height:0;overflow:auto}
+.content{padding:24px 28px;display:grid;gap:18px;align-content:start;flex:1}
+.ph{display:flex;align-items:end;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.ph h2{margin:0;font:600 24px/32px var(--display);letter-spacing:-.01em}
+.ph p{margin:2px 0 0;color:var(--muted);font-size:15px}
+.btn2{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px;border-radius:var(--r-md);border:1px solid var(--control);background:var(--surface);color:var(--manik);font:600 14px/20px var(--sans);cursor:pointer}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th{background:var(--soft);color:var(--muted);font:600 13px/18px var(--sans);text-align:left;padding:10px 14px;white-space:nowrap}
+td{padding:11px 14px;border-top:1px solid var(--line);white-space:nowrap}
+.num{font-variant-numeric:tabular-nums}.r{text-align:right}.mut{color:var(--muted)}
+.est{display:inline-flex;align-items:center;gap:6px;padding:2px 10px 2px 8px;border-radius:999px;font:600 13px/18px var(--sans)}
+.est svg{width:15px;height:15px}
+.e-ok{background:var(--exito-soft);color:var(--on-exito)}.e-warn{background:var(--aviso-soft);color:var(--on-aviso)}.e-bad{background:var(--error-soft);color:var(--on-error)}.e-info{background:var(--info-soft);color:var(--on-info)}.e-neu{background:var(--soft);color:var(--muted)}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px 18px;display:grid;gap:2px}
+.kpi span{font:700 12px/16px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.kpi b{font:600 30px/36px var(--sans);font-variant-numeric:tabular-nums}
+.kpi small{color:var(--on-exito);font-size:13px}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:12px 28px;border-top:1px solid var(--line);background:var(--surface);font-size:13px;line-height:18px;color:var(--muted)}
+.foot a{color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.foot .l{display:flex;gap:14px;flex-wrap:wrap}.foot .ok{display:inline-flex;align-items:center;gap:6px}.foot .ok i{width:8px;height:8px;border-radius:50%;background:var(--exito);display:inline-block}
+/* ── reglas ── */
+.rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.rule{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px;display:grid;gap:6px;align-content:start}
+.rule h3{margin:0;font:600 17px/24px var(--display)}
+.rule p{margin:0;font-size:15px;color:var(--muted)}
+.rule .who{font:600 13px/18px var(--sans);color:var(--ink)}
+.anat{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px 20px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.anat h3{margin:0 0 6px;font:600 17px/24px var(--display)}
+.anat ul{margin:0;padding-left:18px;color:var(--ink);font-size:15px;display:grid;gap:4px}
+.note{font-size:14px;color:var(--muted);margin:0}
+@media (max-width:900px){.rules,.anat{grid-template-columns:1fr}}
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>El shell de cada app</h1>
+    <p class="lead">Barra superior, barra lateral y pie: una sola estructura para las seis apps del Ecosistema Manik. Lo que cambia es cuánta navegación necesita cada una.</p>
+  </header>
+  <div class="ctrl">
+    <div class="apps" id="apps" role="group" aria-label="App"></div>
+    <div class="seg" role="group" aria-label="Ancho">
+      <button type="button" id="w-desk" aria-pressed="true">Escritorio</button>
+      <button type="button" id="w-tab" aria-pressed="false">Tableta · riel</button>
+    </div>
+  </div>
+  <div class="frame"><div class="shell" id="shell"></div></div>
+
+  <div class="rules">
+    <div class="rule"><h3>Pestañas en la barra</h3><p class="who">≤ 3 destinos · Impulsa</p><p>Sin barra lateral: las pestañas viven en la barra superior y el contenido usa todo el ancho.</p></div>
+    <div class="rule"><h3>Barra lateral plana</h3><p class="who">4 a 7 destinos · Agenda, Farmacia, Grupos</p><p>Una lista sin títulos de grupo. El botón de la acción principal va arriba.</p></div>
+    <div class="rule"><h3>Barra lateral por grupos</h3><p class="who">8 o más destinos · Expediente, Compras</p><p>Títulos de grupo en mayúsculas; se pliega a un riel de iconos. Facturación electrónica es su propio grupo en Compras.</p></div>
+  </div>
+  <div class="anat">
+    <div><h3>Barra superior · 64 px</h3><ul><li>Sello y «Producto Manik»: lleva al inicio de la app.</li><li>Búsqueda propia de la app, al centro.</li><li>Clínica activa: cambia de sucursal sin salir.</li><li>Avisos, mosaico del ecosistema y avatar, siempre en ese orden.</li></ul></div>
+    <div><h3>Barra lateral · 248 px o riel de 72</h3><ul><li>Arriba, la acción principal de la app en azul Manik.</li><li>Activo: fondo «manik-soft», texto azul y en 600.</li><li>Contadores solo donde hay trabajo pendiente.</li><li>Abajo: Configuración y Ayuda.</li></ul></div>
+    <div><h3>Pie · 42 px</h3><ul><li>Aviso de privacidad, términos y soporte (datos de salud: el aviso siempre a un clic).</li><li>Clínica, versión y estado de sincronización.</li><li>Va al final del contenido, no fijo: no roba alto de pantalla.</li></ul></div>
+  </div>
+  <p class="note">Las opciones de cada barra lateral son una propuesta a partir de lo que hace cada app; los nombres y el orden se confirman con quien la usa.</p>
+</div>
+
+<script>
+/*DATA*/
+const CONT = {
+ expediente:{t:'Hoy',s:'Martes 27 de octubre · 6 consultas',acc:'Ver agenda',
+  tabla:[['Hora','Paciente','Motivo','Expediente','Estado'],[['09:00','Mariana Ruiz Ortega','Control de hipertensión','MR-0107-II1',['ok','Atendida']],['09:40','Jorge Hernández Lara','Dolor lumbar','JH-2210-0O8',['info','En consulta']],['10:20','Ana Sofía Méndez','Primera vez · pediatría','AM-3301-1L4',['neu','En sala']],['11:00','Ricardo Villa','Resultados de laboratorio','RV-0912-7A2',['neu','Confirmada']],['11:40','Lucía Torres','Seguimiento posoperatorio','LT-1188-5K9',['warn','Sin confirmar']]]]},
+ agenda:{t:'Hoy',s:'Martes 27 de octubre · Dra. Ramírez, Dr. Ortega',acc:'Ver semana',
+  tabla:[['Hora','Paciente','Médico','Consultorio','Estado'],[['09:00','Mariana Ruiz Ortega','Dra. Ramírez','1',['ok','Llegó']],['09:40','Jorge Hernández Lara','Dra. Ramírez','1',['info','En consulta']],['10:00','Pedro Salinas','Dr. Ortega','2',['neu','Confirmada']],['10:20','Ana Sofía Méndez','Dra. Ramírez','1',['warn','Sin confirmar']],['10:40','Carmen Ríos','Dr. Ortega','2',['bad','Canceló']]]]},
+ compras:{t:'Facturas emitidas',s:'CFDI 4.0 · octubre 2026',acc:'Exportar XML',
+  tabla:[['Folio','Cliente','RFC','Total','Estado'],[['F-2026-0412','Aseguradora del Valle','AVA950101AB1','$ 18,420.00',['ok','Timbrada']],['F-2026-0413','Juan Pérez García','PEGJ800612H21','$ 1,250.00',['ok','Timbrada']],['F-2026-0414','Hospital San Ángel','HSA010203XY9','$ 64,980.50',['warn','Pago pendiente']],['F-2026-0409','Laboratorios Norte','LNO120405MN3','$ 7,300.00',['bad','Cancelada']],['F-2026-0415','Público en general','XAXX010101000','$ 890.00',['info','Por timbrar']]]]},
+ farmacia:{t:'Recetas por surtir',s:'Sucursal Santa Lucía · 8 pendientes',acc:'Escanear receta',
+  tabla:[['Receta','Paciente','Medicamento','Cant.','Estado'],[['RX-88120','Mariana Ruiz Ortega','Losartán 50 mg · tabletas','30',['ok','Lista']],['RX-88121','Jorge Hernández Lara','Diclofenaco 100 mg','10',['warn','Existencia baja']],['RX-88122','Ana Sofía Méndez','Amoxicilina 250 mg/5 mL','1',['bad','Sin existencia']],['RX-88123','Ricardo Villa','Metformina 850 mg','60',['ok','Lista']],['RX-88124','Lucía Torres','Paracetamol 500 mg','20',['info','Por validar']]]]},
+ impulsa:{t:'Resultados',s:'Últimos 30 días · 4 campañas',acc:'Descargar reporte',kpis:[['Pacientes nuevos','553','+12 %'],['Recurrentes','1,208','+4 %'],['Citas agendadas','341','+9 %'],['Asistencia','87 %','+2 pts']],
+  tabla:[['Campaña','Audiencia','Enviados','Citas','Estado'],[['Chequeo cardiovascular','Mayores de 45','4,120','118',['ok','En curso']],['Vacunación influenza','Todos','9,860','164',['ok','En curso']],['Papanicolaou','Mujeres 25–64','2,310','59',['neu','Terminada']],['Control de diabetes','Pacientes con DM2','1,040','—',['info','Programada']]]]},
+ grupos:{t:'Clínicas y sucursales',s:'Grupo Médico del Valle · 4 clínicas',acc:'Agregar clínica',
+  tabla:[['Clínica','Ciudad','Usuarios','Apps','Estado'],[['Clínica Santa Lucía','Puebla','42','6 de 6',['ok','Activa']],['Clínica del Valle Norte','Puebla','28','4 de 6',['ok','Activa']],['Centro Médico Atlixco','Atlixco','15','3 de 6',['warn','Licencia vence en 12 días']],['Unidad Cholula','Cholula','0','—',['neu','En configuración']]]]},
+};
+const EI={ok:'ok',warn:'warn',bad:'x',info:'clock',neu:'clock'};
+const ic=(k)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[k]}</svg>`;
+let app='expediente', rail=false;
+const $=(id)=>document.getElementById(id);
+function renderApps(){
+  $('apps').innerHTML=Object.entries(APPS).map(([k,a])=>`<button type="button" data-k="${k}" aria-pressed="${k===app}">${SELLO[k]}${a.n}</button>`).join('');
+  $('apps').querySelectorAll('button').forEach(b=>b.onclick=()=>{app=b.dataset.k;renderApps();render()});
+}
+function render(){
+  const a=APPS[app], c=CONT[app], tabs=a.patron==='pestanas';
+  const items=a.nav;
+  let nav=`<div class="nav">${tabs?'':`<button class="ib" type="button" aria-label="${rail?'Expandir':'Plegar'} menú" id="tg">${ic('panel')}</button>`}
+   <a class="brand" href="#${app}">${SELLO[app]}<span><b>${a.n}</b> Manik</span></a>`;
+  if(tabs) nav+=`<nav class="tabs" aria-label="Secciones">${items[0][1].map(([i,l])=>`<button class="tab" type="button"${l===a.activo?' aria-current="page"':''}>${ic(i)}${l}</button>`).join('')}</nav><span class="grow"></span>`;
+  else nav+=`<span class="grow"></span>${a.busca?`<span class="search">${ic('search')}${a.busca}</span>`:''}<span class="grow"></span>`;
+  nav+=`<button class="clin" type="button" aria-label="Clínica activa: Clínica Santa Lucía. Cambiar">Clínica Santa Lucía ${ic('chev')}</button>
+   <button class="ib" type="button" aria-label="Avisos, 3 nuevos">${ic('bell')}<span class="dot"></span></button>
+   <button class="ib eco" type="button" aria-label="Ecosistema Manik: cambiar de app">${SELLO.ecosistema}</button><span class="av" aria-label="Dra. Ramírez">DR</span></div>`;
+  let sb='';
+  if(!tabs){
+    sb=`<aside class="sb${rail?' rail':''}" aria-label="Menú de ${a.n}"><button class="cta" type="button" title="${a.cta}">${ic('plus')}<span>${a.cta}</span></button>`;
+    items.forEach(([g,its],gi)=>{
+      if(g) sb+=`${gi?'<div class="gsep"></div>':''}<p class="gh">${g}</p>`;
+      sb+=its.map(([i,l,n])=>`<a class="it" href="#${app}" title="${l}"${l===a.activo?' aria-current="page"':''}>${ic(i)}<span class="lbl">${l}</span>${n?`<span class="ct">${n}</span><span class="ctdot"></span>`:''}</a>`).join('');
+    });
+    sb+=`<div class="sb-f"><a class="it" href="#${app}" title="Configuración">${ic('gear')}<span class="lbl">Configuración</span></a><a class="it" href="#${app}" title="Ayuda">${ic('help')}<span class="lbl">Ayuda</span></a></div></aside>`;
+  }
+  const [h,rows]=c.tabla, rnum=new Set([3]);
+  let main=`<main class="main"><div class="content"><div class="ph"><div><h2>${c.t}</h2><p>${c.s}</p></div><button class="btn2" type="button">${c.acc}</button></div>`;
+  if(c.kpis) main+=`<div class="kpis">${c.kpis.map(([l,v,d])=>`<div class="kpi"><span>${l}</span><b>${v}</b><small>${d} vs. mes anterior</small></div>`).join('')}</div>`;
+  main+=`<div class="card"><table><thead><tr>${h.map((x,i)=>`<th${rnum.has(i)?' class="r"':''}>${x}</th>`).join('')}</tr></thead><tbody>${rows.map(r=>`<tr>${r.map((v,i)=>Array.isArray(v)?`<td><span class="est e-${v[0]}">${ic(EI[v[0]])}${v[1]}</span></td>`:`<td class="${i===0||i>=2?'num':''}${rnum.has(i)?' r':''}${i===2?' mut':''}">${v}</td>`).join('')}</tr>`).join('')}</tbody></table></div></div>`;
+  main+=`<footer class="foot"><span class="l">© 2026 MedicalManik<a href="#${app}">Aviso de privacidad</a><a href="#${app}">Términos de uso</a><a href="#${app}">Soporte</a></span><span class="ok"><i></i>Clínica Santa Lucía · v3.4.1 · Sincronizado hace 1 min</span></footer></main>`;
+  const shell=$('shell');
+  shell.style.width=rail?'960px':'1300px';
+  shell.innerHTML=nav+`<div class="body${tabs?' nosb':''}" style="--sbw:${rail?'72px':'248px'}">${sb}${main}</div>`;
+  const tg=$('tg'); if(tg) tg.onclick=()=>{rail=!rail;setW();render()};
+}
+function setW(){ $('w-desk').setAttribute('aria-pressed',!rail); $('w-tab').setAttribute('aria-pressed',rail); }
+$('w-desk').onclick=()=>{rail=false;setW();render()};
+$('w-tab').onclick=()=>{rail=true;setW();render()};
+try{ const h=location.hash.slice(1); if(APPS[h]) app=h; }catch(e){}
+renderApps(); render();
+window.addEventListener('hashchange',()=>{const h=location.hash.slice(1); if(APPS[h]&&h!==app){app=h;renderApps();render();}});
+</script>
