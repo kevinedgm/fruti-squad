@@ -1,0 +1,383 @@
+<title>Directorio Manik bienestar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300..700&family=Onest:wght@400..700&display=swap">
+<style>
+/* Sensación de bienestar (referencia Hims & Hers / Oura): luz suave, mucho aire, sans ligera en títulos,
+   fotos de personas como protagonistas. Tema claro único y deliberado. */
+:root{
+  --white:#FFFFFF;
+  --wash:#EEF3F5;
+  --mist:#F5FAFB;
+  --ink:#14213D;
+  --muted:#4A5674;     /* 7.3:1 */
+  --line:#DCE4EA;
+  --field:#6B7590;
+  --cian:#009BB0;
+  --act:#00788A;       /* 5.2:1 con blanco */
+  --act-dk:#00606F;
+  --sky:#D3F0F4;       /* luz cian */
+  --sun:#FFEFD2;       /* luz cálida, derivada del amarillo de estrellas */
+  --star:#E3A21C;
+  --ok:#15814B;
+  --head:'Urbanist',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --body:'Onest',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--wash);color:var(--ink);font:17px/1.55 var(--body)}
+p{margin:0}
+h1,h2,h3{margin:0;text-wrap:balance}
+:focus-visible{outline:3px solid var(--act);outline-offset:2px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+svg.lucide{width:22px;height:22px;flex:none}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 64px;display:grid;gap:36px}
+.top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.top p{font-size:15px;color:var(--muted)}
+.top b{color:var(--ink)}
+.seg{display:inline-flex;border:1.5px solid var(--field);border-radius:999px;padding:3px;gap:3px;background:var(--white)}
+.seg button{font:600 15px var(--body);color:var(--ink);background:none;border:0;border-radius:999px;min-height:38px;padding:0 16px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.frame{width:100%;max-width:1280px;margin:0 auto;background:var(--white);border-radius:28px;overflow:hidden;box-shadow:0 1px 2px rgba(20,33,61,.06),0 20px 50px rgba(20,33,61,.08);transition:max-width .25s ease}
+.frame.phone{max-width:390px;border-radius:36px;box-shadow:0 0 0 8px var(--ink)}
+@media (prefers-reduced-motion:reduce){.frame{transition:none}}
+
+/* =========== producto =========== */
+.app{container-type:inline-size;position:relative}
+.nav{display:flex;align-items:center;gap:28px;padding:20px 44px;position:relative;z-index:2}
+.nav .logo svg{height:30px;width:auto;display:block}
+.nav ul{display:flex;gap:6px;list-style:none;margin:0 0 0 12px;padding:0}
+.nav ul a{display:block;color:var(--ink);text-decoration:none;font-weight:500;padding:8px 14px;border-radius:999px}
+.nav ul a:hover{background:rgba(255,255,255,.7)}
+.nav ul a[aria-current]{background:var(--white)}
+.nav .me{margin-left:auto;color:var(--ink);text-decoration:none;font-weight:600;padding:10px 18px;border-radius:999px;background:var(--white)}
+.nav .menu{display:none;margin-left:auto;font:600 16px var(--body);background:var(--white);border:0;border-radius:999px;min-height:44px;padding:0 18px;color:var(--ink)}
+
+.hero{position:relative;padding:20px 44px 56px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center}
+.app::before{content:"";position:absolute;inset:0 0 auto 0;height:760px;z-index:0;
+  background:radial-gradient(60% 70% at 8% 10%,var(--sky) 0%,rgba(211,240,244,0) 70%),radial-gradient(50% 60% at 92% 30%,var(--sun) 0%,rgba(255,239,210,0) 70%),linear-gradient(180deg,var(--mist) 0%,var(--white) 100%)}
+.hero>*{position:relative;z-index:1;min-width:0}
+.htxt{display:grid;gap:22px}
+.pill{justify-self:start;display:inline-flex;align-items:center;gap:8px;background:var(--white);border-radius:999px;padding:6px 14px 6px 8px;font-size:15px;font-weight:500}
+.pill span{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--sky);color:var(--act)}
+.pill span svg{width:15px;height:15px}
+.h1{font:300 clamp(44px,6.4cqi,80px)/1.02 var(--head);letter-spacing:-.035em}
+.h1 b{font-weight:600}
+.lead{font-size:19px;color:var(--muted);max-width:40ch}
+.search{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) auto;align-items:center;background:var(--white);border-radius:999px;padding:8px;box-shadow:0 1px 2px rgba(20,33,61,.06),0 12px 32px rgba(20,33,61,.10);max-width:640px}
+.search .f{display:flex;align-items:center;gap:10px;padding:6px 16px;min-width:0}
+.search .f+.f{border-left:1px solid var(--line)}
+.search .f svg{color:var(--act)}
+.search .f div{display:grid;min-width:0}
+.search label{font-size:13px;font-weight:600;color:var(--muted)}
+.search input{border:0;outline:0;font:500 17px var(--body);color:var(--ink);background:none;padding:0;min-width:0;width:100%}
+.search input::placeholder{color:var(--muted)}
+.search:focus-within{outline:3px solid var(--act);outline-offset:3px}
+.search .go{border:0;background:var(--ink);color:#fff;border-radius:999px;min-height:54px;padding:0 26px;font:600 17px var(--body);cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.search .go:hover{background:#000}
+.quick{display:flex;flex-wrap:wrap;gap:8px}
+.quick a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);background:rgba(255,255,255,.85);border:1px solid var(--line);border-radius:999px;padding:7px 14px 7px 10px;font-weight:500;font-size:15px}
+.quick a svg{width:18px;height:18px;color:var(--act)}
+.quick a:hover{background:var(--white);border-color:var(--field)}
+
+/* foto protagonista (pendiente: fotografía real) */
+.visual{position:relative;aspect-ratio:4/5;max-width:100%;max-height:600px;justify-self:end;width:100%}
+.photo{position:absolute;inset:0;border-radius:32px;overflow:hidden;background:
+  radial-gradient(70% 55% at 50% 38%,#FFE3B8 0%,rgba(255,227,184,0) 70%),
+  radial-gradient(90% 70% at 30% 100%,#8FD8E2 0%,rgba(143,216,226,0) 70%),
+  linear-gradient(160deg,#BFE9EF 0%,#F6E3C8 100%)}
+.photo .who{position:absolute;left:50%;bottom:0;width:62%;transform:translateX(-50%)}
+.photo .who i{display:block;margin:0 auto;width:44%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.55)}
+.photo .who b{display:block;margin-top:6%;height:0;padding-bottom:62%;border-radius:50% 50% 0 0;background:rgba(255,255,255,.55)}
+.photo .tag{position:absolute;left:16px;bottom:16px;font-size:13px;font-weight:600;background:rgba(20,33,61,.78);color:#fff;border-radius:999px;padding:5px 11px}
+.float{position:absolute;background:var(--white);border-radius:20px;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 10px 30px rgba(20,33,61,.14);font-size:15px}
+.float b{display:block;font-weight:600}
+.float small{color:var(--muted);font-size:14px}
+.float .ic{display:grid;place-items:center;width:40px;height:40px;border-radius:14px;background:var(--sky);color:var(--act)}
+.f1{top:12%;left:-28px}
+.f2{bottom:14%;right:-20px}
+.f2 .ic{background:var(--sun);color:#8A5A00}
+
+/* secciones */
+.sec{padding:56px 44px;display:grid;gap:24px;position:relative;z-index:1}
+.sec-h{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:end;justify-content:space-between}
+.h2{font:400 clamp(30px,3.6cqi,44px)/1.08 var(--head);letter-spacing:-.03em}
+.h2 b{font-weight:600}
+.sec-h p{color:var(--muted);max-width:44ch}
+
+.cats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
+.cat{display:grid;gap:26px;align-content:space-between;text-decoration:none;color:var(--ink);border-radius:24px;padding:18px;min-height:168px;background:var(--mist);transition:transform .2s ease}
+.cat:nth-child(3n+1){background:#E4F5F7}
+.cat:nth-child(3n+2){background:#FFF4E0}
+.cat:nth-child(3n){background:#EEF2F8}
+.cat:hover{transform:translateY(-3px)}
+.cat .ic{display:grid;place-items:center;width:48px;height:48px;border-radius:16px;background:var(--white);color:var(--act)}
+.cat b{font:600 19px/1.15 var(--head);display:block}
+.cat small{color:var(--muted);font-size:14px}
+@media (prefers-reduced-motion:reduce){.cat{transition:none}.cat:hover{transform:none}}
+
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.chip{font:500 15px var(--body);color:var(--ink);background:var(--white);border:1.5px solid var(--line);border-radius:999px;min-height:42px;padding:0 16px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip:hover{border-color:var(--field)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tools .sort{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-size:15px;color:var(--muted)}
+.tools select{font:500 15px var(--body);color:var(--ink);border:1.5px solid var(--line);border-radius:999px;min-height:42px;padding:0 14px;background:var(--white)}
+.count{font-size:16px;color:var(--muted)}
+.count b{color:var(--ink)}
+
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.doc{background:var(--white);border:1px solid var(--line);border-radius:28px;padding:16px;display:grid;grid-template-columns:132px minmax(0,1fr);gap:18px;transition:box-shadow .2s ease}
+.doc:hover{box-shadow:0 12px 30px rgba(20,33,61,.08)}
+.face{border-radius:20px;aspect-ratio:3/4;max-width:100%;display:grid;place-items:end start;padding:10px 12px;font:300 34px var(--head);letter-spacing:-.02em;color:var(--ink);background:linear-gradient(160deg,#CDEEF2,#FBE7C9)}
+.doc:nth-child(2n) .face{background:linear-gradient(160deg,#F9E2C2,#D6EAF5)}
+.info{display:grid;gap:8px;align-content:start;min-width:0}
+.top-line{display:flex;justify-content:space-between;gap:10px;align-items:start}
+.doc h3{font:600 22px/1.15 var(--head);letter-spacing:-.01em}
+.doc h3 a{color:inherit;text-decoration:none}
+.doc h3 a:hover{text-decoration:underline}
+.spec{color:var(--muted);font-size:15px}
+.price{font:600 18px var(--head);white-space:nowrap}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.meta span{display:inline-flex;align-items:center;gap:5px;font-size:14px;background:var(--mist);border-radius:999px;padding:4px 10px}
+.meta span svg{width:15px;height:15px}
+.meta .v{color:var(--ok);font-weight:600;background:#E7F5EE}
+.meta .st{color:var(--ink)}
+.meta .st b{color:var(--star);font-weight:400}
+.meta .new{background:var(--sun);font-weight:600}
+.when{font-size:15px;font-weight:600;margin-top:4px}
+.when span{font-weight:400;color:var(--muted)}
+.times{display:flex;flex-wrap:wrap;gap:6px}
+.times button{font:600 15px var(--body);font-variant-numeric:tabular-nums;color:var(--act);background:var(--white);border:1.5px solid var(--act);border-radius:999px;min-height:42px;padding:0 14px;cursor:pointer}
+.times button[aria-pressed="true"]{background:var(--act);color:#fff}
+.book{justify-self:start;font:600 16px var(--body);background:var(--act);color:#fff;border:0;border-radius:999px;min-height:48px;padding:0 22px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.book svg{width:18px;height:18px}
+.book:hover{background:var(--act-dk)}
+.msg{font-size:15px;font-weight:600;color:var(--ok)}
+.tel{font:600 22px var(--head);font-variant-numeric:tabular-nums;user-select:all}
+.copy{justify-self:start;font:600 16px var(--body);background:var(--white);color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;min-height:46px;padding:0 20px;cursor:pointer}
+.ad{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;background:var(--sun);border-radius:22px;padding:16px 20px;font-size:16px}
+.ad .lbl{font-weight:700;font-size:13px;color:#6B4A00;background:var(--white);border-radius:999px;padding:3px 10px}
+.ad a{margin-left:auto;font-weight:600;color:var(--ink)}
+
+.trust{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;background:var(--ink);color:#fff;border-radius:28px;padding:30px;margin:0 44px}
+.trust div{display:grid;gap:8px}
+.trust .ic{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.1);color:#7FDCE6}
+.trust b{font:600 20px var(--head)}
+.trust p{color:#C7D2E4;font-size:15px}
+
+.foot{display:flex;flex-wrap:wrap;gap:16px 36px;align-items:center;padding:40px 44px 36px;font-size:15px;color:var(--muted)}
+.foot svg{height:24px;width:auto;display:block}
+.foot nav{display:flex;flex-wrap:wrap;gap:6px 20px;margin-left:auto}
+.foot a{color:var(--ink)}
+
+@container (max-width:1000px){
+  .cats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .grid{grid-template-columns:1fr}
+}
+@container (max-width:760px){
+  .nav{padding:16px 18px}.nav ul,.nav .me{display:none}.nav .menu{display:inline-flex;align-items:center}
+  .hero{grid-template-columns:1fr;padding:8px 18px 36px;gap:30px}
+  .visual{justify-self:stretch;aspect-ratio:1/1}
+  .f1{left:12px;top:12px}.f2{right:12px;bottom:12px}
+  .search{grid-template-columns:1fr;border-radius:26px;padding:10px}
+  .search .f+.f{border-left:0;border-top:1px solid var(--line)}
+  .search .f{padding:10px 12px}
+  .search .go{justify-content:center}
+  .sec{padding:36px 18px}
+  .cats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cat{min-height:140px}
+  .doc{grid-template-columns:88px minmax(0,1fr);gap:14px;border-radius:24px}
+  .face{font-size:26px}
+  .top-line{flex-direction:column;gap:2px}
+  .tools .sort{margin-left:0}
+  .trust{grid-template-columns:1fr;margin:0 18px;padding:24px}
+  .foot{padding:30px 18px}.foot nav{margin-left:0}
+}
+
+/* notas */
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:26px;background:var(--white);border-radius:24px;padding:28px}
+.notes h2{grid-column:1/-1;font:600 28px/1.1 var(--head);letter-spacing:-.02em}
+.notes section{display:grid;gap:8px;align-content:start}
+.notes h3{font:600 18px var(--head)}
+.notes ul{margin:0;padding-left:20px;display:grid;gap:7px;font-size:16px}
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <p><b>Directorio Manik · dirección bienestar, versión 1.</b> Médicos, precios y opiniones son de ejemplo; las fotos son espacios para fotografía real.</p>
+    <div class="seg" role="group" aria-label="Ancho de la vista"><button type="button" id="v-desk" aria-pressed="true">Escritorio</button><button type="button" id="v-phone" aria-pressed="false">Celular</button></div>
+  </div>
+
+  <div class="frame" id="frame"><div class="app">
+    <header class="nav">
+      <a class="logo" href="#frame" aria-label="Manik, inicio"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -21.6 395.2 117.6" aria-hidden="true" focusable="false"><defs><clipPath id="lg1"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z"/></clipPath></defs><g transform="translate(0 -6.072000000000001) scale(0.7526218487394958)"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z" fill="#009BB0"/><path clip-path="url(#lg1)" d="M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64" fill="none" stroke="#F6F8FC" stroke-width="13" stroke-linejoin="round"/></g><path d="M99.55018487394958 74.382V20.082H110.55018487394958V43.382000000000005H109.55018487394958Q109.55018487394958 35.182 111.65018487394957 29.632Q113.75018487394956 24.082 117.90018487394957 21.232000000000003Q122.05018487394958 18.382000000000005 128.25018487394956 18.382000000000005H128.85018487394956Q135.15018487394957 18.382000000000005 139.30018487394958 21.232000000000003Q143.45018487394958 24.082 145.5001848739496 29.632Q147.55018487394958 35.182 147.55018487394958 43.382000000000005H144.05018487394958Q144.05018487394958 35.182 146.20018487394958 29.632Q148.35018487394956 24.082 152.50018487394956 21.232000000000003Q156.65018487394957 18.382000000000005 162.85018487394956 18.382000000000005H163.45018487394958Q169.7501848739496 18.382000000000005 173.95018487394958 21.232000000000003Q178.15018487394957 24.082 180.30018487394958 29.632Q182.45018487394958 35.182 182.45018487394958 43.382000000000005V74.382H168.55018487394958V42.082Q168.55018487394958 36.982000000000006 165.95018487394958 33.932Q163.35018487394956 30.882000000000005 158.55018487394958 30.882000000000005Q153.75018487394956 30.882000000000005 150.85018487394956 34.032000000000004Q147.95018487394958 37.182 147.95018487394958 42.482V74.382H134.05018487394958V42.082Q134.05018487394958 36.982000000000006 131.45018487394958 33.932Q128.85018487394956 30.882000000000005 124.05018487394958 30.882000000000005Q119.25018487394956 30.882000000000005 116.35018487394956 34.032000000000004Q113.45018487394957 37.182 113.45018487394957 42.482V74.382ZM226.2501848739496 74.382V58.282000000000004H223.95018487394958V40.382000000000005Q223.95018487394958 35.682 221.65018487394957 33.382000000000005Q219.3501848739496 31.082 214.55018487394958 31.082Q212.05018487394958 31.082 208.55018487394958 31.182000000000002Q205.05018487394958 31.282000000000004 201.5001848739496 31.432000000000002Q197.95018487394958 31.582 195.15018487394957 31.782000000000004V19.982Q197.45018487394958 19.782000000000004 200.3501848739496 19.582000000000004Q203.2501848739496 19.382000000000005 206.3001848739496 19.332000000000004Q209.3501848739496 19.282000000000004 212.05018487394958 19.282000000000004Q220.45018487394958 19.282000000000004 226.0001848739496 21.482000000000003Q231.55018487394958 23.682000000000002 234.40018487394957 28.382Q237.2501848739496 33.082 237.2501848739496 40.682V74.382ZM208.7501848739496 75.78200000000001Q202.8501848739496 75.78200000000001 198.40018487394957 73.68200000000002Q193.95018487394958 71.58200000000001 191.5001848739496 67.682Q189.05018487394958 63.782000000000004 189.05018487394958 58.282000000000004Q189.05018487394958 52.282000000000004 192.0001848739496 48.482Q194.95018487394958 44.682 200.30018487394958 42.782000000000004Q205.65018487394957 40.882000000000005 212.8501848739496 40.882000000000005H225.45018487394958V49.182H212.65018487394957Q207.8501848739496 49.182 205.3001848739496 51.532000000000004Q202.7501848739496 53.882000000000005 202.7501848739496 57.58200000000001Q202.7501848739496 61.282000000000004 205.3001848739496 63.58200000000001Q207.8501848739496 65.882 212.65018487394957 65.882Q215.55018487394958 65.882 218.0001848739496 64.83200000000001Q220.45018487394958 63.782000000000004 222.1001848739496 61.232Q223.7501848739496 58.682 223.95018487394958 54.282000000000004L227.3501848739496 58.182Q226.8501848739496 63.882000000000005 224.6001848739496 67.78200000000001Q222.3501848739496 71.682 218.40018487394957 73.732Q214.45018487394958 75.78200000000001 208.7501848739496 75.78200000000001ZM248.1501848739496 74.382V20.082H259.15018487394957V43.382000000000005H258.15018487394957Q258.15018487394957 35.082 260.3501848739496 29.532Q262.5501848739496 23.982 266.90018487394957 21.182000000000002Q271.2501848739496 18.382000000000005 277.7501848739496 18.382000000000005H278.3501848739496Q288.0501848739496 18.382000000000005 293.0501848739496 24.632000000000005Q298.0501848739496 30.882000000000005 298.0501848739496 43.282000000000004V74.382H284.15018487394957V42.082Q284.15018487394957 37.082 281.30018487394955 33.982Q278.4501848739496 30.882000000000005 273.4501848739496 30.882000000000005Q268.3501848739496 30.882000000000005 265.20018487394964 34.032000000000004Q262.0501848739496 37.182 262.0501848739496 42.482V74.382ZM311.5501848739496 74.382V20.082H325.4501848739496V74.382ZM303.9501848739496 30.482V20.082H325.4501848739496V30.482ZM316.6501848739496 13.582Q312.5501848739496 13.582 310.6001848739496 11.431999999999999Q308.6501848739496 9.281999999999996 308.6501848739496 5.981999999999999Q308.6501848739496 2.682000000000002 310.6001848739496 0.5820000000000007Q312.5501848739496 -1.5180000000000007 316.6501848739496 -1.5180000000000007Q320.7501848739496 -1.5180000000000007 322.65018487394957 0.5820000000000007Q324.5501848739496 2.682000000000002 324.5501848739496 5.981999999999999Q324.5501848739496 9.281999999999996 322.65018487394957 11.431999999999999Q320.7501848739496 13.582 316.6501848739496 13.582ZM375.45018487394964 74.382 357.2501848739496 48.982H349.1501848739496L372.2501848739496 20.082H386.7501848739496L365.4501848739496 46.782000000000004L365.7501848739496 39.782000000000004L391.1501848739496 74.382ZM337.4501848739496 74.382V1.382000000000005H351.3501848739496V74.382Z" fill="#14213D"/></svg>
+</a>
+      <ul><li><a href="#frame" aria-current="page">Buscar médico</a></li><li><a href="#frame">Preguntas</a></li><li><a href="#frame">Artículos</a></li></ul>
+      <a class="me" href="#frame">Soy médico</a>
+      <button class="menu" type="button">Menú</button>
+    </header>
+
+    <section class="hero">
+      <div class="htxt">
+        <span class="pill"><span><svg aria-hidden="true" focusable="false" class="lucide lucide-shield-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /> </svg></span>Más de 2,000 médicos con cédula verificada</span>
+        <h1 class="h1">Cuidarte ya no tiene que ser <b>difícil</b>.</h1>
+        <p class="lead">Encuentra a tu especialista, lee lo que opinan otros pacientes y agenda en un minuto.</p>
+        <form class="search" id="f" role="search">
+          <div class="f"><svg aria-hidden="true" focusable="false" class="lucide lucide-search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" /> </svg><div><label for="q">Qué necesitas</label><input id="q" value="Dermatóloga" placeholder="Especialidad o médico" autocomplete="off"></div></div>
+          <div class="f"><svg aria-hidden="true" focusable="false" class="lucide lucide-map-pin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" /> </svg><div><label for="d">Dónde</label><input id="d" value="Angelópolis, Puebla" placeholder="Colonia o ciudad" autocomplete="off"></div></div>
+          <button class="go" type="submit">Buscar</button>
+        </form>
+        <div class="quick"><a href="#res"><svg aria-hidden="true" focusable="false" class="lucide lucide-scan-face" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M3 7V5a2 2 0 0 1 2-2h2" /> <path d="M17 3h2a2 2 0 0 1 2 2v2" /> <path d="M21 17v2a2 2 0 0 1-2 2h-2" /> <path d="M7 21H5a2 2 0 0 1-2-2v-2" /> <path d="M8 14s1.5 2 4 2 4-2 4-2" /> <path d="M9 9h.01" /> <path d="M15 9h.01" /> </svg>Piel</a><a href="#res"><svg aria-hidden="true" focusable="false" class="lucide lucide-brain" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 18V5" /> <path d="M15 13a4.17 4.17 0 01-3-4 4.17 4.17 0 01-3 4" /> <path d="M17.707 6.294A3 3 0 1012 5a3 3 0 10-5.707 1.294" /> <path d="M17.996 5.125a4 4 0 012.526 5.77" /> <path d="M18 18a4 4 0 002-7.465" /> <path d="M19.967 17.482a4 4 0 11-7.967.517 4 4 0 11-7.967-.517" /> <path d="M6 18a4 4 0 01-2-7.465" /> <path d="M6.004 5.125a4 4 0 00-2.526 5.77" /> </svg>Salud mental</a><a href="#res"><svg aria-hidden="true" focusable="false" class="lucide lucide-apple" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 6.528V3a1 1 0 0 1 1-1h0" /> <path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21" /> </svg>Nutrición</a><a href="#res"><svg aria-hidden="true" focusable="false" class="lucide lucide-flower-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1" /> <circle cx="12" cy="8" r="2" /> <path d="M12 10v12" /> <path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z" /> <path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z" /> </svg>Ginecología</a></div>
+      </div>
+      <div class="visual">
+        <div class="photo" role="img" aria-label="Espacio para fotografía: paciente joven con luz natural"><div class="who" aria-hidden="true"><i></i><b></b></div><span class="tag">Foto real aquí</span></div>
+        <div class="float f1"><span class="ic"><svg aria-hidden="true" focusable="false" class="lucide lucide-calendar-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M8 2v3" /> <path d="M16 2v3" /> <rect x="3" y="3" width="18" height="18" rx="2" /> <path d="M3 9h18" /> <path d="m9 15 2 2 4-4" /> </svg></span><div><b>Cita confirmada</b><small>Hoy, 16:30 · Dra. Soto</small></div></div>
+        <div class="float f2"><span class="ic"><svg aria-hidden="true" focusable="false" class="lucide lucide-message-circle-heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /> <path d="M7.828 13.07A3 3 0 0 1 12 8.764a3 3 0 0 1 5.004 2.224 3 3 0 0 1-.832 2.083l-3.447 3.62a1 1 0 0 1-1.45-.001z" /> </svg></span><div><b>4.9 de 312 opiniones</b><small>«Me explicó todo sin prisa»</small></div></div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="h-cat">
+      <div class="sec-h"><h2 class="h2" id="h-cat">Busca por <b>lo que sientes</b></h2><p>Si no sabes a qué especialista ir, empieza por aquí.</p></div>
+      <div class="cats">
+        <a class="cat" href="#res"><span class="ic"><svg aria-hidden="true" focusable="false" class="lucide lucide-scan-face" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M3 7V5a2 2 0 0 1 2-2h2" /> <path d="M17 3h2a2 2 0 0 1 2 2v2" /> <path d="M21 17v2a2 2 0 0 1-2 2h-2" /> <path d="M7 21H5a2 2 0 0 1-2-2v-2" /> <path d="M8 14s1.5 2 4 2 4-2 4-2" /> <path d="M9 9h.01" /> <path d="M15 9h.01" /> </svg></span><span><b>Piel</b><small>Dermatología</small></span></a>
+        <a class="cat" href="#res"><span class="ic"><svg aria-hidden="true" focusable="false" class="lucide lucide-brain" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 18V5" /> <path d="M15 13a4.17 4.17 0 01-3-4 4.17 4.17 0 01-3 4" /> <path d="M17.707 6.294A3 3 0 1012 5a3 3 0 10-5.707 1.294" /> <path d="M17.996 5.125a4 4 0 012.526 5.77" /> <path d="M18 18a4 4 0 002-7.465" /> <path d="M19.967 17.482a4 4 0 11-7.967.517 4 4 0 11-7.967-.517" /> <path d="M6 18a4 4 0 01-2-7.465" /> <path d="M6.004 5.125a4 4 0 00-2.526 5.77" /> </svg></span><span><b>Salud mental</b><small>Psicología y psiquiatría</small></span></a>
+        <a class="cat" href="#res"><span class="ic"><svg aria-hidden="true" focusable="false" class="lucide lucide-apple" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 6.528V3a1 1 0 0 1 1-1h0" /> <path d="M18.237 21A15 15 0 0 0 22 11a6 6 0 0 0-10-4.472A6 6 0 0 0 2 11a15.1 15.1 0 0 0 3.763 10 3 3 0 0 0 3.648.648 5.5 5.5 0 0 1 5.178 0A3 3 0 0 0 18.237 21" /> </svg></span><span><b>Alimentación</b><small>Nutrición</small></span></a>
+        <a class="cat" href="#res"><span class="ic"><svg aria-hidden="true" focusable="false" class="lucide lucide-flower-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1" /> <circle cx="12" cy="8" r="2" /> <path d="M12 10v12" /> <path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z" /> <path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z" /> </svg></span><span><b>Salud íntima</b><small>Ginecología y urología</small></span></a>
+        <a class="cat" href="#res"><span class="ic"><svg aria-hidden="true" focusable="false" class="lucide lucide-baby" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5" /> <path d="M15 12h.01" /> <path d="M19.38 6.813A9 9 0 0 1 20.8 10.2a2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1" /> <path d="M9 12h.01" /> </svg></span><span><b>Niñas y niños</b><small>Pediatría</small></span></a>
+        <a class="cat" href="#res"><span class="ic"><svg aria-hidden="true" focusable="false" class="lucide lucide-stethoscope" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M11 2v2" /> <path d="M5 2v2" /> <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1" /> <path d="M8 15a6 6 0 0 0 12 0v-3" /> <circle cx="20" cy="10" r="2" /> </svg></span><span><b>Chequeo general</b><small>Medicina general</small></span></a>
+      </div>
+    </section>
+
+    <section class="sec" id="res" aria-labelledby="h-res" style="padding-top:8px">
+      <div class="sec-h"><h2 class="h2" id="h-res"><b>Dermatólogas</b> cerca de ti</h2><p class="count" aria-live="polite"><b id="n">4</b> <span id="nl">especialistas en Angelópolis</span></p></div>
+      <div class="tools" role="group" aria-label="Filtros">
+        <button type="button" class="chip" id="c-hoy" aria-pressed="false">Con lugar hoy</button>
+        <button type="button" class="chip" id="c-linea" aria-pressed="false">Cita en línea</button>
+        <button type="button" class="chip" id="c-precio" aria-pressed="false">Hasta $800</button>
+        <span class="sort"><label for="orden">Ordenar</label><select id="orden"><option value="km">Más cerca</option><option value="op">Más opiniones</option><option value="cita">Cita más pronto</option><option value="precio">Menor precio</option></select></span>
+      </div>
+      <div class="grid" id="list">
+        <article class="doc" data-km="1.8" data-op="312" data-cita="0" data-precio="900" data-linea="1" data-hoy="1">
+          <div class="face" role="img" aria-label="Espacio para foto de la Dra. Mariana Soto">MS</div>
+          <div class="info">
+            <div class="top-line"><div><h3><a href="#frame">Dra. Mariana Soto</a></h3><p class="spec">Dermatóloga · acné y lunares</p></div><p class="price">$900</p></div>
+            <div class="meta"><span class="st"><b aria-hidden="true">★</b> 4.9 · 312 opiniones</span><span><svg aria-hidden="true" focusable="false" class="lucide lucide-map-pin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" /> </svg>1.8 km</span><span class="v"><svg aria-hidden="true" focusable="false" class="lucide lucide-badge-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /> <path d="m16 9-5.5 5.5L8 12" /> </svg>Cédula verificada</span></div>
+            <p class="when">Hoy <span>· toca una hora</span></p>
+            <div class="times"><button type="button" aria-pressed="false">16:30</button><button type="button" aria-pressed="false">17:00</button><button type="button" aria-pressed="false">18:30</button></div>
+            <button type="button" class="book">Agendar <svg aria-hidden="true" focusable="false" class="lucide lucide-arrow-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></button>
+          </div>
+        </article>
+        <article class="doc" data-km="2.4" data-op="540" data-cita="1" data-precio="1100" data-linea="1" data-hoy="0">
+          <div class="face" role="img" aria-label="Espacio para foto del Dr. Rodrigo Llaguno">RL</div>
+          <div class="info">
+            <div class="top-line"><div><h3><a href="#frame">Dr. Rodrigo Llaguno</a></h3><p class="spec">Dermatólogo · piel de niños</p></div><p class="price">$1,100</p></div>
+            <div class="meta"><span class="st"><b aria-hidden="true">★</b> 4.8 · 540 opiniones</span><span><svg aria-hidden="true" focusable="false" class="lucide lucide-map-pin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" /> </svg>2.4 km</span><span class="v"><svg aria-hidden="true" focusable="false" class="lucide lucide-badge-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /> <path d="m16 9-5.5 5.5L8 12" /> </svg>Cédula verificada</span></div>
+            <p class="when">Mañana <span>· hoy ya no tiene lugar</span></p>
+            <div class="times"><button type="button" aria-pressed="false">9:00</button><button type="button" aria-pressed="false">9:30</button><button type="button" aria-pressed="false">12:00</button></div>
+            <button type="button" class="book">Agendar <svg aria-hidden="true" focusable="false" class="lucide lucide-arrow-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></button>
+          </div>
+        </article>
+        <aside class="ad" id="ad" aria-label="Anuncio"><span class="lbl">Patrocinado</span><span>Clínica Dermalia: revisión de lunares, $650 hasta el 30 de noviembre.</span><a href="#frame">Ver promoción</a></aside>
+        <article class="doc" data-km="3.1" data-op="41" data-cita="9" data-precio="750" data-linea="0" data-hoy="0">
+          <div class="face" role="img" aria-label="Espacio para foto de la Dra. Fernanda Quiroz">FQ</div>
+          <div class="info">
+            <div class="top-line"><div><h3><a href="#frame">Dra. Fernanda Quiroz</a></h3><p class="spec">Dermatóloga · cosmética</p></div><p class="price">$750</p></div>
+            <div class="meta"><span class="st"><b aria-hidden="true">★</b> 4.7 · 41 opiniones</span><span><svg aria-hidden="true" focusable="false" class="lucide lucide-map-pin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" /> </svg>3.1 km</span><span class="v"><svg aria-hidden="true" focusable="false" class="lucide lucide-badge-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /> <path d="m16 9-5.5 5.5L8 12" /> </svg>Cédula verificada</span></div>
+            <p class="when">Agenda por teléfono <span>· llama y pide tu cita</span></p>
+            <span class="tel">222 555 0187</span>
+            <button type="button" class="copy">Copiar número</button>
+          </div>
+        </article>
+        <article class="doc" data-km="4.0" data-op="3" data-cita="3" data-precio="700" data-linea="1" data-hoy="0">
+          <div class="face" role="img" aria-label="Espacio para foto del Dr. Iván Hernández">IH</div>
+          <div class="info">
+            <div class="top-line"><div><h3><a href="#frame">Dr. Iván Hernández</a></h3><p class="spec">Dermatólogo · alergias de piel</p></div><p class="price">$700</p></div>
+            <div class="meta"><span class="new">Nuevo en Manik</span><span><svg aria-hidden="true" focusable="false" class="lucide lucide-map-pin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" /> </svg>4.0 km</span><span class="v"><svg aria-hidden="true" focusable="false" class="lucide lucide-badge-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /> <path d="m16 9-5.5 5.5L8 12" /> </svg>Cédula verificada</span></div>
+            <p class="when">Lunes 3 <span>· su primer día libre</span></p>
+            <div class="times"><button type="button" aria-pressed="false">10:00</button><button type="button" aria-pressed="false">11:00</button></div>
+            <button type="button" class="book">Agendar <svg aria-hidden="true" focusable="false" class="lucide lucide-arrow-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="m12 5 7 7-7 7" /> </svg></button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="trust" aria-label="Por qué Manik">
+      <div><span class="ic"><svg aria-hidden="true" focusable="false" class="lucide lucide-badge-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" /> <path d="m16 9-5.5 5.5L8 12" /> </svg></span><b>Médicos verificados</b><p>Revisamos la cédula profesional de cada médico antes de publicarlo.</p></div>
+      <div><span class="ic"><svg aria-hidden="true" focusable="false" class="lucide lucide-message-circle-heart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /> <path d="M7.828 13.07A3 3 0 0 1 12 8.764a3 3 0 0 1 5.004 2.224 3 3 0 0 1-.832 2.083l-3.447 3.62a1 1 0 0 1-1.45-.001z" /> </svg></span><b>Opiniones reales</b><p>Solo opina quien tuvo una cita agendada en Manik.</p></div>
+      <div><span class="ic"><svg aria-hidden="true" focusable="false" class="lucide lucide-calendar-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M8 2v3" /> <path d="M16 2v3" /> <rect x="3" y="3" width="18" height="18" rx="2" /> <path d="M3 9h18" /> <path d="m9 15 2 2 4-4" /> </svg></span><b>Sin costo para ti</b><p>Buscar y agendar es gratis. Pagas la consulta directo al médico.</p></div>
+    </section>
+
+    <footer class="foot">
+      <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -21.6 395.2 117.6" aria-hidden="true" focusable="false"><defs><clipPath id="lg2"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z"/></clipPath></defs><g transform="translate(0 -6.072000000000001) scale(0.7526218487394958)"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z" fill="#009BB0"/><path clip-path="url(#lg2)" d="M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64" fill="none" stroke="#F6F8FC" stroke-width="13" stroke-linejoin="round"/></g><path d="M99.55018487394958 74.382V20.082H110.55018487394958V43.382000000000005H109.55018487394958Q109.55018487394958 35.182 111.65018487394957 29.632Q113.75018487394956 24.082 117.90018487394957 21.232000000000003Q122.05018487394958 18.382000000000005 128.25018487394956 18.382000000000005H128.85018487394956Q135.15018487394957 18.382000000000005 139.30018487394958 21.232000000000003Q143.45018487394958 24.082 145.5001848739496 29.632Q147.55018487394958 35.182 147.55018487394958 43.382000000000005H144.05018487394958Q144.05018487394958 35.182 146.20018487394958 29.632Q148.35018487394956 24.082 152.50018487394956 21.232000000000003Q156.65018487394957 18.382000000000005 162.85018487394956 18.382000000000005H163.45018487394958Q169.7501848739496 18.382000000000005 173.95018487394958 21.232000000000003Q178.15018487394957 24.082 180.30018487394958 29.632Q182.45018487394958 35.182 182.45018487394958 43.382000000000005V74.382H168.55018487394958V42.082Q168.55018487394958 36.982000000000006 165.95018487394958 33.932Q163.35018487394956 30.882000000000005 158.55018487394958 30.882000000000005Q153.75018487394956 30.882000000000005 150.85018487394956 34.032000000000004Q147.95018487394958 37.182 147.95018487394958 42.482V74.382H134.05018487394958V42.082Q134.05018487394958 36.982000000000006 131.45018487394958 33.932Q128.85018487394956 30.882000000000005 124.05018487394958 30.882000000000005Q119.25018487394956 30.882000000000005 116.35018487394956 34.032000000000004Q113.45018487394957 37.182 113.45018487394957 42.482V74.382ZM226.2501848739496 74.382V58.282000000000004H223.95018487394958V40.382000000000005Q223.95018487394958 35.682 221.65018487394957 33.382000000000005Q219.3501848739496 31.082 214.55018487394958 31.082Q212.05018487394958 31.082 208.55018487394958 31.182000000000002Q205.05018487394958 31.282000000000004 201.5001848739496 31.432000000000002Q197.95018487394958 31.582 195.15018487394957 31.782000000000004V19.982Q197.45018487394958 19.782000000000004 200.3501848739496 19.582000000000004Q203.2501848739496 19.382000000000005 206.3001848739496 19.332000000000004Q209.3501848739496 19.282000000000004 212.05018487394958 19.282000000000004Q220.45018487394958 19.282000000000004 226.0001848739496 21.482000000000003Q231.55018487394958 23.682000000000002 234.40018487394957 28.382Q237.2501848739496 33.082 237.2501848739496 40.682V74.382ZM208.7501848739496 75.78200000000001Q202.8501848739496 75.78200000000001 198.40018487394957 73.68200000000002Q193.95018487394958 71.58200000000001 191.5001848739496 67.682Q189.05018487394958 63.782000000000004 189.05018487394958 58.282000000000004Q189.05018487394958 52.282000000000004 192.0001848739496 48.482Q194.95018487394958 44.682 200.30018487394958 42.782000000000004Q205.65018487394957 40.882000000000005 212.8501848739496 40.882000000000005H225.45018487394958V49.182H212.65018487394957Q207.8501848739496 49.182 205.3001848739496 51.532000000000004Q202.7501848739496 53.882000000000005 202.7501848739496 57.58200000000001Q202.7501848739496 61.282000000000004 205.3001848739496 63.58200000000001Q207.8501848739496 65.882 212.65018487394957 65.882Q215.55018487394958 65.882 218.0001848739496 64.83200000000001Q220.45018487394958 63.782000000000004 222.1001848739496 61.232Q223.7501848739496 58.682 223.95018487394958 54.282000000000004L227.3501848739496 58.182Q226.8501848739496 63.882000000000005 224.6001848739496 67.78200000000001Q222.3501848739496 71.682 218.40018487394957 73.732Q214.45018487394958 75.78200000000001 208.7501848739496 75.78200000000001ZM248.1501848739496 74.382V20.082H259.15018487394957V43.382000000000005H258.15018487394957Q258.15018487394957 35.082 260.3501848739496 29.532Q262.5501848739496 23.982 266.90018487394957 21.182000000000002Q271.2501848739496 18.382000000000005 277.7501848739496 18.382000000000005H278.3501848739496Q288.0501848739496 18.382000000000005 293.0501848739496 24.632000000000005Q298.0501848739496 30.882000000000005 298.0501848739496 43.282000000000004V74.382H284.15018487394957V42.082Q284.15018487394957 37.082 281.30018487394955 33.982Q278.4501848739496 30.882000000000005 273.4501848739496 30.882000000000005Q268.3501848739496 30.882000000000005 265.20018487394964 34.032000000000004Q262.0501848739496 37.182 262.0501848739496 42.482V74.382ZM311.5501848739496 74.382V20.082H325.4501848739496V74.382ZM303.9501848739496 30.482V20.082H325.4501848739496V30.482ZM316.6501848739496 13.582Q312.5501848739496 13.582 310.6001848739496 11.431999999999999Q308.6501848739496 9.281999999999996 308.6501848739496 5.981999999999999Q308.6501848739496 2.682000000000002 310.6001848739496 0.5820000000000007Q312.5501848739496 -1.5180000000000007 316.6501848739496 -1.5180000000000007Q320.7501848739496 -1.5180000000000007 322.65018487394957 0.5820000000000007Q324.5501848739496 2.682000000000002 324.5501848739496 5.981999999999999Q324.5501848739496 9.281999999999996 322.65018487394957 11.431999999999999Q320.7501848739496 13.582 316.6501848739496 13.582ZM375.45018487394964 74.382 357.2501848739496 48.982H349.1501848739496L372.2501848739496 20.082H386.7501848739496L365.4501848739496 46.782000000000004L365.7501848739496 39.782000000000004L391.1501848739496 74.382ZM337.4501848739496 74.382V1.382000000000005H351.3501848739496V74.382Z" fill="#14213D"/></svg>
+</span><span>de MedicalManik</span>
+      <nav aria-label="Pie"><a href="#frame">Soy médico</a><a href="#frame">Aviso de privacidad</a><a href="#frame">Términos</a></nav>
+    </footer>
+  </div></div>
+
+  <div class="notes">
+    <h2>Notas de esta versión</h2>
+    <section><h3>Qué tomé de la referencia</h3><ul>
+      <li>Luz suave de fondo: cian y un tono cálido, sin colores fuertes.</li>
+      <li>Títulos en sans ligera y grande (Urbanist); texto en Onest.</li>
+      <li>Fotos de personas como protagonistas, con tarjetas flotando encima.</li>
+      <li>Categorías por lo que sientes («Piel», «Salud mental»), no solo por especialidad.</li>
+    </ul></section>
+    <section><h3>Supuestos que hay que confirmar</h3><ul>
+      <li>«Más de 2,000 médicos», «solo opina quien agendó» y los precios son textos de ejemplo. Hay que usar datos reales.</li>
+      <li>El manual dice «sin degradados» para el sello; aquí los degradados solo están en fondos y fotos, nunca en el sello.</li>
+    </ul></section>
+    <section><h3>Auditoría: pendientes</h3><ul>
+      <li>Fotos: esta dirección depende de fotografía real (pacientes y médicos). Sin fotos pierde gran parte del efecto.</li>
+      <li>Revisé en navegador a 1280 y 390 px; sin prueba con teclado real ni lector de pantalla.</li>
+      <li>Falta la ficha del médico y el flujo para agendar.</li>
+    </ul></section>
+  </div>
+</div>
+
+<script>
+(function(){
+  var fr=document.getElementById('frame'),bd=document.getElementById('v-desk'),bp=document.getElementById('v-phone');
+  function view(p){fr.classList.toggle('phone',p);bd.setAttribute('aria-pressed',!p);bp.setAttribute('aria-pressed',p)}
+  bd.onclick=function(){view(false)};bp.onclick=function(){view(true)};
+  var list=document.getElementById('list'),ad=document.getElementById('ad');
+  var docs=[].slice.call(list.querySelectorAll('.doc'));
+  var ch=document.getElementById('c-hoy'),cl=document.getElementById('c-linea'),cp=document.getElementById('c-precio'),orden=document.getElementById('orden');
+  function on(b){return b.getAttribute('aria-pressed')==='true'}
+  function render(){
+    var k=orden.value;
+    var vis=docs.filter(function(c){return(!on(cl)||c.dataset.linea==='1')&&(!on(ch)||c.dataset.hoy==='1')&&(!on(cp)||+c.dataset.precio<=800)});
+    vis.sort(function(a,b){
+      if(k==='op')return b.dataset.op-a.dataset.op;
+      if(k==='precio')return a.dataset.precio-b.dataset.precio;
+      if(k==='cita')return(a.dataset.cita-b.dataset.cita)||(a.dataset.km-b.dataset.km);
+      return a.dataset.km-b.dataset.km});
+    docs.forEach(function(c){c.hidden=vis.indexOf(c)<0});
+    vis.forEach(function(c,i){list.appendChild(c);if(i===1)list.appendChild(ad)});
+    if(vis.length<2)list.appendChild(ad);
+    document.getElementById('n').textContent=vis.length;
+    document.getElementById('nl').textContent=(vis.length===1?'especialista':'especialistas')+' en Angelópolis';
+  }
+  [ch,cl,cp].forEach(function(b){b.onclick=function(){b.setAttribute('aria-pressed',!on(b));render()}});
+  orden.onchange=render;
+  docs.forEach(function(c){
+    var bk=c.querySelector('.book'),ts=c.querySelectorAll('.times button');
+    ts.forEach(function(t){t.onclick=function(){
+      var v=!on(t);ts.forEach(function(o){o.setAttribute('aria-pressed','false')});t.setAttribute('aria-pressed',v);
+      if(bk)bk.firstChild.textContent=v?'Agendar a las '+t.textContent+' ':'Agendar ';
+    }});
+    if(bk)bk.onclick=function(){
+      var s=c.querySelector('.times [aria-pressed="true"]'),m=c.querySelector('.msg');
+      if(!m){m=document.createElement('p');m.className='msg';m.setAttribute('role','status');bk.after(m)}
+      m.textContent=s?'Apartada a las '+s.textContent+'. Sigue confirmar tus datos.':'Primero elige una hora.';
+      m.style.color=s?'':'var(--ink)';
+    };
+    var co=c.querySelector('.copy');
+    if(co)co.onclick=function(){
+      var t=c.querySelector('.tel');
+      function sel(){var r=document.createRange();r.selectNodeContents(t);var s=getSelection();s.removeAllRanges();s.addRange(r);co.textContent='Número seleccionado'}
+      try{navigator.clipboard.writeText(t.textContent).then(function(){co.textContent='Número copiado'},sel)}catch(e){sel()}
+    };
+  });
+  document.getElementById('f').onsubmit=function(e){e.preventDefault();render()};
+})();
+</script>

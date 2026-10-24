@@ -1,0 +1,381 @@
+<title>Directorio Manik bienestar</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+{{FUENTES}}
+<style>
+/* Sensación de bienestar (referencia Hims & Hers / Oura): luz suave, mucho aire, sans ligera en títulos,
+   fotos de personas como protagonistas. Tema claro único y deliberado. */
+:root{
+  --white:#FFFFFF;
+  --wash:#EEF3F5;
+  --mist:#F5FAFB;
+  --ink:#14213D;
+  --muted:#4A5674;     /* 7.3:1 */
+  --line:#DCE4EA;
+  --field:#6B7590;
+  --cian:#009BB0;
+  --act:#00788A;       /* 5.2:1 con blanco */
+  --act-dk:#00606F;
+  --sky:#D3F0F4;       /* luz cian */
+  --sun:#FFEFD2;       /* luz cálida, derivada del amarillo de estrellas */
+  --star:#E3A21C;
+  --ok:#15814B;
+  --head:'Urbanist',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  --body:'Onest',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--wash);color:var(--ink);font:17px/1.55 var(--body)}
+p{margin:0}
+h1,h2,h3{margin:0;text-wrap:balance}
+:focus-visible{outline:3px solid var(--act);outline-offset:2px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+svg.lucide{width:22px;height:22px;flex:none}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 64px;display:grid;gap:36px}
+.top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.top p{font-size:15px;color:var(--muted)}
+.top b{color:var(--ink)}
+.seg{display:inline-flex;border:1.5px solid var(--field);border-radius:999px;padding:3px;gap:3px;background:var(--white)}
+.seg button{font:600 15px var(--body);color:var(--ink);background:none;border:0;border-radius:999px;min-height:38px;padding:0 16px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.frame{width:100%;max-width:1280px;margin:0 auto;background:var(--white);border-radius:28px;overflow:hidden;box-shadow:0 1px 2px rgba(20,33,61,.06),0 20px 50px rgba(20,33,61,.08);transition:max-width .25s ease}
+.frame.phone{max-width:390px;border-radius:36px;box-shadow:0 0 0 8px var(--ink)}
+@media (prefers-reduced-motion:reduce){.frame{transition:none}}
+
+/* =========== producto =========== */
+.app{container-type:inline-size;position:relative}
+.nav{display:flex;align-items:center;gap:28px;padding:20px 44px;position:relative;z-index:2}
+.nav .logo svg{height:30px;width:auto;display:block}
+.nav ul{display:flex;gap:6px;list-style:none;margin:0 0 0 12px;padding:0}
+.nav ul a{display:block;color:var(--ink);text-decoration:none;font-weight:500;padding:8px 14px;border-radius:999px}
+.nav ul a:hover{background:rgba(255,255,255,.7)}
+.nav ul a[aria-current]{background:var(--white)}
+.nav .me{margin-left:auto;color:var(--ink);text-decoration:none;font-weight:600;padding:10px 18px;border-radius:999px;background:var(--white)}
+.nav .menu{display:none;margin-left:auto;font:600 16px var(--body);background:var(--white);border:0;border-radius:999px;min-height:44px;padding:0 18px;color:var(--ink)}
+
+.hero{position:relative;padding:20px 44px 56px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:center}
+.app::before{content:"";position:absolute;inset:0 0 auto 0;height:760px;z-index:0;
+  background:radial-gradient(60% 70% at 8% 10%,var(--sky) 0%,rgba(211,240,244,0) 70%),radial-gradient(50% 60% at 92% 30%,var(--sun) 0%,rgba(255,239,210,0) 70%),linear-gradient(180deg,var(--mist) 0%,var(--white) 100%)}
+.hero>*{position:relative;z-index:1;min-width:0}
+.htxt{display:grid;gap:22px}
+.pill{justify-self:start;display:inline-flex;align-items:center;gap:8px;background:var(--white);border-radius:999px;padding:6px 14px 6px 8px;font-size:15px;font-weight:500}
+.pill span{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--sky);color:var(--act)}
+.pill span svg{width:15px;height:15px}
+.h1{font:300 clamp(44px,6.4cqi,80px)/1.02 var(--head);letter-spacing:-.035em}
+.h1 b{font-weight:600}
+.lead{font-size:19px;color:var(--muted);max-width:40ch}
+.search{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) auto;align-items:center;background:var(--white);border-radius:999px;padding:8px;box-shadow:0 1px 2px rgba(20,33,61,.06),0 12px 32px rgba(20,33,61,.10);max-width:640px}
+.search .f{display:flex;align-items:center;gap:10px;padding:6px 16px;min-width:0}
+.search .f+.f{border-left:1px solid var(--line)}
+.search .f svg{color:var(--act)}
+.search .f div{display:grid;min-width:0}
+.search label{font-size:13px;font-weight:600;color:var(--muted)}
+.search input{border:0;outline:0;font:500 17px var(--body);color:var(--ink);background:none;padding:0;min-width:0;width:100%}
+.search input::placeholder{color:var(--muted)}
+.search:focus-within{outline:3px solid var(--act);outline-offset:3px}
+.search .go{border:0;background:var(--ink);color:#fff;border-radius:999px;min-height:54px;padding:0 26px;font:600 17px var(--body);cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.search .go:hover{background:#000}
+.quick{display:flex;flex-wrap:wrap;gap:8px}
+.quick a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--ink);background:rgba(255,255,255,.85);border:1px solid var(--line);border-radius:999px;padding:7px 14px 7px 10px;font-weight:500;font-size:15px}
+.quick a svg{width:18px;height:18px;color:var(--act)}
+.quick a:hover{background:var(--white);border-color:var(--field)}
+
+/* foto protagonista (pendiente: fotografía real) */
+.visual{position:relative;aspect-ratio:4/5;max-width:100%;max-height:600px;justify-self:end;width:100%}
+.photo{position:absolute;inset:0;border-radius:32px;overflow:hidden;background:
+  radial-gradient(70% 55% at 50% 38%,#FFE3B8 0%,rgba(255,227,184,0) 70%),
+  radial-gradient(90% 70% at 30% 100%,#8FD8E2 0%,rgba(143,216,226,0) 70%),
+  linear-gradient(160deg,#BFE9EF 0%,#F6E3C8 100%)}
+.photo .who{position:absolute;left:50%;bottom:0;width:62%;transform:translateX(-50%)}
+.photo .who i{display:block;margin:0 auto;width:44%;aspect-ratio:1;border-radius:50%;background:rgba(255,255,255,.55)}
+.photo .who b{display:block;margin-top:6%;height:0;padding-bottom:62%;border-radius:50% 50% 0 0;background:rgba(255,255,255,.55)}
+.photo .tag{position:absolute;left:16px;bottom:16px;font-size:13px;font-weight:600;background:rgba(20,33,61,.78);color:#fff;border-radius:999px;padding:5px 11px}
+.float{position:absolute;background:var(--white);border-radius:20px;padding:12px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 10px 30px rgba(20,33,61,.14);font-size:15px}
+.float b{display:block;font-weight:600}
+.float small{color:var(--muted);font-size:14px}
+.float .ic{display:grid;place-items:center;width:40px;height:40px;border-radius:14px;background:var(--sky);color:var(--act)}
+.f1{top:12%;left:-28px}
+.f2{bottom:14%;right:-20px}
+.f2 .ic{background:var(--sun);color:#8A5A00}
+
+/* secciones */
+.sec{padding:56px 44px;display:grid;gap:24px;position:relative;z-index:1}
+.sec-h{display:flex;flex-wrap:wrap;gap:10px 20px;align-items:end;justify-content:space-between}
+.h2{font:400 clamp(30px,3.6cqi,44px)/1.08 var(--head);letter-spacing:-.03em}
+.h2 b{font-weight:600}
+.sec-h p{color:var(--muted);max-width:44ch}
+
+.cats{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:14px}
+.cat{display:grid;gap:26px;align-content:space-between;text-decoration:none;color:var(--ink);border-radius:24px;padding:18px;min-height:168px;background:var(--mist);transition:transform .2s ease}
+.cat:nth-child(3n+1){background:#E4F5F7}
+.cat:nth-child(3n+2){background:#FFF4E0}
+.cat:nth-child(3n){background:#EEF2F8}
+.cat:hover{transform:translateY(-3px)}
+.cat .ic{display:grid;place-items:center;width:48px;height:48px;border-radius:16px;background:var(--white);color:var(--act)}
+.cat b{font:600 19px/1.15 var(--head);display:block}
+.cat small{color:var(--muted);font-size:14px}
+@media (prefers-reduced-motion:reduce){.cat{transition:none}.cat:hover{transform:none}}
+
+.tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.chip{font:500 15px var(--body);color:var(--ink);background:var(--white);border:1.5px solid var(--line);border-radius:999px;min-height:42px;padding:0 16px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip:hover{border-color:var(--field)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tools .sort{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-size:15px;color:var(--muted)}
+.tools select{font:500 15px var(--body);color:var(--ink);border:1.5px solid var(--line);border-radius:999px;min-height:42px;padding:0 14px;background:var(--white)}
+.count{font-size:16px;color:var(--muted)}
+.count b{color:var(--ink)}
+
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.doc{background:var(--white);border:1px solid var(--line);border-radius:28px;padding:16px;display:grid;grid-template-columns:132px minmax(0,1fr);gap:18px;transition:box-shadow .2s ease}
+.doc:hover{box-shadow:0 12px 30px rgba(20,33,61,.08)}
+.face{border-radius:20px;aspect-ratio:3/4;max-width:100%;display:grid;place-items:end start;padding:10px 12px;font:300 34px var(--head);letter-spacing:-.02em;color:var(--ink);background:linear-gradient(160deg,#CDEEF2,#FBE7C9)}
+.doc:nth-child(2n) .face{background:linear-gradient(160deg,#F9E2C2,#D6EAF5)}
+.info{display:grid;gap:8px;align-content:start;min-width:0}
+.top-line{display:flex;justify-content:space-between;gap:10px;align-items:start}
+.doc h3{font:600 22px/1.15 var(--head);letter-spacing:-.01em}
+.doc h3 a{color:inherit;text-decoration:none}
+.doc h3 a:hover{text-decoration:underline}
+.spec{color:var(--muted);font-size:15px}
+.price{font:600 18px var(--head);white-space:nowrap}
+.meta{display:flex;flex-wrap:wrap;gap:6px}
+.meta span{display:inline-flex;align-items:center;gap:5px;font-size:14px;background:var(--mist);border-radius:999px;padding:4px 10px}
+.meta span svg{width:15px;height:15px}
+.meta .v{color:var(--ok);font-weight:600;background:#E7F5EE}
+.meta .st{color:var(--ink)}
+.meta .st b{color:var(--star);font-weight:400}
+.meta .new{background:var(--sun);font-weight:600}
+.when{font-size:15px;font-weight:600;margin-top:4px}
+.when span{font-weight:400;color:var(--muted)}
+.times{display:flex;flex-wrap:wrap;gap:6px}
+.times button{font:600 15px var(--body);font-variant-numeric:tabular-nums;color:var(--act);background:var(--white);border:1.5px solid var(--act);border-radius:999px;min-height:42px;padding:0 14px;cursor:pointer}
+.times button[aria-pressed="true"]{background:var(--act);color:#fff}
+.book{justify-self:start;font:600 16px var(--body);background:var(--act);color:#fff;border:0;border-radius:999px;min-height:48px;padding:0 22px;cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.book svg{width:18px;height:18px}
+.book:hover{background:var(--act-dk)}
+.msg{font-size:15px;font-weight:600;color:var(--ok)}
+.tel{font:600 22px var(--head);font-variant-numeric:tabular-nums;user-select:all}
+.copy{justify-self:start;font:600 16px var(--body);background:var(--white);color:var(--ink);border:1.5px solid var(--ink);border-radius:999px;min-height:46px;padding:0 20px;cursor:pointer}
+.ad{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;background:var(--sun);border-radius:22px;padding:16px 20px;font-size:16px}
+.ad .lbl{font-weight:700;font-size:13px;color:#6B4A00;background:var(--white);border-radius:999px;padding:3px 10px}
+.ad a{margin-left:auto;font-weight:600;color:var(--ink)}
+
+.trust{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;background:var(--ink);color:#fff;border-radius:28px;padding:30px;margin:0 44px}
+.trust div{display:grid;gap:8px}
+.trust .ic{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.1);color:#7FDCE6}
+.trust b{font:600 20px var(--head)}
+.trust p{color:#C7D2E4;font-size:15px}
+
+.foot{display:flex;flex-wrap:wrap;gap:16px 36px;align-items:center;padding:40px 44px 36px;font-size:15px;color:var(--muted)}
+.foot svg{height:24px;width:auto;display:block}
+.foot nav{display:flex;flex-wrap:wrap;gap:6px 20px;margin-left:auto}
+.foot a{color:var(--ink)}
+
+@container (max-width:1000px){
+  .cats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .grid{grid-template-columns:1fr}
+}
+@container (max-width:760px){
+  .nav{padding:16px 18px}.nav ul,.nav .me{display:none}.nav .menu{display:inline-flex;align-items:center}
+  .hero{grid-template-columns:1fr;padding:8px 18px 36px;gap:30px}
+  .visual{justify-self:stretch;aspect-ratio:1/1}
+  .f1{left:12px;top:12px}.f2{right:12px;bottom:12px}
+  .search{grid-template-columns:1fr;border-radius:26px;padding:10px}
+  .search .f+.f{border-left:0;border-top:1px solid var(--line)}
+  .search .f{padding:10px 12px}
+  .search .go{justify-content:center}
+  .sec{padding:36px 18px}
+  .cats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cat{min-height:140px}
+  .doc{grid-template-columns:88px minmax(0,1fr);gap:14px;border-radius:24px}
+  .face{font-size:26px}
+  .top-line{flex-direction:column;gap:2px}
+  .tools .sort{margin-left:0}
+  .trust{grid-template-columns:1fr;margin:0 18px;padding:24px}
+  .foot{padding:30px 18px}.foot nav{margin-left:0}
+}
+
+/* notas */
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:26px;background:var(--white);border-radius:24px;padding:28px}
+.notes h2{grid-column:1/-1;font:600 28px/1.1 var(--head);letter-spacing:-.02em}
+.notes section{display:grid;gap:8px;align-content:start}
+.notes h3{font:600 18px var(--head)}
+.notes ul{margin:0;padding-left:20px;display:grid;gap:7px;font-size:16px}
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <p><b>Directorio Manik · dirección bienestar, versión 1.</b> Médicos, precios y opiniones son de ejemplo; las fotos son espacios para fotografía real.</p>
+    <div class="seg" role="group" aria-label="Ancho de la vista"><button type="button" id="v-desk" aria-pressed="true">Escritorio</button><button type="button" id="v-phone" aria-pressed="false">Celular</button></div>
+  </div>
+
+  <div class="frame" id="frame"><div class="app">
+    <header class="nav">
+      <a class="logo" href="#frame" aria-label="Manik, inicio">{{LOGO}}</a>
+      <ul><li><a href="#frame" aria-current="page">Buscar médico</a></li><li><a href="#frame">Preguntas</a></li><li><a href="#frame">Artículos</a></li></ul>
+      <a class="me" href="#frame">Soy médico</a>
+      <button class="menu" type="button">Menú</button>
+    </header>
+
+    <section class="hero">
+      <div class="htxt">
+        <span class="pill"><span>{{i:shield-check}}</span>Más de 2,000 médicos con cédula verificada</span>
+        <h1 class="h1">Cuidarte ya no tiene que ser <b>difícil</b>.</h1>
+        <p class="lead">Encuentra a tu especialista, lee lo que opinan otros pacientes y agenda en un minuto.</p>
+        <form class="search" id="f" role="search">
+          <div class="f">{{i:search}}<div><label for="q">Qué necesitas</label><input id="q" value="Dermatóloga" placeholder="Especialidad o médico" autocomplete="off"></div></div>
+          <div class="f">{{i:map-pin}}<div><label for="d">Dónde</label><input id="d" value="Angelópolis, Puebla" placeholder="Colonia o ciudad" autocomplete="off"></div></div>
+          <button class="go" type="submit">Buscar</button>
+        </form>
+        <div class="quick"><a href="#res">{{i:scan-face}}Piel</a><a href="#res">{{i:brain}}Salud mental</a><a href="#res">{{i:apple}}Nutrición</a><a href="#res">{{i:flower-2}}Ginecología</a></div>
+      </div>
+      <div class="visual">
+        <div class="photo" role="img" aria-label="Espacio para fotografía: paciente joven con luz natural"><div class="who" aria-hidden="true"><i></i><b></b></div><span class="tag">Foto real aquí</span></div>
+        <div class="float f1"><span class="ic">{{i:calendar-check}}</span><div><b>Cita confirmada</b><small>Hoy, 16:30 · Dra. Soto</small></div></div>
+        <div class="float f2"><span class="ic">{{i:message-circle-heart}}</span><div><b>4.9 de 312 opiniones</b><small>«Me explicó todo sin prisa»</small></div></div>
+      </div>
+    </section>
+
+    <section class="sec" aria-labelledby="h-cat">
+      <div class="sec-h"><h2 class="h2" id="h-cat">Busca por <b>lo que sientes</b></h2><p>Si no sabes a qué especialista ir, empieza por aquí.</p></div>
+      <div class="cats">
+        <a class="cat" href="#res"><span class="ic">{{i:scan-face}}</span><span><b>Piel</b><small>Dermatología</small></span></a>
+        <a class="cat" href="#res"><span class="ic">{{i:brain}}</span><span><b>Salud mental</b><small>Psicología y psiquiatría</small></span></a>
+        <a class="cat" href="#res"><span class="ic">{{i:apple}}</span><span><b>Alimentación</b><small>Nutrición</small></span></a>
+        <a class="cat" href="#res"><span class="ic">{{i:flower-2}}</span><span><b>Salud íntima</b><small>Ginecología y urología</small></span></a>
+        <a class="cat" href="#res"><span class="ic">{{i:baby}}</span><span><b>Niñas y niños</b><small>Pediatría</small></span></a>
+        <a class="cat" href="#res"><span class="ic">{{i:stethoscope}}</span><span><b>Chequeo general</b><small>Medicina general</small></span></a>
+      </div>
+    </section>
+
+    <section class="sec" id="res" aria-labelledby="h-res" style="padding-top:8px">
+      <div class="sec-h"><h2 class="h2" id="h-res"><b>Dermatólogas</b> cerca de ti</h2><p class="count" aria-live="polite"><b id="n">4</b> <span id="nl">especialistas en Angelópolis</span></p></div>
+      <div class="tools" role="group" aria-label="Filtros">
+        <button type="button" class="chip" id="c-hoy" aria-pressed="false">Con lugar hoy</button>
+        <button type="button" class="chip" id="c-linea" aria-pressed="false">Cita en línea</button>
+        <button type="button" class="chip" id="c-precio" aria-pressed="false">Hasta $800</button>
+        <span class="sort"><label for="orden">Ordenar</label><select id="orden"><option value="km">Más cerca</option><option value="op">Más opiniones</option><option value="cita">Cita más pronto</option><option value="precio">Menor precio</option></select></span>
+      </div>
+      <div class="grid" id="list">
+        <article class="doc" data-km="1.8" data-op="312" data-cita="0" data-precio="900" data-linea="1" data-hoy="1">
+          <div class="face" role="img" aria-label="Espacio para foto de la Dra. Mariana Soto">MS</div>
+          <div class="info">
+            <div class="top-line"><div><h3><a href="#frame">Dra. Mariana Soto</a></h3><p class="spec">Dermatóloga · acné y lunares</p></div><p class="price">$900</p></div>
+            <div class="meta"><span class="st"><b aria-hidden="true">★</b> 4.9 · 312 opiniones</span><span>{{i:map-pin}}1.8 km</span><span class="v">{{i:badge-check}}Cédula verificada</span></div>
+            <p class="when">Hoy <span>· toca una hora</span></p>
+            <div class="times"><button type="button" aria-pressed="false">16:30</button><button type="button" aria-pressed="false">17:00</button><button type="button" aria-pressed="false">18:30</button></div>
+            <button type="button" class="book">Agendar {{i:arrow-right}}</button>
+          </div>
+        </article>
+        <article class="doc" data-km="2.4" data-op="540" data-cita="1" data-precio="1100" data-linea="1" data-hoy="0">
+          <div class="face" role="img" aria-label="Espacio para foto del Dr. Rodrigo Llaguno">RL</div>
+          <div class="info">
+            <div class="top-line"><div><h3><a href="#frame">Dr. Rodrigo Llaguno</a></h3><p class="spec">Dermatólogo · piel de niños</p></div><p class="price">$1,100</p></div>
+            <div class="meta"><span class="st"><b aria-hidden="true">★</b> 4.8 · 540 opiniones</span><span>{{i:map-pin}}2.4 km</span><span class="v">{{i:badge-check}}Cédula verificada</span></div>
+            <p class="when">Mañana <span>· hoy ya no tiene lugar</span></p>
+            <div class="times"><button type="button" aria-pressed="false">9:00</button><button type="button" aria-pressed="false">9:30</button><button type="button" aria-pressed="false">12:00</button></div>
+            <button type="button" class="book">Agendar {{i:arrow-right}}</button>
+          </div>
+        </article>
+        <aside class="ad" id="ad" aria-label="Anuncio"><span class="lbl">Patrocinado</span><span>Clínica Dermalia: revisión de lunares, $650 hasta el 30 de noviembre.</span><a href="#frame">Ver promoción</a></aside>
+        <article class="doc" data-km="3.1" data-op="41" data-cita="9" data-precio="750" data-linea="0" data-hoy="0">
+          <div class="face" role="img" aria-label="Espacio para foto de la Dra. Fernanda Quiroz">FQ</div>
+          <div class="info">
+            <div class="top-line"><div><h3><a href="#frame">Dra. Fernanda Quiroz</a></h3><p class="spec">Dermatóloga · cosmética</p></div><p class="price">$750</p></div>
+            <div class="meta"><span class="st"><b aria-hidden="true">★</b> 4.7 · 41 opiniones</span><span>{{i:map-pin}}3.1 km</span><span class="v">{{i:badge-check}}Cédula verificada</span></div>
+            <p class="when">Agenda por teléfono <span>· llama y pide tu cita</span></p>
+            <span class="tel">222 555 0187</span>
+            <button type="button" class="copy">Copiar número</button>
+          </div>
+        </article>
+        <article class="doc" data-km="4.0" data-op="3" data-cita="3" data-precio="700" data-linea="1" data-hoy="0">
+          <div class="face" role="img" aria-label="Espacio para foto del Dr. Iván Hernández">IH</div>
+          <div class="info">
+            <div class="top-line"><div><h3><a href="#frame">Dr. Iván Hernández</a></h3><p class="spec">Dermatólogo · alergias de piel</p></div><p class="price">$700</p></div>
+            <div class="meta"><span class="new">Nuevo en Manik</span><span>{{i:map-pin}}4.0 km</span><span class="v">{{i:badge-check}}Cédula verificada</span></div>
+            <p class="when">Lunes 3 <span>· su primer día libre</span></p>
+            <div class="times"><button type="button" aria-pressed="false">10:00</button><button type="button" aria-pressed="false">11:00</button></div>
+            <button type="button" class="book">Agendar {{i:arrow-right}}</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="trust" aria-label="Por qué Manik">
+      <div><span class="ic">{{i:badge-check}}</span><b>Médicos verificados</b><p>Revisamos la cédula profesional de cada médico antes de publicarlo.</p></div>
+      <div><span class="ic">{{i:message-circle-heart}}</span><b>Opiniones reales</b><p>Solo opina quien tuvo una cita agendada en Manik.</p></div>
+      <div><span class="ic">{{i:calendar-check}}</span><b>Sin costo para ti</b><p>Buscar y agendar es gratis. Pagas la consulta directo al médico.</p></div>
+    </section>
+
+    <footer class="foot">
+      <span>{{LOGO_B}}</span><span>de MedicalManik</span>
+      <nav aria-label="Pie"><a href="#frame">Soy médico</a><a href="#frame">Aviso de privacidad</a><a href="#frame">Términos</a></nav>
+    </footer>
+  </div></div>
+
+  <div class="notes">
+    <h2>Notas de esta versión</h2>
+    <section><h3>Qué tomé de la referencia</h3><ul>
+      <li>Luz suave de fondo: cian y un tono cálido, sin colores fuertes.</li>
+      <li>Títulos en sans ligera y grande (Urbanist); texto en Onest.</li>
+      <li>Fotos de personas como protagonistas, con tarjetas flotando encima.</li>
+      <li>Categorías por lo que sientes («Piel», «Salud mental»), no solo por especialidad.</li>
+    </ul></section>
+    <section><h3>Supuestos que hay que confirmar</h3><ul>
+      <li>«Más de 2,000 médicos», «solo opina quien agendó» y los precios son textos de ejemplo. Hay que usar datos reales.</li>
+      <li>El manual dice «sin degradados» para el sello; aquí los degradados solo están en fondos y fotos, nunca en el sello.</li>
+    </ul></section>
+    <section><h3>Auditoría: pendientes</h3><ul>
+      <li>Fotos: esta dirección depende de fotografía real (pacientes y médicos). Sin fotos pierde gran parte del efecto.</li>
+      <li>Revisé en navegador a 1280 y 390 px; sin prueba con teclado real ni lector de pantalla.</li>
+      <li>Falta la ficha del médico y el flujo para agendar.</li>
+    </ul></section>
+  </div>
+</div>
+
+<script>
+(function(){
+  var fr=document.getElementById('frame'),bd=document.getElementById('v-desk'),bp=document.getElementById('v-phone');
+  function view(p){fr.classList.toggle('phone',p);bd.setAttribute('aria-pressed',!p);bp.setAttribute('aria-pressed',p)}
+  bd.onclick=function(){view(false)};bp.onclick=function(){view(true)};
+  var list=document.getElementById('list'),ad=document.getElementById('ad');
+  var docs=[].slice.call(list.querySelectorAll('.doc'));
+  var ch=document.getElementById('c-hoy'),cl=document.getElementById('c-linea'),cp=document.getElementById('c-precio'),orden=document.getElementById('orden');
+  function on(b){return b.getAttribute('aria-pressed')==='true'}
+  function render(){
+    var k=orden.value;
+    var vis=docs.filter(function(c){return(!on(cl)||c.dataset.linea==='1')&&(!on(ch)||c.dataset.hoy==='1')&&(!on(cp)||+c.dataset.precio<=800)});
+    vis.sort(function(a,b){
+      if(k==='op')return b.dataset.op-a.dataset.op;
+      if(k==='precio')return a.dataset.precio-b.dataset.precio;
+      if(k==='cita')return(a.dataset.cita-b.dataset.cita)||(a.dataset.km-b.dataset.km);
+      return a.dataset.km-b.dataset.km});
+    docs.forEach(function(c){c.hidden=vis.indexOf(c)<0});
+    vis.forEach(function(c,i){list.appendChild(c);if(i===1)list.appendChild(ad)});
+    if(vis.length<2)list.appendChild(ad);
+    document.getElementById('n').textContent=vis.length;
+    document.getElementById('nl').textContent=(vis.length===1?'especialista':'especialistas')+' en Angelópolis';
+  }
+  [ch,cl,cp].forEach(function(b){b.onclick=function(){b.setAttribute('aria-pressed',!on(b));render()}});
+  orden.onchange=render;
+  docs.forEach(function(c){
+    var bk=c.querySelector('.book'),ts=c.querySelectorAll('.times button');
+    ts.forEach(function(t){t.onclick=function(){
+      var v=!on(t);ts.forEach(function(o){o.setAttribute('aria-pressed','false')});t.setAttribute('aria-pressed',v);
+      if(bk)bk.firstChild.textContent=v?'Agendar a las '+t.textContent+' ':'Agendar ';
+    }});
+    if(bk)bk.onclick=function(){
+      var s=c.querySelector('.times [aria-pressed="true"]'),m=c.querySelector('.msg');
+      if(!m){m=document.createElement('p');m.className='msg';m.setAttribute('role','status');bk.after(m)}
+      m.textContent=s?'Apartada a las '+s.textContent+'. Sigue confirmar tus datos.':'Primero elige una hora.';
+      m.style.color=s?'':'var(--ink)';
+    };
+    var co=c.querySelector('.copy');
+    if(co)co.onclick=function(){
+      var t=c.querySelector('.tel');
+      function sel(){var r=document.createRange();r.selectNodeContents(t);var s=getSelection();s.removeAllRanges();s.addRange(r);co.textContent='Número seleccionado'}
+      try{navigator.clipboard.writeText(t.textContent).then(function(){co.textContent='Número copiado'},sel)}catch(e){sel()}
+    };
+  });
+  document.getElementById('f').onsubmit=function(e){e.preventDefault();render()};
+})();
+</script>
