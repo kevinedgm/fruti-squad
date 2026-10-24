@@ -1,0 +1,56 @@
+{
+  "ecosistema": "Ecosistema Manik",
+  "empresa": "MedicalManik",
+  "patron_nombre": "<Producto> Manik",
+  "linea": "#F6F8FC",
+  "acento_marca": {
+    "hex": "#00BDD0",
+    "uso": "acento gráfico; no como fondo de texto ni de producto (2.29:1 con blanco)"
+  },
+  "tinta": "#14213D",
+  "noche": "#0F1C3F",
+  "productos": {
+    "MedicalManik": {
+      "hex": "#234899",
+      "para": "sello madre",
+      "contraste_blanco": 8.54,
+      "contraste_noche": 1.95
+    },
+    "Expediente": {
+      "hex": "#234899",
+      "para": "médicos",
+      "contraste_blanco": 8.54,
+      "contraste_noche": 1.95
+    },
+    "Agenda": {
+      "hex": "#007C8C",
+      "para": "asistentes",
+      "contraste_blanco": 4.93,
+      "contraste_noche": 3.39
+    },
+    "Compras": {
+      "hex": "#A15C07",
+      "para": "compras y facturación",
+      "contraste_blanco": 5.19,
+      "contraste_noche": 3.22
+    },
+    "Farmacia": {
+      "hex": "#1B7F52",
+      "para": "farmacia",
+      "contraste_blanco": 5.0,
+      "contraste_noche": 3.34
+    },
+    "Impulsa": {
+      "hex": "#6B3FB8",
+      "para": "campañas de prevención y marketing",
+      "contraste_blanco": 6.93,
+      "contraste_noche": 2.41
+    },
+    "Grupos": {
+      "hex": "#C73A55",
+      "para": "administradores de clínicas y hospitales",
+      "contraste_blanco": 5.04,
+      "contraste_noche": 3.31
+    }
+  }
+}
