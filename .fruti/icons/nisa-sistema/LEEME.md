@@ -22,3 +22,6 @@ Ronda 1 rechazada («busco algo distinto»): todas derivaban del logo madre. Sí
 
 ## Nabi · ronda 3 · la placa (`nabi-ronda-3/`)
 El usuario eligió A (Placa). Variaciones: A1 Placa (anillos vacíos), A2 Solo la N (vacíos como puntos), A3 Con placa (cuerpo de microplaca con esquina cortada A1), A4 Pocillos cuadrados, A5 En proceso (la muestra pera recorre la N; sirve de indicador de carga). Wordmark: «nab» + i sin punto (`dotlessi` de Archivo) con un pocillo pera como punto.
+
+## Nabi · ronda 4 · A2 + A4 + A5 (`nabi-ronda-4/`)
+El usuario eligió A2, A4 y A5. Sistema: N de pocillos con vacíos como puntos y la muestra pera en (3,0), en dos formas (R redondo, Q cuadrado redondeado). Favicon: solo la N, sin vacíos, pocillos más grandes. Carga: la muestra pera recorre la N en el orden del trazo (10 pasos, 200 ms; `carga-*.svg` con CSS y `prefers-reduced-motion`; `carga-*.gif`). Wordmark con pocillo pera en la i, claro y sobre azul. Pendiente: elegir forma.
