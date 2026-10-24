@@ -1,0 +1,33 @@
+{
+  "marca": "Manik",
+  "respaldo": "de MedicalManik",
+  "lema": "Tu médico, a la mano.",
+  "color": {
+    "manik-cian": {
+      "hex": "#009BB0",
+      "uso": "el sello y grandes áreas de marca",
+      "blanco_encima": 3.33
+    },
+    "manik-cian-ui": {
+      "hex": "#00788A",
+      "uso": "botones, enlaces y texto en cian (texto blanco encima)",
+      "blanco_encima": 5.18
+    },
+    "tinta": {
+      "hex": "#14213D",
+      "uso": "texto y logotipo"
+    },
+    "azul-medicalmanik": {
+      "hex": "#234899",
+      "uso": "solo en «de MedicalManik»"
+    },
+    "calificacion": {
+      "hex": "#F2B33D",
+      "uso": "estrellas (gráfico); el número va en tinta"
+    }
+  },
+  "tipografia": {
+    "logotipo": "Sora 600, tracking −0.04 em, en minúsculas, convertido a trazos",
+    "interfaz": "Atkinson Hyperlegible Next, como el ecosistema"
+  }
+}
