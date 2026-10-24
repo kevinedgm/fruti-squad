@@ -1,0 +1,115 @@
+{
+  "v": 3,
+  "layout": "files",
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-10-24T16:58:30Z"
+  },
+  "title": "Ecosistema Manik",
+  "namespace": "EcosistemaManik",
+  "libraries": [],
+  "sections": {},
+  "groups": [
+    "Sellos",
+    "Ecosistema"
+  ],
+  "assetGroups": {
+    "Sellos": {
+      "name": "Sellos",
+      "tile": "m",
+      "order": [
+        "medicalmanik.svg",
+        "expediente.svg",
+        "agenda.svg",
+        "compras.svg",
+        "farmacia.svg",
+        "impulsa.svg",
+        "grupos.svg",
+        "medicalmanik-1tinta.svg"
+      ],
+      "files": {
+        "medicalmanik.svg": {
+          "name": "medicalmanik.svg",
+          "blob": "b960064adc8e2ea3bc0ad52ba4c1645a",
+          "size": 785,
+          "type": "image/svg+xml"
+        },
+        "expediente.svg": {
+          "name": "expediente.svg",
+          "blob": "26b606b673244009be944a9421937b3e",
+          "size": 877,
+          "type": "image/svg+xml"
+        },
+        "agenda.svg": {
+          "name": "agenda.svg",
+          "blob": "529d392899981fb38c2f1b46bfd8b30b",
+          "size": 1012,
+          "type": "image/svg+xml"
+        },
+        "compras.svg": {
+          "name": "compras.svg",
+          "blob": "512f89f0825ba83a074cf5f1ccd8bf6d",
+          "size": 819,
+          "type": "image/svg+xml"
+        },
+        "farmacia.svg": {
+          "name": "farmacia.svg",
+          "blob": "e38ede352a1a2363095cd3e0c9fb9e7d",
+          "size": 1024,
+          "type": "image/svg+xml"
+        },
+        "impulsa.svg": {
+          "name": "impulsa.svg",
+          "blob": "07c6485f4953617c0f53277d02d95fb9",
+          "size": 1034,
+          "type": "image/svg+xml"
+        },
+        "grupos.svg": {
+          "name": "grupos.svg",
+          "blob": "e26c3ae0f4bf9928c5d4a88e716fca12",
+          "size": 1254,
+          "type": "image/svg+xml"
+        },
+        "medicalmanik-1tinta.svg": {
+          "name": "medicalmanik-1tinta.svg",
+          "blob": "b67c4621ed3f312229c92a046e94b9bc",
+          "size": 754,
+          "type": "image/svg+xml"
+        }
+      }
+    },
+    "Ecosistema": {
+      "name": "Ecosistema",
+      "tile": "s",
+      "order": [
+        "ecosistema.svg",
+        "ecosistema-1tinta.svg"
+      ],
+      "files": {
+        "ecosistema.svg": {
+          "name": "ecosistema.svg",
+          "blob": "15d37dbf5372ca4e4ff1216403ec6e0a",
+          "size": 536,
+          "type": "image/svg+xml"
+        },
+        "ecosistema-1tinta.svg": {
+          "name": "ecosistema-1tinta.svg",
+          "blob": "3d5b89799a2b4a082727102d35a3720b",
+          "size": 566,
+          "type": "image/svg+xml"
+        }
+      }
+    }
+  },
+  "blobs": {},
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "lastChange": {
+    "at": "2026-10-24T16:58:30Z",
+    "by": "Kevin",
+    "via": "Claude Code",
+    "note": "Sistema inicial del Ecosistema Manik: sellos de seis productos, mosaico del ecosistema, Sora + Atkinson Hyperlegible Next, identidad vs interfaz, inicio y selector."
+  }
+}

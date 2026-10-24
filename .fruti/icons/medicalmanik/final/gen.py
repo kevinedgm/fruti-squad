@@ -14,7 +14,7 @@ PROD = {
  'Agenda': (CUADRO, 'M14 -10 V8 M86 -10 V8', '#007C8C', 'asistentes'),
  'Compras': (f'M{r} 0 H{100-r} A{r} {r} 0 0 1 100 {r} V100 L87.5 90 L75 100 L62.5 90 L50 100 L37.5 90 L25 100 L12.5 90 L0 100 V{r} A{r} {r} 0 0 1 {r} 0 Z', '', '#A15C07', 'compras y facturación'),
  'Farmacia': (CUADRO, 'M96 -7 V15 M85 4 H107', '#1B7F52', 'farmacia'),
- 'Impulsa': (CUADRO, 'M88 12 L104 -4 M92 -4 H104 V8', '#6B3FB8', 'campañas de prevención y marketing'),
+ 'Impulsa': (CUADRO, 'M88 12 L104 -4 M92 -4 H104 V8', '#504CA1', 'campañas de prevención y marketing'),
  'Grupos': (CUADRO, '', '#C73A55', 'administradores de clínicas y hospitales'),
 }
 def simbolo(p, mono=False):

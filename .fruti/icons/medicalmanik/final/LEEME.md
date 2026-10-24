@@ -17,6 +17,7 @@ MedicalManik es la empresa y el sello madre. Cada producto se nombra «<Producto
 4. La cruz de Farmacia va siempre en el verde del producto, nunca en rojo (emblema protegido).
 5. El cian #00BDD0 es acento de marca: no se usa como fondo de texto ni como color de producto (2.29:1 con blanco).
 6. El identificador del ecosistema es un emblema fijo de seis cuadros: no cambia si se suman productos; el selector sí muestra todas las apps.
+8. Impulsa usa #504CA1, el violeta `accent-deep` que ya tiene su sistema en producción.
 7. Nombre en interfaz: el producto en peso 600 y «Manik» en peso regular.
 
 ## Pendiente
