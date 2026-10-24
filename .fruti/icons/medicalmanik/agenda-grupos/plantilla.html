@@ -1,4 +1,4 @@
-<title>Agenda Manik para grupos</title>
+<title>Agenda Manik para asistentes</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap">
 <style>
@@ -109,19 +109,41 @@ svg.i{width:18px;height:18px;display:block;flex:none}
 .nt{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 18px;display:grid;gap:6px;align-content:start}
 .nt h3{margin:0;font:600 17px/24px var(--display)}.nt p{margin:0;font-size:15px;color:var(--muted)}
 .note{font-size:14px;color:var(--muted);margin:0}
+.esc{display:flex;gap:6px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:5px;justify-self:start}
+.esc button{border:0;background:transparent;border-radius:10px;padding:8px 14px;min-height:40px;font:600 14px/20px var(--sans);color:var(--muted);cursor:pointer}.esc button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.ctx{display:flex;align-items:center;gap:10px;height:44px;padding:0 12px;border:1px solid var(--line);border-radius:12px;background:var(--soft);white-space:nowrap}.ctx small{display:block;font:500 11.5px/14px var(--sans);color:var(--muted)}.ctx b{display:block;font:600 14px/18px var(--sans)}
+.dd{position:relative}.ddp{position:absolute;top:46px;right:0;z-index:20;width:340px;background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:0 18px 44px rgba(20,33,61,.16);padding:10px;display:grid;gap:6px}
+.ddp input{height:40px;border:1px solid var(--control);border-radius:12px;padding:0 12px;font:15px var(--sans);color:var(--ink)}
+.ddp .ls{max-height:300px;overflow:auto;display:grid;gap:2px}.ddp .ls button{display:grid;grid-template-columns:32px 1fr;gap:0 10px;align-items:center;text-align:left;border:0;background:transparent;border-radius:10px;padding:6px 8px;cursor:pointer;font:inherit;color:inherit}
+.ddp .ls button:hover{background:var(--soft)}.ddp .ls .a{grid-row:span 2;width:32px;height:32px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font:600 12px/1 var(--sans)}.ddp .ls b{font:600 14px/18px var(--sans)}.ddp .ls small{font:500 12px/16px var(--sans);color:var(--muted)}
+.ddp .ft{font-size:12.5px;color:var(--muted);padding:2px 6px;margin:0}
+.hdbtn{all:unset;cursor:pointer;display:contents}
+.back{display:inline-flex;align-items:center;gap:6px;border:0;background:transparent;color:var(--manik);font:600 14px/20px var(--sans);cursor:pointer;padding:0;min-height:32px;justify-self:start}
+.mcard{display:flex;gap:14px;align-items:center;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px 16px}
+.mcard .a{width:44px;height:44px;border-radius:50%;background:var(--agenda-soft);color:#00636F;display:grid;place-items:center;font:600 15px/1 var(--display)}
+.mcard h3{margin:0;font:600 18px/24px var(--display)}.mcard p{margin:0;font-size:14px;color:var(--muted)}
+.wk{display:grid;grid-template-columns:56px repeat(6,minmax(150px,1fr))}
+.wk .hd{grid-template-columns:1fr;min-height:52px}.wk .hd b{font:600 15px/20px var(--display)}.wk .hd.hoy b{color:var(--manik)}
+.cl{position:absolute;left:0;right:0}.cl .bn{position:absolute;top:3px;left:6px;right:6px;font:700 10.5px/14px var(--sans);letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sg{display:flex;border:1px solid var(--control);border-radius:10px;overflow:hidden}.sg button{flex:1;border:0;background:transparent;min-height:36px;font:600 13px/18px var(--sans);color:var(--muted);cursor:pointer}.sg button[aria-pressed="true"]{background:var(--manik-soft);color:var(--manik)}
+.near{display:flex;gap:8px;align-items:center;border:1px solid var(--control);border-radius:10px;padding:6px 10px;font-size:13.5px;line-height:18px}.near b{font-weight:600}
+.cg{font:700 11.5px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;margin:4px 0 0}
+.sala{display:grid;gap:6px}.sala div{display:grid;grid-template-columns:auto 1fr auto;gap:2px 10px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:8px 10px;font-size:13.5px;line-height:18px}.sala .h{grid-row:span 2;font:600 14px/18px var(--sans);font-variant-numeric:tabular-nums}.sala small{color:var(--muted);font-size:12px;grid-column:2/4}
+
 @media (max-width:900px){.notes{grid-template-columns:1fr}}
 </style>
 
 <div class="wrap">
   <header>
-    <h1>Agenda Manik para grupos</h1>
-    <p class="lead">La recepción de una clínica del grupo: todos los médicos que atienden hoy aquí, lado a lado, con sus citas y sus espacios libres. Pensado para 30 a 250 médicos que rotan entre 15 clínicas.</p>
+    <h1>Agenda Manik para asistentes</h1>
+    <p class="lead">Una misma app para dos tipos de cuenta. En un grupo, la asistente ve todas las clínicas y todos los médicos; en un consultorio particular, solo la semana de su médico. La vista de un médico es la misma en los dos casos y es la que ve el propio médico en Expediente.</p>
   </header>
+  <div class="esc" role="group" aria-label="Tipo de cuenta"><button type="button" data-cu="grupo" aria-pressed="true">Asistente de grupo · 15 clínicas</button><button type="button" data-cu="particular" aria-pressed="false">Asistente de un médico</button></div>
   <div class="frame"><div class="shell" id="shell"></div></div>
   <div class="notes">
-    <div class="nt"><h3>Solo quien atiende aquí hoy</h3><p>De 250 médicos del grupo, la columna aparece solo si el médico tiene horario en esta clínica este día. Una clínica típica ve de 10 a 20 columnas, no 250.</p></div>
-    <div class="nt"><h3>La rotación, dentro de la columna</h3><p>Si un médico atiende aquí en la mañana y en otra clínica en la tarde, su columna muestra «En Clínica Centro 16:00–20:00». La asistente sabe dónde está sin cambiar de pantalla.</p></div>
-    <div class="nt"><h3>Agendar por espacio, no por médico</h3><p>«Próximos espacios» responde lo que pregunta el paciente al teléfono: ¿quién me puede ver hoy en pediatría? Se filtra por especialidad y se agenda con un clic.</p></div>
+    <div class="nt"><h3>Día por médico (grupo)</h3><p>La clínica de arriba es el lugar que se está viendo, no un permiso: la asistente cambia a cualquiera de las 15. Solo aparecen los médicos con horario ahí ese día.</p></div>
+    <div class="nt"><h3>Un médico, toda su semana</h3><p>«Ver agenda de un médico» (o clic en el nombre de una columna) abre su semana en todas las clínicas; cada franja dice dónde atiende. Es la misma vista del consultorio particular y de Expediente.</p></div>
+    <div class="nt"><h3>Buscar espacio cerca del paciente</h3><p>En «Próximos espacios», «Todas las clínicas» ordena por cercanía al domicilio del paciente y luego por hora: la asistente lo deriva a la clínica más cercana con espacio.</p></div>
   </div>
   <p class="note">Ejemplo con datos ficticios. Iconos y tipos tomados de la agenda actual: cita programada, sin cita (no programada), evento o bloqueo, videoconsulta, signos vitales altos.</p>
 </div>
@@ -140,7 +162,7 @@ const ST={pend:['Sin confirmar','clock'],rec:['Recordatorio enviado','send'],con
 let seed=7; const R=()=>(seed=(seed*16807)%2147483647)/2147483647; const pick=a=>a[Math.floor(R()*a.length)];
 const ESP=[['Medicina general',5],['Pediatría',3],['Ginecología',2],['Cardiología',2],['Dermatología',1],['Traumatología',2],['Nutrición',1],['Psicología',1]];
 const NOM=['Ángel Tanaka','Lucía Herrera','Mario Esquivel','Karla Benítez','Rodrigo Saldaña','Paola Medina','Javier Olvera','Daniela Ríos','Sergio Ávila','Mónica Treviño','Andrés Cabrera','Fabiola Luna','Hugo Peralta','Ximena Duarte','Iván Robles','Renata Cano','Óscar Villalobos'];
-const OTRAS=['Clínica Centro','Clínica Satélite','Clínica Polanco','Hospital Del Valle'];
+const OTRAS=['Clínica Centro','Clínica Angelópolis','Clínica Cholula','Hospital Del Valle'];
 const PAC=['María López','José Ramírez','Ana Torres','Luis Hernández','Carmen Díaz','Pedro Morales','Sofía Castro','Diego Flores','Valeria Ruiz','Jorge Mendoza','Fernanda Cruz','Ricardo Vega','Elena Navarro','Raúl Ortiz','Gabriela Reyes','Tomás Aguilar','Paula Sánchez','Héctor Lara','Natalia Pineda','Emilio Rosas'];
 const MOT={'Medicina general':['Consulta','Seguimiento','Certificado médico'],'Pediatría':['Niño sano','Vacunas','Consulta'],'Ginecología':['Control prenatal','Papanicolaou','Consulta'],'Cardiología':['Valoración','Electrocardiograma','Seguimiento'],'Dermatología':['Consulta','Revisión de lunares'],'Traumatología':['Valoración','Retiro de yeso','Seguimiento'],'Nutrición':['Plan alimenticio','Seguimiento'],'Psicología':['Sesión','Primera vez']};
 const MED=[]; let ni=0;
@@ -156,61 +178,158 @@ MED.forEach(m=>{let h=m.aqui[0];while(h<m.aqui[1]){const d=m.int/60;const r=R();
     CIT.push({m:m.id,h,d,p,mot:pick(MOT[m.e]),s,walk:R()<.08&&h<AHORA,video:R()<.08&&h>AHORA,alto:s==='sig'&&R()<.5});}
   h+=d;}});
 // ── estado de la vista ──
-let esp='Todas', soloLibres=false, slotSel=null, vista='dia';
+let cuenta='grupo', vista='dia', medSel=null, esp='Todas', soloLibres=false, slotSel=null, alcance='clinica', ddOpen=false, ddQ='';
 const fmt=h=>{const H=Math.floor(h+1e-6),M=Math.round((h-H)*60);return `${H}:${String(M).padStart(2,'0')}`};
 const y=h=>(h-H0)*60*PX;
 const libres=m=>{const out=[];for(let h=m.aqui[0];h<m.aqui[1]-1e-6;h+=m.int/60){if(!CIT.some(c=>c.m===m.id&&h<c.h+c.d-1e-6&&h+m.int/60>c.h+1e-6))out.push(h)}return out};
-function render(){
+// Clínicas del grupo, con distancia al domicilio del paciente de ejemplo (CP 72160, Col. La Paz)
+const CLIN=[['Clínica Reforma',1.2,'c1'],['Hospital Del Valle',2.6,'c4'],['Clínica Centro',3.4,'c2'],['Clínica Angelópolis',5.1,'c3'],['Clínica Cholula',8.7,'c5']];
+const TINT={c1:['#E2EBFA','#2C4F8F'],c2:['#E0F1E8','#22654A'],c3:['#F7ECDB','#7A5216'],c4:['#ECE5F8','#4E3F86'],c5:['#DFF0F3','#1F5E6B'],p1:['#E2EBFA','#2C4F8F'],p2:['#F7ECDB','#7A5216']};
+const tintDe=n=>{const c=CLIN.find(x=>x[0]===n);return TINT[c?c[2]:'c2']};
+const DIAS=['Lun','Mar','Mié','Jue','Vie','Sáb'], FECHAS=[26,27,28,29,30,31], HOYD=1;
+// Médico del consultorio particular: dos consultorios propios
+const PART={id:'m1',n:'Dr. Ángel Tanaka',ini:'ÁT',e:'Medicina general',int:15,cons:['Consultorio Zavaleta','Hospital Puebla']};
+function semana(m){ // franjas por día [lugar, inicio, fin]
+  if(cuenta==='particular') return [0,1,2,3,4,5].map(d=>d===5?[[PART.cons[0],9,13]]:d%2?[[PART.cons[0],9,14],[PART.cons[1],16,20]]:[[PART.cons[1],8,13],[PART.cons[0],16,19]]);
+  return [0,1,2,3,4,5].map(d=>{
+    if(d===5) return [['Clínica Reforma',9,13]];
+    const otra=m.fuera?m.fuera[2]:'Clínica Centro';
+    if(d%2) return [['Clínica Reforma',...m.aqui]].concat(m.fuera?[[m.fuera[2],m.fuera[0],m.fuera[1]]]:[]);
+    return m.fuera?[[otra,...m.aqui],['Clínica Reforma',m.fuera[0],m.fuera[1]]]:[['Clínica Reforma',...m.aqui],[d===0?'Hospital Del Valle':'Clínica Centro',16,19]];
+  });
+}
+function citasSemana(m){
+  let sd=m.id.length*31+(+m.id.slice(1)); const r=()=>(sd=(sd*16807)%2147483647)/2147483647;
+  const out=[]; const sem=semana(m);
+  sem.forEach((bl,d)=>bl.forEach(([lug,a,b])=>{
+    if(d===HOYD&&lug==='Clínica Reforma'&&cuenta==='grupo'){CIT.filter(c=>c.m===m.id).forEach(c=>out.push({...c,d0:d,lug}));return;}
+    for(let h=a;h<b-1e-6;h+=m.int/60){ if(r()<.55){ let s=d<HOYD?(r()<.1?'noas':'term'):d===HOYD?(h<AHORA-0.3?'term':h<AHORA?'cons':h<AHORA+0.6?'lleg':'conf'):pick(['pend','pend','rec','conf']);
+      out.push({m:m.id,h,d:m.int/60,p:PAC[Math.floor(r()*PAC.length)],mot:(MOT[m.e]||['Consulta'])[Math.floor(r()*2)],s,d0:d,lug,video:r()<.06&&d>HOYD});}}
+  }));
+  return out;
+}
+const libresSem=(m,cs)=>{const sem=semana(m),out=[];sem.forEach((bl,d)=>bl.forEach(([lug,a,b])=>{for(let h=a;h<b-1e-6;h+=m.int/60){if(!cs.some(c=>c.d0===d&&h<c.h+c.d-1e-6&&h+m.int/60>c.h+1e-6))out.push({d,h,lug})}}));return out};
+function evHTML(c,top,hh){
+  const [sl,si]=ST[c.s], tiny=hh<34, two=!tiny&&hh<50;
+  return `<button type="button" class="ev st-${c.s}${tiny?' tiny':two?' two':''}" style="top:${top}px;height:${hh}px" aria-label="${fmt(c.h)} ${c.p}, ${c.mot}, ${sl}">
+   <span class="t">${c.video?ic('video'):''}${c.alto?`<span class="alt">${ic('alert')}</span>`:''}${fmt(c.h)} ${c.p}</span>${tiny?'':`<span class="m">${c.walk?'<span class="tag">SIN CITA · </span>':''}${c.mot}</span>`}<span class="s">${ic(si)}<span>${sl}</span></span></button>`;
+}
+function navHTML(){
+  const ctx=cuenta==='grupo'
+   ?`<button class="clin" type="button" aria-label="Clínica que estás viendo: Clínica Reforma. Cambiar">${ic('pin')}<span><small>Grupo Médico del Valle · viendo</small><b>Clínica Reforma</b></span>${ic('chev')}</button>`
+   :`<span class="ctx">${ic('users')}<span><small>Agenda de</small><b>${PART.n} · 2 consultorios</b></span></span>`;
+  return `<div class="nav"><span class="brand">${SELLO.agenda}<span><b>Agenda</b> Manik</span></span><span class="grow"></span><span class="search">${ic('search')}Buscar paciente${cuenta==='grupo'?' o médico':''}</span><span class="grow"></span>${ctx}
+   <button class="ib" type="button" aria-label="Avisos">${ic('bell')}</button><button class="ib eco" type="button" aria-label="Ecosistema Manik: cambiar de app">${SELLO.ecosistema}</button><span class="av">AS</span></div>`;
+}
+function railHTML(sala){return `<nav class="rail" aria-label="Menú de Agenda"><button class="cta" type="button" aria-label="Nueva cita">${ic('plus')}</button><a href="#" aria-current="page" aria-label="Hoy">${ic('home')}</a><a href="#" aria-label="Calendario">${ic('cal')}</a><a href="#" aria-label="Sala de espera, ${sala}">${ic('door')}<span class="n">${sala}</span></a><a href="#" aria-label="Pacientes">${ic('users')}</a><a href="#" aria-label="Recordatorios">${ic('bellr')}</a></nav>`}
+function ddHTML(){
+  const q=ddQ.toLowerCase(), L=MED.filter(m=>(m.n+' '+m.e).toLowerCase().includes(q));
+  return `<div class="ddp" role="dialog" aria-label="Ver agenda de un médico"><input id="ddq" placeholder="Nombre o especialidad" value="${ddQ}" aria-label="Buscar médico"><div class="ls">${L.map(m=>`<button type="button" data-med="${m.id}"><span class="a">${m.ini}</span><b>${m.n}</b><small>${m.e} · ${m.fuera?'Reforma y '+m.fuera[2].replace('Clínica ',''):'Reforma'}</small></button>`).join('')||'<p class="ft">Sin resultados.</p>'}</div><p class="ft">Busca entre los 250 médicos del grupo, no solo los de esta clínica.</p></div>`;
+}
+function vistaDia(){
   const meds=MED.filter(m=>(esp==='Todas'||m.e===esp)&&(!soloLibres||libres(m).some(h=>h>=AHORA)));
   const conteo=e=>MED.filter(m=>e==='Todas'||m.e===e).length;
   const tot=CIT.filter(c=>!c.blk&&meds.some(m=>m.id===c.m)).length, lib=meds.reduce((a,m)=>a+libres(m).filter(h=>h>=AHORA).length,0), sala=CIT.filter(c=>['lleg','sig'].includes(c.s)).length;
-  let nav=`<div class="nav"><span class="brand">${SELLO.agenda}<span><b>Agenda</b> Manik</span></span><span class="grow"></span><span class="search">${ic('search')}Buscar paciente o médico</span><span class="grow"></span>
-   <button class="clin" type="button" aria-label="Clínica: Clínica Reforma. Cambiar de clínica">${ic('pin')}<span><small>Grupo Médico del Valle · 15 clínicas</small><b>Clínica Reforma</b></span>${ic('chev')}</button>
-   <button class="ib" type="button" aria-label="Avisos">${ic('bell')}</button><button class="ib eco" type="button" aria-label="Ecosistema Manik: cambiar de app">${SELLO.ecosistema}</button><span class="av">AS</span></div>`;
-  let rail=`<nav class="rail" aria-label="Menú de Agenda"><button class="cta" type="button" aria-label="Nueva cita">${ic('plus')}</button><a href="#" aria-current="page" aria-label="Hoy">${ic('home')}</a><a href="#" aria-label="Calendario">${ic('cal')}</a><a href="#" aria-label="Sala de espera, ${sala}">${ic('door')}<span class="n">${sala}</span></a><a href="#" aria-label="Pacientes">${ic('users')}</a><a href="#" aria-label="Recordatorios">${ic('bellr')}</a></nav>`;
   let tb=`<div class="tb"><button class="btn" type="button">Hoy</button><button class="btn icb" type="button" aria-label="Día anterior">${ic('chevL')}</button><button class="btn icb" type="button" aria-label="Día siguiente">${ic('chevR')}</button><h2>Martes 27 de octubre</h2>
-   <span class="grow"></span><div class="seg" role="group" aria-label="Vista"><button type="button" aria-pressed="true">Día · por médico</button><button type="button" aria-pressed="false">Semana · un médico</button><button type="button" aria-pressed="false">Lista</button></div><button class="btn p" type="button">${ic('plus')}Nueva cita</button></div>
+   <span class="grow"></span><div class="dd"><button class="btn" type="button" id="dd" aria-expanded="${ddOpen}">${ic('users')}Ver agenda de un médico ${ic('chev')}</button>${ddOpen?ddHTML():''}</div><button class="btn p" type="button">${ic('plus')}Nueva cita</button></div>
    <div class="fl" role="group" aria-label="Especialidad">${['Todas',...ESP.map(e=>e[0])].map(e=>`<button type="button" class="chip" data-e="${e}" aria-pressed="${e===esp}">${e} <span class="c">${conteo(e)}</span></button>`).join('')}
    <label class="tog"><input type="checkbox" id="libres" ${soloLibres?'checked':''}>Solo con espacios libres</label></div>
    <div class="sum"><span><b>${meds.length}</b> médicos atienden hoy en Clínica Reforma</span><span><b>${tot}</b> citas</span><span><b>${lib}</b> espacios libres desde ahora</span><span><b>${sala}</b> pacientes en sala</span></div>`;
   const total=(H1-H0)*60*PX;
   let g=`<div class="sc" id="sc"><div class="grid" style="--n:${meds.length}"><div class="hd g0"></div>`;
-  meds.forEach(m=>{const L=libres(m).filter(h=>h>=AHORA);g+=`<div class="hd"><span class="a">${m.ini}</span><b title="${m.n}">${m.n}</b><small>${m.e} · Cons. ${m.cons}</small><span class="fr${L.length?'':' z'}">${L.length?`${L.length} libres · próximo ${fmt(L[0])}`:'Sin espacios hoy'}</span></div>`;});
+  meds.forEach(m=>{const L=libres(m).filter(h=>h>=AHORA);g+=`<div class="hd"><button class="hdbtn" type="button" data-med="${m.id}" aria-label="Ver la semana de ${m.n}"><span class="a">${m.ini}</span><b title="${m.n}">${m.n}</b><small>${m.e} · Cons. ${m.cons}</small></button><span class="fr${L.length?'':' z'}">${L.length?`${L.length} libres · próximo ${fmt(L[0])}`:'Sin espacios hoy'}</span></div>`;});
   g+=`<div class="tc" style="height:${total}px">${Array.from({length:H1-H0},(_,k)=>k?`<span style="top:${k*60*PX}px">${H0+k}:00</span>`:'').join('')}</div>`;
   meds.forEach(m=>{
     g+=`<div class="col" style="height:${total}px">`;
     for(let k=1;k<H1-H0;k++) g+=`<div class="hl" style="top:${k*60*PX}px"></div>`;
     g+=`<div class="av-blk" style="top:${y(m.aqui[0])}px;height:${(m.aqui[1]-m.aqui[0])*60*PX}px"></div>`;
     if(m.fuera) g+=`<div class="away" style="top:${y(m.fuera[0])+4}px;height:${(m.fuera[1]-m.fuera[0])*60*PX-8}px">${ic('pin')}En ${m.fuera[2]}<small>${m.fuera[0]}:00 – ${m.fuera[1]}:00</small></div>`;
-    libres(m).forEach(h=>{const k=m.id+'@'+h;g+=`<button type="button" class="slot${slotSel===k?' sel':''}" data-k="${k}" data-h="${fmt(h)}" style="top:${y(h)}px;height:${m.int*PX}px" aria-label="Libre ${fmt(h)} con ${m.n}"></button>`;});
-    CIT.filter(c=>c.m===m.id).forEach(c=>{
-      const top=y(c.h)+1, hh=c.d*60*PX-3;
+    libres(m).forEach(h=>{const k=m.id+'@'+h+'@Clínica Reforma@1';g+=`<button type="button" class="slot${slotSel===k?' sel':''}" data-k="${k}" data-h="${fmt(h)}" style="top:${y(h)}px;height:${m.int*PX}px" aria-label="Libre ${fmt(h)} con ${m.n}"></button>`;});
+    CIT.filter(c=>c.m===m.id).forEach(c=>{const top=y(c.h)+1, hh=c.d*60*PX-3;
       if(c.blk){g+=`<div class="blkd" style="top:${top}px;height:${hh}px">${ic('lock')}${c.blk}</div>`;return;}
-      const [sl,si]=ST[c.s], tiny=hh<34, two=!tiny&&hh<50;
-      g+=`<button type="button" class="ev st-${c.s}${tiny?' tiny':two?' two':''}${c.walk?' walk':''}" style="top:${top}px;height:${hh}px" aria-label="${fmt(c.h)} ${c.p}, ${c.mot}, ${sl}${c.walk?', sin cita':''}${c.video?', videoconsulta':''}${c.alto?', signos vitales altos':''}">
-        <span class="t">${c.video?ic('video'):''}${c.alto?`<span class="alt">${ic('alert')}</span>`:''}${fmt(c.h)} ${c.p}</span>${tiny?'':`<span class="m">${c.walk?'<span class="tag">SIN CITA · </span>':''}${c.mot}</span>`}<span class="s">${ic(si)}<span>${sl}</span></span></button>`;
-    });
+      g+=evHTML(c,top,hh);});
     g+=`<div class="now" style="top:${y(AHORA)}px"></div></div>`;
   });
-  g+='</div></div>';
-  // panel derecho
-  const dias=[];const first=new Date(2026,9,1);const off=(first.getDay()+6)%7;
-  for(let k=0;k<off;k++)dias.push(`<button type="button" class="o" tabindex="-1">${28+k}</button>`);
+  return {main:tb+g+'</div></div>', sala};
+}
+function vistaSemana(m){
+  const cs=citasSemana(m), L=libresSem(m,cs), sem=semana(m), lugares=[...new Set(sem.flat().map(b=>b[0]))];
+  const sala=cs.filter(c=>c.d0===HOYD&&['lleg','sig'].includes(c.s)).length;
+  let tb=cuenta==='grupo'?`<button class="back" type="button" id="back">${ic('chevL')}Todos los médicos de Clínica Reforma</button>`:'';
+  tb+=`<div class="mcard"><span class="a">${m.ini}</span><div><h3>${m.n}</h3><p>${m.e} · citas de ${m.int} min · atiende en ${lugares.join(', ')}</p></div><span class="grow"></span>
+   ${cuenta==='grupo'?`<div class="dd"><button class="btn" type="button" id="dd" aria-expanded="${ddOpen}">${ic('users')}Cambiar de médico ${ic('chev')}</button>${ddOpen?ddHTML():''}</div>`:''}<button class="btn p" type="button">${ic('plus')}Nueva cita</button></div>
+   <div class="tb"><button class="btn" type="button">Hoy</button><button class="btn icb" type="button" aria-label="Semana anterior">${ic('chevL')}</button><button class="btn icb" type="button" aria-label="Semana siguiente">${ic('chevR')}</button><h2>26 – 31 oct 2026</h2><span class="grow"></span>
+   <div class="fl">${lugares.map(l=>{const t=tintDe(l);return `<span class="chip" style="cursor:default;background:${t[0]};border-color:transparent;color:${t[1]}">${ic('pin')}${l}</span>`}).join('')}</div></div>`;
+  const total=(H1-H0)*60*PX;
+  let g=`<div class="sc" id="sc"><div class="wk"><div class="hd g0"></div>${DIAS.map((d,i)=>`<div class="hd${i===HOYD?' hoy':''}"><b>${d} ${FECHAS[i]}</b><small>${cs.filter(c=>c.d0===i&&c.s!=='noas').length} citas · ${L.filter(x=>x.d===i&&(i>HOYD||x.h>=AHORA)).length} libres</small></div>`).join('')}`;
+  g+=`<div class="tc" style="height:${total}px">${Array.from({length:H1-H0},(_,k)=>k?`<span style="top:${k*60*PX}px">${H0+k}:00</span>`:'').join('')}</div>`;
+  for(let d=0;d<6;d++){
+    g+=`<div class="col" style="height:${total}px">`;
+    for(let k=1;k<H1-H0;k++) g+=`<div class="hl" style="top:${k*60*PX}px"></div>`;
+    sem[d].forEach(([lug,a,b])=>{const t=cuenta==='particular'?TINT[lug===PART.cons[0]?'p1':'p2']:tintDe(lug);g+=`<div class="cl" style="top:${y(a)}px;height:${(b-a)*60*PX}px;background:${t[0]};border-top:2px solid rgba(20,33,61,.08)"><span class="bn" style="color:${t[1]}">${lug.replace('Clínica ','')}</span></div>`;});
+    L.filter(x=>x.d===d&&(d>HOYD||(d===HOYD&&x.h>=AHORA))).forEach(x=>{const k=m.id+'@'+x.h+'@'+x.lug+'@'+d;g+=`<button type="button" class="slot${slotSel===k?' sel':''}" data-k="${k}" data-h="${fmt(x.h)}" style="top:${y(x.h)}px;height:${m.int*PX}px" aria-label="Libre ${DIAS[d]} ${fmt(x.h)}, ${x.lug}"></button>`;});
+    cs.filter(c=>c.d0===d).forEach(c=>{g+=evHTML(c,y(c.h)+1,c.d*60*PX-3)});
+    if(d===HOYD) g+=`<div class="now" style="top:${y(AHORA)}px"></div>`;
+    g+='</div>';
+  }
+  return {main:tb+g+'</div></div>', sala, cs, L};
+}
+function miniCal(){const dias=[];for(let k=0;k<3;k++)dias.push(`<button type="button" class="o" tabindex="-1">${28+k}</button>`);
   for(let d=1;d<=31;d++){const cls=[d===27?'hoy':'',(d>=19&&d<=31&&d%7!==4)?'d':''].join(' ');dias.push(`<button type="button" class="${cls}" aria-label="${d} de octubre">${d}</button>`);}
-  const prox=meds.flatMap(m=>libres(m).filter(h=>h>=AHORA).map(h=>({m,h}))).sort((a,b)=>a.h-b.h).slice(0,6);
+  return `<div><div class="mh"><button class="btn icb" type="button" aria-label="Mes anterior">${ic('chevL')}</button><b>Octubre 2026</b><button class="btn icb" type="button" aria-label="Mes siguiente">${ic('chevR')}</button></div><div class="mini">${['L','M','X','J','V','S','D'].map(w=>`<span class="w">${w}</span>`).join('')}${dias.join('')}</div></div>`;}
+function proximos(){
+  const E=esp==='Todas'?null:esp;
+  if(alcance==='clinica'){
+    const meds=MED.filter(m=>!E||m.e===E);
+    const prox=meds.flatMap(m=>libres(m).filter(h=>h>=AHORA).map(h=>({m,h}))).sort((a,b)=>a.h-b.h).slice(0,6);
+    return prox.map(({m,h})=>`<button type="button" data-k="${m.id}@${h}@Clínica Reforma@1"><span class="h">${fmt(h)}</span><b>${m.n}</b><span class="k">${m.int}′</span><small>${m.e} · C${m.cons}</small></button>`).join('');
+  }
+  // todas las clínicas: por cercanía al paciente y luego por hora
+  let sd=11; const r=()=>(sd=(sd*16807)%2147483647)/2147483647;
+  return CLIN.map(([cn,km])=>{
+    let items;
+    if(cn==='Clínica Reforma'){items=MED.filter(m=>!E||m.e===E).flatMap(m=>libres(m).filter(h=>h>=AHORA).map(h=>({n:m.n,e:m.e,h,id:m.id,i:m.int}))).sort((a,b)=>a.h-b.h).slice(0,2);}
+    else{items=[0,1].map(k=>{const h=Math.round((AHORA+0.5+r()*5)*4)/4;return {n:(k?'Dra. ':'Dr. ')+pick(['Laura Méndez','Raúl Garza','Isabel Ochoa','Tomás Ibarra','Elisa Rangel','Martín Solís']),e:E||pick(['Medicina general','Pediatría']),h,id:'x',i:30}}).sort((a,b)=>a.h-b.h);}
+    return `<p class="cg"><span>${cn}</span><span>${km.toFixed(1)} km</span></p>`+items.map(x=>`<button type="button" data-k="${x.id}@${x.h}@${cn}@1"><span class="h">${fmt(x.h)}</span><b>${x.n}</b><span class="k">${x.i}′</span><small>${x.e}</small></button>`).join('');
+  }).join('');
+}
+function sideHTML(res){
   let sel='';
-  if(slotSel){const [mid,h]=slotSel.split('@');const m=MED.find(x=>x.id===mid);sel=`<div class="dlg" role="dialog" aria-label="Nueva cita"><h3>Nueva cita</h3><p><b>${fmt(+h)}</b> · ${m.n}<br><span style="color:var(--muted)">${m.e} · Consultorio ${m.cons} · ${m.int} min</span></p><button class="btn p" type="button">${ic('plus')}Elegir paciente</button><button class="btn" type="button" id="x">Cancelar</button></div>`;}
-  let side=`<aside class="side">${sel}<div><div class="mh"><button class="btn icb" type="button" aria-label="Mes anterior">${ic('chevL')}</button><b>Octubre 2026</b><button class="btn icb" type="button" aria-label="Mes siguiente">${ic('chevR')}</button></div>
-   <div class="mini">${['L','M','X','J','V','S','D'].map(w=>`<span class="w">${w}</span>`).join('')}${dias.join('')}</div></div>
-   <div><h3>Próximos espacios${esp==='Todas'?'':' · '+esp}</h3></div><div class="nx">${prox.map(({m,h})=>`<button type="button" data-k="${m.id}@${h}"><span class="h">${fmt(h)}</span><b>${m.n}</b><span class="k">${m.int}′</span><small>${m.e} · C${m.cons}</small></button>`).join('')||'<p class="note">Sin espacios hoy con este filtro.</p>'}</div>
-   <div class="leg"><h3 style="color:var(--ink)">Cómo leer la agenda</h3><div><i style="border-style:dashed"></i>Falta confirmar</div><div><i></i>Confirmó</div><div><i style="background:var(--aviso-soft);border-color:#A75F00"></i>En la clínica: llegó o signos tomados</div><div><i style="background:var(--manik);border-color:var(--manik)"></i>En consulta</div><div><i style="background:#F7F9FC;border-color:#C9D1DF"></i>Terminada</div><div><i style="background:repeating-linear-gradient(135deg,#E9ECF2 0 4px,#E1E5EC 4px 5px);border-color:#C9CFDA"></i>Evento o bloqueo</div><div><span style="color:var(--on-aviso);font:700 11px/14px var(--sans);letter-spacing:.06em">SIN CITA</span>&nbsp;No programada</div><div>${ic('video')}Videoconsulta</div><div><span class="alt">${ic('alert')}</span>Signos vitales altos</div><div><span style="display:inline-block;width:22px;height:14px;border:1.5px dashed #B8C0D2;border-radius:5px"></span>Atiende en otra clínica</div></div></aside>`;
-  const prev=document.getElementById('sc'); const st=prev?[prev.scrollTop,prev.scrollLeft]:[Math.round(y(8.5)),0];
-  document.getElementById('shell').innerHTML=nav+`<div class="body">${rail}<div class="main">${tb}${g}</div>${side}</div>`;
-  const sc=document.getElementById('sc'); sc.scrollTop=st[0]; sc.scrollLeft=st[1];
-  document.querySelectorAll('[data-e]').forEach(b=>b.onclick=()=>{esp=b.dataset.e;slotSel=null;render()});
-  document.getElementById('libres').onchange=e=>{soloLibres=e.target.checked;render()};
-  document.querySelectorAll('.slot,.nx button').forEach(b=>b.onclick=()=>{slotSel=b.dataset.k;render()});
+  if(slotSel){const [mid,h,lug,d]=slotSel.split('@');const m=mid==='x'?null:(cuenta==='particular'?PART:MED.find(x=>x.id===mid));
+    sel=`<div class="dlg" role="dialog" aria-label="Nueva cita"><h3>Nueva cita</h3><p><b>${['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'][+d]} ${FECHAS[+d]} · ${fmt(+h)}</b>${m?' · '+m.n:''}<br><span style="color:var(--muted)">${lug}${m?' · '+m.e+' · '+m.int+' min':''}</span></p><button class="btn p" type="button">${ic('plus')}Elegir paciente</button><button class="btn" type="button" id="x">Cancelar</button></div>`;}
+  if(cuenta==='particular'){
+    const hoy=res.cs.filter(c=>c.d0===HOYD&&['lleg','sig','cons'].includes(c.s)).sort((a,b)=>a.h-b.h);
+    const L=res.L.filter(x=>x.d>HOYD||(x.d===HOYD&&x.h>=AHORA)).slice(0,5);
+    return `<aside class="side">${sel}<div><h3>Sala de espera · hoy</h3></div><div class="sala">${hoy.map(c=>`<div><span class="h">${fmt(c.h)}</span><b>${c.p}</b><span class="s" style="font:600 12px/16px var(--sans)">${ST[c.s][0]}</span><small>${c.mot} · ${c.lug}</small></div>`).join('')||'<p class="note">Nadie en sala.</p>'}</div>
+     <div><h3>Próximos espacios</h3></div><div class="nx">${L.map(x=>`<button type="button" data-k="m1@${x.h}@${x.lug}@${x.d}"><span class="h">${fmt(x.h)}</span><b>${DIAS[x.d]} ${FECHAS[x.d]}</b><span class="k">${PART.int}′</span><small>${x.lug}</small></button>`).join('')}</div>${miniCal()}</aside>`;
+  }
+  return `<aside class="side">${sel}<div style="display:grid;gap:8px"><h3>Próximos espacios${esp==='Todas'?'':' · '+esp}</h3><div class="sg" role="group" aria-label="Dónde buscar"><button type="button" data-al="clinica" aria-pressed="${alcance==='clinica'}">Esta clínica</button><button type="button" data-al="todas" aria-pressed="${alcance==='todas'}">Todas las clínicas</button></div>
+   ${alcance==='todas'?`<div class="near">${ic('pin')}<span>Cerca de <b>CP 72160 · Col. La Paz</b><br><small style="color:var(--muted)">domicilio del paciente</small></span></div>`:''}</div><div class="nx">${proximos()||'<p class="note">Sin espacios hoy con este filtro.</p>'}</div>${miniCal()}
+   <div class="leg"><h3 style="color:var(--ink)">Cómo leer la agenda</h3><div><i style="border-style:dashed"></i>Falta confirmar</div><div><i></i>Confirmó</div><div><i style="background:var(--aviso-soft);border-color:#A75F00"></i>En la clínica</div><div><i style="background:var(--manik);border-color:var(--manik)"></i>En consulta</div><div><i style="background:#F7F9FC;border-color:#C9D1DF"></i>Terminada</div><div><i style="background:repeating-linear-gradient(135deg,#E9ECF2 0 4px,#E1E5EC 4px 5px);border-color:#C9CFDA"></i>Evento o bloqueo</div><div>${ic('video')}Videoconsulta</div><div><span class="alt">${ic('alert')}</span>Signos vitales altos</div><div><span style="display:inline-block;width:22px;height:14px;border:1.5px dashed #B8C0D2;border-radius:5px"></span>Atiende en otra clínica</div></div></aside>`;
+}
+function render(){
+  let res;
+  if(cuenta==='particular') res=vistaSemana(PART);
+  else if(vista==='semana') res=vistaSemana(MED.find(x=>x.id===medSel));
+  else res=vistaDia();
+  const prev=document.getElementById('sc'); const st=prev&&prev.dataset.v===cuenta+vista+medSel?[prev.scrollTop,prev.scrollLeft]:[Math.round(y(vista==='dia'&&cuenta==='grupo'?8.5:7.85)),0];
+  document.getElementById('shell').innerHTML=navHTML()+`<div class="body">${railHTML(res.sala)}<div class="main">${res.main}</div>${sideHTML(res)}</div>`;
+  const sc=document.getElementById('sc'); sc.dataset.v=cuenta+vista+medSel; sc.scrollTop=st[0]; sc.scrollLeft=st[1];
+  bind();
+}
+function bind(){
+  const q=(sel,f)=>document.querySelectorAll(sel).forEach(f);
+  q('[data-e]',b=>b.onclick=()=>{esp=b.dataset.e;slotSel=null;render()});
+  const lb=document.getElementById('libres'); if(lb) lb.onchange=e=>{soloLibres=e.target.checked;render()};
+  q('.slot,.nx button',b=>b.onclick=()=>{slotSel=b.dataset.k;render()});
+  q('[data-al]',b=>b.onclick=()=>{alcance=b.dataset.al;render()});
+  q('[data-med]',b=>b.onclick=()=>{medSel=b.dataset.med;vista='semana';ddOpen=false;ddQ='';slotSel=null;render()});
+  const dd=document.getElementById('dd'); if(dd) dd.onclick=()=>{ddOpen=!ddOpen;render();const i=document.getElementById('ddq');if(i)i.focus()};
+  const dq=document.getElementById('ddq'); if(dq) dq.oninput=e=>{ddQ=e.target.value;const pos=e.target.selectionStart;render();const i=document.getElementById('ddq');i.focus();i.setSelectionRange(pos,pos)};
+  const bk=document.getElementById('back'); if(bk) bk.onclick=()=>{vista='dia';slotSel=null;render()};
   const x=document.getElementById('x'); if(x) x.onclick=()=>{slotSel=null;render()};
 }
+document.querySelectorAll('[data-cu]').forEach(b=>b.onclick=()=>{cuenta=b.dataset.cu;document.querySelectorAll('[data-cu]').forEach(o=>o.setAttribute('aria-pressed',o===b));slotSel=null;ddOpen=false;render()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&ddOpen){ddOpen=false;render();const d=document.getElementById('dd');if(d)d.focus()}});
 render();
 </script>
