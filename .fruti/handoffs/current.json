@@ -12,5 +12,34 @@
   "open_questions": [],
   "blockers": [],
   "evidence_paths": [],
-  "delta": []
+  "delta": [],
+  "icon": {
+    "id": "user-avatar",
+    "artifact": "Nabi",
+    "style_source": "referencia de Notion de la persona",
+    "sizes": [
+      24,
+      32,
+      40,
+      64,
+      128
+    ],
+    "small_variant": false,
+    "motion": "none",
+    "confusions_tested": [
+      "user-round",
+      "smile",
+      "glasses"
+    ],
+    "criteria_failed": [
+      "A1 (lienzo 128, excepción aprobada)"
+    ],
+    "files": [
+      ".fruti/icons/nisa-sistema/nabi-avatar-final/user-avatar.svg",
+      ".fruti/icons/nisa-sistema/nabi-avatar-final/registro.yaml"
+    ],
+    "unresolved": [
+      "componente de avatar con selector de fondo en el DS de Nabi (pendiente de pedido)"
+    ]
+  }
 }

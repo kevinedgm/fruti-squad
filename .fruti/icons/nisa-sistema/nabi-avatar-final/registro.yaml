@@ -1,0 +1,15 @@
+# Entrada propuesta del registro semántico (Uva E6). Aprobada por la persona el 2026-10-24.
+semanticName: user-avatar
+icon: { library: custom, name: uva-user-avatar, file: user-avatar.svg }
+category: object
+accessibility: { defaultLabel: null, hidden: true }   # el nombre de la persona va al lado; si va solo, aria-label = nombre
+direction: { rtl: fixed }
+motion: { allowed: none }
+status: proposed
+canvas: { viewBox: "0 0 128 128", stroke: 3.6, note: "excepción a A1 (24): a 1.5 en 24 la cara pierde la proporción de la referencia" }
+usage:
+  container: "círculo de color del componente; el SVG ocupa el 100 % y hereda color"
+  color: "blanco o #121826, el de mayor contraste con el fondo"
+  backgrounds: [Gris #D9DCE3 (defecto), "#052A76", "#3D67AE", "#00B4D8", "#006D53", "#38B000", "#C2D225", "#F48C06", "#553739", "#3D0066", "#E8EDF7"]
+  sizes: { recommended_min: 32, supported: [24, 32, 40, 64, 128] }
+  user_can_change: [background]
