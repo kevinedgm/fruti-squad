@@ -28,3 +28,6 @@ El usuario eligió A2, A4 y A5. Sistema: N de pocillos con vacíos como puntos y
 
 ## Cierre
 Forma elegida: pocillo redondo. Paquete en `nabi-final/`, manual en `nabi-guia/guia.html` → https://claude.ai/artifact/SpJUaBTY9zUURYgy8NGk5A
+
+## Design system de Nabi
+Artefacto: https://claude.ai/artifact/FzzBwrjsBqAm4gdgcTduiV. Fuentes en `nabi-design-system/` (`build.py <scratchpad>`; ids de assets en el script). Tipografía: Archivo (títulos al 125 % de ancho e interfaz) + IBM Plex Mono con cero con barra para valores y resultados de análisis (sección `valores.md`). Color: azul y pera del laboratorio; estados con los secundarios del laboratorio (#006D53 conforme, #3D67AE pendiente, #F48C06 solo relleno) más #B42318 fuera. Tema claro. Componentes: Cover, Boton, Campo, ResultadoAnalisis, TablaResultados, EstadoMuestra, IdMuestra, Carga. Pendientes: decisión frente al esmeralda de Verdant; confirmar nombres de estado con el flujo real.
