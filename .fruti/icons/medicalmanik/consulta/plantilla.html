@@ -4,16 +4,16 @@
 <style>
 /* La consulta como una sola nota que se lee de arriba abajo (padecimiento → signos → diagnóstico → tratamiento → estudios → indicaciones), con lo que se entregará armándose a la derecha. */
 :root{
-  --canvas:#F5F7FB;--surface:#FFFFFF;--soft:#EEF1F7;--ink:#14213D;--muted:#4A5674;--subtle:#7A849C;--line:#E1E6F0;--control:#858EA5;
+  --canvas:#E8ECF3;--surface:#FFFFFF;--soft:#EEF1F7;--head:#F1F4F9;--ink:#14213D;--muted:#3E4A66;--subtle:#6B7590;--line:#D3D9E4;--edge:#B9C2D3;--control:#5F6A84;
   --manik:#234899;--manik-hover:#1C3A79;--manik-soft:#E9EDF5;
   --exito:#15814B;--exito-soft:#E8F2ED;--on-exito:#106239;--aviso:#A75F00;--aviso-soft:#F6EFE6;--on-aviso:#7F4A08;--error:#C33F4E;--error-soft:#F9ECED;--on-error:#9C3443;--info:#3F7695;--info-soft:#ECF1F4;--on-info:#335F7A;
   --display:"Sora","Segoe UI",system-ui,sans-serif;--sans:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
   color-scheme:light;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--canvas);color:var(--ink);font:16px/24px var(--sans);padding-block:24px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+body{margin:0;background:var(--canvas);color:var(--ink);font:1.062rem/1.688rem var(--sans);padding-block:24px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .wrap{max-width:1480px;margin:0 auto;display:grid;gap:18px}
-h1{margin:0;font:600 28px/36px var(--display);letter-spacing:-.02em;text-wrap:balance}
+h1{margin:0;font:600 1.75rem/2.375rem var(--display);letter-spacing:-.02em;text-wrap:balance}
 .lead{margin:4px 0 0;color:var(--muted);max-width:84ch}
 button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--manik);outline-offset:2px}
 svg.i{width:18px;height:18px;display:block;flex:none}
@@ -22,104 +22,122 @@ svg.i{width:18px;height:18px;display:block;flex:none}
 @media (min-width:1340px){.frame{overflow:visible}}
 /* barra de app */
 .nav{display:flex;align-items:center;gap:12px;height:56px;padding:0 16px;background:var(--surface);border-bottom:1px solid var(--line)}
-.brand{display:flex;align-items:center;gap:10px;color:var(--muted);white-space:nowrap;font:15px/20px var(--display)}.brand svg{width:30px;height:30px;display:block}.brand b{font-weight:600;color:var(--ink)}
-.crumb{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:14px}.crumb a{color:var(--manik);text-decoration:none;font-weight:600}
+.brand{display:flex;align-items:center;gap:10px;color:var(--muted);white-space:nowrap;font:1rem/1.438rem var(--display)}.brand svg{width:30px;height:30px;display:block}.brand b{font-weight:600;color:var(--ink)}
+.crumb{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:0.9375rem}.crumb a{color:var(--manik);text-decoration:none;font-weight:600}
 .grow{flex:1}.ib{width:40px;height:40px;display:grid;place-items:center;border:0;background:transparent;border-radius:10px;color:var(--muted);cursor:pointer}.ib:hover{background:var(--soft)}
 .eco svg{width:22px;height:22px;display:block}.av{width:34px;height:34px;border-radius:50%;background:var(--soft);display:grid;place-items:center;font:600 12px/1 var(--sans)}
-.saved{display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--muted)}.saved i{width:8px;height:8px;border-radius:50%;background:var(--exito);display:inline-block}
+.saved{display:inline-flex;align-items:center;gap:6px;font-size:0.875rem;color:var(--muted)}.saved i{width:8px;height:8px;border-radius:50%;background:var(--exito);display:inline-block}
 /* barra del paciente */
 .pt{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--line)}
 .pav{width:48px;height:48px;border-radius:50%;background:#E9EEF6;color:var(--manik);display:grid;place-items:center;font:600 16px/1 var(--display);flex:none}
-.pn h2{margin:0;font:600 20px/26px var(--display);letter-spacing:-.01em}
-.pn p{margin:0;font-size:14px;line-height:20px;color:var(--muted)}.pn p b{color:var(--ink);font-weight:600}
-.flag{display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 9px;border-radius:999px;font:600 13px/18px var(--sans);border:0;cursor:pointer}
+.pn h2{margin:0;font:600 1.25rem/1.75rem var(--display);letter-spacing:-.01em}
+.pn p{margin:0;font-size:0.9375rem;line-height:20px;color:var(--muted)}.pn p b{color:var(--ink);font-weight:600}
+.flag{display:inline-flex;align-items:center;gap:6px;padding:4px 12px 4px 9px;border-radius:999px;font:600 0.875rem/1.312rem var(--sans);border:0;cursor:pointer}
 .flag.w{background:var(--aviso-soft);color:var(--on-aviso)}.flag.e{background:var(--error-soft);color:var(--on-error)}.flag.n{background:var(--soft);color:var(--muted)}
 .tl{display:flex;gap:4px;margin-left:8px}
-.tbtn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 14px/20px var(--sans);cursor:pointer;white-space:nowrap}
+.tbtn{display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:600 0.9375rem/1.438rem var(--sans);cursor:pointer;white-space:nowrap}
 .tbtn:hover{background:var(--soft)}.tbtn[aria-expanded="true"]{background:var(--manik-soft);border-color:var(--manik-soft);color:var(--manik)}
-.timer{display:inline-flex;align-items:center;gap:8px;font:600 14px/20px var(--sans);color:var(--muted);font-variant-numeric:tabular-nums;padding:0 4px}
+.timer{display:inline-flex;align-items:center;gap:8px;font:600 0.9375rem/1.438rem var(--sans);color:var(--muted);font-variant-numeric:tabular-nums;padding:0 4px}
 .timer button{width:32px;height:32px;border-radius:8px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer;color:var(--muted)}
-.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:14px;border:1px solid var(--control);background:var(--surface);color:var(--ink);font:600 15px/20px var(--sans);cursor:pointer;white-space:nowrap}
-.btn:hover{background:var(--soft)}.btn.p{background:var(--manik);border-color:var(--manik);color:#fff}.btn.p:hover{background:var(--manik-hover)}.btn.s{min-height:36px;padding:0 12px;font-size:14px;border-radius:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px;border-radius:14px;border:1px solid var(--control);background:var(--surface);color:var(--ink);font:600 1rem/1.438rem var(--sans);cursor:pointer;white-space:nowrap}
+.btn:hover{background:var(--soft)}.btn.p{background:var(--manik);border-color:var(--manik);color:#fff}.btn.p:hover{background:var(--manik-hover)}.btn.s{min-height:36px;padding:0 12px;font-size:0.9375rem;border-radius:10px}
 .btn[aria-disabled="true"]{opacity:.55;cursor:not-allowed}
 /* índice de secciones */
 .idx{position:sticky;top:73px;z-index:9;display:flex;gap:4px;padding:8px 20px;background:var(--canvas);border-bottom:1px solid var(--line);overflow-x:auto}
-.idx a{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;text-decoration:none;color:var(--muted);font:600 14px/20px var(--sans);white-space:nowrap}
-.idx a:hover{background:var(--soft)}.idx a .n{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--control);display:grid;place-items:center;font-size:12px}
+.idx a{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;text-decoration:none;color:var(--muted);font:600 0.9375rem/1.438rem var(--sans);white-space:nowrap}
+.idx a:hover{background:var(--soft)}.idx a .n{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--control);display:grid;place-items:center;font-size:0.875rem}
 .idx a.ok{color:var(--ink)}.idx a.ok .n{background:var(--exito);border-color:var(--exito);color:#fff}
 .idx a.req .n{border-color:var(--aviso)}
 /* cuerpo */
 .body{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:20px;padding:20px;align-items:start}
 .note{display:grid;gap:16px}
 .sec{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px 22px;display:grid;gap:14px;scroll-margin-top:140px}
-.sh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.sh h3{margin:0;font:600 18px/26px var(--display)}.sh .hint{font-size:14px;color:var(--muted)}.sh .rq{font:600 12px/16px var(--sans);color:var(--on-aviso);background:var(--aviso-soft);padding:1px 8px;border-radius:999px}
-label.l{font:600 14px/20px var(--sans)}
-textarea,input[type=text],input[type=number]{width:100%;border:1px solid var(--control);border-radius:12px;padding:10px 14px;font:16px/24px var(--sans);color:var(--ink);background:var(--surface)}
+.sh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.sh h3{margin:0;font:600 1.125rem/1.75rem var(--display)}.sh .hint{font-size:0.9375rem;color:var(--muted)}.sh .rq{font:600 0.875rem/1.25rem var(--sans);color:var(--on-aviso);background:var(--aviso-soft);padding:1px 8px;border-radius:999px}
+label.l{font:600 0.9375rem/1.438rem var(--sans)}
+textarea,input[type=text],input[type=number]{width:100%;border:1px solid var(--control);border-radius:12px;padding:10px 14px;font:1.062rem/1.688rem var(--sans);color:var(--ink);background:var(--surface)}
 textarea{min-height:96px;resize:vertical}
-.ta{position:relative}.mic{position:absolute;right:10px;bottom:10px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:6px 10px;font:600 13px/18px var(--sans);color:var(--ink);cursor:pointer}
+.ta{position:relative}.mic{position:absolute;right:10px;bottom:10px;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:6px 10px;font:600 0.875rem/1.312rem var(--sans);color:var(--ink);cursor:pointer}
 .mic svg{color:var(--error)}
-.small{font-size:13px;line-height:18px;color:var(--muted)}
+.small{font-size:0.875rem;line-height:18px;color:var(--muted)}
 /* signos */
 .vs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .v{display:grid;gap:4px}.v .in{display:flex;align-items:center;border:1px solid var(--control);border-radius:12px;background:var(--surface);padding:0 12px;height:46px}
-.v .in input{border:0;padding:0;height:auto;outline:0;font:600 17px/24px var(--sans);font-variant-numeric:tabular-nums;width:100%;min-width:0;background:transparent}
-.v .in span{color:var(--muted);font-size:14px;white-space:nowrap}
+.v .in input{border:0;padding:0;height:auto;outline:0;font:600 1.125rem/1.688rem var(--sans);font-variant-numeric:tabular-nums;width:100%;min-width:0;background:transparent}
+.v .in span{color:var(--muted);font-size:0.9375rem;white-space:nowrap}
 .v.bad .in{border:2px solid var(--error)}.v.warn .in{border:2px solid var(--aviso)}
-.v .r{font-size:12.5px;line-height:16px;color:var(--muted)}.v .m{display:flex;gap:4px;align-items:start;font:600 12.5px/16px var(--sans)}.v.bad .m{color:var(--on-error)}.v.warn .m{color:var(--on-aviso)}
+.v .r{font-size:0.875rem;line-height:16px;color:var(--muted)}.v .m{display:flex;gap:4px;align-items:start;font:600 0.875rem/1.219rem var(--sans)}.v.bad .m{color:var(--on-error)}.v.warn .m{color:var(--on-aviso)}
 .v .m svg{width:14px;height:14px;margin-top:1px}
 .more{display:flex;gap:8px;flex-wrap:wrap}
 details{border:1px solid var(--line);border-radius:12px;padding:0 14px}details[open]{padding-bottom:12px}
-summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:8px;font:600 15px/20px var(--sans);list-style:none}summary::-webkit-details-marker{display:none}
-summary .c{margin-left:auto;font:500 13px/18px var(--sans);color:var(--muted)}
+summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:8px;font:600 1rem/1.438rem var(--sans);list-style:none}summary::-webkit-details-marker{display:none}
+summary .c{margin-left:auto;font:500 0.875rem/1.312rem var(--sans);color:var(--muted)}
 /* buscadores y listas */
 .srch{position:relative}.srch input{padding-left:42px;height:46px}.srch>svg{position:absolute;left:14px;top:14px;color:var(--muted)}
 .sug{position:absolute;left:0;right:0;top:50px;z-index:5;background:var(--surface);border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 44px rgba(20,33,61,.16);padding:6px;display:grid;gap:2px}
 .sug button{display:flex;gap:10px;align-items:baseline;text-align:left;border:0;background:transparent;border-radius:8px;padding:8px 10px;font:inherit;color:inherit;cursor:pointer}.sug button:hover,.sug button:focus{background:var(--soft)}
-.sug code{font:600 13px/18px var(--sans);color:var(--manik);min-width:52px}.sug small{color:var(--muted);font-size:13px}
+.sug code{font:600 0.875rem/1.312rem var(--sans);color:var(--manik);min-width:52px}.sug small{color:var(--muted);font-size:0.875rem}
 .items{display:grid;gap:8px}
 .it{display:grid;grid-template-columns:auto 1fr auto;gap:4px 12px;align-items:center;border:1px solid var(--line);border-radius:12px;padding:10px 12px}
-.it .tag{font:600 12px/16px var(--sans);padding:2px 8px;border-radius:999px;background:var(--soft);color:var(--muted);white-space:nowrap}.it .tag.pr{background:var(--manik-soft);color:var(--manik)}
-.it b{font-weight:600}.it small{grid-column:2;color:var(--muted);font-size:13.5px}
+.it .tag{font:600 0.875rem/1.25rem var(--sans);padding:2px 8px;border-radius:999px;background:var(--soft);color:var(--muted);white-space:nowrap}.it .tag.pr{background:var(--manik-soft);color:var(--manik)}
+.it b{font-weight:600}.it small{grid-column:2;color:var(--muted);font-size:0.9375rem}
 .it .x{border:0;background:transparent;border-radius:8px;width:36px;height:36px;display:grid;place-items:center;color:var(--muted);cursor:pointer}.it .x:hover{background:var(--soft)}
 .dose{grid-column:2/4;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
-.dose label{display:grid;gap:2px;font:600 12.5px/16px var(--sans);color:var(--muted)}.dose input{height:38px;padding:0 10px;font-size:15px}
-.ai{display:flex;gap:10px;align-items:start;border-radius:12px;background:var(--info-soft);color:var(--on-info);padding:10px 12px;font-size:14px;line-height:20px}
+.dose label{display:grid;gap:2px;font:600 0.875rem/1.219rem var(--sans);color:var(--muted)}.dose input{height:38px;padding:0 10px;font-size:1rem}
+.ai{display:flex;gap:10px;align-items:start;border-radius:12px;background:var(--info-soft);color:var(--on-info);padding:10px 12px;font-size:0.9375rem;line-height:20px}
 .ai b{font-weight:600}
-.empty{border:1.5px dashed var(--line);border-radius:12px;padding:14px;color:var(--muted);font-size:14px;text-align:center}
+.empty{border:1.5px dashed var(--line);border-radius:12px;padding:14px;color:var(--muted);font-size:0.9375rem;text-align:center}
 .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
 .seg{display:flex;border:1px solid var(--control);border-radius:12px;overflow:hidden;background:var(--surface)}
-.seg button{border:0;border-left:1px solid var(--line);background:transparent;padding:0 14px;min-height:40px;font:600 14px/20px var(--sans);color:var(--muted);cursor:pointer}.seg button:first-child{border-left:0}.seg button[aria-pressed="true"]{background:var(--manik-soft);color:var(--manik)}
+.seg button{border:0;border-left:1px solid var(--line);background:transparent;padding:0 14px;min-height:40px;font:600 0.9375rem/1.438rem var(--sans);color:var(--muted);cursor:pointer}.seg button:first-child{border-left:0}.seg button[aria-pressed="true"]{background:var(--manik-soft);color:var(--manik)}
 /* panel de entregables */
 .out{position:sticky;top:140px;display:grid;gap:12px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 18px;display:grid;gap:10px}
-.card h4{margin:0;font:600 16px/22px var(--display);display:flex;align-items:center;gap:8px}.card h4 .ct{margin-left:auto;font:600 12px/16px var(--sans);color:var(--muted)}
-.rx{display:grid;gap:8px;font-size:14px;line-height:20px}.rx div{padding-left:12px;border-left:2px solid var(--line)}.rx small{display:block;color:var(--muted);font-size:13px}
-.chk{display:grid;gap:6px;font-size:14px;line-height:20px}.chk div{display:flex;gap:8px;align-items:center}.chk .ok{color:var(--on-exito)}.chk .no{color:var(--on-aviso)}
+.card h4{margin:0;font:600 1.062rem/1.562rem var(--display);display:flex;align-items:center;gap:8px}.card h4 .ct{margin-left:auto;font:600 0.875rem/1.25rem var(--sans);color:var(--muted)}
+.rx{display:grid;gap:8px;font-size:0.9375rem;line-height:20px}.rx div{padding-left:12px;border-left:2px solid var(--line)}.rx small{display:block;color:var(--muted);font-size:0.875rem}
+.chk{display:grid;gap:6px;font-size:0.9375rem;line-height:20px}.chk div{display:flex;gap:8px;align-items:center}.chk .ok{color:var(--on-exito)}.chk .no{color:var(--on-aviso)}
 .chk svg{width:16px;height:16px}
 /* cajón */
 .drawer{position:absolute;top:56px;right:0;bottom:0;width:440px;background:var(--surface);border-left:1px solid var(--line);box-shadow:-18px 0 44px rgba(20,33,61,.12);z-index:30}.drawer .dw{position:sticky;top:0;max-height:100vh;overflow:auto;display:flex;flex-direction:column}
-.drawer header{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}.drawer header h3{margin:0;font:600 18px/24px var(--display)}
+.drawer header{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}.drawer header h3{margin:0;font:600 1.125rem/1.625rem var(--display)}
 .drawer .dt{display:flex;gap:4px;padding:8px 12px;border-bottom:1px solid var(--line)}
-.drawer .dt button{border:0;background:transparent;border-radius:10px;padding:8px 12px;font:600 14px/20px var(--sans);color:var(--muted);cursor:pointer}.drawer .dt button[aria-pressed="true"]{background:var(--manik-soft);color:var(--manik)}
+.drawer .dt button{border:0;background:transparent;border-radius:10px;padding:8px 12px;font:600 0.9375rem/1.438rem var(--sans);color:var(--muted);cursor:pointer}.drawer .dt button[aria-pressed="true"]{background:var(--manik-soft);color:var(--manik)}
 .drawer .dc{padding:16px;overflow:auto;display:grid;gap:12px;align-content:start}
-.hist{border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:4px;font-size:14px;line-height:20px}.hist b{font-weight:600}.hist small{color:var(--muted)}
+.hist{border:1px solid var(--line);border-radius:12px;padding:12px;display:grid;gap:4px;font-size:0.9375rem;line-height:20px}.hist b{font-weight:600}.hist small{color:var(--muted)}
 .notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .nt{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px 18px;display:grid;gap:6px;align-content:start}
-.nt h3{margin:0;font:600 17px/24px var(--display)}.nt p{margin:0;font-size:15px;color:var(--muted)}.nt ul{margin:0;padding-left:18px;font-size:15px;color:var(--muted);display:grid;gap:4px}
-.note2{font-size:14px;color:var(--muted);margin:0}
+.nt h3{margin:0;font:600 1.125rem/1.688rem var(--display)}.nt p{margin:0;font-size:1rem;color:var(--muted)}.nt ul{margin:0;padding-left:18px;font-size:1rem;color:var(--muted);display:grid;gap:4px}
+.note2{font-size:0.9375rem;color:var(--muted);margin:0}
 .dxs{display:grid;gap:12px}.dxc{border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:10px;background:#FBFCFE}
-.dxh{display:flex;align-items:center;gap:10px}.dxh .x{border:0;background:transparent;border-radius:8px;width:36px;height:36px;display:grid;place-items:center;color:var(--muted);cursor:pointer}.dxh .x:hover{background:var(--soft)}.dxh code{font:600 14px/20px var(--sans);color:var(--manik)}.dxh b{font-weight:600}
-.dxh .tag{font:600 12px/16px var(--sans);padding:2px 8px;border-radius:999px;background:var(--soft);color:var(--muted)}.dxh .tag.pr{background:var(--manik-soft);color:var(--manik)}
+.dxh{display:flex;align-items:center;gap:10px}.dxh .x{border:0;background:transparent;border-radius:8px;width:36px;height:36px;display:grid;place-items:center;color:var(--muted);cursor:pointer}.dxh .x:hover{background:var(--soft)}.dxh code{font:600 0.9375rem/1.438rem var(--sans);color:var(--manik)}.dxh b{font-weight:600}
+.dxh .tag{font:600 0.875rem/1.25rem var(--sans);padding:2px 8px;border-radius:999px;background:var(--soft);color:var(--muted)}.dxh .tag.pr{background:var(--manik-soft);color:var(--manik)}
 .it.med{background:var(--surface)}.it.med.bad{border:2px solid var(--error)}
-.alr{grid-column:1/-1;display:flex;gap:10px;align-items:start;border-radius:10px;padding:10px 12px;font-size:14px;line-height:20px}.alr svg{margin-top:2px}
+.alr{grid-column:1/-1;display:flex;gap:10px;align-items:start;border-radius:10px;padding:10px 12px;font-size:0.9375rem;line-height:20px}.alr svg{margin-top:2px}
 .alr.contra{background:var(--error-soft);color:var(--on-error)}.alr.prec{background:var(--aviso-soft);color:var(--on-aviso)}.alr b{font-weight:700}.alr .just{margin:6px 0 0;color:var(--ink)}
-.srch.sm input{height:40px;font-size:15px}.srch.sm>svg{top:11px}
-.frec{gap:6px}.chip2{border:1px dashed var(--control);background:var(--surface);border-radius:999px;padding:4px 12px;font:600 13px/18px var(--sans);color:var(--manik);cursor:pointer;min-height:32px}.chip2:hover{background:var(--manik-soft)}
+.srch.sm input{height:40px;font-size:1rem}.srch.sm>svg{top:11px}
+.frec{gap:6px}.chip2{border:1px dashed var(--control);background:var(--surface);border-radius:999px;padding:4px 12px;font:600 0.875rem/1.312rem var(--sans);color:var(--manik);cursor:pointer;min-height:32px}.chip2:hover{background:var(--manik-soft)}
 .hj{grid-column:2/4;display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:4px}
-.seg.sm button{min-height:34px;padding:0 10px;font-size:13px}
-.lockc{display:inline-flex;align-items:center;gap:6px;font:600 13px/18px var(--sans);color:#4E3F86;background:#ECE5F8;padding:4px 10px;border-radius:999px}.lockc svg{width:14px;height:14px}
+.seg.sm button{min-height:34px;padding:0 10px;font-size:0.875rem}
+.lockc{display:inline-flex;align-items:center;gap:6px;font:600 0.875rem/1.312rem var(--sans);color:#4E3F86;background:#ECE5F8;padding:4px 10px;border-radius:999px}.lockc svg{width:14px;height:14px}
 .card.ctrl{border-color:#CFC3EC}
 @media (max-width:900px){.notes{grid-template-columns:1fr}}
+
+html{font-size:var(--root,16px)}
+::placeholder{color:#5F6A84;opacity:1}
+.sec{border-color:var(--edge);padding:0 22px 22px}
+.sh{margin:0 -22px;padding:14px 22px;background:var(--head);border-bottom:1px solid var(--line);border-radius:18px 18px 0 0}
+.card,.dxc,.it,details{border-color:var(--edge)}
+.it .x,.dxh .x{width:auto!important;padding:0 10px;gap:6px;display:inline-flex!important;align-items:center;font:600 0.875rem/1.25rem var(--sans);color:var(--muted);min-height:40px}
+.dose input{height:44px}.seg.sm button{min-height:40px}
+.v .in{height:auto;min-height:48px}.v{align-content:start}.vs{align-items:start}
+.timer button{width:auto;padding:0 10px;gap:6px;display:inline-flex;align-items:center;font:600 0.875rem var(--sans);height:36px}
+.fs{display:flex;align-items:center;gap:8px;font:600 0.875rem/1.25rem var(--sans);color:var(--muted)}
+.fs .seg button{min-height:36px;padding:0 10px}
+.btn[aria-disabled="true"]{background:#C7CEDB;border-color:#C7CEDB;color:#3E4A66;opacity:1}
+.why{font-size:0.875rem;line-height:1.25rem;color:var(--on-aviso)}
+.nores{padding:10px 12px;font-size:0.9375rem;color:var(--muted)}
+.toast{position:sticky;bottom:16px;margin:0 auto;width:max-content;max-width:90%;display:flex;gap:14px;align-items:center;background:var(--ink);color:#fff;border-radius:14px;padding:10px 12px 10px 16px;font-size:1rem;z-index:40;box-shadow:0 12px 30px rgba(20,33,61,.25)}
+.toast button{border:0;background:#fff;color:var(--ink);border-radius:10px;min-height:40px;padding:0 14px;font:600 0.9375rem var(--sans);cursor:pointer}
+.app{background:var(--canvas)}
 </style>
 
 <div class="wrap">
@@ -169,7 +187,7 @@ const MEDS=[
 const EDAD_M=9; // meses
 const EST=['Biometría hemática completa','Examen general de orina','Química sanguínea de 6 elementos','Radiografía de tórax PA','Electroencefalograma'];
 const mk=n=>{const m=MEDS.find(x=>x.n===n);return {...m,h:m.ctrl?'C':1}};
-let S={pad:'El paciente presenta dolor muscular constante y cefalea recurrente desde hace alrededor de 7 días.',vit:Object.fromEntries(VIT.map(v=>[v.k,v.v])),
+let S={fs:(()=>{try{return +localStorage.getItem('mm-fs')||16}catch(e){return 16}})(),undo:null,pad:'El paciente presenta dolor muscular constante y cefalea recurrente desde hace alrededor de 7 días.',vit:Object.fromEntries(VIT.map(v=>[v.k,v.v])),
  dx:[{c:'J06.9',n:'Infección aguda de vías respiratorias superiores',meds:[mk('Paracetamol')]},{c:'G40.9',n:'Epilepsia, no especificada',meds:[mk('Fenobarbital')]}],
  est:[{n:'Biometría hemática completa'}],estInd:'Enviar resultados al correo del tutor.',ind:{1:'Reposo relativo. Volver si hay fiebre mayor de 38.5 °C.',C:'No suspender de golpe. Traer el frasco a la próxima consulta.'},ref:'Ninguna',q:{dx:'',est:''},qm:{},drawer:null,ia:false};
 const allMeds=()=>S.dx.flatMap(d=>d.meds);
@@ -193,23 +211,23 @@ function sug(kind){const q=S.q[kind].toLowerCase();if(q.length<2)return '';
   let L=kind==='dx'?DX.filter(d=>(d[0]+' '+d[1]).toLowerCase().includes(q)).map(d=>`<button type="button" data-add-dx="${d[0]}"><code>${d[0]}</code><span>${d[1]}</span></button>`)
    :EST.filter(e=>e.toLowerCase().includes(q)).map(e=>`<button type="button" data-add-est="${e}">${e}</button>`);
   if(kind==='dx'&&!L.length) L=[`<button type="button" data-add-dx="libre"><code>Escrito</code><span>Usar «${S.q.dx}» como diagnóstico escrito</span></button>`];
-  return L.length?`<div class="sug" role="listbox">${L.join('')}</div>`:'';}
+  return L.length?`<div class="sug" role="listbox">${L.join('')}</div>`:`<div class="sug"><p class="nores">Sin resultados para «${S.q[kind]}». Revisa la ortografía o escribe el nombre del estudio.</p></div>`;}
 function sugMed(i){const q=(S.qm[i]||'').toLowerCase();if(q.length<2)return '';const d=S.dx[i];
   const L=MEDS.filter(m=>m.n.toLowerCase().includes(q)||m.p.toLowerCase().includes(q)).sort((a,b)=>(b.dx.includes(d.c))-(a.dx.includes(d.c)));
-  return L.length?`<div class="sug" role="listbox">${L.map(m=>`<button type="button" data-add-med="${i}:${m.n}"><b>${m.n}</b><small>${m.p}${m.ctrl?' · controlado':''}</small></button>`).join('')}</div>`:'';}
+  return !L.length?`<div class="sug"><p class="nores">Sin resultados para «${S.qm[i]}». Prueba con el nombre genérico (por ejemplo, paracetamol).</p></div>`:`<div class="sug" role="listbox">${L.map(m=>`<button type="button" data-add-med="${i}:${m.n}"><b>${m.n}</b><small>${m.p}${m.ctrl?' · controlado':''}</small></button>`).join('')}</div>`;}
 function medHTML(m,i,j){const al=alertas(m), contra=al.some(a=>a.lv==='contra');
-  return `<div class="it med${contra&&!m.just?' bad':''}">${ic('pill')}<b>${m.n} <span style="font-weight:400;color:var(--muted)">· ${m.p}</span></b><button class="x" type="button" data-rm-med="${i}:${j}" aria-label="Quitar ${m.n}">${ic('x')}</button>
+  return `<div class="it med${contra&&!m.just?' bad':''}">${ic('pill')}<b>${m.n} <span style="font-weight:400;color:var(--muted)">· ${m.p}</span></b><button class="x" type="button" data-rm-med="${i}:${j}" aria-label="Quitar ${m.n}">${ic('x')}<span>Quitar</span></button>
    ${al.map(a=>`<div class="alr ${a.lv}" role="${a.lv==='contra'?'alert':'status'}">${ic('alert')}<div><b>${a.lv==='contra'?'Contraindicado':'Precaución'}</b> · ${a.t}${a.lv==='contra'?(m.just?`<p class="just">Recetado con justificación: «${m.just}»</p>`:`<div class="row" style="margin-top:8px"><button class="btn s" type="button" data-rm-med="${i}:${j}">Quitar ${m.n.toLowerCase()}</button><input type="text" id="j-${i}-${j}" placeholder="Motivo para recetarlo de todos modos" style="flex:1;min-width:200px;height:36px;padding:0 10px;font-size:14px"><button class="btn s" type="button" data-just="${i}:${j}">Recetar con justificación</button></div>`):''}</div></div>`).join('')}
    <div class="dose"><label>Dosis<input type="text" value="${m.d}"></label><label>Frecuencia<input type="text" value="${m.f}"></label><label>Duración<input type="text" value="${m.t}"></label><label>Vía<input type="text" value="${/Crema|Pasta/.test(m.p)?'Tópica':'Oral'}"></label></div>
    <div class="hj">${m.ctrl?`<span class="lockc">${ic('lock')}Receta de controlados</span><span class="small">Marcado como controlado en el catálogo.</span>`:`<span class="small">Imprimir en</span><div class="seg sm" role="group" aria-label="Hoja de ${m.n}">${hojas().filter(h=>h!=='C').map(h=>`<button type="button" data-hoja="${i}:${j}:${h}" aria-pressed="${m.h===h}">${hojaN(h)}</button>`).join('')}<button type="button" data-hoja="${i}:${j}:+">+ Hoja nueva</button></div>`}</div></div>`;}
 function render(){
   const sel=document.activeElement&&document.activeElement.id, pos=document.activeElement&&document.activeElement.selectionStart;
   const flags=VIT.map(chkVital).filter(x=>x.c).length;
-  let h=`<div class="nav"><span class="brand">${SELLO.expediente}<span><b>Expediente</b> Manik</span></span><span class="crumb">· <a href="#">Agenda</a> › Consulta 13:30</span><span class="grow"></span><span class="saved"><i></i>Guardado automático · hace 5 s</span><button class="ib eco" type="button" aria-label="Ecosistema Manik: cambiar de app">${SELLO.ecosistema}</button><span class="av">DR</span></div>
+  let h=`<div class="nav"><span class="brand">${SELLO.expediente}<span><b>Expediente</b> Manik</span></span><span class="crumb">· <a href="#">Agenda</a> › Consulta 13:30</span><span class="grow"></span><span class="fs">Tamaño de letra<div class="seg" role="group" aria-label="Tamaño de letra"><button type="button" data-fs="16" aria-pressed="${S.fs===16}">Normal</button><button type="button" data-fs="18" aria-pressed="${S.fs===18}">Grande</button></div></span><span class="saved"><i></i>Guardado automático · hace 5 s</span><button class="ib eco" type="button" aria-label="Ecosistema Manik: cambiar de app">${SELLO.ecosistema}</button><span class="av">DR</span></div>
   <div class="pt"><span class="pav">KG</span><div class="pn"><h2>Kevin Eduardo García Martínez</h2><p><b>9 meses</b> · Hombre · 01 ene 2026 · Exp. <b>KG-0126-01</b></p></div>
    <button class="flag w" type="button">${ic('alert')}Alergias sin registrar · Registrar</button><button class="flag n" type="button">Tipo de sangre: sin registrar</button>
    <div class="tl">${[['ant','book','Antecedentes'],['his','hist','Historial'],['gra','chart','Gráficas']].map(([k,i,l])=>`<button class="tbtn" type="button" data-dr="${k}" aria-expanded="${S.drawer===k}">${ic(i)}${l}</button>`).join('')}<button class="tbtn" type="button" aria-label="Más herramientas: anotaciones privadas, consentimiento, exportar">${ic('more')}Más</button></div>
-   <span class="grow"></span><span class="timer">${ic('clock')}En consulta · 03:02<button type="button" aria-label="Pausar tiempo de consulta">${ic('pause')}</button></span><button class="btn p" type="button" id="fin">Terminar consulta</button></div>
+   <span class="grow"></span><span class="timer">${ic('clock')}En consulta · 03:02<button type="button">${ic('pause')}Pausar</button></span><button class="btn p" type="button" id="fin">Terminar consulta</button></div>
   <nav class="idx" aria-label="Secciones de la nota">${SECS.map(([k,l],i)=>`<a href="#s-${k}" class="${done[k]()?'ok':(k==='dx'||k==='pad'?'req':'')}"><span class="n">${done[k]()?ic('check'):i+1}</span>${l}${k==='sig'&&flags?` <span style="color:var(--on-error)">· ${flags} por revisar</span>`:''}</a>`).join('')}</nav>
   <div class="body"><div class="note">`;
   h+=`<section class="sec" id="s-pad"><div class="sh"><h3>Padecimiento actual</h3><span class="rq">Obligatorio</span><span class="hint">Qué le pasa, desde cuándo y cómo ha evolucionado.</span></div>
@@ -219,7 +237,7 @@ function render(){
   h+=`</div><div class="more"><details><summary>Exploración física por aparatos <span class="c">Opcional</span></summary><textarea aria-label="Exploración física">Activo, reactivo, bien hidratado. Piel con lesiones papulares en tronco.</textarea></details><details><summary>Glucosa y colesterol <span class="c">Opcional</span></summary><p class="small">Capturas de glucometría y perfil de lípidos.</p></details><details><summary>Cintura y cadera <span class="c">No se piden a los 9 meses</span></summary><p class="small">Aparecen a partir de los 6 años.</p></details></div></section>`;
   h+=`<section class="sec" id="s-dx"><div class="sh"><h3>Diagnóstico y tratamiento</h3><span class="rq">Obligatorio</span><span class="hint">Busca el diagnóstico (CIE-10) y receta dentro de él: cada medicamento queda ligado a su diagnóstico.</span></div>
    <div class="srch">${ic('search')}<input type="text" id="q-dx" data-q="dx" placeholder="Agregar diagnóstico: dermatitis, J06.9…" value="${S.q.dx}" autocomplete="off">${sug('dx')}</div>
-   <div class="dxs">${S.dx.map((d,i)=>`<div class="dxc"><div class="dxh"><span class="tag${i===0?' pr':''}">${i===0?'Principal':'Secundario'}</span><code>${d.c}</code><b>${d.n}</b><span class="grow"></span><button class="x" type="button" data-rm-dx="${i}" aria-label="Quitar diagnóstico ${d.n}">${ic('x')}</button></div>
+   <div class="dxs">${S.dx.map((d,i)=>`<div class="dxc"><div class="dxh"><span class="tag${i===0?' pr':''}">${i===0?'Principal':'Secundario'}</span><code>${d.c}</code><b>${d.n}</b><span class="grow"></span><button class="x" type="button" data-rm-dx="${i}" aria-label="Quitar diagnóstico ${d.n}">${ic('x')}<span>Quitar</span></button></div>
      <div class="items">${d.meds.map((m,j)=>medHTML(m,i,j)).join('')}</div>
      <div class="srch sm">${ic('search')}<input type="text" id="qm-${i}" data-qm="${i}" placeholder="Agregar medicamento para ${d.n.split(',')[0].toLowerCase()}" value="${S.qm[i]||''}" autocomplete="off">${sugMed(i)}</div>
      <div class="row frec"><span class="small">Frecuentes para ${d.c} (aptos para la edad):</span>${MEDS.filter(m=>m.dx.includes(d.c)&&!d.meds.some(x=>x.n===m.n)&&!(m.minM&&EDAD_M<m.minM)).slice(0,3).map(m=>`<button class="chip2" type="button" data-add-med="${i}:${m.n}">+ ${m.n}</button>`).join('')}</div></div>`).join('')||'<div class="empty">Agrega un diagnóstico para empezar a recetar.</div>'}</div>
@@ -227,7 +245,7 @@ function render(){
    ${S.ia?`<div class="ai" role="status">${ic('info')}<span><b>Dosis por peso (8.8 kg):</b> paracetamol hasta 130 mg (4 mL) cada 6 h. Confirma las alergias con el tutor: no hay registro.</span></div>`:''}</section>`;
   h+=`<section class="sec" id="s-est"><div class="sh"><h3>Estudios y procedimientos</h3><span class="hint">Opcional.</span></div>
    <div class="srch">${ic('search')}<input type="text" id="q-est" data-q="est" placeholder="Buscar estudio: biometría, orina, radiografía…" value="${S.q.est}" autocomplete="off">${sug('est')}</div>
-   <div class="items">${S.est.map((e,i)=>`<div class="it">${ic('flask')}<b>${e.n}</b><button class="x" type="button" data-rm-est="${i}" aria-label="Quitar ${e.n}">${ic('x')}</button></div>`).join('')}</div>
+   <div class="items">${S.est.map((e,i)=>`<div class="it">${ic('flask')}<b>${e.n}</b><button class="x" type="button" data-rm-est="${i}" aria-label="Quitar ${e.n}">${ic('x')}<span>Quitar</span></button></div>`).join('')}</div>
    <label class="l" for="estind">Indicaciones para los estudios</label><textarea id="estind" style="min-height:64px">${S.estInd}</textarea>
    <div class="row"><span class="l">Referir a cirugía</span><div class="seg" role="group" aria-label="Referir a cirugía">${['Ninguna','General','Ginecológica'].map(r=>`<button type="button" data-ref="${r}" aria-pressed="${S.ref===r}">${r}</button>`).join('')}</div></div></section>`;
   h+=`<section class="sec" id="s-ind"><div class="sh"><h3>Indicaciones para el paciente</h3><span class="hint">${hojas().length>1?'Cada hoja lleva sus propias indicaciones.':'Aparecen en la receta.'}</span></div>${hojas().map(h=>`${hojas().length>1?`<label class="l" for="ind-${h}">${hojaN(h)}</label>`:''}<textarea id="ind-${h}" data-ind="${h}" style="min-height:72px">${S.ind[h]||''}</textarea>`).join('')}
@@ -236,11 +254,13 @@ function render(){
    ${hojas().map(h=>{const ms=allMeds().filter(m=>m.h===h);return `<div class="card${h==='C'?' ctrl':''}"><h4>${ic(h==='C'?'lock':'pill')}Receta · ${hojaN(h)} <span class="ct">${ms.length} med.</span></h4>${h==='C'?'<span class="small">Se imprime en el recetario especial con el folio del médico.</span>':''}<div class="rx">${ms.map(m=>`<div><b>${m.n}</b> · ${m.p}<small>${m.d} ${m.f} por ${m.t} · ${S.dx.find(d=>d.meds.includes(m)).c}</small></div>`).join('')||'<span class="small">Sin medicamentos en esta hoja.</span>'}${S.ind[h]?`<div><b>Indicaciones</b><small>${S.ind[h]}</small></div>`:''}</div></div>`}).join('')}<button class="btn s" type="button">${ic('eye')}Vista previa de ${hojas().length>1?'las '+hojas().length+' hojas':'la receta'}</button>
    <div class="card"><h4>${ic('flask')}Solicitud de estudios <span class="ct">${S.est.length}</span></h4><div class="rx">${S.est.map(e=>`<div>${e.n}</div>`).join('')||'<span class="small">Sin estudios.</span>'}${S.ref!=='Ninguna'?`<div><b>Referencia</b><small>Cirugía ${S.ref.toLowerCase()}</small></div>`:''}</div></div>
    <div class="card"><h4>Antes de terminar</h4><div class="chk">${[['Padecimiento',done.pad()],['Diagnóstico con tratamiento',S.dx.length>0],[pendContra()?`${pendContra()} contraindicación sin resolver`:'Contraindicaciones revisadas',!pendContra()],['Signos sin pendientes',done.sig()],['Alergias confirmadas',false]].map(([l,o])=>`<div class="${o?'ok':'no'}">${ic(o?'check':'alert')}${l}${o?'':' · pendiente'}</div>`).join('')}</div>
-   <button class="btn p" type="button">Terminar y entregar receta</button><span class="small">Se guarda la nota, se genera la receta y la cita pasa a «Terminada» en la agenda.</span></div></aside></div>`;
+   ${pendContra()||!done.pad()||!S.dx.length?`<button class="btn p" type="button" aria-disabled="true" aria-describedby="why">Terminar y entregar receta</button><span class="why" id="why">Para terminar: ${[!done.pad()?'escribe el padecimiento':'',!S.dx.length?'agrega un diagnóstico':'',pendContra()?'resuelve la contraindicación':''].filter(Boolean).join(', ')}.</span>`:`<button class="btn p" type="button">Terminar y entregar receta</button>`}<span class="small">Se guarda la nota, se genera la receta y la cita pasa a «Terminada» en la agenda.</span></div></aside></div>`;
   if(S.drawer){h+=`<div class="drawer" role="dialog" aria-label="${{ant:'Antecedentes',his:'Historial',gra:'Gráficas'}[S.drawer]}"><div class="dw"><header><h3>${{ant:'Antecedentes',his:'Historial de consultas',gra:'Gráficas de crecimiento'}[S.drawer]}</h3><span class="grow"></span><button class="ib" type="button" id="cd" aria-label="Cerrar">${ic('x')}</button></header><div class="dc">`+
    (S.drawer==='ant'?`<div class="hist"><b>Perinatales</b><small>Nacido a término, 38 SDG, peso al nacer 3.2 kg. Sin complicaciones.</small></div><div class="hist"><b>Vacunas</b><small>Esquema completo a los 6 meses. Pendiente: SRP a los 12 meses.</small></div><div class="hist"><b>Heredofamiliares</b><small>Madre con asma. Abuelo con diabetes tipo 2.</small></div><div class="hist"><b>Alergias</b><small style="color:var(--on-aviso)">Sin registrar. Pregunta al tutor y registra.</small></div>`
    :S.drawer==='his'?`<div class="hist"><b>12 sep 2026 · Control de niño sano</b><small>Peso 8.1 kg · Talla 72 cm · Sin hallazgos. Dra. Ramírez</small></div><div class="hist"><b>05 jul 2026 · Vacunas 6 meses</b><small>Hexavalente, rotavirus, neumococo. Dra. Ramírez</small></div><div class="hist"><b>18 abr 2026 · Rinofaringitis</b><small>Paracetamol 3 días. Dr. Ortega</small></div>`
    :`<div class="hist"><b>Peso para la edad</b><small>8.8 kg · percentil 50. Línea de crecimiento estable desde los 3 meses.</small></div><div class="hist"><b>Talla para la edad</b><small>Último dato confiable: 72 cm (12 sep). El valor de hoy (1.78 m) parece un error de captura.</small></div>`)+`</div></div></div>`;}
+  if(S.undo)h+=`<div class="toast" role="status">${S.undo.t}.<button type="button" id="undo">Deshacer</button></div>`;
+  document.documentElement.style.setProperty('--root',S.fs+'px');
   document.getElementById('app').innerHTML=h;
   const pt=document.querySelector('.pt'), ix=document.querySelector('.idx'); ix.style.top=pt.offsetHeight+'px'; document.querySelector('.out').style.top=(pt.offsetHeight+ix.offsetHeight+16)+'px';
   bind();
@@ -257,8 +277,10 @@ function bind(){
   q('[data-add-dx]',b=>b.onclick=()=>{const c=b.dataset.addDx;const d=c==='libre'?['Escrito',S.q.dx]:DX.find(x=>x[0]===c);S.dx.push({c:d[0],n:d[1],meds:[]});S.q.dx='';render()});
   q('[data-add-med]',b=>b.onclick=()=>{const [i,n]=b.dataset.addMed.split(':');S.dx[+i].meds.push(mk(n));S.qm[i]='';S.ia=false;render()});
   q('[data-add-est]',b=>b.onclick=()=>{S.est.push({n:b.dataset.addEst});S.q.est='';render()});
-  q('[data-rm-dx]',b=>b.onclick=()=>{S.dx.splice(+b.dataset.rmDx,1);render()});
-  q('[data-rm-med]',b=>b.onclick=()=>{const [i,j]=b.dataset.rmMed.split(':');S.dx[+i].meds.splice(+j,1);render()});
+  q('[data-rm-dx]',b=>b.onclick=()=>{const i=+b.dataset.rmDx,d=S.dx.splice(i,1)[0];S.undo={t:`Se quitó el diagnóstico ${d.c}`,f:()=>S.dx.splice(i,0,d)};render()});
+  q('[data-rm-med]',b=>b.onclick=()=>{const [i,j]=b.dataset.rmMed.split(':');const m=S.dx[+i].meds.splice(+j,1)[0];S.undo={t:`Se quitó ${m.n}`,f:()=>S.dx[+i].meds.splice(+j,0,m)};render()});
+  q('[data-fs]',b=>b.onclick=()=>{S.fs=+b.dataset.fs;try{localStorage.setItem('mm-fs',S.fs)}catch(e){}render()});
+  const un=document.getElementById('undo');if(un)un.onclick=()=>{S.undo.f();S.undo=null;render()};
   q('[data-just]',b=>b.onclick=()=>{const [i,j]=b.dataset.just.split(':');const v=document.getElementById(`j-${i}-${j}`).value.trim();if(!v){document.getElementById(`j-${i}-${j}`).focus();return}S.dx[+i].meds[+j].just=v;render()});
   q('[data-rm-est]',b=>b.onclick=()=>{S.est.splice(+b.dataset.rmEst,1);render()});
   q('[data-ref]',b=>b.onclick=()=>{S.ref=b.dataset.ref;render()});
