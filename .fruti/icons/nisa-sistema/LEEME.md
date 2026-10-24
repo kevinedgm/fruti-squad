@@ -12,3 +12,7 @@ El usuario quiere replantear el nombre del sistema que se llamó Conectti (`.fru
 
 ## Ronda 1 · nombre (`ronda-1/`)
 Seis candidatos en tres arquitecturas: A Nisa Nabani Lab (monolítica), B Traza, C Certa, D Matraz, E Alícuota (respaldadas «de Nisa Nabani»), F Nabi (familia). Ninguno verificado en IMPI, USPTO ni dominios.
+
+## Nombre elegido: Nabi (arquitectura de familia)
+## Nabi · ronda 1 · símbolo (`nabi-ronda-1/`)
+Colores del laboratorio (#052A76, #C2D225); wordmark «nabi» en Archivo 700 wdth 125 (`/tmp/nabi-archivo.ttf`), grotesca ancha cercana al logo madre. A Onda (una sola onda = «n», punto pera = i), B Matraz (contorno + líquido pera con onda), C Ligadura nb, D Muestras (onda + tres puntos crecientes), E Hija (onda azul + onda pera menor en su cuenco).
