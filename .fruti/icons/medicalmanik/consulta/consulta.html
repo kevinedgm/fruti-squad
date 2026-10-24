@@ -122,6 +122,19 @@ summary .c{margin-left:auto;font:500 0.875rem/1.312rem var(--sans);color:var(--m
 @media (max-width:900px){.notes{grid-template-columns:1fr}}
 
 html{font-size:var(--root,16px)}
+.body.g1{grid-template-columns:minmax(0,860px);justify-content:center}.g1 .vs{grid-template-columns:repeat(auto-fill,minmax(230px,1fr))}
+.prog{position:sticky;z-index:9;display:grid;gap:8px;padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--line)}
+.prog .pg{display:flex;gap:10px;align-items:baseline;max-width:860px;width:100%;margin:0 auto}.prog .pg span{font:600 0.9375rem var(--sans);color:var(--muted)}.prog .pg b{font:600 1.125rem var(--display)}
+.prog .bar{height:8px;border-radius:99px;background:var(--soft);max-width:860px;width:100%;margin:0 auto;overflow:hidden}.prog .bar i{display:block;height:100%;background:var(--manik);border-radius:99px}
+.paso{display:flex;align-items:center;gap:14px;width:100%;text-align:left;border:1px solid var(--edge);background:var(--surface);border-radius:14px;padding:14px 18px;font:inherit;color:var(--ink);cursor:pointer;min-height:60px}
+.paso:hover{background:var(--head)}.paso .n{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none;font:600 0.9375rem var(--sans);border:2px solid var(--control);color:var(--muted)}
+.paso.hecho .n{background:var(--exito);border-color:var(--exito);color:#fff}.paso.at .n{background:var(--aviso-soft);border-color:var(--aviso);color:var(--on-aviso)}
+.paso .n svg{width:16px;height:16px}.paso .pt2{display:grid;gap:2px;min-width:0;flex:1}.paso .pt2 b{font:600 1.0625rem var(--display)}.paso .pt2 span{color:var(--muted);font-size:0.9375rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.paso.fut{background:transparent;border-style:dashed;color:var(--muted);min-height:52px}.paso.fut .pt2 b{color:var(--muted);font-weight:600}
+.paso .ed{font:600 0.9375rem var(--sans);color:var(--manik)}
+.nxt{display:flex;gap:10px;align-items:center;border-top:1px solid var(--line);padding-top:16px;margin-top:4px;flex-wrap:wrap}
+.fin{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}.fin>.btn{grid-column:1/-1;justify-self:start}
+.g .rq{display:none}.g .pt .flag.n,.g #fin{display:none}.g .pt .tl .tbtn:not([data-dr="ant"]){display:none}
 ::placeholder{color:#5F6A84;opacity:1}
 .sec{border-color:var(--edge);padding:0 22px 22px}
 .sh{margin:0 -22px;padding:14px 22px;background:var(--head);border-bottom:1px solid var(--line);border-radius:18px 18px 0 0}
@@ -130,7 +143,7 @@ html{font-size:var(--root,16px)}
 .dose input{height:44px}.seg.sm button{min-height:40px}
 .v .in{height:auto;min-height:48px}.v{align-content:start}.vs{align-items:start}
 .timer button{width:auto;padding:0 10px;gap:6px;display:inline-flex;align-items:center;font:600 0.875rem var(--sans);height:36px}
-.fs{display:flex;align-items:center;gap:8px;font:600 0.875rem/1.25rem var(--sans);color:var(--muted)}
+.crumb,.fs,.saved{white-space:nowrap}.fs{display:flex;align-items:center;gap:8px;font:600 0.875rem/1.25rem var(--sans);color:var(--muted)}
 .fs .seg button{min-height:36px;padding:0 10px}
 .btn[aria-disabled="true"]{background:#C7CEDB;border-color:#C7CEDB;color:#3E4A66;opacity:1}
 .why{font-size:0.875rem;line-height:1.25rem;color:var(--on-aviso)}
@@ -143,7 +156,7 @@ html{font-size:var(--root,16px)}
 <div class="wrap">
   <header>
     <h1>La consulta en Expediente Manik</h1>
-    <p class="lead">Una sola nota que se llena de arriba abajo, en el orden en que el médico piensa. Los datos del paciente quedan a la vista, las herramientas se abren al lado sin salir de la consulta, y la receta y la solicitud de estudios se arman solas a la derecha.</p>
+    <p class="lead">Paso a paso: un solo bloque abierto a la vez, lo terminado se resume en una línea y lo que sigue solo muestra su título. Quien ya domina el sistema puede cambiar a «Completa» y ver toda la nota con la receta armándose a la derecha.</p>
   </header>
   <div class="frame"><div class="app" id="app"></div></div>
   <div class="notes">
@@ -187,7 +200,7 @@ const MEDS=[
 const EDAD_M=9; // meses
 const EST=['Biometría hemática completa','Examen general de orina','Química sanguínea de 6 elementos','Radiografía de tórax PA','Electroencefalograma'];
 const mk=n=>{const m=MEDS.find(x=>x.n===n);return {...m,h:m.ctrl?'C':1}};
-let S={fs:(()=>{try{return +localStorage.getItem('mm-fs')||16}catch(e){return 16}})(),undo:null,pad:'El paciente presenta dolor muscular constante y cefalea recurrente desde hace alrededor de 7 días.',vit:Object.fromEntries(VIT.map(v=>[v.k,v.v])),
+let S={modo:(()=>{try{return localStorage.getItem('mm-modo')||'guiado'}catch(e){return 'guiado'}})(),paso:1,fs:(()=>{try{return +localStorage.getItem('mm-fs')||16}catch(e){return 16}})(),undo:null,pad:'El paciente presenta dolor muscular constante y cefalea recurrente desde hace alrededor de 7 días.',vit:Object.fromEntries(VIT.map(v=>[v.k,v.v])),
  dx:[{c:'J06.9',n:'Infección aguda de vías respiratorias superiores',meds:[mk('Paracetamol')]},{c:'G40.9',n:'Epilepsia, no especificada',meds:[mk('Fenobarbital')]}],
  est:[{n:'Biometría hemática completa'}],estInd:'Enviar resultados al correo del tutor.',ind:{1:'Reposo relativo. Volver si hay fiebre mayor de 38.5 °C.',C:'No suspender de golpe. Traer el frasco a la próxima consulta.'},ref:'Ninguna',q:{dx:'',est:''},qm:{},drawer:null,ia:false};
 const allMeds=()=>S.dx.flatMap(d=>d.meds);
@@ -215,6 +228,31 @@ function sug(kind){const q=S.q[kind].toLowerCase();if(q.length<2)return '';
 function sugMed(i){const q=(S.qm[i]||'').toLowerCase();if(q.length<2)return '';const d=S.dx[i];
   const L=MEDS.filter(m=>m.n.toLowerCase().includes(q)||m.p.toLowerCase().includes(q)).sort((a,b)=>(b.dx.includes(d.c))-(a.dx.includes(d.c)));
   return !L.length?`<div class="sug"><p class="nores">Sin resultados para «${S.qm[i]}». Prueba con el nombre genérico (por ejemplo, paracetamol).</p></div>`:`<div class="sug" role="listbox">${L.map(m=>`<button type="button" data-add-med="${i}:${m.n}"><b>${m.n}</b><small>${m.p}${m.ctrl?' · controlado':''}</small></button>`).join('')}</div>`;}
+const PASOS=[['pad','Padecimiento'],['sig','Signos vitales'],['dx','Diagnóstico y tratamiento'],['est','Estudios',1],['ind','Indicaciones'],['fin','Revisar y entregar']];
+function resumen(k){
+  if(k==='pad')return S.pad.length>70?S.pad.slice(0,70)+'…':S.pad;
+  if(k==='sig'){const n=VIT.map(chkVital).filter(x=>x.c).length;return n?`${n} valor${n>1?'es':''} por revisar`:'Todos en rango para la edad'}
+  if(k==='dx')return S.dx.map(d=>`${d.c} · ${d.meds.length} medicamento${d.meds.length===1?'':'s'}`).join(' · ')||'Sin diagnóstico';
+  if(k==='est')return S.est.length?S.est.map(e=>e.n).join(', '):'Sin estudios';
+  if(k==='ind'){const t=Object.values(S.ind).filter(Boolean).join(' · ');return t.length>70?t.slice(0,70)+'…':t||'Sin indicaciones'}
+  return '';}
+const atencion=k=>k==='sig'?VIT.some(v=>chkVital(v).c):k==='dx'?(!S.dx.length||pendContra()>0):k==='pad'?!done.pad():false;
+function armar(h,ASIDE){
+  const cut=h.lastIndexOf('<div class="body"><div class="note">'); let head=h.slice(0,cut); const notes=h.slice(cut+'<div class="body"><div class="note">'.length);
+  const secs={}; notes.replace(/<section class="sec" id="s-(\w+)"[\s\S]*?<\/section>/g,(m,k)=>{secs[k]=m;return m});
+  if(S.modo==='completo') return head+'<div class="body"><div class="note">'+Object.values(secs).join('')+'</div>'+ASIDE+'</div>';
+  const P=S.paso, cur=PASOS[P];
+  head=head.replace(/<nav class="idx"[\s\S]*?<\/nav>/,`<div class="prog"><div class="pg"><span>Paso ${P+1} de ${PASOS.length}</span><b>${cur[1]}</b></div><div class="bar" role="progressbar" aria-valuemin="1" aria-valuemax="${PASOS.length}" aria-valuenow="${P+1}" aria-label="Avance de la consulta"><i style="width:${(P+1)/PASOS.length*100}%"></i></div></div>`);
+  secs.fin=`<section class="sec" id="s-fin"><div class="sh"><h3>Revisar y entregar</h3><span class="hint">Así quedarán la receta y la solicitud de estudios.</span></div><div class="fin">${ASIDE.replace('<aside class="out" aria-label="Lo que se va a entregar">','').replace('</aside>','')}</div></section>`;
+  let out='<div class="body g1"><div class="note">';
+  PASOS.forEach(([k,l,opc],i)=>{
+    if(i===P){const nx=PASOS[i+1];
+      out+=secs[k].replace(/<\/section>$/,`<div class="nxt">${i?`<button class="btn" type="button" data-paso="${i-1}">← Anterior</button>`:''}<span class="grow"></span>${opc?`<button class="btn" type="button" data-paso="${i+1}">Omitir</button>`:''}${nx?`<button class="btn p" type="button" data-paso="${i+1}">Siguiente: ${nx[1]} →</button>`:''}</div></section>`);
+    } else {
+      const d=i<P, at=d&&atencion(k);
+      out+=`<button type="button" class="paso${d?' hecho':' fut'}${at?' at':''}" data-paso="${i}"><span class="n">${d?(at?ic('alert'):ic('check')):i+1}</span><span class="pt2"><b>${l}</b>${d?`<span>${resumen(k)}</span>`:''}</span>${d?'<span class="ed">Editar</span>':''}</button>`;
+    }});
+  return head+out+'</div></div>';}
 function medHTML(m,i,j){const al=alertas(m), contra=al.some(a=>a.lv==='contra');
   return `<div class="it med${contra&&!m.just?' bad':''}">${ic('pill')}<b>${m.n} <span style="font-weight:400;color:var(--muted)">· ${m.p}</span></b><button class="x" type="button" data-rm-med="${i}:${j}" aria-label="Quitar ${m.n}">${ic('x')}<span>Quitar</span></button>
    ${al.map(a=>`<div class="alr ${a.lv}" role="${a.lv==='contra'?'alert':'status'}">${ic('alert')}<div><b>${a.lv==='contra'?'Contraindicado':'Precaución'}</b> · ${a.t}${a.lv==='contra'?(m.just?`<p class="just">Recetado con justificación: «${m.just}»</p>`:`<div class="row" style="margin-top:8px"><button class="btn s" type="button" data-rm-med="${i}:${j}">Quitar ${m.n.toLowerCase()}</button><input type="text" id="j-${i}-${j}" placeholder="Motivo para recetarlo de todos modos" style="flex:1;min-width:200px;height:36px;padding:0 10px;font-size:14px"><button class="btn s" type="button" data-just="${i}:${j}">Recetar con justificación</button></div>`):''}</div></div>`).join('')}
@@ -223,10 +261,10 @@ function medHTML(m,i,j){const al=alertas(m), contra=al.some(a=>a.lv==='contra');
 function render(){
   const sel=document.activeElement&&document.activeElement.id, pos=document.activeElement&&document.activeElement.selectionStart;
   const flags=VIT.map(chkVital).filter(x=>x.c).length;
-  let h=`<div class="nav"><span class="brand">${SELLO.expediente}<span><b>Expediente</b> Manik</span></span><span class="crumb">· <a href="#">Agenda</a> › Consulta 13:30</span><span class="grow"></span><span class="fs">Tamaño de letra<div class="seg" role="group" aria-label="Tamaño de letra"><button type="button" data-fs="16" aria-pressed="${S.fs===16}">Normal</button><button type="button" data-fs="18" aria-pressed="${S.fs===18}">Grande</button></div></span><span class="saved"><i></i>Guardado automático · hace 5 s</span><button class="ib eco" type="button" aria-label="Ecosistema Manik: cambiar de app">${SELLO.ecosistema}</button><span class="av">DR</span></div>
+  let h=`<div class="nav"><span class="brand">${SELLO.expediente}<span><b>Expediente</b> Manik</span></span><span class="crumb">· <a href="#">Agenda</a> › Consulta 13:30</span><span class="grow"></span><span class="fs">Vista:<div class="seg" role="group" aria-label="Vista de la consulta"><button type="button" data-modo="guiado" aria-pressed="${S.modo==='guiado'}">Paso a paso</button><button type="button" data-modo="completo" aria-pressed="${S.modo==='completo'}">Completa</button></div></span><span class="fs">Letra:<div class="seg" role="group" aria-label="Tamaño de letra"><button type="button" data-fs="16" aria-pressed="${S.fs===16}">Normal</button><button type="button" data-fs="18" aria-pressed="${S.fs===18}">Grande</button></div></span><span class="saved" title="Guardado automático hace 5 s"><i></i>Guardado</span><button class="ib eco" type="button" aria-label="Ecosistema Manik: cambiar de app">${SELLO.ecosistema}</button><span class="av">DR</span></div>
   <div class="pt"><span class="pav">KG</span><div class="pn"><h2>Kevin Eduardo García Martínez</h2><p><b>9 meses</b> · Hombre · 01 ene 2026 · Exp. <b>KG-0126-01</b></p></div>
    <button class="flag w" type="button">${ic('alert')}Alergias sin registrar · Registrar</button><button class="flag n" type="button">Tipo de sangre: sin registrar</button>
-   <div class="tl">${[['ant','book','Antecedentes'],['his','hist','Historial'],['gra','chart','Gráficas']].map(([k,i,l])=>`<button class="tbtn" type="button" data-dr="${k}" aria-expanded="${S.drawer===k}">${ic(i)}${l}</button>`).join('')}<button class="tbtn" type="button" aria-label="Más herramientas: anotaciones privadas, consentimiento, exportar">${ic('more')}Más</button></div>
+   <div class="tl">${[['ant','book',S.modo==='guiado'?'Ver expediente del paciente':'Antecedentes'],['his','hist','Historial'],['gra','chart','Gráficas']].map(([k,i,l])=>`<button class="tbtn" type="button" data-dr="${k}" aria-expanded="${S.drawer===k}">${ic(i)}${l}</button>`).join('')}<button class="tbtn" type="button" aria-label="Más herramientas: anotaciones privadas, consentimiento, exportar">${ic('more')}Más</button></div>
    <span class="grow"></span><span class="timer">${ic('clock')}En consulta · 03:02<button type="button">${ic('pause')}Pausar</button></span><button class="btn p" type="button" id="fin">Terminar consulta</button></div>
   <nav class="idx" aria-label="Secciones de la nota">${SECS.map(([k,l],i)=>`<a href="#s-${k}" class="${done[k]()?'ok':(k==='dx'||k==='pad'?'req':'')}"><span class="n">${done[k]()?ic('check'):i+1}</span>${l}${k==='sig'&&flags?` <span style="color:var(--on-error)">· ${flags} por revisar</span>`:''}</a>`).join('')}</nav>
   <div class="body"><div class="note">`;
@@ -250,19 +288,20 @@ function render(){
    <div class="row"><span class="l">Referir a cirugía</span><div class="seg" role="group" aria-label="Referir a cirugía">${['Ninguna','General','Ginecológica'].map(r=>`<button type="button" data-ref="${r}" aria-pressed="${S.ref===r}">${r}</button>`).join('')}</div></div></section>`;
   h+=`<section class="sec" id="s-ind"><div class="sh"><h3>Indicaciones para el paciente</h3><span class="hint">${hojas().length>1?'Cada hoja lleva sus propias indicaciones.':'Aparecen en la receta.'}</span></div>${hojas().map(h=>`${hojas().length>1?`<label class="l" for="ind-${h}">${hojaN(h)}</label>`:''}<textarea id="ind-${h}" data-ind="${h}" style="min-height:72px">${S.ind[h]||''}</textarea>`).join('')}
    <details><summary>${ic('lock')}Anotaciones privadas del médico <span class="c">No aparecen en el expediente</span></summary><textarea aria-label="Anotaciones privadas"></textarea></details></section>`;
-  h+=`</div><aside class="out" aria-label="Lo que se va a entregar">
+  const ASIDE=`<aside class="out" aria-label="Lo que se va a entregar">
    ${hojas().map(h=>{const ms=allMeds().filter(m=>m.h===h);return `<div class="card${h==='C'?' ctrl':''}"><h4>${ic(h==='C'?'lock':'pill')}Receta · ${hojaN(h)} <span class="ct">${ms.length} med.</span></h4>${h==='C'?'<span class="small">Se imprime en el recetario especial con el folio del médico.</span>':''}<div class="rx">${ms.map(m=>`<div><b>${m.n}</b> · ${m.p}<small>${m.d} ${m.f} por ${m.t} · ${S.dx.find(d=>d.meds.includes(m)).c}</small></div>`).join('')||'<span class="small">Sin medicamentos en esta hoja.</span>'}${S.ind[h]?`<div><b>Indicaciones</b><small>${S.ind[h]}</small></div>`:''}</div></div>`}).join('')}<button class="btn s" type="button">${ic('eye')}Vista previa de ${hojas().length>1?'las '+hojas().length+' hojas':'la receta'}</button>
    <div class="card"><h4>${ic('flask')}Solicitud de estudios <span class="ct">${S.est.length}</span></h4><div class="rx">${S.est.map(e=>`<div>${e.n}</div>`).join('')||'<span class="small">Sin estudios.</span>'}${S.ref!=='Ninguna'?`<div><b>Referencia</b><small>Cirugía ${S.ref.toLowerCase()}</small></div>`:''}</div></div>
    <div class="card"><h4>Antes de terminar</h4><div class="chk">${[['Padecimiento',done.pad()],['Diagnóstico con tratamiento',S.dx.length>0],[pendContra()?`${pendContra()} contraindicación sin resolver`:'Contraindicaciones revisadas',!pendContra()],['Signos sin pendientes',done.sig()],['Alergias confirmadas',false]].map(([l,o])=>`<div class="${o?'ok':'no'}">${ic(o?'check':'alert')}${l}${o?'':' · pendiente'}</div>`).join('')}</div>
-   ${pendContra()||!done.pad()||!S.dx.length?`<button class="btn p" type="button" aria-disabled="true" aria-describedby="why">Terminar y entregar receta</button><span class="why" id="why">Para terminar: ${[!done.pad()?'escribe el padecimiento':'',!S.dx.length?'agrega un diagnóstico':'',pendContra()?'resuelve la contraindicación':''].filter(Boolean).join(', ')}.</span>`:`<button class="btn p" type="button">Terminar y entregar receta</button>`}<span class="small">Se guarda la nota, se genera la receta y la cita pasa a «Terminada» en la agenda.</span></div></aside></div>`;
-  if(S.drawer){h+=`<div class="drawer" role="dialog" aria-label="${{ant:'Antecedentes',his:'Historial',gra:'Gráficas'}[S.drawer]}"><div class="dw"><header><h3>${{ant:'Antecedentes',his:'Historial de consultas',gra:'Gráficas de crecimiento'}[S.drawer]}</h3><span class="grow"></span><button class="ib" type="button" id="cd" aria-label="Cerrar">${ic('x')}</button></header><div class="dc">`+
+   ${pendContra()||!done.pad()||!S.dx.length?`<button class="btn p" type="button" aria-disabled="true" aria-describedby="why">Terminar y entregar receta</button><span class="why" id="why">Para terminar: ${[!done.pad()?'escribe el padecimiento':'',!S.dx.length?'agrega un diagnóstico':'',pendContra()?'resuelve la contraindicación':''].filter(Boolean).join(', ')}.</span>`:`<button class="btn p" type="button">Terminar y entregar receta</button>`}<span class="small">Se guarda la nota, se genera la receta y la cita pasa a «Terminada» en la agenda.</span></div></aside>`;
+  h=armar(h,ASIDE);
+  if(S.drawer){h+=`<div class="drawer" role="dialog" aria-label="${{ant:'Antecedentes',his:'Historial',gra:'Gráficas'}[S.drawer]}"><div class="dw"><header><h3>${{ant:'Antecedentes',his:'Historial de consultas',gra:'Gráficas de crecimiento'}[S.drawer]}</h3><span class="grow"></span><button class="ib" type="button" id="cd" aria-label="Cerrar">${ic('x')}</button></header><div class="dt">${[['ant','Antecedentes'],['his','Historial'],['gra','Gráficas']].map(([k,l])=>`<button type="button" data-dr2="${k}" aria-pressed="${S.drawer===k}">${l}</button>`).join('')}</div><div class="dc">`+
    (S.drawer==='ant'?`<div class="hist"><b>Perinatales</b><small>Nacido a término, 38 SDG, peso al nacer 3.2 kg. Sin complicaciones.</small></div><div class="hist"><b>Vacunas</b><small>Esquema completo a los 6 meses. Pendiente: SRP a los 12 meses.</small></div><div class="hist"><b>Heredofamiliares</b><small>Madre con asma. Abuelo con diabetes tipo 2.</small></div><div class="hist"><b>Alergias</b><small style="color:var(--on-aviso)">Sin registrar. Pregunta al tutor y registra.</small></div>`
    :S.drawer==='his'?`<div class="hist"><b>12 sep 2026 · Control de niño sano</b><small>Peso 8.1 kg · Talla 72 cm · Sin hallazgos. Dra. Ramírez</small></div><div class="hist"><b>05 jul 2026 · Vacunas 6 meses</b><small>Hexavalente, rotavirus, neumococo. Dra. Ramírez</small></div><div class="hist"><b>18 abr 2026 · Rinofaringitis</b><small>Paracetamol 3 días. Dr. Ortega</small></div>`
    :`<div class="hist"><b>Peso para la edad</b><small>8.8 kg · percentil 50. Línea de crecimiento estable desde los 3 meses.</small></div><div class="hist"><b>Talla para la edad</b><small>Último dato confiable: 72 cm (12 sep). El valor de hoy (1.78 m) parece un error de captura.</small></div>`)+`</div></div></div>`;}
   if(S.undo)h+=`<div class="toast" role="status">${S.undo.t}.<button type="button" id="undo">Deshacer</button></div>`;
   document.documentElement.style.setProperty('--root',S.fs+'px');
   document.getElementById('app').innerHTML=h;
-  const pt=document.querySelector('.pt'), ix=document.querySelector('.idx'); ix.style.top=pt.offsetHeight+'px'; document.querySelector('.out').style.top=(pt.offsetHeight+ix.offsetHeight+16)+'px';
+  const pt=document.querySelector('.pt'), ix=document.querySelector('.idx')||document.querySelector('.prog'); ix.style.top=pt.offsetHeight+'px'; const ou=document.querySelector('.body>.out'); if(ou) ou.style.top=(pt.offsetHeight+ix.offsetHeight+16)+'px'; document.getElementById('app').classList.toggle('g',S.modo==='guiado');
   bind();
   if(sel){const e=document.getElementById(sel);if(e){e.focus();try{e.setSelectionRange(pos,pos)}catch(_){}}}
 }
@@ -270,7 +309,7 @@ function bind(){
   const q=(s,f)=>document.querySelectorAll(s).forEach(f);
   q('[data-v]',e=>e.oninput=()=>{S.vit[e.dataset.v]=e.value;render()});
   q('[data-q]',e=>e.oninput=()=>{S.q[e.dataset.q]=e.value;render()});
-  document.getElementById('pad').oninput=e=>{S.pad=e.target.value;render()};
+  const pd=document.getElementById('pad'); if(pd) pd.oninput=e=>{S.pad=e.target.value;render()};
   q('[data-ind]',e=>e.oninput=()=>{S.ind[e.dataset.ind]=e.value;render()});
   q('[data-qm]',e=>e.oninput=()=>{S.qm[e.dataset.qm]=e.value;render()});
   q('[data-hoja]',b=>b.onclick=()=>{const [i,j,h]=b.dataset.hoja.split(':');S.dx[+i].meds[+j].h=h==='+'?Math.max(...hojas().filter(x=>x!=='C'))+1:+h;render()});
@@ -279,6 +318,9 @@ function bind(){
   q('[data-add-est]',b=>b.onclick=()=>{S.est.push({n:b.dataset.addEst});S.q.est='';render()});
   q('[data-rm-dx]',b=>b.onclick=()=>{const i=+b.dataset.rmDx,d=S.dx.splice(i,1)[0];S.undo={t:`Se quitó el diagnóstico ${d.c}`,f:()=>S.dx.splice(i,0,d)};render()});
   q('[data-rm-med]',b=>b.onclick=()=>{const [i,j]=b.dataset.rmMed.split(':');const m=S.dx[+i].meds.splice(+j,1)[0];S.undo={t:`Se quitó ${m.n}`,f:()=>S.dx[+i].meds.splice(+j,0,m)};render()});
+  q('[data-paso]',b=>b.onclick=()=>{S.paso=+b.dataset.paso;render();const t=document.querySelector('.note .sec');if(t)t.scrollIntoView({block:'start'})});
+  q('[data-modo]',b=>b.onclick=()=>{S.modo=b.dataset.modo;try{localStorage.setItem('mm-modo',S.modo)}catch(e){}render()});
+  q('[data-dr2]',b=>b.onclick=()=>{S.drawer=b.dataset.dr2;render()});
   q('[data-fs]',b=>b.onclick=()=>{S.fs=+b.dataset.fs;try{localStorage.setItem('mm-fs',S.fs)}catch(e){}render()});
   const un=document.getElementById('undo');if(un)un.onclick=()=>{S.undo.f();S.undo=null;render()};
   q('[data-just]',b=>b.onclick=()=>{const [i,j]=b.dataset.just.split(':');const v=document.getElementById(`j-${i}-${j}`).value.trim();if(!v){document.getElementById(`j-${i}-${j}`).focus();return}S.dx[+i].meds[+j].just=v;render()});
@@ -286,7 +328,7 @@ function bind(){
   q('[data-ref]',b=>b.onclick=()=>{S.ref=b.dataset.ref;render()});
   q('[data-dr]',b=>b.onclick=()=>{S.drawer=S.drawer===b.dataset.dr?null:b.dataset.dr;render()});
   const cd=document.getElementById('cd'); if(cd) cd.onclick=()=>{S.drawer=null;render()};
-  document.getElementById('ia').onclick=()=>{S.ia=true;render()};
+  const ia=document.getElementById('ia'); if(ia) ia.onclick=()=>{S.ia=true;render()};
   q('.idx a',a=>a.onclick=e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'})});
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&S.drawer){S.drawer=null;render()}});

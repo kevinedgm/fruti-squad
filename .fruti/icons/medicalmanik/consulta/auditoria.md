@@ -28,6 +28,12 @@ Contexto: ~40 % de los médicos usuarios tiene más de 50 años y migra desde Wo
 - Estados: contraindicación (error), sin resultados (vacío), deshabilitado con motivo, deshacer, foco por teclado, letra grande.
 - Medido en la página: lienzo rgb(232,236,243), borde de sección rgb(185,194,211), borde de campo rgb(95,106,132); en «Grande» el cuerpo mide 19.1 px y las referencias 15.75 px.
 
+## Modo paso a paso (después de «demasiado ruido visual»)
+- Un solo bloque abierto; lo terminado se resume en una línea con «Editar»; lo que sigue solo muestra su título (borde punteado).
+- Barra de avance «Paso 2 de 6» en lugar del índice de seis pastillas; la receta y la lista «Antes de terminar» pasan al último paso.
+- En la barra del paciente queda un solo botón «Ver expediente del paciente» (cajón con pestañas Antecedentes, Historial, Gráficas); se ocultan tipo de sangre, «Obligatorio» y «Terminar consulta» de la cabecera.
+- «Vista: Paso a paso / Completa» y «Letra: Normal / Grande» se recuerdan por usuario. Verificado sin errores de consola en los 6 pasos.
+
 ## Pendientes
 - Estado de carga (esqueleto) y error de guardado: no dibujados.
 - Prueba con médicos mayores de 50 años (5 segundos y una consulta completa): no realizada.
