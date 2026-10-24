@@ -1,0 +1,475 @@
+<title>Directorio Manik rediseño</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700&family=Sora:wght@500;600&display=swap">
+<style>
+/* Una sola columna de lectura (diagnóstico, propuesta, estados, auditoría). La propuesta es un lienzo con container queries:
+   el mismo componente se ve en escritorio o en celular según el ancho de su marco. Tema claro único y deliberado (la marca Manik es clara). */
+:root{
+  --bg:#F5F8FA;        /* fondo de página, gris con sesgo cian */
+  --surface:#FFFFFF;
+  --ink:#14213D;       /* tinta Manik */
+  --muted:#4A5674;     /* 7.3:1 sobre blanco */
+  --line:#D3DCE6;      /* divisores decorativos */
+  --field:#6B7590;     /* borde de campos, 4.6:1 */
+  --cian:#009BB0;      /* sello y áreas de marca */
+  --cian-ui:#00788A;   /* acción, 5.2:1 con blanco */
+  --cian-tint:#E3F4F6;
+  --star:#F2B33D;
+  --sponsor:#FCF3E1;
+  --warn:#A15C07;
+  --err:#B4343F;
+  --err-tint:#FBEDEE;
+  --ok:#15814B;
+  --display:'Sora',ui-sans-serif,system-ui,sans-serif;
+  --sans:'Atkinson Hyperlegible Next','Atkinson Hyperlegible',ui-sans-serif,system-ui,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font:17px/1.55 var(--sans)}
+.page{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:40px 64px;display:grid;gap:56px}
+h1,h2,h3{font-family:var(--display);font-weight:600;text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(28px,4vw,40px);line-height:1.15}
+h2{font-size:26px;line-height:1.2}
+h3{font-size:19px;line-height:1.3}
+p{margin:0}
+.lead{color:var(--muted);max-width:66ch}
+.eyebrow{font:600 13px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--cian-ui)}
+.sec{display:grid;gap:18px;min-width:0}
+.sec>header{display:grid;gap:6px}
+:focus-visible{outline:3px solid var(--cian-ui);outline-offset:2px}
+
+/* intro */
+.intro{display:grid;gap:14px}
+.intro .facts{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.intro .facts span{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:15px;color:var(--muted)}
+
+/* diagnóstico */
+.diag{display:grid;gap:0;background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.diag .row{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr) minmax(0,1.1fr);gap:20px;padding:16px 20px;border-top:1px solid var(--line)}
+.diag .row:first-child{border-top:0}
+.diag .head{background:#EEF3F6;font:600 14px var(--sans);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding-block:10px}
+.diag b{font-weight:700}
+.diag .row>div{min-width:0}
+.diag .tag{display:inline-block;font:600 12px var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+@media (max-width:760px){.diag .row{grid-template-columns:1fr;gap:6px}.diag .head{display:none}.diag .row>div::before{content:attr(data-l);display:block;font:600 12px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}}
+
+/* conmutador de vista */
+.viewbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.seg{display:inline-flex;background:var(--surface);border:1px solid var(--field);border-radius:12px;padding:3px;gap:3px}
+.seg button{font:600 16px var(--sans);color:var(--ink);background:none;border:0;border-radius:9px;min-height:40px;padding:0 16px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.stage{background:#E6ECF1;border-radius:18px;padding:24px;display:grid;justify-items:center;overflow:hidden}
+.frame{width:100%;max-width:1120px;background:var(--bg);border-radius:12px;box-shadow:0 1px 2px rgba(20,33,61,.08),0 8px 28px rgba(20,33,61,.08);overflow:hidden;transition:max-width .25s ease}
+.frame.phone{max-width:390px;border-radius:28px;border:8px solid var(--ink)}
+@media (max-width:560px){.stage{padding:10px}.frame.phone{border-width:0;border-radius:12px}}
+@media (prefers-reduced-motion:reduce){.frame{transition:none}}
+
+/* ================= el producto ================= */
+.app{container-type:inline-size;font-size:17px}
+.app a{color:var(--cian-ui)}
+.nav{background:var(--surface);border-bottom:1px solid var(--line)}
+.nav .in{display:flex;align-items:center;gap:22px;padding:12px 24px;min-height:64px}
+.nav .logo svg{height:30px;width:auto;display:block}
+.nav ul{display:flex;gap:4px;list-style:none;margin:0;padding:0}
+.nav ul a{display:block;text-decoration:none;color:var(--ink);font-weight:600;padding:8px 12px;border-radius:10px}
+.nav ul a[aria-current]{background:var(--cian-tint);color:var(--ink)}
+.nav .me{margin-left:auto;color:var(--ink);font-weight:600;text-decoration:none;border:1.5px solid var(--field);border-radius:10px;padding:7px 14px}
+.nav .menu{display:none;margin-left:auto;background:none;border:1.5px solid var(--field);border-radius:10px;min-height:44px;padding:0 14px;font:600 16px var(--sans);color:var(--ink)}
+
+.hero{background:var(--surface);border-bottom:1px solid var(--line)}
+.hero .in{padding:28px 24px 24px;display:grid;gap:16px;max-width:1040px}
+.hero h1{font-size:34px}
+.search{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;gap:10px;align-items:end}
+.fld{display:grid;gap:6px;min-width:0}
+.fld label{font-weight:700;font-size:16px}
+.inp{display:flex;align-items:center;gap:8px;background:var(--surface);border:1.5px solid var(--field);border-radius:12px;min-height:52px;padding:0 12px}
+.inp:focus-within{outline:3px solid var(--cian-ui);outline-offset:1px}
+.inp svg{flex:none;width:20px;height:20px;stroke:var(--muted)}
+.inp input{border:0;outline:0;font:17px var(--sans);color:var(--ink);background:none;width:100%;min-width:0}
+.inp input::placeholder{color:var(--muted)}
+.inp .near{flex:none;border:0;background:var(--cian-tint);color:var(--ink);font:600 15px var(--sans);border-radius:8px;padding:6px 10px;cursor:pointer;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 17px var(--sans);border-radius:12px;min-height:52px;padding:0 22px;border:0;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn.pri{background:var(--cian-ui);color:#fff}
+.btn.pri:hover{background:#006575}
+.btn.sec{background:var(--surface);color:var(--ink);border:1.5px solid var(--field)}
+.btn.sec:hover{background:#EEF3F6}
+.btn svg{width:20px;height:20px;stroke:currentColor}
+.popular{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:15px;color:var(--muted)}
+.popular a{color:var(--ink);text-decoration:none;border:1px solid var(--line);background:var(--bg);border-radius:999px;padding:5px 12px;font-weight:600}
+
+.body{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;padding:22px 24px 32px;max-width:1120px}
+.tools{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;justify-content:space-between}
+.count{font-size:17px}
+.count b{font-family:var(--display);font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:600 15px var(--sans);color:var(--ink);background:var(--surface);border:1.5px solid var(--field);border-radius:999px;min-height:40px;padding:0 14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.chip[aria-pressed="true"]::before{content:"✓"}
+.sort{display:flex;align-items:center;gap:8px;font-size:15px}
+.sort select{font:600 15px var(--sans);color:var(--ink);border:1.5px solid var(--field);border-radius:10px;min-height:40px;padding:0 10px;background:var(--surface)}
+.list{display:grid;gap:14px;margin-top:14px}
+
+.doc{background:var(--surface);border:1px solid var(--line);border-radius:16px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,330px);overflow:hidden}
+.doc .who{padding:18px;display:grid;grid-template-columns:72px minmax(0,1fr);gap:14px;align-content:start}
+.ph{width:72px;height:72px;border-radius:16px;display:grid;place-items:center;font:600 24px var(--display);color:var(--ink);background:var(--cian-tint);position:relative}
+.doc .nm{display:grid;gap:3px;min-width:0}
+.doc h3 a{color:var(--ink);text-decoration:none}
+.doc h3 a:hover{text-decoration:underline}
+.spec{font-weight:600}
+.ver{display:inline-flex;align-items:center;gap:5px;font-size:15px;color:var(--ok);font-weight:600}
+.ver svg{width:16px;height:16px;stroke:currentColor}
+.rate{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:16px}
+.rate .st{color:var(--star);letter-spacing:1px}
+.rate b{font-weight:700}
+.rate span.c{color:var(--muted)}
+.new{font:600 14px var(--sans);background:var(--cian-tint);border-radius:6px;padding:2px 8px}
+.where{grid-column:1/-1;display:grid;gap:2px;font-size:16px;color:var(--muted);border-top:1px solid var(--line);padding-top:12px;margin-top:2px}
+.where b{color:var(--ink);font-weight:700}
+.where .km{color:var(--ink);font-weight:600}
+.cons{display:inline-flex;gap:4px;flex-wrap:wrap;margin-bottom:6px}
+.cons button{font:600 14px var(--sans);border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:4px 10px;cursor:pointer}
+.cons button[aria-pressed="true"]{border-color:var(--ink);background:var(--surface);box-shadow:inset 0 -2px 0 var(--ink)}
+.doc .act{background:#F8FAFB;border-left:1px solid var(--line);padding:18px;display:grid;gap:12px;align-content:start}
+.act .lbl{font-weight:700;font-size:16px}
+.act .lbl small{display:block;font-weight:400;color:var(--muted);font-size:15px}
+.slots{display:flex;flex-wrap:wrap;gap:8px}
+.slot{font:700 16px var(--sans);font-variant-numeric:tabular-nums;color:var(--cian-ui);background:var(--surface);border:1.5px solid var(--cian-ui);border-radius:10px;min-height:44px;min-width:76px;padding:0 10px;cursor:pointer}
+.slot[aria-pressed="true"]{background:var(--cian-ui);color:#fff}
+.slot.more{color:var(--ink);border-color:var(--field);min-width:0}
+.tel{font:700 20px var(--sans);font-variant-numeric:tabular-nums;letter-spacing:.02em;user-select:all}
+.act .btn{width:100%}
+.act .note{font-size:15px;color:var(--muted)}
+.ok-msg{font-size:15px;color:var(--ok);font-weight:600}
+
+.spons{background:var(--sponsor);border:1px solid #EBDDBE;border-radius:16px;padding:16px 18px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 16px;align-items:center}
+.spons .tg{font:700 12px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:#6B4A00}
+.spons p{color:var(--ink)}
+.spons a{grid-row:1/3;grid-column:2;font-weight:700}
+
+.side{display:grid;gap:14px;align-content:start}
+.ask{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:8px}
+.ask p{color:var(--muted);font-size:16px}
+.guide{border-top:1px solid var(--line);padding-top:14px;display:grid;gap:6px;font-size:16px}
+.guide ul{margin:0;padding-left:18px;display:grid;gap:4px}
+
+.foot{background:var(--ink);color:#DCE3EE}
+.foot .in{padding:24px;display:flex;flex-wrap:wrap;gap:18px 40px;align-items:center;justify-content:space-between;font-size:15px}
+.foot svg{height:24px;width:auto;display:block}
+.foot svg path[fill="#14213D"]{fill:#fff}
+.foot a{color:#fff}
+.foot nav{display:flex;flex-wrap:wrap;gap:6px 18px}
+
+/* adaptación: celular */
+@container (max-width:760px){
+  .nav ul,.nav .me{display:none}
+  .nav .menu{display:inline-flex;align-items:center}
+  .nav .in{padding:10px 16px}
+  .hero .in{padding:20px 16px}
+  .hero h1{font-size:26px}
+  .search{grid-template-columns:1fr}
+  .search .btn{width:100%}
+  .body{grid-template-columns:1fr;padding:16px}
+  .side{order:3}
+  .doc{grid-template-columns:1fr}
+  .doc .act{border-left:0;border-top:1px solid var(--line)}
+  .doc .who{grid-template-columns:60px minmax(0,1fr)}
+  .ph{width:60px;height:60px;font-size:20px}
+  .tools{align-items:flex-start;flex-direction:column}
+  .spons{grid-template-columns:1fr}
+  .spons a{grid-row:auto;grid-column:auto}
+  .foot .in{padding:20px 16px}
+}
+
+/* estados */
+.states{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:14px}
+.state{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;align-content:start}
+.state>.eyebrow{color:var(--muted)}
+.skel{display:grid;grid-template-columns:56px 1fr;gap:12px}
+.skel i{display:block;background:#E4EAF0;border-radius:8px;height:14px}
+.skel .p{height:56px;border-radius:14px;grid-row:1/4}
+@media (prefers-reduced-motion:no-preference){.skel i{animation:pulse 1.4s ease-in-out infinite}@keyframes pulse{50%{opacity:.5}}}
+.empty h3{font-size:17px}
+.empty p,.err p{font-size:16px;color:var(--muted)}
+.err{border-color:#E6B9BE;background:var(--err-tint)}
+.err h3{font-size:17px;color:var(--err)}
+.mini .btn{min-height:44px;font-size:16px;padding:8px 16px;white-space:normal;text-align:center}
+
+/* auditoría */
+.audit{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+.audit>div{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;display:grid;gap:10px;align-content:start}
+.audit ul{margin:0;padding-left:20px;display:grid;gap:8px;font-size:16px}
+.audit h3{font-size:18px}
+.next{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+.next>div{border-top:3px solid var(--ink);padding-top:12px;display:grid;gap:6px}
+.next p{font-size:16px;color:var(--muted)}
+.next b{color:var(--ink)}
+</style>
+
+<div class="page">
+
+<section class="intro">
+  <p class="eyebrow">Directorio Manik · rediseño v1</p>
+  <h1>Encontrar médico y agendar, sin ruido</h1>
+  <p class="lead">Revisé las cuatro secciones que me mandaste (Directorio, Preguntas, Destacados y Blog). Empiezo por el Directorio porque es donde el paciente decide y agenda. Abajo está lo que encontré, la propuesta funcionando, sus estados y la auditoría.</p>
+  <div class="facts"><span>Fuente: 4 capturas de escritorio</span><span>Sin acceso al sitio en vivo</span><span>Médicos y teléfonos de ejemplo, no reales</span></div>
+</section>
+
+<section class="sec" aria-labelledby="h-diag">
+  <header><h2 id="h-diag">Lo que encontré</h2>
+  <p class="lead">La primera columna es lo que se ve en las capturas. La segunda es mi lectura del efecto en el paciente, no está medida.</p></header>
+  <div class="diag" role="table" aria-label="Diagnóstico del directorio actual">
+    <div class="row head" role="row"><div role="columnheader">Lo que se ve</div><div role="columnheader">Efecto probable</div><div role="columnheader">Cambio propuesto</div></div>
+    <div class="row" role="row"><div role="cell" data-l="Lo que se ve">De 10 bloques en la lista de resultados, <b>5 son médicos</b>; los otros 5 son promociones y «Guías de salud».</div><div role="cell" data-l="Efecto probable">El paciente tiene que distinguir qué es un médico y qué es publicidad. La lista se siente más larga de lo que es.</div><div role="cell" data-l="Cambio propuesto">En la lista solo van médicos. Máximo un espacio <b>patrocinado</b>, rotulado como tal. Las guías pasan a la columna lateral, ligadas a la especialidad buscada.</div></div>
+    <div class="row" role="row"><div role="cell" data-l="Lo que se ve">Cada sección tiene su propio color de portada: azul, verde, dorado sobre marino y naranja. Las barras usan cian con texto oscuro y el logo blanco encima.</div><div role="cell" data-l="Efecto probable">Parecen cuatro sitios distintos. No se forma una marca que el paciente recuerde.</div><div role="cell" data-l="Cambio propuesto">Una sola piel: fondo blanco, tinta, cian Manik como acento y la acción en cian interfaz. Barra blanca con el logotipo Manik.</div></div>
+    <div class="row" role="row"><div role="cell" data-l="Lo que se ve">Todas las calificaciones visibles son <b>5.0</b>, incluso con «1 opiniones». En Destacados, los 25 tienen 5.0.</div><div role="cell" data-l="Efecto probable">La calificación no ayuda a elegir y resta credibilidad.</div><div role="cell" data-l="Cambio propuesto">Mostrar el número de opiniones junto al promedio; con menos de 5 opiniones, «Nuevo en Manik» en lugar de estrellas. Ordenar por opiniones o cercanía, no por estrellas.</div></div>
+    <div class="row" role="row"><div role="cell" data-l="Lo que se ve">Dos acciones distintas según el médico («Reservar cita» o «Llamar al consultorio»). El teléfono aparece además arriba, en la dirección.</div><div role="cell" data-l="Efecto probable">La diferencia es buena pero está escondida en textos pequeños («Agenda en línea disponible» frente a «Consulta disponible»).</div><div role="cell" data-l="Cambio propuesto">El panel derecho dice qué puedes hacer: horarios para tocar y «Agendar», o «Este consultorio agenda por teléfono» con el número grande. Una sola acción principal por tarjeta.</div></div>
+    <div class="row" role="row"><div role="cell" data-l="Lo que se ve">Fotos faltantes resueltas de tres maneras: cuadro vacío, iniciales y cuadro de color sin nada.</div><div role="cell" data-l="Efecto probable">Las tarjetas sin foto parecen rotas o incompletas.</div><div role="cell" data-l="Cambio propuesto">Un solo respaldo: iniciales sobre cian claro, siempre del mismo tamaño.</div></div>
+    <div class="row" role="row"><div role="cell" data-l="Lo que se ve">Textos de apoyo muy pequeños y en gris claro (dirección, «opiniones», «Llama para agendar tu cita»). Seis botones de redes sociales flotando a la izquierda.</div><div role="cell" data-l="Efecto probable">Difícil de leer para pacientes mayores. Los botones flotantes tapan contenido en pantallas chicas.</div><div role="cell" data-l="Cambio propuesto">Texto base de 17 px con contraste de 7:1 en lo secundario. Compartir solo dentro de un artículo o una ficha, no flotando.</div></div>
+    <div class="row" role="row"><div role="cell" data-l="Lo que se ve">El titular promete «cerca de ti», pero la ubicación arranca en «Todo México» y no hay forma de ordenar ni de filtrar.</div><div role="cell" data-l="Efecto probable">El paciente ve médicos de otras ciudades mezclados.</div><div role="cell" data-l="Cambio propuesto">Campo «Dónde» con «Cerca de mí», distancia en cada tarjeta, filtros «Agenda en línea» y «Con horario hoy», y orden por cercanía, opiniones o próxima cita.</div></div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="h-prop">
+  <header><h2 id="h-prop">La propuesta</h2>
+  <p class="lead">Funciona: prueba los filtros, el orden, los consultorios y los horarios. Cambia a «Celular» para ver cómo se acomoda.</p></header>
+  <div class="viewbar">
+    <div class="seg" role="group" aria-label="Ancho de la vista"><button type="button" id="v-desk" aria-pressed="true">Escritorio</button><button type="button" id="v-phone" aria-pressed="false">Celular</button></div>
+  </div>
+  <div class="stage"><div class="frame" id="frame">
+  <div class="app">
+    <div class="nav"><div class="in">
+      <a class="logo" href="#h-prop" aria-label="Manik, inicio">{{LOGO}}</a>
+      <ul><li><a href="#h-prop" aria-current="page">Buscar médico</a></li><li><a href="#h-prop">Preguntas</a></li><li><a href="#h-prop">Artículos</a></li></ul>
+      <a class="me" href="#h-prop">Soy médico</a>
+      <button class="menu" type="button">Menú</button>
+    </div></div>
+
+    <div class="hero"><div class="in">
+      <h1>Encuentra a tu médico cerca de ti</h1>
+      <form class="search" id="f-buscar">
+        <div class="fld"><label for="q">Qué buscas</label>
+          <div class="inp"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="q" value="Pediatra" placeholder="Especialidad o nombre del médico" autocomplete="off"></div></div>
+        <div class="fld"><label for="d">Dónde</label>
+          <div class="inp"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><input id="d" value="Puebla, Pue." placeholder="Ciudad o colonia" autocomplete="off"><button class="near" type="button" id="near">Cerca de mí</button></div></div>
+        <button class="btn pri" type="submit">Buscar</button>
+      </form>
+      <div class="popular"><span>Más buscados:</span><a href="#h-prop">Ginecología</a><a href="#h-prop">Pediatría</a><a href="#h-prop">Dermatología</a><a href="#h-prop">Cardiología</a></div>
+    </div></div>
+
+    <div class="body">
+      <main>
+        <div class="tools">
+          <p class="count" aria-live="polite"><b id="n">4</b> <span id="nlabel">pediatras en Puebla</span></p>
+          <div class="sort"><label for="orden">Ordenar por</label><select id="orden"><option value="km">Más cerca</option><option value="op">Más opiniones</option><option value="cita">Próxima cita</option></select></div>
+        </div>
+        <div class="chips" role="group" aria-label="Filtros" style="margin-top:10px">
+          <button type="button" class="chip" id="c-linea" aria-pressed="false">Agenda en línea</button>
+          <button type="button" class="chip" id="c-hoy" aria-pressed="false">Con horario hoy</button>
+        </div>
+        <div class="list" id="list">
+
+          <article class="doc" data-km="1.2" data-op="124" data-cita="0" data-linea="1" data-hoy="1">
+            <div class="who">
+              <div class="ph" aria-hidden="true">LH</div>
+              <div class="nm"><h3><a href="#h-prop">Dra. Lucía Herrera Campos</a></h3><span class="spec">Pediatra</span>
+                <span class="ver"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Cédula verificada</span>
+                <div class="rate"><span class="st" aria-hidden="true">★★★★★</span><b>4.9</b><span class="c">· 124 opiniones</span></div></div>
+              <div class="where"><span><b>Consultorio Pediátrico Las Ánimas</b></span><span>Blvd. Atlixcáyotl 5208, Reserva Territorial Atlixcáyotl · <span class="km">a 1.2 km</span></span></div>
+            </div>
+            <div class="act">
+              <p class="lbl">Horarios de hoy<small>Toca uno para agendar</small></p>
+              <div class="slots"><button type="button" class="slot" aria-pressed="false">11:30</button><button type="button" class="slot" aria-pressed="false">12:00</button><button type="button" class="slot" aria-pressed="false">16:30</button><button type="button" class="slot more">Más horarios</button></div>
+              <button type="button" class="btn pri go">Agendar cita</button>
+            </div>
+          </article>
+
+          <article class="doc" data-km="2.6" data-op="211" data-cita="2" data-linea="1" data-hoy="0">
+            <div class="who">
+              <div class="ph" aria-hidden="true">TO</div>
+              <div class="nm"><h3><a href="#h-prop">Dr. Tomás Ortega Ruiz</a></h3><span class="spec">Pediatra · Neonatología</span>
+                <span class="ver"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Cédula verificada</span>
+                <div class="rate"><span class="st" aria-hidden="true">★★★★★</span><b>4.8</b><span class="c">· 211 opiniones</span></div></div>
+              <div class="where"><span><b>Hospital Ángeles Puebla, consultorio 412</b></span><span>Av. Kepler 2143, Reserva Territorial Atlixcáyotl · <span class="km">a 2.6 km</span></span></div>
+            </div>
+            <div class="act">
+              <p class="lbl">Próximos horarios: jueves 30<small>Hoy y mañana ya no tiene espacio</small></p>
+              <div class="slots"><button type="button" class="slot" aria-pressed="false">09:00</button><button type="button" class="slot" aria-pressed="false">10:30</button><button type="button" class="slot more">Más horarios</button></div>
+              <button type="button" class="btn pri go">Agendar cita</button>
+            </div>
+          </article>
+
+          <div class="spons" id="spons">
+            <span class="tg">Patrocinado</span>
+            <p>Paquete de vacunación infantil en Clínica Santa Fe, precio especial hasta el 11 de diciembre.</p>
+            <a href="#h-prop">Ver promoción</a>
+          </div>
+
+          <article class="doc" data-km="3.4" data-op="58" data-cita="9" data-linea="0" data-hoy="0">
+            <div class="who">
+              <div class="ph" aria-hidden="true">AV</div>
+              <div class="nm"><h3><a href="#h-prop">Dr. Andrés Villalobos Mora</a></h3><span class="spec">Pediatra</span>
+                <span class="ver"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Cédula verificada</span>
+                <div class="rate"><span class="st" aria-hidden="true">★★★★★</span><b>4.7</b><span class="c">· 58 opiniones</span></div></div>
+              <div class="where">
+                <div class="cons" role="group" aria-label="Consultorios"><button type="button" aria-pressed="true" data-i="0">Centro</button><button type="button" aria-pressed="false" data-i="1">Cholula</button></div>
+                <span class="c0"><b>Clínica del Centro</b></span><span class="c0">Calle 5 de Mayo 1102, Centro Histórico · <span class="km">a 3.4 km</span></span>
+                <span class="c1" hidden><b>Torre Médica Cholula</b></span><span class="c1" hidden>Recta a Cholula 3510, San Andrés Cholula · <span class="km">a 6.1 km</span></span>
+              </div>
+            </div>
+            <div class="act">
+              <p class="lbl">Este consultorio agenda por teléfono<small>Llama y pide cita con el Dr. Villalobos</small></p>
+              <span class="tel" id="tel">222 555 0142</span>
+              <button type="button" class="btn sec copy"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg>Copiar número</button>
+            </div>
+          </article>
+
+          <article class="doc" data-km="4.1" data-op="2" data-cita="0" data-linea="1" data-hoy="1">
+            <div class="who">
+              <div class="ph" aria-hidden="true">SR</div>
+              <div class="nm"><h3><a href="#h-prop">Dra. Sofía Ramírez Téllez</a></h3><span class="spec">Pediatra</span>
+                <span class="ver"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg>Cédula verificada</span>
+                <div class="rate"><span class="new">Nuevo en Manik</span><span class="c">2 opiniones</span></div></div>
+              <div class="where"><span><b>Consultorio Ramírez</b></span><span>Av. 31 Poniente 4110, Santa Cruz los Ángeles · <span class="km">a 4.1 km</span></span></div>
+            </div>
+            <div class="act">
+              <p class="lbl">Horarios de hoy<small>Toca uno para agendar</small></p>
+              <div class="slots"><button type="button" class="slot" aria-pressed="false">17:00</button><button type="button" class="slot" aria-pressed="false">18:30</button><button type="button" class="slot more">Más horarios</button></div>
+              <button type="button" class="btn pri go">Agendar cita</button>
+            </div>
+          </article>
+
+        </div>
+      </main>
+      <aside class="side" aria-label="Ayuda">
+        <div class="ask"><h3>¿No sabes a qué especialista ir?</h3><p>Escribe tu duda y un médico verificado te orienta, sin costo.</p><a class="btn sec" href="#h-prop">Hacer una pregunta</a>
+          <div class="guide"><b>Para leer antes de la consulta</b><ul><li><a href="#h-prop">Fiebre en niños: cuándo ir al médico</a></li><li><a href="#h-prop">Calendario de vacunación 2026</a></li></ul></div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="foot"><div class="in">
+      <span>{{LOGO_PIE}}</span>
+      <nav aria-label="Pie"><a href="#h-prop">Soy médico</a><a href="#h-prop">Aviso de privacidad</a><a href="#h-prop">Términos</a></nav>
+      <span>de MedicalManik</span>
+    </div></div>
+  </div>
+  </div></div>
+</section>
+
+<section class="sec" aria-labelledby="h-est">
+  <header><h2 id="h-est">Estados de la lista</h2>
+  <p class="lead">Lo que ve el paciente cuando la lista no está lista. Cada mensaje dice qué pasó y qué puede hacer.</p></header>
+  <div class="states">
+    <div class="state"><span class="eyebrow">Cargando</span>
+      <div class="skel" aria-label="Cargando médicos" role="status"><i class="p"></i><i style="width:70%"></i><i style="width:45%"></i><i style="width:60%"></i></div>
+      <div class="skel" aria-hidden="true"><i class="p"></i><i style="width:62%"></i><i style="width:40%"></i><i style="width:55%"></i></div>
+    </div>
+    <div class="state empty mini"><span class="eyebrow">Sin resultados</span><h3>No encontramos pediatras con horario hoy en Puebla</h3><p>Hay 2 pediatras con horario esta semana.</p><button type="button" class="btn sec">Ver horarios de esta semana</button></div>
+    <div class="state err mini" role="alert"><span class="eyebrow">Error de conexión</span><h3>No pudimos cargar los médicos</h3><p>Revisa tu conexión a internet e inténtalo otra vez. Tu búsqueda se conserva.</p><button type="button" class="btn sec">Reintentar</button></div>
+    <div class="state mini"><span class="eyebrow">Cita apartada</span><h3>Elegiste hoy a las 11:30 con la Dra. Herrera</h3><p class="note" style="color:var(--muted);font-size:16px">En el siguiente paso confirmas tus datos. Te mandamos un recordatorio un día antes.</p><button type="button" class="btn pri">Continuar</button></div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="h-aud">
+  <header><h2 id="h-aud">Auditoría</h2>
+  <p class="lead">Revisión de estructura, jerarquía, contraste, espaciado, controles, estados y tokens.</p></header>
+  <div class="audit">
+    <div><h3>Cumplimientos</h3><ul>
+      <li>Estructura en cuatro capas: barra, búsqueda, herramientas (conteo, filtros, orden) y lista.</li>
+      <li>Una sola acción principal por tarjeta, en cian interfaz (5.2:1 con blanco).</li>
+      <li>Texto secundario a 7.3:1; bordes de campos y chips a 4.6:1; texto base de 17 px.</li>
+      <li>Objetivos táctiles de 40 a 52 px; foco visible de 3 px en todos los controles.</li>
+      <li>Filtros, horarios y consultorios usan <code>aria-pressed</code>; el conteo se anuncia con <code>aria-live</code>.</li>
+      <li>La calificación nunca depende solo de las estrellas: el número y las opiniones van en tinta.</li>
+      <li>Colores y fuentes salen de la identidad Manik (<code>manik-final/tema.json</code>).</li>
+    </ul></div>
+    <div><h3>Correcciones hechas al sitio actual</h3><ul>
+      <li>Lista solo de médicos; publicidad rotulada «Patrocinado» y limitada a un espacio.</li>
+      <li>Respaldo único sin foto (iniciales).</li>
+      <li>«Nuevo en Manik» con menos de 5 opiniones, en lugar de un 5.0.</li>
+      <li>Ubicación con «Cerca de mí» y distancia en cada tarjeta.</li>
+      <li>Fuera los botones flotantes de redes y las cuatro portadas de colores.</li>
+      <li>Varios consultorios: selector arriba de la dirección; la dirección cambia, no la tarjeta.</li>
+    </ul></div>
+    <div><h3>Pendientes</h3><ul>
+      <li>El «Brief de Diseño UI: Vistas de Gestión y Formularios» no está en el repo; usé la identidad Manik como fuente. Evidencia faltante.</li>
+      <li>Revisé capturas, no el sitio: no verifiqué navegación por teclado, lector de pantalla ni la versión móvil real.</li>
+      <li>Falta saber si el sistema guarda distancia, horarios del día y número de opiniones reales. Si no, cambian los filtros.</li>
+      <li>Decidir la regla de patrocinados (cuántos, en qué posición) con negocio.</li>
+      <li>Ficha del médico y flujo para agendar: no tengo capturas.</li>
+      <li>Probar con pacientes mayores de 50 años.</li>
+    </ul></div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="h-sig">
+  <header><h2 id="h-sig">Lo que sigue en el resto del sitio</h2>
+  <p class="lead">Hallazgos de las otras tres capturas. Los trabajo cuando el Directorio quede aprobado.</p></header>
+  <div class="next">
+    <div><h3>Destacados</h3><p><b>Hoy:</b> 25 médicos en tarjetas doradas, todos con 5.0 y muchos sin foto.</p><p><b>Propuesta:</b> que deje de ser una página aparte y sea un orden del Directorio («Más opiniones»), con la misma tarjeta.</p></div>
+    <div><h3>Preguntas</h3><p><b>Hoy:</b> buen contenido, pero cada pregunta repite caja verde, botón y médicos en la columna.</p><p><b>Propuesta:</b> lista de preguntas por tema, la respuesta del médico con su tarjeta compacta y un botón para agendar con él.</p></div>
+    <div><h3>Blog → Artículos</h3><p><b>Hoy:</b> títulos en mayúsculas, mezcla de inglés y español, y la mayoría con una imagen genérica de olas.</p><p><b>Propuesta:</b> reglas editoriales (español, tipo oración), imagen solo si aporta y el autor enlazado a su ficha.</p></div>
+  </div>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var frame=document.getElementById('frame'),bd=document.getElementById('v-desk'),bp=document.getElementById('v-phone');
+  function view(p){frame.classList.toggle('phone',p);bd.setAttribute('aria-pressed',!p);bp.setAttribute('aria-pressed',p)}
+  bd.onclick=function(){view(false)};bp.onclick=function(){view(true)};
+
+  var list=document.getElementById('list'),spons=document.getElementById('spons');
+  var cards=[].slice.call(list.querySelectorAll('.doc'));
+  var cl=document.getElementById('c-linea'),ch=document.getElementById('c-hoy'),orden=document.getElementById('orden');
+  function render(){
+    var fl=cl.getAttribute('aria-pressed')==='true',fh=ch.getAttribute('aria-pressed')==='true',k=orden.value;
+    var vis=cards.filter(function(c){return(!fl||c.dataset.linea==='1')&&(!fh||c.dataset.hoy==='1')});
+    vis.sort(function(a,b){
+      if(k==='op')return b.dataset.op-a.dataset.op;
+      if(k==='cita')return(a.dataset.cita-b.dataset.cita)||(a.dataset.km-b.dataset.km);
+      return a.dataset.km-b.dataset.km});
+    cards.forEach(function(c){c.hidden=vis.indexOf(c)<0});
+    vis.forEach(function(c,i){list.appendChild(c);if(i===1)list.appendChild(spons)});
+    if(vis.length<2)list.appendChild(spons);
+    document.getElementById('n').textContent=vis.length;
+    document.getElementById('nlabel').textContent=(vis.length===1?'pediatra':'pediatras')+' en Puebla';
+  }
+  [cl,ch].forEach(function(b){b.onclick=function(){b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')!=='true');render()}});
+  orden.onchange=render;
+
+  cards.forEach(function(c){
+    var go=c.querySelector('.go'),dia=c.querySelector('.lbl').firstChild.textContent;
+    c.querySelectorAll('.slot:not(.more)').forEach(function(s){s.onclick=function(){
+      var on=s.getAttribute('aria-pressed')!=='true';
+      c.querySelectorAll('.slot').forEach(function(o){o.setAttribute('aria-pressed','false')});
+      s.setAttribute('aria-pressed',on);
+      if(go)go.textContent=on?('Agendar a las '+s.textContent):'Agendar cita';
+    }});
+    if(go)go.onclick=function(){
+      var sel=c.querySelector('.slot[aria-pressed="true"]');var m=c.querySelector('.ok-msg');
+      if(!m){m=document.createElement('p');m.className='ok-msg';m.setAttribute('role','status');go.after(m)}
+      m.textContent=sel?('Apartado: '+sel.textContent+'. Ahora confirmarías tus datos.'):'Elige primero un horario.';
+      m.style.color=sel?'':'var(--warn)';
+    };
+    var cons=c.querySelectorAll('.cons button');
+    cons.forEach(function(b){b.onclick=function(){
+      cons.forEach(function(o){o.setAttribute('aria-pressed',o===b)});
+      c.querySelectorAll('.c0').forEach(function(e){e.hidden=b.dataset.i!=='0'});
+      c.querySelectorAll('.c1').forEach(function(e){e.hidden=b.dataset.i!=='1'});
+    }});
+    var cp=c.querySelector('.copy');
+    if(cp)cp.onclick=function(){
+      var t=c.querySelector('.tel'),txt=t.textContent;
+      function sel(){var r=document.createRange();r.selectNodeContents(t);var s=getSelection();s.removeAllRanges();s.addRange(r);cp.lastChild.textContent='Número seleccionado'}
+      try{navigator.clipboard.writeText(txt).then(function(){cp.lastChild.textContent='Número copiado'},sel)}catch(e){sel()}
+    };
+  });
+  document.getElementById('f-buscar').onsubmit=function(e){e.preventDefault();render()};
+  document.getElementById('near').onclick=function(){document.getElementById('d').value='Cerca de mí (ejemplo)';};
+})();
+</script>
