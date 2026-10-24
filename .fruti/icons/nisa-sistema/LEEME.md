@@ -19,3 +19,6 @@ Colores del laboratorio (#052A76, #C2D225); wordmark «nabi» en Archivo 700 wdt
 
 ## Nabi · ronda 2 · fuera de la onda y el matraz (`nabi-ronda-2/`)
 Ronda 1 rechazada («busco algo distinto»): todas derivaban del logo madre. Símbolos desde los objetos y la operación del laboratorio, manteniendo azul y pera: A Placa (pocillos 4×4, los llenos dibujan la N), B Etiqueta (código de barras + punto), C Gradilla (cuatro tubos con niveles crecientes), D b con ojo (b gruesa con el ojo pera; el giro se repite en la b del wordmark), E Esténcil (N en tres piezas, diagonal pera).
+
+## Nabi · ronda 3 · la placa (`nabi-ronda-3/`)
+El usuario eligió A (Placa). Variaciones: A1 Placa (anillos vacíos), A2 Solo la N (vacíos como puntos), A3 Con placa (cuerpo de microplaca con esquina cortada A1), A4 Pocillos cuadrados, A5 En proceso (la muestra pera recorre la N; sirve de indicador de carga). Wordmark: «nab» + i sin punto (`dotlessi` de Archivo) con un pocillo pera como punto.
