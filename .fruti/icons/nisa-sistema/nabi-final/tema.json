@@ -1,0 +1,28 @@
+{
+ "nombre": "Nabi",
+ "arquitectura": "marca de familia de Nisa Nabani",
+ "simbolo": "placa de 4×4 pocillos redondos; los llenos dibujan la N, los vacíos son puntos y la muestra pera ocupa el pocillo superior derecho",
+ "color": {
+  "azul": "#052A76",
+  "pera": "#C2D225",
+  "blanco": "#FFFFFF",
+  "nota": "Colores primarios del laboratorio Nisa Nabani."
+ },
+ "tipografia": {
+  "wordmark": "Archivo 700, ancho 125 %, minúsculas; i sin punto con pocillo pera; en trazados",
+  "interfaz": "pendiente: la UI usa Verdant WebKit v3"
+ },
+ "movimiento": {
+  "carga": "la muestra pera recorre la N en orden de trazo, 10 pasos de 200 ms; con prefers-reduced-motion queda fija en el último pocillo"
+ },
+ "reglas": [
+  "El pera nunca es texto.",
+  "No reordenar ni quitar pocillos; la N tiene 10 llenos y 6 vacíos.",
+  "A 16–32 px se usa el favicon: solo la N, sin vacíos.",
+  "La muestra pera siempre es una sola."
+ ],
+ "pendiente": [
+  "Conciliar azul/pera de marca con el acento esmeralda de Verdant en la interfaz.",
+  "Búsqueda de marca «Nabi» (IMPI, USPTO, dominios)."
+ ]
+}
