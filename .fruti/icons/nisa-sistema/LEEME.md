@@ -16,3 +16,6 @@ Seis candidatos en tres arquitecturas: A Nisa Nabani Lab (monolítica), B Traza,
 ## Nombre elegido: Nabi (arquitectura de familia)
 ## Nabi · ronda 1 · símbolo (`nabi-ronda-1/`)
 Colores del laboratorio (#052A76, #C2D225); wordmark «nabi» en Archivo 700 wdth 125 (`/tmp/nabi-archivo.ttf`), grotesca ancha cercana al logo madre. A Onda (una sola onda = «n», punto pera = i), B Matraz (contorno + líquido pera con onda), C Ligadura nb, D Muestras (onda + tres puntos crecientes), E Hija (onda azul + onda pera menor en su cuenco).
+
+## Nabi · ronda 2 · fuera de la onda y el matraz (`nabi-ronda-2/`)
+Ronda 1 rechazada («busco algo distinto»): todas derivaban del logo madre. Símbolos desde los objetos y la operación del laboratorio, manteniendo azul y pera: A Placa (pocillos 4×4, los llenos dibujan la N), B Etiqueta (código de barras + punto), C Gradilla (cuatro tubos con niveles crecientes), D b con ojo (b gruesa con el ojo pera; el giro se repite en la b del wordmark), E Esténcil (N en tres piezas, diagonal pera).
