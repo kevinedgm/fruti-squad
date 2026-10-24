@@ -1,4 +1,4 @@
-# Nabi · avatar unisex: la cara de la ronda 4 (A), fiel a la referencia de Notion, sin pelo ni género.
+# Nabi · avatar unisex calcado de la referencia de Notion que dio la persona (cejas unidas, nariz en «2», sin boca).
 # Lienzo propio del avatar (128): el círculo de color lo pone el componente; la figura va en currentColor.
 import re, sys
 S = sys.argv[1]
@@ -7,14 +7,15 @@ def T(d):  # hornea translate(64 66) scale(1.22) translate(-63 -69) en las coord
     for x, y in zip(it, it): out += [f'{(float(x)-63)*1.22+64:.2f}', f'{(float(y)-69)*1.22+66:.2f}']
     v = iter(out); return re.sub(r'-?\d+\.?\d*', lambda m: next(v), d)
 def C(x, y): return f'{(x-63)*1.22+64:.2f}', f'{(y-69)*1.22+66:.2f}'
-(ex1, ey1), (ex2, ey2) = C(47, 58), C(78, 58)
-SVG = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none" stroke="currentColor" stroke-width="5.1" '
+# Geometría calcada de la referencia de Notion (ronda 7): cejas unidas en un solo trazo,
+# la nariz baja en diagonal desde la unión y termina en un pie horizontal; ojos de punto; sin boca.
+SVG = ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none" stroke="currentColor" stroke-width="3.6" '
        'stroke-linecap="round" stroke-linejoin="round" class="uva-icon uva-user-avatar" aria-hidden="true">'
        '<style>.uva-user-avatar__ojo{fill:currentColor;stroke:none}</style>'
-       f'<path d="{T("M38 51 Q46 43 55 49")}"/>'
-       f'<circle class="uva-user-avatar__ojo" cx="{ex1}" cy="{ey1}" r="4.15"/><circle class="uva-user-avatar__ojo" cx="{ex2}" cy="{ey2}" r="4.15"/>'
-       f'<path d="{T("M88 50 C82 44 72 45 68 52 L59 80 L68 81.5")}"/>'
-       f'<path d="{T("M57 93 L71 92")}"/></svg>')
+       '<path d="M39 41.6 Q51.4 24.6 65.6 40.2 Q80.4 24.4 94.2 44"/>'
+       '<path d="M65.6 40.2 L43 92.8 L64.2 94.6"/>'
+       '<circle class="uva-user-avatar__ojo" cx="53.4" cy="50.8" r="4.4"/>'
+       '<circle class="uva-user-avatar__ojo" cx="76.4" cy="54.2" r="4.4"/></svg>')
 open('user-avatar.svg', 'w').write(SVG)
 
 W, INKL, INK = '#FFFFFF', '#121826', '#052A76'
