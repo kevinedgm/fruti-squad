@@ -1,0 +1,401 @@
+<title>Directorio Manik B</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..700,0..100;1,9..144,300..700,0..100&family=Instrument+Sans:wght@400..700&display=swap">
+<style>
+/* Directorio como sección de una revista: la búsqueda es una frase, los resultados son fichas tipográficas (sin cajas),
+   y la columna lateral es contenido editorial firmado. Tema claro único y deliberado: papel blanco, tinta y un solo cian. */
+:root{
+  --paper:#FFFFFF;
+  --wash:#F2F6F7;      /* fondo de la página que envuelve el lienzo */
+  --ink:#14213D;
+  --muted:#4A5674;     /* 7.3:1 */
+  --rule:#C9D3DD;      /* filetes */
+  --field:#6B7590;     /* 4.6:1, bordes de controles */
+  --cian:#009BB0;      /* sello */
+  --act:#00788A;       /* acción, 5.2:1 con blanco */
+  --act-dk:#006070;
+  --tint:#E6F3F5;
+  --star:#E3A21C;      /* solo estrellas; el número va en tinta */
+  --sponsor:#F7F1E3;
+  --ok:#15814B;
+  --serif:'Fraunces',ui-serif,Georgia,'Times New Roman',serif;
+  --sans:'Instrument Sans',ui-sans-serif,system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--wash);color:var(--ink);font:17px/1.55 var(--sans)}
+p{margin:0}
+h1,h2,h3,h4{margin:0;text-wrap:balance;font-weight:400}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--act);outline-offset:2px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px;display:grid;gap:40px}
+
+/* barra de la página de presentación */
+.top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.top p{font-size:15px;color:var(--muted)}
+.top p b{color:var(--ink)}
+.seg{display:inline-flex;border:1.5px solid var(--field);border-radius:8px;padding:3px;gap:3px;background:var(--paper)}
+.seg button{font:600 15px var(--sans);color:var(--ink);background:none;border:0;border-radius:5px;min-height:38px;padding:0 14px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.frame{width:100%;margin:0 auto;background:var(--paper);box-shadow:0 0 0 1px var(--rule);transition:max-width .25s ease;max-width:1240px}
+.frame.phone{max-width:390px;box-shadow:0 0 0 8px var(--ink);border-radius:4px}
+@media (prefers-reduced-motion:reduce){.frame{transition:none}}
+
+/* ================= producto ================= */
+.app{container-type:inline-size}
+.mast{display:flex;align-items:center;gap:28px;padding:18px 40px;border-bottom:1px solid var(--ink)}
+.mast .logo svg{height:30px;width:auto;display:block}
+.mast nav{display:flex;gap:26px;margin-left:auto;font-weight:600}
+.mast nav a{text-decoration:none;padding:6px 0;border-bottom:2px solid transparent}
+.mast nav a[aria-current]{border-bottom-color:var(--ink)}
+.mast nav a:hover{border-bottom-color:var(--rule)}
+.mast .menu{display:none;margin-left:auto;font:600 16px var(--sans);background:none;border:1.5px solid var(--ink);border-radius:6px;min-height:44px;padding:0 14px;color:var(--ink)}
+
+/* búsqueda como frase */
+.ask{padding:56px 40px 40px;display:grid;gap:22px;border-bottom:1px solid var(--rule)}
+.sentence{font:400 clamp(34px,5.4cqi,64px)/1.12 var(--serif);font-variation-settings:"opsz" 144,"SOFT" 50;letter-spacing:-.015em;display:flex;flex-wrap:wrap;align-items:baseline;gap:.08em .28em;margin:0}
+.slotin{display:inline-grid;position:relative}
+.slotin input{font:inherit;font-variation-settings:inherit;letter-spacing:inherit;color:var(--act);background:none;border:0;border-bottom:3px solid var(--act);padding:0 .1em;width:var(--w,9ch);max-width:100%;outline:0;min-width:3ch}
+.mirror{position:absolute;visibility:hidden;white-space:pre;left:-9999px;top:0}
+.slotin input:focus-visible{background:var(--tint)}
+.sentence .go{align-self:center;font:700 18px var(--sans);letter-spacing:0;background:var(--ink);color:#fff;border:0;border-radius:6px;min-height:56px;padding:0 26px;cursor:pointer}
+.sentence .go:hover{background:#000}
+.under{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:16px;color:var(--muted);align-items:center}
+.under button{font:600 16px var(--sans);color:var(--ink);background:none;border:0;padding:0;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.under a{color:var(--ink);font-weight:600;text-underline-offset:3px}
+
+/* cuerpo: resultados + columna editorial */
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:0}
+.res{padding:30px 40px 40px;border-right:1px solid var(--rule);min-width:0}
+.rhead{display:grid;gap:14px;padding-bottom:18px;border-bottom:1px solid var(--ink)}
+.rhead h2{font:400 32px/1.15 var(--serif);font-variation-settings:"opsz" 72}
+.rhead h2 b{font-weight:600}
+.ctrl{display:flex;flex-wrap:wrap;gap:10px 26px;align-items:center;font-size:16px}
+.ctrl label{display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;min-height:40px}
+.ctrl input[type=checkbox]{width:20px;height:20px;accent-color:var(--act);margin:0}
+.ctrl .sort{margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-weight:400}
+.ctrl select{font:600 16px var(--sans);color:var(--ink);border:1.5px solid var(--field);border-radius:6px;min-height:40px;padding:0 8px;background:var(--paper)}
+
+/* ficha de médico: tipografía, no caja */
+.doc{display:grid;grid-template-columns:104px minmax(0,1fr) 250px;gap:8px 28px;padding:28px 0;border-bottom:1px solid var(--rule)}
+.pic{width:104px;aspect-ratio:4/5;max-width:100%;background:var(--tint);display:grid;place-items:end start;padding:8px 10px;font:400 40px/1 var(--serif);font-variation-settings:"opsz" 144,"SOFT" 100;color:var(--act-dk)}
+.body{display:grid;gap:8px;align-content:start;min-width:0}
+.doc h3{font:500 30px/1.1 var(--serif);font-variation-settings:"opsz" 96,"SOFT" 30;letter-spacing:-.01em}
+.doc h3 a{text-decoration:none}
+.doc h3 a:hover{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:4px}
+.role{font-size:17px}
+.role b{font-weight:700}
+.facts{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:15px;color:var(--muted)}
+.facts .v{color:var(--ok);font-weight:600}
+.rate{font-size:16px}
+.rate .st{color:var(--star);letter-spacing:1px}
+.rate b{font-weight:700}
+.rate .c{color:var(--muted)}
+.new{font-weight:700}
+.quote{font:italic 400 20px/1.4 var(--serif);font-variation-settings:"opsz" 36,"SOFT" 100;margin:6px 0 2px;max-width:46ch}
+.quote cite{display:block;font:400 14px var(--sans);color:var(--muted);margin-top:4px}
+.addr{font-size:16px;color:var(--muted)}
+.addr b{color:var(--ink);font-weight:600}
+.places{display:flex;gap:16px;font-size:15px;font-weight:600}
+.places button{font:inherit;color:var(--muted);background:none;border:0;padding:4px 0;border-bottom:2px solid transparent;cursor:pointer}
+.places button[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.side{display:grid;gap:12px;align-content:start;border-left:1px solid var(--rule);padding-left:22px}
+.price{display:grid;gap:0}
+.price small{font-size:14px;color:var(--muted)}
+.price b{font:500 26px var(--serif);font-variation-settings:"opsz" 48;font-variant-numeric:lining-nums}
+.when{font-weight:700;font-size:16px}
+.when span{display:block;font-weight:400;color:var(--muted);font-size:15px}
+.times{display:flex;flex-wrap:wrap;gap:6px}
+.times button{font:600 16px var(--sans);font-variant-numeric:tabular-nums;color:var(--act);background:var(--paper);border:1.5px solid var(--act);border-radius:6px;min-height:44px;min-width:70px;padding:0 8px;cursor:pointer}
+.times button[aria-pressed="true"]{background:var(--act);color:#fff}
+.book{font:700 17px var(--sans);background:var(--act);color:#fff;border:0;border-radius:6px;min-height:50px;cursor:pointer;width:100%}
+.book:hover{background:var(--act-dk)}
+.msg{font-size:15px;font-weight:600;color:var(--ok)}
+.tel{font:500 24px var(--serif);font-variation-settings:"opsz" 48;font-variant-numeric:lining-nums tabular-nums;user-select:all}
+.copy{font:700 16px var(--sans);background:var(--paper);color:var(--ink);border:1.5px solid var(--ink);border-radius:6px;min-height:46px;cursor:pointer;width:100%}
+
+.ad{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:6px 18px;align-items:baseline;background:var(--sponsor);padding:18px 20px;margin:20px 0}
+.ad .lbl{font:700 13px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:#6B4A00}
+.ad p{font-size:16px}
+.ad a{font-weight:700}
+.more{margin-top:26px;font:700 17px var(--sans);background:var(--paper);color:var(--ink);border:1.5px solid var(--ink);border-radius:6px;min-height:50px;padding:0 22px;cursor:pointer}
+
+/* columna editorial */
+.ed{padding:30px 28px;display:grid;gap:28px;align-content:start;align-self:start;position:sticky;top:0}
+.ed .tag{font:700 14px var(--sans);color:var(--act)}
+.story{display:grid;gap:10px}
+.story h3{font:500 28px/1.12 var(--serif);font-variation-settings:"opsz" 72,"SOFT" 50}
+.story h3 a{text-decoration:none}
+.story h3 a:hover{text-decoration:underline}
+.story .dek{font:italic 400 18px/1.45 var(--serif);font-variation-settings:"opsz" 24,"SOFT" 100;color:var(--muted)}
+.by{font-size:15px;color:var(--muted)}
+.by b{color:var(--ink)}
+.drop{font-size:16px}
+.drop::first-letter{float:left;font:500 56px/.82 var(--serif);font-variation-settings:"opsz" 144;margin:4px 8px 0 0;color:var(--act-dk)}
+.qbox{border-top:1px solid var(--ink);padding-top:16px;display:grid;gap:10px}
+.qbox h4{font:500 22px/1.2 var(--serif);font-variation-settings:"opsz" 48}
+.qbox p{font-size:16px;color:var(--muted)}
+.qbox a{font-weight:700;color:var(--act)}
+.mini{display:grid;gap:8px;border-top:1px solid var(--rule);padding-top:16px}
+.mini ol{margin:0;padding-left:0;list-style:none;display:grid;gap:6px;font-size:16px}
+.mini li{display:flex;gap:10px}
+.mini li span{font:italic 400 18px var(--serif);color:var(--muted);min-width:1.4ch}
+
+.foot{background:var(--ink);color:#DCE3EE;padding:26px 40px;display:flex;flex-wrap:wrap;gap:16px 36px;align-items:center;font-size:15px}
+.foot svg{height:24px;width:auto;display:block}
+.foot nav{display:flex;flex-wrap:wrap;gap:6px 20px;margin-left:auto}
+.foot a{color:#fff}
+
+@container (max-width:820px){
+  .mast{padding:14px 18px}.mast nav{display:none}.mast .menu{display:inline-flex;align-items:center}
+  .ask{padding:30px 18px 26px}
+  .sentence{font-size:34px}
+  .sentence .go{width:100%;margin-top:8px}
+  .cols{grid-template-columns:1fr}
+  .res{padding:22px 18px;border-right:0}
+  .ed{padding:24px 18px;border-top:1px solid var(--ink);position:static}
+  .doc{grid-template-columns:72px minmax(0,1fr);gap:8px 16px}
+  .pic{width:72px;font-size:30px}
+  .side{grid-column:1/-1;border-left:0;padding-left:0;border-top:1px solid var(--rule);padding-top:14px}
+  .doc h3{font-size:25px}
+  .quote{font-size:18px}
+  .ctrl .sort{margin-left:0}
+  .ad{grid-template-columns:1fr}
+  .foot{padding:22px 18px}.foot nav{margin-left:0}
+}
+
+/* notas */
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:28px;background:var(--paper);padding:28px;box-shadow:0 0 0 1px var(--rule)}
+.notes h2{font:500 26px/1.15 var(--serif);font-variation-settings:"opsz" 72;grid-column:1/-1}
+.notes section{display:grid;gap:10px;align-content:start}
+.notes h3{font:700 17px var(--sans)}
+.notes ul{margin:0;padding-left:20px;display:grid;gap:7px;font-size:16px}
+.notes s{color:var(--muted)}
+</style>
+
+<div class="wrap">
+  <div class="top">
+    <p><b>Directorio Manik · dirección B, versión 1.</b> Médicos, precios y opiniones son de ejemplo.</p>
+    <div class="seg" role="group" aria-label="Ancho de la vista"><button type="button" id="v-desk" aria-pressed="true">Escritorio</button><button type="button" id="v-phone" aria-pressed="false">Celular</button></div>
+  </div>
+
+  <div class="frame" id="frame"><div class="app">
+    <header class="mast">
+      <a class="logo" href="#frame" aria-label="Manik, inicio"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -21.6 395.2 117.6" aria-hidden="true" focusable="false"><defs><clipPath id="lg1"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z"/></clipPath></defs><g transform="translate(0 -6.072000000000001) scale(0.7526218487394958)"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z" fill="#009BB0"/><path clip-path="url(#lg1)" d="M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64" fill="none" stroke="#F6F8FC" stroke-width="13" stroke-linejoin="round"/></g><path d="M99.55018487394958 74.382V20.082H110.55018487394958V43.382000000000005H109.55018487394958Q109.55018487394958 35.182 111.65018487394957 29.632Q113.75018487394956 24.082 117.90018487394957 21.232000000000003Q122.05018487394958 18.382000000000005 128.25018487394956 18.382000000000005H128.85018487394956Q135.15018487394957 18.382000000000005 139.30018487394958 21.232000000000003Q143.45018487394958 24.082 145.5001848739496 29.632Q147.55018487394958 35.182 147.55018487394958 43.382000000000005H144.05018487394958Q144.05018487394958 35.182 146.20018487394958 29.632Q148.35018487394956 24.082 152.50018487394956 21.232000000000003Q156.65018487394957 18.382000000000005 162.85018487394956 18.382000000000005H163.45018487394958Q169.7501848739496 18.382000000000005 173.95018487394958 21.232000000000003Q178.15018487394957 24.082 180.30018487394958 29.632Q182.45018487394958 35.182 182.45018487394958 43.382000000000005V74.382H168.55018487394958V42.082Q168.55018487394958 36.982000000000006 165.95018487394958 33.932Q163.35018487394956 30.882000000000005 158.55018487394958 30.882000000000005Q153.75018487394956 30.882000000000005 150.85018487394956 34.032000000000004Q147.95018487394958 37.182 147.95018487394958 42.482V74.382H134.05018487394958V42.082Q134.05018487394958 36.982000000000006 131.45018487394958 33.932Q128.85018487394956 30.882000000000005 124.05018487394958 30.882000000000005Q119.25018487394956 30.882000000000005 116.35018487394956 34.032000000000004Q113.45018487394957 37.182 113.45018487394957 42.482V74.382ZM226.2501848739496 74.382V58.282000000000004H223.95018487394958V40.382000000000005Q223.95018487394958 35.682 221.65018487394957 33.382000000000005Q219.3501848739496 31.082 214.55018487394958 31.082Q212.05018487394958 31.082 208.55018487394958 31.182000000000002Q205.05018487394958 31.282000000000004 201.5001848739496 31.432000000000002Q197.95018487394958 31.582 195.15018487394957 31.782000000000004V19.982Q197.45018487394958 19.782000000000004 200.3501848739496 19.582000000000004Q203.2501848739496 19.382000000000005 206.3001848739496 19.332000000000004Q209.3501848739496 19.282000000000004 212.05018487394958 19.282000000000004Q220.45018487394958 19.282000000000004 226.0001848739496 21.482000000000003Q231.55018487394958 23.682000000000002 234.40018487394957 28.382Q237.2501848739496 33.082 237.2501848739496 40.682V74.382ZM208.7501848739496 75.78200000000001Q202.8501848739496 75.78200000000001 198.40018487394957 73.68200000000002Q193.95018487394958 71.58200000000001 191.5001848739496 67.682Q189.05018487394958 63.782000000000004 189.05018487394958 58.282000000000004Q189.05018487394958 52.282000000000004 192.0001848739496 48.482Q194.95018487394958 44.682 200.30018487394958 42.782000000000004Q205.65018487394957 40.882000000000005 212.8501848739496 40.882000000000005H225.45018487394958V49.182H212.65018487394957Q207.8501848739496 49.182 205.3001848739496 51.532000000000004Q202.7501848739496 53.882000000000005 202.7501848739496 57.58200000000001Q202.7501848739496 61.282000000000004 205.3001848739496 63.58200000000001Q207.8501848739496 65.882 212.65018487394957 65.882Q215.55018487394958 65.882 218.0001848739496 64.83200000000001Q220.45018487394958 63.782000000000004 222.1001848739496 61.232Q223.7501848739496 58.682 223.95018487394958 54.282000000000004L227.3501848739496 58.182Q226.8501848739496 63.882000000000005 224.6001848739496 67.78200000000001Q222.3501848739496 71.682 218.40018487394957 73.732Q214.45018487394958 75.78200000000001 208.7501848739496 75.78200000000001ZM248.1501848739496 74.382V20.082H259.15018487394957V43.382000000000005H258.15018487394957Q258.15018487394957 35.082 260.3501848739496 29.532Q262.5501848739496 23.982 266.90018487394957 21.182000000000002Q271.2501848739496 18.382000000000005 277.7501848739496 18.382000000000005H278.3501848739496Q288.0501848739496 18.382000000000005 293.0501848739496 24.632000000000005Q298.0501848739496 30.882000000000005 298.0501848739496 43.282000000000004V74.382H284.15018487394957V42.082Q284.15018487394957 37.082 281.30018487394955 33.982Q278.4501848739496 30.882000000000005 273.4501848739496 30.882000000000005Q268.3501848739496 30.882000000000005 265.20018487394964 34.032000000000004Q262.0501848739496 37.182 262.0501848739496 42.482V74.382ZM311.5501848739496 74.382V20.082H325.4501848739496V74.382ZM303.9501848739496 30.482V20.082H325.4501848739496V30.482ZM316.6501848739496 13.582Q312.5501848739496 13.582 310.6001848739496 11.431999999999999Q308.6501848739496 9.281999999999996 308.6501848739496 5.981999999999999Q308.6501848739496 2.682000000000002 310.6001848739496 0.5820000000000007Q312.5501848739496 -1.5180000000000007 316.6501848739496 -1.5180000000000007Q320.7501848739496 -1.5180000000000007 322.65018487394957 0.5820000000000007Q324.5501848739496 2.682000000000002 324.5501848739496 5.981999999999999Q324.5501848739496 9.281999999999996 322.65018487394957 11.431999999999999Q320.7501848739496 13.582 316.6501848739496 13.582ZM375.45018487394964 74.382 357.2501848739496 48.982H349.1501848739496L372.2501848739496 20.082H386.7501848739496L365.4501848739496 46.782000000000004L365.7501848739496 39.782000000000004L391.1501848739496 74.382ZM337.4501848739496 74.382V1.382000000000005H351.3501848739496V74.382Z" fill="#14213D"/></svg>
+</a>
+      <nav aria-label="Principal"><a href="#frame" aria-current="page">Buscar médico</a><a href="#frame">Preguntas</a><a href="#frame">Artículos</a><a href="#frame">Soy médico</a></nav>
+      <button class="menu" type="button">Menú</button>
+    </header>
+
+    <form class="ask" id="f" role="search">
+      <p class="sentence">Busco
+        <span class="slotin"><label class="vh" for="q">Especialidad o nombre del médico</label><input id="q" value="dermatóloga" style="--w:10.5ch" autocomplete="off"></span>
+        cerca de
+        <span class="slotin"><label class="vh" for="d">Colonia o ciudad</label><input id="d" value="Angelópolis" style="--w:10ch" autocomplete="off"></span>
+        <button class="go" type="submit">Buscar</button>
+      </p>
+      <div class="under"><button type="button" id="near">Usar mi ubicación</button><span>o explora</span><a href="#frame">Pediatría</a><a href="#frame">Ginecología</a><a href="#frame">Psicología</a><a href="#frame">Nutrición</a></div>
+    </form>
+
+    <div class="cols">
+      <main class="res">
+        <div class="rhead">
+          <h2 aria-live="polite"><b id="n">4</b> <span id="nl">dermatólogos cerca de Angelópolis, Puebla</span></h2>
+          <div class="ctrl">
+            <label><input type="checkbox" id="c-linea"> Cita en línea</label>
+            <label><input type="checkbox" id="c-hoy"> Con lugar hoy</label>
+            <span class="sort"><label for="orden" style="font-weight:400">Ordenar</label><select id="orden"><option value="km">Más cerca</option><option value="op">Más opiniones</option><option value="cita">Cita más pronto</option><option value="precio">Menor precio</option></select></span>
+          </div>
+        </div>
+
+        <div id="list">
+        <article class="doc" data-km="1.8" data-op="312" data-cita="0" data-precio="900" data-linea="1" data-hoy="1">
+          <div class="pic" aria-hidden="true">MS</div>
+          <div class="body">
+            <h3><a href="#frame">Dra. Mariana Soto Arriaga</a></h3>
+            <p class="role"><b>Dermatóloga</b> · acné, lunares y caída de cabello</p>
+            <p class="facts"><span>11 años de experiencia</span><span class="v">Cédula 10234567 verificada</span></p>
+            <p class="rate"><span class="st" aria-hidden="true">★★★★★</span> <b>4.9</b> <span class="c">de 312 opiniones</span></p>
+            <blockquote class="quote">«Me explicó todo sin prisa y el tratamiento sí funcionó.»<cite>Paciente, octubre 2026</cite></blockquote>
+            <p class="addr"><b>Torre Médica Atlixcáyotl, piso 6</b><br>Blvd. Atlixcáyotl 2501, a 1.8 km</p>
+          </div>
+          <div class="side">
+            <p class="price"><small>Consulta</small><b>$900</b></p>
+            <p class="when">Hoy<span>Toca una hora</span></p>
+            <div class="times"><button type="button" aria-pressed="false">16:30</button><button type="button" aria-pressed="false">17:00</button><button type="button" aria-pressed="false">18:30</button></div>
+            <button type="button" class="book">Agendar</button>
+          </div>
+        </article>
+
+        <article class="doc" data-km="2.4" data-op="540" data-cita="1" data-precio="1100" data-linea="1" data-hoy="0">
+          <div class="pic" aria-hidden="true">RL</div>
+          <div class="body">
+            <h3><a href="#frame">Dr. Rodrigo Llaguno Pérez</a></h3>
+            <p class="role"><b>Dermatólogo</b> · dermatología pediátrica</p>
+            <p class="facts"><span>18 años de experiencia</span><span class="v">Cédula 6618204 verificada</span></p>
+            <p class="rate"><span class="st" aria-hidden="true">★★★★★</span> <b>4.8</b> <span class="c">de 540 opiniones</span></p>
+            <blockquote class="quote">«Atendió a mi hija con mucha paciencia, y a mí me resolvió todas las dudas.»<cite>Paciente, septiembre 2026</cite></blockquote>
+            <p class="addr"><b>Centro Médico Zavaleta, consultorio 210</b><br>Calz. Zavaleta 3315, a 2.4 km</p>
+          </div>
+          <div class="side">
+            <p class="price"><small>Consulta</small><b>$1,100</b></p>
+            <p class="when">Mañana, viernes<span>Hoy ya no tiene lugar</span></p>
+            <div class="times"><button type="button" aria-pressed="false">9:00</button><button type="button" aria-pressed="false">9:30</button><button type="button" aria-pressed="false">12:00</button></div>
+            <button type="button" class="book">Agendar</button>
+          </div>
+        </article>
+
+        <aside class="ad" id="ad" aria-label="Anuncio">
+          <span class="lbl">Patrocinado</span>
+          <p>Clínica Dermalia: revisión de lunares con dermatoscopio, $650 hasta el 30 de noviembre.</p>
+          <a href="#frame">Ver promoción</a>
+        </aside>
+
+        <article class="doc" data-km="3.1" data-op="41" data-cita="9" data-precio="750" data-linea="0" data-hoy="0">
+          <div class="pic" aria-hidden="true">FQ</div>
+          <div class="body">
+            <h3><a href="#frame">Dra. Fernanda Quiroz Lima</a></h3>
+            <p class="role"><b>Dermatóloga</b> · dermatología cosmética</p>
+            <p class="facts"><span>6 años de experiencia</span><span class="v">Cédula 11870342 verificada</span></p>
+            <p class="rate"><span class="st" aria-hidden="true">★★★★★</span> <b>4.7</b> <span class="c">de 41 opiniones</span></p>
+            <div class="places" role="group" aria-label="Consultorios"><button type="button" aria-pressed="true" data-i="0">La Paz</button><button type="button" aria-pressed="false" data-i="1">Cholula</button></div>
+            <p class="addr p0"><b>Consultorio Quiroz</b><br>Av. Juárez 2915, col. La Paz, a 3.1 km</p>
+            <p class="addr p1" hidden><b>Plaza Médica Cholula, local 4</b><br>Recta a Cholula 3510, a 6.0 km</p>
+          </div>
+          <div class="side">
+            <p class="price"><small>Consulta</small><b>$750</b></p>
+            <p class="when">Agenda por teléfono<span>Llama y pide cita con la Dra. Quiroz</span></p>
+            <span class="tel">222 555 0187</span>
+            <button type="button" class="copy">Copiar número</button>
+          </div>
+        </article>
+
+        <article class="doc" data-km="4.0" data-op="3" data-cita="3" data-precio="700" data-linea="1" data-hoy="0">
+          <div class="pic" aria-hidden="true">IH</div>
+          <div class="body">
+            <h3><a href="#frame">Dr. Iván Hernández Rojas</a></h3>
+            <p class="role"><b>Dermatólogo</b> · dermatitis y alergias de piel</p>
+            <p class="facts"><span>4 años de experiencia</span><span class="v">Cédula 12455019 verificada</span></p>
+            <p class="rate"><span class="new">Nuevo en Manik</span> <span class="c">· 3 opiniones, aún sin promedio</span></p>
+            <p class="addr"><b>Consultorios San Manuel</b><br>Av. San Claudio 4204, a 4.0 km</p>
+          </div>
+          <div class="side">
+            <p class="price"><small>Consulta</small><b>$700</b></p>
+            <p class="when">Lunes 3<span>Su primer día libre</span></p>
+            <div class="times"><button type="button" aria-pressed="false">10:00</button><button type="button" aria-pressed="false">11:00</button></div>
+            <button type="button" class="book">Agendar</button>
+          </div>
+        </article>
+        </div>
+        <button type="button" class="more">Ver 8 dermatólogos más</button>
+      </main>
+
+      <aside class="ed" aria-label="Para leer">
+        <article class="story">
+          <span class="tag">Antes de tu cita</span>
+          <h3><a href="#frame">Lunares: cuándo revisarlos y qué pasa en la consulta</a></h3>
+          <p class="dek">La revisión dura quince minutos y no duele. Lo importante es saber qué contarle a tu dermatóloga.</p>
+          <p class="by">Por <b>Dra. Mariana Soto</b> · 5 min de lectura</p>
+          <p class="drop">Un lunar que cambia de forma, de color o que sangra merece una revisión pronto. Los demás pueden esperar a tu chequeo anual, y conviene llevar fotos de cómo se veían antes.</p>
+        </article>
+        <div class="qbox">
+          <h4>¿Tienes una duda antes de ir?</h4>
+          <p>Escríbela. Te responde un dermatólogo con cédula verificada, sin costo.</p>
+          <a href="#frame">Hacer una pregunta</a>
+        </div>
+        <div class="mini">
+          <span class="tag">Lo que más preguntan en Puebla</span>
+          <ol><li><span>1</span><a href="#frame">¿El acné adulto tiene cura?</a></li><li><span>2</span><a href="#frame">¿Cada cuánto revisar los lunares?</a></li><li><span>3</span><a href="#frame">¿Qué protector solar usar a diario?</a></li></ol>
+        </div>
+      </aside>
+    </div>
+
+    <footer class="foot">
+      <span><svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -21.6 395.2 117.6" aria-hidden="true" focusable="false"><defs><clipPath id="lb"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z"/></clipPath></defs><g transform="translate(0 -6.072000000000001) scale(0.7526218487394958)"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z" fill="#009BB0"/><path clip-path="url(#lb)" d="M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64" fill="none" stroke="#F6F8FC" stroke-width="13" stroke-linejoin="round"/></g><path d="M99.55018487394958 74.382V20.082H110.55018487394958V43.382000000000005H109.55018487394958Q109.55018487394958 35.182 111.65018487394957 29.632Q113.75018487394956 24.082 117.90018487394957 21.232000000000003Q122.05018487394958 18.382000000000005 128.25018487394956 18.382000000000005H128.85018487394956Q135.15018487394957 18.382000000000005 139.30018487394958 21.232000000000003Q143.45018487394958 24.082 145.5001848739496 29.632Q147.55018487394958 35.182 147.55018487394958 43.382000000000005H144.05018487394958Q144.05018487394958 35.182 146.20018487394958 29.632Q148.35018487394956 24.082 152.50018487394956 21.232000000000003Q156.65018487394957 18.382000000000005 162.85018487394956 18.382000000000005H163.45018487394958Q169.7501848739496 18.382000000000005 173.95018487394958 21.232000000000003Q178.15018487394957 24.082 180.30018487394958 29.632Q182.45018487394958 35.182 182.45018487394958 43.382000000000005V74.382H168.55018487394958V42.082Q168.55018487394958 36.982000000000006 165.95018487394958 33.932Q163.35018487394956 30.882000000000005 158.55018487394958 30.882000000000005Q153.75018487394956 30.882000000000005 150.85018487394956 34.032000000000004Q147.95018487394958 37.182 147.95018487394958 42.482V74.382H134.05018487394958V42.082Q134.05018487394958 36.982000000000006 131.45018487394958 33.932Q128.85018487394956 30.882000000000005 124.05018487394958 30.882000000000005Q119.25018487394956 30.882000000000005 116.35018487394956 34.032000000000004Q113.45018487394957 37.182 113.45018487394957 42.482V74.382ZM226.2501848739496 74.382V58.282000000000004H223.95018487394958V40.382000000000005Q223.95018487394958 35.682 221.65018487394957 33.382000000000005Q219.3501848739496 31.082 214.55018487394958 31.082Q212.05018487394958 31.082 208.55018487394958 31.182000000000002Q205.05018487394958 31.282000000000004 201.5001848739496 31.432000000000002Q197.95018487394958 31.582 195.15018487394957 31.782000000000004V19.982Q197.45018487394958 19.782000000000004 200.3501848739496 19.582000000000004Q203.2501848739496 19.382000000000005 206.3001848739496 19.332000000000004Q209.3501848739496 19.282000000000004 212.05018487394958 19.282000000000004Q220.45018487394958 19.282000000000004 226.0001848739496 21.482000000000003Q231.55018487394958 23.682000000000002 234.40018487394957 28.382Q237.2501848739496 33.082 237.2501848739496 40.682V74.382ZM208.7501848739496 75.78200000000001Q202.8501848739496 75.78200000000001 198.40018487394957 73.68200000000002Q193.95018487394958 71.58200000000001 191.5001848739496 67.682Q189.05018487394958 63.782000000000004 189.05018487394958 58.282000000000004Q189.05018487394958 52.282000000000004 192.0001848739496 48.482Q194.95018487394958 44.682 200.30018487394958 42.782000000000004Q205.65018487394957 40.882000000000005 212.8501848739496 40.882000000000005H225.45018487394958V49.182H212.65018487394957Q207.8501848739496 49.182 205.3001848739496 51.532000000000004Q202.7501848739496 53.882000000000005 202.7501848739496 57.58200000000001Q202.7501848739496 61.282000000000004 205.3001848739496 63.58200000000001Q207.8501848739496 65.882 212.65018487394957 65.882Q215.55018487394958 65.882 218.0001848739496 64.83200000000001Q220.45018487394958 63.782000000000004 222.1001848739496 61.232Q223.7501848739496 58.682 223.95018487394958 54.282000000000004L227.3501848739496 58.182Q226.8501848739496 63.882000000000005 224.6001848739496 67.78200000000001Q222.3501848739496 71.682 218.40018487394957 73.732Q214.45018487394958 75.78200000000001 208.7501848739496 75.78200000000001ZM248.1501848739496 74.382V20.082H259.15018487394957V43.382000000000005H258.15018487394957Q258.15018487394957 35.082 260.3501848739496 29.532Q262.5501848739496 23.982 266.90018487394957 21.182000000000002Q271.2501848739496 18.382000000000005 277.7501848739496 18.382000000000005H278.3501848739496Q288.0501848739496 18.382000000000005 293.0501848739496 24.632000000000005Q298.0501848739496 30.882000000000005 298.0501848739496 43.282000000000004V74.382H284.15018487394957V42.082Q284.15018487394957 37.082 281.30018487394955 33.982Q278.4501848739496 30.882000000000005 273.4501848739496 30.882000000000005Q268.3501848739496 30.882000000000005 265.20018487394964 34.032000000000004Q262.0501848739496 37.182 262.0501848739496 42.482V74.382ZM311.5501848739496 74.382V20.082H325.4501848739496V74.382ZM303.9501848739496 30.482V20.082H325.4501848739496V30.482ZM316.6501848739496 13.582Q312.5501848739496 13.582 310.6001848739496 11.431999999999999Q308.6501848739496 9.281999999999996 308.6501848739496 5.981999999999999Q308.6501848739496 2.682000000000002 310.6001848739496 0.5820000000000007Q312.5501848739496 -1.5180000000000007 316.6501848739496 -1.5180000000000007Q320.7501848739496 -1.5180000000000007 322.65018487394957 0.5820000000000007Q324.5501848739496 2.682000000000002 324.5501848739496 5.981999999999999Q324.5501848739496 9.281999999999996 322.65018487394957 11.431999999999999Q320.7501848739496 13.582 316.6501848739496 13.582ZM375.45018487394964 74.382 357.2501848739496 48.982H349.1501848739496L372.2501848739496 20.082H386.7501848739496L365.4501848739496 46.782000000000004L365.7501848739496 39.782000000000004L391.1501848739496 74.382ZM337.4501848739496 74.382V1.382000000000005H351.3501848739496V74.382Z" fill="#FFFFFF"/></svg>
+</span><span>de MedicalManik</span>
+      <nav aria-label="Pie"><a href="#frame">Soy médico</a><a href="#frame">Aviso de privacidad</a><a href="#frame">Términos</a></nav>
+    </footer>
+  </div></div>
+
+  <div class="notes">
+    <h2>Qué hice para que no parezca hecho por IA</h2>
+    <section><h3>Quité</h3><ul>
+      <li><s>La palabra en cursiva de color en el titular.</s> Es el truco más repetido; ahora la frase es la búsqueda.</li>
+      <li><s>Tarjetas con sombra, radios grandes y stickers.</s> Las fichas se separan con filetes y espacio.</li>
+      <li><s>Tres cajas iguales al pie.</s> La columna lateral tiene un solo artículo firmado y una pregunta.</li>
+      <li><s>Etiquetas en mayúsculas espaciadas en todas partes.</s> Solo queda «Patrocinado».</li>
+    </ul></section>
+    <section><h3>Agregué</h3><ul>
+      <li>Datos que solo tiene un directorio médico: cédula, años de experiencia, precio de consulta, horas reales.</li>
+      <li>La opinión de un paciente como cita de revista, en cursiva, con fecha.</li>
+      <li>Retrato vertical (4:5) para la foto del médico, como en una revista. Mientras no haya foto, iniciales.</li>
+      <li>Capitular y bajada en el artículo, firmados por una médica del directorio.</li>
+    </ul></section>
+    <section><h3>Auditoría: pendientes</h3><ul>
+      <li>Precio, años de experiencia y cédula: confirmar que el sistema los tiene. Si no, se quitan.</li>
+      <li>Fotos reales de médicos: es lo que más cambiaría la sensación. Hoy muchos perfiles no tienen.</li>
+      <li>Revisé capturas, no el sitio. Sin prueba con teclado real ni lector de pantalla.</li>
+      <li>Falta la ficha del médico y el flujo para agendar.</li>
+    </ul></section>
+  </div>
+</div>
+
+<script>
+(function(){
+  var fr=document.getElementById('frame'),bd=document.getElementById('v-desk'),bp=document.getElementById('v-phone');
+  function view(p){fr.classList.toggle('phone',p);bd.setAttribute('aria-pressed',!p);bp.setAttribute('aria-pressed',p)}
+  bd.onclick=function(){view(false)};bp.onclick=function(){view(true)};
+
+  var list=document.getElementById('list'),ad=document.getElementById('ad');
+  var docs=[].slice.call(list.querySelectorAll('.doc'));
+  var cl=document.getElementById('c-linea'),ch=document.getElementById('c-hoy'),orden=document.getElementById('orden');
+  function render(){
+    var k=orden.value;
+    var vis=docs.filter(function(c){return(!cl.checked||c.dataset.linea==='1')&&(!ch.checked||c.dataset.hoy==='1')});
+    vis.sort(function(a,b){
+      if(k==='op')return b.dataset.op-a.dataset.op;
+      if(k==='precio')return a.dataset.precio-b.dataset.precio;
+      if(k==='cita')return(a.dataset.cita-b.dataset.cita)||(a.dataset.km-b.dataset.km);
+      return a.dataset.km-b.dataset.km});
+    docs.forEach(function(c){c.hidden=vis.indexOf(c)<0});
+    vis.forEach(function(c,i){list.appendChild(c);if(i===1)list.appendChild(ad)});
+    if(vis.length<2)list.appendChild(ad);
+    document.getElementById('n').textContent=vis.length;
+    document.getElementById('nl').textContent=(vis.length===1?'dermatólogo':'dermatólogos')+' cerca de Angelópolis, Puebla';
+  }
+  cl.onchange=ch.onchange=orden.onchange=render;
+  docs.forEach(function(c){
+    var bk=c.querySelector('.book'),ts=c.querySelectorAll('.times button');
+    ts.forEach(function(t){t.onclick=function(){
+      var on=t.getAttribute('aria-pressed')!=='true';
+      ts.forEach(function(o){o.setAttribute('aria-pressed','false')});t.setAttribute('aria-pressed',on);
+      bk.textContent=on?'Agendar a las '+t.textContent:'Agendar';
+    }});
+    if(bk)bk.onclick=function(){
+      var s=c.querySelector('.times [aria-pressed="true"]'),m=c.querySelector('.msg');
+      if(!m){m=document.createElement('p');m.className='msg';m.setAttribute('role','status');bk.after(m)}
+      m.textContent=s?'Apartada a las '+s.textContent+'. Sigue confirmar tus datos.':'Primero elige una hora.';
+      m.style.color=s?'':'var(--ink)';
+    };
+    var pl=c.querySelectorAll('.places button');
+    pl.forEach(function(b){b.onclick=function(){
+      pl.forEach(function(o){o.setAttribute('aria-pressed',o===b)});
+      c.querySelector('.p0').hidden=b.dataset.i!=='0';c.querySelector('.p1').hidden=b.dataset.i!=='1';
+    }});
+    var cp=c.querySelector('.copy');
+    if(cp)cp.onclick=function(){
+      var t=c.querySelector('.tel');
+      function sel(){var r=document.createRange();r.selectNodeContents(t);var s=getSelection();s.removeAllRanges();s.addRange(r);cp.textContent='Número seleccionado'}
+      try{navigator.clipboard.writeText(t.textContent).then(function(){cp.textContent='Número copiado'},sel)}catch(e){sel()}
+    };
+  });
+  var mir=document.createElement('span');mir.className='mirror sentence';mir.setAttribute('aria-hidden','true');document.getElementById('f').appendChild(mir);
+  function fit(i){mir.textContent=i.value||' ';i.style.width=Math.ceil(mir.getBoundingClientRect().width+10)+'px'}
+  ['q','d'].forEach(function(id){var i=document.getElementById(id);i.addEventListener('input',function(){fit(i)});fit(i);if(document.fonts)document.fonts.ready.then(function(){fit(i)})});
+  new ResizeObserver(function(){['q','d'].forEach(function(id){fit(document.getElementById(id))})}).observe(document.getElementById('f'));
+  document.getElementById('f').onsubmit=function(e){e.preventDefault();render()};
+  document.getElementById('near').onclick=function(){var d=document.getElementById('d');d.value='mi ubicación';fit(d)};
+})();
+</script>
