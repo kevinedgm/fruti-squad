@@ -34,16 +34,56 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
 .intro{display:flex;flex-wrap:wrap;gap:6px 20px;align-items:baseline;justify-content:space-between}
 .intro h1{font:600 22px/1.25 var(--display)}
 .intro p{color:var(--muted);font-size:15px}
+.seg{display:inline-flex;align-items:center;gap:4px;background:var(--surface);border:1.5px solid var(--control);border-radius:12px;padding:3px 3px 3px 12px;font-size:15px;color:var(--muted)}
+.seg button{min-height:44px;padding:0 14px;border-radius:9px;border:0;background:none;font-weight:700;cursor:pointer;color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
 
 /* ===== app ===== */
 .app{background:var(--canvas);border-radius:18px;overflow:clip;box-shadow:0 0 0 1px var(--edge);container-type:inline-size}
-.bar{display:flex;align-items:center;gap:12px;min-height:52px;padding:6px 18px;background:var(--surface);border-bottom:1px solid var(--line);font-size:15px;color:var(--muted)}
-.bar .brand{display:flex;align-items:center;gap:8px;font:600 15px var(--display);color:var(--ink)}
-.bar .brand svg{width:26px;height:26px}
-.bar .crumb a{color:var(--azul);font-weight:600;text-decoration:none}
-.bar .saved{margin-left:auto;display:inline-flex;align-items:center;gap:6px}
-.bar .help{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border-radius:10px;border:1px solid var(--control);background:var(--surface);font-weight:600;color:var(--ink);cursor:pointer}
-.bar .saved i{width:8px;height:8px;border-radius:50%;background:var(--ok)}
+/* barra superior de la app (shell de Expediente: 8+ destinos → sidebar por grupos, plegable a riel) */
+.bar{display:flex;align-items:center;gap:10px;min-height:64px;padding:8px 14px;background:var(--surface);border-bottom:1px solid var(--line)}
+.ib{width:44px;height:44px;border-radius:10px;border:0;background:none;display:grid;place-items:center;cursor:pointer;color:var(--muted);flex:none;position:relative}
+.ib:hover{background:var(--soft)}
+.ib .dot{position:absolute;top:8px;right:8px;min-width:18px;height:18px;border-radius:9px;background:var(--error);color:#fff;font:700 11px/18px var(--sans);text-align:center;padding:0 4px}
+.bar .brand{display:flex;align-items:center;gap:8px;font:600 16px var(--display);color:var(--ink);text-decoration:none;white-space:nowrap}
+.bar .brand svg{width:30px;height:30px}
+.bar .brand span{font-weight:400;color:var(--muted)}
+.bar .search{flex:1;max-width:460px;margin:0 auto;display:flex;align-items:center;gap:8px;min-height:44px;border:1px solid var(--control);border-radius:12px;padding:0 12px;color:var(--hint);font-size:15px;background:var(--surface);white-space:nowrap;overflow:hidden}
+.bar .clinic{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-weight:600;font-size:15px;cursor:pointer;white-space:nowrap}
+.bar .clinic svg{width:18px;height:18px}
+.bar .eco svg{width:26px;height:26px}
+.av{width:38px;height:38px;border-radius:50%;background:var(--azul-soft);color:var(--azul);display:grid;place-items:center;font:700 14px var(--sans);flex:none}
+.ctx{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;padding:10px 18px;font-size:15px;color:var(--muted);background:var(--canvas)}
+.ctx a{color:var(--azul);font-weight:600;text-decoration:none}
+.ctx .saved{margin-left:auto;display:inline-flex;align-items:center;gap:6px}
+.ctx .saved i{width:8px;height:8px;border-radius:50%;background:var(--ok)}
+.ctx .mode{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--azul);background:var(--azul-soft);border-radius:999px;padding:2px 10px}
+.ctx .mode svg{width:16px;height:16px}
+
+/* sidebar de la app: en consulta arranca como riel para dejar espacio; «Expandir menú» lo abre encima, sin mover la consulta */
+.shell{display:grid;grid-template-columns:72px minmax(0,1fr);position:relative}
+.anav{background:var(--surface);border-right:1px solid var(--line);position:relative;z-index:45}
+.anav .in{position:sticky;top:0;display:grid;gap:4px;padding:12px 10px;align-content:start;max-height:100vh;overflow:auto}
+.anav .cta{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border-radius:12px;border:0;background:var(--azul);color:#fff;font-weight:700;cursor:pointer;margin-bottom:8px}
+.anav .gh{font:600 12px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:10px 10px 4px;display:none}
+.anav .gsep{height:1px;background:var(--line);margin:6px 4px}
+.it{display:flex;align-items:center;justify-content:center;gap:12px;min-height:44px;padding:0 10px;border-radius:12px;color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;position:relative;white-space:nowrap}
+.it:hover{background:var(--soft)}
+.it[aria-current="page"]{background:var(--azul-soft);color:var(--azul)}
+.it .lbl,.anav .cta span{display:none}
+.it .ct{display:none;margin-left:auto;font:700 13px var(--sans);background:var(--soft);border-radius:999px;padding:1px 8px;color:var(--ink)}
+.it .ctdot{position:absolute;top:6px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--azul)}
+.it::after{content:attr(data-label);position:absolute;left:calc(100% + 10px);top:50%;transform:translateY(-50%);background:var(--ink);color:#fff;font:600 15px/1.3 var(--sans);padding:8px 12px;border-radius:8px;white-space:nowrap;display:none;z-index:80}
+.shell:not(.nav-open):not(.tips-off) .it:hover::after,.shell:not(.nav-open):not(.tips-off) .it:focus-visible::after{display:block}
+.anav .foot{border-top:1px solid var(--line);margin-top:8px;padding-top:8px;display:grid;gap:4px}
+.shell.nav-open .anav .in{position:absolute;top:0;left:0;width:260px;max-height:none;min-height:100%;background:var(--surface);border-right:1px solid var(--edge);box-shadow:16px 0 40px rgba(20,33,61,.14)}
+.shell.nav-open .anav .gh{display:block}
+.shell.nav-open .it{justify-content:flex-start}
+.shell.nav-open .it .lbl,.shell.nav-open .anav .cta span,.shell.nav-open .it .ct{display:inline}
+.shell.nav-open .it .ctdot,.shell.nav-open .anav .gsep{display:none}
+.bar .mnav{display:none}
+.navscrim{position:absolute;inset:0;background:rgba(20,33,61,.25);z-index:44}
+.content{min-width:0}
 
 /* paciente */
 .pt{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;padding:12px 18px;background:var(--surface);border-bottom:1px solid var(--edge)}
@@ -68,8 +108,11 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
 .timer .lbl{font-size:15px}
 
 /* cuerpo: pasos | consulta | herramientas */
-.body{display:grid;grid-template-columns:230px minmax(0,1fr) 290px;gap:18px;padding:18px;align-items:start}
-.app.tools-closed .body{grid-template-columns:230px minmax(0,1fr) 64px}
+.body{--sidew:290px;display:grid;grid-template-columns:230px minmax(0,1fr) var(--sidew);grid-template-areas:"steps main side";gap:18px;padding:18px;align-items:start}
+.steps{grid-area:steps}.main{grid-area:main}.side{grid-area:side}
+.app.tools-closed .body{--sidew:64px}
+.app.tele .body,.app.tele.tools-closed .body,.app.docked .body{--sidew:440px}
+.app.tele.wide .body{--sidew:minmax(0,1.15fr)}
 
 /* pasos */
 .steps{position:sticky;top:calc(var(--pth,80px) + 16px);display:grid;gap:14px}
@@ -137,7 +180,8 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
 .later ul{margin:0;padding-left:20px;display:grid;gap:4px;color:var(--muted)}
 
 /* herramientas de apoyo */
-.tools-p{position:sticky;top:calc(var(--pth,80px) + 16px);background:var(--surface);border:1px solid var(--edge);border-radius:18px;display:grid}
+.side{position:sticky;top:calc(var(--pth,80px) + 16px);display:grid;gap:14px;align-content:start;min-width:0}
+.tools-p{background:var(--surface);border:1px solid var(--edge);border-radius:18px;display:grid}
 .tp-h{border-radius:18px 18px 0 0}
 .tool{position:relative}
 .tool::after{content:attr(data-label);position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);background:var(--ink);color:#fff;font:600 15px/1.3 var(--sans);padding:8px 12px;border-radius:8px;white-space:nowrap;display:none;z-index:30}
@@ -165,15 +209,46 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
 .notes p svg{width:14px;height:14px}
 .app.tools-closed .tools-p .tp-h h3,.app.tools-closed .tg h4,.app.tools-closed .tool span.t,.app.tools-closed .tool .new,.app.tools-closed .notes{display:none}
 .app.tools-closed .tp-h{padding:8px 11px;justify-content:center}
+.app.tele.tools-closed .tools-p{grid-template-columns:auto minmax(0,1fr)}
+.app.tele.tools-closed .tp-h{border-radius:18px 0 0 18px;border-bottom:0;border-right:1px solid var(--line)}
+.app.tele.tools-closed .tg{display:flex;flex-wrap:wrap;gap:4px;border-bottom:0;padding:8px 4px}
+.app.tele.tools-closed .tool::after{right:auto;left:50%;top:auto;bottom:calc(100% + 8px);transform:translateX(-50%)}
+.app.tele.tools-closed .tool{width:auto;padding:5px}
 .app.tools-closed .tool{justify-content:center;padding:6px 0}
 .app.tools-closed .tg{padding:8px 6px}
+
+/* videoconsulta */
+.vc{background:var(--ink);color:#fff;border-radius:18px;overflow:hidden;display:grid}
+.vc-h{display:flex;align-items:center;gap:10px;padding:10px 12px 10px 16px;font-size:15px}
+.vc-h b{font:600 16px var(--display)}
+.vc-h .net{margin-left:auto;display:inline-flex;align-items:center;gap:6px;color:#CFE9D9;font-size:14px}
+.vc-h .net svg{width:16px;height:16px}
+.stage{position:relative;aspect-ratio:16/10;max-width:100%;background:radial-gradient(60% 70% at 50% 40%,#3B4C77 0%,#1B2747 100%);display:grid;place-items:center}
+.stage .who{display:grid;justify-items:center;gap:8px;text-align:center;padding:12px}
+.stage .who .bigav{width:84px;height:84px;border-radius:50%;background:#2C3B63;display:grid;place-items:center;font:600 28px var(--display)}
+.stage .name{position:absolute;left:10px;bottom:10px;background:rgba(10,18,40,.8);border-radius:8px;padding:4px 10px;font-size:14px;font-weight:600}
+.stage .self{position:absolute;right:10px;top:10px;width:28%;aspect-ratio:4/3;border-radius:10px;background:#45567F;border:2px solid #fff;display:grid;place-items:center;font:600 13px var(--sans)}
+.stage .cap{position:absolute;left:10px;right:10px;bottom:48px;background:rgba(10,18,40,.9);border-radius:8px;padding:8px 12px;font-size:16px;line-height:1.4}
+.stage .cap small{display:block;font-size:13px;color:#C9D3E8}
+.vc .wait{display:grid;gap:10px;justify-items:center;text-align:center;padding:16px}
+.vc .wait p{color:#C9D3E8;font-size:15px}
+.vc .admit{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 18px;border-radius:12px;border:0;background:#fff;color:var(--ink);font-weight:700;cursor:pointer}
+.ctrls{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px;justify-content:center}
+.ctrls .cb{flex:1 1 0}
+.cb{display:inline-flex;flex-direction:column;align-items:center;gap:2px;min-width:56px;min-height:56px;padding:6px 8px;border-radius:12px;border:1px solid #4A5A82;background:#22305A;color:#fff;font:600 13px var(--sans);cursor:pointer}
+.cb:hover{background:#2C3B6A}
+.cb[aria-pressed="true"].off{background:#FFFFFF;color:var(--on-error);border-color:#fff}
+.cb[aria-pressed="true"].on{background:#FFFFFF;color:var(--azul);border-color:#fff}
+.cb.end{background:var(--error);border-color:var(--error)}
+.cb.end:hover{background:#A9323F}
+.vc :focus-visible{outline-color:#9CC3FF}
+.vc-note{font-size:13px;color:#C9D3E8;padding:0 14px 12px;text-align:center}
 
 /* cajón de herramienta */
 /* Ancho: el panel de la herramienta ocupa la columna derecha y no tapa la consulta (2.4.11). Angosto: diálogo modal con Esc y foco contenido (2.1.2). */
 .drawer{background:var(--surface);border:1px solid var(--edge);border-radius:18px;display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden}
-.app.docked .body{grid-template-columns:230px minmax(0,1fr) 440px}
 .app.docked .tools-p{display:none}
-.app.docked .drawer{position:sticky;top:calc(var(--pth,80px) + 16px);max-height:calc(100vh - var(--pth,80px) - 32px)}
+.app.docked .drawer{max-height:calc(100vh - var(--pth,80px) - 32px)}
 .drawer.as-modal{position:fixed;top:0;right:0;bottom:0;width:min(480px,100%);border-radius:0;z-index:60;box-shadow:-16px 0 40px rgba(20,33,61,.2)}
 .backdrop{position:fixed;inset:0;background:rgba(20,33,61,.4);z-index:50}
 .dr-h{display:flex;align-items:center;gap:10px;padding:12px 12px 12px 18px;border-bottom:1px solid var(--line);background:var(--head)}
@@ -188,20 +263,41 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
 .kv dd{margin:0}
 .spark{display:block;width:100%;height:auto;max-width:100%}
 
-@container (max-width:1100px){
+@container (max-width:1180px){
   .body{grid-template-columns:210px minmax(0,1fr) 64px}
-  .app .tools-p .tp-h h3,.app .tg h4,.app .tool span.t,.app .tool .new,.app .notes{display:none}
-  .app .tool{justify-content:center;padding:6px 0}.app .tp-h{justify-content:center;padding:8px}
+  .app.tele .body,.app.tele.wide .body{grid-template-columns:210px minmax(0,1fr);grid-template-areas:"side side" "steps main"}
+  .app.tele .side{position:static;grid-template-columns:minmax(0,560px) minmax(0,1fr);align-items:start}
+  .app.tele .side .vc{grid-row:span 2}
+  .bar .clinic,.bar .search span{display:none}.bar .search{flex:0 0 44px;padding:0;justify-content:center;border:0}
+  /* sin video: la columna se reduce a íconos con su nombre al pasar o enfocar. Con video hay espacio junto a él: lista completa */
+  .app:not(.tele) .tools-p .tp-h h3,.app:not(.tele) .tg h4,.app:not(.tele) .tool span.t,.app:not(.tele) .tool .new,.app:not(.tele) .notes{display:none}
+  .app:not(.tele) .tool{justify-content:center;padding:6px 0}.app:not(.tele) .tp-h{justify-content:center;padding:8px}
   .app .tp-h button{display:none}
+  .app:not(.tele) .tool::after{display:none}
+  .app:not(.tele):not(.tips-off) .tool:hover::after,.app:not(.tele):not(.tips-off) .tool:focus-visible::after{display:block}
 }
 @container (max-width:760px){
-  .body{grid-template-columns:1fr;padding:12px;gap:12px}
+  .body,.app.tele .body,.app.tele.wide .body{grid-template-columns:1fr;grid-template-areas:"steps" "main" "side";padding:12px;gap:12px}
+  .app.tele .body,.app.tele.wide .body{grid-template-areas:"side" "steps" "main"}
+  .app.tele .side{grid-template-columns:1fr}
+  .side{position:static}
+  .shell{grid-template-columns:1fr}
+  .anav{display:none}
+  .shell.nav-open .anav{display:block;position:fixed;inset:0 auto 0 0;z-index:70}
+  .shell.nav-open .anav .in{position:static;min-height:100vh;width:min(300px,86vw)}
+  .bar .brand span{display:none}
+  .bar .mnav{display:grid}
   .steps{position:static}.steps h3,.sep,.steps .ant{display:none}
   .steps ol{grid-template-columns:repeat(4,minmax(0,1fr))}
   .pt{position:static}
   .st{grid-template-columns:1fr;justify-items:center;text-align:center;padding:8px 4px}.st small{display:none}.st b{font-size:13px}
   .tools-p{position:static;order:3}
-  .tools-p .tg{display:flex;flex-wrap:wrap}
+  /* en pantalla táctil no hay «pasar el ratón»: las herramientas siempre muestran su nombre */
+  .app:not(.zz) .tools-p .tp-h h3,.app:not(.zz) .tg h4,.app:not(.zz) .tool span.t,.app:not(.zz) .notes{display:block}
+  .app:not(.zz) .tool .new{display:inline}
+  .app:not(.zz) .tool{justify-content:flex-start;padding:9px 8px}
+  .app:not(.zz) .tp-h{justify-content:flex-start;padding:12px 16px}
+  .app:not(.zz) .tool::after{display:none!important}
   .when{margin-left:0}
   .mh,.mb,.mf{padding-left:16px;padding-right:16px}
   .mf .btn{white-space:normal;text-align:left}.mf .btn.p{flex:1;justify-content:space-between}
@@ -221,15 +317,49 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
 <div class="page">
   <div class="intro">
     <h1>Consulta · prototipo 1: el marco</h1>
-    <p>Paciente arriba, pasos a la izquierda, consulta al centro, herramientas de apoyo a la derecha. Datos de ejemplo.</p>
+    <div class="seg" role="group" aria-label="Tipo de consulta (control del prototipo)"><span>Tipo de consulta:</span><button type="button" id="t-pres" aria-pressed="true">Presencial</button><button type="button" id="t-tele" aria-pressed="false">Teleconsulta</button></div>
   </div>
 
   <div class="app" id="app">
     <div class="bar">
-      <span class="brand">{{SELLO}}Expediente Manik</span>
-      <span class="crumb"><a href="#app">Agenda de hoy</a> › Consulta del <b>24/10/2026, 13:30</b></span>
+      <button type="button" class="ib mnav" id="mnav" aria-label="Abrir menú" aria-expanded="false">{{i:menu}}</button>
+      <a class="brand" href="#app">{{SELLO}}Expediente <span>Manik</span></a>
+      <span class="search" role="search">{{i:search}}<span>Buscar paciente por nombre, CURP o expediente</span></span>
+      <button type="button" class="clinic">{{i:building-2}}Consultorio Angelópolis{{i:chevron-down}}</button>
+      <button type="button" class="ib" aria-label="Avisos, 2 nuevos">{{i:bell}}<span class="dot" aria-hidden="true">2</span></button>
+      <button type="button" class="ib eco" aria-label="Ecosistema Manik: cambiar de app">{{ECO}}</button>
+      <span class="av" role="img" aria-label="Dra. Ramírez">DR</span>
+    </div>
+    <div class="shell" id="shell">
+      <nav class="anav" id="anav" aria-label="Menú de Expediente"><div class="in">
+        <button type="button" class="ib" id="navt" aria-expanded="false" aria-label="Expandir menú">{{i:panel-left-open}}</button>
+        <button type="button" class="cta it" data-label="Nueva consulta" aria-label="Nueva consulta">{{i:plus}}<span>Nueva consulta</span></button>
+        <div class="gh">Atención</div>
+        <a class="it" href="#app" data-label="Hoy" aria-label="Hoy, 6 pendientes" aria-current="page">{{i:house}}<span class="lbl">Hoy</span><span class="ct">6</span><span class="ctdot"></span></a>
+        <a class="it" href="#app" data-label="Pacientes" aria-label="Pacientes">{{i:users}}<span class="lbl">Pacientes</span></a>
+        <a class="it" href="#app" data-label="Consultas" aria-label="Consultas">{{i:stethoscope}}<span class="lbl">Consultas</span></a>
+        <a class="it" href="#app" data-label="Lista de espera" aria-label="Lista de espera, 3 pendientes">{{i:clock}}<span class="lbl">Lista de espera</span><span class="ct">3</span><span class="ctdot"></span></a>
+        <div class="gsep"></div>
+        <div class="gh">Clínico</div>
+        <a class="it" href="#app" data-label="Recetas" aria-label="Recetas">{{i:pill}}<span class="lbl">Recetas</span></a>
+        <a class="it" href="#app" data-label="Órdenes de estudios" aria-label="Órdenes de estudios">{{i:flask-conical}}<span class="lbl">Órdenes de estudios</span></a>
+        <a class="it" href="#app" data-label="Resultados" aria-label="Resultados, 2 pendientes">{{i:chart-line}}<span class="lbl">Resultados</span><span class="ct">2</span><span class="ctdot"></span></a>
+        <a class="it" href="#app" data-label="Vacunas" aria-label="Vacunas">{{i:syringe}}<span class="lbl">Vacunas</span></a>
+        <div class="gsep"></div>
+        <div class="gh">Documentos</div>
+        <a class="it" href="#app" data-label="Consentimientos" aria-label="Consentimientos">{{i:file-text}}<span class="lbl">Consentimientos</span></a>
+        <a class="it" href="#app" data-label="Certificados" aria-label="Certificados">{{i:award}}<span class="lbl">Certificados</span></a>
+        <a class="it" href="#app" data-label="Plantillas" aria-label="Plantillas">{{i:layout-template}}<span class="lbl">Plantillas</span></a>
+        <div class="gsep"></div>
+        <div class="gh">Análisis</div>
+        <a class="it" href="#app" data-label="Reportes" aria-label="Reportes">{{i:chart-column}}<span class="lbl">Reportes</span></a>
+        <div class="foot"><a class="it" href="#app" data-label="Configuración" aria-label="Configuración">{{i:settings}}<span class="lbl">Configuración</span></a><a class="it" href="#app" data-label="Ayuda" aria-label="Ayuda">{{i:circle-help}}<span class="lbl">Ayuda</span></a></div>
+      </div></nav>
+      <div class="content">
+    <div class="ctx">
+      <span><a href="#app">Hoy</a> › Consulta del <b>24/10/2026, 13:30</b></span>
+      <span class="mode" id="modeTag">{{i:door-open}}<span>Presencial</span></span>
       <span class="saved"><i></i>Guardado hace un momento</span>
-      <button type="button" class="help">{{i:info}}Ayuda</button>
     </div>
 
     <header class="pt">
@@ -295,6 +425,26 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
         </div>
       </main>
 
+      <div class="side" id="side">
+      <section class="vc" id="vc" aria-label="Videoconsulta" hidden>
+        <div class="vc-h"><b>Videoconsulta</b><span id="vcst">Sala de espera</span><span class="net">{{i:wifi}}Conexión buena</span></div>
+        <div class="stage" id="stage">
+          <div class="wait" id="wait"><div class="bigav" style="width:72px;height:72px;border-radius:50%;background:#2C3B63;display:grid;place-items:center;font:600 24px var(--display)">LM</div><b>Laura Martínez está en la sala de espera</b><p>Mamá de Kevin · se conectó hace 1 min</p><button type="button" class="admit" id="admit">{{i:video}}Admitir y empezar</button></div>
+          <div class="who" id="who" hidden><div class="bigav">LM</div><span style="font-size:14px;color:#C9D3E8">Video de ejemplo</span></div>
+          <span class="name" id="vname" hidden>Laura Martínez (mamá)</span>
+          <span class="self" id="self" hidden>Tú</span>
+          <p class="cap" id="cap" hidden aria-live="polite"><small>Subtítulos automáticos</small>Laura: sigue con fiebre desde anoche y casi no quiere comer.</p>
+        </div>
+        <div class="ctrls" id="ctrls" role="group" aria-label="Controles de la llamada" hidden>
+          <button type="button" class="cb off" id="cb-mic" aria-pressed="false">{{i:mic}}<span>Micrófono</span></button>
+          <button type="button" class="cb off" id="cb-cam" aria-pressed="false">{{i:video}}<span>Cámara</span></button>
+          <button type="button" class="cb on" id="cb-share" aria-pressed="false">{{i:monitor-up}}<span>Compartir</span></button>
+          <button type="button" class="cb on" id="cb-cap" aria-pressed="false">{{i:captions}}<span>Subtítulos</span></button>
+          <button type="button" class="cb on" id="cb-wide" aria-pressed="false">{{i:maximize-2}}<span>Ampliar</span></button>
+          <button type="button" class="cb end" id="cb-end">{{i:phone-off}}<span>Colgar</span></button>
+        </div>
+        <p class="vc-note" id="vcnote" hidden>Colgar termina la llamada, no la consulta: la nota sigue abierta.</p>
+      </section>
       <aside class="tools-p" aria-label="Herramientas de apoyo">
         <div class="tp-h"><h3>Herramientas de apoyo</h3><button type="button" id="tclose" aria-label="Plegar herramientas" aria-expanded="true">{{i:panel-right-close}}</button></div>
         <div class="tg"><h4>Del paciente</h4>
@@ -318,11 +468,20 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
         <div class="dr-b" id="dr-b"></div>
         <div class="dr-f">{{i:check}}La consulta sigue abierta y el tiempo sigue corriendo.</div>
       </div>
+      </div>
+    </div>
+      </div>
     </div>
 
   </div>
 
   <div class="notesd">
+    <section><h2>Menú de la app y videoconsulta</h2><ul>
+      <li><b>El menú de Expediente es el del shell aprobado</b> (Atención, Clínico, Documentos, Análisis; Configuración y Ayuda al pie). Durante la consulta arranca plegado como riel de íconos para dejar espacio a la nota; «Expandir menú» lo abre encima, sin mover la consulta, y se cierra con Esc, al hacer clic fuera o al salir de él con Tab.</li>
+      <li><b>La videoconsulta va arriba de la columna derecha</b>, sobre las herramientas: el médico ve al paciente mientras escribe y la cámara queda del lado de la pantalla donde suele estar. Empieza en «sala de espera» con «Admitir y empezar».</li>
+      <li><b>Controles con texto</b>: Micrófono, Cámara, Compartir, Subtítulos, Ampliar y Colgar. «Ampliar» agranda el video a media pantalla; «Colgar» termina la llamada pero no la consulta.</li>
+      <li><b>Pantallas medianas</b>: el video pasa arriba de la consulta, con las herramientas a su lado; en celular, video, pasos y nota en una columna.</li>
+    </ul></section>
     <section><h2>Qué cambia y por qué</h2><ul>
       <li><b>Las herramientas de apoyo van en su propia columna</b>, con ese título, para que no se lean como menú de navegación. Se pliegan a una columna de íconos con su nombre al pasar o enfocar.</li>
       <li><b>Cada herramienta se abre junto a la consulta</b>, en esa misma columna, sin taparla: el médico puede ver la gráfica mientras escribe. En pantallas angostas se abre como ventana con «Cerrar» y Esc.</li>
@@ -446,5 +605,49 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
       else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}
     }
   });
+
+  // ===== sidebar de la app =====
+  var shell=document.getElementById('shell'),navt=document.getElementById('navt'),mnav=document.getElementById('mnav'),anav=document.getElementById('anav'),scrim=null;
+  function setNav(open,from){
+    shell.classList.toggle('nav-open',open);
+    [navt,mnav].forEach(function(b){b.setAttribute('aria-expanded',open)});
+    navt.setAttribute('aria-label',open?'Plegar menú':'Expandir menú');
+    navt.innerHTML=open?'{{i:panel-left-close}}':'{{i:panel-left-open}}';
+    if(open&&!scrim){scrim=document.createElement('div');scrim.className='navscrim';scrim.onclick=function(){setNav(false)};shell.appendChild(scrim)}
+    if(!open&&scrim){scrim.remove();scrim=null}
+    if(open)anav.querySelector('.cta').focus();else if(from)from.focus();
+  }
+  navt.onclick=function(){setNav(!shell.classList.contains('nav-open'),navt)};
+  mnav.onclick=function(){setNav(true)};
+  // el menú expandido se cierra al salir de él con Tab, para que nunca tape el foco (2.4.11)
+  anav.addEventListener('focusout',function(e){if(shell.classList.contains('nav-open')&&e.relatedTarget&&!anav.contains(e.relatedTarget))setNav(false)});
+  anav.querySelectorAll('.it').forEach(function(a){a.addEventListener('mouseenter',function(){shell.classList.remove('tips-off')});a.addEventListener('focus',function(){shell.classList.remove('tips-off')})});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(shell.classList.contains('nav-open'))setNav(false,window.innerWidth>760?navt:mnav);else shell.classList.add('tips-off')}});
+
+  // ===== teleconsulta =====
+  var tPres=document.getElementById('t-pres'),tTele=document.getElementById('t-tele'),vc=document.getElementById('vc'),modeTag=document.getElementById('modeTag');
+  var $=function(id){return document.getElementById(id)};
+  function llamada(estado){ // espera | en | fin
+    $('wait').hidden=estado!=='espera';
+    ['who','vname','self','ctrls','vcnote'].forEach(function(id){$(id).hidden=estado!=='en'});
+    if(estado!=='en'){$('cap').hidden=true;app.classList.remove('wide');$('cb-wide').setAttribute('aria-pressed','false')}
+    $('vcst').textContent=estado==='espera'?'Sala de espera':estado==='en'?'En llamada':'Llamada terminada';
+    if(estado==='fin'){$('wait').hidden=false;$('wait').querySelector('b').textContent='Terminó la llamada con Laura Martínez';$('wait').querySelector('p').textContent='La consulta sigue abierta para terminar la nota y la receta.';$('admit').lastChild.textContent='Volver a llamar'}
+  }
+  function tipo(tele){
+    app.classList.toggle('tele',tele);vc.hidden=!tele;
+    tPres.setAttribute('aria-pressed',!tele);tTele.setAttribute('aria-pressed',tele);
+    modeTag.innerHTML=tele?'{{i:video}}<span>Teleconsulta</span>':'{{i:door-open}}<span>Presencial</span>';
+    if(tele){$('wait').querySelector('b').textContent='Laura Martínez está en la sala de espera';$('wait').querySelector('p').textContent='Mamá de Kevin · se conectó hace 1 min';$('admit').lastChild.textContent='Admitir y empezar';llamada('espera')}
+  }
+  tPres.onclick=function(){tipo(false)};tTele.onclick=function(){tipo(true)};
+  $('admit').onclick=function(){llamada('en');$('cb-mic').focus()};
+  function tog(id,txtOn,txtOff,fn){var b=$(id);b.onclick=function(){var v=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',v);b.querySelector('span').textContent=v?txtOn:txtOff;if(fn)fn(v)}}
+  tog('cb-mic','Mic. apagado','Micrófono');
+  tog('cb-cam','Cámara apagada','Cámara');
+  tog('cb-share','Compartiendo','Compartir');
+  tog('cb-cap','Subtítulos','Subtítulos',function(v){$('cap').hidden=!v});
+  tog('cb-wide','Reducir','Ampliar',function(v){app.classList.toggle('wide',v)});
+  $('cb-end').onclick=function(){llamada('fin');$('admit').focus()};
 })();
 </script>

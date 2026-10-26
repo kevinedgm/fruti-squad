@@ -34,16 +34,56 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
 .intro{display:flex;flex-wrap:wrap;gap:6px 20px;align-items:baseline;justify-content:space-between}
 .intro h1{font:600 22px/1.25 var(--display)}
 .intro p{color:var(--muted);font-size:15px}
+.seg{display:inline-flex;align-items:center;gap:4px;background:var(--surface);border:1.5px solid var(--control);border-radius:12px;padding:3px 3px 3px 12px;font-size:15px;color:var(--muted)}
+.seg button{min-height:44px;padding:0 14px;border-radius:9px;border:0;background:none;font-weight:700;cursor:pointer;color:var(--ink)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
 
 /* ===== app ===== */
 .app{background:var(--canvas);border-radius:18px;overflow:clip;box-shadow:0 0 0 1px var(--edge);container-type:inline-size}
-.bar{display:flex;align-items:center;gap:12px;min-height:52px;padding:6px 18px;background:var(--surface);border-bottom:1px solid var(--line);font-size:15px;color:var(--muted)}
-.bar .brand{display:flex;align-items:center;gap:8px;font:600 15px var(--display);color:var(--ink)}
-.bar .brand svg{width:26px;height:26px}
-.bar .crumb a{color:var(--azul);font-weight:600;text-decoration:none}
-.bar .saved{margin-left:auto;display:inline-flex;align-items:center;gap:6px}
-.bar .help{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 12px;border-radius:10px;border:1px solid var(--control);background:var(--surface);font-weight:600;color:var(--ink);cursor:pointer}
-.bar .saved i{width:8px;height:8px;border-radius:50%;background:var(--ok)}
+/* barra superior de la app (shell de Expediente: 8+ destinos → sidebar por grupos, plegable a riel) */
+.bar{display:flex;align-items:center;gap:10px;min-height:64px;padding:8px 14px;background:var(--surface);border-bottom:1px solid var(--line)}
+.ib{width:44px;height:44px;border-radius:10px;border:0;background:none;display:grid;place-items:center;cursor:pointer;color:var(--muted);flex:none;position:relative}
+.ib:hover{background:var(--soft)}
+.ib .dot{position:absolute;top:8px;right:8px;min-width:18px;height:18px;border-radius:9px;background:var(--error);color:#fff;font:700 11px/18px var(--sans);text-align:center;padding:0 4px}
+.bar .brand{display:flex;align-items:center;gap:8px;font:600 16px var(--display);color:var(--ink);text-decoration:none;white-space:nowrap}
+.bar .brand svg{width:30px;height:30px}
+.bar .brand span{font-weight:400;color:var(--muted)}
+.bar .search{flex:1;max-width:460px;margin:0 auto;display:flex;align-items:center;gap:8px;min-height:44px;border:1px solid var(--control);border-radius:12px;padding:0 12px;color:var(--hint);font-size:15px;background:var(--surface);white-space:nowrap;overflow:hidden}
+.bar .clinic{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);font-weight:600;font-size:15px;cursor:pointer;white-space:nowrap}
+.bar .clinic svg{width:18px;height:18px}
+.bar .eco svg{width:26px;height:26px}
+.av{width:38px;height:38px;border-radius:50%;background:var(--azul-soft);color:var(--azul);display:grid;place-items:center;font:700 14px var(--sans);flex:none}
+.ctx{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;padding:10px 18px;font-size:15px;color:var(--muted);background:var(--canvas)}
+.ctx a{color:var(--azul);font-weight:600;text-decoration:none}
+.ctx .saved{margin-left:auto;display:inline-flex;align-items:center;gap:6px}
+.ctx .saved i{width:8px;height:8px;border-radius:50%;background:var(--ok)}
+.ctx .mode{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--azul);background:var(--azul-soft);border-radius:999px;padding:2px 10px}
+.ctx .mode svg{width:16px;height:16px}
+
+/* sidebar de la app: en consulta arranca como riel para dejar espacio; «Expandir menú» lo abre encima, sin mover la consulta */
+.shell{display:grid;grid-template-columns:72px minmax(0,1fr);position:relative}
+.anav{background:var(--surface);border-right:1px solid var(--line);position:relative;z-index:45}
+.anav .in{position:sticky;top:0;display:grid;gap:4px;padding:12px 10px;align-content:start;max-height:100vh;overflow:auto}
+.anav .cta{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border-radius:12px;border:0;background:var(--azul);color:#fff;font-weight:700;cursor:pointer;margin-bottom:8px}
+.anav .gh{font:600 12px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:10px 10px 4px;display:none}
+.anav .gsep{height:1px;background:var(--line);margin:6px 4px}
+.it{display:flex;align-items:center;justify-content:center;gap:12px;min-height:44px;padding:0 10px;border-radius:12px;color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;position:relative;white-space:nowrap}
+.it:hover{background:var(--soft)}
+.it[aria-current="page"]{background:var(--azul-soft);color:var(--azul)}
+.it .lbl,.anav .cta span{display:none}
+.it .ct{display:none;margin-left:auto;font:700 13px var(--sans);background:var(--soft);border-radius:999px;padding:1px 8px;color:var(--ink)}
+.it .ctdot{position:absolute;top:6px;right:8px;width:8px;height:8px;border-radius:50%;background:var(--azul)}
+.it::after{content:attr(data-label);position:absolute;left:calc(100% + 10px);top:50%;transform:translateY(-50%);background:var(--ink);color:#fff;font:600 15px/1.3 var(--sans);padding:8px 12px;border-radius:8px;white-space:nowrap;display:none;z-index:80}
+.shell:not(.nav-open):not(.tips-off) .it:hover::after,.shell:not(.nav-open):not(.tips-off) .it:focus-visible::after{display:block}
+.anav .foot{border-top:1px solid var(--line);margin-top:8px;padding-top:8px;display:grid;gap:4px}
+.shell.nav-open .anav .in{position:absolute;top:0;left:0;width:260px;max-height:none;min-height:100%;background:var(--surface);border-right:1px solid var(--edge);box-shadow:16px 0 40px rgba(20,33,61,.14)}
+.shell.nav-open .anav .gh{display:block}
+.shell.nav-open .it{justify-content:flex-start}
+.shell.nav-open .it .lbl,.shell.nav-open .anav .cta span,.shell.nav-open .it .ct{display:inline}
+.shell.nav-open .it .ctdot,.shell.nav-open .anav .gsep{display:none}
+.bar .mnav{display:none}
+.navscrim{position:absolute;inset:0;background:rgba(20,33,61,.25);z-index:44}
+.content{min-width:0}
 
 /* paciente */
 .pt{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;padding:12px 18px;background:var(--surface);border-bottom:1px solid var(--edge)}
@@ -68,8 +108,11 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
 .timer .lbl{font-size:15px}
 
 /* cuerpo: pasos | consulta | herramientas */
-.body{display:grid;grid-template-columns:230px minmax(0,1fr) 290px;gap:18px;padding:18px;align-items:start}
-.app.tools-closed .body{grid-template-columns:230px minmax(0,1fr) 64px}
+.body{--sidew:290px;display:grid;grid-template-columns:230px minmax(0,1fr) var(--sidew);grid-template-areas:"steps main side";gap:18px;padding:18px;align-items:start}
+.steps{grid-area:steps}.main{grid-area:main}.side{grid-area:side}
+.app.tools-closed .body{--sidew:64px}
+.app.tele .body,.app.tele.tools-closed .body,.app.docked .body{--sidew:440px}
+.app.tele.wide .body{--sidew:minmax(0,1.15fr)}
 
 /* pasos */
 .steps{position:sticky;top:calc(var(--pth,80px) + 16px);display:grid;gap:14px}
@@ -137,7 +180,8 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
 .later ul{margin:0;padding-left:20px;display:grid;gap:4px;color:var(--muted)}
 
 /* herramientas de apoyo */
-.tools-p{position:sticky;top:calc(var(--pth,80px) + 16px);background:var(--surface);border:1px solid var(--edge);border-radius:18px;display:grid}
+.side{position:sticky;top:calc(var(--pth,80px) + 16px);display:grid;gap:14px;align-content:start;min-width:0}
+.tools-p{background:var(--surface);border:1px solid var(--edge);border-radius:18px;display:grid}
 .tp-h{border-radius:18px 18px 0 0}
 .tool{position:relative}
 .tool::after{content:attr(data-label);position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);background:var(--ink);color:#fff;font:600 15px/1.3 var(--sans);padding:8px 12px;border-radius:8px;white-space:nowrap;display:none;z-index:30}
@@ -165,15 +209,46 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
 .notes p svg{width:14px;height:14px}
 .app.tools-closed .tools-p .tp-h h3,.app.tools-closed .tg h4,.app.tools-closed .tool span.t,.app.tools-closed .tool .new,.app.tools-closed .notes{display:none}
 .app.tools-closed .tp-h{padding:8px 11px;justify-content:center}
+.app.tele.tools-closed .tools-p{grid-template-columns:auto minmax(0,1fr)}
+.app.tele.tools-closed .tp-h{border-radius:18px 0 0 18px;border-bottom:0;border-right:1px solid var(--line)}
+.app.tele.tools-closed .tg{display:flex;flex-wrap:wrap;gap:4px;border-bottom:0;padding:8px 4px}
+.app.tele.tools-closed .tool::after{right:auto;left:50%;top:auto;bottom:calc(100% + 8px);transform:translateX(-50%)}
+.app.tele.tools-closed .tool{width:auto;padding:5px}
 .app.tools-closed .tool{justify-content:center;padding:6px 0}
 .app.tools-closed .tg{padding:8px 6px}
+
+/* videoconsulta */
+.vc{background:var(--ink);color:#fff;border-radius:18px;overflow:hidden;display:grid}
+.vc-h{display:flex;align-items:center;gap:10px;padding:10px 12px 10px 16px;font-size:15px}
+.vc-h b{font:600 16px var(--display)}
+.vc-h .net{margin-left:auto;display:inline-flex;align-items:center;gap:6px;color:#CFE9D9;font-size:14px}
+.vc-h .net svg{width:16px;height:16px}
+.stage{position:relative;aspect-ratio:16/10;max-width:100%;background:radial-gradient(60% 70% at 50% 40%,#3B4C77 0%,#1B2747 100%);display:grid;place-items:center}
+.stage .who{display:grid;justify-items:center;gap:8px;text-align:center;padding:12px}
+.stage .who .bigav{width:84px;height:84px;border-radius:50%;background:#2C3B63;display:grid;place-items:center;font:600 28px var(--display)}
+.stage .name{position:absolute;left:10px;bottom:10px;background:rgba(10,18,40,.8);border-radius:8px;padding:4px 10px;font-size:14px;font-weight:600}
+.stage .self{position:absolute;right:10px;top:10px;width:28%;aspect-ratio:4/3;border-radius:10px;background:#45567F;border:2px solid #fff;display:grid;place-items:center;font:600 13px var(--sans)}
+.stage .cap{position:absolute;left:10px;right:10px;bottom:48px;background:rgba(10,18,40,.9);border-radius:8px;padding:8px 12px;font-size:16px;line-height:1.4}
+.stage .cap small{display:block;font-size:13px;color:#C9D3E8}
+.vc .wait{display:grid;gap:10px;justify-items:center;text-align:center;padding:16px}
+.vc .wait p{color:#C9D3E8;font-size:15px}
+.vc .admit{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:0 18px;border-radius:12px;border:0;background:#fff;color:var(--ink);font-weight:700;cursor:pointer}
+.ctrls{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px;justify-content:center}
+.ctrls .cb{flex:1 1 0}
+.cb{display:inline-flex;flex-direction:column;align-items:center;gap:2px;min-width:56px;min-height:56px;padding:6px 8px;border-radius:12px;border:1px solid #4A5A82;background:#22305A;color:#fff;font:600 13px var(--sans);cursor:pointer}
+.cb:hover{background:#2C3B6A}
+.cb[aria-pressed="true"].off{background:#FFFFFF;color:var(--on-error);border-color:#fff}
+.cb[aria-pressed="true"].on{background:#FFFFFF;color:var(--azul);border-color:#fff}
+.cb.end{background:var(--error);border-color:var(--error)}
+.cb.end:hover{background:#A9323F}
+.vc :focus-visible{outline-color:#9CC3FF}
+.vc-note{font-size:13px;color:#C9D3E8;padding:0 14px 12px;text-align:center}
 
 /* cajón de herramienta */
 /* Ancho: el panel de la herramienta ocupa la columna derecha y no tapa la consulta (2.4.11). Angosto: diálogo modal con Esc y foco contenido (2.1.2). */
 .drawer{background:var(--surface);border:1px solid var(--edge);border-radius:18px;display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden}
-.app.docked .body{grid-template-columns:230px minmax(0,1fr) 440px}
 .app.docked .tools-p{display:none}
-.app.docked .drawer{position:sticky;top:calc(var(--pth,80px) + 16px);max-height:calc(100vh - var(--pth,80px) - 32px)}
+.app.docked .drawer{max-height:calc(100vh - var(--pth,80px) - 32px)}
 .drawer.as-modal{position:fixed;top:0;right:0;bottom:0;width:min(480px,100%);border-radius:0;z-index:60;box-shadow:-16px 0 40px rgba(20,33,61,.2)}
 .backdrop{position:fixed;inset:0;background:rgba(20,33,61,.4);z-index:50}
 .dr-h{display:flex;align-items:center;gap:10px;padding:12px 12px 12px 18px;border-bottom:1px solid var(--line);background:var(--head)}
@@ -188,20 +263,41 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
 .kv dd{margin:0}
 .spark{display:block;width:100%;height:auto;max-width:100%}
 
-@container (max-width:1100px){
+@container (max-width:1180px){
   .body{grid-template-columns:210px minmax(0,1fr) 64px}
-  .app .tools-p .tp-h h3,.app .tg h4,.app .tool span.t,.app .tool .new,.app .notes{display:none}
-  .app .tool{justify-content:center;padding:6px 0}.app .tp-h{justify-content:center;padding:8px}
+  .app.tele .body,.app.tele.wide .body{grid-template-columns:210px minmax(0,1fr);grid-template-areas:"side side" "steps main"}
+  .app.tele .side{position:static;grid-template-columns:minmax(0,560px) minmax(0,1fr);align-items:start}
+  .app.tele .side .vc{grid-row:span 2}
+  .bar .clinic,.bar .search span{display:none}.bar .search{flex:0 0 44px;padding:0;justify-content:center;border:0}
+  /* sin video: la columna se reduce a íconos con su nombre al pasar o enfocar. Con video hay espacio junto a él: lista completa */
+  .app:not(.tele) .tools-p .tp-h h3,.app:not(.tele) .tg h4,.app:not(.tele) .tool span.t,.app:not(.tele) .tool .new,.app:not(.tele) .notes{display:none}
+  .app:not(.tele) .tool{justify-content:center;padding:6px 0}.app:not(.tele) .tp-h{justify-content:center;padding:8px}
   .app .tp-h button{display:none}
+  .app:not(.tele) .tool::after{display:none}
+  .app:not(.tele):not(.tips-off) .tool:hover::after,.app:not(.tele):not(.tips-off) .tool:focus-visible::after{display:block}
 }
 @container (max-width:760px){
-  .body{grid-template-columns:1fr;padding:12px;gap:12px}
+  .body,.app.tele .body,.app.tele.wide .body{grid-template-columns:1fr;grid-template-areas:"steps" "main" "side";padding:12px;gap:12px}
+  .app.tele .body,.app.tele.wide .body{grid-template-areas:"side" "steps" "main"}
+  .app.tele .side{grid-template-columns:1fr}
+  .side{position:static}
+  .shell{grid-template-columns:1fr}
+  .anav{display:none}
+  .shell.nav-open .anav{display:block;position:fixed;inset:0 auto 0 0;z-index:70}
+  .shell.nav-open .anav .in{position:static;min-height:100vh;width:min(300px,86vw)}
+  .bar .brand span{display:none}
+  .bar .mnav{display:grid}
   .steps{position:static}.steps h3,.sep,.steps .ant{display:none}
   .steps ol{grid-template-columns:repeat(4,minmax(0,1fr))}
   .pt{position:static}
   .st{grid-template-columns:1fr;justify-items:center;text-align:center;padding:8px 4px}.st small{display:none}.st b{font-size:13px}
   .tools-p{position:static;order:3}
-  .tools-p .tg{display:flex;flex-wrap:wrap}
+  /* en pantalla táctil no hay «pasar el ratón»: las herramientas siempre muestran su nombre */
+  .app:not(.zz) .tools-p .tp-h h3,.app:not(.zz) .tg h4,.app:not(.zz) .tool span.t,.app:not(.zz) .notes{display:block}
+  .app:not(.zz) .tool .new{display:inline}
+  .app:not(.zz) .tool{justify-content:flex-start;padding:9px 8px}
+  .app:not(.zz) .tp-h{justify-content:flex-start;padding:12px 16px}
+  .app:not(.zz) .tool::after{display:none!important}
   .when{margin-left:0}
   .mh,.mb,.mf{padding-left:16px;padding-right:16px}
   .mf .btn{white-space:normal;text-align:left}.mf .btn.p{flex:1;justify-content:space-between}
@@ -221,15 +317,49 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
 <div class="page">
   <div class="intro">
     <h1>Consulta · prototipo 1: el marco</h1>
-    <p>Paciente arriba, pasos a la izquierda, consulta al centro, herramientas de apoyo a la derecha. Datos de ejemplo.</p>
+    <div class="seg" role="group" aria-label="Tipo de consulta (control del prototipo)"><span>Tipo de consulta:</span><button type="button" id="t-pres" aria-pressed="true">Presencial</button><button type="button" id="t-tele" aria-pressed="false">Teleconsulta</button></div>
   </div>
 
   <div class="app" id="app">
     <div class="bar">
-      <span class="brand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -18 126 126" aria-hidden="true" focusable="false"><defs><clipPath id="ex-c-expediente"><path d="M0 -2 A10 10 0 0 1 10 -12 H38 C44 -12 46 -10 49 -6 L52 -2 C54 0 56 0 60 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H21 A21 21 0 0 1 0 79 Z"/></clipPath><mask id="ex-m-expediente" maskUnits="userSpaceOnUse" x="-8" y="-18" width="126" height="126"><rect x="-8" y="-18" width="126" height="126" fill="#fff"/></mask></defs><g mask="url(#ex-m-expediente)"><path d="M0 -2 A10 10 0 0 1 10 -12 H38 C44 -12 46 -10 49 -6 L52 -2 C54 0 56 0 60 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H21 A21 21 0 0 1 0 79 Z" fill="#234899"/><path clip-path="url(#ex-c-expediente)" d="M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64" fill="none" stroke="#F6F8FC" stroke-width="13" stroke-linejoin="round"/></g></svg>Expediente Manik</span>
-      <span class="crumb"><a href="#app">Agenda de hoy</a> › Consulta del <b>24/10/2026, 13:30</b></span>
+      <button type="button" class="ib mnav" id="mnav" aria-label="Abrir menú" aria-expanded="false"><svg aria-hidden="true" focusable="false" class="lucide lucide-menu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M4 5h16" /> <path d="M4 12h16" /> <path d="M4 19h16" /> </svg></button>
+      <a class="brand" href="#app"><svg xmlns="http://www.w3.org/2000/svg" viewBox="-8 -18 126 126" aria-hidden="true" focusable="false"><defs><clipPath id="ex-c-expediente"><path d="M0 -2 A10 10 0 0 1 10 -12 H38 C44 -12 46 -10 49 -6 L52 -2 C54 0 56 0 60 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H21 A21 21 0 0 1 0 79 Z"/></clipPath><mask id="ex-m-expediente" maskUnits="userSpaceOnUse" x="-8" y="-18" width="126" height="126"><rect x="-8" y="-18" width="126" height="126" fill="#fff"/></mask></defs><g mask="url(#ex-m-expediente)"><path d="M0 -2 A10 10 0 0 1 10 -12 H38 C44 -12 46 -10 49 -6 L52 -2 C54 0 56 0 60 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H21 A21 21 0 0 1 0 79 Z" fill="#234899"/><path clip-path="url(#ex-c-expediente)" d="M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64" fill="none" stroke="#F6F8FC" stroke-width="13" stroke-linejoin="round"/></g></svg>Expediente <span>Manik</span></a>
+      <span class="search" role="search"><svg aria-hidden="true" focusable="false" class="lucide lucide-search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m21 21-4.34-4.34" /> <circle cx="11" cy="11" r="8" /> </svg><span>Buscar paciente por nombre, CURP o expediente</span></span>
+      <button type="button" class="clinic"><svg aria-hidden="true" focusable="false" class="lucide lucide-building-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M10 12h4" /> <path d="M10 8h4" /> <path d="M14 21v-3a2 2 0 0 0-4 0v3" /> <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" /> <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" /> </svg>Consultorio Angelópolis<svg aria-hidden="true" focusable="false" class="lucide lucide-chevron-down" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m6 9 6 6 6-6" /> </svg></button>
+      <button type="button" class="ib" aria-label="Avisos, 2 nuevos"><svg aria-hidden="true" focusable="false" class="lucide lucide-bell" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M10.268 21a2 2 0 0 0 3.464 0" /> <path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" /> </svg><span class="dot" aria-hidden="true">2</span></button>
+      <button type="button" class="ib eco" aria-label="Ecosistema Manik: cambiar de app"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><rect x="2.80" y="5.60" width="5.6" height="5.6" rx="1.6" fill="#234899"/><rect x="10.00" y="5.60" width="5.6" height="5.6" rx="1.6" fill="#007C8C"/><rect x="17.20" y="5.60" width="5.6" height="5.6" rx="1.6" fill="#A15C07"/><rect x="2.80" y="12.80" width="5.6" height="5.6" rx="1.6" fill="#1B7F52"/><rect x="10.00" y="12.80" width="5.6" height="5.6" rx="1.6" fill="#504CA1"/><rect x="17.20" y="12.80" width="5.6" height="5.6" rx="1.6" fill="#C73A55"/></svg></button>
+      <span class="av" role="img" aria-label="Dra. Ramírez">DR</span>
+    </div>
+    <div class="shell" id="shell">
+      <nav class="anav" id="anav" aria-label="Menú de Expediente"><div class="in">
+        <button type="button" class="ib" id="navt" aria-expanded="false" aria-label="Expandir menú"><svg aria-hidden="true" focusable="false" class="lucide lucide-panel-left-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M9 3v18" /> <path d="m14 9 3 3-3 3" /> </svg></button>
+        <button type="button" class="cta it" data-label="Nueva consulta" aria-label="Nueva consulta"><svg aria-hidden="true" focusable="false" class="lucide lucide-plus" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M5 12h14" /> <path d="M12 5v14" /> </svg><span>Nueva consulta</span></button>
+        <div class="gh">Atención</div>
+        <a class="it" href="#app" data-label="Hoy" aria-label="Hoy, 6 pendientes" aria-current="page"><svg aria-hidden="true" focusable="false" class="lucide lucide-house" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /> <path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /> </svg><span class="lbl">Hoy</span><span class="ct">6</span><span class="ctdot"></span></a>
+        <a class="it" href="#app" data-label="Pacientes" aria-label="Pacientes"><svg aria-hidden="true" focusable="false" class="lucide lucide-users" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /> <path d="M16 3.128a4 4 0 0 1 0 7.744" /> <path d="M22 21v-2a4 4 0 0 0-3-3.87" /> <circle cx="9" cy="7" r="4" /> </svg><span class="lbl">Pacientes</span></a>
+        <a class="it" href="#app" data-label="Consultas" aria-label="Consultas"><svg aria-hidden="true" focusable="false" class="lucide lucide-stethoscope" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M11 2v2" /> <path d="M5 2v2" /> <path d="M5 3H4a2 2 0 0 0-2 2v4a6 6 0 0 0 12 0V5a2 2 0 0 0-2-2h-1" /> <path d="M8 15a6 6 0 0 0 12 0v-3" /> <circle cx="20" cy="10" r="2" /> </svg><span class="lbl">Consultas</span></a>
+        <a class="it" href="#app" data-label="Lista de espera" aria-label="Lista de espera, 3 pendientes"><svg aria-hidden="true" focusable="false" class="lucide lucide-clock" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <circle cx="12" cy="12" r="10" /> <path d="M12 6v6l4 2" /> </svg><span class="lbl">Lista de espera</span><span class="ct">3</span><span class="ctdot"></span></a>
+        <div class="gsep"></div>
+        <div class="gh">Clínico</div>
+        <a class="it" href="#app" data-label="Recetas" aria-label="Recetas"><svg aria-hidden="true" focusable="false" class="lucide lucide-pill" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z" /> <path d="m8.5 8.5 7 7" /> </svg><span class="lbl">Recetas</span></a>
+        <a class="it" href="#app" data-label="Órdenes de estudios" aria-label="Órdenes de estudios"><svg aria-hidden="true" focusable="false" class="lucide lucide-flask-conical" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2" /> <path d="M6.453 15h11.094" /> <path d="M8.5 2h7" /> </svg><span class="lbl">Órdenes de estudios</span></a>
+        <a class="it" href="#app" data-label="Resultados" aria-label="Resultados, 2 pendientes"><svg aria-hidden="true" focusable="false" class="lucide lucide-chart-line" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M3 3v16a2 2 0 0 0 2 2h16" /> <path d="m19 9-5 5-4-4-3 3" /> </svg><span class="lbl">Resultados</span><span class="ct">2</span><span class="ctdot"></span></a>
+        <a class="it" href="#app" data-label="Vacunas" aria-label="Vacunas"><svg aria-hidden="true" focusable="false" class="lucide lucide-syringe" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m18 2 4 4" /> <path d="m17 7 3-3" /> <path d="M19 9 8.7 19.3c-1 1-2.5 1-3.4 0l-.6-.6c-1-1-1-2.5 0-3.4L15 5" /> <path d="m9 11 4 4" /> <path d="m5 19-3 3" /> <path d="m14 4 6 6" /> </svg><span class="lbl">Vacunas</span></a>
+        <div class="gsep"></div>
+        <div class="gh">Documentos</div>
+        <a class="it" href="#app" data-label="Consentimientos" aria-label="Consentimientos"><svg aria-hidden="true" focusable="false" class="lucide lucide-file-text" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <path d="M10 9H8" /> <path d="M16 13H8" /> <path d="M16 17H8" /> </svg><span class="lbl">Consentimientos</span></a>
+        <a class="it" href="#app" data-label="Certificados" aria-label="Certificados"><svg aria-hidden="true" focusable="false" class="lucide lucide-award" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526" /> <circle cx="12" cy="8" r="6" /> </svg><span class="lbl">Certificados</span></a>
+        <a class="it" href="#app" data-label="Plantillas" aria-label="Plantillas"><svg aria-hidden="true" focusable="false" class="lucide lucide-layout-template" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="18" height="7" x="3" y="3" rx="1" /> <rect width="9" height="7" x="3" y="14" rx="1" /> <rect width="5" height="7" x="16" y="14" rx="1" /> </svg><span class="lbl">Plantillas</span></a>
+        <div class="gsep"></div>
+        <div class="gh">Análisis</div>
+        <a class="it" href="#app" data-label="Reportes" aria-label="Reportes"><svg aria-hidden="true" focusable="false" class="lucide lucide-chart-column" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M3 3v16a2 2 0 0 0 2 2h16" /> <path d="M18 17V9" /> <path d="M13 17V5" /> <path d="M8 17v-3" /> </svg><span class="lbl">Reportes</span></a>
+        <div class="foot"><a class="it" href="#app" data-label="Configuración" aria-label="Configuración"><svg aria-hidden="true" focusable="false" class="lucide lucide-settings" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915" /> <circle cx="12" cy="12" r="3" /> </svg><span class="lbl">Configuración</span></a><a class="it" href="#app" data-label="Ayuda" aria-label="Ayuda"><svg aria-hidden="true" focusable="false" class="lucide lucide-circle-help" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <circle cx="12" cy="12" r="10" /> <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" /> <path d="M12 17h.01" /> </svg><span class="lbl">Ayuda</span></a></div>
+      </div></nav>
+      <div class="content">
+    <div class="ctx">
+      <span><a href="#app">Hoy</a> › Consulta del <b>24/10/2026, 13:30</b></span>
+      <span class="mode" id="modeTag"><svg aria-hidden="true" focusable="false" class="lucide lucide-door-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M10 21H2" /> <path d="M10 3H7a2 2 0 00-2 2v16" /> <path d="M14 12h.01" /> <path d="M19 21V5a2 2 0 00-1.675-1.974l-6.163-1.013A1 1 0 0010 3v18a1 1 0 001.124.992z" /> <path d="M22 21h-3" /> </svg><span>Presencial</span></span>
       <span class="saved"><i></i>Guardado hace un momento</span>
-      <button type="button" class="help"><svg aria-hidden="true" focusable="false" class="lucide lucide-info" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <circle cx="12" cy="12" r="10" /> <path d="M12 16v-4" /> <path d="M12 8h.01" /> </svg>Ayuda</button>
     </div>
 
     <header class="pt">
@@ -295,6 +425,26 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
         </div>
       </main>
 
+      <div class="side" id="side">
+      <section class="vc" id="vc" aria-label="Videoconsulta" hidden>
+        <div class="vc-h"><b>Videoconsulta</b><span id="vcst">Sala de espera</span><span class="net"><svg aria-hidden="true" focusable="false" class="lucide lucide-wifi" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 20h.01" /> <path d="M2 8.82a15 15 0 0 1 20 0" /> <path d="M5 12.859a10 10 0 0 1 14 0" /> <path d="M8.5 16.429a5 5 0 0 1 7 0" /> </svg>Conexión buena</span></div>
+        <div class="stage" id="stage">
+          <div class="wait" id="wait"><div class="bigav" style="width:72px;height:72px;border-radius:50%;background:#2C3B63;display:grid;place-items:center;font:600 24px var(--display)">LM</div><b>Laura Martínez está en la sala de espera</b><p>Mamá de Kevin · se conectó hace 1 min</p><button type="button" class="admit" id="admit"><svg aria-hidden="true" focusable="false" class="lucide lucide-video" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" /> <rect x="2" y="6" width="14" height="12" rx="2" /> </svg>Admitir y empezar</button></div>
+          <div class="who" id="who" hidden><div class="bigav">LM</div><span style="font-size:14px;color:#C9D3E8">Video de ejemplo</span></div>
+          <span class="name" id="vname" hidden>Laura Martínez (mamá)</span>
+          <span class="self" id="self" hidden>Tú</span>
+          <p class="cap" id="cap" hidden aria-live="polite"><small>Subtítulos automáticos</small>Laura: sigue con fiebre desde anoche y casi no quiere comer.</p>
+        </div>
+        <div class="ctrls" id="ctrls" role="group" aria-label="Controles de la llamada" hidden>
+          <button type="button" class="cb off" id="cb-mic" aria-pressed="false"><svg aria-hidden="true" focusable="false" class="lucide lucide-mic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M12 19v3" /> <path d="M19 10v2a7 7 0 0 1-14 0v-2" /> <rect x="9" y="2" width="6" height="13" rx="3" /> </svg><span>Micrófono</span></button>
+          <button type="button" class="cb off" id="cb-cam" aria-pressed="false"><svg aria-hidden="true" focusable="false" class="lucide lucide-video" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" /> <rect x="2" y="6" width="14" height="12" rx="2" /> </svg><span>Cámara</span></button>
+          <button type="button" class="cb on" id="cb-share" aria-pressed="false"><svg aria-hidden="true" focusable="false" class="lucide lucide-monitor-up" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m9 10 3-3 3 3" /> <path d="M12 13V7" /> <rect width="20" height="14" x="2" y="3" rx="2" /> <path d="M12 17v4" /> <path d="M8 21h8" /> </svg><span>Compartir</span></button>
+          <button type="button" class="cb on" id="cb-cap" aria-pressed="false"><svg aria-hidden="true" focusable="false" class="lucide lucide-captions" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="18" height="14" x="3" y="5" rx="2" ry="2" /> <path d="M7 15h4M15 15h2M7 11h2M13 11h4" /> </svg><span>Subtítulos</span></button>
+          <button type="button" class="cb on" id="cb-wide" aria-pressed="false"><svg aria-hidden="true" focusable="false" class="lucide lucide-maximize-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M15 3h6v6" /> <path d="m21 3-7 7" /> <path d="m3 21 7-7" /> <path d="M9 21H3v-6" /> </svg><span>Ampliar</span></button>
+          <button type="button" class="cb end" id="cb-end"><svg aria-hidden="true" focusable="false" class="lucide lucide-phone-off" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M10.1 13.9a14 14 0 0 0 3.732 2.668 1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2 18 18 0 0 1-12.728-5.272" /> <path d="M22 2 2 22" /> <path d="M4.76 13.582A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 .244.473" /> </svg><span>Colgar</span></button>
+        </div>
+        <p class="vc-note" id="vcnote" hidden>Colgar termina la llamada, no la consulta: la nota sigue abierta.</p>
+      </section>
       <aside class="tools-p" aria-label="Herramientas de apoyo">
         <div class="tp-h"><h3>Herramientas de apoyo</h3><button type="button" id="tclose" aria-label="Plegar herramientas" aria-expanded="true"><svg aria-hidden="true" focusable="false" class="lucide lucide-panel-right-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M15 3v18" /> <path d="m8 9 3 3-3 3" /> </svg></button></div>
         <div class="tg"><h4>Del paciente</h4>
@@ -318,11 +468,20 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
         <div class="dr-b" id="dr-b"></div>
         <div class="dr-f"><svg aria-hidden="true" focusable="false" class="lucide lucide-check" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M20 6 9 17l-5-5" /> </svg>La consulta sigue abierta y el tiempo sigue corriendo.</div>
       </div>
+      </div>
+    </div>
+      </div>
     </div>
 
   </div>
 
   <div class="notesd">
+    <section><h2>Menú de la app y videoconsulta</h2><ul>
+      <li><b>El menú de Expediente es el del shell aprobado</b> (Atención, Clínico, Documentos, Análisis; Configuración y Ayuda al pie). Durante la consulta arranca plegado como riel de íconos para dejar espacio a la nota; «Expandir menú» lo abre encima, sin mover la consulta, y se cierra con Esc, al hacer clic fuera o al salir de él con Tab.</li>
+      <li><b>La videoconsulta va arriba de la columna derecha</b>, sobre las herramientas: el médico ve al paciente mientras escribe y la cámara queda del lado de la pantalla donde suele estar. Empieza en «sala de espera» con «Admitir y empezar».</li>
+      <li><b>Controles con texto</b>: Micrófono, Cámara, Compartir, Subtítulos, Ampliar y Colgar. «Ampliar» agranda el video a media pantalla; «Colgar» termina la llamada pero no la consulta.</li>
+      <li><b>Pantallas medianas</b>: el video pasa arriba de la consulta, con las herramientas a su lado; en celular, video, pasos y nota en una columna.</li>
+    </ul></section>
     <section><h2>Qué cambia y por qué</h2><ul>
       <li><b>Las herramientas de apoyo van en su propia columna</b>, con ese título, para que no se lean como menú de navegación. Se pliegan a una columna de íconos con su nombre al pasar o enfocar.</li>
       <li><b>Cada herramienta se abre junto a la consulta</b>, en esa misma columna, sin taparla: el médico puede ver la gráfica mientras escribe. En pantallas angostas se abre como ventana con «Cerrar» y Esc.</li>
@@ -446,5 +605,49 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
       else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}
     }
   });
+
+  // ===== sidebar de la app =====
+  var shell=document.getElementById('shell'),navt=document.getElementById('navt'),mnav=document.getElementById('mnav'),anav=document.getElementById('anav'),scrim=null;
+  function setNav(open,from){
+    shell.classList.toggle('nav-open',open);
+    [navt,mnav].forEach(function(b){b.setAttribute('aria-expanded',open)});
+    navt.setAttribute('aria-label',open?'Plegar menú':'Expandir menú');
+    navt.innerHTML=open?'<svg aria-hidden="true" focusable="false" class="lucide lucide-panel-left-close" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M9 3v18" /> <path d="m16 15-3-3 3-3" /> </svg>':'<svg aria-hidden="true" focusable="false" class="lucide lucide-panel-left-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <rect width="18" height="18" x="3" y="3" rx="2" /> <path d="M9 3v18" /> <path d="m14 9 3 3-3 3" /> </svg>';
+    if(open&&!scrim){scrim=document.createElement('div');scrim.className='navscrim';scrim.onclick=function(){setNav(false)};shell.appendChild(scrim)}
+    if(!open&&scrim){scrim.remove();scrim=null}
+    if(open)anav.querySelector('.cta').focus();else if(from)from.focus();
+  }
+  navt.onclick=function(){setNav(!shell.classList.contains('nav-open'),navt)};
+  mnav.onclick=function(){setNav(true)};
+  // el menú expandido se cierra al salir de él con Tab, para que nunca tape el foco (2.4.11)
+  anav.addEventListener('focusout',function(e){if(shell.classList.contains('nav-open')&&e.relatedTarget&&!anav.contains(e.relatedTarget))setNav(false)});
+  anav.querySelectorAll('.it').forEach(function(a){a.addEventListener('mouseenter',function(){shell.classList.remove('tips-off')});a.addEventListener('focus',function(){shell.classList.remove('tips-off')})});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(shell.classList.contains('nav-open'))setNav(false,window.innerWidth>760?navt:mnav);else shell.classList.add('tips-off')}});
+
+  // ===== teleconsulta =====
+  var tPres=document.getElementById('t-pres'),tTele=document.getElementById('t-tele'),vc=document.getElementById('vc'),modeTag=document.getElementById('modeTag');
+  var $=function(id){return document.getElementById(id)};
+  function llamada(estado){ // espera | en | fin
+    $('wait').hidden=estado!=='espera';
+    ['who','vname','self','ctrls','vcnote'].forEach(function(id){$(id).hidden=estado!=='en'});
+    if(estado!=='en'){$('cap').hidden=true;app.classList.remove('wide');$('cb-wide').setAttribute('aria-pressed','false')}
+    $('vcst').textContent=estado==='espera'?'Sala de espera':estado==='en'?'En llamada':'Llamada terminada';
+    if(estado==='fin'){$('wait').hidden=false;$('wait').querySelector('b').textContent='Terminó la llamada con Laura Martínez';$('wait').querySelector('p').textContent='La consulta sigue abierta para terminar la nota y la receta.';$('admit').lastChild.textContent='Volver a llamar'}
+  }
+  function tipo(tele){
+    app.classList.toggle('tele',tele);vc.hidden=!tele;
+    tPres.setAttribute('aria-pressed',!tele);tTele.setAttribute('aria-pressed',tele);
+    modeTag.innerHTML=tele?'<svg aria-hidden="true" focusable="false" class="lucide lucide-video" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5" /> <rect x="2" y="6" width="14" height="12" rx="2" /> </svg><span>Teleconsulta</span>':'<svg aria-hidden="true" focusable="false" class="lucide lucide-door-open" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" > <path d="M10 21H2" /> <path d="M10 3H7a2 2 0 00-2 2v16" /> <path d="M14 12h.01" /> <path d="M19 21V5a2 2 0 00-1.675-1.974l-6.163-1.013A1 1 0 0010 3v18a1 1 0 001.124.992z" /> <path d="M22 21h-3" /> </svg><span>Presencial</span>';
+    if(tele){$('wait').querySelector('b').textContent='Laura Martínez está en la sala de espera';$('wait').querySelector('p').textContent='Mamá de Kevin · se conectó hace 1 min';$('admit').lastChild.textContent='Admitir y empezar';llamada('espera')}
+  }
+  tPres.onclick=function(){tipo(false)};tTele.onclick=function(){tipo(true)};
+  $('admit').onclick=function(){llamada('en');$('cb-mic').focus()};
+  function tog(id,txtOn,txtOff,fn){var b=$(id);b.onclick=function(){var v=b.getAttribute('aria-pressed')!=='true';b.setAttribute('aria-pressed',v);b.querySelector('span').textContent=v?txtOn:txtOff;if(fn)fn(v)}}
+  tog('cb-mic','Mic. apagado','Micrófono');
+  tog('cb-cam','Cámara apagada','Cámara');
+  tog('cb-share','Compartiendo','Compartir');
+  tog('cb-cap','Subtítulos','Subtítulos',function(v){$('cap').hidden=!v});
+  tog('cb-wide','Reducir','Ampliar',function(v){app.classList.toggle('wide',v)});
+  $('cb-end').onclick=function(){llamada('fin');$('admit').focus()};
 })();
 </script>

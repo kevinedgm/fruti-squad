@@ -104,3 +104,19 @@ Estado: **C** cumple · **C\*** cumple con una corrección hecha en esta revisi�
 3. Prueba con médicos mayores de 50 años.
 4. 2.2.1: política de expiración de sesión.
 5. 3.3.4: revisión antes de «Terminar consulta» (prototipo 4).
+
+## Revisión 2: menú de la app y videoconsulta
+Prueba automática en Chromium, 1500, 1100 y 390 px: sin desplazamiento horizontal, sin errores de consola; ningún control bajo 44 px.
+
+| Criterio | Nivel | Estado | Evidencia |
+|---|---|---|---|
+| 3.2.3 Navegación consistente | AA | C | El menú es el del shell de Expediente (mismos grupos, mismo orden; Ayuda al pie del menú en todas las pantallas). |
+| 3.2.6 Ayuda consistente | A | C\* | «Ayuda» se movió de la barra superior al pie del menú, donde está en el shell, para que esté siempre en el mismo lugar. |
+| 1.4.13 Contenido al pasar o enfocar | AA | C | En el riel cada ícono muestra su nombre al pasar o enfocar; Esc lo oculta; se puede recorrer con el ratón. En celular las herramientas muestran siempre su nombre (no hay «pasar»). |
+| 2.4.11 Foco no oculto | AA | C\* | El menú expandido cubre parte de la consulta: se cierra al salir de él con Tab, con Esc o con clic fuera, así que nunca tapa el elemento enfocado. |
+| 2.1.1 / 2.1.2 Teclado, sin trampa | A | C | Menú, sala de espera y controles de la llamada son botones nativos; Esc cierra el menú y devuelve el foco al botón que lo abrió (medido). |
+| 4.1.2 Nombre, función, valor | A | C | Micrófono, cámara, compartir, subtítulos y ampliar usan `aria-pressed` y cambian su texto («Mic. apagado», «Reducir»). |
+| 1.4.1 Uso del color | A | C | El estado de cada control se indica con fondo, texto y `aria-pressed`, no solo con color; «Colgar» además tiene ícono y texto. |
+| 1.2.4 Subtítulos en directo | AA | C\* | No está en la guía, pero WCAG 2.2 lo pide para audio en vivo: botón «Subtítulos» con la marca «Subtítulos automáticos» (transparencia de IA). P: confirmar que el proveedor de video los ofrece en español. |
+| 1.1.1 Contenido no textual | A | P | El video real de la llamada no necesita alternativa (es comunicación en vivo); el sello del ecosistema y los íconos del riel tienen nombre accesible. |
+| 3.3.4 Prevención de errores | AA | C | «Colgar» no cierra la consulta; aviso visible: «Colgar termina la llamada, no la consulta». |
