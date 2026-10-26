@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-fidelidad" content="F2">
+<title>Wireframe · consulta-expediente · componentes · r01</title>
+<link rel="stylesheet" href="vendor/wireframe-kit.css">
+<style>
+/* Composición local del wireframe: solo variables grises del kit. */
+.cx-sel{background:transparent;border:1px solid #777;color:var(--wf-g0);border-radius:4px;padding:4px 10px;min-height:32px;font:inherit;max-width:100%}
+.wf-ctl label:has(.cx-sel){min-width:0;max-width:100%}
+.wf-ctl .cx-sel{width:min(420px,calc(100vw - 140px))}
+.cx-zone{min-width:0;overflow-wrap:anywhere}
+.wf-frame.cx-auto{min-height:0}
+.cx-ic{display:inline-block;width:18px;height:18px;border:1.5px solid currentColor;border-radius:4px;flex:none;opacity:.8}
+.cx-ic.r{border-radius:50%}
+.cx-row{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center}
+.cx-stack{display:grid;gap:12px}
+.cx-pad{padding:16px 20px}
+.cx-grow{flex:1;min-width:0}
+.cx-chip{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 12px;border:1px solid var(--wf-g6);border-radius:999px;font-size:13px;font-weight:600;background:var(--wf-g0)}
+.cx-chip.dash{border-style:dashed}
+.cx-chip.fill{border:2px solid var(--wf-g9)}  /* estado, no botón: contorno grueso + texto, sin relleno sólido */
+.cx-stage .cx-chip{color:var(--wf-g9)}
+.cx-code{display:inline-block;font:600 12px var(--wf-mono);border:1px solid var(--wf-g6);border-radius:4px;padding:2px 6px}
+.cx-code.dash{border-style:dashed}
+.cx-mark{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;border-left:4px solid var(--wf-g9);padding:2px 8px;background:var(--wf-g1)}
+.cx-alert{border:2px solid var(--wf-g9);border-radius:var(--wf-r);padding:12px 14px;background:var(--wf-g1)}
+.cx-alert.soft{border-width:1px;border-style:dashed}
+.cx-err{display:flex;gap:6px;align-items:flex-start;font-size:13px;font-weight:700}
+.cx-err::before{content:"!";display:inline-grid;place-items:center;width:18px;height:18px;border:2px solid currentColor;border-radius:50%;font-size:11px;flex:none}
+.cx-input-err{border:2px solid var(--wf-g9)}
+.cx-ta{width:100%;min-height:120px;border:1px solid var(--wf-g4);border-radius:var(--wf-r);padding:10px 12px;font:inherit;background:var(--wf-g0);resize:none}
+.cx-field{display:grid;gap:4px;min-width:0}
+.cx-field label{font-size:13px;font-weight:600}
+.cx-field .u{display:flex;align-items:center;border:1px solid var(--wf-g4);border-radius:var(--wf-r);min-height:44px;padding:0 10px;gap:6px;background:var(--wf-g0)}
+.cx-field .u input{border:0;outline:0;font:inherit;width:100%;min-width:0;min-height:42px;background:none}
+.cx-field .u span{font-size:13px;color:var(--wf-g6)}
+.cx-field.warn .u{border:2px solid var(--wf-g9);background:var(--wf-g1)}
+.cx-hint{font-size:12px;color:var(--wf-g6)}
+.cx-lb{border:1px solid var(--wf-g4);border-radius:var(--wf-r);margin-top:4px;padding:4px;background:var(--wf-g0)}
+.cx-lb div{padding:8px 10px;border-radius:4px;min-height:44px}
+.cx-lb div.on{background:var(--wf-g2);outline:2px solid var(--wf-g9)}
+.cx-card{border:1px solid var(--wf-g4);border-radius:var(--wf-r);background:var(--wf-g0);overflow:hidden}
+.cx-card.main{border:2px solid var(--wf-g9)}
+.cx-card>header{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;padding:10px 14px;background:var(--wf-g1);border-bottom:1px solid var(--wf-g3)}
+.cx-card>div{padding:12px 14px;display:grid;gap:10px}
+.cx-toast{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;background:var(--wf-g9);color:var(--wf-g0);border-radius:var(--wf-r);padding:8px 8px 8px 14px}
+.cx-toast .wf-btn{border-color:var(--wf-g4);background:transparent;color:var(--wf-g0)}
+.cx-toast .wf-btn.inv{background:var(--wf-g0);color:var(--wf-g9)}
+.cx-dark{background:var(--wf-g8);color:var(--wf-g0);border-radius:var(--wf-r);overflow:hidden}
+.cx-dark .wf-btn{background:transparent;color:var(--wf-g0);border-color:var(--wf-g4)}
+.cx-dark .wf-btn.on{background:var(--wf-g0);color:var(--wf-g9)}
+.cx-stage{position:relative;aspect-ratio:16/10;max-width:100%;background:var(--wf-g6);display:grid;place-items:center}
+.cx-stage .self{position:absolute;right:8px;top:8px;width:26%;aspect-ratio:4/3;border:2px solid var(--wf-g0);border-radius:6px;display:grid;place-items:center;font-size:12px}
+.cx-stage .name{position:absolute;left:8px;bottom:8px;background:var(--wf-g9);padding:2px 8px;border-radius:4px;font-size:12px}
+.cx-stage .cap{position:absolute;left:8px;right:8px;bottom:36px;background:var(--wf-g9);padding:6px 10px;border-radius:4px;font-size:13px}
+.cx-ctrls{display:flex;flex-wrap:wrap;gap:6px;padding:8px}
+.cx-ctrls .wf-btn{flex:1 1 0;min-width:64px;flex-direction:column;gap:2px;font-size:12px;min-height:52px;padding:4px}
+.cx-tl{list-style:none;margin:0;padding:0}
+.cx-tl li{display:flex;align-items:center;gap:10px;min-height:44px;padding:4px 8px}
+.cx-tl h4{margin:10px 8px 4px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--wf-g6)}
+
+/* composición de página (C00) */
+.cx-app{display:grid;grid-template-rows:auto 1fr;min-height:620px}
+.cx-top{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--wf-g3)}
+.cx-shell{display:grid;grid-template-columns:64px minmax(0,1fr)}
+.cx-rail{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:8px;display:grid;gap:6px;align-content:start;justify-items:center}
+.cx-rail .b{width:40px;height:40px;border:1px solid var(--wf-g4);border-radius:8px;display:grid;place-items:center;font-size:10px}
+.cx-body{display:grid;grid-template-columns:200px minmax(0,1fr) var(--side,260px);grid-template-areas:"steps main side";gap:12px;padding:12px;align-items:start}
+.cx-body.tele{--side:360px}
+.cx-zone{border:1.5px dashed var(--wf-g6);border-radius:var(--wf-r);padding:10px;display:grid;gap:6px;align-content:start;min-height:80px;background:var(--wf-g0)}
+.cx-zone b{font-size:13px}
+.cx-zone small{font-size:12px;color:var(--wf-g6)}
+.z-steps{grid-area:steps}.z-main{grid-area:main;min-height:380px}.z-side{grid-area:side}
+
+/* pasos (C03) */
+.cx-steps{display:grid;gap:4px;list-style:none;margin:0;padding:0}
+.cx-steps li{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:8px;border-radius:6px;min-height:44px}
+.cx-steps li .n{width:26px;height:26px;border:1.5px solid var(--wf-g6);border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700}
+.cx-steps li.cur{outline:2px solid var(--wf-g9)}
+.cx-steps li.cur .n{background:var(--wf-g9);color:var(--wf-g0);border-color:var(--wf-g9)}
+.cx-steps li.done .n{background:var(--wf-g6);color:var(--wf-g0);border-color:var(--wf-g6)}
+.cx-steps small{display:block;font-size:12px;color:var(--wf-g6)}
+
+.cx-vit{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;align-items:start}
+
+@container wf (max-width:1023px){
+  .cx-body{grid-template-columns:180px minmax(0,1fr) 64px}
+  .cx-body.tele{grid-template-columns:180px minmax(0,1fr);grid-template-areas:"side side" "steps main"}
+  .cx-hide-m{display:none}
+}
+@container wf (max-width:599px){
+  .cx-shell{grid-template-columns:1fr}
+  .cx-rail{display:none}
+  .cx-body,.cx-body.tele{grid-template-columns:1fr;grid-template-areas:"steps" "main" "side"}
+  .cx-body.tele{grid-template-areas:"side" "steps" "main"}
+  .cx-steps.h{grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}
+  .cx-steps.h li{grid-template-columns:1fr;justify-items:center;text-align:center}
+  .cx-steps.h small{display:none}
+  .cx-vit{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cx-hide-c{display:none}
+  .cx-show-c{display:flex!important}
+}
+.cx-show-c{display:none!important}
+
+/* ficha del componente (fuera del marco) */
+.cx-spec{max-width:1100px;margin:var(--wf-s5) auto 0;display:grid;gap:var(--wf-s3)}
+.cx-spec .wf-card h2{margin-top:0}
+.cx-spec table{width:100%}
+</style>
+</head>
+<body class="wf">
+<!-- kiwi · F2 · consulta-expediente separada en componentes. Solo grises del kit. -->
+
+<div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+  <strong>consulta-expediente · componentes · r01 · F2</strong>
+  <label>Componente <select class="cx-sel" id="cx-comp" aria-label="Componente"></select></label>
+  <fieldset><legend>Espacio</legend>
+    <button data-w="1440" aria-pressed="true">expanded 1440</button>
+    <button data-w="834" aria-pressed="false">medium 834</button>
+    <button data-w="393" aria-pressed="false">compact 393</button>
+  </fieldset>
+  <label>Estado <select id="wf-state" data-wf-states class="cx-sel"></select></label>
+  <label><input type="checkbox" id="wf-notes" checked> Notas</label>
+</div>
+
+<div class="wf-stage">
+  <p class="wf-frame-label" id="wf-label"></p>
+  <div class="wf-frame cx-auto" id="wf-frame">
+    <div id="wf-banner"></div>
+    <main class="wf-main" id="wf-view" tabindex="-1"></main>
+  </div>
+  <section class="cx-spec" id="cx-spec" aria-label="Contrato del componente"></section>
+</div>
+
+<script>
+const I = (r) => `<span class="cx-ic${r ? ' r' : ''}" aria-hidden="true"></span>`;
+const N = (t) => `<span class="wf-note">${t}</span>`;
+const EJ = '<span class="wf-tag">ejemplo</span>';
+const SUP = '<span class="wf-tag">supuesto</span>';
+
+/* ---------- piezas reutilizadas ---------- */
+const patient = (o = {}) => `
+  <div class="cx-row" style="padding:10px 14px;border-bottom:1px solid var(--wf-g3)">
+    <span class="cx-chip" aria-hidden="true">KG</span>
+    <div class="cx-grow"><strong>${o.name || 'Kevin Eduardo García Martínez'}</strong><div class="wf-small wf-muted"><b>9 meses y 23 días</b> · Hombre · Nació el 01/01/2026</div></div>
+    ${o.allergies ? `<span class="cx-chip">${I()}Alergias: ${o.allergies}</span>` : `<button class="cx-chip dash">${I()}Alergias sin registrar · <u>Registrar</u></button>`}
+    <button class="cx-chip">${I(1)}Grupo sanguíneo: sin registro</button>
+    <span class="cx-row" style="gap:6px">${I(1)}<b>${o.hidden ? 'Tiempo oculto' : (o.paused ? '02:49 · en pausa' : '02:49')}</b>
+      <button class="wf-btn">${o.paused ? 'Reanudar' : 'Pausar'}</button><button class="wf-btn" aria-pressed="${!!o.hidden}">${o.hidden ? 'Mostrar' : 'Ocultar'}</button></span>
+  </div>`;
+const stepsList = (cur = 1, err) => `
+  <ol class="cx-steps h" aria-label="Pasos de la consulta">
+    ${[['Exploración y padecimiento', 'Padecimiento obligatorio'], ['Diagnóstico y tratamiento', 'Al menos un diagnóstico'], ['Estudios y cirugías', 'Opcional'], ['Receta y cierre', 'Revisar y terminar']].map((s, i) => {
+      const n = i + 1, st = n < cur ? 'done' : n === cur ? 'cur' : '';
+      return `<li class="${st}" ${n === cur ? 'aria-current="step"' : ''}><span class="n">${n < cur ? '✓' : n}</span><span><b>${s[0]}</b><small>${n < cur ? 'Completo' : (err && n === cur ? '<b>Falta: ' + s[1].toLowerCase() + '</b>' : s[1])}</small></span></li>`;
+    }).join('')}
+  </ol>`;
+const field = (l, v, u, o = {}) => `<div class="cx-field${o.warn ? ' warn' : ''}"><label>${l}</label><div class="u"><input value="${v}" aria-label="${l}"${o.err ? ' aria-invalid="true"' : ''}><span>${u}</span></div>${o.msg ? `<span class="${o.warn || o.err ? 'cx-err' : 'cx-hint'}">${o.msg}</span>` : ''}</div>`;
+const combo = (label, ph, o = {}) => `<div class="cx-field"><label>${label}</label><div class="u${o.err ? ' cx-input-err' : ''}">${I(1)}<input value="${o.q || ''}" placeholder="${ph}" aria-label="${label}"></div>${o.list || ''}<span class="cx-hint">Flechas para recorrer, Enter para elegir, Esc para cerrar.</span></div>`;
+const med = (o = {}) => `<div class="cx-card"${o.ctl ? ' style="border-left:4px solid var(--wf-g9)"' : ''}><div>
+  <div class="cx-row"><strong>${o.n || 'Paracetamol'}</strong><span>${o.p || 'Solución oral (gotas) 100 mg/mL'}</span>${o.ctl ? `<span class="cx-mark">${I()}Controlado · va en receta aparte</span>` : ''}</div>
+  <span class="wf-small wf-muted">Sustancia activa: ${o.s || 'Paracetamol'}</span>
+  ${o.just ? `<span class="cx-mark">Contraindicación aceptada. Justificación: ${o.just}</span>` : ''}
+  ${o.edit ? editForm(o) : `<span class="cx-row">${I(1)}${o.pauta || '1.3 mL vía oral cada 6 horas por 3 días · Solo si la temperatura es de 38 °C o más'}</span>
+  <div class="cx-row"><button class="wf-btn wf-btn--quiet">Editar pauta</button><button class="wf-btn wf-btn--danger">Quitar</button></div>`}
+</div></div>`;
+const editForm = (o) => `<div class="cx-vit" style="background:var(--wf-g1);padding:10px;border-radius:6px">
+  ${field('Cantidad', o.err ? '' : '1.3', '', o.err ? { err: 1, msg: 'Escriba la cantidad por toma, por ejemplo 1.3.' } : {})}
+  ${field('Unidad', 'mL', '▾')}${field('Vía', 'Oral', '▾')}${field('Cada (horas)', '6', '▾')}${field('Durante (días)', '3', '')}
+  <div class="cx-field" style="grid-column:1/-1"><label>Indicaciones para el paciente</label><div class="u"><input value="Solo si la temperatura es de 38 °C o más" aria-label="Indicaciones"></div></div>
+  <p class="cx-hint" style="grid-column:1/-1">Propuesta de ayuda · por peso (8.9 kg): 10–15 mg/kg = 89–134 mg ≈ 0.9–1.3 mL. La dosis la decide usted. ${SUP}</p>
+  <div class="cx-row" style="grid-column:1/-1"><button class="wf-btn wf-btn--primary">Guardar pauta</button><button class="wf-btn wf-btn--quiet">Cancelar</button></div></div>`;
+const dxCard = (o = {}) => `<div class="cx-card${o.main ? ' main' : ''}">
+  <header><span class="cx-code${o.code ? '' : ' dash'}">${o.code || 'Escrito · sin CIE-10'}</span><strong class="cx-grow">${o.name}</strong>
+    ${o.main ? '<span class="cx-chip fill">★ Principal</span>' : '<button class="wf-btn wf-btn--quiet">★ Hacer principal</button>'}<button class="wf-btn wf-btn--danger">Quitar</button></header>
+  <div><span class="wf-small" style="font-weight:700;letter-spacing:.05em">MEDICAMENTOS</span>
+    ${o.meds || '<p class="wf-muted" style="margin:0">Sin medicamentos todavía.</p>'}
+    ${o.code ? (o.sug === false ? '' : `<div class="cx-row wf-small"><span class="wf-muted">Sugeridos para ${o.code}:</span>${(o.sug || ['Paracetamol · Solución oral 100 mg/mL', 'Cloruro de sodio 0.9 % · Solución nasal']).map(s => `<button class="cx-chip dash">+ ${s}</button>`).join('')}</div>`)
+      : '<p class="wf-muted wf-small" style="margin:0">Al no tener código CIE-10, no hay medicamentos sugeridos; búsquelos por nombre o sustancia.</p>'}
+    ${o.extra || ''}
+    <div><button class="wf-btn">+ ${o.meds ? 'Agregar otro medicamento' : 'Agregar medicamento'}</button></div>
+  </div></div>`;
+const tools = (mode) => `<aside class="cx-card" aria-label="Herramientas de apoyo"><header><strong class="cx-grow">Herramientas de apoyo</strong><button class="wf-btn" aria-label="${mode === 'rail' ? 'Desplegar' : 'Plegar'} herramientas">${I()}</button></header>
+  ${mode === 'rail' ? `<div style="display:grid;gap:6px;justify-items:center">${'<button class="wf-btn" style="width:44px;padding:0" aria-label="Herramienta">' + I() + '</button>'}${'<button class="wf-btn" style="width:44px;padding:0" aria-label="Herramienta">' + I() + '</button>'.repeat(7)}</div>`
+  : `<ul class="cx-tl"><h4>Del paciente</h4><li>${I()}Información adicional</li><li>${I()}Historia clínica</li><li>${I()}Estado de salud <span class="wf-muted wf-small">· última consulta</span></li><li>${I()}Gráficas <span class="cx-chip dash" style="min-height:24px">Dato nuevo</span></li><li>${I()}Multimedia</li>
+    <h4>Mis notas</h4><li>${I()}Anotaciones privadas</li><li style="display:block"><label class="wf-small" style="font-weight:600">Anotación privada</label><textarea class="cx-ta" style="min-height:64px" aria-label="Anotación privada"></textarea><span class="cx-hint">No aparecen en el expediente ni en la receta.</span></li>
+    <h4>Documentos</h4><li>${I()}Carta de consentimiento <span class="wf-muted wf-small">· generar o subir firmada</span></li><li>${I()}Exportar historial a Word</li></ul>`}</aside>`;
+const video = (st = 'call', o = {}) => `<section class="cx-dark" aria-label="Videoconsulta">
+  <div class="cx-row" style="padding:8px 12px"><b>Videoconsulta</b><span>${{ wait: 'Sala de espera', call: 'En llamada', end: 'Llamada terminada', weak: 'Reconectando…', denied: 'Sin cámara' }[st]}</span><span class="cx-grow"></span><span class="wf-small">${I()}${st === 'weak' ? 'Conexión débil' : 'Conexión buena'}</span></div>
+  <div class="cx-stage">
+    ${st === 'wait' ? `<div style="text-align:center;display:grid;gap:8px;justify-items:center"><span class="cx-chip">LM</span><b>Laura Martínez está en la sala de espera</b><span class="wf-small">Mamá de Kevin · se conectó hace 1 min</span><button class="wf-btn on">Admitir y empezar</button></div>` : ''}
+    ${st === 'end' ? `<div style="text-align:center;display:grid;gap:8px;justify-items:center"><b>Terminó la llamada con Laura Martínez</b><span class="wf-small">La consulta sigue abierta para terminar la nota y la receta.</span><button class="wf-btn on">Volver a llamar</button></div>` : ''}
+    ${st === 'denied' ? `<div style="text-align:center;display:grid;gap:8px;justify-items:center;padding:12px"><b>El navegador no tiene permiso de usar su cámara</b><span class="wf-small">Permítalo en el candado de la barra de direcciones. Puede seguir solo con audio.</span><div class="cx-row" style="justify-content:center"><button class="wf-btn on">Intentar de nuevo</button><button class="wf-btn">Seguir sin video</button></div></div>` : ''}
+    ${st === 'call' || st === 'weak' ? `<span class="cx-chip">LM</span><span class="self">${o.camOff ? 'Cámara apagada' : 'Tú'}</span><span class="name">Laura Martínez (mamá)</span>${o.cap ? '<span class="cap"><small>Subtítulos automáticos</small><br>Laura: sigue con fiebre desde anoche…</span>' : ''}${st === 'weak' ? '<span class="cap" role="status">Conexión débil: bajamos la calidad del video para no cortar el audio.</span>' : ''}` : ''}
+  </div>
+  ${st === 'call' || st === 'weak' ? `<div class="cx-ctrls" role="group" aria-label="Controles de la llamada">
+    <button class="wf-btn${o.micOff ? ' on' : ''}" aria-pressed="${!!o.micOff}">${I()}${o.micOff ? 'Mic. apagado' : 'Micrófono'}</button>
+    <button class="wf-btn${o.camOff ? ' on' : ''}" aria-pressed="${!!o.camOff}">${I()}${o.camOff ? 'Cámara apagada' : 'Cámara'}</button>
+    <button class="wf-btn" aria-pressed="false">${I()}Compartir</button>
+    <button class="wf-btn${o.cap ? ' on' : ''}" aria-pressed="${!!o.cap}">${I()}Subtítulos</button>
+    <button class="wf-btn" aria-pressed="false">${I()}Ampliar</button>
+    <button class="wf-btn" style="border-style:dashed">${I()}Colgar</button></div>
+    <p class="wf-small" style="text-align:center;margin:0 0 8px">Colgar termina la llamada, no la consulta.</p>` : ''}
+</section>`;
+
+/* ---------- componentes ---------- */
+const C = [
+ { id: 'C00', n: 'Composición de la página', why: 'Mapa de dónde vive cada componente en cada espacio.',
+   anat: ['Barra superior de la app (C01)', 'Riel del menú (C01)', 'Barra del paciente (C02)', 'Pasos (C03)', 'Panel del paso (C04) con C05–C11 dentro', 'Columna lateral: videoconsulta (C13) arriba y herramientas (C12)'],
+   adapt: ['Una columna: video, pasos horizontales, paso, herramientas. Menú en hoja desde «Menú».', 'Riel + pasos + paso; herramientas como riel de íconos; con video, el video sube arriba.', 'Riel + pasos + paso + columna lateral (260 px; 360 px con video o herramienta abierta).'],
+   a11y: ['Orden del código = orden visual: barra, menú, paciente, pasos, paso, columna lateral.', 'La barra del paciente es fija en medium/expanded y deja de serlo en compact (2.4.11).'],
+   S: {
+    pres: ['Presencial', () => page(false)],
+    tele: ['Teleconsulta', () => page(true)],
+    tool: ['Herramienta abierta', () => page(false, 'tool')],
+    menu: ['Menú expandido', () => page(false, 'menu')],
+    loading: ['Carga', () => `<div class="wf-skel" aria-busy="true"><div class="wf-line" style="height:40px"></div><div class="cx-body"><div class="wf-line z-steps" style="height:200px"></div><div class="wf-line z-main" style="height:380px"></div><div class="wf-line z-side" style="height:200px"></div></div></div>${N('Esqueleto con la misma huella que la página; la barra del paciente aparece primero.')}`],
+    offline: ['Sin conexión', () => page(false)],
+   } },
+ { id: 'C01', n: 'Barra superior y menú de la app', why: 'Llevar a otras secciones de Expediente sin salir de la consulta por accidente.',
+   anat: ['Botón «Expandir menú»', 'Sello + «Expediente Manik»', 'Búsqueda de pacientes', 'Clínica activa', 'Avisos', 'Mosaico del ecosistema', 'Avatar', 'Riel: Nueva consulta; Atención, Clínico, Documentos, Análisis; Configuración y Ayuda al pie'],
+   adapt: ['Sin riel; botón «Menú» abre el menú en hoja a pantalla; búsqueda como ícono.', 'Riel de íconos con nombre al pasar/enfocar; búsqueda como ícono.', 'Riel durante la consulta (decisión del usuario); «Expandir menú» lo abre encima sin mover la consulta.'],
+   a11y: ['Ícono del riel: nombre al pasar o enfocar, Esc lo oculta (1.4.13).', 'Menú expandido: se cierra con Esc, clic fuera o al salir con Tab (2.4.11); foco vuelve al botón.', 'Ayuda siempre al pie del menú (3.2.6).'],
+   S: {
+    rail: ['Riel (consulta)', () => shellW(false)],
+    open: ['Menú expandido', () => shellW(true)],
+    long: ['Contadores y nombres largos', () => shellW(true, true)],
+   } },
+ { id: 'C02', n: 'Barra del paciente', why: 'Saber siempre a quién se atiende y los datos de seguridad, y controlar el tiempo de consulta.',
+   anat: ['Iniciales/foto', 'Nombre completo', 'Edad exacta · sexo · nacimiento', 'Alergias (aviso si no hay registro)', 'Grupo sanguíneo', 'Cronómetro con Pausar y Ocultar'],
+   adapt: ['Dos o tres renglones; no es fija.', 'Fija; avisos pasan a segundo renglón si no caben.', 'Fija en un renglón.'],
+   a11y: ['Alergias sin registro: forma (contorno discontinuo) + texto, no solo color (1.4.1).', 'Cronómetro: Ocultar detiene el cambio cada segundo sin parar el conteo (2.2.2).'],
+   S: {
+    def: ['Alergias sin registrar', () => patient()],
+    all: ['Con alergias', () => patient({ allergies: 'Penicilina · Huevo' })],
+    paused: ['Cronómetro en pausa', () => patient({ paused: 1 })],
+    hidden: ['Cronómetro oculto', () => patient({ hidden: 1 })],
+    long: ['Nombre largo', () => patient({ name: 'María Guadalupe de los Ángeles Hernández Villaseñor de la Concepción' })],
+    loading: ['Carga', () => `<div class="wf-skel" aria-busy="true"><div class="wf-line" style="height:44px"></div></div>`],
+   } },
+ { id: 'C03', n: 'Pasos de la consulta', why: 'Saber en qué paso voy, qué está completo y qué falta.',
+   anat: ['Antecedentes (aparte, arriba)', 'Encabezado «Consulta»', '4 pasos: número/estado, nombre, requisito'],
+   adapt: ['Fila horizontal de 4 con número y nombre corto; sin requisito (va en el panel).', 'Columna de 180 px.', 'Columna de 200–230 px fija al desplazar.'],
+   a11y: ['Paso actual con aria-current="step" y contorno; completo con ✓ y texto «Completo» (1.4.1).', 'Al cambiar de paso el foco va al título del paso.'],
+   S: {
+    p1: ['Paso 1 actual', () => `<nav aria-label="Pasos"><div class="cx-row">${I()}<b>Antecedentes</b><span class="wf-muted wf-small">Revisar o completar</span></div><hr>${stepsList(1)}</nav>`],
+    p2: ['Paso 2 actual', () => `<nav aria-label="Pasos">${stepsList(2)}</nav>`],
+    err: ['Requisito pendiente', () => `<nav aria-label="Pasos">${stepsList(2, true)}</nav>${N('Si se intenta avanzar sin cumplir, el requisito se escribe en negritas y el panel muestra el error con foco.')}`],
+   } },
+ { id: 'C04', n: 'Panel del paso', why: 'Contener el trabajo de un paso con una sola acción primaria: Continuar.',
+   anat: ['Encabezado: «Paso N de 4» + título', 'Cuerpo (C05–C11)', 'Pie: Regresar (secundaria) · Continuar: siguiente paso (primaria)'],
+   adapt: ['Pie con Continuar de ancho completo y Regresar arriba de él.', 'Igual que expanded con menos aire.', 'Pie al final del contenido, Regresar a la izquierda y Continuar a la derecha.'],
+   a11y: ['Una sola acción primaria por vista.', 'Guardado automático con estado visible («Guardado hace un momento»).'],
+   S: {
+    def: ['Normal', () => panel('<div class="wf-box" style="height:160px"></div>')],
+    error: ['Error de validación', () => panel(`<p class="cx-err" role="alert">Falta el padecimiento actual. Escriba al menos el motivo de la consulta para continuar.</p><div class="wf-box" style="height:120px"></div>`)],
+    offline: ['Sin conexión', () => panel('<div class="wf-box" style="height:160px"></div>', 'Sin conexión · los cambios se guardan en este equipo y se enviarán al volver la red')],
+    saveerr: ['Error al guardar', () => panel(`<div class="cx-alert" role="alert"><b>No pudimos guardar los últimos cambios.</b><p class="wf-small" style="margin:4px 0 8px">Lo que escribió sigue aquí. Revise su conexión.</p><button class="wf-btn">Reintentar</button></div><div class="wf-box" style="height:120px"></div>`)],
+   } },
+ { id: 'C05', n: 'Signos vitales', why: 'Capturar signos con unidad y detectar valores fuera de rango para la edad.',
+   anat: ['Título + «rangos para 9 meses»', 'Campos con etiqueta y unidad', 'Aviso fuera de rango con texto', 'Ejemplo de formato (TA)', 'Glucosa y colesterol · Exploración física por sistemas'],
+   adapt: ['2 columnas.', '3 columnas.', '4 columnas.'],
+   a11y: ['Fuera de rango: borde grueso + ícono + texto con el rango normal (1.4.1, 3.3.1).', 'Todo el recuadro es zona de toque (≥ 44 px).'],
+   S: {
+    def: ['Normal', () => vitals()],
+    out: ['Fuera de rango', () => vitals('out')],
+    fmt: ['Formato inválido', () => vitals('fmt')],
+    prev: ['Dato de la consulta anterior', () => vitals('prev')],
+    empty: ['Vacío', () => vitals('empty')],
+   } },
+ { id: 'C06', n: 'Padecimiento actual', why: 'Escribir o dictar el motivo de consulta (obligatorio).',
+   anat: ['Etiqueta + «Obligatorio»', 'Cuadro que crece con el texto', 'Dictar', 'Contador', 'Aviso de dictado automático'],
+   adapt: ['Igual; Dictar ocupa el ancho.', 'Igual.', 'Igual.'],
+   a11y: ['Crece solo, sin arrastrar (2.5.7).', 'Error con sugerencia y foco (3.3.1, 3.3.3).', 'Transparencia: el dictado es automático y puede equivocarse.'],
+   S: {
+    def: ['Con texto', () => pad('Fiebre de 38.4 °C desde hace 2 días, irritable, come menos. Sin vómito ni diarrea.')],
+    err: ['Vacío con error', () => pad('', 'err')],
+    mic: ['Dictando', () => pad('Fiebre de 38.4 °C desde hace 2 días…', 'mic')],
+    long: ['Texto largo', () => pad('Fiebre de 38.4 °C desde hace 2 días, irritable, come menos. '.repeat(8))],
+   } },
+ { id: 'C07', n: 'Buscador con lista (diagnóstico o medicamento)', why: 'Encontrar un diagnóstico CIE-10 o un medicamento del catálogo sin conocer el código exacto.',
+   anat: ['Etiqueta', 'Campo con ícono', 'Lista de resultados (código/nombre o nombre/presentación/sustancia + marcas)', 'Instrucción de teclado'],
+   adapt: ['Lista a ancho completo; máx. 6 visibles.', 'Igual.', 'Igual.'],
+   a11y: ['Patrón combobox ARIA 1.2; flechas, Enter, Esc (2.1.1, 4.1.2).', 'Conteo de resultados anunciado (4.1.3).'],
+   S: {
+    closed: ['Cerrado', () => combo('Agregar diagnóstico', 'Código CIE-10 o nombre, por ejemplo «otitis»')],
+    res: ['Con resultados', () => combo('Agregar diagnóstico', '', { q: 'oti', list: '<div class="cx-lb" role="listbox"><div class="on"><span class="cx-code">H66.9</span> Otitis media, no especificada</div><div><span class="cx-code">H60.9</span> Otitis externa, no especificada</div></div>' })],
+    med: ['Medicamentos con marcas', () => combo('Buscar medicamento para J06.9', '', { q: 'cl', list: '<div class="cx-lb" role="listbox"><div class="on"><b>Cloruro de sodio 0.9 % · Solución nasal en gotas</b><br><span class="wf-small wf-muted">Sustancia: Cloruro de sodio</span></div><div><b>Clonazepam · Solución oral 2.5 mg/mL</b><br><span class="wf-small wf-muted">Sustancia: Clonazepam</span> <span class="cx-mark">Controlado · va en receta aparte</span></div></div>' })],
+    none: ['Sin resultados', () => combo('Agregar diagnóstico', '', { q: 'xyz', list: '<div class="cx-lb"><div class="wf-muted">Sin resultados para «xyz». Pruebe con otra palabra o use «Diagnóstico escrito».</div></div>' })],
+    load: ['Buscando', () => combo('Agregar diagnóstico', '', { q: 'oti', list: '<div class="cx-lb wf-skel" aria-busy="true"><div><div class="wf-line"></div></div><div><div class="wf-line" style="width:70%"></div></div></div>' })],
+    off: ['Sin conexión', () => combo('Agregar diagnóstico', '', { q: 'oti', list: '<div class="cx-lb"><div><b>No se pudo buscar sin conexión.</b> Use «Diagnóstico escrito» o reintente cuando vuelva la red. <button class="wf-btn">Reintentar</button></div></div>' })],
+   } },
+ { id: 'C08', n: 'Tarjeta de diagnóstico', why: 'Ver cada diagnóstico con sus medicamentos y decidir cuál es el principal.',
+   anat: ['Código CIE-10 o «Escrito · sin CIE-10»', 'Nombre', 'Principal / Hacer principal', 'Quitar', 'Medicamentos (C09)', 'Sugeridos del catálogo', 'Agregar medicamento'],
+   adapt: ['Encabezado en dos renglones; acciones debajo del nombre.', 'Igual que expanded.', 'Encabezado en un renglón.'],
+   a11y: ['Principal: borde + etiqueta con texto (1.4.1).', 'Orden con botón, sin arrastrar (2.5.7).', 'Quitar con deshacer (3.3.4).'],
+   S: {
+    main: ['Principal con medicamento', () => dxCard({ main: 1, code: 'R50.9', name: 'Fiebre, no especificada', meds: med(), sug: ['Ibuprofeno · Suspensión oral 40 mg/mL'] })],
+    sec: ['Secundario con sugeridos', () => dxCard({ code: 'J06.9', name: 'Infección aguda de las vías respiratorias superiores, no especificada' })],
+    written: ['Diagnóstico escrito', () => dxCard({ code: '', name: 'Irritabilidad asociada a erupción dental' })],
+    empty: ['Sin diagnósticos', () => `<p class="cx-err" role="alert">Agregue al menos un diagnóstico para continuar: búsquelo arriba por código o nombre, o escríbalo. ${SUP}</p><div class="wf-state"><h2>Aún no hay diagnósticos</h2><p class="wf-muted">Busque por código CIE-10 o nombre, o use «Diagnóstico escrito».</p></div>`],
+    long: ['Nombre largo', () => dxCard({ code: 'Z24.1', name: 'Necesidad de inmunización contra la encefalitis viral transmitida por artrópodos', sug: false })],
+   } },
+ { id: 'C09', n: 'Medicamento y pauta', why: 'Confirmar qué se receta, cuánto, cómo y por cuánto tiempo.',
+   anat: ['Nombre · presentación', 'Sustancia activa', 'Marca de controlado', 'Pauta en una frase', 'Editar pauta · Quitar', 'Formulario de pauta: cantidad, unidad, vía, cada, días, indicaciones; ayuda por peso'],
+   adapt: ['Formulario en 2 columnas.', '3 columnas.', '4–5 columnas.'],
+   a11y: ['Controlado: borde lateral + texto (1.4.1).', 'Campos con etiqueta visible (3.3.2); error junto al campo (3.3.1).'],
+   S: {
+    view: ['Vista', () => med()],
+    edit: ['Editando pauta', () => med({ edit: 1 })],
+    err: ['Pauta incompleta', () => med({ edit: 1, err: 1 })],
+    ctl: ['Controlado', () => med({ n: 'Clonazepam', p: 'Solución oral 2.5 mg/mL', s: 'Clonazepam', ctl: 1, pauta: '<b>Falta la pauta.</b> Use «Editar pauta».' })],
+    just: ['Contraindicación aceptada', () => med({ n: 'Ácido acetilsalicílico', p: 'Tabletas 100 mg', s: 'Ácido acetilsalicílico', just: 'Enfermedad de Kawasaki, indicado por cardiología pediátrica ' + EJ, pauta: '1 tableta vía oral cada 24 horas por 30 días' })],
+   } },
+ { id: 'C10', n: 'Alerta de contraindicación', why: 'Evitar recetar algo contraindicado sin darse cuenta, sin bloquear el criterio médico.',
+   anat: ['Título: medicamento + «contraindicado para» paciente', 'Motivo del catálogo', 'Elegir otro medicamento (primaria)', 'Agregar de todos modos → justificación obligatoria → Confirmar y agregar'],
+   adapt: ['Botones a ancho completo, apilados.', 'Igual que expanded.', 'Botones en un renglón.'],
+   a11y: ['role="alert"; foco en «Elegir otro medicamento».', 'Justificación obligatoria con error junto al campo (3.3.4).'],
+   S: {
+    ci: ['Aviso', () => ci(0)],
+    just: ['Pidiendo justificación', () => ci(1)],
+    err: ['Justificación vacía', () => ci(2)],
+   } },
+ { id: 'C11', n: 'Aviso para deshacer', why: 'Quitar sin miedo: cualquier quitado se puede recuperar.',
+   anat: ['Qué se quitó', 'Deshacer (primaria del aviso)', 'Cerrar'],
+   adapt: ['Ancho completo, pegado abajo sobre el área segura.', 'Pegado abajo del panel.', 'Pegado abajo del panel.'],
+   a11y: ['Sin tiempo límite (2.2.1); role="status"; foco a «Deshacer».'],
+   S: {
+    on: ['Visible', () => `<div class="cx-toast" role="status"><span class="cx-grow">Se quitó «Paracetamol».</span><button class="wf-btn inv">Deshacer</button><button class="wf-btn">Cerrar</button></div>`],
+    dx: ['Quitar diagnóstico', () => `<div class="cx-toast" role="status"><span class="cx-grow">Se quitó el diagnóstico «J06.9 Infección aguda de las vías respiratorias superiores, no especificada».</span><button class="wf-btn inv">Deshacer</button><button class="wf-btn">Cerrar</button></div>`],
+   } },
+ { id: 'C12', n: 'Herramientas de apoyo', why: 'Consultar información del paciente o generar documentos sin salir de la consulta.',
+   anat: ['Encabezado + Plegar', 'Del paciente: Información adicional, Historia clínica, Estado de salud, Gráficas (dato nuevo), Multimedia', 'Mis notas: Anotaciones privadas (campo)', 'Documentos: Carta de consentimiento, Exportar a Word', 'Panel de la herramienta: título, contenido, Cerrar'],
+   adapt: ['Lista completa con nombres al final de la página; la herramienta abre como ventana con Cerrar.', 'Riel de íconos; la herramienta abre como ventana modal.', 'Lista (290 px) o riel (64 px); la herramienta abre en la columna, junto a la consulta.'],
+   a11y: ['Etiquetas al pasar/enfocar en riel (1.4.13); en táctil siempre visibles.', 'Ventana modal: foco contenido, Esc y Cerrar; foco vuelve a la herramienta (2.1.2).', 'Abierta en columna no tapa la consulta (2.4.11).'],
+   S: {
+    list: ['Lista', () => tools()],
+    rail: ['Plegada', () => `<div style="max-width:72px">${tools('rail')}</div>`],
+    open: ['Herramienta abierta', () => `<aside class="cx-card" aria-label="Gráficas"><header><div class="cx-grow"><strong>Gráficas</strong><div class="wf-small wf-muted">Kevin Eduardo García Martínez</div></div><button class="wf-btn wf-btn--quiet">✕ Cerrar</button></header><div><b>Peso · kg, últimos 6 meses</b><div class="wf-img" style="aspect-ratio:16/7"></div><span class="wf-small">La consulta sigue abierta y el tiempo sigue corriendo.</span></div></aside>`],
+    empty: ['Sin datos', () => `<aside class="cx-card"><header><strong class="cx-grow">Multimedia</strong><button class="wf-btn wf-btn--quiet">✕ Cerrar</button></header><div class="wf-state" style="margin:12px"><h2 style="margin-top:0">Aún no hay archivos</h2><p class="wf-muted">Fotos y estudios del paciente aparecerán aquí.</p><button class="wf-btn">Subir archivo</button></div></aside>`],
+    error: ['Error al cargar', () => `<aside class="cx-card"><header><strong class="cx-grow">Historia clínica</strong><button class="wf-btn wf-btn--quiet">✕ Cerrar</button></header><div class="wf-state" role="alert" style="margin:12px"><h2 style="margin-top:0">No pudimos cargar la historia clínica</h2><p class="wf-muted">La consulta no se afecta. Revise su conexión.</p><button class="wf-btn wf-btn--primary">Reintentar</button></div></aside>`],
+   } },
+ { id: 'C13', n: 'Videoconsulta', why: 'Atender por video viendo al paciente mientras se escribe la nota.',
+   anat: ['Encabezado: estado de la llamada + calidad de conexión', 'Video del paciente + vista propia + nombre', 'Subtítulos automáticos', 'Controles: Micrófono, Cámara, Compartir, Subtítulos, Ampliar, Colgar', 'Aviso «Colgar no termina la consulta»'],
+   adapt: ['Arriba de todo, ancho completo; controles en 2 renglones si no caben.', 'Arriba de la consulta junto a las herramientas.', 'Arriba de la columna lateral (360 px); «Ampliar» la lleva a media pantalla.'],
+   a11y: ['Controles con texto y aria-pressed (4.1.2, 1.4.1).', 'Subtítulos en vivo marcados como automáticos (1.2.4).', 'Colgar no termina la consulta (3.3.4).'],
+   S: {
+    wait: ['Sala de espera', () => video('wait')],
+    call: ['En llamada', () => video('call')],
+    cap: ['Con subtítulos', () => video('call', { cap: 1 })],
+    off: ['Mic y cámara apagados', () => video('call', { micOff: 1, camOff: 1 })],
+    weak: ['Conexión débil', () => video('weak')],
+    denied: ['Sin permiso de cámara', () => video('denied')],
+    end: ['Llamada terminada', () => video('end')],
+   } },
+];
+
+function page(tele, extra) {
+  return `<div class="cx-app">
+   <div class="cx-top"><span class="cx-chip cx-show-c">☰ Menú</span><b>Expediente Manik</b><span class="cx-grow"></span><span class="cx-hide-m wf-small wf-muted">[Buscar paciente…]</span><span class="cx-chip cx-hide-c">Consultorio Angelópolis ▾</span><span class="cx-chip">DR</span></div>
+   <div class="cx-shell" style="position:relative">
+    <nav class="cx-rail" aria-label="Menú (C01)"><span class="b">C01</span>${'<span class="b"></span>'.repeat(6)}</nav>
+    <div>
+     <div class="cx-zone" style="border-radius:0;border-left:0;border-right:0"><b>C02 · Barra del paciente</b><small>fija en medium y expanded</small></div>
+     <div class="cx-body${tele || extra === 'tool' ? ' tele' : ''}">
+      <div class="cx-zone z-steps"><b>C03 · Pasos</b><small>4 pasos + Antecedentes</small></div>
+      <div class="cx-zone z-main"><b>C04 · Panel del paso</b><small>Paso 2: C07 buscador · C08 diagnósticos · C09 medicamentos · C10 contraindicación · C11 deshacer</small><small>Paso 1: C05 signos · C06 padecimiento</small></div>
+      <div class="z-side" style="display:grid;gap:8px">
+       ${tele ? '<div class="cx-zone"><b>C13 · Videoconsulta</b><small>arriba, sobre las herramientas</small></div>' : ''}
+       <div class="cx-zone"><b>C12 · ${extra === 'tool' ? 'Herramienta abierta (Gráficas)' : 'Herramientas de apoyo'}</b><small>${extra === 'tool' ? 'en la columna, sin tapar la consulta' : 'lista o riel'}</small></div>
+      </div>
+     </div>
+    </div>
+    ${extra === 'menu' ? `<div class="wf-scrim"></div><nav class="wf-drawer" aria-label="Menú expandido"><b>C01 · Menú expandido</b><p class="wf-small">Encima de la consulta, sin moverla. Esc, clic fuera o Tab fuera lo cierran.</p></nav>` : ''}
+   </div></div>
+   ${N(tele ? 'Teleconsulta: la columna lateral crece a 360 px y el video va arriba; en medium el video sube arriba de la consulta; en compact queda primero.' : 'Presencial: la columna lateral solo tiene herramientas. Un solo botón primario en la vista: «Continuar» dentro de C04.')}`;
+}
+function shellW(open, long) {
+  const items = [['Hoy', long ? '128' : '6'], ['Pacientes'], ['Consultas'], ['Lista de espera', long ? '57' : '3'], ['Recetas'], ['Órdenes de estudios'], ['Resultados', '2'], ['Vacunas'], ['Consentimientos'], ['Certificados'], ['Plantillas'], ['Reportes']];
+  return `<div class="cx-top"><button class="wf-btn" aria-label="${open ? 'Plegar' : 'Expandir'} menú">${I()}</button><b>Expediente Manik</b><span class="cx-grow cx-hide-m"><span class="wf-input" style="display:flex;align-items:center;max-width:420px">${I(1)}&nbsp;Buscar paciente por nombre, CURP o expediente</span></span><span class="cx-chip cx-hide-c">Consultorio Angelópolis ▾</span><button class="wf-btn" aria-label="Avisos, 2 nuevos">${I()} 2</button><button class="wf-btn" aria-label="Ecosistema Manik">${I()}</button><span class="cx-chip">DR</span></div>
+  <div style="display:grid;grid-template-columns:${open ? '260px' : '64px'} 1fr;min-height:420px">
+   <nav class="cx-rail" style="justify-items:${open ? 'stretch' : 'center'}" aria-label="Menú de Expediente">
+    <button class="wf-btn wf-btn--primary">${open ? '+ Nueva consulta' : '+'}</button>
+    ${open ? items.map((x, i) => `${[0, 4, 8, 11].includes(i) ? `<span class="wf-small wf-muted" style="margin-top:6px">${['ATENCIÓN', 'CLÍNICO', 'DOCUMENTOS', 'ANÁLISIS'][[0, 4, 8, 11].indexOf(i)]}</span>` : ''}<span class="cx-row" style="min-height:40px${i === 0 ? ';outline:2px solid var(--wf-g9);border-radius:6px;padding:0 6px' : ''}">${I()}${x[0]}${x[1] ? `<span class="cx-chip" style="min-height:22px;margin-left:auto">${x[1]}</span>` : ''}</span>`).join('') + '<hr><span class="cx-row">' + I() + 'Configuración</span><span class="cx-row">' + I() + 'Ayuda</span>'
+      : items.map((x, i) => `<span class="b" title="${x[0]}" style="${i === 0 ? 'outline:2px solid var(--wf-g9)' : ''}">${x[1] ? '•' : ''}</span>`).join('') + '<hr style="width:100%"><span class="b"></span><span class="b"></span>'}
+   </nav>
+   <div class="cx-pad">${open ? N('Expandido: se superpone a la consulta (aquí se muestra al lado para leerlo). Cierra con Esc, clic fuera o Tab fuera.') : N('Riel durante la consulta. Cada ícono muestra su nombre al pasar o enfocar; el punto indica pendientes y el nombre accesible dice cuántos.')}${long ? N('Contadores de 3 dígitos caben en la pastilla; nombres largos de sección se cortan en 2 renglones, nunca con puntos suspensivos.') : ''}<div class="wf-box" style="height:200px;margin-top:12px"></div></div>
+  </div>`;
+}
+function panel(body, banner) {
+  return `${banner ? `<p class="wf-banner" role="status"><b>${banner.split(' · ')[0]}.</b> ${banner.split(' · ')[1]}</p>` : ''}<section class="cx-card"><header><span class="wf-small wf-muted">Paso 1 de 4</span><strong class="cx-grow" style="font-size:18px">Exploración y padecimiento</strong><span class="wf-small wf-muted">● Guardado hace un momento</span></header><div>${body}</div>
+   <div class="cx-row" style="justify-content:space-between;padding:12px 14px;border-top:1px solid var(--wf-g3)"><button class="wf-btn wf-btn--quiet">‹ Regresar</button><button class="wf-btn wf-btn--primary" data-wf-persist>Continuar: Diagnóstico y tratamiento ›</button></div></section>
+   <div class="cx-show-c" style="margin-top:8px"><button class="wf-btn wf-btn--primary" style="flex:1">Continuar: Diagnóstico y tratamiento ›</button></div>
+   ${N('En compact «Continuar» ocupa todo el ancho al final del paso (sobre el área segura), y el botón del pie se oculta: nunca dos primarios.')}`;
+}
+function vitals(st) {
+  const prev = st === 'prev', e = st === 'empty';
+  return `<h3 style="margin-top:0">Signos vitales <span class="wf-muted wf-small">· rangos para 9 meses</span></h3><div class="cx-vit">
+   ${field('Talla', e ? '' : '0.72', 'm', prev ? { msg: 'Última consulta: 0.70 m · <u>Usar</u> ' + SUP } : {})}
+   ${field('Peso', e ? '' : '8.9', 'kg', prev ? { msg: 'Última consulta: 8.4 kg · <u>Usar</u>' } : {})}
+   ${field('Temperatura', e ? '' : (st === 'out' ? '38.4' : '36.8'), '°C', st === 'out' ? { warn: 1, msg: 'Fiebre (normal 36.5–37.5)' } : {})}
+   ${field('Frec. cardiaca', e ? '' : '128', 'lpm')}${field('Frec. respiratoria', e ? '' : '32', 'rpm')}${field('Saturación (SpO₂)', e ? '' : '98', '%')}${field('Perímetro cefálico', e ? '' : '45', 'cm')}
+   ${field('Tensión arterial', st === 'fmt' ? '9060' : '', 'mmHg', st === 'fmt' ? { err: 1, warn: 1, msg: 'Escriba sistólica/diastólica, por ejemplo 90/60.' } : { msg: 'Ejemplo: 90/60' })}
+  </div><div class="cx-row" style="margin-top:12px"><button class="wf-btn">Glucosa y colesterol</button><button class="wf-btn">Exploración física por sistemas</button></div>
+  ${e ? N('Vacío: ningún campo es obligatorio; no se muestra error.') : ''}${prev ? N('3.3.7: ofrecer el dato anterior evita reescribir; nunca se copia solo. Supuesto: el sistema tiene la consulta anterior.') : ''}${N('Incógnita: los contadores «4 / 5» de la pantalla actual. Quitados hasta saber qué significan.')}`;
+}
+function pad(t, st) {
+  return `<div class="cx-field"><label>Padecimiento actual <span class="cx-chip dash" style="min-height:22px">Obligatorio</span></label>
+   <textarea class="cx-ta${st === 'err' ? ' cx-input-err' : ''}" aria-label="Padecimiento actual"${st === 'err' ? ' aria-invalid="true"' : ''}>${t}</textarea>
+   <div class="cx-row" style="justify-content:space-between"><button class="wf-btn" aria-pressed="${st === 'mic'}">${I(1)}${st === 'mic' ? 'Escuchando… toca para parar' : 'Dictar'}</button><span class="cx-hint">${t.length} / 5000</span></div>
+   ${st === 'err' ? '<p class="cx-err" role="alert">Falta el padecimiento actual. Escriba al menos el motivo de la consulta para continuar; puede dictarlo con «Dictar».</p>' : ''}
+   ${st === 'mic' ? '<p class="cx-mark">El dictado se convierte en texto de forma automática y puede equivocarse. Revíselo antes de continuar.</p>' : ''}</div>`;
+}
+function ci(s) {
+  return `<div class="cx-alert" role="alert"><b>! Ácido acetilsalicílico: contraindicado para Kevin (9 meses)</b><p class="wf-small" style="margin:4px 0 10px">Contraindicado en menores de 12 años por riesgo de síndrome de Reye. ${EJ}</p>
+   ${s ? `<div class="cx-field"><label>Justificación clínica (obligatoria)</label><textarea class="cx-ta${s === 2 ? ' cx-input-err' : ''}" style="min-height:70px" aria-label="Justificación clínica"></textarea>${s === 2 ? '<p class="cx-err">Escriba por qué lo indica a pesar de la contraindicación.</p>' : ''}</div>` : ''}
+   <div class="cx-row" style="margin-top:10px"><button class="wf-btn wf-btn--primary">Elegir otro medicamento</button><button class="wf-btn">${s ? 'Confirmar y agregar' : 'Agregar de todos modos'}</button></div></div>
+   ${N('La acción segura es la primaria. Agregar de todos modos queda como secundaria y exige justificación que se guarda en la tarjeta del medicamento.')}`;
+}
+
+/* ---------- control ---------- */
+let S = { w: innerWidth < 700 ? 393 : innerWidth < 1200 ? 834 : 1440, c: 0, state: null };
+const sel = document.getElementById('cx-comp'), stSel = document.getElementById('wf-state');
+sel.innerHTML = C.map((c, i) => `<option value="${i}">${c.id} · ${c.n}</option>`).join('');
+function fillStates() { const k = Object.keys(C[S.c].S); stSel.innerHTML = k.map(x => `<option value="${x}">${C[S.c].S[x][0]}</option>`).join(''); S.state = k[0]; }
+function spec(c) {
+  const m = ['compact', 'medium', 'expanded'];
+  return `<div class="wf-card"><h2>${c.id} · ${c.n}</h2><p><b>Para qué:</b> ${c.why}</p>
+   <h3>Anatomía</h3><ol>${c.anat.map(a => `<li>${a}</li>`).join('')}</ol>
+   <h3>Estados</h3><p>${Object.values(c.S).map(s => s[0]).join(' · ')}</p>
+   <h3>Por espacio</h3><table class="wf-table"><thead><tr><th>Modo</th><th>Comportamiento</th></tr></thead><tbody>${c.adapt.map((a, i) => `<tr><td>${m[i]}</td><td>${a}</td></tr>`).join('')}</tbody></table>
+   <h3>Accesibilidad</h3><ul>${c.a11y.map(a => `<li>${a}</li>`).join('')}</ul></div>`;
+}
+function render() {
+  const f = document.getElementById('wf-frame'), c = C[S.c];
+  f.style.setProperty('--wf-w', S.w + 'px');
+  document.getElementById('wf-label').style.setProperty('--wf-w', S.w + 'px');
+  document.getElementById('wf-label').textContent = `${c.id} · ${c.n} · marco ${S.w}px · ${S.w < 600 ? 'compact' : S.w < 1024 ? 'medium' : 'expanded'} (referencia declarada)`;
+  f.classList.toggle('cx-auto', c.id !== 'C00' && c.id !== 'C01');
+  const v = document.getElementById('wf-view');
+  v.style.padding = (c.id === 'C00' || c.id === 'C01') ? '0' : '';
+  v.innerHTML = c.S[S.state][1]();
+  document.getElementById('wf-banner').innerHTML = (c.id === 'C00' && S.state === 'offline') ? '<p class="wf-banner" role="status"><b>Sin conexión.</b> La nota se guarda en este equipo; los catálogos no se pueden consultar hasta que vuelva la red.</p>' : '';
+  document.getElementById('cx-spec').innerHTML = spec(c);
+  document.querySelectorAll('[data-w]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.w === S.w)));
+}
+document.addEventListener('click', e => { const b = e.target.closest('[data-w]'); if (b) { S.w = +b.dataset.w; render(); } });
+sel.addEventListener('change', e => { S.c = +e.target.value; fillStates(); render(); });
+stSel.addEventListener('change', e => { S.state = e.target.value; render(); });
+document.getElementById('wf-notes').addEventListener('change', e => document.body.classList.toggle('wf-no-notes', !e.target.checked));
+const h = location.hash.replace('#', '').toUpperCase(); const hi = C.findIndex(c => c.id === h); if (hi >= 0) { S.c = hi; sel.value = hi; }
+fillStates(); render();
+</script>
+</body>
+</html>
