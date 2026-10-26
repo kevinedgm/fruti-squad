@@ -198,6 +198,8 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
 .lb li small{color:var(--muted);font-size:14px}
 .lb li.none{cursor:default;color:var(--muted)}
 .lb li.none:hover{background:none}
+.code.wr{display:inline-flex;align-items:center;gap:5px;background:var(--aviso-soft);border-color:#E2C9A6;color:var(--on-aviso)}
+.code.wr svg{width:14px;height:14px}
 .code{display:inline-block;font:700 14px/1 var(--sans);font-variant-numeric:tabular-nums;background:var(--soft);border:1px solid var(--edge);border-radius:6px;padding:4px 7px;margin-right:6px;color:var(--ink)}
 .tag{display:inline-flex;align-items:center;gap:5px;font:700 13px/1.2 var(--sans);border-radius:999px;padding:3px 9px}
 .tag svg{width:14px;height:14px}
@@ -233,8 +235,6 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
 .sug button:hover{background:var(--azul-soft);border-style:solid}
 .sug button svg{width:16px;height:16px;color:var(--azul)}
 .addrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-.nomed{display:inline-flex;align-items:center;gap:8px;min-height:44px;font-size:16px;cursor:pointer}
-.nomed input{width:20px;height:20px;accent-color:var(--azul)}
 .edit{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px 12px;padding:12px;border-radius:12px;background:var(--soft)}
 .edit .f{display:grid;gap:4px}
 .edit .f label{font-weight:600;font-size:15px}
@@ -501,12 +501,12 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
                 <ul class="lb" id="dxlb" role="listbox" aria-label="Diagnósticos encontrados" hidden></ul>
                 <span class="hint" id="dxq-h">Flechas para recorrer, Enter para elegir, Esc para cerrar.</span>
               </div>
-              <button type="button" class="btn" id="dxfree">{{i:file-pen-line}}Escribir sin código</button>
+              <button type="button" class="btn" id="dxfree">{{i:file-pen-line}}Diagnóstico escrito</button>
             </div>
             <div class="fld" id="dxfree-f" hidden style="margin-top:12px">
               <label for="dxft">Diagnóstico escrito</label>
               <div class="addrow"><input id="dxft" class="cbx" style="flex:1;min-width:min(100%,240px);font:17px var(--sans);padding:0 12px" autocomplete="off"><button type="button" class="btn p" id="dxft-ok">Agregar</button><button type="button" class="btn q" id="dxft-x">Cancelar</button></div>
-              <span class="hint">Se guarda sin código CIE-10; no tendrá medicamentos sugeridos.</span>
+              <span class="hint">Para lo que no está en el catálogo CIE-10. Se marca como «Escrito · sin CIE-10» y no tiene medicamentos sugeridos.</span>
             </div>
           </section>
           <p class="s2err" id="s2err" role="alert" hidden>{{i:circle-alert}}<span>Agregue al menos un diagnóstico para continuar: búsquelo arriba por código o nombre, o escríbalo sin código.</span></p>
@@ -575,13 +575,13 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
   <div class="notesd">
     <section class="full"><h2>Paso 2: diagnóstico y tratamiento</h2><ul>
       <li><b>Cada diagnóstico es una tarjeta con sus medicamentos adentro.</b> Hoy hay dos columnas y hay que seleccionar una enfermedad para ver sus medicamentos; así se ve todo de un vistazo, que es lo que después se revisa en la receta.</li>
-      <li><b>Búsqueda por código o por nombre</b> («otitis» o «H66»), con teclado: flechas, Enter y Esc. «Escribir sin código» reemplaza al botón «DX escrito».</li>
+      <li><b>Búsqueda por código o por nombre</b> («otitis» o «H66»), con teclado: flechas, Enter y Esc. «Diagnóstico escrito» reemplaza al botón «DX escrito»; esos diagnósticos se marcan «Escrito · sin CIE-10» (lo que hoy indica el ícono de pastilla tachada) y avisan que no tienen medicamentos sugeridos.</li>
       <li><b>«Hacer principal»</b> con texto reemplaza la flecha hacia arriba; el principal lleva borde y etiqueta «Principal».</li>
       <li><b>Medicamentos sugeridos por diagnóstico</b> (la asociación del catálogo) en un toque; al agregar uno se abre su pauta para confirmarla: cantidad, unidad, vía, cada cuántas horas, días e indicaciones.</li>
       <li><b>Contraindicaciones antes de agregar</b>: el buscador avisa «Contraindicado para este paciente»; si se elige igual, se pide una justificación obligatoria que queda escrita en la tarjeta.</li>
       <li><b>Controlados marcados</b> con ícono y texto «va en receta aparte» (busque «clonazepam» para verlo).</li>
       <li><b>Quitar se puede deshacer</b>; el aviso no desaparece solo.</li>
-      <li><b>Supuestos que hay que confirmar:</b> que se requiere al menos un diagnóstico para continuar; que el ícono de pastilla tachada de hoy significa «sin medicamentos» (aquí es la casilla «Este diagnóstico no lleva medicamentos»); y la ayuda de dosis por peso, que es una propuesta y necesita una fuente clínica validada.</li>
+      <li><b>Supuestos que hay que confirmar:</b> que se requiere al menos un diagnóstico para continuar, y la ayuda de dosis por peso, que es una propuesta y necesita una fuente clínica validada.</li>
     </ul></section>
     <section><h2>Menú de la app y videoconsulta</h2><ul>
       <li><b>El menú de Expediente es el del shell aprobado</b> (Atención, Clínico, Documentos, Análisis; Configuración y Ayuda al pie). Durante la consulta arranca plegado como riel de íconos para dejar espacio a la nota; «Expandir menú» lo abre encima, sin mover la consulta, y se cierra con Esc, al hacer clic fuera o al salir de él con Tab.</li>
@@ -778,8 +778,9 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
   };
   var SUG={'R50.9':['para','ibu'],'J06.9':['para','nacl'],'J00':['nacl','para'],'H66.9':['amox','para'],'B37.0':['nist']};
   var uid=0,dx=[
-    {id:++uid,c:'R50.9',n:'Fiebre, no especificada',nomed:false,meds:[{id:++uid,k:'para',q:'1.3',u:'mL',via:'Oral',cada:'6',dias:'3',ind:'Solo si la temperatura es de 38 °C o más'}]},
-    {id:++uid,c:'J06.9',n:'Infección aguda de las vías respiratorias superiores, no especificada',nomed:false,meds:[]}
+    {id:++uid,c:'R50.9',n:'Fiebre, no especificada',meds:[{id:++uid,k:'para',q:'1.3',u:'mL',via:'Oral',cada:'6',dias:'3',ind:'Solo si la temperatura es de 38 °C o más'}]},
+    {id:++uid,c:'J06.9',n:'Infección aguda de las vías respiratorias superiores, no especificada',meds:[]},
+    {id:++uid,c:'',n:'Irritabilidad asociada a erupción dental',meds:[]}
   ];
   var ui={adding:null,editing:null,ci:null},last=null;
   var dxl=document.getElementById('dxl'),live=document.createElement('p');live.className='vh';live.setAttribute('aria-live','polite');document.body.appendChild(live);
@@ -814,11 +815,11 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
     return h+'</li>';
   }
   function dxHTML(d,i){
-    var h='<li class="dx'+(i===0?' principal':'')+'" id="d'+d.id+'"><div class="dx-h">'+(d.c?'<span class="code">'+d.c+'</span>':'<span class="code">Sin código</span>')
+    var h='<li class="dx'+(i===0?' principal':'')+'" id="d'+d.id+'"><div class="dx-h">'+(d.c?'<span class="code">'+d.c+'</span>':'<span class="code wr">{{i:file-pen-line}}Escrito · sin CIE-10</span>')
       +'<h4>'+esc(d.n)+'</h4>'+(i===0?'<span class="tag pr">{{i:star}}Principal</span>':'<button type="button" class="lnk" data-act="main" data-dx="'+d.id+'">{{i:star}}Hacer principal</button>')
       +'<button type="button" class="lnk del" data-act="del-dx" data-dx="'+d.id+'" aria-label="Quitar diagnóstico '+esc(d.n)+'">{{i:trash-2}}Quitar</button></div><div class="dx-b"><h5>Medicamentos</h5>';
     if(d.meds.length)h+='<ul class="meds">'+d.meds.map(function(m){return medHTML(d,m)}).join('')+'</ul>';
-    else h+='<p class="empty">'+(d.nomed?'Este diagnóstico no lleva medicamentos.':'Sin medicamentos todavía.')+'</p>';
+    else h+='<p class="empty">Sin medicamentos todavía.</p>';
     if(ui.adding===d.id){
       h+='<div class="fld"><label for="mq'+d.id+'">Buscar medicamento para '+(d.c||'este diagnóstico')+'</label>'
         +'<div class="cbx">{{i:search}}<input id="mq'+d.id+'" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="mlb'+d.id+'" autocomplete="off" placeholder="Nombre comercial o sustancia activa"></div>'
@@ -830,14 +831,11 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
           +(ui.ci.just?'<button type="button" class="btn" data-act="ci-confirm" data-dx="'+d.id+'">Confirmar y agregar</button>':'<button type="button" class="btn" data-act="ci-anyway" data-dx="'+d.id+'">Agregar de todos modos</button>')+'</div></div>';
       }
       h+='<div class="addrow"><button type="button" class="btn q" data-act="add-close" data-dx="'+d.id+'">Terminar de agregar</button></div>';
-    }else if(!d.nomed){
+    }else{
       var sg=(SUG[d.c]||[]).filter(function(k){return !d.meds.some(function(m){return m.k===k})});
       if(sg.length)h+='<div class="sug"><span>Sugeridos para '+d.c+':</span>'+sg.map(function(k){return '<button type="button" data-act="sug" data-dx="'+d.id+'" data-k="'+k+'">{{i:circle-plus}}'+esc(MED[k].n)+' · '+esc(MED[k].p)+'</button>'}).join('')+'</div>';
-      h+='<div class="addrow"><button type="button" class="btn" data-act="add" data-dx="'+d.id+'">{{i:plus}}'+(d.meds.length?'Agregar otro medicamento':'Agregar medicamento')+'</button>';
-      if(!d.meds.length)h+='<label class="nomed"><input type="checkbox" data-act="nomed" data-dx="'+d.id+'">Este diagnóstico no lleva medicamentos</label>';
-      h+='</div>';
-    }else{
-      h+='<div class="addrow"><label class="nomed"><input type="checkbox" checked data-act="nomed" data-dx="'+d.id+'">Este diagnóstico no lleva medicamentos</label></div>';
+      if(!d.c)h+='<p class="empty">Al no tener código CIE-10, no hay medicamentos sugeridos; búsquelos por nombre o sustancia.</p>';
+      h+='<div class="addrow"><button type="button" class="btn" data-act="add" data-dx="'+d.id+'">{{i:plus}}'+(d.meds.length?'Agregar otro medicamento':'Agregar medicamento')+'</button></div>';
     }
     return h+'</div></li>';
   }
@@ -872,7 +870,7 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
   function dxSearch(q){
     var nq=norm(q),ya=dx.map(function(d){return d.c});
     var r=CIE.filter(function(x){return ya.indexOf(x[0])<0&&(norm(x[0]).indexOf(nq)===0||norm(x[1]).indexOf(nq)>=0)}).slice(0,8);
-    return {items:r.map(function(x){return {v:x,html:'<b><span class="code">'+x[0]+'</span>'+esc(x[1])+'</b>'}}),none:'Sin resultados para «'+esc(q)+'». Pruebe con otra palabra o use «Escribir sin código».'};
+    return {items:r.map(function(x){return {v:x,html:'<b><span class="code">'+x[0]+'</span>'+esc(x[1])+'</b>'}}),none:'Sin resultados para «'+esc(q)+'». Pruebe con otra palabra o use «Diagnóstico escrito».'};
   }
   function medSearch(dxid){return function(q){
     var nq=norm(q),d=dx[findDx(dxid)],ya=d.meds.map(function(m){return m.k});
@@ -882,7 +880,7 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
   }}
   function addMed(dxid,k,just){
     var d=dx[findDx(dxid)],c=MED[k],m={id:++uid,k:k,q:c.d[0],u:c.d[1],via:c.d[2],cada:c.d[3],dias:c.d[4],ind:c.d[5],just:just||''};
-    d.meds.push(m);d.nomed=false;ui.ci=null;ui.adding=null;ui.editing=m.id;render('#e'+m.id+'q');say(c.n+' agregado. Revise la pauta.');
+    d.meds.push(m);ui.ci=null;ui.adding=null;ui.editing=m.id;render('#e'+m.id+'q');say(c.n+' agregado. Revise la pauta.');
   }
   function pickMed(dxid,k){
     var c=MED[k];
@@ -908,7 +906,6 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
     else if(a==='cancel-edit'){var id=ui.editing;ui.editing=null;render('#m'+id+' [data-act="edit"]')}
     else if(a==='del-med'){dx.forEach(function(dd,di){var j=dd.meds.findIndex(function(m){return m.id===mId});if(j>=0){var m=dd.meds.splice(j,1)[0];render();toast('Se quitó «'+MED[m.k].n+'».',function(){dd.meds.splice(j,0,m);render('#m'+m.id+' [data-act="edit"]')})}})}
   });
-  dxl.addEventListener('change',function(e){var b=e.target;if(b.dataset.act==='nomed'){var d=dx[findDx(+b.dataset.dx)];d.nomed=b.checked;render('#d'+d.id+' [data-act="nomed"]')}});
   dxl.addEventListener('submit',function(e){
     e.preventDefault();var f=e.target,mId=+f.dataset.med,p='e'+mId,m;
     dx.forEach(function(d){d.meds.forEach(function(x){if(x.id===mId)m=x})});
@@ -918,12 +915,12 @@ svg.lucide{width:20px;height:20px;flex:none;display:block}
     ui.editing=null;render('#m'+mId+' [data-act="edit"]');say('Pauta guardada');
   });
   combo(document.getElementById('dxq'),document.getElementById('dxlb'),dxSearch,function(x){
-    var d={id:++uid,c:x[0],n:x[1],nomed:false,meds:[]};dx.push(d);document.getElementById('dxq').value='';document.getElementById('s2err').hidden=true;render('#d'+d.id+' [data-act="add"]');say(x[0]+' agregado');
+    var d={id:++uid,c:x[0],n:x[1],meds:[]};dx.push(d);document.getElementById('dxq').value='';document.getElementById('s2err').hidden=true;render('#d'+d.id+' [data-act="add"]');say(x[0]+' agregado');
   });
   var ff=document.getElementById('dxfree-f'),ft=document.getElementById('dxft');
   document.getElementById('dxfree').onclick=function(){ff.hidden=false;ft.focus()};
   document.getElementById('dxft-x').onclick=function(){ff.hidden=true;ft.value='';document.getElementById('dxfree').focus()};
-  function addFree(){var v=ft.value.trim();if(!v){ft.focus();return}var d={id:++uid,c:'',n:v,nomed:false,meds:[]};dx.push(d);ft.value='';ff.hidden=true;document.getElementById('s2err').hidden=true;render('#d'+d.id+' [data-act="add"]')}
+  function addFree(){var v=ft.value.trim();if(!v){ft.focus();return}var d={id:++uid,c:'',n:v,meds:[]};dx.push(d);ft.value='';ff.hidden=true;document.getElementById('s2err').hidden=true;render('#d'+d.id+' [data-act="add"]')}
   document.getElementById('dxft-ok').onclick=addFree;ft.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();addFree()}});
   okDx=function(){var v=dx.length>0;document.getElementById('s2err').hidden=v;if(!v)document.getElementById('dxq').focus();return v};
   render();
