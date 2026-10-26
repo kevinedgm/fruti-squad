@@ -1,0 +1,48 @@
+Su semana: {{citas_atendidas}} consultas y {{pacientes_nuevos}} pacientes nuevos
+
+Expediente Manik
+
+Su semana en el consultorio
+Resumen del {{semana}} , comparado con la semana anterior.
+Consultas atendidas
+{{citas_atendidas}}
+{{citas_cambio}} vs. semana anterior
+
+Pacientes nuevos
+{{pacientes_nuevos}}
+{{pacientes_cambio}} vs. semana anterior
+
+Visitas a su perfil en Manik
+{{visitas_perfil}}
+{{visitas_cambio}} vs. semana anterior
+
+Opiniones nuevas
+{{opiniones_nuevas}}
+Promedio {{promedio_opiniones}} de 5
+
+Consultas por día
+Lun
+{{citas_lun}}
+Mar
+{{citas_mar}}
+Mié
+{{citas_mie}}
+Jue
+{{citas_jue}}
+Vie
+{{citas_vie}}
+Sáb
+{{citas_sab}}
+Su día con más consultas fue el {{dia_mas_ocupado}}. {{faltas}} pacientes no llegaron a su cita.
+Lo que dijo un paciente
+«{{opinion_destacada}}»
+{{opinion_autor}}
+
+Esta semana: tiene {{citas_proxima_semana}} citas agendadas y {{espacios_libres}} espacios libres.
+
+Ver estadísticas completas ({{estadisticas_url}})
+
+MedicalManik, el ecosistema digital para su consultorio. ¿Dudas? Escríbanos a {{soporte_correo}}.
+
+Recibe este resumen cada lunes. Dejar de recibirlo ({{baja_url}}).
+{{empresa_direccion}}

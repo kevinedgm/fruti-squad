@@ -1,0 +1,24 @@
+Su Plan {{plan}} está activo
+
+MedicalManik
+
+Su Plan {{plan}} está activo
+Gracias, {{tratamiento}} {{apellido}}. Recibimos su pago y su plan ya está funcionando.
+Plan {{plan}} · {{periodo}}
+Subtotal {{subtotal}}
+IVA 16% {{iva}}
+Método de pago {{metodo_pago}}
+Próximo cobro {{proximo_cobro}}
+Total pagado {{total}}
+Lo que incluye su plan
+✓ {{beneficio_1}}
+✓ {{beneficio_2}}
+✓ {{beneficio_3}}
+✓ {{beneficio_4}}
+Ir a mi cuenta ({{app_url}})
+Si necesita factura, pídala desde Mi cuenta › Facturación. Le llegará en otro correo con el PDF y el XML.
+
+MedicalManik, el ecosistema digital para su consultorio. ¿Dudas? Escríbanos a {{soporte_correo}}.
+
+Recibe este correo porque se hizo un pago en su cuenta de MedicalManik.
+{{empresa_direccion}}

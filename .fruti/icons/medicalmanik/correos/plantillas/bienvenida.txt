@@ -1,0 +1,22 @@
+Le damos la bienvenida a MedicalManik, {{tratamiento}} {{apellido}}
+
+MedicalManik
+
+Le damos la bienvenida, {{tratamiento}} {{apellido}}
+Su cuenta está lista. Con estos tres pasos su consultorio queda funcionando y los pacientes pueden encontrarlo en Manik.
+1
+Complete su perfil profesional
+Cédula, especialidad, foto y dirección del consultorio.
+2
+Configure su agenda
+Días, horarios y duración de cada consulta.
+3
+Publique su perfil en Manik
+Así los pacientes pueden verlo y agendar en línea.
+Entrar a MedicalManik ({{app_url}})
+Su usuario es {{correo}}. Si necesita ayuda para configurar su cuenta, responda a este correo y le acompañamos paso a paso.
+
+MedicalManik, el ecosistema digital para su consultorio. ¿Dudas? Escríbanos a {{soporte_correo}}.
+
+Recibe este correo porque creó una cuenta en MedicalManik.
+{{empresa_direccion}}

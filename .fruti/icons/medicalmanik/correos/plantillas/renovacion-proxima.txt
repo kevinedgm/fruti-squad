@@ -1,0 +1,17 @@
+Su Plan {{plan}} se renueva el {{proximo_cobro}}
+
+MedicalManik
+
+Su plan se renueva en 7 días
+El {{proximo_cobro}} renovaremos su Plan {{plan}}. No tiene que hacer nada si quiere seguir igual.
+Plan {{plan}} · {{periodo}}
+Se cobrará a {{metodo_pago}}
+Fecha {{proximo_cobro}}
+Monto {{total}}
+Revisar mi plan ({{plan_url}})
+Puede cambiar de plan o de tarjeta antes de esa fecha desde Mi cuenta › Plan y pagos.
+
+MedicalManik, el ecosistema digital para su consultorio. ¿Dudas? Escríbanos a {{soporte_correo}}.
+
+Recibe este aviso porque tiene un plan con renovación automática.
+{{empresa_direccion}}

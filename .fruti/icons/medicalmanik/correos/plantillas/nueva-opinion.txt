@@ -1,0 +1,17 @@
+Un paciente opinó sobre su consulta
+
+MedicalManik
+
+Tiene una opinión nueva
+Un paciente que atendió el {{fecha_consulta}} calificó su consulta en Manik.
+★★★★★ {{calificacion}} de 5
+«{{opinion}}»
+{{opinion_autor}}
+
+Responder las opiniones, aunque sea con una línea, ayuda a que otros pacientes confíen en usted.
+Responder opinión ({{opinion_url}})
+
+MedicalManik, el ecosistema digital para su consultorio. ¿Dudas? Escríbanos a {{soporte_correo}}.
+
+Le avisamos de cada opinión nueva. Dejar de recibirlo ({{baja_url}}).
+{{empresa_direccion}}

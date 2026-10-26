@@ -1,0 +1,19 @@
+Tu cita con {{medico}} está confirmada
+
+Tu cita está confirmada
+Te esperan el {{fecha_cita}} a las {{hora_cita}} .
+{{medico}}
+{{especialidad}}
+Cuándo {{fecha_cita}}, {{hora_cita}}
+Dónde {{consultorio}}
+{{direccion}}
+Consulta {{precio}} · pagas en el consultorio
+
+Agregar a mi calendario ({{calendario_url}})
+Cómo llegar ({{mapa_url}})  ·  Cambiar o cancelar ({{gestionar_url}})
+Te mandamos un recordatorio un día antes. Si no puedes ir, cancela con tiempo para que otra persona use ese espacio.
+
+Manik es parte de MedicalManik. ¿Dudas? Escríbenos a {{soporte_correo}}.
+
+Recibes este correo porque agendaste una cita en Manik.
+{{empresa_direccion}}

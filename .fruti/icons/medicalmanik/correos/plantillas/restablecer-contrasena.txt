@@ -1,0 +1,14 @@
+Restablezca su contraseña de MedicalManik
+
+MedicalManik
+
+Restablezca su contraseña
+Recibimos una solicitud para cambiar la contraseña de {{correo}}.
+Crear nueva contraseña ({{restablecer_url}})
+El enlace funciona durante {{minutos_vigencia}} minutos y solo una vez.
+¿No lo solicitó usted? Ignore este correo: su contraseña actual sigue funcionando. Si recibe varios de estos correos sin haberlos pedido, avísenos.
+
+MedicalManik, el ecosistema digital para su consultorio. ¿Dudas? Escríbanos a {{soporte_correo}}.
+
+Solicitud hecha el {{fecha_solicitud}} desde {{dispositivo}}.
+{{empresa_direccion}}

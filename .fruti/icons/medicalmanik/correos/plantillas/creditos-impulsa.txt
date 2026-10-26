@@ -1,0 +1,23 @@
+Sus {{creditos}} créditos de Impulsa están listos
+
+Impulsa Manik
+
+Sus créditos están listos
+Compró {{creditos}} créditos de Impulsa. Ya puede usarlos en sus campañas de prevención.
+Saldo disponible
+{{saldo_creditos}} créditos
+Alcanza para enviar unos {{alcance_estimado}} mensajes.
+
+Paquete {{paquete}}
+Créditos {{creditos}}
+Subtotal {{subtotal}}
+IVA 16% {{iva}}
+Método de pago {{metodo_pago}}
+Total pagado {{total}}
+Crear una campaña ({{impulsa_url}})
+Los créditos no vencen mientras su cuenta esté activa. Si una campaña no se envía, los créditos regresan a su saldo.
+
+MedicalManik, el ecosistema digital para su consultorio. ¿Dudas? Escríbanos a {{soporte_correo}}.
+
+Recibe este correo porque se hizo una compra en Impulsa Manik.
+{{empresa_direccion}}

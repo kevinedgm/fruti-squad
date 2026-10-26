@@ -1,0 +1,16 @@
+No pudimos cobrar su Plan {{plan}}
+
+MedicalManik
+
+No pudimos cobrar su plan
+Pago rechazado: {{motivo_rechazo}}
+
+Intentamos cobrar {{total}} a {{metodo_pago}} para renovar su Plan {{plan}}.
+Su cuenta sigue funcionando normalmente hasta el {{fecha_limite}} . Volveremos a intentar el cobro el {{fecha_reintento}}.
+Actualizar método de pago ({{pago_url}})
+Después del {{fecha_limite}} su cuenta pasa al plan gratuito: sus expedientes y citas se conservan, pero algunas funciones se desactivan.
+
+MedicalManik, el ecosistema digital para su consultorio. ¿Dudas? Escríbanos a {{soporte_correo}}.
+
+Recibe este correo porque falló el cobro de su plan.
+{{empresa_direccion}}

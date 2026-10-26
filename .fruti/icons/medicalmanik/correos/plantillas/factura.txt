@@ -1,0 +1,19 @@
+Factura {{folio}} de MedicalManik
+
+MedicalManik
+
+Su factura está lista
+Adjuntamos su factura en PDF y XML.
+Folio {{folio}}
+RFC receptor {{rfc}}
+Concepto {{concepto}}
+Fecha {{fecha_factura}}
+Uso de CFDI {{uso_cfdi}}
+Total {{total}}
+Descargar factura ({{factura_url}})
+Si algún dato fiscal es incorrecto, responda a este correo antes de fin de mes para corregirla.
+
+MedicalManik, el ecosistema digital para su consultorio. ¿Dudas? Escríbanos a {{soporte_correo}}.
+
+Recibe este correo porque pidió factura de un pago en MedicalManik.
+{{empresa_direccion}}

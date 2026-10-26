@@ -1,0 +1,60 @@
+<title>Correos MedicalManik</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="{{FUENTES}}">
+<style>
+/* Índice fijo a la izquierda y los correos uno debajo de otro, cada uno con sus datos de envío arriba.
+   Los estilos de esta página van con clase para no tocar el HTML de los correos. Tema claro único (los correos se diseñan en claro). */
+:root{
+  --bg:#E9EDF3; --panel:#FFFFFF; --ink:#14213D; --muted:#4A5674; --line:#D5DCE7; --azul:#234899; --field:#6B7590;
+  --sans:'Atkinson Hyperlegible Next',Arial,Helvetica,sans-serif; --tit:'Sora',Arial,Helvetica,sans-serif;
+  color-scheme:light;
+}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 var(--sans)}
+.v-wrap{display:grid;grid-template-columns:250px minmax(0,1fr);gap:28px;max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px}
+.v-side{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;max-height:100vh;overflow:auto;padding-top:4px}
+.v-side h1{font:600 20px/1.2 var(--tit);margin:0 0 4px}
+.v-side p{margin:0 0 14px;color:var(--muted);font-size:14px}
+.v-side ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.v-side li.g{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:14px 0 4px}
+.v-side a{display:block;color:var(--ink);text-decoration:none;padding:6px 10px;border-radius:8px;font-size:15px}
+.v-side a:hover{background:var(--panel)}
+.v-seg{display:inline-flex;border:1.5px solid var(--field);border-radius:10px;padding:3px;gap:3px;background:var(--panel);margin-bottom:6px}
+.v-seg button{font:700 14px var(--sans);color:var(--ink);background:none;border:0;border-radius:7px;min-height:36px;padding:0 12px;cursor:pointer}
+.v-seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.v-list{display:grid;gap:36px;min-width:0}
+.mail{display:grid;gap:12px;scroll-margin-top:16px}
+.meta{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:grid;gap:6px}
+.meta .grp{margin:0;font-size:13px;color:var(--muted)}
+.meta h2{margin:0;font:600 20px/1.25 var(--tit)}
+.meta dl{display:grid;grid-template-columns:110px minmax(0,1fr);gap:4px 12px;margin:6px 0 0;font-size:15px}
+.meta dt{color:var(--muted)}
+.meta dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.meta details{font-size:14px;color:var(--muted)}
+.meta summary{cursor:pointer;font-weight:700;color:var(--ink)}
+.vars{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.vars code{font:13px ui-monospace,Menlo,Consolas,monospace;background:#EEF2F7;border-radius:6px;padding:2px 7px;color:var(--ink)}
+.screen{background:#F3F5F9;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.mailbody{max-width:664px;margin:0 auto;transition:max-width .2s ease}
+.narrow .mailbody{max-width:375px}
+:focus-visible{outline:3px solid var(--azul);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.mailbody{transition:none}}
+@media (max-width:860px){.v-wrap{grid-template-columns:1fr}.v-side{position:static;max-height:none}}
+</style>
+
+<div class="v-wrap" id="top">
+  <aside class="v-side" aria-label="Correos">
+    <h1>Correos MedicalManik</h1>
+    <p>{{N}} plantillas con datos de ejemplo.</p>
+    <div class="v-seg" role="group" aria-label="Ancho de lectura"><button type="button" id="w-d" aria-pressed="true">Escritorio</button><button type="button" id="w-m" aria-pressed="false">Celular</button></div>
+    <ul>{{NAV}}</ul>
+  </aside>
+  <main class="v-list" id="lista">{{CORREOS}}</main>
+</div>
+<script>
+(function(){
+  var l=document.getElementById('lista'),d=document.getElementById('w-d'),m=document.getElementById('w-m');
+  function set(n){l.classList.toggle('narrow',n);d.setAttribute('aria-pressed',!n);m.setAttribute('aria-pressed',n)}
+  d.onclick=function(){set(false)};m.onclick=function(){set(true)};
+  document.querySelectorAll('.mailbody a[href="#"]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault()})});
+})();
+</script>

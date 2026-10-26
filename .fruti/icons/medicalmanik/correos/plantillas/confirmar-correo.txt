@@ -1,0 +1,13 @@
+Su código de confirmación: {{codigo}}
+
+MedicalManik
+
+Confirme su correo
+Escriba este código en la pantalla de registro de MedicalManik:
+{{codigo}}
+El código vence en {{minutos_vigencia}} minutos. Si usted no se registró en MedicalManik, ignore este correo; nadie podrá usar su dirección sin el código.
+
+MedicalManik, el ecosistema digital para su consultorio. ¿Dudas? Escríbanos a {{soporte_correo}}.
+
+Recibe este correo porque alguien escribió esta dirección al registrarse.
+{{empresa_direccion}}
