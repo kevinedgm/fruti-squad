@@ -120,3 +120,20 @@ Prueba automática en Chromium, 1500, 1100 y 390 px: sin desplazamiento horizont
 | 1.2.4 Subtítulos en directo | AA | C\* | No está en la guía, pero WCAG 2.2 lo pide para audio en vivo: botón «Subtítulos» con la marca «Subtítulos automáticos» (transparencia de IA). P: confirmar que el proveedor de video los ofrece en español. |
 | 1.1.1 Contenido no textual | A | P | El video real de la llamada no necesita alternativa (es comunicación en vivo); el sello del ecosistema y los íconos del riel tienen nombre accesible. |
 | 3.3.4 Prevención de errores | AA | C | «Colgar» no cierra la consulta; aviso visible: «Colgar termina la llamada, no la consulta». |
+
+## Revisión 3: paso 2, diagnóstico y tratamiento
+Prueba automática en Chromium (1500, 390 y 320 px): búsqueda por teclado, sugeridos, contraindicación con justificación, quitar y deshacer, hacer principal y validación sin diagnósticos. Sin errores de consola ni desplazamiento horizontal.
+
+| Criterio | Nivel | Estado | Evidencia |
+|---|---|---|---|
+| 4.1.2 Nombre, función, valor | A | C | Buscadores con el patrón combobox de ARIA 1.2 (`aria-expanded`, `aria-controls`, `aria-activedescendant`, opciones con `aria-selected`). |
+| 2.1.1 Teclado | A | C | Flechas recorren resultados, Enter elige, Esc cierra la lista sin cerrar otra cosa. |
+| 4.1.3 Mensajes de estado | AA | C | «N resultados», «Paracetamol agregado. Revise la pauta», «Pauta guardada» y «… es ahora el diagnóstico principal» se anuncian sin mover el foco. |
+| 3.3.1 / 3.3.3 Errores | A / AA | C | Sin diagnósticos: mensaje con ícono que dice cómo resolverlo y foco al buscador. Pauta sin cantidad y contraindicación sin justificación: mensaje junto al campo, `aria-invalid` y foco. |
+| 3.3.4 Prevención de errores | AA | C | Contraindicación: «Elegir otro medicamento» es la acción principal; agregar de todos modos exige justificación escrita. Quitar diagnóstico o medicamento se puede deshacer. |
+| 2.2.1 Tiempo ajustable | A | C | El aviso de «Deshacer» no tiene tiempo límite; se cierra con «Cerrar». |
+| 1.4.1 Uso del color | A | C | Principal: borde, etiqueta y estrella con texto. Controlado: borde lateral, ícono y texto. Contraindicado: ícono y texto. |
+| 2.5.7 Arrastre | AA | C | El orden de diagnósticos se cambia con «Hacer principal», sin arrastrar. |
+| 3.3.2 Etiquetas | A | C | Cada campo de la pauta tiene etiqueta visible; los buscadores tienen etiqueta e instrucción de uso. |
+| 2.4.6 Encabezados y etiquetas | AA | C | Botones con propósito propio: «Quitar diagnóstico Fiebre, no especificada» para el lector de pantalla. |
+| 2.5.5 Tamaño de objetivo | AAA | C | Sugeridos, enlaces de acción y casillas a 44 px. |
