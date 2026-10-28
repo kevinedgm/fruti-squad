@@ -1,0 +1,115 @@
+<!-- @dsCard group="Data display" height=560 width=1100 -->
+<!doctype html><html lang="es"><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap"><style>
+*{box-sizing:border-box}[hidden]{display:none!important}
+html,body{margin:0}body{background:var(--bg);color:var(--text);font:15px/22px var(--font-sans);padding:var(--space-6)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
+.i{width:16px;height:16px;flex:none;stroke:currentColor;fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+.mono{font-family:var(--font-datos);font-feature-settings:"zero"}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+/* encabezado de módulo */
+.mh{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 24px;align-items:end;padding-bottom:var(--space-5)}
+@media (max-width:640px){.mh{grid-template-columns:minmax(0,1fr)}.mh .acts{justify-content:flex-start;flex-wrap:wrap}}
+.crumb{grid-column:1/-1;font:500 13px/18px var(--font-sans);color:var(--text-muted);display:flex;gap:6px;align-items:center}
+.crumb a{color:var(--text-muted);text-decoration:none}.crumb a:hover{color:var(--primary);text-decoration:underline;text-underline-offset:3px}
+.t1{margin:0;font:700 26px/32px var(--font-display);font-stretch:125%;letter-spacing:-.015em;color:var(--text)}
+.deck{margin:2px 0 0;font:italic 400 17px/24px var(--font-editorial);color:var(--text-muted)}
+.cnt{font:500 13px/18px var(--font-datos);color:var(--text-muted);margin-top:6px}
+.cnt b{color:var(--text);font-weight:600}
+.acts{display:flex;gap:var(--space-2);align-items:center}
+/* botones */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:var(--control-h);padding:0 16px;border-radius:var(--radius-sm);font:600 14px/20px var(--font-sans);border:1px solid transparent;cursor:pointer;white-space:nowrap;transition:transform var(--quick) var(--ease-out),box-shadow var(--quick) ease,background var(--quick) ease}
+.btn-p{background:var(--primary);color:var(--on-primary);box-shadow:var(--shadow-primary)}
+.btn-p:hover{background:var(--primary-hover);box-shadow:var(--shadow-primary-hover);transform:translateY(-1px)}
+.btn-p:active{transform:none;box-shadow:var(--shadow-primary)}
+.btn-p:focus-visible{outline-offset:3px}
+.btn-s{background:var(--surface);color:var(--primary);border-color:var(--border-control);box-shadow:var(--shadow-1)}
+.btn-s:hover{background:var(--surface-hover)}
+.btn-g{background:transparent;color:var(--primary)}.btn-g:hover{background:var(--surface-hover)}
+.btn-d{background:var(--surface);color:var(--fuera);border-color:var(--fuera)}.btn-d:hover{background:var(--fuera-soft)}
+.ib{width:32px;height:32px;display:inline-grid;place-items:center;border:0;border-radius:var(--radius-sm);background:transparent;color:var(--text-muted);cursor:pointer}
+.ib:hover{background:var(--surface-hover);color:var(--text)}
+/* barra de herramientas */
+.tb{display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center;padding:var(--space-3);border-bottom:1px solid var(--border)}
+.fld{display:flex;align-items:center;gap:8px;min-height:var(--control-h);background:var(--surface);border:1px solid var(--border-control);border-radius:var(--radius-md);box-shadow:var(--shadow-inset);padding:0 10px;color:var(--text-muted);transition:border-color var(--quick) ease,box-shadow var(--quick) ease}
+.fld:focus-within{border-color:var(--primary);box-shadow:var(--shadow-inset),0 0 0 3px var(--primary-soft)}
+.fld input,.fld select{border:0;outline:0;background:none;font:15px/22px var(--font-sans);color:var(--text);min-width:0;width:100%;min-height:38px}
+.fld input::placeholder{color:var(--text-subtle)}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 10px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);font:500 13px/18px var(--font-sans);color:var(--text);cursor:pointer}
+.chip:hover{background:var(--surface-hover)}
+.chip[aria-pressed="true"]{background:var(--primary-soft);border-color:var(--primary-soft);color:var(--primary)}
+.chip .n{font:500 12px var(--font-datos);color:inherit;opacity:.8}
+/* tarjeta y tabla */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);box-shadow:var(--shadow-1);overflow:hidden}
+.tbl{width:100%;border-collapse:collapse}
+.tbl th{background:var(--surface-sunken);font:500 13px/18px var(--font-sans);color:var(--text-muted);text-align:left;padding:9px 12px;border-bottom:1px solid var(--border);white-space:nowrap}
+.tbl th button{font:inherit;color:inherit;background:none;border:0;padding:0;display:inline-flex;gap:4px;align-items:center;cursor:pointer}
+.tbl th button:hover{color:var(--text)}
+.tbl td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:middle;height:56px}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tbody tr{transition:background var(--quick) ease}
+.tbl tbody tr:hover td{background:var(--surface-hover)}
+.tbl tbody tr[aria-selected="true"] td{background:var(--primary-soft)}
+.tbl .ck{width:44px}.tbl .ck input{width:18px;height:18px;accent-color:var(--primary);margin:0}
+.who{display:flex;align-items:center;gap:10px;min-width:0}
+.av{width:32px;height:32px;border-radius:var(--radius-pill);background:var(--primary-soft);color:var(--primary);display:grid;place-items:center;font:600 12px var(--font-sans);flex:none}
+.av.off{background:var(--surface-sunken);color:var(--text-muted)}
+.who b{display:flex;align-items:center;gap:6px;font-weight:600}
+.who small{display:block;font:400 12px/16px var(--font-datos);color:var(--text-muted);font-feature-settings:"zero"}
+.cur{width:8px;height:8px;border-radius:50%;background:var(--pera);box-shadow:0 0 0 2px var(--pera-soft);flex:none}
+.dt{font:500 13px/18px var(--font-datos);color:var(--text-muted);font-feature-settings:"zero";white-space:nowrap}
+.ra{display:flex;gap:2px;justify-content:flex-end;opacity:0;transition:opacity var(--quick) ease}
+.tbl tbody tr:hover .ra,.tbl tbody tr:focus-within .ra,.tbl tbody tr[aria-selected="true"] .ra{opacity:1}
+@media (hover:none){.ra{opacity:1}}
+.tw{overflow-x:auto;position:relative}.tw .tbl{min-width:860px}
+/* estado de usuario */
+.est{display:inline-flex;align-items:center;gap:6px;padding:3px 10px 3px 8px;border-radius:var(--radius-sm);font:500 13px/18px var(--font-sans);white-space:nowrap}
+.est .i{width:15px;height:15px}
+.e-act{background:var(--conforme-soft);color:var(--on-conforme-soft)}
+.e-inv{background:var(--pendiente-soft);color:var(--on-pendiente-soft)}
+.e-sus{background:var(--alerta-soft);color:var(--on-alerta-soft)}
+.e-blo{background:var(--fuera-soft);color:var(--on-fuera-soft)}
+.e-baja{background:var(--surface-sunken);color:var(--text-muted)}
+/* barra de acciones en lote */
+.bulk{display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center;background:var(--text);color:var(--on-primary);border-radius:var(--radius-md);padding:6px 6px 6px 14px;box-shadow:var(--shadow-overlay);margin:var(--space-3)}
+.bulk .n{font:500 13px var(--font-datos);font-feature-settings:"zero";margin-right:auto}
+.bulk .btn{min-height:32px;background:transparent;color:var(--on-primary);border-color:rgba(255,255,255,.35)}
+.bulk .btn:hover{background:rgba(255,255,255,.08)}
+.bulk :focus-visible{outline-color:var(--pera)}
+/* pie de tabla */
+.tf{display:flex;justify-content:space-between;align-items:center;gap:var(--space-3);padding:10px 12px;border-top:1px solid var(--border);font:500 13px var(--font-datos);color:var(--text-muted);font-feature-settings:"zero"}
+/* panel lateral (formulario) */
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-overlay);width:min(440px,100%);display:grid;grid-template-rows:auto minmax(0,1fr) auto;max-height:100%}
+.ph{display:flex;align-items:flex-start;gap:12px;padding:18px 20px 14px;border-bottom:1px solid var(--border)}
+.ph h2{margin:0;font:600 17px/24px var(--font-sans)}
+.ph p{margin:2px 0 0;font:400 13px/18px var(--font-sans);color:var(--text-muted)}
+.pb{padding:18px 20px;display:grid;align-content:start;gap:var(--space-5);overflow:auto}
+.pf{display:flex;flex-wrap:wrap;gap:var(--space-2);justify-content:flex-end;padding:14px 20px;border-top:1px solid var(--border);background:var(--surface)}
+.f{display:grid;gap:6px}
+.f>label,.f legend{font:500 13px/18px var(--font-sans);color:var(--text)}
+.f .req{color:var(--text-muted);font-weight:400}
+.f .help{font:400 12px/16px var(--font-sans);color:var(--text-muted)}
+.f .err{display:flex;gap:6px;align-items:flex-start;font:500 12px/16px var(--font-sans);color:var(--on-fuera-soft)}
+.f .err .i{width:14px;height:14px;margin-top:1px}
+.f[data-state="error"] .fld{border-color:var(--fuera);box-shadow:var(--shadow-inset),0 0 0 3px var(--fuera-soft)}
+fieldset.f{border:0;margin:0;padding:0}
+.opts{display:grid;gap:6px}
+.opt{display:grid;grid-template-columns:18px 1fr;gap:2px 10px;align-items:start;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius-md);cursor:pointer;background:var(--surface);transition:border-color var(--quick) ease,background var(--quick) ease}
+.opt:hover{background:var(--surface-hover)}
+.opt input{margin:2px 0 0;width:18px;height:18px;accent-color:var(--primary)}
+.opt b{font:600 14px/20px var(--font-sans)}
+.opt small{grid-column:2;font:400 12px/16px var(--font-sans);color:var(--text-muted)}
+.opt:has(input:checked){border-color:var(--primary);background:var(--primary-soft)}
+.checks{display:flex;flex-wrap:wrap;gap:6px}
+.checks label{display:inline-flex;align-items:center;gap:8px;min-height:36px;padding:0 10px;border:1px solid var(--border);border-radius:var(--radius-sm);font:500 13px var(--font-sans);cursor:pointer;background:var(--surface)}
+.checks label:has(input:checked){border-color:var(--primary-soft);background:var(--primary-soft);color:var(--primary)}
+.checks input{width:16px;height:16px;accent-color:var(--primary);margin:0}
+.danger{border-top:1px solid var(--border);padding-top:var(--space-4);display:grid;gap:8px}
+.danger p{margin:0;font:400 13px/18px var(--font-sans);color:var(--text-muted)}
+/* aviso y vacíos */
+.toast{display:flex;align-items:center;gap:12px;background:var(--text);color:var(--on-primary);border-radius:var(--radius-md);padding:8px 8px 8px 14px;box-shadow:var(--shadow-overlay);font:500 14px var(--font-sans)}
+.toast .btn{min-height:32px;background:var(--surface);color:var(--text)}
+.empty{display:grid;justify-items:center;gap:8px;text-align:center;padding:48px 24px}
+.empty .lm{font:italic 400 22px/30px var(--font-editorial);color:var(--text);margin:0}
+.empty p{margin:0;color:var(--text-muted);max-width:44ch}
+@media (prefers-reduced-motion:reduce){.btn,.tbl tbody tr,.ra,.fld,.opt{transition:none}.btn-p:hover{transform:none}}
+</style></head><body><div class="card"><div class="bulk" role="region" aria-label="Acciones para la selección"><span class="n">2 seleccionados</span><button class="btn">Cambiar rol</button><button class="btn">Suspender</button><button class="btn" aria-label="Quitar selección"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18" /> <path d="m6 6 12 12" /></svg></button></div><div class="tw" tabindex="0" role="region" aria-label="Tabla de usuarios"><table class="tbl" aria-label="Usuarios"><thead><tr><th class="ck"><input type="checkbox" aria-label="Seleccionar todos"></th><th><button>Usuario <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m21 16-4 4-4-4" /> <path d="M17 20V4" /> <path d="m3 8 4-4 4 4" /> <path d="M7 4v16" /></svg></button></th><th>Rol</th><th>Divisiones</th><th><button>Último acceso <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m21 16-4 4-4-4" /> <path d="M17 20V4" /> <path d="m3 8 4-4 4 4" /> <path d="M7 4v16" /></svg></button></th><th>Estado</th><th><span class="vh">Acciones</span></th></tr></thead><tbody><tr><td class="ck"><input type="checkbox" aria-label="Seleccionar a María Ruiz Téllez"></td><td><div class="who"><span class="av" aria-hidden="true">MR</span><span><b>María Ruiz Téllez<span class=cur title="En edición"></span><span class=vh>en edición</span></b><small>m.ruiz@nisanabani.mx</small></span></div></td><td>Analista</td><td>Aguas · Alimentos</td><td class="dt">2026-10-28 09:41</td><td><span class="est e-act"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="m16 9-5.5 5.5L8 12" /></svg>Activo</span></td><td><div class="ra"><button class="ib" aria-label="Editar a María Ruiz Téllez"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /> <path d="m15 5 4 4" /></svg></button><button class="ib" aria-label="Más acciones para María Ruiz Téllez"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1" /> <circle cx="19" cy="12" r="1" /> <circle cx="5" cy="12" r="1" /></svg></button></div></td></tr><tr aria-selected="true"><td class="ck"><input type="checkbox" aria-label="Seleccionar a Jorge Orozco" checked></td><td><div class="who"><span class="av" aria-hidden="true">JO</span><span><b>Jorge Orozco</b><small>j.orozco@nisanabani.mx</small></span></div></td><td>Supervisor de calidad</td><td>Todas</td><td class="dt">2026-10-28 08:15</td><td><span class="est e-act"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="m16 9-5.5 5.5L8 12" /></svg>Activo</span></td><td><div class="ra"><button class="ib" aria-label="Editar a Jorge Orozco"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /> <path d="m15 5 4 4" /></svg></button><button class="ib" aria-label="Más acciones para Jorge Orozco"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1" /> <circle cx="19" cy="12" r="1" /> <circle cx="5" cy="12" r="1" /></svg></button></div></td></tr><tr aria-selected="true"><td class="ck"><input type="checkbox" aria-label="Seleccionar a Lucía Pacheco" checked></td><td><div class="who"><span class="av" aria-hidden="true">LP</span><span><b>Lucía Pacheco</b><small>l.pacheco@nisanabani.mx</small></span></div></td><td>Recepción</td><td>Bebidas de agave</td><td class="dt">—</td><td><span class="est e-inv"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" /> <rect x="2" y="4" width="20" height="16" rx="2" /></svg>Invitación enviada</span></td><td><div class="ra"><button class="ib" aria-label="Editar a Lucía Pacheco"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /> <path d="m15 5 4 4" /></svg></button><button class="ib" aria-label="Más acciones para Lucía Pacheco"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1" /> <circle cx="19" cy="12" r="1" /> <circle cx="5" cy="12" r="1" /></svg></button></div></td></tr><tr><td class="ck"><input type="checkbox" aria-label="Seleccionar a Andrés Villalobos"></td><td><div class="who"><span class="av" aria-hidden="true">AV</span><span><b>Andrés Villalobos</b><small>a.villalobos@nisanabani.mx</small></span></div></td><td>Analista</td><td>Ambiental</td><td class="dt">2026-10-21 17:02</td><td><span class="est e-sus"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <line x1="10" x2="10" y1="15" y2="9" /> <line x1="14" x2="14" y1="15" y2="9" /></svg>Suspendido</span></td><td><div class="ra"><button class="ib" aria-label="Editar a Andrés Villalobos"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /> <path d="m15 5 4 4" /></svg></button><button class="ib" aria-label="Más acciones para Andrés Villalobos"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1" /> <circle cx="19" cy="12" r="1" /> <circle cx="5" cy="12" r="1" /></svg></button></div></td></tr><tr><td class="ck"><input type="checkbox" aria-label="Seleccionar a Sofía Ramírez"></td><td><div class="who"><span class="av" aria-hidden="true">SR</span><span><b>Sofía Ramírez</b><small>s.ramirez@nisanabani.mx</small></span></div></td><td>Analista</td><td>Farmacia</td><td class="dt">2026-10-27 12:30</td><td><span class="est e-blo"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect width="18" height="11" x="3" y="11" rx="2" ry="2" /> <path d="M7 11V7a5 5 0 0 1 10 0v4" /></svg>Bloqueado</span></td><td><div class="ra"><button class="ib" aria-label="Editar a Sofía Ramírez"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /> <path d="m15 5 4 4" /></svg></button><button class="ib" aria-label="Más acciones para Sofía Ramírez"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1" /> <circle cx="19" cy="12" r="1" /> <circle cx="5" cy="12" r="1" /></svg></button></div></td></tr><tr><td class="ck"><input type="checkbox" aria-label="Seleccionar a Ernesto Cano"></td><td><div class="who"><span class="av off" aria-hidden="true">EC</span><span><b>Ernesto Cano</b><small>e.cano@nisanabani.mx</small></span></div></td><td>Administración</td><td>Todas</td><td class="dt">2026-08-02 10:11</td><td><span class="est e-baja"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" /> <path d="M4.929 4.929 19.07 19.071" /></svg>Dado de baja</span></td><td><div class="ra"><button class="ib" aria-label="Editar a Ernesto Cano"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z" /> <path d="m15 5 4 4" /></svg></button><button class="ib" aria-label="Más acciones para Ernesto Cano"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="1" /> <circle cx="19" cy="12" r="1" /> <circle cx="5" cy="12" r="1" /></svg></button></div></td></tr></tbody></table></div><div class="tf"><span>1–6 de 24</span><span><button class="btn btn-g" style="min-height:32px">Anterior</button><button class="btn btn-g" style="min-height:32px">Siguiente</button></span></div></div></body></html>
