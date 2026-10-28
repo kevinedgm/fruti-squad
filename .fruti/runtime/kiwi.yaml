@@ -89,6 +89,9 @@ operations:
       - no_generic_card_without_grouping_reason
       - piece_contract_per_piece_with_promote_demote_per_size
       - adaptation_is_recomposition_not_restacking
+      - preserve_is_a_valid_adaptation_when_justified_per_piece
+      - primary_action_form_and_row_declared_per_mode
+      - data_piece_marker_on_every_piece_and_group_in_kiwi_f2_html
       - configured_interface_standards_are_normative_when_present
       - missing_normative_standard_is_reported_not_invented
 

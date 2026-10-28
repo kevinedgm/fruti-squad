@@ -38,6 +38,16 @@ checks:
     kind: deterministic
     check: registry-contract-consistency
     severity: error
+  - id: FID-GEOMETRY-001
+    category: structural
+    kind: deterministic
+    applies_to: every_piece_marked_in_f2
+    check: f3-preserves-f2-geometry
+    tool: fruti fidelity --f2 <kiwi-f2> --f3 <f3> --round <round> --out .fruti/tests/<round>/fidelity.json
+    compares: [presence, visibility, grouping, relation, intrusion, gap, size]
+    spaces: [compact, medium, expanded]
+    blocked_is_pass: false
+    severity: error
   - id: VIS-HIERARCHY-001
     category: visual
     kind: judgment

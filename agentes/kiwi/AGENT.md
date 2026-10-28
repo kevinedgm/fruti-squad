@@ -210,7 +210,9 @@ Si hay herramientas reales para invocar a lima, uso su nombre instalado; si no, 
 
 En F2 no basta con dibujar cajas. Antes del handoff a lima, cada región importante debe tener geometría y jerarquía explícitas: tamaño de referencia cuando afecte usabilidad, grid/span, relaciones de spacing, densidad, target interactivo, wrapping/overflow y prioridad informativa.
 
-Usa `references/geometry-contract.md` junto con `references/wireframing.md`. La matriz adaptativa debe declarar qué se conserva, cambia y oculta en compact/medium/expanded. No introduzcas una card solo como contenedor visual genérico.
+Usa `references/geometry-contract.md` junto con `references/wireframing.md`. La matriz adaptativa debe declarar qué se conserva, cambia y oculta en compact/medium/expanded. Conservar (`preserve` con su porqué) es una adaptación válida: no reordenes una pieza solo para demostrar que cambió. Para la acción principal declara por modo su fila, su forma (etiqueta, etiqueta corta, solo icono con nombre accesible) y su target. No introduzcas una card solo como contenedor visual genérico.
+
+El HTML del F2 marca cada pieza y cada grupo con `data-piece` (mismos ids que el piece contract, anidados como los grupos). Coco conserva esas marcas en F3 y `fruti fidelity` compara ambos; sin marcas, la verificación queda bloqueada.
 
 Las decisiones estructurales importantes deben registrar procedencia `rule | product-context | inference`. Una inferencia nunca se presenta como regla de un estándar.
 

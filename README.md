@@ -259,6 +259,7 @@ LIMA
         ↓
 COCO
   F3 + implementación real
+  fidelidad F2 → F3 (FID-GEOMETRY-001)
   auditoría + compliance report
         ↓
 LIMA
@@ -273,6 +274,17 @@ result.md
 ```
 
 Si una guía normativa configurada no está disponible, la prueba debe marcarla como evidencia faltante. No se permite inventarla desde memoria.
+
+## Fidelidad estructural F2 → F3
+
+Kiwi marca cada pieza del F2 con `data-piece`; Coco conserva las marcas en F3. Este comando compara la geometría de ambos en cada viewport de verificación y falla si una pieza cambia de grupo, de orden o de fila, si otra pieza se mete entre sus miembros, o si su separación o tamaño se desvían más de lo tolerado:
+
+```bash
+fruti fidelity --f2 .fruti/tests/r01/kiwi-f2.html --f3 http://localhost:5173/usuarios \
+  --round r01 --out .fruti/tests/r01/fidelity.json
+```
+
+Un `fail` bloquea la dimensión estructural; un `blocked` (sin Playwright o sin marcas) deja la prueba en PARTIAL. Ejemplo completo y tabla de chequeos en [`docs/fidelidad/`](docs/fidelidad/README.md).
 
 
 # Arquitectura de contexto eficiente
@@ -354,7 +366,7 @@ Nunca debe copiar documentos enteros.
 
 Define las reglas de auditoría con identificadores estables.
 
-Los checks deterministas deben ejecutarse mediante scripts/herramientas cuando sea posible. Por ejemplo: DOM inválido, IDs duplicados, overflow horizontal, tokens prohibidos, semántica interactiva, targets táctiles o inconsistencias del registry.
+Los checks deterministas deben ejecutarse mediante scripts/herramientas cuando sea posible. Por ejemplo: fidelidad estructural F2 → F3 (`FID-GEOMETRY-001`, con `fruti fidelity`), DOM inválido, IDs duplicados, overflow horizontal, tokens prohibidos, semántica interactiva, targets táctiles o inconsistencias del registry.
 
 Coco reserva razonamiento para lo que realmente requiere juicio: jerarquía, claridad, densidad, affordance, consistencia, composición adaptativa y regresiones visuales.
 

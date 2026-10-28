@@ -48,6 +48,7 @@ const request=[
 '- .fruti/tests/'+round+'/kiwi-decisions.yaml',
 '- .fruti/tests/'+round+'/lima-contract.yaml',
 '- Coco implementation/component',
+'- .fruti/tests/'+round+'/fidelity.json (fruti fidelity --f2 kiwi-f2.html --f3 <F3> --round '+round+' --out .fruti/tests/'+round+'/fidelity.json)',
 '- .fruti/reports/compliance-current.json (latest pointer; must carry round: '+round+')',
 '- .fruti/tests/'+round+'/compliance.json and .fruti/tests/'+round+'/handoff-<stage>.json for each stage (round copies; stage = kiwi | lima | coco | lima-gate | mora)',
 '- Mora Design Hub documentation page with verified Preview',
@@ -64,6 +65,8 @@ const request=[
 '- Mora Preview corresponds to Coco verified output.',
 '- Overall PASS is forbidden unless every mandatory quality dimension passes.',
 '- No-overflow is not evidence of collision-free or well-composed layout.',
+'- kiwi-f2.html marks every piece and group with data-piece; F3 keeps the same markers. FID-GEOMETRY-001 fail = structural FAIL; blocked = PARTIAL, never PASS.',
+'- preserve (with a reason) is a valid adaptation; a page-header action stays in its row unless the piece contract says otherwise.',
 '- If design_system is NEW and minimum foundations are missing, F3 visual PASS is BLOCKED until foundations are approved.',''
 ].join('\n');
 writeFileSync(join(dir,'request.md'),request);

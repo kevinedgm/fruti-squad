@@ -20,7 +20,7 @@ operations:
   candidate_gate:
     references: [skills/lima/reference/quality-gates.md, skills/lima/reference/lifecycle.md]
   stable_gate:
-    inputs: [.fruti/reports/compliance-current.json]
+    inputs: [.fruti/reports/compliance-current.json, .fruti/tests/<round>/fidelity.json]
     references: [skills/lima/reference/quality-gates.md, skills/lima/reference/lifecycle.md]
   promote:
     references: [skills/lima/reference/promotion.md]
@@ -64,6 +64,8 @@ operations:
     rules:
       - classify_reuse_extend_new_local
       - validate_geometry_and_adaptive_contract
+      - return_to_kiwi_if_f2_pieces_lack_data_piece_markers
+      - adaptive_action_rules_are_defaults_the_piece_contract_wins
       - validate_against_configured_interface_standards
       - do_not_redesign_f2
       - if_f2_invalid_return_to_kiwi_with_failed_rule_ids_and_preserve_frozen_decisions
@@ -87,5 +89,6 @@ rules:
   - changing_target_does_not_redesign_contract
   - consume_coco_compliance_report_for_gates
   - do_not_rerun_coco_audit
+  - structural_gate_fails_when_fid_geometry_fails_and_is_partial_when_blocked
   - enforce_redesign_scope
   - full_skill_manual_only_if_runtime_contract_is_insufficient

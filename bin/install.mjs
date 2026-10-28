@@ -96,6 +96,7 @@ ${C.bold}Commands${C.reset}
   install        Copy the squad into a project (or --global)
   list           Show installable members and per-target paths
   path <p>       Resolve a package-relative path (skills/..., agentes/...) via .fruti/paths.yaml
+  fidelity       FID-GEOMETRY-001: compare Kiwi F2 vs Coco F3 geometry (--f2 <html> --f3 <html|URL>)
   help           Show this help
 
 ${C.bold}Options${C.reset}
@@ -598,6 +599,11 @@ switch (cmd) {
   case 'test': {
     const tr = spawnSync(process.execPath, [resolve(__dirname, 'test.mjs'), ...process.argv.slice(3)], { stdio: 'inherit', cwd: process.cwd() });
     process.exit(tr.status ?? 1);
+    break;
+  }
+  case 'fidelity': {
+    const vr = spawnSync(process.execPath, [resolve(__dirname, 'fidelity.mjs'), ...process.argv.slice(3)], { stdio: 'inherit', cwd: process.cwd() });
+    process.exit(vr.status ?? 1);
     break;
   }
   case 'foundations': {

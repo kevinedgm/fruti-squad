@@ -177,6 +177,8 @@ Update state with pointers + compact decisions. If cached state conflicts with a
 
 Coco owns the canonical audit and writes `.fruti/reports/compliance-current.json` (or artifact-specific equivalent). Lima consumes it for gates and Mora as QA evidence; neither reruns Coco's audit merely to understand the result. Deterministic checks run in scripts first; model reasoning is for non-deterministic review (details in `.fruti/runtime/coco.yaml` → `r0_audit`).
 
+Structural fidelity is deterministic, not a judgment Coco grades for itself. The approved F2 is the structural reference: Kiwi marks its pieces with `data-piece`, Coco keeps them in F3, and `fruti fidelity --f2 <kiwi-f2> --f3 <f3> --round <round> --out .fruti/tests/<round>/fidelity.json` (rule `FID-GEOMETRY-001`, severity error) compares both at every verification viewport. A `fail` blocks the structural dimension; a `blocked` run (no browser, no markers) is reported as PARTIAL, never PASS. When F3 must deviate from F2, the deviation returns to Kiwi as a new structural revision; Coco does not decide it.
+
 ## Documentation policy
 
 `.fruti/contracts/documentation.yaml` is the single normative source for Design Hub page anatomy, section order and the neutral documentation shell. `skills/lima/reference/component-documentation.md` and `design-hub.md` contribute only guidance that does not conflict with it (golden rule, lifecycle-gated API, isolated previews); on any conflict the contract wins. Mora's read scope is in `.fruti/runtime/mora.yaml`.
