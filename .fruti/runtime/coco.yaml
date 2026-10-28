@@ -21,7 +21,7 @@ operations:
     deterministic_first: true
     deep_docs: failed_or_ambiguous_rules_only
     output: .fruti/reports/compliance-current.json
-    deterministic_checks: [dom_validity, duplicate_ids, broken_links, horizontal_overflow, token_usage, forbidden_raw_values, interactive_semantics, required_states, target_sizes, focus_hooks, registry_consistency]
+    deterministic_checks: [structural_fidelity_vs_f2, dom_validity, duplicate_ids, broken_links, horizontal_overflow, token_usage, forbidden_raw_values, interactive_semantics, required_states, target_sizes, focus_hooks, registry_consistency]
     model_review: [hierarchy, clarity, density, affordance, consistency, adaptive_composition, misleading_interaction, visual_regressions, exceptions]
     report: rule_ids_and_evidence_never_reread_a_standard_to_rediscover_a_known_criterion
   first_run:
@@ -35,9 +35,14 @@ operations:
       - design_direction
     outputs:
       - configured_target_component
+      - .fruti/tests/<round>/fidelity.json
       - .fruti/reports/compliance-current.json
     rules:
       - preserve_approved_information_architecture
+      - keep_every_data_piece_marker_from_f2_with_the_same_id_and_nesting
+      - run_fruti_fidelity_f2_vs_f3_at_every_profile_viewport_before_reporting
+      - fid_geometry_fail_blocks_structural_pass_and_blocked_reports_partial
+      - a_deliberate_deviation_from_f2_is_not_fixed_in_f3_it_returns_to_kiwi_with_the_finding
       - visual_expression_belongs_here_not_in_kiwi_f2
       - use_real_icon_library_when_configured
       - motion_must_explain_feedback_continuity_or_state

@@ -9,7 +9,9 @@
 </head>
 <body class="wf">
 <!-- kiwi · base F1/F2. Copia como index.html de la ronda y el kit a vendor/.
-     Reemplaza SUPERFICIE, las regiones y los estados. No añadas color. -->
+     Reemplaza SUPERFICIE, las regiones y los estados. No añadas color.
+     Marca cada pieza y cada grupo con data-piece="<id del piece contract>" (anidados como los grupos):
+     Coco los conserva en F3 y `fruti fidelity` compara ambos (FID-GEOMETRY-001). -->
 
 <div class="wf-ctl" role="region" aria-label="Controles del wireframe">
   <strong>SUPERFICIE · r01 · F2</strong>
@@ -56,7 +58,7 @@ const V = {
     <h1>Título de la vista</h1>
     <p class="wf-muted">Qué necesita saber el usuario aquí, en una frase.</p>
     <div class="wf-actions"><button class="wf-btn wf-btn--primary" data-wf-persist>Verbo + objeto</button><button class="wf-btn">Secundaria</button></div>
-    <span class="wf-note">Una sola acción primaria. En compact pasa a la barra inferior persistente.</span>
+    <span class="wf-note">Una sola acción primaria. Si la vista es un flujo de tarea, en compact puede pasar a la barra inferior; si es la acción de una cabecera de página, se queda en su fila (declara cuál en el piece contract).</span>
     <h2>Dato dominante</h2>
     <div class="wf-grid">${'<div class="wf-card"><div class="wf-img"></div><div class="wf-line"></div><div class="wf-line" style="width:60%"></div></div>'.repeat(3)}</div>`,
   loading: () => `<div class="wf-skel" aria-busy="true"><div class="wf-line" style="height:28px;width:40%"></div><div class="wf-grid">${'<div class="wf-card"><div class="wf-img"></div><div class="wf-line"></div></div>'.repeat(3)}</div></div><span class="wf-note">Misma huella que el default.</span>`,
@@ -66,7 +68,7 @@ const V = {
   offline: () => V.default(),
   long: () => V.default().replace('Título de la vista','Título de la vista con un nombre extraordinariamente largo que obliga a revisar el ajuste en dos o tres líneas'),
 };
-let S = {w: innerWidth < 700 ? 393 : innerWidth < 1200 ? 834 : 1440, state: 'default'};
+let S = {w: innerWidth < 600 ? 393 : innerWidth < 1024 ? 834 : 1440, state: 'default'};
 function render(){
   const f = document.getElementById('wf-frame');
   f.style.setProperty('--wf-w', S.w + 'px');

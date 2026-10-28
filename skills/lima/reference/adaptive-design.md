@@ -8,11 +8,13 @@
 |---|---|---|
 | Desktop | pointer + keyboard | density OK, hover affordances, compact controls, popovers |
 | Tablet | touch, larger reach | larger touch targets (≥44px), fewer hover-only affordances |
-| Mobile | thumb, one hand | thumb-zone actions, full-width or bottom-anchored, sheets over popovers |
+| Mobile | thumb, one hand | actions within thumb reach and ≥44px; full-width or bottom-anchored only for task flows (forms, checkout, wizards), not for page-header actions; sheets over popovers |
 
 ## Rethink, don't shrink
 
 Decide how composition AND interaction change, e.g.: action → compact button / larger touch surface / full-width or thumb-zone; menu → popover / bottom sheet; filters → toolbar / drawer + chips + clear; table → columns / prioritized columns / stacked cards. Document the transformation per breakpoint, not just CSS media queries.
+
+These transformations are defaults. Kiwi's piece contract for the approved F2 wins: if it says the page-header action stays in the header row as an icon-only button, that is the rule, and FID-GEOMETRY-001 enforces it. `preserve` with a reason is a valid adaptation.
 
 ## Experience principles (applied from the first draft)
 

@@ -1,6 +1,6 @@
 {
   "name": "fruti-squad",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Fruti Squad 🍓 — kiwi · lima · coco · mora: estructura, gobierno, construcción, auditoría, pruebas y documentación de interfaces.",
   "bin": {
     "fruti-squad": "bin/install.mjs",

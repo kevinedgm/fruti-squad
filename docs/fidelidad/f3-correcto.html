@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>F3 · Cabecera Usuarios · respeta el F2</title>
+<style>
+  :root{--ink:#14201b;--ink-2:#5b6661;--surface:#fbfaf7;--line:#e3e1da;--action:#0d3b2e;--on-action:#fff;--mark:#2f6f5e}
+  body{margin:0;background:var(--surface);color:var(--ink);font:16px/1.4 Georgia, serif}
+  .ph{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 24px;border-bottom:1px solid var(--line)}
+  .ph-id{display:flex;align-items:center;gap:12px;min-width:0}
+  .ph-ic{width:40px;height:40px;border-radius:10px;background:var(--mark);flex:none}
+  .ph h1{margin:0;font-size:20px;line-height:1.2}
+  .ph p{margin:0;font-size:14px;color:var(--ink-2)}
+  .ph-act{height:44px;padding:0 16px;border:0;border-radius:10px;background:var(--action);color:var(--on-action);font:inherit;flex:none}
+  .ph-act:focus-visible{outline:3px solid var(--mark);outline-offset:2px}
+  @media (max-width: 599px){
+    .ph{padding:12px 16px}
+    .ph h1{font-size:18px}
+    .ph-act{width:44px;padding:0}
+    .ph-act span{display:none}
+  }
+</style>
+</head>
+<body>
+<header class="ph" data-piece="header">
+  <div class="ph-id" data-piece="header.identity">
+    <span class="ph-ic" data-piece="header.icon" aria-hidden="true"></span>
+    <div data-piece="header.texts">
+      <h1 data-piece="header.title">Usuarios</h1>
+      <p data-piece="header.subtitle">Administra cuentas, roles y permisos</p>
+    </div>
+  </div>
+  <button class="ph-act" data-piece="header.action" aria-label="Registrar usuario">＋<span> Registrar usuario</span></button>
+</header>
+</body>
+</html>

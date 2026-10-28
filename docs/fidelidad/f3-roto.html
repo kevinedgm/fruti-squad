@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>F3 · Cabecera Usuarios · se aparta del F2</title>
+<!-- Reproduce los tres errores reales: icono lejos del texto (space-between en la fila equivocada),
+     botón entre título y subtítulo en móvil (grupos disueltos), botón en bloque en móvil. -->
+<style>
+  :root{--ink:#14201b;--ink-2:#5b6661;--surface:#fbfaf7;--line:#e3e1da;--action:#0d3b2e;--on-action:#fff;--mark:#2f6f5e}
+  body{margin:0;background:var(--surface);color:var(--ink);font:16px/1.4 Georgia, serif}
+  .ph{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;border-bottom:1px solid var(--line)}
+  .ph-id{display:flex;align-items:center;justify-content:space-between;flex:1}
+  .ph-ic{width:40px;height:40px;border-radius:10px;background:var(--mark);flex:none}
+  .ph h1{margin:0;font-size:20px;line-height:1.2}
+  .ph p{margin:0;font-size:14px;color:var(--ink-2)}
+  .ph-act{height:44px;padding:0 16px;border:0;border-radius:10px;background:var(--action);color:var(--on-action);font:inherit}
+  @media (max-width: 599px){
+    .ph{display:grid;grid-template-columns:1fr;gap:8px}
+    .ph-id,.ph-tx{display:contents}
+    .ph-ic{order:0}.ph h1{order:1}.ph-act{order:2;width:100%}.ph p{order:3}
+  }
+</style>
+</head>
+<body>
+<header class="ph" data-piece="header">
+  <div class="ph-id" data-piece="header.identity">
+    <span class="ph-ic" data-piece="header.icon" aria-hidden="true"></span>
+    <div class="ph-tx" data-piece="header.texts">
+      <h1 data-piece="header.title">Usuarios</h1>
+      <p data-piece="header.subtitle">Administra cuentas, roles y permisos</p>
+    </div>
+  </div>
+  <button class="ph-act" data-piece="header.action">＋<span> Registrar usuario</span></button>
+</header>
+</body>
+</html>

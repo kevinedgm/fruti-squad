@@ -37,12 +37,24 @@ Decompose each screen into pieces: a piece is a group of data plus an interactio
 
 Recompose, don't restack: every size must state which value is promoted and which is demoted. Only moving blocks into rows or columns does not count as adaptation.
 
+Preserve is a valid decision. When a piece is already correct at every size (a page header with identity on the left and one action on the right is the typical case), record `preserve` with its `because` and keep the same rows and grouping; reduce type role, padding or the action form instead of reordering. Changing a piece only to show that it adapted is a defect.
+
 - Every piece classified new or extend gets its own per-size table, not only the first one you think of.
 - If the dominant value is the same at every size, justify it (`because`); do not copy it by default. Ask whether a different value should lead when the space is much larger or smaller.
 - State what each dimension derives from (content range, 44 px target, one-hand use); an unexplained number is not a dimension.
 - A pattern that repeats (for example the same section header three times) is one piece, listed once with its count.
 - If a missing specification changes the dimensions (for example the target platform's widget or safe-area sizes), ask for it as an open question that changes the structure; do not fill it from memory.
 - Test each piece with the longest content of its expected range (longest phrase, largest numbers, long-locale words) and record whether it fits at every size. If it does not fit, change the structure (for example a sentence becomes a label plus counted rows); do not only truncate or wrap.
+
+## Primary action per mode
+
+For each mode record the action's **row** (same row as the identity | own row | bottom-anchored), its **form** (label | short label | icon-only with accessible name | menu) and its target size. Full-width or bottom-anchored actions are for task flows (forms, checkout, wizards); a page-header action stays in the header row unless this piece contract says otherwise and why.
+
+## Piece markers (required for FID-GEOMETRY-001)
+
+`kiwi-f2.html` marks every piece and every group with `data-piece="<id>"`, using the same ids as the piece contract (`header`, `header.identity`, `header.texts`, `header.title`, `header.subtitle`, `header.action`). Nest the markers as the groups are nested: the nesting is the grouping Coco must preserve.
+
+Coco keeps the same markers in F3 and runs `fruti fidelity`, which renders both at every verification viewport and fails when a piece disappears, changes group, changes order or row, lets another piece in between its members, or changes spacing or size beyond the tolerance (default ×2 with 16 px slack). An approved freedom is declared on the F2 piece: `data-piece-free="size"`, `"gap"` or `"all"`, with its reason in the decision record. Example fixtures: `docs/fidelidad/`.
 
 ## Decision provenance
 
