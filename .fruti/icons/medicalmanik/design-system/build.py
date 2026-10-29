@@ -157,6 +157,8 @@ comps['CabeceraPaciente'] = ('Datos', 250, f'<div class="card pc"><div class="pt
  '.pc{padding:20px;display:grid;gap:16px}.pt{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.av2{width:48px;height:48px;border-radius:50%;background:var(--app-expediente-soft,#EAEEF6);color:var(--app-expediente-ink,#234899);display:grid;place-items:center;font:600 16px var(--font-display,"Urbanist",sans-serif)}.nmp{margin:0;font-size:20px;line-height:28px;font-weight:600}.sm{margin:0;font-size:14px;line-height:20px}.id{font-weight:600;color:var(--ink,#14213D);letter-spacing:.02em}.sp{flex:1}'
  '.vs{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}.v{display:grid;gap:2px;padding:12px 14px;border-radius:var(--radius-md,14px);background:var(--surface-soft,#EEF1F7)}.ov{font:700 12px/16px var(--font-sans,sans-serif);letter-spacing:.08em;color:var(--muted,#4A5674)}.vx{font:600 28px/32px var(--font-sans,sans-serif)}',
  'Cabecera del paciente en Expediente: quién es, su clave y lo que no puede pasarse por alto.\n\n- Nombre en Urbanist 600; edad, sexo, clave de expediente y tipo de sangre en `body-sm`. La clave en 600 con tracking 0.02em: Atkinson distingue I, l y 1 (MR-0107-II1).\n- Alergias siempre visibles como estado «error» con icono, a la derecha del nombre.\n- Signos en `dato-xl` (Atkinson 600, cifras tabulares) con la unidad aparte en «muted».\n- El consumidor provee: datos del paciente, alergias, últimos signos con fecha.')
+import cita_calendario
+cita_calendario.build('.', page)
 for name, (grp, h, body, css, md) in comps.items():
     os.makedirs(f'components/{name}', exist_ok=True)
     open(f'components/{name}/preview.html', 'w').write(page(grp, h, body, css))

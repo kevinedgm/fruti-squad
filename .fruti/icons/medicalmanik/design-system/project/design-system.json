@@ -102,10 +102,10 @@
     "Ecosistema"
   ],
   "lastChange": {
-    "at": "2026-10-29T23:29:09Z",
+    "at": "2026-10-29T23:40:23Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "Adopta la identidad del directorio Manik en marca y títulos: Urbanist en lugar de Sora, cian del pin (#009BB0) y fondos de luz (bruma, luz-cian, luz-calida) en portada, inicio de sesión e inicio del ecosistema. Dentro de las apps siguen Atkinson y el botón azul Manik."
+    "note": "Nuevo componente CitaCalendario: cómo aparece una cita en los espacios del calendario según su duración, seis estados con icono Lucide y la alerta clínica «Signos fuera de rango»."
   },
   "layout": "files",
   "libraries": [],
