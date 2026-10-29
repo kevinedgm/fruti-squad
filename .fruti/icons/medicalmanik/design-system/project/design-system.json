@@ -1,22 +1,80 @@
 {
   "v": 3,
-  "layout": "files",
-  "createdOnFiles": {
-    "v": 1,
-    "at": "2026-10-24T16:58:30Z"
-  },
-  "title": "Ecosistema Manik",
-  "namespace": "EcosistemaManik",
-  "libraries": [],
-  "sections": {},
-  "groups": [
-    "Sellos",
-    "Ecosistema"
-  ],
   "assetGroups": {
+    "Ecosistema": {
+      "files": {
+        "ecosistema-1tinta.svg": {
+          "blob": "3d5b89799a2b4a082727102d35a3720b",
+          "name": "ecosistema-1tinta.svg",
+          "size": 566,
+          "type": "image/svg+xml"
+        },
+        "ecosistema.svg": {
+          "blob": "15d37dbf5372ca4e4ff1216403ec6e0a",
+          "name": "ecosistema.svg",
+          "size": 536,
+          "type": "image/svg+xml"
+        }
+      },
+      "name": "Ecosistema",
+      "order": [
+        "ecosistema.svg",
+        "ecosistema-1tinta.svg"
+      ],
+      "tile": "s"
+    },
     "Sellos": {
+      "files": {
+        "agenda.svg": {
+          "blob": "529d392899981fb38c2f1b46bfd8b30b",
+          "name": "agenda.svg",
+          "size": 1012,
+          "type": "image/svg+xml"
+        },
+        "compras.svg": {
+          "blob": "512f89f0825ba83a074cf5f1ccd8bf6d",
+          "name": "compras.svg",
+          "size": 819,
+          "type": "image/svg+xml"
+        },
+        "expediente.svg": {
+          "blob": "26b606b673244009be944a9421937b3e",
+          "name": "expediente.svg",
+          "size": 877,
+          "type": "image/svg+xml"
+        },
+        "farmacia.svg": {
+          "blob": "e38ede352a1a2363095cd3e0c9fb9e7d",
+          "name": "farmacia.svg",
+          "size": 1024,
+          "type": "image/svg+xml"
+        },
+        "grupos.svg": {
+          "blob": "e26c3ae0f4bf9928c5d4a88e716fca12",
+          "name": "grupos.svg",
+          "size": 1254,
+          "type": "image/svg+xml"
+        },
+        "impulsa.svg": {
+          "blob": "07c6485f4953617c0f53277d02d95fb9",
+          "name": "impulsa.svg",
+          "size": 1034,
+          "type": "image/svg+xml"
+        },
+        "medicalmanik-1tinta.svg": {
+          "blob": "b67c4621ed3f312229c92a046e94b9bc",
+          "name": "medicalmanik-1tinta.svg",
+          "size": 754,
+          "type": "image/svg+xml"
+        },
+        "medicalmanik.svg": {
+          "blob": "b960064adc8e2ea3bc0ad52ba4c1645a",
+          "name": "medicalmanik.svg",
+          "size": 785,
+          "type": "image/svg+xml"
+        }
+      },
       "name": "Sellos",
-      "tile": "m",
       "order": [
         "medicalmanik.svg",
         "expediente.svg",
@@ -27,89 +85,31 @@
         "grupos.svg",
         "medicalmanik-1tinta.svg"
       ],
-      "files": {
-        "medicalmanik.svg": {
-          "name": "medicalmanik.svg",
-          "blob": "b960064adc8e2ea3bc0ad52ba4c1645a",
-          "size": 785,
-          "type": "image/svg+xml"
-        },
-        "expediente.svg": {
-          "name": "expediente.svg",
-          "blob": "26b606b673244009be944a9421937b3e",
-          "size": 877,
-          "type": "image/svg+xml"
-        },
-        "agenda.svg": {
-          "name": "agenda.svg",
-          "blob": "529d392899981fb38c2f1b46bfd8b30b",
-          "size": 1012,
-          "type": "image/svg+xml"
-        },
-        "compras.svg": {
-          "name": "compras.svg",
-          "blob": "512f89f0825ba83a074cf5f1ccd8bf6d",
-          "size": 819,
-          "type": "image/svg+xml"
-        },
-        "farmacia.svg": {
-          "name": "farmacia.svg",
-          "blob": "e38ede352a1a2363095cd3e0c9fb9e7d",
-          "size": 1024,
-          "type": "image/svg+xml"
-        },
-        "impulsa.svg": {
-          "name": "impulsa.svg",
-          "blob": "07c6485f4953617c0f53277d02d95fb9",
-          "size": 1034,
-          "type": "image/svg+xml"
-        },
-        "grupos.svg": {
-          "name": "grupos.svg",
-          "blob": "e26c3ae0f4bf9928c5d4a88e716fca12",
-          "size": 1254,
-          "type": "image/svg+xml"
-        },
-        "medicalmanik-1tinta.svg": {
-          "name": "medicalmanik-1tinta.svg",
-          "blob": "b67c4621ed3f312229c92a046e94b9bc",
-          "size": 754,
-          "type": "image/svg+xml"
-        }
-      }
-    },
-    "Ecosistema": {
-      "name": "Ecosistema",
-      "tile": "s",
-      "order": [
-        "ecosistema.svg",
-        "ecosistema-1tinta.svg"
-      ],
-      "files": {
-        "ecosistema.svg": {
-          "name": "ecosistema.svg",
-          "blob": "15d37dbf5372ca4e4ff1216403ec6e0a",
-          "size": 536,
-          "type": "image/svg+xml"
-        },
-        "ecosistema-1tinta.svg": {
-          "name": "ecosistema-1tinta.svg",
-          "blob": "3d5b89799a2b4a082727102d35a3720b",
-          "size": 566,
-          "type": "image/svg+xml"
-        }
-      }
+      "tile": "m"
     }
   },
   "blobs": {},
+  "createdOnFiles": {
+    "at": "2026-10-24T16:58:30Z",
+    "v": 1
+  },
   "docs": {
     "readme": "project/README.md",
     "sections": []
   },
+  "groups": [
+    "Sellos",
+    "Ecosistema"
+  ],
   "lastChange": {
-    "at": "2026-10-24T16:58:30Z",
+    "at": "2026-10-29T23:29:09Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "Sistema inicial del Ecosistema Manik: sellos de seis productos, mosaico del ecosistema, Sora + Atkinson Hyperlegible Next, identidad vs interfaz, inicio y selector."
-  }
+    "note": "Adopta la identidad del directorio Manik en marca y títulos: Urbanist en lugar de Sora, cian del pin (#009BB0) y fondos de luz (bruma, luz-cian, luz-calida) en portada, inicio de sesión e inicio del ecosistema. Dentro de las apps siguen Atkinson y el botón azul Manik."
+  },
+  "layout": "files",
+  "libraries": [],
+  "namespace": "EcosistemaManik",
+  "sections": {},
+  "title": "Ecosistema Manik"
 }

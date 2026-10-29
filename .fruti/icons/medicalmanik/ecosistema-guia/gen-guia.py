@@ -44,18 +44,18 @@ malh = ''.join(f'<figure class="mal"><div>{s}</div><figcaption>{t}</figcaption><
 
 html = f'''<title>Ecosistema Manik · manual de marca</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300..700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap">
 <style>
-/* Manual de la familia de herramientas clínicas: lienzo azulado, tinta y azul Manik. Mismo formato que el manual del directorio. Tema claro deliberado: el ecosistema no tiene tema oscuro. */
-:root{{--bg:#FFFFFF;--canvas:#F5F7FB;--fg:#14213D;--muted:#4A5674;--line:#E1E6F0;--sunk:#EEF1F7;--manik:#234899;--manik-soft:#E9EDF5;--cian:#00BDD0;--noche:#0F1C3F;
---display:"Sora","Segoe UI",system-ui,sans-serif;--sans:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,sans-serif;color-scheme:light}}
+/* Manual de la familia de herramientas clínicas con la identidad del directorio Manik: Urbanist, cian del pin y luz. Tema claro deliberado: el ecosistema no tiene tema oscuro. */
+:root{{--bg:#FFFFFF;--canvas:#F5F7FB;--fg:#14213D;--muted:#4A5674;--line:#E1E6F0;--sunk:#EEF1F7;--manik:#234899;--manik-soft:#E9EDF5;--cian:#009BB0;--bruma:#F5FAFB;--luz-cian:#D3F0F4;--luz-calida:#FFEFD2;--noche:#0F1C3F;
+--display:"Urbanist","Segoe UI",system-ui,sans-serif;--sans:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,sans-serif;color-scheme:light}}
 body{{background:var(--bg);color:var(--fg);font:17px/1.6 var(--sans);margin:0;padding-block:0 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}}
 main{{max-width:1080px;margin:0 auto}}
 h1,h2,h3{{font-family:var(--display);font-weight:600;letter-spacing:-.02em;text-wrap:balance;margin:0}}
-h1{{font-size:clamp(34px,6vw,60px);line-height:1.05}} h2{{font-size:26px;line-height:1.2;margin-bottom:6px}} h3{{font-size:18px;margin:22px 0 8px}}
+h1{{font-size:clamp(40px,7vw,72px);line-height:1.02;font-weight:300;letter-spacing:-.035em}} h2{{font-size:26px;line-height:1.2;margin-bottom:6px}} h3{{font-size:18px;margin:22px 0 8px}}
 p{{max-width:68ch;margin:0 0 12px}} .muted{{color:var(--muted)}} .ov{{font:600 13px/1.4 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}}
 .num{{font:600 14px var(--display);color:var(--manik);display:block;margin-bottom:4px}}
-.hero{{padding:56px 0 40px;border-bottom:1px solid var(--line);display:grid;gap:20px}}
+.hero{{padding:56px clamp(20px,4vw,48px) 44px;margin-top:16px;border-radius:28px;display:grid;gap:20px;background:radial-gradient(ellipse 55% 75% at 0% 0%,var(--luz-cian),transparent 70%),radial-gradient(ellipse 45% 70% at 100% 100%,var(--luz-calida),transparent 70%),var(--bruma)}}
 .hero .row{{display:flex;flex-wrap:wrap;align-items:center;gap:18px}} .hero .row svg{{height:96px;width:auto;display:block}}
 .hero .mos svg{{height:56px;width:auto;display:block}}
 section{{padding:44px 0;border-bottom:1px solid var(--line)}}
@@ -90,8 +90,8 @@ section{{padding:44px 0;border-bottom:1px solid var(--line)}}
 @media (max-width:700px){{.anat{{grid-template-columns:1fr}}}}
 </style>
 <main>
-<header class="hero"><span class="ov">Manual de marca · v1 · herramientas clínicas de MedicalManik</span>
-<div class="row">{sv('medicalmanik')}<h1>Ecosistema Manik</h1></div>
+<header class="hero"><span class="ov">Manual de marca · v2 · herramientas clínicas de MedicalManik</span>
+<div class="row">{sv('medicalmanik')}<h1>Ecosistema <b style="font-weight:600">Manik</b></h1></div>
 <p class="muted">Las apps con las que una clínica u hospital atiende, agenda, compra, surte, comunica y administra. Una empresa, un sello y seis productos que se reconocen como familia: la misma M de pulso, cada una con su rasgo y su color.</p>
 <div class="mos">{sv('ecosistema')}</div></header>
 
@@ -100,6 +100,7 @@ section{{padding:44px 0;border-bottom:1px solid var(--line)}}
 <div><b>«Producto» Manik</b><br><span class="muted">Cada herramienta: Expediente, Agenda, Compras, Farmacia, Impulsa y Grupos.</span></div>
 <div><b>Ecosistema Manik</b><br><span class="muted">El conjunto. Su identificador es el mosaico de seis cuadros.</span></div>
 <div><b>Manik</b><br><span class="muted">El directorio para pacientes. Tiene su propio manual.</span></div></div>
+<p style="margin-top:14px"><b>Una sola identidad visual.</b> Las herramientas de la clínica usan la misma identidad que el directorio Manik en la marca, la portada, el inicio de sesión, el inicio del ecosistema y los títulos: Urbanist, el cian del pin y los fondos de luz. Dentro de cada app manda la legibilidad clínica: Atkinson en interfaz y datos, y el botón en azul Manik.</p>
 <h3>Cómo se escribe</h3>
 <p>Siempre «<b>Producto Manik</b>»: Expediente Manik, Agenda Manik. Nunca «Manik Expediente», «Expediente MM» ni «App de Agenda». En interfaz, el producto va en peso 600 y «Manik» en peso regular:</p>
 <p class="pn" style="font-size:26px"><span>Expediente</span> Manik</p>
@@ -138,18 +139,23 @@ section{{padding:44px 0;border-bottom:1px solid var(--line)}}
 <div style="background:var(--fg);color:#fff;border-color:var(--fg)"><b>Tinta</b>#14213D<br>Texto. 15.97:1.</div>
 <div style="background:#fff"><b>Superficie</b>#FFFFFF<br>Tarjetas, barras y menús.</div>
 <div style="background:var(--canvas)"><b>Lienzo</b>#F5F7FB<br>Fondo de las apps, con sesgo al azul.</div>
-<div style="background:var(--noche);color:#fff;border-color:var(--noche)"><b>Noche</b>#0F1C3F<br>Solo portada e inicio de sesión.</div>
-<div style="background:var(--cian);color:var(--fg);border-color:var(--cian)"><b>Cian</b>#00BDD0<br>Acento gráfico. Nunca fondo de texto blanco (2.29:1) ni producto.</div></div>
+<div style="background:var(--cian);color:var(--fg);border-color:var(--cian)"><b>Cian Manik</b>#009BB0<br>El cian del pin. Acento gráfico: nunca texto pequeño ni producto.</div>
+<div style="background:var(--bruma)"><b>Bruma</b>#F5FAFB<br>Fondo de portada, inicio de sesión e inicio del ecosistema.</div>
+<div style="background:var(--luz-cian);border-color:var(--luz-cian)"><b>Luz cian</b>#D3F0F4<br>Halo frío de fondo y círculo detrás de iconos.</div>
+<div style="background:var(--luz-calida);border-color:var(--luz-calida)"><b>Luz cálida</b>#FFEFD2<br>Halo cálido, pareja de la luz cian.</div>
+<div style="background:var(--noche);color:#fff;border-color:var(--noche)"><b>Noche</b>#0F1C3F<br>Planos oscuros puntuales y sellos a una tinta en blanco.</div></div>
 <div class="bar" aria-hidden="true"><i style="width:60%;background:var(--canvas)"></i><i style="width:20%;background:#fff"></i><i style="width:12%;background:var(--fg)"></i><i style="width:6%;background:var(--manik)"></i><i style="width:2%;background:var(--cian)"></i></div>
-<p class="cap">Proporción en una pantalla típica: lienzo y superficie dominan; tinta para leer; azul para lo que se toca; el color de producto aparece solo en el sello y en el selector.</p>
+<p class="cap">Proporción en una pantalla de trabajo: lienzo y superficie dominan; tinta para leer; azul para lo que se toca; el color de producto aparece solo en el sello y en el selector.</p>
+<h3>Luz de marca</h3>
+<p>Portada, inicio de sesión e inicio del ecosistema van sobre <b>bruma</b> con dos halos suaves, uno cian y uno cálido, igual que el directorio Manik. Dentro de las apps el fondo es el lienzo de trabajo: la luz es para dar la bienvenida, no para trabajar encima.</p>
 <h3>Estados, iguales en todas las apps</h3>
 <p><span class="st" style="background:#E8F2ED;color:#157C4A">Éxito</span> <span class="st" style="background:#F6EFE6;color:#A05C03">Aviso</span> <span class="st" style="background:#F9ECED;color:#BA3D4D">Error</span> <span class="st" style="background:#ECF1F4;color:#3D7291">Información</span></p>
 <p class="muted">Siempre con icono y texto (Lucide: circle-check, triangle-alert, circle-x, info).</p></section>
 
 <section><span class="num">07</span><h2>Tipografía</h2>
-<div class="type"><div class="spec"><span class="ov">Primaria · Sora</span><div class="big" style="font-family:var(--display);font-weight:600">Buenos días, Dra. Ramírez</div><p class="muted">Nombres de producto, saludos y títulos. 600 en títulos. Nunca en párrafos, tablas ni datos clínicos.</p></div>
+<div class="type"><div class="spec"><span class="ov">Primaria · Urbanist</span><div class="big" style="font-family:var(--display);font-weight:300;letter-spacing:-.03em">Buenos días, Dra. Ramírez</div><p class="muted">La letra del directorio Manik, así pacientes y clínicas ven la misma familia. 300 grande en portada e inicio; 600 en títulos y nombres de producto. Nunca en párrafos, tablas ni datos clínicos.</p></div>
 <div class="spec"><span class="ov">Secundaria · Atkinson Hyperlegible Next</span><div class="big" style="font-weight:500;font-variant-numeric:tabular-nums">Paracetamol 500 mg · 1 c/8 h</div><p class="muted">Toda la interfaz y todo dato. Distingue 1, l e I; 0 y O; rn y m: en un expediente evita leer mal una dosis o una clave.</p></div></div>
-<ul><li>Cifras tabulares en tablas, dosis y signos vitales.</li><li>Piso de 13 px: nada clínico por debajo.</li><li>Las dos en Google Fonts: <code>Sora:wght@400;600;700</code> y <code>Atkinson Hyperlegible Next:wght@400;500;600;700</code>.</li></ul></section>
+<ul><li>Cifras tabulares en tablas, dosis y signos vitales.</li><li>Piso de 13 px: nada clínico por debajo.</li><li>Las dos en Google Fonts: <code>Urbanist:wght@300..700</code> y <code>Atkinson Hyperlegible Next:wght@400;500;600;700</code>.</li></ul></section>
 
 <section><span class="num">08</span><h2>Voz</h2>
 <p>Directa y clínica. El verbo dice lo que pasa; los errores dicen el límite. Trato de usted o por título profesional.</p>
@@ -159,7 +165,7 @@ section{{padding:44px 0;border-bottom:1px solid var(--line)}}
 <section><span class="num">09</span><h2>Aplicaciones</h2>
 <h3>Barra superior de una app</h3>
 <div class="bar64">{sv('agenda')}<span class="pn"><span>Agenda</span> Manik</span><span class="mos" aria-hidden="true">{sv('ecosistema')}</span></div>
-<p class="cap" style="margin-top:8px">64 px de alto, sobre superficie blanca. Sello a 32 px, nombre en Sora y el mosaico del ecosistema a la derecha para cambiar de app.</p>
+<p class="cap" style="margin-top:8px">64 px de alto, sobre superficie blanca. Sello a 32 px, nombre en Urbanist y el mosaico del ecosistema a la derecha para cambiar de app.</p>
 <h3>Inicio y selector del ecosistema</h3>
 <div class="tiles">{''.join(f'<div class="tile{" h" if i == 1 else ""}">{sv(a)}<span class="pn" style="font-size:17px"><span>{n}</span> Manik</span><small>Para {para}</small></div>' for i, (a, n, para, *_) in enumerate(PROD[:3]))}</div>
 <p class="cap" style="margin-top:8px">Una tarjeta por app: sello, nombre y para quién es. Al pasar el cursor, una sombra corta (como en la segunda).</p></section>
@@ -173,11 +179,11 @@ section{{padding:44px 0;border-bottom:1px solid var(--line)}}
 <li><code>png/&lt;archivo&gt;-{{16,32,64,128,512}}.png</code> con transparencia.</li>
 <li><code>tema.json</code>: colores, para quién es cada producto y contrastes medidos.</li></ul>
 <h3>Pendiente</h3><ul class="pend">
-<li>No hay logotipos de nombre por producto convertidos a trazos: hoy el nombre se compone con Sora en interfaz.</li>
-<li>La tipografía de la palabra MedicalManik original no está identificada; Sora es una aproximación.</li>
+<li>No hay logotipos de nombre por producto convertidos a trazos: hoy el nombre se compone con Urbanist en interfaz.</li>
+<li>El manual del directorio Manik todavía dice Sora + Atkinson; su versión vigente (bienestar) usa Urbanist + Onest. Falta actualizarlo.</li>
 <li>Manik Impulsa (en producción) difiere en tipografía (Ubuntu), color de acción (violeta) y lienzo (gris neutro). Falta decidir si se alinea.</li>
 <li>Confirmar si existe un inicio de sesión único entre apps.</li>
-<li>Revisar si el ecosistema debe adoptar la identidad nueva de mimedicomanik.com que se usó en el rediseño del directorio.</li></ul></section>
+</ul></section>
 </main>'''
 open('guia.html', 'w').write(html)
 print('ok')

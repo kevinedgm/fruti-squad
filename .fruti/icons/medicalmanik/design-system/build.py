@@ -21,7 +21,7 @@ def on(c, bg, need=4.5):  # oscurece hacia la tinta hasta cumplir el contraste
     return c
 
 N = dict(canvas='#F5F7FB', surface='#FFFFFF', soft='#EEF1F7', pressed='#E4E9F2', ink=INK, muted='#4A5674', subtle='#7A849C', line='#E1E6F0', control='#858EA5', noche='#0F1C3F')
-MANIK, CIAN = '#234899', '#00BDD0'
+MANIK, CIAN = '#234899', '#009BB0'  # cian del pin de Manik (directorio)
 PROD = [('expediente', 'Expediente', '#234899', 'Médicos', 'Historia clínica, consultas, notas y recetas del paciente.'),
         ('agenda', 'Agenda', '#007C8C', 'Asistentes', 'Citas, confirmaciones y sala de espera.'),
         ('compras', 'Compras', '#A15C07', 'Administración', 'Órdenes de compra, proveedores y facturación.'),
@@ -43,12 +43,15 @@ col = [
  t('subtle', N['subtle'], f"SOLO NO-TEXTO: iconos decorativos y separadores gráficos ({cr(N['subtle'], N['surface'])}:1)."),
  t('line', N['line'], 'Divisores y bordes de tarjeta. Decorativo.'),
  t('line-control', N['control'], f"Borde de campos y controles sin relleno: {cr(N['control'], N['surface'])}:1 sobre surface, {cr(N['control'], N['canvas'])}:1 sobre canvas."),
- t('noche', N['noche'], 'Azul noche: solo planos de marca (portada, pantalla de inicio de sesión). No es fondo de navegación.'),
+ t('noche', N['noche'], 'Azul noche: planos oscuros puntuales (franja de confianza, piezas impresas, sellos a una tinta en blanco). No es fondo de navegación, ni de portada ni de inicio de sesión: esos van en luz.'),
  t('manik', MANIK, f"Azul MedicalManik: sello madre, acción principal de TODAS las apps, enlaces y foco. Blanco encima {cr('#FFFFFF', MANIK)}:1."),
  t('manik-hover', mix(MANIK, INK, .3), 'Hover y presionado de manik.'),
  t('manik-soft', mix(MANIK, '#FFFFFF', .9), f"Selección, navegación activa, filtro activo; texto encima en manik ({cr(MANIK, mix(MANIK, '#FFFFFF', .9))}:1)."),
  t('on-manik', '#FFFFFF', 'Texto e iconos sobre manik.'),
- t('cian', CIAN, f"Acento de marca de la paleta original. Solo gráfico: nunca texto ni fondo de texto ({cr(CIAN, '#FFFFFF')}:1 con blanco)."),
+ t('cian', CIAN, f"Cian de Manik, el mismo del pin del directorio. Acento gráfico: iconos sobre luz, detalles de portada. Nunca texto pequeño ni fondo de texto ({cr(CIAN, '#FFFFFF')}:1 con blanco) ni color de producto."),
+ t('bruma', '#F5FAFB', 'Fondo de portada, inicio de sesión e inicio del ecosistema, como el directorio Manik. Dentro de las apps manda «canvas».'),
+ t('luz-cian', '#D3F0F4', f"Luz fría de marca: halo de fondo en portada, inicio de sesión e inicio del ecosistema, y círculo detrás de iconos. Texto encima en ink ({cr(INK, '#D3F0F4')}:1)."),
+ t('luz-calida', '#FFEFD2', f"Luz cálida de marca, pareja de «luz-cian»: segundo halo y avisos amables. Texto encima en ink ({cr(INK, '#FFEFD2')}:1)."),
  t('focus', '{manik}', 'Anillo de foco de 2 px con 2 px de separación, en todas las apps.'),
 ]
 for k, n, c, quien, _ in PROD:
@@ -61,12 +64,12 @@ for k, c, u in EST:
     col += [t(k, c, f"{u} {cr(c, N['surface'])}:1 sobre surface."), t(f'{k}-soft', s, f'Fondo del estado {k}.'), t(f'on-{k}-soft', o, f'Texto sobre {k}-soft: {cr(o, s)}:1.')]
 
 S_ = lambda n, fs, lh, fw, sample, usage, **k: dict(name=n, fontSize=fs, lineHeight=lh, fontWeight=fw, sample=sample, usage=usage, **k)
-tokens = {'name': 'Ecosistema Manik', 'version': 1,
+tokens = {'name': 'Ecosistema Manik', 'version': 2,
  'color': {'themes': [{'id': 'light', 'name': 'Claro'}], 'tokens': col},
- 'type': {'fonts': [], 'families': {'display': '"Sora", "Segoe UI", system-ui, sans-serif', 'sans': '"Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif'},
+ 'type': {'fonts': [], 'families': {'display': '"Urbanist", "Segoe UI", system-ui, sans-serif', 'sans': '"Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif'},
   'groups': [
-   {'name': 'Primaria · Sora', 'family': 'display', 'note': 'Marca y títulos: la voz del ecosistema. 600 en títulos; nunca en párrafos, tablas ni valores clínicos.', 'styles': [
-     S_('display', '32px', '40px', 600, 'Buenos días, Dra. Ramírez', 'Saludo del inicio del ecosistema y títulos de portada. Una por pantalla.', letterSpacing='-0.02em'),
+   {'name': 'Primaria · Urbanist', 'family': 'display', 'note': 'La letra del directorio Manik: marca, saludos y títulos, para que pacientes y clínicas vean la misma familia. 300 grande solo en portada e inicio; 600 en títulos y nombres de app. Nunca en párrafos, tablas ni valores clínicos.', 'styles': [
+     S_('display', '40px', '44px', 300, 'Buenos días, Dra. Ramírez', 'Saludo del inicio del ecosistema y títulos de portada, ligero como en el directorio. Una por pantalla.', letterSpacing='-0.03em'),
      S_('title-1', '24px', '32px', 600, 'Expediente de Mariana Ruiz', 'Título de página.', letterSpacing='-0.01em'),
      S_('title-2', '18px', '26px', 600, 'Signos vitales', 'Título de tarjeta, panel y diálogo.'),
      S_('app-name', '16px', '24px', 600, 'Farmacia', 'Nombre del producto junto a su sello: «Farmacia» en 600 y «Manik» en 400.')]},
@@ -89,9 +92,9 @@ tokens = {'name': 'Ecosistema Manik', 'version': 1,
 json.dump(tokens, open('tokens.json', 'w'), ensure_ascii=False, indent=1)
 V = {x['name']: x['value'] for x in col}
 
-FONTS = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap">'
+FONTS = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300..700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap">'
 BASE = '''html,body{margin:0}body{background:var(--canvas,#F5F7FB);color:var(--ink,#14213D);font:16px/24px var(--font-sans,"Atkinson Hyperlegible Next",system-ui,sans-serif);padding:16px}
-.d{font-family:var(--font-display,"Sora",sans-serif)}.num{font-variant-numeric:tabular-nums}.mut{color:var(--muted,#4A5674)}
+.d{font-family:var(--font-display,"Urbanist",sans-serif)}.num{font-variant-numeric:tabular-nums}.mut{color:var(--muted,#4A5674)}
 .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .btn{display:inline-flex;align-items:center;gap:8px;min-height:var(--control-height,44px);padding:0 18px;border-radius:var(--radius-md,14px);font:600 15px/20px var(--font-sans,"Atkinson Hyperlegible Next",sans-serif);border:1px solid transparent;cursor:pointer}
 .btn:focus-visible,button:focus-visible,a:focus-visible{outline:2px solid var(--focus,#234899);outline-offset:2px}
@@ -109,7 +112,7 @@ est = lambda k, ik, txt: f'<span class="est" style="background:var(--{k}-soft,{V
 img = lambda n, z, alt='': f'<img src="{blob(n)}" width="{z}" height="{z}" alt="{alt}" style="display:block;flex:none">'
 ECO_BTN = f'<button class="eco" aria-label="Ecosistema Manik: cambiar de app" aria-haspopup="dialog">{img("ecosistema.svg", 24)}</button>'
 TOP_CSS = '''.top{display:flex;align-items:center;gap:12px;height:var(--header-height,64px);padding:0 16px;background:var(--surface,#fff);border:1px solid var(--line,#E1E6F0);border-radius:var(--radius-lg,18px)}
-.nm{font:16px/24px var(--font-display,"Sora",sans-serif);color:var(--muted,#4A5674);white-space:nowrap}.nm b{font-weight:600;color:var(--ink,#14213D)}
+.nm{font:16px/24px var(--font-display,"Urbanist",sans-serif);color:var(--muted,#4A5674);white-space:nowrap}.nm b{font-weight:600;color:var(--ink,#14213D)}
 .sp{flex:1;min-width:0}.srch{display:flex;align-items:center;gap:8px;height:40px;border:1px solid var(--line-control,#858EA5);border-radius:var(--radius-md,14px);padding:0 12px;color:var(--muted,#4A5674);font-size:14px;width:280px;max-width:40%;background:var(--surface,#fff)}
 .eco{width:44px;height:44px;border-radius:12px;border:0;background:transparent;display:grid;place-items:center;cursor:pointer}.eco:hover{background:var(--surface-soft,#EEF1F7)}.eco[aria-expanded="true"]{background:var(--manik-soft,#E9EDF5)}
 .av{width:36px;height:36px;border-radius:50%;background:var(--surface-soft,#EEF1F7);display:grid;place-items:center;font:600 13px/1 var(--font-sans,sans-serif);color:var(--ink,#14213D)}
@@ -121,8 +124,8 @@ tiles = lambda actual, z=44: ''.join(f'<a class="tile{" on" if n == actual else 
 comps = {}
 comps['SelloProducto'] = ('Marca', 208, ''.join(f'<figure style="margin:0;display:grid;justify-items:center;gap:8px;width:132px">{img(k + ".svg", 88, n + " Manik")}<figcaption class="d" style="font-size:14px;line-height:20px;text-align:center"><b style="font-weight:600">{n}</b> <span class="mut">Manik</span></figcaption></figure>' for k, n, *_ in PROD),
  'body{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;align-items:end}',
- 'Sello de cada producto: la misma línea de pulso en un contenedor que cuenta qué es la app.\n\n- La línea es idéntica en todos; el rasgo vive en el borde y nunca la corta: carpeta (Expediente), argollas (Agenda), ticket (Compras), cruz (Farmacia), flecha (Impulsa), tarjeta detrás (Grupos).\n- Nombre: el producto en Sora 600 (`app-name`) y «Manik» en 400 y «muted». Nunca «Manik Farmacia» ni solo «Farmacia» como marca.\n- Color: `app-<producto>` es identidad, no interfaz (ver README, Color).\n- Tamaño mínimo 24 px; a 16 px solo en pestañas del navegador.\n- El consumidor provee: el producto y el tamaño. Archivos en el grupo de assets «Sellos».')
-comps['EncabezadoApp'] = ('Navegación', 96, f'<div class="top">{img("farmacia.svg", 34, "")}<span class="nm"><b>Farmacia</b> Manik</span><span class="sp"></span><span class="srch">{ic("search")}Buscar producto, receta o lote</span><span class="ib">{ic("bell")}</span>{ECO_BTN}<span class="av">MR</span></div>', TOP_CSS,
+ 'Sello de cada producto: la misma línea de pulso en un contenedor que cuenta qué es la app.\n\n- La línea es idéntica en todos; el rasgo vive en el borde y nunca la corta: carpeta (Expediente), argollas (Agenda), ticket (Compras), cruz (Farmacia), flecha (Impulsa), tarjeta detrás (Grupos).\n- Nombre: el producto en Urbanist 600 (`app-name`) y «Manik» en 400 y «muted». Nunca «Manik Farmacia» ni solo «Farmacia» como marca.\n- Color: `app-<producto>` es identidad, no interfaz (ver README, Color).\n- Tamaño mínimo 24 px; a 16 px solo en pestañas del navegador.\n- El consumidor provee: el producto y el tamaño. Archivos en el grupo de assets «Sellos».')
+comps['EncabezadoApp'] = ('Navegación', 100, f'<div class="top">{img("farmacia.svg", 34, "")}<span class="nm"><b>Farmacia</b> Manik</span><span class="sp"></span><span class="srch">{ic("search")}Buscar producto, receta o lote</span><span class="ib">{ic("bell")}</span>{ECO_BTN}<span class="av">MR</span></div>', TOP_CSS,
  'Barra superior que comparten todas las apps: sello y nombre de la app a la izquierda; búsqueda, avisos, el botón del ecosistema y el avatar a la derecha.\n\n- 64 px (`header-height`), fondo «surface», borde «line». La navegación es clara en todo el ecosistema.\n- El botón del ecosistema (mosaico de seis cuadros, 24 px en un área de 44) va siempre en el mismo lugar: justo antes del avatar. Su nombre accesible: «Ecosistema Manik: cambiar de app».\n- El sello de la app a 32–36 px. Clic en el sello o el nombre: inicio de esa app.\n- El consumidor provee: la app, la búsqueda propia de la app y el usuario.')
 comps['SelectorEcosistema'] = ('Navegación', 460, f'<div class="top">{img("farmacia.svg", 34, "")}<span class="nm"><b>Farmacia</b> Manik</span><span class="sp"></span><button class="eco" aria-label="Ecosistema Manik: cambiar de app" aria-expanded="true" aria-controls="sel">{img("ecosistema.svg", 24)}</button><span class="av">MR</span></div><div id="sel" class="pop" role="dialog" aria-label="Ecosistema Manik"><div class="ph">{img("ecosistema.svg", 18)}<span class="nm"><b>Ecosistema</b> Manik</span></div><nav class="tiles" aria-label="Apps del ecosistema">{tiles("Farmacia")}</nav><a class="all" href="#inicio">Ir al inicio del ecosistema {ic("arrow")}</a></div>',
  TOP_CSS + TILE_CSS + '.pop{margin:8px 0 0 auto;width:min(380px,100%);background:var(--surface,#fff);border:1px solid var(--line,#E1E6F0);border-radius:var(--radius-lg,18px);box-shadow:var(--shadow-pop,0 18px 44px rgba(20,33,61,.16));padding:16px}.ph{display:flex;align-items:center;gap:8px;margin-bottom:10px}.all{display:flex;align-items:center;justify-content:center;gap:6px;border-top:1px solid var(--line,#E1E6F0);margin-top:10px;padding-top:12px;color:var(--manik,#234899);font:600 14px/20px var(--font-sans,sans-serif);text-decoration:none}',
@@ -134,13 +137,13 @@ for i, (k, n, c, quien, desc) in enumerate(PROD):
     cards += (f'<a class="app{" lock" if lock else ""}" href="#{k}" style="--tint:var(--app-{k}-soft,{V["app-" + k + "-soft"]})"{DIS if lock else ""}><span class="ah">{img(k + ".svg", 52)}<span class="go">{ic("lock" if lock else "arrow")}</span></span>'
               f'<span class="an"><b>{n}</b> Manik</span><span class="aq">{quien}</span><span class="ad">{desc}</span>'
               + (f'<span class="al">Sin acceso · pídelo a tu administrador de grupo</span>' if lock else (f'<span class="al">Última vez: hoy, 09:40</span>' if i == 0 else '')) + '</a>')
-comps['InicioEcosistema'] = ('Patrones', 640, f'<main class="home"><div class="hh"><div>{img("medicalmanik.svg", 40)}</div><div><p class="ov">ECOSISTEMA MANIK</p><h1 class="d">Buenos días, Dra. Ramírez</h1><p class="mut">¿A qué app quieres ir? Clínica Santa Lucía · Grupo Médico del Valle</p></div></div><div class="grid">{cards}</div></main>',
- '.home{display:grid;gap:24px;padding:8px}.hh{display:flex;gap:16px;align-items:center}.ov{margin:0;font:700 12px/16px var(--font-sans,sans-serif);letter-spacing:.08em;color:var(--muted,#4A5674)}h1{margin:2px 0;font-size:28px;line-height:36px;font-weight:600;letter-spacing:-.02em}.hh p.mut{margin:0;font-size:15px}'
+comps['InicioEcosistema'] = ('Patrones', 680, f'<main class="home"><div class="hh"><div>{img("medicalmanik.svg", 40)}</div><div><p class="ov">ECOSISTEMA MANIK</p><h1 class="d">Buenos días, Dra. Ramírez</h1><p class="mut">¿A qué app quieres ir? Clínica Santa Lucía · Grupo Médico del Valle</p></div></div><div class="grid">{cards}</div></main>',
+ '.home{display:grid;gap:24px;padding:24px;border-radius:var(--radius-2xl,24px);background:radial-gradient(ellipse 60% 70% at 0% 0%,var(--luz-cian,#D3F0F4),transparent 70%),radial-gradient(ellipse 50% 60% at 100% 0%,var(--luz-calida,#FFEFD2),transparent 70%),var(--bruma,#F5FAFB)}.hh{display:flex;gap:16px;align-items:center}.ov{margin:0;font:700 12px/16px var(--font-sans,sans-serif);letter-spacing:.08em;color:var(--muted,#4A5674)}h1{margin:2px 0;font-size:36px;line-height:40px;font-weight:300;letter-spacing:-.03em}.hh p.mut{margin:0;font-size:15px}'
  '.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}.app{display:grid;gap:4px;align-content:start;padding:18px;border-radius:var(--radius-lg,18px);background:var(--surface,#fff);border:1px solid var(--line,#E1E6F0);text-decoration:none;color:var(--ink,#14213D);transition:box-shadow .15s}'
- '.app:hover{box-shadow:var(--shadow-hover,0 8px 20px rgba(20,33,61,.08));background:var(--tint)}.ah{display:flex;justify-content:space-between;align-items:start;margin-bottom:8px}.go{color:var(--muted,#4A5674)}.an{font:18px/26px var(--font-display,"Sora",sans-serif);color:var(--muted,#4A5674)}.an b{font-weight:600;color:var(--ink,#14213D)}'
+ '.app:hover{box-shadow:var(--shadow-hover,0 8px 20px rgba(20,33,61,.08));background:var(--tint)}.ah{display:flex;justify-content:space-between;align-items:start;margin-bottom:8px}.go{color:var(--muted,#4A5674)}.an{font:18px/26px var(--font-display,"Urbanist",sans-serif);color:var(--muted,#4A5674)}.an b{font-weight:600;color:var(--ink,#14213D)}'
  '.aq{font:600 13px/18px var(--font-sans,sans-serif);color:var(--muted,#4A5674)}.ad{font-size:14px;line-height:20px;color:var(--ink,#14213D)}.al{margin-top:6px;font-size:13px;line-height:18px;color:var(--muted,#4A5674)}.lock{background:var(--surface-soft,#EEF1F7)}.lock img{filter:grayscale(1);opacity:.55}.lock .an b{color:var(--muted,#4A5674)}'
  '@media (prefers-reduced-motion:reduce){.app{transition:none}}',
- 'La primera pantalla después de iniciar sesión: el ecosistema completo para que la persona elija a qué app ir.\n\n- Flujo: inicio de sesión único → Inicio del ecosistema → app elegida. Desde cualquier app se vuelve con el botón del ecosistema («Ir al inicio del ecosistema»).\n- Saludo en `display` (Sora) con el nombre y la clínica o grupo activo; «¿A qué app quieres ir?» como subtítulo.\n- Una tarjeta por app en el orden fijo: sello a 52 px, nombre «Producto Manik», para quién es y qué hace en una línea. Al pasar el cursor, la tarjeta toma `app-<producto>-soft`.\n- Apps sin acceso: visibles pero apagadas (sello en gris), con candado y «Sin acceso · pídelo a tu administrador de grupo»; `aria-disabled`. Así la persona sabe que existen y a quién pedirlas.\n- Si la persona solo tiene una app, el inicio se salta y entra directo (propuesta, por confirmar).\n- El consumidor provee: nombre y tratamiento, clínica o grupo activo, apps con y sin acceso, último uso.')
+ 'La primera pantalla después de iniciar sesión: el ecosistema completo para que la persona elija a qué app ir.\n\n- Flujo: inicio de sesión único → Inicio del ecosistema → app elegida. Desde cualquier app se vuelve con el botón del ecosistema («Ir al inicio del ecosistema»).\n- Saludo en `display` (Urbanist 300) sobre «bruma» con los halos «luz-cian» y «luz-calida», como el directorio Manik, con el nombre y la clínica o grupo activo; «¿A qué app quieres ir?» como subtítulo.\n- Una tarjeta por app en el orden fijo: sello a 52 px, nombre «Producto Manik», para quién es y qué hace en una línea. Al pasar el cursor, la tarjeta toma `app-<producto>-soft`.\n- Apps sin acceso: visibles pero apagadas (sello en gris), con candado y «Sin acceso · pídelo a tu administrador de grupo»; `aria-disabled`. Así la persona sabe que existen y a quién pedirlas.\n- Si la persona solo tiene una app, el inicio se salta y entra directo (propuesta, por confirmar).\n- El consumidor provee: nombre y tratamiento, clínica o grupo activo, apps con y sin acceso, último uso.')
 comps['Boton'] = ('Acciones', 92, '<button class="btn b1">Guardar receta</button><button class="btn b2">Agregar medicamento</button><button class="btn b3">Ver historial</button><button class="btn b4">Cancelar cita</button>', '',
  'Botón: la acción principal es azul Manik en TODAS las apps, sin importar el color del producto.\n\n- `primario`: «manik» con «on-manik»; una por vista. `secundario`: «surface», borde «line-control», texto «manik». `terciario`: solo texto. `destructivo`: borde y texto «error», siempre con confirmación.\n- 44 px (`control-height`), radio `radius-md`, texto `button` (Atkinson 600). Foco: anillo «focus» 2 px.\n- Por qué no el color del producto: los colores de Farmacia, Compras y Grupos coinciden con éxito, aviso y error; un botón verde o rojo diría otra cosa. El mismo botón en todas las apps también evita reaprender al cambiar de app.\n- El consumidor provee: verbo + objeto, estado de carga y `aria-disabled`.')
 comps['Campo'] = ('Formularios', 200, f'<div class="f"><label for="m">Medicamento</label><input id="m" value="Losartán"><small class="mut">Nombre genérico o comercial.</small></div><div class="f"><label for="ds">Dosis</label><div class="in err"><input id="ds" class="num" value="500" aria-invalid="true" aria-describedby="e1"><span class="mut num">mg</span></div><small id="e1" class="er">{ic("bad")}Fuera de rango: máximo 100 mg al día.</small></div>',
@@ -151,9 +154,9 @@ comps['Estado'] = ('Retroalimentación', 92, est('exito', 'ok', 'Receta surtida'
  'Estado: icono + texto sobre el fondo suave del estado, iguales en todas las apps.\n\n- Éxito, aviso, error e información; texto `on-<estado>-soft` (≥4.5:1).\n- Nunca solo color: los colores de producto se parecen a los de estado (Farmacia/éxito, Compras/aviso, Grupos/error); el icono y la palabra los separan.\n- Las alergias van siempre como error, en la cabecera del paciente.\n- El consumidor provee: el estado y el texto exacto.')
 vit = [('PRESIÓN', '120/80', 'mmHg'), ('FREC. CARDIACA', '72', 'lpm'), ('GLUCOSA', '104', 'mg/dL'), ('PESO', '68.4', 'kg')]
 comps['CabeceraPaciente'] = ('Datos', 250, f'<div class="card pc"><div class="pt"><span class="av2">MR</span><div><p class="d nmp">Mariana Ruiz Ortega</p><p class="mut sm num">42 años · F · Exp. <b class="id">MR-0107-II1</b> · Tipo O+</p></div><span class="sp"></span>{est("error", "bad", "Alergia: penicilina")}</div><div class="vs">' + ''.join(f'<div class="v"><span class="ov">{a}</span><span class="num vx">{b}</span><span class="mut sm">{u}</span></div>' for a, b, u in vit) + '</div></div>',
- '.pc{padding:20px;display:grid;gap:16px}.pt{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.av2{width:48px;height:48px;border-radius:50%;background:var(--app-expediente-soft,#EAEEF6);color:var(--app-expediente-ink,#234899);display:grid;place-items:center;font:600 16px var(--font-display,"Sora",sans-serif)}.nmp{margin:0;font-size:20px;line-height:28px;font-weight:600}.sm{margin:0;font-size:14px;line-height:20px}.id{font-weight:600;color:var(--ink,#14213D);letter-spacing:.02em}.sp{flex:1}'
+ '.pc{padding:20px;display:grid;gap:16px}.pt{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.av2{width:48px;height:48px;border-radius:50%;background:var(--app-expediente-soft,#EAEEF6);color:var(--app-expediente-ink,#234899);display:grid;place-items:center;font:600 16px var(--font-display,"Urbanist",sans-serif)}.nmp{margin:0;font-size:20px;line-height:28px;font-weight:600}.sm{margin:0;font-size:14px;line-height:20px}.id{font-weight:600;color:var(--ink,#14213D);letter-spacing:.02em}.sp{flex:1}'
  '.vs{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px}.v{display:grid;gap:2px;padding:12px 14px;border-radius:var(--radius-md,14px);background:var(--surface-soft,#EEF1F7)}.ov{font:700 12px/16px var(--font-sans,sans-serif);letter-spacing:.08em;color:var(--muted,#4A5674)}.vx{font:600 28px/32px var(--font-sans,sans-serif)}',
- 'Cabecera del paciente en Expediente: quién es, su clave y lo que no puede pasarse por alto.\n\n- Nombre en Sora 600; edad, sexo, clave de expediente y tipo de sangre en `body-sm`. La clave en 600 con tracking 0.02em: Atkinson distingue I, l y 1 (MR-0107-II1).\n- Alergias siempre visibles como estado «error» con icono, a la derecha del nombre.\n- Signos en `dato-xl` (Atkinson 600, cifras tabulares) con la unidad aparte en «muted».\n- El consumidor provee: datos del paciente, alergias, últimos signos con fecha.')
+ 'Cabecera del paciente en Expediente: quién es, su clave y lo que no puede pasarse por alto.\n\n- Nombre en Urbanist 600; edad, sexo, clave de expediente y tipo de sangre en `body-sm`. La clave en 600 con tracking 0.02em: Atkinson distingue I, l y 1 (MR-0107-II1).\n- Alergias siempre visibles como estado «error» con icono, a la derecha del nombre.\n- Signos en `dato-xl` (Atkinson 600, cifras tabulares) con la unidad aparte en «muted».\n- El consumidor provee: datos del paciente, alergias, últimos signos con fecha.')
 for name, (grp, h, body, css, md) in comps.items():
     os.makedirs(f'components/{name}', exist_ok=True)
     open(f'components/{name}/preview.html', 'w').write(page(grp, h, body, css))
@@ -164,17 +167,19 @@ os.makedirs('components/Cover', exist_ok=True)
 seals = ''.join(img(k + '.svg', 58) for k, *_ in PROD)
 open('components/Cover/preview.html', 'w').write(f'''<!-- @dsCard height=288 -->
 <!doctype html><html lang="es"><head><meta charset="utf-8">{FONTS}<style>
-html,body{{margin:0;height:100%}}body{{background:var(--noche,#0F1C3F);color:#fff;font-family:var(--font-sans,"Atkinson Hyperlegible Next",sans-serif);overflow:hidden}}
+html,body{{margin:0;height:100%}}body{{background:radial-gradient(ellipse 55% 80% at 100% 0%,var(--luz-cian,#D3F0F4),transparent 70%),radial-gradient(ellipse 45% 70% at 0% 100%,var(--luz-calida,#FFEFD2),transparent 70%),var(--bruma,#F5FAFB);color:var(--ink,#14213D);font-family:var(--font-sans,"Atkinson Hyperlegible Next",sans-serif);overflow:hidden}}
 .c{{position:relative;height:288px;padding:28px 32px;box-sizing:border-box;display:grid;align-content:space-between}}
-.top{{display:flex;align-items:center;gap:12px}}.top span{{font:600 15px/20px var(--font-display,"Sora",sans-serif);color:#C9D3EA;letter-spacing:.02em}}
-h1{{margin:0;font:600 44px/48px var(--font-display,"Sora",sans-serif);letter-spacing:-.03em}}h1 span{{font-weight:400;color:#AEBBD8}}
-.s{{display:flex;gap:12px;flex-wrap:wrap;align-items:end}}.s img{{background:#fff;border-radius:16px;padding:6px}}
-p{{margin:0;color:#C9D3EA;font-size:15px;line-height:22px;max-width:520px}}
-</style></head><body><div class="c"><div class="top">{img("ecosistema.svg", 28)}<span>MedicalManik</span></div><div style="display:grid;gap:10px"><h1>Ecosistema <span>Manik</span></h1><p>Un sello, seis apps clínicas: expediente, agenda, compras, farmacia, campañas y grupos. Sora para la marca; Atkinson Hyperlegible Next para cada dato.</p></div><div class="s">{seals}</div></div></body></html>''')
+.top{{display:flex;align-items:center;gap:12px}}.top span{{font:600 15px/20px var(--font-display,"Urbanist",sans-serif);color:var(--muted,#4A5674);letter-spacing:.02em}}
+h1{{margin:0;font:300 52px/54px var(--font-display,"Urbanist",sans-serif);letter-spacing:-.035em}}h1 span{{font-weight:600}}
+.s{{display:flex;gap:12px;flex-wrap:wrap;align-items:end}}.s img{{filter:drop-shadow(0 6px 14px rgba(20,33,61,.10))}}
+p{{margin:0;color:var(--muted,#4A5674);font-size:15px;line-height:22px;max-width:520px}}
+</style></head><body><div class="c"><div class="top">{img("ecosistema.svg", 28)}<span>MedicalManik</span></div><div style="display:grid;gap:10px"><h1>Ecosistema <span>Manik</span></h1><p>Un sello, seis apps clínicas: expediente, agenda, compras, farmacia, campañas y grupos. Urbanist para la marca, como el directorio Manik; Atkinson Hyperlegible Next para cada dato.</p></div><div class="s">{seals}</div></div></body></html>''')
 
 README = f'''# Ecosistema Manik
 
 El sistema compartido de las apps clínicas de MedicalManik: un sello, seis productos «Producto + Manik», un inicio común y un selector para pasar de una app a otra. Una clínica u hospital entra una sola vez y elige a dónde ir.
+
+Comparte la identidad del directorio Manik (Urbanist, cian del pin y fondos de luz) en la marca, la portada, el inicio de sesión, el inicio del ecosistema y los títulos. Dentro de cada app manda la legibilidad clínica: Atkinson en interfaz y datos, y el botón en azul Manik.
 
 ## Arquitectura
 
@@ -214,17 +219,18 @@ Por qué: tres colores de producto coinciden con estados (Farmacia ≈ éxito, C
 | --- | --- | --- |
 ''' + ''.join(f"| {n} | {c} | {cr('#FFFFFF', c)}:1 |\n" for k, n, c, *_ in PROD) + f'''
 - Neutros con un sesgo al azul: `canvas` {N['canvas']}, `surface` blanco, `ink` {N['ink']} ({cr(N['ink'], '#FFFFFF')}:1), `muted` {N['muted']} ({cr(N['muted'], '#FFFFFF')}:1). `subtle` es solo gráfico.
-- **Navegación clara.** El azul Manik y el violeta de Impulsa no alcanzan 3:1 sobre azul noche; por eso barras y menús van en `surface` y `noche` se reserva a portada e inicio de sesión.
-- `cian` {CIAN} es acento de la marca original: solo gráfico (2.29:1 con blanco).
+- **Navegación clara.** El azul Manik y el violeta de Impulsa no alcanzan 3:1 sobre azul noche; por eso barras y menús van en `surface`. `noche` queda para planos oscuros puntuales.
+- **Luz de marca, como el directorio Manik:** portada, inicio de sesión e inicio del ecosistema van sobre `bruma` (#F5FAFB) con dos halos, `luz-cian` (#D3F0F4) y `luz-calida` (#FFEFD2). Dentro de las apps, `canvas`.
+- `cian` {CIAN} es el cian del pin de Manik: acento gráfico ({cr(CIAN, '#FFFFFF')}:1 con blanco), nunca texto pequeño, fondo de texto ni color de producto.
 - Tema claro únicamente, como Manik Impulsa en producción.
 
 ## Tipografía
 
-- **Primaria · Sora** (Google Fonts): marca, saludos y títulos. Geométrica, coincide con la palabra MedicalManik. 600 en títulos; nunca en párrafos, tablas ni datos clínicos.
+- **Primaria · Urbanist** (Google Fonts): la letra del directorio Manik, así pacientes y clínicas ven la misma familia. Marca, saludos y títulos: 300 grande en portada e inicio; 600 en títulos y nombres de app. Nunca en párrafos, tablas ni datos clínicos.
 - **Secundaria · Atkinson Hyperlegible Next** (Google Fonts): toda la interfaz y todo dato. La diseñó el Braille Institute para que cada letra se distinga: 1, l e I; 0 y O; rn y m. En un expediente eso evita leer mal una dosis o una clave.
 - Cifras tabulares (`font-variant-numeric: tabular-nums`) en tablas, dosis y signos.
 - Piso de 13 px: nada clínico por debajo.
-- Carga: `family=Sora:wght@400;600;700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700`.
+- Carga: `family=Urbanist:wght@300..700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700`.
 
 ## Espacio, forma y profundidad
 
@@ -244,7 +250,7 @@ Directa y clínica: el verbo dice lo que pasa («Guardar receta», «Surtir»). 
 
 Manik Impulsa ya tiene su propio sistema en producción. Este sistema lo respeta en espacio, radios, sombras, estados e iconos, y difiere en tres puntos que hay que decidir:
 
-1. **Tipografía:** Impulsa usa solo Ubuntu; aquí, Sora + Atkinson.
+1. **Tipografía:** Impulsa usa solo Ubuntu; aquí, Urbanist + Atkinson.
 2. **Acción:** Impulsa usa su violeta (#504CA1) para botones; aquí la acción es azul Manik en todas las apps.
 3. **Lienzo:** Impulsa usa grises neutros (#F4F4F4); aquí los neutros tienen un sesgo al azul.
 
@@ -267,7 +273,7 @@ json.dump({'v': 3, 'layout': 'files', 'createdOnFiles': {'v': 1, 'at': now}, 'ti
   'assetGroups': {'Sellos': {'name': 'Sellos', 'tile': 'm', 'order': order_s, 'files': {n: files[n] for n in order_s}},
                   'Ecosistema': {'name': 'Ecosistema', 'tile': 's', 'order': order_e, 'files': {n: files[n] for n in order_e}}},
   'blobs': {}, 'docs': {'readme': 'project/README.md', 'sections': []},
-  'lastChange': {'at': now, 'by': 'Kevin', 'via': 'Claude Code', 'note': 'Sistema inicial del Ecosistema Manik: sellos de seis productos, mosaico del ecosistema, Sora + Atkinson Hyperlegible Next, identidad vs interfaz, inicio y selector.'}},
+  'lastChange': {'at': now, 'by': 'Kevin', 'via': 'Claude Code', 'note': 'Adopta la identidad del directorio Manik en marca y títulos: Urbanist, cian del pin y fondos de luz; dentro de las apps siguen Atkinson y el botón azul Manik.'}},
  open('design-system.json', 'w'), indent=2, ensure_ascii=False)
 os.makedirs('assets/Sellos', exist_ok=True); os.makedirs('assets/Ecosistema', exist_ok=True)
 open('assets/Sellos/README.md', 'w').write('# Sellos\n\nSello madre MedicalManik y los seis productos, en color con fondo transparente (los cortes son máscaras), más el sello madre a una tinta (`currentColor`). Mínimo 24 px en interfaz.\n')

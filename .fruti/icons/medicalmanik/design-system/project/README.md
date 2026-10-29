@@ -2,6 +2,8 @@
 
 El sistema compartido de las apps clínicas de MedicalManik: un sello, seis productos «Producto + Manik», un inicio común y un selector para pasar de una app a otra. Una clínica u hospital entra una sola vez y elige a dónde ir.
 
+Comparte la identidad del directorio Manik (Urbanist, cian del pin y fondos de luz) en la marca, la portada, el inicio de sesión, el inicio del ecosistema y los títulos. Dentro de cada app manda la legibilidad clínica: Atkinson en interfaz y datos, y el botón en azul Manik.
+
 ## Arquitectura
 
 - **MedicalManik** es la empresa y el sello madre: la M de pulso en el cuadro limpio.
@@ -46,17 +48,18 @@ Por qué: tres colores de producto coinciden con estados (Farmacia ≈ éxito, C
 | Grupos | #C73A55 | 5.04:1 |
 
 - Neutros con un sesgo al azul: `canvas` #F5F7FB, `surface` blanco, `ink` #14213D (15.97:1), `muted` #4A5674 (7.31:1). `subtle` es solo gráfico.
-- **Navegación clara.** El azul Manik y el violeta de Impulsa no alcanzan 3:1 sobre azul noche; por eso barras y menús van en `surface` y `noche` se reserva a portada e inicio de sesión.
-- `cian` #00BDD0 es acento de la marca original: solo gráfico (2.29:1 con blanco).
+- **Navegación clara.** El azul Manik y el violeta de Impulsa no alcanzan 3:1 sobre azul noche; por eso barras y menús van en `surface`. `noche` queda para planos oscuros puntuales.
+- **Luz de marca, como el directorio Manik:** portada, inicio de sesión e inicio del ecosistema van sobre `bruma` (#F5FAFB) con dos halos, `luz-cian` (#D3F0F4) y `luz-calida` (#FFEFD2). Dentro de las apps, `canvas`.
+- `cian` #009BB0 es el cian del pin de Manik: acento gráfico (3.33:1 con blanco), nunca texto pequeño, fondo de texto ni color de producto.
 - Tema claro únicamente, como Manik Impulsa en producción.
 
 ## Tipografía
 
-- **Primaria · Sora** (Google Fonts): marca, saludos y títulos. Geométrica, coincide con la palabra MedicalManik. 600 en títulos; nunca en párrafos, tablas ni datos clínicos.
+- **Primaria · Urbanist** (Google Fonts): la letra del directorio Manik, así pacientes y clínicas ven la misma familia. Marca, saludos y títulos: 300 grande en portada e inicio; 600 en títulos y nombres de app. Nunca en párrafos, tablas ni datos clínicos.
 - **Secundaria · Atkinson Hyperlegible Next** (Google Fonts): toda la interfaz y todo dato. La diseñó el Braille Institute para que cada letra se distinga: 1, l e I; 0 y O; rn y m. En un expediente eso evita leer mal una dosis o una clave.
 - Cifras tabulares (`font-variant-numeric: tabular-nums`) en tablas, dosis y signos.
 - Piso de 13 px: nada clínico por debajo.
-- Carga: `family=Sora:wght@400;600;700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700`.
+- Carga: `family=Urbanist:wght@300..700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700`.
 
 ## Espacio, forma y profundidad
 
@@ -76,7 +79,7 @@ Directa y clínica: el verbo dice lo que pasa («Guardar receta», «Surtir»). 
 
 Manik Impulsa ya tiene su propio sistema en producción. Este sistema lo respeta en espacio, radios, sombras, estados e iconos, y difiere en tres puntos que hay que decidir:
 
-1. **Tipografía:** Impulsa usa solo Ubuntu; aquí, Sora + Atkinson.
+1. **Tipografía:** Impulsa usa solo Ubuntu; aquí, Urbanist + Atkinson.
 2. **Acción:** Impulsa usa su violeta (#504CA1) para botones; aquí la acción es azul Manik en todas las apps.
 3. **Lienzo:** Impulsa usa grises neutros (#F4F4F4); aquí los neutros tienen un sesgo al azul.
 
