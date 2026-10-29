@@ -15,6 +15,7 @@ mal = [
  ('Cambiar la línea por otro dibujo', var(SIM, 'x6').replace('M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64', 'M20 50 L80 50 M50 20 L50 80')),
 ]
 malh = ''.join(f'<figure class="mal"><div>{s}</div><figcaption>{t}</figcaption></figure>' for t, s in mal)
+FOTO = open('foto.html').read()
 html = f'''<title>Manik · manual de marca</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300..700&family=Onest:wght@400..700&display=swap">
@@ -55,6 +56,9 @@ section{{padding:44px 0;border-bottom:1px solid var(--line)}}
 .mal{{margin:0;border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;justify-items:center;overflow:hidden}} .mal div{{height:90px;display:grid;place-items:center}} .mal svg{{height:80px;width:auto}} .mal figcaption{{font-size:14px;font-weight:600}} .mal figcaption::before{{content:"✕ ";color:#9C3443}}
 .files li{{margin:4px 0}} code{{font-size:14px;background:var(--sunk);padding:2px 6px;border-radius:6px}}
 .src{{font-size:14px;color:var(--muted)}} .src a{{color:var(--cianui)}}
+.fotos{{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:start}} .fig2{{margin:0;display:grid;gap:8px}} .fig2 svg{{width:100%;height:auto;display:block;max-width:440px}}
+.fotos th{{width:110px;background:var(--sunk)}} .reglas{{margin:0;padding-left:20px;display:grid;gap:8px}}
+.up{{background:#fff;border:1px solid var(--line);border-radius:24px;padding:20px 22px;max-width:520px;box-shadow:0 1px 2px rgba(20,33,61,.05),0 6px 18px rgba(20,33,61,.06)}} .up .upt{{font:600 20px var(--display);margin:0 0 4px}} .up ol{{margin:0;padding-left:22px;display:grid;gap:6px}}
 @media (max-width:700px){{.anat{{grid-template-columns:1fr}}}}
 </style>
 <main>
@@ -109,15 +113,16 @@ section{{padding:44px 0;border-bottom:1px solid var(--line)}}
 <section><span class="num">07</span><h2>Aplicaciones</h2>
 <div class="apps"><div><h3>Búsqueda</h3><div class="search">Qué necesitas · Dónde<b>Buscar</b></div>
 <h3>Ficha de médico</h3><div class="ficha"><div class="t"><span class="av">LH</span><div style="flex:1;min-width:0"><h4 style="display:flex;justify-content:space-between;gap:12px">Dra. Lucía Herrera <span>$900</span></h4><small>Pediatra · a 1.2 km</small><span class="stars"><i aria-hidden="true">★</i> <b>4.9</b> <span class="muted">· 124 opiniones</span></span></div></div><div><span class="tag">Cédula verificada</span></div><div class="slots">Hoy <span>11:30</span><span>12:00</span><span>16:30</span></div><div class="btnm">Agendar</div></div>
-<h3>Fotografía</h3><p class="cap">La dirección bienestar se apoya en fotos reales de personas: luz natural, fondos claros, sin poses de banco de imágenes. Los retratos de médicos van con un encuadre parecido entre sí. Sin foto, iniciales sobre luz cian.</p></div>
+<p class="cap" style="margin-top:10px">Fotografía de médicos y de marca: ver la sección 08.</p></div>
 <div><h3>Ícono de app</h3><div class="phone"><span class="ico">{var(sv('app-icon'),'p')}</span><small>Manik</small></div><p class="cap" style="margin-top:10px">El símbolo sobre blanco, con aire alrededor. El nombre bajo el ícono es «Manik».</p></div></div></section>
 
-<section><span class="num">08</span><h2>Usos incorrectos</h2><div class="g">{malh}</div>
+{FOTO}
+<section><span class="num">09</span><h2>Usos incorrectos</h2><div class="g">{malh}</div>
 <p class="muted" style="margin-top:12px">Tampoco: poner el símbolo sobre fotografías sin contraste, separar la punta del cuadro, escribir «manik» con otra fuente, o usar el azul de Expediente para el sello.</p></section>
 
-<section><span class="num">09</span><h2>Archivos</h2><ul class="files"><li><code>svg/simbolo.svg</code>, <code>simbolo-1tinta.svg</code>, <code>simbolo-blanco.svg</code>, <code>favicon.svg</code></li><li><code>svg/logotipo.svg</code>, <code>logotipo-endoso.svg</code>, <code>logotipo-vertical.svg</code>, <code>logotipo-blanco.svg</code>, <code>logotipo-1tinta.svg</code></li><li><code>svg/app-icon.svg</code> y <code>png/</code> de 16 a 512 px</li><li><code>tema.json</code>: colores y contrastes</li></ul>
+<section><span class="num">10</span><h2>Archivos</h2><ul class="files"><li><code>svg/simbolo.svg</code>, <code>simbolo-1tinta.svg</code>, <code>simbolo-blanco.svg</code>, <code>favicon.svg</code></li><li><code>svg/logotipo.svg</code>, <code>logotipo-endoso.svg</code>, <code>logotipo-vertical.svg</code>, <code>logotipo-blanco.svg</code>, <code>logotipo-1tinta.svg</code></li><li><code>svg/app-icon.svg</code> y <code>png/</code> de 16 a 512 px</li><li><code>tema.json</code>: colores y contrastes</li></ul>
 <p class="src">Fuentes sobre Manik': <a href="https://journals.iai.spk-berlin.de/index.php/indiana/article/download/1672/1310/3630">Barrera Vásquez (Indiana)</a> · <a href="https://revistas-filologicas.unam.mx/estudios-cultura-maya/index.php/ecm/article/download/518/513">Acuña (Estudios de Cultura Maya, UNAM)</a> · <a href="https://en.wikipedia.org/wiki/Tzolk%CA%BCin">Tzolk'in</a>.</p>
-<p class="src">Pendiente antes de publicar la marca: verificar registro de «Manik» y disponibilidad de manik.mx; definir la regla de fotografía con fotos reales de médicos y pacientes.</p></section>
+<p class="src">Pendiente antes de publicar la marca: verificar registro de «Manik» y disponibilidad de manik.mx; confirmar con el área legal la sección de consentimiento y definir quién revisa los retratos.</p></section>
 </main>'''
 open('guia.html', 'w').write(html)
 print('ok')

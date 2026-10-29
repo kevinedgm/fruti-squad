@@ -38,6 +38,9 @@ section{padding:44px 0;border-bottom:1px solid var(--line)}
 .mal{margin:0;border:1px solid var(--line);border-radius:14px;padding:16px;display:grid;gap:10px;justify-items:center;overflow:hidden} .mal div{height:90px;display:grid;place-items:center} .mal svg{height:80px;width:auto} .mal figcaption{font-size:14px;font-weight:600} .mal figcaption::before{content:"✕ ";color:#9C3443}
 .files li{margin:4px 0} code{font-size:14px;background:var(--sunk);padding:2px 6px;border-radius:6px}
 .src{font-size:14px;color:var(--muted)} .src a{color:var(--cianui)}
+.fotos{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));align-items:start} .fig2{margin:0;display:grid;gap:8px} .fig2 svg{width:100%;height:auto;display:block;max-width:440px}
+.fotos th{width:110px;background:var(--sunk)} .reglas{margin:0;padding-left:20px;display:grid;gap:8px}
+.up{background:#fff;border:1px solid var(--line);border-radius:24px;padding:20px 22px;max-width:520px;box-shadow:0 1px 2px rgba(20,33,61,.05),0 6px 18px rgba(20,33,61,.06)} .up .upt{font:600 20px var(--display);margin:0 0 4px} .up ol{margin:0;padding-left:22px;display:grid;gap:6px}
 @media (max-width:700px){.anat{grid-template-columns:1fr}}
 </style>
 <main>
@@ -103,11 +106,84 @@ section{padding:44px 0;border-bottom:1px solid var(--line)}
 <section><span class="num">07</span><h2>Aplicaciones</h2>
 <div class="apps"><div><h3>Búsqueda</h3><div class="search">Qué necesitas · Dónde<b>Buscar</b></div>
 <h3>Ficha de médico</h3><div class="ficha"><div class="t"><span class="av">LH</span><div style="flex:1;min-width:0"><h4 style="display:flex;justify-content:space-between;gap:12px">Dra. Lucía Herrera <span>$900</span></h4><small>Pediatra · a 1.2 km</small><span class="stars"><i aria-hidden="true">★</i> <b>4.9</b> <span class="muted">· 124 opiniones</span></span></div></div><div><span class="tag">Cédula verificada</span></div><div class="slots">Hoy <span>11:30</span><span>12:00</span><span>16:30</span></div><div class="btnm">Agendar</div></div>
-<h3>Fotografía</h3><p class="cap">La dirección bienestar se apoya en fotos reales de personas: luz natural, fondos claros, sin poses de banco de imágenes. Los retratos de médicos van con un encuadre parecido entre sí. Sin foto, iniciales sobre luz cian.</p></div>
+<p class="cap" style="margin-top:10px">Fotografía de médicos y de marca: ver la sección 08.</p></div>
 <div><h3>Ícono de app</h3><div class="phone"><span class="ico"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" role="img" aria-label="Manik"><title>Manik</title><rect width="1024" height="1024" rx="0" fill="#FFFFFF"/><defs><clipPath id="aip"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z"/></clipPath></defs><g transform="translate(232 178) scale(5.6)"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z" fill="#009BB0"/><path clip-path="url(#aip)" d="M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64" fill="none" stroke="#F6F8FC" stroke-width="13" stroke-linejoin="round"/></g></svg>
 </span><small>Manik</small></div><p class="cap" style="margin-top:10px">El símbolo sobre blanco, con aire alrededor. El nombre bajo el ícono es «Manik».</p></div></div></section>
 
-<section><span class="num">08</span><h2>Usos incorrectos</h2><div class="g"><figure class="mal"><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 104 123" role="img" aria-label="Manik"><title>Manik</title><defs><clipPath id="mx1"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z"/></clipPath></defs><g transform="translate(0 0) scale(1.0)"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z" fill="#1B7F52"/><path clip-path="url(#mx1)" d="M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64" fill="none" stroke="#F6F8FC" stroke-width="13" stroke-linejoin="round"/></g></svg>
+
+<section id="foto"><span class="num">08</span><h2>Fotografía</h2>
+<p>La dirección bienestar vive de fotos de personas reales. Hay dos tipos, con dueños distintos:</p>
+<div class="arq"><div><b>Retratos de médicos</b><br><span class="muted">Los sube cada médico desde su celular. La regla es una guía corta y una revisión antes de publicar.</span></div><div><b>Fotos de marca</b><br><span class="muted">Portada, categorías y campañas. Las produce Manik. La regla es de estilo, de casting y de consentimiento.</span></div></div>
+
+<h3>Retrato de médico</h3>
+<div class="fotos"><figure class="fig2"><svg viewBox="0 0 430 330" role="img" aria-label="Encuadre del retrato: vertical 3 por 4, ojos en el tercio superior, aire sobre la cabeza y corte a la mitad del pecho">
+<defs><clipPath id="fr1"><rect x="5" y="5" width="240" height="320" rx="20"/></clipPath></defs>
+<rect x="5" y="5" width="240" height="320" rx="20" fill="#EEF3F5"/>
+<g clip-path="url(#fr1)" fill="#BFCBD4"><ellipse cx="125" cy="104" rx="50" ry="58"/><path d="M28 330 C36 248 78 214 125 214 C172 214 214 248 222 330 Z"/></g>
+<g stroke="#00788A" stroke-width="1.5" stroke-dasharray="5 4" fill="none"><path d="M5 46 H260"/><path d="M5 111.7 H260"/><path d="M5 290 H260"/><path d="M85 5 V325 M165 5 V325" opacity=".45"/></g>
+<g font-family="Onest,system-ui,sans-serif" font-size="13" fill="#14213D"><text x="268" y="50">Aire sobre la cabeza</text><text x="268" y="66" fill="#4A5674">1/8 del alto, aprox.</text><text x="268" y="115">Ojos en el tercio</text><text x="268" y="131">superior</text><text x="268" y="294">Corte a mitad</text><text x="268" y="310">del pecho</text></g>
+</svg><figcaption class="cap">Vertical 3:4, cara centrada. Es el mismo formato de la ficha del directorio.</figcaption></figure>
+<div class="tw"><table><tbody>
+<tr><th>Proporción</th><td>3:4 vertical. Manik recorta al formato; si la cara no queda centrada, se pide otra foto.</td></tr>
+<tr><th>Tamaño</th><td>Mínimo 900 × 1200 px al subirla. Se sirve a 480 × 640 (pantallas 2x), WebP, 120 KB como máximo.</td></tr>
+<tr><th>Luz</th><td>Natural o de ventana, de frente o a 45°. Sin flash directo ni sombras duras en la cara.</td></tr>
+<tr><th>Fondo</th><td>Liso y claro: pared clara o consultorio desenfocado. Sin logotipos, diplomas legibles ni otras personas.</td></tr>
+<tr><th>Persona</th><td>Ropa de consulta. Sin cubrebocas ni lentes oscuros; lentes graduados sí, sin reflejo. Expresión natural, mirada a cámara o apenas de lado.</td></tr>
+<tr><th>Edición</th><td>Solo exposición, balance de blancos y recorte. Sin filtros ni retoque que cambie rasgos: el paciente debe reconocer a su médico al llegar.</td></tr>
+<tr><th>Esquinas</th><td>20 px en la ficha. La foto se entrega con esquinas rectas; el redondeo lo pone la interfaz.</td></tr>
+</tbody></table></div></div>
+<div class="two" style="margin-top:14px"><div class="si"><b>Así sí</b><ul><li>Foto reciente, que se parezca a como lo verá el paciente hoy.</li><li>Tomada por otra persona a la altura de los ojos, a un metro o más.</li><li>Junto a una ventana, con la pared clara detrás.</li><li>Una sola persona en la foto.</li></ul></div>
+<div class="nosi"><b>Así no</b><ul><li>Selfie con el brazo a la vista o con el celular en la mano.</li><li>Foto de credencial o INE escaneada.</li><li>Logotipo de la clínica en lugar de la foto.</li><li>Recorte de una foto grupal o de un evento.</li><li>Brazos cruzados con el estetoscopio al cuello, pose de banco de imágenes.</li></ul></div></div>
+
+<h3>Lo que ve el médico al subir su foto</h3>
+<div class="up"><p class="upt">Tu foto de perfil</p><p class="muted" style="margin:0 0 10px">Los pacientes eligen con más confianza cuando ven tu cara. Para que se vea bien:</p>
+<ol><li>Pide a alguien que te tome la foto, de frente y a la altura de tus ojos.</li><li>Ponte junto a una ventana, con una pared clara detrás.</li><li>Que se vea de tu cabeza a la mitad del pecho.</li><li>Sin filtros, sin cubrebocas y sin lentes oscuros.</li></ol>
+<p class="muted" style="margin:10px 0 0;font-size:15px">La revisamos antes de publicarla. Si algo no funciona, te decimos qué cambiar.</p></div>
+
+<h3>Revisión antes de publicar</h3>
+<div class="tw"><table><thead><tr><th>Comprobación</th><th>Quién</th><th>Si falla</th></tr></thead><tbody>
+<tr><td>Mide 900 × 1200 px o más y es vertical</td><td>Automática</td><td>«Tu foto es muy pequeña. Sube una de al menos 900 × 1200 px.»</td></tr>
+<tr><td>Hay una sola cara y está centrada</td><td>Automática (propuesta)</td><td>«No encontramos tu cara al centro. Prueba con una foto de frente.»</td></tr>
+<tr><td>No es credencial, logotipo ni recorte grupal</td><td>Persona del equipo</td><td>Se rechaza con el motivo.</td></tr>
+<tr><td>Luz, fondo y edición dentro de la regla</td><td>Persona del equipo</td><td>Se publica y se sugiere mejorarla; no bloquea.</td></tr>
+</tbody></table></div>
+<p class="cap" style="margin-top:8px">Solo bloquea lo que confunde al paciente (que no sea la persona o no se vea su cara). La calidad se sugiere, para que ningún médico se quede sin perfil.</p>
+
+<h3>Sin foto</h3>
+<div class="two"><div class="resp" style="background:#fff"><svg viewBox="0 0 150 200" style="height:180px;width:auto" role="img" aria-label="Ejemplo sin foto: iniciales MS sobre el degradado de luz"><defs><linearGradient id="nf" x1="0" y1="0" x2=".6" y2="1"><stop offset="0" stop-color="#CDEEF2"/><stop offset="1" stop-color="#FBE7C9"/></linearGradient></defs><rect width="150" height="200" rx="16" fill="url(#nf)"/><text x="12" y="186" font-family="Urbanist,system-ui,sans-serif" font-weight="300" font-size="40" letter-spacing="-1" fill="#14213D">MS</text></svg></div>
+<div><p>Iniciales en Urbanist 300 sobre el degradado de luz cian a luz cálida, en el mismo tamaño 3:4. Así la lista no se rompe y no hay huecos grises.</p><p>Nunca una silueta genérica ni un avatar de dibujo: parecen perfiles falsos.</p></div></div>
+
+<h3>Fotos de marca</h3>
+<div class="fotos"><figure class="fig2"><svg viewBox="0 0 430 410" role="img" aria-label="Composición de la portada: persona a un lado, aire del otro para las tarjetas flotantes, la cara nunca se tapa">
+<defs><linearGradient id="pg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#D3F0F4"/><stop offset="1" stop-color="#FFEFD2"/></linearGradient><clipPath id="fr2"><rect x="5" y="5" width="320" height="400" rx="28"/></clipPath></defs>
+<rect x="5" y="5" width="320" height="400" rx="28" fill="url(#pg)"/>
+<g clip-path="url(#fr2)" fill="#BFCBD4"><ellipse cx="220" cy="150" rx="52" ry="60"/><path d="M110 420 C118 300 168 268 220 268 C272 268 322 300 330 420 Z"/></g>
+<circle cx="220" cy="150" r="78" fill="none" stroke="#B4343F" stroke-width="1.5" stroke-dasharray="5 4"/>
+<g fill="#fff" stroke="#00788A" stroke-width="1.5" stroke-dasharray="5 4"><rect x="20" y="40" width="120" height="44" rx="14"/><rect x="20" y="320" width="150" height="50" rx="14"/></g>
+<g font-family="Onest,system-ui,sans-serif" font-size="13" fill="#14213D"><text x="30" y="66">Tarjeta</text><text x="30" y="350">Tarjeta</text><text x="338" y="146">Cara libre:</text><text x="338" y="162" fill="#4A5674">ninguna tarjeta</text><text x="338" y="178" fill="#4A5674">la tapa</text><text x="338" y="56">Persona a la</text><text x="338" y="72" fill="#4A5674">derecha; las tarjetas,</text><text x="338" y="88" fill="#4A5674">en el aire libre</text></g>
+</svg><figcaption class="cap">Portada 4:5 en escritorio y 1:1 en celular: el sujeto debe funcionar en los dos recortes.</figcaption></figure>
+<div><ul class="reglas"><li><b>Personas cuidándose en su vida diaria:</b> caminar, cocinar, revisar el celular, estar con su familia. No en camilla ni en pasillo de hospital.</li>
+<li><b>México real:</b> distintas edades, tonos de piel y cuerpos. La generación Z es protagonista frecuente, no la única.</li>
+<li><b>Luz natural y cálida</b> con piel fiel. La ropa en tonos claros, neutros, arena o cian conversa con la luz de la marca.</li>
+<li><b>Composición:</b> persona a un lado y aire del otro para las tarjetas flotantes.</li>
+<li><b>Por categoría:</b> la foto muestra el bienestar, no el problema. Para «Piel», alguien a gusto con su piel; no un acercamiento a una lesión.</li></ul></div></div>
+<div class="two" style="margin-top:14px"><div class="si"><b>Así sí</b><ul><li>Una mujer de 24 años revisa su cita en el celular camino al trabajo.</li><li>Un papá juega con su hija en casa.</li><li>Una persona mayor camina en un parque por la mañana.</li></ul></div>
+<div class="nosi"><b>Así no</b><ul><li>Batas, estetoscopios o jeringas como símbolo de salud.</li><li>Sangre, dolor explícito o enfermedad a la vista.</li><li>Sonrisas forzadas a cámara de banco de imágenes.</li><li>Manos con corazones o cerebros en 3D, y luz azul de hospital.</li><li>Texto dentro de la foto.</li></ul></div></div>
+<p class="cap" style="margin-top:10px">Banco de imágenes solo si la foto cumple esta regla y tiene licencia de uso comercial. Una sesión propia da un resultado más consistente.</p>
+
+<h3>Consentimiento y privacidad</h3>
+<ul class="reglas"><li><b>Autorización firmada</b> de cada persona que aparece, con el uso permitido (web, app, redes, campañas) y el plazo.</li>
+<li><b>Menores:</b> solo con autorización de madre, padre o tutor.</li>
+<li><b>Temas sensibles:</b> una foto junto a «Salud mental» o «Salud íntima» asocia a esa persona con una condición. Solo con consentimiento expreso para ese uso, o con una toma donde no se le reconozca.</li>
+<li><b>Pacientes reales:</b> nunca en fotos de marca sin su autorización; nunca fotos tomadas en consulta.</li>
+<li><b>Médicos:</b> al subir su foto aceptan que se publique en su perfil y pueden cambiarla o retirarla cuando quieran.</li></ul>
+<p class="cap">Inferencia, sin revisión legal: en México la ley de datos personales trata la información de salud como dato sensible y pide consentimiento expreso por escrito. Esta parte debe confirmarla el área legal.</p>
+
+<h3>Texto alternativo</h3>
+<p>Retrato: nombre y especialidad («Dra. Mariana Soto, dermatóloga»). Fotos de ambiente: texto alternativo vacío, porque solo decoran y el mensaje está en el texto de al lado.</p>
+</section>
+
+<section><span class="num">09</span><h2>Usos incorrectos</h2><div class="g"><figure class="mal"><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 104 123" role="img" aria-label="Manik"><title>Manik</title><defs><clipPath id="mx1"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z"/></clipPath></defs><g transform="translate(0 0) scale(1.0)"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z" fill="#1B7F52"/><path clip-path="url(#mx1)" d="M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64" fill="none" stroke="#F6F8FC" stroke-width="13" stroke-linejoin="round"/></g></svg>
 </div><figcaption>Cambiar el color</figcaption></figure><figure class="mal"><div><svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 104 123" role="img" aria-label="Manik"><defs><linearGradient id="gx" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#234899"/><stop offset="1" stop-color="#00BDD0"/></linearGradient></defs><title>Manik</title><defs><clipPath id="mx2"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z"/></clipPath></defs><g transform="translate(0 0) scale(1.0)"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z" fill="url(#gx)"/><path clip-path="url(#mx2)" d="M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64" fill="none" stroke="#F6F8FC" stroke-width="13" stroke-linejoin="round"/></g></svg>
 </div><figcaption>Agregar degradados</figcaption></figure><figure class="mal"><div><svg style="transform:rotate(-14deg)" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 104 123" role="img" aria-label="Manik"><title>Manik</title><defs><clipPath id="mx3"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z"/></clipPath></defs><g transform="translate(0 0) scale(1.0)"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z" fill="#009BB0"/><path clip-path="url(#mx3)" d="M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64" fill="none" stroke="#F6F8FC" stroke-width="13" stroke-linejoin="round"/></g></svg>
 </div><figcaption>Rotar o inclinar</figcaption></figure><figure class="mal"><div><svg style="transform:scaleX(1.45)" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 104 123" role="img" aria-label="Manik"><title>Manik</title><defs><clipPath id="mx4"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z"/></clipPath></defs><g transform="translate(0 0) scale(1.0)"><path d="M21 0 H79 A21 21 0 0 1 100 21 V79 A21 21 0 0 1 79 100 H66 Q59 100 56 106 L50 119 L44 106 Q41 100 34 100 H21 A21 21 0 0 1 0 79 V21 A21 21 0 0 1 21 0 Z" fill="#009BB0"/><path clip-path="url(#mx4)" d="M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64" fill="none" stroke="#F6F8FC" stroke-width="13" stroke-linejoin="round"/></g></svg>
@@ -116,7 +192,7 @@ section{padding:44px 0;border-bottom:1px solid var(--line)}
 </div><figcaption>Cambiar la línea por otro dibujo</figcaption></figure></div>
 <p class="muted" style="margin-top:12px">Tampoco: poner el símbolo sobre fotografías sin contraste, separar la punta del cuadro, escribir «manik» con otra fuente, o usar el azul de Expediente para el sello.</p></section>
 
-<section><span class="num">09</span><h2>Archivos</h2><ul class="files"><li><code>svg/simbolo.svg</code>, <code>simbolo-1tinta.svg</code>, <code>simbolo-blanco.svg</code>, <code>favicon.svg</code></li><li><code>svg/logotipo.svg</code>, <code>logotipo-endoso.svg</code>, <code>logotipo-vertical.svg</code>, <code>logotipo-blanco.svg</code>, <code>logotipo-1tinta.svg</code></li><li><code>svg/app-icon.svg</code> y <code>png/</code> de 16 a 512 px</li><li><code>tema.json</code>: colores y contrastes</li></ul>
+<section><span class="num">10</span><h2>Archivos</h2><ul class="files"><li><code>svg/simbolo.svg</code>, <code>simbolo-1tinta.svg</code>, <code>simbolo-blanco.svg</code>, <code>favicon.svg</code></li><li><code>svg/logotipo.svg</code>, <code>logotipo-endoso.svg</code>, <code>logotipo-vertical.svg</code>, <code>logotipo-blanco.svg</code>, <code>logotipo-1tinta.svg</code></li><li><code>svg/app-icon.svg</code> y <code>png/</code> de 16 a 512 px</li><li><code>tema.json</code>: colores y contrastes</li></ul>
 <p class="src">Fuentes sobre Manik': <a href="https://journals.iai.spk-berlin.de/index.php/indiana/article/download/1672/1310/3630">Barrera Vásquez (Indiana)</a> · <a href="https://revistas-filologicas.unam.mx/estudios-cultura-maya/index.php/ecm/article/download/518/513">Acuña (Estudios de Cultura Maya, UNAM)</a> · <a href="https://en.wikipedia.org/wiki/Tzolk%CA%BCin">Tzolk'in</a>.</p>
-<p class="src">Pendiente antes de publicar la marca: verificar registro de «Manik» y disponibilidad de manik.mx; definir la regla de fotografía con fotos reales de médicos y pacientes.</p></section>
+<p class="src">Pendiente antes de publicar la marca: verificar registro de «Manik» y disponibilidad de manik.mx; confirmar con el área legal la sección de consentimiento y definir quién revisa los retratos.</p></section>
 </main>
