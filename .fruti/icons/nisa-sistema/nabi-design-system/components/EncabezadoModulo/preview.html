@@ -1,5 +1,5 @@
 <!-- @dsCard group="Módulos" height=190 -->
-<!doctype html><html lang="es"><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=swap"><style>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"><style>
 *{box-sizing:border-box}[hidden]{display:none!important}
 html,body{margin:0}body{background:var(--bg);color:var(--text);font:15px/22px var(--font-sans);padding:var(--space-6)}
 :focus-visible{outline:2px solid var(--focus);outline-offset:2px;border-radius:4px}
@@ -11,8 +11,8 @@ html,body{margin:0}body{background:var(--bg);color:var(--text);font:15px/22px va
 @media (max-width:640px){.mh{grid-template-columns:minmax(0,1fr)}.mh .acts{justify-content:flex-start;flex-wrap:wrap}}
 .crumb{grid-column:1/-1;font:500 13px/18px var(--font-sans);color:var(--text-muted);display:flex;gap:6px;align-items:center}
 .crumb a{color:var(--text-muted);text-decoration:none}.crumb a:hover{color:var(--primary);text-decoration:underline;text-underline-offset:3px}
-.t1{margin:0;font:700 26px/32px var(--font-display);font-stretch:125%;letter-spacing:-.015em;color:var(--text)}
-.deck{margin:2px 0 0;font:italic 400 17px/24px var(--font-editorial);color:var(--text-muted)}
+.t1{margin:0;font:600 24px/32px var(--font-display);letter-spacing:-.005em;color:var(--text)}
+.deck{margin:2px 0 0;font:400 15px/22px var(--font-sans);color:var(--text-muted)}
 .cnt{font:500 13px/18px var(--font-datos);color:var(--text-muted);margin-top:6px}
 .cnt b{color:var(--text);font-weight:600}
 .acts{display:flex;gap:var(--space-2);align-items:center}
@@ -68,7 +68,7 @@ html,body{margin:0}body{background:var(--bg);color:var(--text);font:15px/22px va
 .e-inv{background:var(--pendiente-soft);color:var(--on-pendiente-soft)}
 .e-sus{background:var(--alerta-soft);color:var(--on-alerta-soft)}
 .e-blo{background:var(--fuera-soft);color:var(--on-fuera-soft)}
-.e-baja{background:var(--surface-sunken);color:var(--text-muted)}
+.e-baja{background:var(--surface);box-shadow:inset 0 0 0 1px var(--border-strong);color:var(--text-muted)}
 /* barra de acciones en lote */
 .bulk{display:flex;flex-wrap:wrap;gap:var(--space-2);align-items:center;background:var(--text);color:var(--on-primary);border-radius:var(--radius-md);padding:6px 6px 6px 14px;box-shadow:var(--shadow-overlay);margin:var(--space-3)}
 .bulk .n{font:500 13px var(--font-datos);font-feature-settings:"zero";margin-right:auto}
@@ -109,7 +109,7 @@ fieldset.f{border:0;margin:0;padding:0}
 .toast{display:flex;align-items:center;gap:12px;background:var(--text);color:var(--on-primary);border-radius:var(--radius-md);padding:8px 8px 8px 14px;box-shadow:var(--shadow-overlay);font:500 14px var(--font-sans)}
 .toast .btn{min-height:32px;background:var(--surface);color:var(--text)}
 .empty{display:grid;justify-items:center;gap:8px;text-align:center;padding:48px 24px}
-.empty .lm{font:italic 400 22px/30px var(--font-editorial);color:var(--text);margin:0}
+.empty .lm{font:600 18px/26px var(--font-display);color:var(--text);margin:0}
 .empty p{margin:0;color:var(--text-muted);max-width:44ch}
 @media (prefers-reduced-motion:reduce){.btn,.tbl tbody tr,.ra,.fld,.opt{transition:none}.btn-p:hover{transform:none}}
 </style></head><body><header class="mh"><nav class="crumb" aria-label="Ruta"><a href="#">Administración</a><span aria-hidden="true">/</span><span aria-current="page">Usuarios</span></nav><div><h1 class="t1">Usuarios</h1><p class="deck">Quién entra a Nabi y qué puede hacer.</p><p class="cnt"><b>24</b> usuarios · <b>3</b> invitaciones pendientes</p></div><div class="acts"><button class="btn btn-s"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3" /> <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /> <path d="m7 10 5 5 5-5" /></svg>Exportar</button><button class="btn btn-p"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" /> <circle cx="9" cy="7" r="4" /> <line x1="19" x2="19" y1="8" y2="14" /> <line x1="22" x2="16" y1="11" y2="11" /></svg>Agregar usuario</button></div></header></body></html>

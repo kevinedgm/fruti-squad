@@ -10,7 +10,7 @@ Estado de una cuenta de usuario: icono + texto sobre el fondo suave del estado, 
 | Bloqueado | `fuera-soft` / `on-fuera-soft` | candado | Bloqueo por intentos fallidos; se desbloquea solo o por sistemas |
 | Dado de baja | `surface-sunken` / `text-muted` | prohibido | Ya no trabaja en el laboratorio; se conserva por trazabilidad |
 
-- El color sigue al significado, no al módulo: verde = está bien, azul = pendiente, naranja = requiere atención, rojo = impedido, gris = fuera de uso.
+- El color sigue al significado, no al módulo: verde = está bien, pizarra = pendiente, ámbar = requiere atención, rojo = impedido, contorno sin relleno = fuera de uso. Ninguno es color de división.
 - Nunca solo color ni solo punto: icono y palabra siempre.
 - El pera no es un estado: marca el registro en curso (ver TablaUsuarios).
 - Los nombres de estado son una propuesta: confirmar con la política de cuentas del laboratorio.

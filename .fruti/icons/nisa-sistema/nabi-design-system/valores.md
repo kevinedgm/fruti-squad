@@ -11,7 +11,7 @@ La segunda fuente existe para una sola cosa: que un resultado se lea, se compare
 - Identificadores: muestra `NN-26-00417`, lote `L-2026-10-147`, certificado `CER-26-0091`.
 - Fechas y horas de análisis en tablas: `2026-10-24 09:42`.
 
-Los nombres de parámetro (pH, Plomo, Coliformes totales), los métodos (NMX-AA-008-SCFI-2016) y el texto corrido van en Archivo.
+Los nombres de parámetro (pH, Plomo, Coliformes totales), los métodos (NMX-AA-008-SCFI-2016) y el texto corrido van en Poppins.
 
 ## Cómo se escriben
 

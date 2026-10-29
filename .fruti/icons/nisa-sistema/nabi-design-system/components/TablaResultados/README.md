@@ -1,6 +1,6 @@
 # TablaResultados
 
-Tabla de resultados de una muestra: nombres en Archivo, valores en Plex Mono alineados a la derecha.
+Tabla de resultados de una muestra: nombres en Poppins, valores en Plex Mono alineados a la derecha.
 
 - Encabezado en `label` sobre «surface-sunken»; filas de 40 px (`row-h`) separadas por «border».
 - Resultado y especificación en `valor` / `valor-sm` (Plex Mono), a la derecha: con cifras de ancho fijo y los mismos decimales, el punto decimal queda en columna.

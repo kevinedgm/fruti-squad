@@ -34,12 +34,12 @@ Proporción: casi todo es `bg`, `surface` y tinta; el azul aparece en la acción
 
 | Elemento | Estilo |
 |---|---|
-| Ruta | `label` (Archivo 500 13/18) |
-| Título del módulo | Archivo 700 al 125 %, 26/32 (`title-1` ampliado) |
-| Entradilla | `entradilla` (Newsreader itálica 17/24) |
+| Ruta | `label` (Poppins 500 13/18) |
+| Título del módulo | Poppins 600 24/32 (`title-1` ampliado) |
+| Entradilla | `body` ampliado (Poppins 400 15/22, `text-muted`) |
 | Conteo, último acceso, correos, folios | Plex Mono (`valor-sm`, `folio`) con cero con barra |
 | Encabezados de columna | `label` |
-| Nombre en tabla | Archivo 600 15/22 |
+| Nombre en tabla | Poppins 600 14/20 |
 | Botones | `button` |
 | Título del panel | `title-2` |
 | Ayudas y errores | `caption` |
@@ -55,7 +55,7 @@ Proporción: casi todo es `bg`, `surface` y tinta; el azul aparece en la acción
 
 - Columnas en este orden: casilla · Usuario (iniciales o foto, nombre, correo) · Rol · Divisiones · Último acceso · Estado · acciones.
 - Filas de 56 px (dos líneas); 40 px si solo hay una.
-- Lo que se compara o copia (fechas, correos, folios) en Plex Mono; lo que se lee, en Archivo.
+- Lo que se compara o copia (fechas, correos, folios) en Plex Mono; lo que se lee, en Poppins.
 - Acciones por fila: «Editar» y «Más», visibles al pasar o enfocar la fila y siempre en táctil. Nunca más de dos iconos por fila.
 
 ## Estados
@@ -68,9 +68,11 @@ El color sigue al significado y es el mismo en todos los módulos:
 | Pendiente | `pendiente-soft` / `on-pendiente-soft` | Invitación enviada · En análisis |
 | Requiere atención | `alerta-soft` / `on-alerta-soft` | Suspendido · En revisión |
 | Impedido | `fuera-soft` / `on-fuera-soft` | Bloqueado · Fuera · Rechazada |
-| Fuera de uso | `surface-sunken` / `text-muted` | Dado de baja · Recibida |
+| Fuera de uso o neutro | contorno `border-strong` sobre `surface` / `text-muted` | Dado de baja · Recibida |
 
-Siempre icono + palabra. El pera no es un estado.
+Siempre icono + palabra. El pera no es un estado, y ningún color de división (`div-*`) se usa como estado.
+
+La columna **Divisiones** muestra el azulejo de 16 px de cada división y su nombre en `text`; el color identifica la división, nunca su estado.
 
 ## Interacciones
 

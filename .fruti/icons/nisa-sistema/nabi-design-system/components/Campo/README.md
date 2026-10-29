@@ -1,6 +1,6 @@
 # Campo
 
-Campo de captura. El texto va en Archivo; el valor de un resultado se escribe en Plex Mono, alineado a la derecha, con la unidad fija al final.
+Campo de captura. El texto va en Poppins; el valor de un resultado se escribe en Plex Mono, alineado a la derecha, con la unidad fija al final.
 
 - 40 px de alto, borde «border-control», radio `radius-md`. Etiqueta `label` arriba; ayuda `caption` abajo.
 - Campo de resultado: `datos` a 15 px, `text-align: right`, unidad como sufijo en «text-muted». Acepta solo el número; la unidad la pone el método.

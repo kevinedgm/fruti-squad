@@ -7,8 +7,9 @@ Nabi es el sistema de laboratorio de Nisa Nabani: recepción de muestras, lotes,
 ## Principios
 
 - **El dato manda.** Cada pantalla tiene un valor o un estado protagonista; todo lo demás se subordina. La marca vive en el encabezado, la carga y los documentos, no en las tablas.
-- **Dos voces tipográficas.** Archivo habla (títulos, etiquetas, texto); IBM Plex Mono mide (resultados, límites, unidades, folios). Si un número se mide, se compara o se copia, va en Plex Mono. Ver la sección «Valores y resultados».
+- **Dos voces tipográficas.** Poppins habla (títulos, etiquetas, texto), como en el manual de Nisa Nabani; IBM Plex Mono mide (resultados, límites, unidades, folios). Si un número se mide, se compara o se copia, va en Plex Mono. Ver la sección «Valores y resultados».
 - **Una sola muestra pera.** El pera marca lo que está en curso: la muestra activa, la fila seleccionada, el pocillo del símbolo. Si hay dos cosas en pera, una sobra.
+- **División no es estado.** Los colores secundarios del manual identifican divisiones; los estados tienen colores propios que no se confunden con ninguna.
 - **Nada depende solo del color.** Conforme, fuera de especificación, alerta y pendiente llevan icono y texto, además de color.
 - **Tema claro, nunca blanco sobre blanco.** El lienzo es gris de laboratorio (`bg` #F2F4F8) y las superficies blancas se separan de él con borde y una sombra mínima. El sistema no tiene tema oscuro.
 - **El color sigue al significado.** Un estado tiene el mismo color, icono y texto en todos los módulos. Ver la sección «Módulos».
@@ -24,15 +25,16 @@ Los primarios de Nisa Nabani ordenan la interfaz; los secundarios del laboratori
 - Lienzo y superficies: `bg` (#F2F4F8) es el fondo de la app; `surface` (blanco) para tarjetas, tablas y paneles; `surface-sunken` (#EEF1F6) para cabeceras de tabla y zonas hundidas; `surface-hover` (#F5F7FB) para filas al pasar. Bordes en dos pesos: `border` (#DFE3EC) separa, `border-strong` (#CDD3DF) delimita.
 - `primary` (azul real #052A76) es la acción primaria, los enlaces y el encabezado. `primary-soft` para la fila seleccionada.
 - `pera` (#C2D225) es la muestra: el pocillo del símbolo y la muestra activa. Nunca texto sobre blanco (1.7:1). `pera-soft` para el registro en curso.
-- Estados de resultado: `conforme` (verde del laboratorio #006D53), `fuera` (#B42318), `alerta` (texto #8A4B00; el naranja del laboratorio #F48C06 solo como relleno) y `pendiente` (azul secundario #3D67AE). Cada uno con su fondo `*-soft` y su texto `on-*-soft`.
+- Estados: `conforme` (#2E7D32), `fuera` (#B42318), `alerta` (texto #8A6100, relleno #E9B10A) y `pendiente` (pizarra #475467). Cada uno con su fondo `*-soft` y su texto `on-*-soft`. Ninguno reutiliza un color de división.
+- Divisiones (`div-*`): los ocho secundarios del manual, uno por división (Aguas #00B4D8, Agrícolas #553739, Ambiental #38B000, Alimentos #F48C06, Bebidas #3D67AE, Bebidas de agave #006D53, Farmacia #3D0066, Consultoría #052A76). Solo en el azulejo del icono y en marcas de documento; el nombre siempre en `text`, porque cuatro de ellos no llegan a 4.5:1 como texto. Ver el componente «Divisiones».
 - Contrastes verificados: todo texto ≥ 4.5:1 sobre su fondo (`text-muted` 6.2:1 sobre `bg`, `text-subtle` 4.7:1 sobre `surface-sunken`); `border-control` 3.3:1 sobre `surface`. Por eso los campos viven sobre `surface`, no sobre `bg` (3.0:1).
 
 ## Tipografía
 
-- **Archivo** (`display`, `sans`). Una sola familia variable en dos anchos: 125 % y 700 en `display` y `title-1`, la misma voz del wordmark; ancho normal en todo lo demás. 15 px de cuerpo para pantallas densas.
+- **Poppins** (`display`, `sans`). La tipografía del manual de Nisa Nabani para títulos, subtítulos y textos. 700 solo en `display`; 600 en títulos y botones; 400 en texto. 14 px de cuerpo: su x-height alta lee como 15 px de otras familias.
 - **IBM Plex Mono** (`datos`). Para valores y resultados de análisis. Cifras de ancho fijo, para que las columnas se alineen solas; cero con barra (`font-feature-settings: "zero"`) para no confundir 0 con O; tiene µ, ±, ×, ≤, ≥, ° y superíndices.
-- **Newsreader itálica** (`editorial`). La voz editorial: entradillas y lemas cortos (`entradilla` 17/24, `lema` 22/31). Nunca en controles, tablas ni datos; como máximo una por pantalla.
-- Se cargan de Google Fonts: `Archivo:wdth,wght@62..125,100..900`, `IBM Plex Mono:wght@400;500;600` y `Newsreader:ital,opsz,wght@1,6..72,400..500`.
+- **IBM Plex Mono** se conserva aunque el manual no la incluye: el manual no cubre datos tabulares y Poppins no alinea cifras en columna.
+- Se cargan de Google Fonts: `Poppins:wght@400;500;600;700` e `IBM Plex Mono:wght@400;500;600`.
 
 ## Espacio, forma y elevación
 
