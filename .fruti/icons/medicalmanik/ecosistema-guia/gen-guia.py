@@ -180,7 +180,6 @@ section{{padding:44px 0;border-bottom:1px solid var(--line)}}
 <li><code>tema.json</code>: colores, para quién es cada producto y contrastes medidos.</li></ul>
 <h3>Pendiente</h3><ul class="pend">
 <li>No hay logotipos de nombre por producto convertidos a trazos: hoy el nombre se compone con Urbanist en interfaz.</li>
-<li>El manual del directorio Manik todavía dice Sora + Atkinson; su versión vigente (bienestar) usa Urbanist + Onest. Falta actualizarlo.</li>
 <li>Manik Impulsa (en producción) difiere en tipografía (Ubuntu), color de acción (violeta) y lienzo (gris neutro). Falta decidir si se alinea.</li>
 <li>Confirmar si existe un inicio de sesión único entre apps.</li>
 </ul></section>
