@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="true">
+<title>Planes en Oaxaca: recorrido</title>
+<style>
+/* F0 · mapa del recorrido. Neutro a propósito: se revisa el flujo, no la apariencia. */
+:root{--bg:#f4f4f5;--card:#fff;--line:#d4d4d8;--tx:#18181b;--mut:#52525b;--soft:#e4e4e7;--dk:#27272a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:400 15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;padding:28px max(16px,env(safe-area-inset-left))}
+main{max-width:1200px;margin:0 auto;display:grid;gap:18px}
+h1{font-size:26px;margin:0}
+h2{font-size:13px;letter-spacing:.07em;text-transform:uppercase;color:var(--mut);margin:0 0 10px}
+.lead{margin:0;color:var(--mut);max-width:900px}
+.etapa{background:var(--card);border:1px solid var(--soft);border-radius:16px;padding:18px}
+.num{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:7px;background:var(--dk);color:#fff;font-size:12px;font-weight:700;margin-right:6px;vertical-align:1px}
+.fila{display:grid;gap:10px}
+.c3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.c2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.box{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card);min-width:0}
+.box b{display:block;margin-bottom:2px}
+.box p{margin:0;color:var(--mut);font-size:14px}
+.box.dk{background:var(--dk);color:#fff;border-color:var(--dk)}
+.box.dk p{color:#d4d4d8}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chips span{border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:13px;background:var(--bg)}
+.flecha{text-align:center;color:var(--mut);font-size:20px;line-height:1;margin:-6px 0}
+.ruta{display:grid;gap:6px}
+.paso{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:14px}
+.paso span{border:1px solid var(--line);border-radius:8px;padding:4px 9px;background:var(--bg)}
+.paso i{font-style:normal;color:var(--mut)}
+.paso+.paso{border-top:1px dashed var(--line);padding-top:8px;margin-top:4px}
+.err{border-left:3px solid var(--dk);padding:6px 10px;background:var(--bg);border-radius:0 8px 8px 0;font-size:13.5px;color:var(--tx)}
+.err b{display:inline}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--dk);border-radius:6px;padding:1px 6px;margin-left:4px;vertical-align:1px}
+.neg{border:2px dashed var(--line);background:transparent}
+.nota{font-size:14px;color:var(--mut);margin:0}
+@media (max-width:900px){.c3,.c2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Planes en Oaxaca · mapa del recorrido</h1>
+  <p class="lead">De «no sé qué hacer» a «ya tengo plan», para tres tipos de persona y tres tipos de ficha. Abajo, el lado del negocio: cómo entra a la app y cómo esa entrada abre la venta de CLNDA Booking, Mesanda o inscripciones. Supuesto vigente: registro abierto para negocios, recomendaciones curadas.</p>
+
+  <section class="etapa" aria-labelledby="e1">
+    <h2 id="e1"><span class="num">1</span>Entrada: quién llega y con qué pregunta</h2>
+    <div class="fila c3">
+      <div class="box"><b>Vivo aquí</b><p>«¿Qué hago hoy o este fin?» Abre cada semana; quiere salir de lo de siempre.</p></div>
+      <div class="box"><b>Estoy de visita</b><p>«¿Dónde me quedo y qué no me pierdo?» Pone las fechas de su viaje; español o inglés.</p></div>
+      <div class="box"><b>Voy solo</b><p>«¿A qué me puedo sumar?» Talleres, clases, tours en grupo.</p></div>
+    </div>
+  </section>
+  <div class="flecha" aria-hidden="true">↓</div>
+
+  <section class="etapa" aria-labelledby="e2">
+    <h2 id="e2"><span class="num">2</span>Descubrir: portada curada por intención, no por categoría</h2>
+    <div class="fila c2">
+      <div class="box"><b>Portada</b><p>Colecciones elegidas por tu equipo; cambian cada semana.</p>
+        <div class="chips"><span>Hoy</span><span>Este fin</span><span>Algo nuevo para ti</span><span>Para ir solo</span><span>Hoteles boutique</span><span>Talleres y clases</span></div></div>
+      <div class="box"><b>Afinar</b><p>Sin salir de la portada: zona, presupuesto, momento del día, con quién.</p>
+        <div class="chips"><span>Centro</span><span>$–$$$</span><span>Mañana / tarde / noche</span><span>Solo · pareja · niños</span></div></div>
+    </div>
+    <div class="fila" style="margin-top:10px">
+      <div class="err"><b>Sin resultados:</b> nunca pantalla vacía; sugerir quitar un filtro o la fecha más cercana con planes.</div>
+      <div class="err"><b>«Algo nuevo para ti»:</b> excluye lo marcado como «ya fui»; si todavía no hay historial, muestra lo más reciente en la app.</div>
+    </div>
+  </section>
+  <div class="flecha" aria-hidden="true">↓</div>
+
+  <section class="etapa" aria-labelledby="e3">
+    <h2 id="e3"><span class="num">3</span>Decidir: la ficha y su acción según el tipo</h2>
+    <div class="fila c3">
+      <div class="box"><b>Lugar abierto</b><p>Café, museo, mercado. Sin reserva.</p>
+        <div class="ruta" style="margin-top:8px"><div class="paso"><span>Ficha</span><i>→</i><span>Cómo llegar · horario</span><i>→</i><span>Guardar en «Mis planes»</span></div></div></div>
+      <div class="box"><b>Reservable</b><p>Hotel boutique <span class="tag">CLNDA Booking</span> o restaurante <span class="tag">Mesanda Reservas</span>.</p>
+        <div class="ruta" style="margin-top:8px">
+          <div class="paso"><span>Hotel</span><i>→</i><span>Fechas</span><i>→</i><span>Reserva directa en el sitio del hotel</span><i>→</i><span>Confirmación</span></div>
+          <div class="paso"><span>Restaurante</span><i>→</i><span>Día, hora, personas</span><i>→</i><span>Solicitud pendiente</span><i>→</i><span>Aceptada o rechazada con otro horario</span></div>
+        </div></div>
+      <div class="box"><b>Actividad con cupo</b><p>Taller, clase, tour en grupo. Fecha, lugares, precio, idioma, nivel.</p>
+        <div class="ruta" style="margin-top:8px"><div class="paso"><span>Ficha</span><i>→</i><span>Elegir fecha</span><i>→</i><span>Inscribirse (pago o apartado)</span><i>→</i><span>Confirmación + recordatorio</span></div></div></div>
+    </div>
+    <div class="fila" style="margin-top:10px">
+      <div class="err"><b>Restaurante no responde:</b> la solicitud vence en el plazo que definas y el comensal recibe otras opciones (plazo: pendiente).</div>
+      <div class="err"><b>Sin cupo:</b> lista de espera u otras fechas del mismo taller.</div>
+      <div class="err"><b>Ficha desactualizada:</b> botón «reportar un dato»; los eventos con fecha pasada se ocultan solos.</div>
+    </div>
+  </section>
+  <div class="flecha" aria-hidden="true">↓</div>
+
+  <section class="etapa" aria-labelledby="e4">
+    <h2 id="e4"><span class="num">4</span>Resultado: «ya tengo plan»</h2>
+    <div class="fila c3">
+      <div class="box dk"><b>Mis planes</b><p>Lo guardado, reservado e inscrito, ordenado por fecha. Es la evidencia de que la app funcionó.</p></div>
+      <div class="box"><b>Después</b><p>«¿Fuiste?» → «ya fui» alimenta «Algo nuevo para ti».</p></div>
+      <div class="box"><b>Turista</b><p>Sus planes caben en las fechas del viaje; lo que no cabe, sugiere otro día.</p></div>
+    </div>
+  </section>
+
+  <section class="etapa neg" aria-labelledby="e5">
+    <h2 id="e5">Lado del negocio: cómo entra y qué se le vende</h2>
+    <div class="ruta">
+      <div class="paso"><span>Se registra gratis</span><i>→</i><span>Sube ficha, fotos, talleres y eventos</span><i>→</i><span>Tu equipo decide si entra a colecciones curadas</span><i>→</i><span>Ve visitas, guardados y solicitudes</span></div>
+      <div class="paso"><span>Hotel sin sitio propio</span><i>→</i><span>CLNDA Booking</span></div>
+      <div class="paso"><span>Restaurante</span><i>→</i><span>Mesanda (gratis) + Mesanda Reservas (nube)</span></div>
+      <div class="paso"><span>Taller u operador de tours</span><i>→</i><span>Inscripciones con cupo (producto por definir)</span></div>
+    </div>
+    <p class="nota" style="margin-top:10px">Por qué cierra: el negocio vuelve cada semana a subir eventos; esa visita frecuente es la relación que abre la venta. El riesgo es el inverso: si no llegan visitantes, el negocio deja de subir cosas.</p>
+  </section>
+
+  <section class="etapa" aria-labelledby="e6">
+    <h2 id="e6">Decisiones pendientes que este mapa vuelve visibles</h2>
+    <div class="fila c3">
+      <div class="box"><b>Plazo de respuesta</b><p>Cuánto tiene el restaurante para aceptar una solicitud y qué pasa si no responde.</p></div>
+      <div class="box"><b>Inscripciones</b><p>¿Pago completo, anticipo o apartado sin pago? ¿Quién devuelve si se cancela?</p></div>
+      <div class="box"><b>Arranque</b><p>¿Qué lado empieza: cargar tú los primeros 50 lugares curados, o convencer primero a negocios?</p></div>
+    </div>
+  </section>
+</main>
+</body>
+</html>
