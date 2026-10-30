@@ -13,6 +13,20 @@ def sv(ruta, uid):
     s = s.replace('id="nsg"', f'id="nsg-{uid}"').replace('url(#nsg)', f'url(#nsg-{uid})')
     return s.replace('<svg ', '<svg aria-hidden="true" focusable="false" ', 1)
 NN = re.sub(r'\s(width|height)="[^"]*"', '', sv('nabi-design-system/marca-nisa/nisa-nabani-logo.svg', 'nn'), count=2)
+def marca(a):
+    m = re.sub(r'<title>.*?</title>|\s(role|aria-label)="[^"]*"', '', open(os.path.join(NS, 'nisalab-areas-final', 'svg', a, 'marca.svg')).read().strip())
+    return m.replace('<svg ', '<svg class="am" aria-hidden="true" focusable="false" ', 1)
+AREA = {'aguas': ('Aguas', '#007CA3', marca('aguas')), 'bebidas': ('Bebidas alcohólicas', '#7A5DA9', marca('bebidas')), 'alimentos': ('Alimentos', '#A6552D', marca('alimentos'))}
+# páginas de NisaLab: variante por área (opción B aprobada) o global
+PAG_LAB = {
+  'Recepción': dict(sec='Recepción', titulo='Recepción de muestras', sub='12 muestras hoy · 3 por etiquetar', accion='Registrar muestra', area='aguas'),
+  'Muestras': dict(sec='Muestras', titulo='Muestras', sub='104 en curso · 9 urgentes', accion='Buscar muestra', area='alimentos'),
+  'Captura': dict(sec='Captura', titulo='Captura de resultados', sub='22 parámetros por capturar', accion='Capturar', area='aguas'),
+  'Bitácoras': dict(sec='Bitácoras', titulo='Bitácora', sub='Turno matutino · 8 registros · 1 sin firmar', accion='Nuevo registro', area='bebidas'),
+  'Informes': dict(sec='Informes', titulo='Informes', sub='7 por generar · 3 por firmar', accion='Generar informe', area='aguas'),
+  'Catálogos': dict(sec='Catálogos', titulo='Normas', sub='64 normas · 5 por vencer', accion='Agregar norma', area=None, entradilla='Normas y métodos contra los que se evalúa cada parámetro.'),
+  'Usuarios': dict(sec='Administración', titulo='Usuarios', sub='24 usuarios · 3 invitaciones pendientes', accion='Agregar usuario', area=None, entradilla='Quién entra a NisaLab y qué puede hacer.'),
+}
 APPS = {
  'lab': dict(nombre='NisaLab', desc='Muestras, resultados e informes', side='#052A76', side2='#0A3487', acc='#C2D225', txt='#C9D3EA', logo=sv('nisalab-final/svg/logotipo.svg', 'l'), icono=sv('nisalab-final/svg/app-icon.svg', 'li'),
             nav=[('inbox', 'Recepción'), ('test-tubes', 'Muestras'), ('flask-conical', 'Captura'), ('clipboard-list', 'Bitácoras'), ('file-text', 'Informes'), ('library', 'Catálogos'), ('users', 'Usuarios')],
@@ -24,7 +38,8 @@ APPS = {
                nav=[('house', 'Inicio'), ('layout-template', 'Plantillas'), ('images', 'Mis piezas'), ('calendar-days', 'Fechas'), ('palette', 'Marca'), ('folder', 'Biblioteca')],
                ruta='Plantillas', titulo='Plantillas', sub='Efemérides, avisos, promociones y carruseles', accion='Nueva pieza'),
 }
-NAVJS = {k: dict(nombre=a['nombre'], side=a['side'], side2=a['side2'], acc=a['acc'], txt=a['txt'], ruta=a['ruta'], titulo=a['titulo'], sub=a['sub'], accion=a['accion'],
+AREAJS = {k: dict(nombre=n, color=c, svg=m) for k, (n, c, m) in AREA.items()}
+NAVJS = {k: dict(pags=(PAG_LAB if k == 'lab' else None), nombre=a['nombre'], side=a['side'], side2=a['side2'], acc=a['acc'], txt=a['txt'], ruta=a['ruta'], titulo=a['titulo'], sub=a['sub'], accion=a['accion'],
                  nav=[(ic(i), t) for i, t in a['nav']]) for k, a in APPS.items()}
 logos = ''.join(f'<span class="lg" data-app="{k}"{"" if k == "lab" else " hidden"}>{a["logo"]}</span>' for k, a in APPS.items())
 switch = ''.join(f'<li><button type="button" class="sw-it" data-go="{k}" role="menuitemradio" aria-checked="{"true" if k == "lab" else "false"}"><span class="sw-ic">{a["icono"]}</span><span><b>{a["nombre"]}</b><small>{a["desc"]}</small></span></button></li>' for k, a in APPS.items())
@@ -66,6 +81,9 @@ button{{font:inherit;color:inherit;cursor:pointer}}.i{{width:20px;height:20px;fi
 .app.mini .ni span,.app.mini .ap span{{display:none}}.app.mini .ni{{justify-content:center;padding:10px}}
 .work{{overflow:auto;padding:24px max(16px,env(safe-area-inset-right,0px)) 40px 28px;min-width:0}}
 .ruta{{font:500 13px var(--sans);color:var(--mu)}}.wh{{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:20px}}.wh h1{{font:600 24px/32px var(--sans);margin:2px 0 0}}.wh p{{color:var(--mu);font:400 13px var(--mono);margin:4px 0 0}}
+.mh{{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 24px;align-items:end;margin-bottom:20px}}.mh .ruta{{grid-column:1/-1}}.mh h1{{font:600 24px/32px var(--sans);margin:0}}.mh .ent{{color:var(--mu);margin:2px 0 0}}.mh .cnt{{color:var(--mu);font:400 13px var(--mono);margin:6px 0 0}}
+.mh.area{{grid-template-columns:auto minmax(0,1fr) auto;column-gap:16px;border-bottom:3px solid var(--ac);padding-bottom:16px}}.mh.area .ruta{{grid-column:2/-1}}.mh.area .am{{grid-row:2;width:52px;height:52px;align-self:center}}.mh h1 .an{{font-weight:400;color:var(--mu)}}
+@media (max-width:640px){{.mh,.mh.area{{grid-template-columns:auto minmax(0,1fr)}}.mh:not(.area){{grid-template-columns:1fr}}.mh .pri{{grid-column:1/-1;justify-self:start}}.mh.area .am{{width:40px;height:40px}}}}
 .pri{{height:40px;border:0;border-radius:10px;background:var(--side);color:#fff;font-weight:600;padding:0 16px;box-shadow:0 6px 14px -8px rgba(20,27,51,.5)}}
 .cards{{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}}.ph{{background:var(--sf);border:1px solid var(--ln);border-radius:14px;padding:18px;min-height:120px;display:grid;gap:10px;align-content:start}}
 .ph i{{display:block;height:10px;border-radius:5px;background:#E7EAF0}}.ph i:nth-child(1){{width:40%;height:12px;background:#D9DEE8}}.ph i:nth-child(3){{width:70%}}.big{{grid-column:1/-1;min-height:220px}}
@@ -96,10 +114,20 @@ button{{font:inherit;color:inherit;cursor:pointer}}.i{{width:20px;height:20px;fi
 const A={json.dumps(NAVJS, ensure_ascii=False)},S={{settings:{json.dumps(ic('settings'))},help:{json.dumps(ic('circle-help'))}}};
 const app=document.getElementById('app'),side=document.getElementById('side'),work=document.getElementById('work'),root=document.documentElement;
 let actual='lab';
+const AR={json.dumps(AREAJS, ensure_ascii=False)};let pag=null;
+function encabezado(a,k){{
+ if(k==='lab'){{const p=a.pags[pag],ar=p.area&&AR[p.area];
+  if(ar)return `<header class="mh area" style="--ac:${{ar.color}}"><span class="ruta">${{p.sec}} / ${{ar.nombre}}</span>${{ar.svg}}<div><h1>${{p.titulo}} <span class="an">${{ar.nombre}}</span></h1><p class="cnt">${{p.sub}}</p></div><button class="pri">${{p.accion}}</button></header>`;
+  return `<header class="mh"><span class="ruta">${{p.sec}} / ${{p.titulo}}</span><div><h1>${{p.titulo}}</h1>${{p.entradilla?`<p class="ent">${{p.entradilla}}</p>`:''}}<p class="cnt">${{p.sub}}</p></div><button class="pri">${{p.accion}}</button></header>`;}}
+ return `<header class="mh"><span class="ruta">${{a.nombre}} / ${{a.ruta}}</span><div><h1>${{a.titulo}}</h1><p class="cnt">${{a.sub}}</p></div><button class="pri">${{a.accion}}</button></header>`;}}
+function trabajo(){{const a=A[actual];const p=actual==='lab'?a.pags[pag]:null;const nota=actual==='lab'?(p.area?'Encabezado por área (opción B aprobada): marca del área, nombre del área junto al título y línea de su color. Prueba Catálogos o Usuarios para ver la variante global.':'Encabezado global: sin marca ni línea de área. Prueba Recepción o Bitácoras para ver la variante por área.'):'Área de trabajo: aquí vive cada pantalla de '+a.nombre+'. La carcasa no cambia; solo el logo, el color del menú lateral, el acento y las secciones.';
+ work.innerHTML=encabezado(a,actual)+`<div class="cards"><div class="ph"><i></i><i></i><i></i></div><div class="ph"><i></i><i></i><i></i></div><div class="ph"><i></i><i></i><i></i></div><div class="ph big"><i></i><i></i><i></i></div></div><p class="cap">${{nota}}</p>`;}}
 function pinta(k){{const a=A[k];actual=k;root.style.setProperty('--side',a.side);root.style.setProperty('--side2',a.side2);root.style.setProperty('--acc',a.acc);root.style.setProperty('--side-tx',a.txt);
  document.querySelectorAll('.lg').forEach(l=>l.hidden=l.dataset.app!==k);document.querySelectorAll('.sw-it').forEach(b=>b.setAttribute('aria-checked',b.dataset.go===k));
- side.innerHTML=`<div class="ap"><span>${{a.nombre}}</span></div>`+a.nav.map(([i,t],n)=>`<a href="#" class="ni"${{n===(k==='studio'?1:0)?' aria-current="page"':''}} title="${{t}}">${{i}}<span>${{t}}</span></a>`).join('')+`<div class="sp"></div><a href="#" class="ni" title="Ayuda">${{S.help}}<span>Ayuda</span></a><a href="#" class="ni" title="Configuración">${{S.settings}}<span>Configuración</span></a>`;
- work.innerHTML=`<div class="wh"><div><span class="ruta">${{a.nombre}} / ${{a.ruta}}</span><h1>${{a.titulo}}</h1><p>${{a.sub}}</p></div><button class="pri">${{a.accion}}</button></div><div class="cards"><div class="ph"><i></i><i></i><i></i></div><div class="ph"><i></i><i></i><i></i></div><div class="ph"><i></i><i></i><i></i></div><div class="ph big"><i></i><i></i><i></i></div></div><p class="cap">Área de trabajo: aquí vive cada pantalla de ${{a.nombre}}. La carcasa no cambia; solo el logo, el color del menú lateral, el acento y las secciones.</p>`;}}
+ const ini=k==='studio'?1:0;pag=k==='lab'?a.nav[0][1]:null;
+ side.innerHTML=`<div class="ap"><span>${{a.nombre}}</span></div>`+a.nav.map(([i,t],n)=>`<a href="#" class="ni" data-t="${{t}}"${{n===ini?' aria-current="page"':''}} title="${{t}}">${{i}}<span>${{t}}</span></a>`).join('')+`<div class="sp"></div><a href="#" class="ni" title="Ayuda">${{S.help}}<span>Ayuda</span></a><a href="#" class="ni" title="Configuración">${{S.settings}}<span>Configuración</span></a>`;
+ side.querySelectorAll('.ni[data-t]').forEach(el=>el.addEventListener('click',e=>{{e.preventDefault();side.querySelectorAll('.ni').forEach(x=>x.removeAttribute('aria-current'));el.setAttribute('aria-current','page');if(actual==='lab'&&A.lab.pags[el.dataset.t]){{pag=el.dataset.t;trabajo();}}if(matchMedia('(max-width:860px)').matches){{app.classList.remove('abierto');}}}}));
+ trabajo();}}
 function pop(btn,el,abrir){{const on=abrir??el.hidden;el.hidden=!on;btn.setAttribute('aria-expanded',on);if(on){{el.querySelector('button,a')?.focus();}}}}
 const sw=document.getElementById('sw'),swp=document.getElementById('sw-pop'),us=document.getElementById('us'),usp=document.getElementById('us-pop');
 sw.addEventListener('click',()=>{{pop(us,usp,false);pop(sw,swp);}});us.addEventListener('click',()=>{{pop(sw,swp,false);pop(us,usp);}});

@@ -18,6 +18,12 @@ Prototipo: `shell.html` (regenerar con `python3 gen.py <íconos lucide>`).
 
 La acción principal del área de trabajo usa `--side`.
 
+## Encabezado de página en NisaLab
+El área de trabajo usa EncabezadoModulo (design system de NisaLab):
+- **Por área (opción B aprobada):** Recepción (Aguas), Muestras (Alimentos), Captura (Aguas), Bitácoras (Bebidas alcohólicas), Informes (Aguas): marca del área, nombre del área junto al título y línea de 3 px en su color.
+- **Global:** Catálogos (Normas) y Usuarios: sin marca ni línea, con entradilla.
+NisaData y NisaStudio usan solo la variante global.
+
 ## Pendiente
 - Contenido real de cada pantalla (aquí son marcadores).
 - Comportamiento de la búsqueda global y de los avisos.
