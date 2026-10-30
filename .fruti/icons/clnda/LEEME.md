@@ -62,3 +62,7 @@ La marca nace de cómo se escribe el nombre y del gesto del código; el color de
 ## Final (usuario: «me gustan B y C»)
 
 C es la regla (símbolo índigo en ambos modos) y B la variante permitida sobre tinta (llave lima en avatar, app icon y portadas). Paquete en `final/` (ver `final/LEEME.md`), guía de marca: https://claude.ai/artifact/GjzYnJQJAAh8tbqEoXuTQj (`guia/gen-guia.py`).
+
+## Productos (2026-10-30)
+
+Familia «CLNDA + palabra» para reservas de hotel, tienda en línea y restaurantes; la marca del producto la ve solo el negocio. Ronda 1 de nombres en `productos-nombres-r1/`.
