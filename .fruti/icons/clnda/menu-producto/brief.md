@@ -26,6 +26,20 @@ El **mesero** necesita **tomar la orden de cada comensal y enviarla a cocina** e
 ## Flujo central (propuesta)
 plano de mesas (libre / ocupada / por cobrar) → tocar mesa → comensales → categoría → platillo (foto) → modificadores (sin cebolla, término) → enviar a cocina → … → cuenta (por comensal o junta) → cobrar o **cargar a la habitación** (si el restaurante es de un hotel con CLNDA Booking).
 
+## Plano y estados de mesa (usuario, 2026-10-30)
+- **Modo edición** (dueño/gerente): dibujar el plano del restaurante y colocar mesas (forma, número, sillas, zona).
+- **Modo servicio** (mesero): tocar una mesa; vacía → iniciar comanda; ocupada → seguir agregando a la orden; al pedir la cuenta, todo ya está concentrado en la mesa.
+
+Estados de mesa (propuesta):
+| Estado | Cómo entra | Qué hace el toque |
+|---|---|---|
+| Libre | inicio, o tras cobrar | iniciar comanda (comensales) |
+| Reservada | reserva para una hora | ver reserva; sentar → ocupada |
+| Ocupada | comanda abierta | abrir orden y agregar |
+| Cuenta pedida | el mesero la pide | ver cuenta, dividir, cobrar |
+| Por limpiar (opcional) | tras cobrar | marcar libre |
+Excepciones: cambiar de mesa, juntar mesas, cancelar un platillo ya enviado, cuenta dividida por comensal.
+
 ## Superficies probables
 App del mesero · pantalla de cocina/barra · caja/cuenta · panel del dueño (menú con fotos, mesas, reportes).
 
