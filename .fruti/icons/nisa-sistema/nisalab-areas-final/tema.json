@@ -1,0 +1,59 @@
+{
+  "sistema": "NisaLab",
+  "patron_nombre": "«Área NisaLab» (por ejemplo, «Aguas NisaLab»)",
+  "paleta": {
+    "metodo": "OKLCH con luminosidad 0.54 e intensidad 0.12 iguales; solo cambia el tono, fuera del rango del pera (100–125°)",
+    "areas": {
+      "aguas": {
+        "nombre": "Aguas",
+        "hex": "#007CA3",
+        "token": "area-aguas",
+        "blanco_encima": 4.8
+      },
+      "agricolas": {
+        "nombre": "Agrícolas",
+        "hex": "#946400",
+        "token": "area-agricolas",
+        "blanco_encima": 5.1
+      },
+      "ambiental": {
+        "nombre": "Ambiental",
+        "hex": "#2F8247",
+        "token": "area-ambiental",
+        "blanco_encima": 4.8
+      },
+      "alimentos": {
+        "nombre": "Alimentos",
+        "hex": "#A6552D",
+        "token": "area-alimentos",
+        "blanco_encima": 5.3
+      },
+      "bebidas": {
+        "nombre": "Bebidas",
+        "hex": "#7A5DA9",
+        "token": "area-bebidas",
+        "blanco_encima": 5.3
+      },
+      "agave": {
+        "nombre": "Bebidas de agave",
+        "hex": "#008478",
+        "token": "area-agave",
+        "blanco_encima": 4.6
+      },
+      "farmacia": {
+        "nombre": "Farmacia",
+        "hex": "#A14E78",
+        "token": "area-farmacia",
+        "blanco_encima": 5.4
+      },
+      "consultoria": {
+        "nombre": "Consultoría",
+        "hex": "#4C6BB4",
+        "token": "area-consultoria",
+        "blanco_encima": 5.2
+      }
+    }
+  },
+  "iconos": "Dibujados en retícula de 40, formas redondas y blancas, grosor de trazo 3–4",
+  "tamano_minimo_px": 16
+}
