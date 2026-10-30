@@ -33,6 +33,12 @@ Consecuencias (inferencia):
   4. Eventos con fecha: enviarlos con al menos 48 h de anticipación para que la revisión no los deje fuera.
   5. El panel valida antes de enviar (orientación y resolución de fotos, extensión de textos, mayúsculas sostenidas): menos rechazos, menos carga del equipo.
   6. Capacidad del equipo: ¿12–24 h también en fin de semana?
+  **Decisiones del usuario (2026-10-30):**
+  - En revisión, el público sigue viendo la versión publicada.
+  - Rechazo: el negocio hace los cambios y reenvía.
+  - **Inmediato** (sin moderación): modificaciones a talleres, eventos u horarios ya publicados.
+  - **Moderado** (12–24 h): evento nuevo, fotos nuevas, cambio de descripción del establecimiento y similares.
+  - Hueco detectado (propuesta): la regla debe ser **por campo, no por objeto**. Inmediatos: fecha, hora, cupo, precio, cancelación, horario, «cerrado hoy». Moderados aunque sean de un evento existente: título, texto y fotos. Si no, cambiar la foto o el texto de un evento ya aprobado se saltaría la moderación.
 
 ## Fases (usuario, 2026-10-30)
 - **Fase 1 · solo información.** Ficha de cada negocio: descripción, galería, ubicación, horario, contacto y redes sociales. Descubrir (portada curada, filtros) y guardar se mantienen. Sin reservas ni inscripciones: la acción de la ficha es **contactar** (WhatsApp, llamar, redes, cómo llegar).
