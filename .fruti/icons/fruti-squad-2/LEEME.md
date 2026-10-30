@@ -41,3 +41,14 @@ Usuario: «me gustarían más abstractas, no literales». La fruta solo como pis
 - B Una línea: un trazo por agente: serpentina (Kiwi), compuerta (Lima), espiral (Coco), curva que une dos extremos (Bruno), cinta doblada (Mora); squad = lazo continuo.
 - C Formas suaves: óvalo, triángulo suave, cuadro redondo, cápsula, trébol; squad = superposición que mezcla colores (se ensucia en el centro).
 Colores: Kiwi #2f9e4f, Lima #a8c81e, Coco #c97a3a, Bruno #2f6fe0, Mora #7b3fa0, squad #18181b.
+
+## Ronda 7 · Átomos por habilidad (`r7/habilidades.html`)
+Usuario: «sí, pero los colores no me gustan; trabajemos sobre la A; propuesta según lo que hace cada integrante». Fuente: responsabilidades en el README de `fruti-squad-kiro`. Piezas: punto (evidencia), enlace (barra), anillo. En tinta.
+| Integrante | Variante 1 | Variante 2 |
+|---|---|---|
+| Fruti Squad | Núcleo (centro + cinco) | Relevo (cinco etapas, la última mayor) |
+| Kiwi | Jerarquía (1-2-3 decreciente) | Regiones (una principal, dos secundarias) |
+| Lima | Compuerta (tres llegan, pasa uno) | Ciclo de vida (local → reutilizable → sistema en anillo) |
+| Coco | Hallazgo (retícula + lente sobre el desviado) | Medición (base + regla) |
+| Bruno | Interruptor (estado que cambia) | Foco (anillo de foco punteado) |
+| Mora | Índice (punto + entrada) | Espejo (código ↔ documentación) |
