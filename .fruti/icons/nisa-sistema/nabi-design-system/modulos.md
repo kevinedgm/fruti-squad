@@ -1,6 +1,6 @@
 # Módulos
 
-Cómo se arma una pantalla de módulo en Nabi (Usuarios, Clientes, Métodos, Equipos): qué color va en cada zona, qué voz tipográfica, dónde viven las acciones, cómo se muestran los estados y cómo responden las interacciones. El ejemplo vivo es el componente `ModuloUsuarios`.
+Cómo se arma una pantalla de módulo en NisaLab (Usuarios, Clientes, Métodos, Equipos): qué color va en cada zona, qué voz tipográfica, dónde viven las acciones, cómo se muestran los estados y cómo responden las interacciones. El ejemplo vivo es el componente `ModuloUsuarios`.
 
 ## Anatomía
 
@@ -20,7 +20,7 @@ Cómo se arma una pantalla de módulo en Nabi (Usuarios, Clientes, Métodos, Equ
 | Encabezado de tabla | `surface-sunken` | `text-muted` | `border` abajo |
 | Fila en hover | `surface-hover` | `text` | — |
 | Fila seleccionada | `primary-soft` | `text` | casilla marcada |
-| Registro en curso | — | — | un pocillo `pera` junto al nombre (uno por pantalla) |
+| Registro en curso | — | — | un punto `pera` junto al nombre (uno por pantalla) |
 | Campos | `surface` | `text`; placeholder `text-subtle` | `border-control` + `shadow-inset`; foco `primary` + anillo `primary-soft` |
 | Filtro activo | `primary-soft` | `primary` | — |
 | Estados | `*-soft` | `on-*-soft` + icono | — |
@@ -70,9 +70,9 @@ El color sigue al significado y es el mismo en todos los módulos:
 | Impedido | `fuera-soft` / `on-fuera-soft` | Bloqueado · Fuera · Rechazada |
 | Fuera de uso o neutro | contorno `border-strong` sobre `surface` / `text-muted` | Dado de baja · Recibida |
 
-Siempre icono + palabra. El pera no es un estado, y ningún color de división (`div-*`) se usa como estado.
+Siempre icono + palabra. El pera no es un estado, y ningún color de área (`area-*`) se usa como estado.
 
-La columna **Divisiones** muestra el azulejo de 16 px de cada división y su nombre en `text`; el color identifica la división, nunca su estado.
+La columna **Divisiones** muestra el ícono de área de 16 px y su nombre en `text`; el color identifica el área, nunca su estado.
 
 ## Interacciones
 
@@ -82,7 +82,7 @@ La columna **Divisiones** muestra el azulejo de 16 px de cada división y su nom
 | Seleccionar | `primary-soft`; aparece la barra de lote con el conteo |
 | Filtrar | El chip pasa a `primary-soft`; el conteo y el pie se actualizan; si no hay resultados, estado vacío con «Limpiar filtros» |
 | Ordenar | Flecha en la columna activa y `aria-sort` |
-| Abrir formulario | Panel lateral con `shadow-overlay`; el registro en curso recibe el pocillo pera; Esc o «Cerrar» devuelven el foco |
+| Abrir formulario | Panel lateral con `shadow-overlay`; el registro en curso recibe el punto pera; Esc o «Cerrar» devuelven el foco |
 | Guardar | Botón ocupado (sin doble envío); al terminar, aviso con «Deshacer» si se puede revertir |
 | Botón primario | Hover: 1 px hacia arriba y sombra mayor; presionado: vuelve a su lugar |
 

@@ -1,35 +1,31 @@
 # Marca
 
-Nabi es marca de familia de Nisa Nabani. Su símbolo es una placa de 4 × 4 pocillos: los llenos dibujan la N, los vacíos quedan como puntos y la muestra pera ocupa el pocillo superior derecho.
+NisaLab es el sistema de laboratorio de Nisa Nabani. Se escribe «NisaLab», junto y con dos mayúsculas; como respaldo, «de Nisa Nabani».
 
-![Lockup](/_blob/7a1dbf9ca2424cafb0c2164b6b1182cf)
+![NisaLab](/_blob/d3c111446e11f8a7211dc4016c7cd0ba)
+
+## Símbolo: Colonia
+
+Cuatro células que casi se tocan, con la misma separación entre ellas y una proporción fija (1.0 · 1.7 · 2.9 · 3.7). Una sola en pera, arriba a la derecha: la que creció. Lo vivo que el laboratorio detecta, cuenta y certifica.
 
 ## Piezas
 
 | Pieza | Uso | Archivo |
 |---|---|---|
-| Símbolo | Encabezado, carga, sellos | `simbolo.svg` · `simbolo-tinta.svg` · `simbolo-blanco.svg` |
-| Favicon | 16–32 px: solo la N, sin vacíos | `favicon.svg` |
-| Wordmark | «nabi» dibujado en trazos anchos (afín a la versal ancha del logo de Nisa Nabani), pocillo pera en la i. Es dibujo, no fuente de interfaz | `wordmark.svg` · `wordmark-blanco.svg` |
-| Lockup horizontal | Barra superior del sistema | `lockup-h.svg` · `lockup-h-blanco.svg` |
-| De familia | Certificados, documentos para clientes, portada | `lockup-familia.svg` |
-| Vertical | Pantalla de acceso | `lockup-v.svg` |
-| App icon | PWA | `app-icon.svg` · `app-icon-maskable.svg` · `icon-512.png` |
-| Carga | Indicador animado | `carga.svg` · `carga.gif` |
+| Símbolo | Encabezado, carga, sellos | `simbolo.svg` · `simbolo-1tinta.svg` · `simbolo-blanco.svg` |
+| Logotipo | «Nisa» en Poppins 700 y «Lab» en 400, a trazos | `logotipo.svg` · `logotipo-blanco.svg` |
+| Con respaldo | Certificados, documentos para clientes, portada | `logotipo-respaldo.svg` |
+| Vertical | Pantalla de acceso | `logotipo-vertical.svg` |
+| Ícono de app | PWA | `app-icon.svg` · `app-icon-maskable.svg` · `app-icon-512.png` |
+| Favicon | 16–32 px | `favicon.svg` |
+
+## Áreas
+
+Cada división es «Área NisaLab» (por ejemplo, «Aguas NisaLab»): la célula que creció toma el color y el ícono del área. Ver el componente «Areas» y el grupo de assets «Áreas».
 
 ## Reglas
 
-- Área de respeto: un pocillo alrededor de toda pieza.
-- No mover, quitar ni añadir pocillos; una sola muestra pera.
-- En certificados y documentos para clientes, siempre el lockup de familia.
-
-## Nisa Nabani
-
-Nabi es producto de Nisa Nabani y conserva su símbolo propio. La marca madre se rige por su manual (2026):
-
-- **Logo:** la N en onda con el matraz, en azul real y pera, junto a «NISA NABANI» en versal ancha. Va en certificados, membretes y documentos para clientes, nunca dentro de la interfaz de trabajo.
-- **Lema:** «Calidad para el desarrollo empresarial.» con el punto en pera.
-- **Divisiones:** Aguas, Agrícolas, Ambiental, Alimentos, Bebidas, Bebidas de agave, Farmacia y Consultoría. Cada una tiene color e icono propios (tokens `div-*`, componente «Divisiones»). En el azulejo de Bebidas de agave el pera es fondo de marca, no la muestra en curso.
-- **Membrete:** folio con prefijo NN + código de división (ejemplo del manual: NNAG-1254) y fecha en mayúsculas.
-
-Pendiente: el manual no da la tabla completa de códigos de división para los folios (el ejemplo NNAG aparece en Aguas y en Agrícolas).
+- El racimo es fijo: no se rota, no se reacomoda, no se le quitan ni agregan células.
+- Una sola célula pera. El pera nunca es texto.
+- Área de respeto: el ancho de la célula grande. Mínimo 16 px en pantalla y 6 mm impreso.
+- El logo de Nisa Nabani y el de NisaLab no se unen en una sola pieza: NisaLab lleva «de Nisa Nabani».

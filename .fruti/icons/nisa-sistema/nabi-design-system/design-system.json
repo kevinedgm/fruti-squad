@@ -3,116 +3,208 @@
   "assetGroups": {
     "Marca": {
       "files": {
-        "app-icon-maskable.svg": {
-          "blob": "276c10cf51876d764f20ef3c8e66cfce",
-          "name": "app-icon-maskable.svg",
-          "size": 908,
+        "simbolo.svg": {
+          "blob": "efa38b67256d251260383b6a1edf49e2",
+          "name": "simbolo.svg",
+          "size": 348,
           "type": "image/svg+xml"
         },
-        "app-icon.svg": {
-          "blob": "33764acad863aca77506517a2459fa3f",
-          "name": "app-icon.svg",
-          "size": 909,
-          "type": "image/svg+xml"
-        },
-        "carga.gif": {
-          "blob": "6358d06d47e59e7d479475ad1ab7587b",
-          "name": "carga.gif",
-          "size": 22337,
-          "type": "image/gif"
-        },
-        "carga.svg": {
-          "blob": "53e142ecc52182e4225c1419d007b881",
-          "name": "carga.svg",
-          "size": 1397,
-          "type": "image/svg+xml"
-        },
-        "favicon.svg": {
-          "blob": "89cacadb924feccc38c722f27cd59acb",
-          "name": "favicon.svg",
-          "size": 696,
-          "type": "image/svg+xml"
-        },
-        "icon-512.png": {
-          "blob": "a2ea7d4a10b50b57e6df7e98cb5071c4",
-          "name": "icon-512.png",
-          "size": 21252,
-          "type": "image/png"
-        },
-        "lockup-familia.svg": {
-          "blob": "3534ef111e16fe05c60c372a3d61e030",
-          "name": "lockup-familia.svg",
-          "size": 9813,
-          "type": "image/svg+xml"
-        },
-        "lockup-h-blanco.svg": {
-          "blob": "800f980fbd3cd25994500a3bb7fbc154",
-          "name": "lockup-h-blanco.svg",
-          "size": 4317,
-          "type": "image/svg+xml"
-        },
-        "lockup-h.svg": {
-          "blob": "7a1dbf9ca2424cafb0c2164b6b1182cf",
-          "name": "lockup-h.svg",
-          "size": 4317,
-          "type": "image/svg+xml"
-        },
-        "lockup-v.svg": {
-          "blob": "0f6d988fd2e293d334cf7415f10cec81",
-          "name": "lockup-v.svg",
-          "size": 4690,
+        "simbolo-1tinta.svg": {
+          "blob": "61d4ab6888306a9eccb2cc588d3282de",
+          "name": "simbolo-1tinta.svg",
+          "size": 368,
           "type": "image/svg+xml"
         },
         "simbolo-blanco.svg": {
-          "blob": "5bc4939f9aa0f943ed74a3cd87e923f7",
+          "blob": "76247be0680bcf4132595ade4311e796",
           "name": "simbolo-blanco.svg",
-          "size": 836,
+          "size": 348,
           "type": "image/svg+xml"
         },
-        "simbolo-tinta.svg": {
-          "blob": "1eb1f4383665a117487d34a24468c339",
-          "name": "simbolo-tinta.svg",
-          "size": 836,
+        "logotipo.svg": {
+          "blob": "d3c111446e11f8a7211dc4016c7cd0ba",
+          "name": "logotipo.svg",
+          "size": 4518,
           "type": "image/svg+xml"
         },
-        "simbolo.svg": {
-          "blob": "18a1e1a03e437685b3bf82bda6037aa1",
-          "name": "simbolo.svg",
-          "size": 836,
+        "logotipo-blanco.svg": {
+          "blob": "9d19dcb002c4cb523e27eb9d754f5641",
+          "name": "logotipo-blanco.svg",
+          "size": 4518,
           "type": "image/svg+xml"
         },
-        "wordmark-blanco.svg": {
-          "blob": "6b1d53d371f0719468c0b6e23e8034f2",
-          "name": "wordmark-blanco.svg",
-          "size": 3697,
+        "logotipo-respaldo.svg": {
+          "blob": "c98fb7a71514f449f585b481e0c7b6a8",
+          "name": "logotipo-respaldo.svg",
+          "size": 13638,
           "type": "image/svg+xml"
         },
-        "wordmark.svg": {
-          "blob": "ebe63b37f78d79fa05e9bac3247e4e2a",
-          "name": "wordmark.svg",
-          "size": 3697,
+        "logotipo-vertical.svg": {
+          "blob": "ea58d0b758df2e2fadcb53a538a398d9",
+          "name": "logotipo-vertical.svg",
+          "size": 5334,
           "type": "image/svg+xml"
+        },
+        "app-icon.svg": {
+          "blob": "c096ed0b26b300a0567711da2b28df0b",
+          "name": "app-icon.svg",
+          "size": 408,
+          "type": "image/svg+xml"
+        },
+        "app-icon-maskable.svg": {
+          "blob": "378de6db6deb53203e1a9b1e4203e9e0",
+          "name": "app-icon-maskable.svg",
+          "size": 407,
+          "type": "image/svg+xml"
+        },
+        "favicon.svg": {
+          "blob": "cba735febc4f813634975c8f4c7a5f88",
+          "name": "favicon.svg",
+          "size": 348,
+          "type": "image/svg+xml"
+        },
+        "app-icon-512.png": {
+          "blob": "17dc8107638e4f2e267a952687451346",
+          "name": "app-icon-512.png",
+          "size": 10230,
+          "type": "image/png"
         }
       },
       "name": "Marca",
       "order": [
         "simbolo.svg",
-        "simbolo-tinta.svg",
+        "simbolo-1tinta.svg",
         "simbolo-blanco.svg",
-        "wordmark.svg",
-        "wordmark-blanco.svg",
-        "lockup-h.svg",
-        "lockup-h-blanco.svg",
-        "lockup-familia.svg",
-        "lockup-v.svg",
-        "favicon.svg",
+        "logotipo.svg",
+        "logotipo-blanco.svg",
+        "logotipo-respaldo.svg",
+        "logotipo-vertical.svg",
         "app-icon.svg",
         "app-icon-maskable.svg",
-        "carga.svg",
-        "icon-512.png",
-        "carga.gif"
+        "favicon.svg",
+        "app-icon-512.png"
       ],
       "tile": "m"
+    },
+    "Áreas": {
+      "files": {
+        "aguas-marca.svg": {
+          "blob": "c161f80533fd08be3854fd58f9b14be0",
+          "name": "aguas-marca.svg",
+          "size": 794,
+          "type": "image/svg+xml"
+        },
+        "agricolas-marca.svg": {
+          "blob": "0e56f75275e0d03592aa77f488af2d14",
+          "name": "agricolas-marca.svg",
+          "size": 1104,
+          "type": "image/svg+xml"
+        },
+        "ambiental-marca.svg": {
+          "blob": "2c7ed8ff58b2167287864a13fa953fa0",
+          "name": "ambiental-marca.svg",
+          "size": 570,
+          "type": "image/svg+xml"
+        },
+        "alimentos-marca.svg": {
+          "blob": "3bffda4ca48d2242c10d0f78b33b1b15",
+          "name": "alimentos-marca.svg",
+          "size": 673,
+          "type": "image/svg+xml"
+        },
+        "bebidas-marca.svg": {
+          "blob": "afadbc855c76eb0d1136f3c344fc9ece",
+          "name": "bebidas-marca.svg",
+          "size": 595,
+          "type": "image/svg+xml"
+        },
+        "agave-marca.svg": {
+          "blob": "9815e62b68849287c3deae77cbecfde8",
+          "name": "agave-marca.svg",
+          "size": 920,
+          "type": "image/svg+xml"
+        },
+        "farmacia-marca.svg": {
+          "blob": "2ad6c7abdcc9916822d5ad43bc6155a7",
+          "name": "farmacia-marca.svg",
+          "size": 613,
+          "type": "image/svg+xml"
+        },
+        "consultoria-marca.svg": {
+          "blob": "025258e8e6ccf6e842a755b8ae33b941",
+          "name": "consultoria-marca.svg",
+          "size": 702,
+          "type": "image/svg+xml"
+        },
+        "aguas-icono.svg": {
+          "blob": "1dccb369a174271b0f6ee8bbea2c62c3",
+          "name": "aguas-icono.svg",
+          "size": 594,
+          "type": "image/svg+xml"
+        },
+        "agricolas-icono.svg": {
+          "blob": "68806942cf03d2d62ec9415c3d9058eb",
+          "name": "agricolas-icono.svg",
+          "size": 904,
+          "type": "image/svg+xml"
+        },
+        "ambiental-icono.svg": {
+          "blob": "b72df357a05d752bda0976372400fba3",
+          "name": "ambiental-icono.svg",
+          "size": 370,
+          "type": "image/svg+xml"
+        },
+        "alimentos-icono.svg": {
+          "blob": "817b9466943a80f09807561d3bb1abd1",
+          "name": "alimentos-icono.svg",
+          "size": 473,
+          "type": "image/svg+xml"
+        },
+        "bebidas-icono.svg": {
+          "blob": "db94d4a07743d54a20ae602fa3e93b70",
+          "name": "bebidas-icono.svg",
+          "size": 395,
+          "type": "image/svg+xml"
+        },
+        "agave-icono.svg": {
+          "blob": "69a43f77eb35d3980afecf3477d2a0e4",
+          "name": "agave-icono.svg",
+          "size": 720,
+          "type": "image/svg+xml"
+        },
+        "farmacia-icono.svg": {
+          "blob": "adf052f9267d6cc5208446f9851b15b2",
+          "name": "farmacia-icono.svg",
+          "size": 413,
+          "type": "image/svg+xml"
+        },
+        "consultoria-icono.svg": {
+          "blob": "a7bbeb85c77062fc1b47ea39bd6b9f62",
+          "name": "consultoria-icono.svg",
+          "size": 502,
+          "type": "image/svg+xml"
+        }
+      },
+      "name": "Áreas",
+      "order": [
+        "aguas-marca.svg",
+        "agricolas-marca.svg",
+        "ambiental-marca.svg",
+        "alimentos-marca.svg",
+        "bebidas-marca.svg",
+        "agave-marca.svg",
+        "farmacia-marca.svg",
+        "consultoria-marca.svg",
+        "aguas-icono.svg",
+        "agricolas-icono.svg",
+        "ambiental-icono.svg",
+        "alimentos-icono.svg",
+        "bebidas-icono.svg",
+        "agave-icono.svg",
+        "farmacia-icono.svg",
+        "consultoria-icono.svg"
+      ],
+      "tile": "s"
     }
   },
   "blobs": {},
@@ -125,17 +217,18 @@
     "sections": []
   },
   "groups": [
-    "Marca"
+    "Marca",
+    "Áreas"
   ],
   "lastChange": {
-    "at": "2026-10-29T03:41:08Z",
+    "at": "2026-10-30T00:36:33Z",
     "by": "Kevin",
-    "note": "Manual de Nisa Nabani aplicado: Poppins para títulos y texto (Plex Mono sigue en datos; sale Newsreader), colores de estado separados de los ocho colores de división, tokens div-* y componente Divisiones con el logo, el lema y los iconos del manual.",
-    "via": "Claude Code"
+    "via": "Claude Code",
+    "note": "Nabi pasa a NisaLab: símbolo Colonia y logotipo Poppins en Marca, ocho áreas con su color e ícono (tokens area-*, componente Áreas, grupo de assets Áreas; sale Divisiones), portada y Carga con Colonia."
   },
   "layout": "files",
   "libraries": [],
-  "namespace": "Nabi",
+  "namespace": "NisaLab",
   "sections": {},
-  "title": "Nabi"
+  "title": "NisaLab"
 }
