@@ -1,0 +1,31 @@
+{
+  "nombre": "Mesanda",
+  "respaldo": "de CLNDA Studio",
+  "formula": "mesa + comanda («la mesa anda»)",
+  "simbolo": "mesa redonda con tres sillas y estela de velocidad en lugar de la cuarta (H1)",
+  "color": {
+    "negro": "#0b0b0c",
+    "blanco": "#ffffff",
+    "amarillo": "#facc15",
+    "amarillo-texto": "#7a5a00",
+    "gris-fondo": "#f4f4f5"
+  },
+  "reglas": {
+    "acento": "amarillo solo en dos funciones de la app: acción principal (Enviar a cocina) y lo que necesita al mesero (Cuenta pedida)",
+    "texto_sobre_amarillo": "siempre negro (12.8:1); nunca blanco",
+    "amarillo_sobre_blanco": "nunca como texto ni icono funcional (1.5:1); en el logotipo claro la estela es decorativa; para texto amarillo-texto",
+    "simbolo_16": "por debajo de 24 px usar simbolo-16 (dos líneas gruesas); sobre blanco, todo negro",
+    "naranja": "prohibido (competidor)",
+    "cliente_final": "Mesanda es herramienta del negocio; el comensal no la ve"
+  },
+  "tipografia": {
+    "marca": "Manrope 800 (trazados)",
+    "interfaz": "Manrope 400–700"
+  },
+  "contraste": {
+    "negro/amarillo": 12.85,
+    "negro/blanco": 19.67,
+    "amarillo/blanco": 1.53,
+    "amarillo-texto/blanco": 6.38
+  }
+}

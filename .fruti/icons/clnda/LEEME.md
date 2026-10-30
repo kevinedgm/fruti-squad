@@ -66,3 +66,7 @@ C es la regla (símbolo índigo en ambos modos) y B la variante permitida sobre 
 ## Productos (2026-10-30)
 
 Familia «CLNDA + palabra» para reservas de hotel, tienda en línea y restaurantes; la marca del producto la ve solo el negocio. Ronda 1 de nombres en `productos-nombres-r1/` (elegida C: Booking, Shop, Menú); ronda 2 de diferenciación en `productos-r2/` (elegido C: forma + color); paquete en `productos-final/`.
+
+## Mesanda (2026-10-30)
+
+El producto de restaurantes pasó a marca propia **Mesanda** (de CLNDA Studio): blanco, negro y amarillo señal; paquete en `mesanda-final/`.
