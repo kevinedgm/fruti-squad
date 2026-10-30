@@ -2,7 +2,10 @@
 
 ## Material
 
-- Kit neutral `assets/wireframe-kit.css`: grises, una familia de sistema, radios y espacios fijos.
+- Kit `assets/wireframe-kit.css`, con la estética del manual de Fruti Squad en dos capas:
+  - **Chrome de la herramienta** (barra de control, escenario, rótulo del marco, notas, `.wf-brand`): marca Fruti Squad, Bricolage Grotesque (`--wf-chrome-font`) y el símbolo de Kiwi. Está fuera del diseño evaluado.
+  - **Contenido del marco** (`.wf-frame`): solo los neutros del manual (tinta, papel, línea), una familia de sistema, radios del manual (tarjeta 14, botón píldora). Sin color y sin la letra de marca: el wireframe decide estructura, no apariencia del producto.
+- Patrones listos en `assets/patterns/` (p. ej. `dashboard.html`): parte de uno solo cuando la superficie coincide.
 - Nada del design system del proyecto salvo `breakpoints`.
 - Parte de `assets/wireframe-base.html`: cópialo como `index.html` de la ronda y el kit a `vendor/`, o inclúyelo inline si el artefacto debe abrirse suelto. Ya trae selector de espacio (compact/medium/expanded), panel de estados y notas.
 

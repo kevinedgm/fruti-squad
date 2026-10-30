@@ -1,36 +1,49 @@
-/* kiwi · wireframe-kit.css — kit neutral F1/F2
-   Solo grises, una familia, formas simples. No usar en F3 (ahí manda el sistema real). */
+/* kiwi · wireframe-kit.css — kit F1/F2 con la estética del manual de Fruti Squad
+   Dos capas:
+   · Chrome de la herramienta (.wf-ctl, .wf-stage, .wf-frame-label, .wf-note, .wf-brand): marca Fruti Squad,
+     Bricolage Grotesque y tinta/papel. Está fuera del diseño evaluado.
+   · Contenido del marco (.wf-frame): solo los neutros del manual, una familia de sistema, formas simples.
+     Sin color: el wireframe decide estructura, no apariencia. No usar en F3 (ahí manda el sistema real). */
 :root{
-  --wf-g0:#ffffff; --wf-g1:#f5f5f5; --wf-g2:#ebebeb; --wf-g3:#d6d6d6; --wf-g4:#b3b3b3;
-  --wf-g6:#595959; --wf-g8:#2b2b2b; --wf-g9:#111111;
-  --wf-r:6px; --wf-s1:4px; --wf-s2:8px; --wf-s3:12px; --wf-s4:16px; --wf-s5:24px; --wf-s6:32px; --wf-s7:48px;
+  /* neutros del manual (tinta #18181b, papel #f5f5f2, línea #e3e3de), todos grises: diferencia entre canales ≤ 6 */
+  --wf-g0:#ffffff; --wf-g1:#f5f5f2; --wf-g2:#ecece8; --wf-g3:#e3e3de; --wf-g4:#b9b9b4;
+  --wf-g6:#55555a; --wf-g8:#2b2b2e; --wf-g9:#18181b; --wf-ink:#0f0f12; --wf-ink-line:#2c2c31;
+  --wf-r:10px; --wf-r-card:14px; --wf-r-pill:999px;
+  --wf-s1:4px; --wf-s2:8px; --wf-s3:12px; --wf-s4:16px; --wf-s5:24px; --wf-s6:32px; --wf-s7:48px;
   --wf-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --wf-mono: ui-monospace, Menlo, Consolas, monospace;
+  /* solo chrome: la letra de marca nunca entra al contenido del marco */
+  --wf-chrome-font: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 *{box-sizing:border-box}
-body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(--wf-g2)}
+body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(--wf-g1)}
 .wf :focus-visible{outline:3px solid var(--wf-g9);outline-offset:2px}
 /* :where() keeps these resets at zero specificity so .wf-btn--primary etc. can set their own color */
 .wf :where(button){font:inherit;color:inherit;cursor:pointer}
 .wf :where(a){color:inherit}
 .wf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* Barra de control (fuera del diseño) */
-.wf-ctl{position:sticky;top:0;z-index:50;background:var(--wf-g9);color:var(--wf-g0);padding:var(--wf-s2) var(--wf-s4);display:flex;flex-wrap:wrap;gap:var(--wf-s3) var(--wf-s5);align-items:center;font-size:13px}
-.wf-ctl fieldset{border:0;margin:0;padding:0;display:flex;gap:var(--wf-s1);align-items:center;flex-wrap:wrap}
-.wf-ctl legend{float:left;margin-right:var(--wf-s2);opacity:.8}
-.wf-ctl button,.wf-ctl select{background:transparent;border:1px solid #777;color:var(--wf-g0);border-radius:4px;padding:4px 10px;min-height:32px;font:inherit}
+/* Chrome (fuera del diseño): marca Fruti Squad */
+.wf-ctl{position:sticky;top:0;z-index:50;background:var(--wf-ink);color:var(--wf-g1);padding:var(--wf-s3) var(--wf-s5);display:flex;flex-wrap:wrap;gap:var(--wf-s3) var(--wf-s5);align-items:center;font:500 13px/1.3 var(--wf-chrome-font)}
+.wf-brand{display:inline-flex;align-items:center;gap:var(--wf-s2);font-weight:700;font-size:14px;margin-right:var(--wf-s2)}
+.wf-brand svg{width:28px;height:28px;flex:0 0 auto}
+.wf-brand small{display:block;font-weight:500;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--wf-g4)}
+.wf-ctl fieldset{border:0;margin:0;padding:0;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.wf-ctl legend{float:left;margin-right:var(--wf-s2);color:var(--wf-g4);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.wf-ctl label{display:flex;gap:6px;align-items:center;color:var(--wf-g4);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.wf-ctl button,.wf-ctl select{background:transparent;border:1px solid var(--wf-ink-line);color:var(--wf-g1);border-radius:var(--wf-r-pill);padding:6px 14px;min-height:36px;font:600 13px var(--wf-chrome-font);letter-spacing:0;text-transform:none}
+.wf-ctl button:hover,.wf-ctl select:hover{border-color:var(--wf-g1)}
 .wf-ctl select option{color:var(--wf-g9)}
-.wf-ctl button[aria-pressed="true"]{background:var(--wf-g0);color:var(--wf-g9)}
-.wf-ctl label{display:flex;gap:6px;align-items:center}
+.wf-ctl button[aria-pressed="true"]{background:var(--wf-g1);color:var(--wf-ink);border-color:var(--wf-g1)}
+.wf-ctl :focus-visible{outline:2px solid var(--wf-g0);outline-offset:2px}
 
-/* Marco de espacio: el contenido responde con container queries */
-.wf-stage{padding:var(--wf-s5) var(--wf-s4) var(--wf-s7);overflow-x:auto}
-.wf-frame-label{font-size:12px;color:var(--wf-g6);margin:0 auto var(--wf-s2);width:var(--wf-w,1440px)}
-.wf-frame{width:var(--wf-w,1440px);margin:0 auto;background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:10px;overflow:hidden;container:wf/inline-size;position:relative;min-height:640px}
+/* Escenario: el marco responde con container queries */
+.wf-stage{padding:var(--wf-s6) var(--wf-s4) var(--wf-s7);overflow-x:auto;background:var(--wf-g1)}
+.wf-frame-label{font:600 11px/1.2 var(--wf-chrome-font);letter-spacing:.06em;text-transform:uppercase;color:var(--wf-g6);margin:0 auto var(--wf-s3);width:var(--wf-w,1440px)}
+.wf-frame{width:var(--wf-w,1440px);margin:0 auto;background:var(--wf-g0);border:1px solid var(--wf-g3);border-radius:16px;overflow:hidden;container:wf/inline-size;position:relative;min-height:640px;font-family:var(--wf-font)}
 
 /* Tipografía */
-.wf h1{font-size:28px;line-height:1.2;margin:0 0 var(--wf-s2)}
+.wf h1{font-size:28px;line-height:1.15;letter-spacing:-.01em;margin:0 0 var(--wf-s2)}
 .wf h2{font-size:20px;margin:var(--wf-s6) 0 var(--wf-s3)}
 .wf h3{font-size:15px;margin:var(--wf-s4) 0 var(--wf-s2)}
 .wf p{margin:0 0 var(--wf-s3)}
@@ -49,9 +62,9 @@ body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(
 .wf-box{background:var(--wf-g2);border-radius:4px;min-height:16px}
 .wf-img{background:repeating-linear-gradient(45deg,var(--wf-g2) 0 8px,var(--wf-g1) 8px 16px);border-radius:4px;aspect-ratio:4/3}
 .wf-line{height:8px;background:var(--wf-g3);border-radius:2px;margin:6px 0}
-.wf-card{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s4);background:var(--wf-g0);min-width:0}
+.wf-card{border:1px solid var(--wf-g3);border-radius:var(--wf-r-card);padding:var(--wf-s4);background:var(--wf-g0);min-width:0}
 .wf-grid{display:grid;gap:var(--wf-s3);grid-template-columns:repeat(var(--wf-cols,3),minmax(0,1fr))}
-.wf-list{list-style:none;margin:0;padding:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r)}
+.wf-list{list-style:none;margin:0;padding:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r-card)}
 .wf-list>li{padding:var(--wf-s3) var(--wf-s4);min-height:48px}
 .wf-list>li+li{border-top:1px solid var(--wf-g3)}
 .wf-table{width:100%;border-collapse:collapse;font-size:14px}
@@ -59,7 +72,7 @@ body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(
 .wf-table th{font-size:12px;color:var(--wf-g6);text-transform:uppercase;letter-spacing:.05em}
 
 /* Controles */
-.wf-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 var(--wf-s4);border-radius:var(--wf-r);border:1px solid var(--wf-g9);background:var(--wf-g0);text-decoration:none;font-weight:600;font-size:14px}
+.wf-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 var(--wf-s4);border-radius:var(--wf-r-pill);border:1px solid var(--wf-g9);background:var(--wf-g0);text-decoration:none;font-weight:600;font-size:14px}
 .wf-btn--primary{background:var(--wf-g9);color:var(--wf-g0)}   /* UNA por vista */
 .wf-btn--quiet{border-color:transparent;text-decoration:underline;font-weight:500}
 .wf-btn--danger{border-style:dashed}                             /* destructiva: separada, forma distinta */
@@ -78,17 +91,18 @@ body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(
 
 /* Estados de datos */
 .wf-skel .wf-line,.wf-skel .wf-img{background:var(--wf-g2)}
-.wf-state{border:1px solid var(--wf-g3);border-radius:var(--wf-r);padding:var(--wf-s6);text-align:center;max-width:520px;margin:var(--wf-s6) auto}
+.wf-state{border:1px solid var(--wf-g3);border-radius:var(--wf-r-card);padding:var(--wf-s6);text-align:center;max-width:520px;margin:var(--wf-s6) auto}
 .wf-banner{padding:var(--wf-s2) var(--wf-s5);background:var(--wf-g2);border-bottom:1px solid var(--wf-g3);font-size:14px}
 
 /* Overlays */
 .wf-scrim{position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:20}
 .wf-drawer{position:absolute;top:0;bottom:0;left:0;width:min(320px,86%);background:var(--wf-g1);z-index:21;padding:var(--wf-s3);overflow:auto}
-.wf-sheet{position:absolute;left:0;right:0;bottom:0;max-height:90%;background:var(--wf-g0);border-radius:12px 12px 0 0;z-index:21;padding:var(--wf-s4);overflow:auto}
+.wf-sheet{position:absolute;left:0;right:0;bottom:0;max-height:90%;background:var(--wf-g0);border-radius:16px 16px 0 0;z-index:21;padding:var(--wf-s4);overflow:auto}
 
 /* Notas de decisión */
-.wf-note{display:block;border:1px dashed var(--wf-g6);background:var(--wf-g1);border-radius:4px;padding:6px 10px;font-size:12px;color:var(--wf-g8);margin:var(--wf-s2) 0}
-.wf-note::before{content:"Nota · ";font-weight:700}
+.wf-note{display:block;border:1px dashed var(--wf-g4);background:var(--wf-g1);border-radius:var(--wf-r);padding:8px 12px;font:400 12.5px/1.45 var(--wf-chrome-font);color:var(--wf-g8);margin:var(--wf-s2) 0}
+.wf-note::before{content:"Nota";display:block;font-weight:700;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--wf-g6);margin-bottom:2px}
+html[lang|="en"] .wf-note::before{content:"Note"}
 body.wf-no-notes .wf-note{display:none}
 
 /* Modos por espacio */

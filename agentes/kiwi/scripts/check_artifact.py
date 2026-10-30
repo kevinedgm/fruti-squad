@@ -7,7 +7,7 @@ Uso:
 Comprueba:
   - estructura mínima (lang, viewport, title) y etiquetas balanceadas;
   - solo grises (hex, rgb/rgba, hsl) en <style>, style="" y CSS locales enlazados;
-  - una sola familia tipográfica (la monoespaciada para código no cuenta);
+  - una sola familia tipográfica (la monoespaciada para código y --wf-chrome-font del chrome no cuentan);
   - panel de estados (F2) y notas de decisión;
   - sin fuentes ni hojas externas salvo el kit.
 Sale con código 1 si hay errores. No sustituye la revisión en navegador.
@@ -117,8 +117,10 @@ def families_in(css):
         first = val.split(",")[0].strip().strip("'\"").lower()
         if first and "mono" not in first and first not in ("inherit", "monospace", "menlo", "consolas"):
             fams.add(first)
-    for m in re.finditer(r"--[\w-]*font[\w-]*\s*:\s*([^;}{]+)", css):
-        first = m.group(1).split(",")[0].strip().strip("'\"").lower()
+    for m in re.finditer(r"--([\w-]*font[\w-]*)\s*:\s*([^;}{]+)", css):
+        if m.group(1).startswith("wf-chrome"):
+            continue  # letra de marca del chrome de la herramienta: no entra al contenido evaluado
+        first = m.group(2).split(",")[0].strip().strip("'\"").lower()
         if first and "mono" not in first and first not in ("monospace", "menlo", "consolas"):
             fams.add(first)
     fams.discard("system-ui")  # la pila del kit empieza en system-ui
@@ -160,6 +162,8 @@ def main():
     # CSS: inline + <style> + hojas locales
     css = "\n".join(c.styles + c.inline)
     for href in c.links:
+        if re.match(r"https://fonts\.googleapis\.com/css2\?family=Bricolage\+Grotesque[^\"'<>]*$", href):
+            continue  # letra de marca del chrome (--wf-chrome-font); si no carga, cae a la pila del sistema
         if re.match(r"https?://", href):
             errors.append(f"hoja externa en un wireframe: {href}")
             continue
@@ -182,7 +186,7 @@ def main():
         errors.append("más de una familia tipográfica: " + ", ".join(sorted(fams)))
     else:
         oks.append("una familia tipográfica")
-    if re.search(r"fonts\.googleapis|@font-face", html + css):
+    if re.search(r"@font-face", html + css) or re.search(r"fonts\.googleapis[^\"']*family=(?!Bricolage)", html + css):
         warns.append("fuentes web cargadas: el kit usa la pila del sistema")
 
     # Estados y notas
