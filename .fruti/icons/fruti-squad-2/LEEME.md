@@ -100,3 +100,8 @@ Usuario: «no me gusta, otra ronda más disruptiva, moderna». 1 Sólido (único
 
 ## Ronda 19 · color (`r19-color/color.html`)
 Paleta viva validada (CVD deutan ≥ 12 sobre #0f0f12): Kiwi #34e0a1, Lima #d4ff3a, Coco #ff9f1c, Bruno #4361ee, Mora #f72585. A Blanco y negro + un acento (punto magenta), B Un color por integrante (versiones oscurecidas en claro), C Duotono: trazo neutro y el punto en el color de quien produce la evidencia; el orquestador reúne los cinco en degradado (recomendada).
+
+**Color aprobado: C duotono** (trazo neutro; punto en el color de cada integrante; el orquestador reúne los cinco en degradado). Paleta: Kiwi #34e0a1, Lima #d4ff3a (#8fb300 en claro), Coco #ff9f1c, Bruno #4361ee, Mora #f72585.
+
+## Ronda 20 · tipografía (`r20-tipo/tipografia.html`)
+A Bricolage Grotesque (con carácter; recomendada), B Instrument Sans (limpia), C Unbounded (ancha, disruptiva; los nombres largos no caben en una línea).
