@@ -105,32 +105,16 @@ body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(
 html[lang|="en"] .wf-note::before{content:"Note"}
 body.wf-no-notes .wf-note{display:none}
 
-/* Esqueleto de laboratorio: cuadrícula de libreta, piezas en línea, rótulos técnicos.
-   Todo en neutros; los rótulos de región son anotación y se ocultan con «Notas». */
+/* Escenario de laboratorio: solo el fondo donde se renderiza el marco (cuadrícula de libreta).
+   El contenido del marco no cambia. Solo neutros. */
 :root{--wf-grid-minor:#ecece8;--wf-grid-major:#dcdcd6}
 .wf-stage{min-height:calc(100vh - 60px);background-color:var(--wf-g1);
   background-image:linear-gradient(var(--wf-grid-major) 1px,transparent 1px),linear-gradient(90deg,var(--wf-grid-major) 1px,transparent 1px),
     linear-gradient(var(--wf-grid-minor) 1px,transparent 1px),linear-gradient(90deg,var(--wf-grid-minor) 1px,transparent 1px);
   background-size:64px 64px,64px 64px,8px 8px,8px 8px}
-.wf-frame{background-color:var(--wf-g0);background-image:radial-gradient(var(--wf-g3) 1px,transparent 1.2px);background-size:16px 16px;border:1px solid var(--wf-g6);box-shadow:0 0 0 6px var(--wf-g0),0 0 0 7px var(--wf-g3)}
+.wf-frame{box-shadow:0 0 0 6px var(--wf-g0),0 0 0 7px var(--wf-g3)}
 .wf-frame-label{font-family:var(--wf-mono);font-weight:500;letter-spacing:.04em}
 .wf-frame-label::before{content:"⌖ ";color:var(--wf-g6)}
-.wf-side{background:transparent;border-right:1px dashed var(--wf-g4);position:relative}
-.wf-top{border-bottom:1px dashed var(--wf-g4);position:relative}
-.wf-main{position:relative}
-.wf-bottom{background:var(--wf-g0);border-top:1px dashed var(--wf-g4)}
-.wf-side::after,.wf-top::after,.wf-main::after,.wf-bottom::after{position:absolute;right:6px;top:4px;font:500 9.5px/1 var(--wf-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--wf-g6);background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:3px;padding:2px 4px;pointer-events:none}
-.wf-side::after{content:"nav · side"}.wf-top::after{content:"top"}.wf-main::after{content:"main"}.wf-bottom::after{content:"bottom bar";top:-9px}
-body.wf-no-notes .wf-side::after,body.wf-no-notes .wf-top::after,body.wf-no-notes .wf-main::after,body.wf-no-notes .wf-bottom::after{display:none}
-.wf-card,.wf-list,.wf-state{background:transparent;border-color:var(--wf-g4)}
-.wf-card{background:var(--wf-g0)}
-.wf-box{background:transparent;border:1px solid var(--wf-g4)}
-.wf-img{background:linear-gradient(to top right,transparent calc(50% - .6px),var(--wf-g4) calc(50% - .6px),var(--wf-g4) calc(50% + .6px),transparent calc(50% + .6px)),
-  linear-gradient(to bottom right,transparent calc(50% - .6px),var(--wf-g4) calc(50% - .6px),var(--wf-g4) calc(50% + .6px),transparent calc(50% + .6px)),var(--wf-g0);
-  border:1px solid var(--wf-g4)}
-.wf-line{background:transparent;border:1px solid var(--wf-g4);height:10px}
-.wf-skel .wf-line,.wf-skel .wf-img{background:var(--wf-g1);border-style:dashed}
-.wf-input{background:var(--wf-g0)}
 
 /* Modos por espacio */
 @container wf (max-width: 1023px){
