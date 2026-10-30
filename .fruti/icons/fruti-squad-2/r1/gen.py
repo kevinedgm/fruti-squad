@@ -32,7 +32,7 @@ S = [
 def card(k, t, i, a, r, b):
     big = s(b); inv = s(b, '#ffffff', INK)
     return (f'<section class="c"><header><span class="k">{k}</span><h2>{t}</h2></header>'
-            f'<div class="lk"><span class="sym">{big}</span><span class="nm"><b>Fruti Squad</b><small>for Kiro</small></span></div>'
+            f'<div class="lk"><span class="sym">{big}</span><span class="nm"><b>Fruti Squad</b><small>UI multiagente</small></span></div>'
             f'<div class="mini"><span class="t">{big}</span><span class="t s24">{big}</span><span class="t s16">{big}</span><span class="t ap">{inv}</span></div>'
             f'<p class="id">{i}</p><p class="pr"><b>A favor:</b> {a}</p><p class="pr"><b>Riesgo:</b> {r}</p></section>')
 css = f'''*{{box-sizing:border-box}}body{{margin:0;background:{BG};color:{INK};font:400 15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;padding:32px max(16px,env(safe-area-inset-left))}}
@@ -48,7 +48,7 @@ main{{max-width:1180px;margin:0 auto}}h1{{font-size:28px;line-height:1.2;margin:
 @media (max-width:820px){{.g{{grid-template-columns:1fr}}.nm b{{font-size:28px}}}}'''
 html = ('<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
         '<meta name="claude:viewport-fit-sides" content="true"><title>Fruti Squad · símbolo nuevo</title>'
-        f'<style>{css}</style></head><body><main><h1>Fruti Squad for Kiro · identidad nueva, ronda 1</h1>'
-        '<p class="lead">Desde cero. Todas las ideas salen de la frase que define el producto: «cada agente hace una sola clase de trabajo y entrega evidencia al siguiente». Y juegan con la tensión de la marca: frutas (cercano) y gobernanza (riguroso). En tinta a propósito: primero la forma, después el color. Tipografía provisional del sistema.</p>'
+        f'<style>{css}</style></head><body><main><h1>Fruti Squad · identidad nueva, ronda 1</h1>'
+        '<p class="lead">Desde cero. Todas las ideas salen de la frase que define el producto: «cada agente hace una sola clase de trabajo y entrega evidencia al siguiente». Y juegan con la tensión de la marca: frutas (cercano) y gobernanza (riguroso). En tinta a propósito: primero la forma, después el color. Tipografía provisional del sistema. Ya no es solo para Kiro: Codex, Kiro y Claude Code; el descriptor «UI multiagente» es provisional.</p>'
         f'<div class="g">{"".join(card(*x) for x in S)}</div></main></body></html>')
 open(os.path.join(H, 'simbolos.html'), 'w').write(html); print('ok')
