@@ -25,3 +25,6 @@ Usuario: «así como hicimos Manik y Nisa Nabani con sus productos, lo mismo aqu
 | Bruno Implementation (nombre provisional) | #2563eb | conector | conectar |
 | Mora Documentation (nombre provisional) | #7e2e8c | ficha detrás (colección) | catalogar |
 Identificador del ecosistema: retícula de seis cuadros. Tipografía provisional.
+
+## Ronda 4 · otra marca constante (`r4/simbolos.html`)
+Usuario: «no me gusta [la fruta], dame otra propuesta de símbolos». Se conserva el método (sello, rasgo, color de la ronda 3) y cambia solo la marca del centro: A Monograma F (brazo inferior = punto de evidencia), B La entrega (curva que pasa el punto), C El gajo (un gajo de cítrico), D Hoja que valida (vena = palomita). Nota: con D, Lima tendría dos palomitas (marca + insignia); su rasgo cambiaría.
