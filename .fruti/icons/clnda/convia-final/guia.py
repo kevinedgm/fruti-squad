@@ -3,6 +3,7 @@ import base64, json, os
 D = os.path.dirname(os.path.abspath(__file__))
 T = json.load(open(os.path.join(D, 'tema.json'))); C = T['color']; K = T['contraste']; CAT = T['categorias']
 u = lambda f: 'data:image/svg+xml;base64,' + base64.b64encode(open(os.path.normpath(os.path.join(D, 'svg', f)), 'rb').read()).decode()
+dist = 'data:image/png;base64,' + base64.b64encode(open(os.path.join(D, 'distintivo', 'vista.png'), 'rb').read()).decode()
 og = 'data:image/png;base64,' + base64.b64encode(open(os.path.join(D, 'png', 'og-1200x630.png'), 'rb').read()).decode()
 def sw(n, h, note): return f'<div class="sw"><i style="background:{h}"></i><div><b>{n}</b><code>{h}</code><small>{note}</small></div></div>'
 cats = ''.join(f'''<div class="cat"><div class="catsw"><img class="ico" src="{u('../iconos/' + k + '-color.svg')}" alt="Ícono de {c['nombre']}"><i style="background:{c['punto']}"></i><i style="background:{c['fondo']}"></i><i style="background:{c['texto']}"></i></div>
@@ -88,6 +89,8 @@ p{{margin:0;max-width:68ch}}.muted{{color:var(--sec)}}code{{font-size:.86em}}
 <div class="voz"><div><h3>Así sí</h3><ul><li>«Este sábado hay un taller de barro para ir solo.»</li><li>«Abre hasta las 21:00; llega antes del atardecer.»</li><li>«Nueve habitaciones alrededor de un patio.»</li></ul></div>
 <div><h3>Así no</h3><ul><li>«¡¡Descubre la MAGIA de Oaxaca!!»</li><li>«Los 100 lugares imperdibles.»</li><li>Emojis, mayúsculas sostenidas, superlativos.</li></ul></div></div></div></section>
 <section><div class="wrap"><p class="n">08 · Aplicaciones</p><h2 class="d">Para compartir</h2><img class="og" src="{og}" alt="Imagen para compartir: logotipo de Convia y la frase lo que vale la pena en Oaxaca, escogido por gente de aquí">
+<h3>Distintivo para negocios aprobados</h3><img class="og" src="{dist}" alt="Tarjetas de mostrador con QR y calcas circulares de ventana en el color de cada categoría">
+<p class="muted">Solo lo reciben los negocios que pasaron la revisión del manual de estándares. <b>Calca de ventana</b>: círculo de 10 cm en vinil, color de la categoría, «Recomendado en Convia». <b>Tarjeta de mostrador</b>: A6 (105×148 mm) con la categoría, el nombre del negocio y un QR a su ficha. Los QR de estos ejemplos apuntan a una dirección de prueba (convia.example).</p>
 <p class="muted">Imagen para compartir (1200×630), ícono de app (512, 192 y 180 px) y favicon que cambia con el modo claro u oscuro. Archivos en <code>convia-final/</code>.</p></div></section>
 <section><div class="wrap"><p class="n">09 · Pendiente</p><h2 class="d">Antes de publicar</h2><ol class="r"><li>Buscar «Convia» en Marcanet (IMPI), clases 9, 35, 39 y 42; revisar dominios y redes.</li><li>Guía de fotografía.</li><li>Textos de marca en inglés.</li></ol></div></section>
 </main>'''
