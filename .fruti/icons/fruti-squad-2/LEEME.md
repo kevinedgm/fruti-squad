@@ -66,3 +66,8 @@ En el idioma de Kiwi: 1 Clasificación (marco en cuatro casillas: reuse/extend/n
 
 ## Ronda 11 · Lima Design System Governance (`r11-lima/lima.html`)
 Usuario: «Lima es Lima Design System Governance»: el símbolo debe contar el producto completo (sistema + gobernanza). 1 Fuente única (un marco manda, tres heredan; recomendada), 2 Biblioteca (marcos apilados, el de enfrente aprobado), 3 Alineación (piezas a una misma regla), 4 Clasificación.
+
+**Lima elegida: «Biblioteca»** (marcos apilados, el de enfrente con el punto).
+
+## Ronda 12 · Coco UI Audit (`r12-coco/coco.html`)
+1 Visor (esquinas que encuadran; recomendada), 2 Hallazgo (retícula con un punto desviado), 3 Comparación (contrato vs implementación; parece cara), 4 Lente (se confunde con «buscar»).
