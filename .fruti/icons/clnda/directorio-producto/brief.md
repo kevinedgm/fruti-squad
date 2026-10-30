@@ -38,7 +38,7 @@ Consecuencias (inferencia):
   - Rechazo: el negocio hace los cambios y reenvía.
   - **Inmediato** (sin moderación): modificaciones a talleres, eventos u horarios ya publicados.
   - **Moderado** (12–24 h): evento nuevo, fotos nuevas, cambio de descripción del establecimiento y similares.
-  - Hueco detectado (propuesta): la regla debe ser **por campo, no por objeto**. Inmediatos: fecha, hora, cupo, precio, cancelación, horario, «cerrado hoy». Moderados aunque sean de un evento existente: título, texto y fotos. Si no, cambiar la foto o el texto de un evento ya aprobado se saltaría la moderación.
+  - **Decisión del usuario (2026-10-30): la regla es por campo, no por objeto.** Inmediatos: fecha, hora, cupo, precio, cancelación, horario, «cerrado hoy». Moderados aunque sean de un evento existente: título, texto y fotos. Si no, cambiar la foto o el texto de un evento ya aprobado se saltaría la moderación.
 
 ## Fases (usuario, 2026-10-30)
 - **Fase 1 · solo información.** Ficha de cada negocio: descripción, galería, ubicación, horario, contacto y redes sociales. Descubrir (portada curada, filtros) y guardar se mantienen. Sin reservas ni inscripciones: la acción de la ficha es **contactar** (WhatsApp, llamar, redes, cómo llegar).
@@ -55,6 +55,16 @@ Dos lados: **visitantes** que buscan qué hacer y **negocios** que quieren apare
 - Huevo y gallina: sin visitantes, aparecer no le vale nada al negocio; sin buenos negocios, no hay visitantes. Hay que decidir qué lado se arranca primero.
 - Competencia directa: Google Maps y TripAdvisor ya listan todo; un directorio genérico pierde. La diferencia posible: curaduría local y reserva directa.
 - Conexión desigual, resuelta en parte: Booking encaja (botón «Reservar» → sitio del hotel); con el complemento **Mesanda Reservas** (usuario) los restaurantes también tienen botón «Reservar mesa» que llega a su plano.
+
+## Tabla de publicación por campo (decidida)
+| Campo | Publicación |
+|---|---|
+| Fecha, hora, cupo, precio, política de cancelación | Inmediata |
+| Horario del establecimiento, «cerrado hoy», evento cancelado | Inmediata |
+| Título, descripción, fotos (de un evento existente o del establecimiento) | Moderada 12–24 h |
+| Evento o taller nuevo | Moderado 12–24 h |
+| Logo, nombre, categoría del establecimiento | Moderado 12–24 h |
+Inmediato quiere decir: pasa la validación automática del panel y se publica; queda registrado para revisión posterior.
 
 ## Incógnitas
 - ¿Curado (solo lo recomendado) o abierto (cualquier negocio se registra)?
