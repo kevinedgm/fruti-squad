@@ -19,7 +19,7 @@ Directorio web de planes, lugares y talleres de Oaxaca. Marca independiente.
 - `iconos/<categoria>.svg` (currentColor) y `<categoria>-color.svg` (sobre su fondo). Trazo de plumón con terminaciones redondas, familia de la estrella. Generar: `python3 iconos.py`. Siempre junto al nombre; mínimo 16 px.
 
 ## Distintivo para negocios aprobados
-- `distintivo/calca-<categoria>.svg` (10 cm, vinil) y `tarjeta-ejemplo-*.svg` (A6, con QR a la ficha; los ejemplos apuntan a convia.example). Generar: `python3 distintivo.py <carpeta de fuentes>` (requiere `pip install qrcode`).
+- `distintivo/calca-<categoria>.svg` (10 cm, vinil) y `tarjeta-ejemplo-*.svg` (A6, con QR a la ficha; los ejemplos apuntan a convia.example). Generar: `python3 distintivo.py <carpeta de fuentes>` (requiere `pip install qrcode`). Vigencia anual: cambiar `ANIO` en `distintivo.py`.
 
 ## Archivos
 - `svg/`: simbolo, simbolo-oscuro, simbolo-tinta (currentColor), logotipo, logotipo-oscuro, logotipo-tinta, palabra, app-icon, favicon (cambia con el tema), og (1200×630). Texto convertido a trazos.
