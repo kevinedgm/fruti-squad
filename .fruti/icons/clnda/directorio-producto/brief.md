@@ -73,7 +73,9 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 - Marca independiente de CLNDA. Evoca Oaxaca sin nombrarla. Español fácil en inglés. Personalidad: amigo que sabe.
 - **Nombre: Convia** (convite + vía; con v). Rondas en `nombres-r1.md` a `nombres-r6.md`.
 - Búsqueda web preliminar (no es búsqueda de marca): existe Convia Inc. (EE. UU., tecnología para edificios; otra clase y mercado) y una app sueca «Convie» de gastronomía y hotelería (nombre parecido, mismo rubro).
-- Pendiente: Marcanet (clases 9, 35, 39, 42), dominios y redes; prueba de recuerdo con 5 personas.
+- **Símbolo: E1b** (estrella de un trazo a mano, inclinada; inspirada en las estrellas del convite). `../convia-r7/E1b.svg`.
+- **Color: paleta B «Convite + cantera»**: fondo verde cantera #1f4d3a, principal magenta #d42a66, acento amarillo #ffc53d, apoyo verde #3f8f6b, papel #f6f3ea, tinta #15241d. Contraste WCAG 2.2 AA verificado en `../convia-color-r1/`.
+- Pendiente: tipografía; Marcanet (clases 9, 35, 39, 42), dominios y redes; prueba de recuerdo con 5 personas.
 
 ## Incógnitas
 - ¿Curado (solo lo recomendado) o abierto (cualquier negocio se registra)?
