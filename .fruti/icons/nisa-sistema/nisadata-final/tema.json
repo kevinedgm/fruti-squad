@@ -1,0 +1,36 @@
+{
+  "marca": "NisaData",
+  "respaldo": "de Nisa Nabani",
+  "producto": "Panel de analítica: tendencias, comportamiento y salud del laboratorio. Lee los datos de NisaLab.",
+  "arquitectura": "Producto hermano de NisaLab dentro de Nisa Nabani: nombre y símbolo propios, mismo patrón «Nisa» + palabra y mismo respaldo.",
+  "simbolo": "Columnas de células: tres columnas de 1, 2 y 3 células (radios 10, 12, 14; separación 4; base común); la célula superior de la columna alta en mandarina.",
+  "color": {
+    "grafito": {
+      "hex": "#1F2532",
+      "uso": "símbolo, logotipo, fondo del ícono de app y superficies de marca",
+      "blanco_encima": 15.3
+    },
+    "mandarina": {
+      "hex": "#FF8A1F",
+      "uso": "una sola célula del símbolo y acentos de marca; nunca texto sobre blanco ni alerta",
+      "sobre_blanco": 2.4,
+      "sobre_grafito": 6.5,
+      "grafito_encima": 6.5
+    }
+  },
+  "tipografia": {
+    "logotipo": "«Nisa» Poppins 700 + «Data» Poppins 400, convertidos a trazos",
+    "interfaz": "Poppins + IBM Plex Mono para datos (la misma de NisaLab)"
+  },
+  "reglas": [
+    "Una sola célula mandarina por símbolo.",
+    "El color de producto vive en marca, ícono de app, acceso y navegación; nunca en tablas ni en estatus.",
+    "La mandarina no es alerta ni estado: no se usa para «pago parcial», avisos ni errores.",
+    "Las gráficas del panel usan su propia paleta de datos, no grafito y mandarina.",
+    "No rotar ni reacomodar las columnas; la base siempre abajo."
+  ],
+  "tamano_minimo": {
+    "pantalla_px": 16,
+    "impreso_mm": 6
+  }
+}
