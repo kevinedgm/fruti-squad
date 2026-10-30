@@ -221,10 +221,10 @@
     "Áreas"
   ],
   "lastChange": {
-    "at": "2026-10-30T02:25:22Z",
+    "at": "2026-10-30T02:28:11Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "Los colores de área nunca aparecen en tablas: en TablaUsuarios y ModuloUsuarios el área va con su ícono a una tinta en text-muted; regla añadida a tokens area-*, Áreas, README y módulos."
+    "note": "EstadoMuestra reemplazado por el esquema del laboratorio: proceso (No ingresada, En proceso, Generando informe, Terminada, Cancelada; tokens muestra-*), pago (No pagada, Pago parcial, Pagada, Cortesía; tokens pago-*) y la marca Urgente en pera."
   },
   "layout": "files",
   "libraries": [],

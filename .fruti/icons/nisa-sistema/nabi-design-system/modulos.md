@@ -64,13 +64,15 @@ El color sigue al significado y es el mismo en todos los módulos:
 
 | Significado | Tokens | Ejemplos |
 |---|---|---|
-| Está bien | `conforme-soft` / `on-conforme-soft` | Activo · Conforme · Liberada |
-| Pendiente | `pendiente-soft` / `on-pendiente-soft` | Invitación enviada · En análisis |
-| Requiere atención | `alerta-soft` / `on-alerta-soft` | Suspendido · En revisión |
-| Impedido | `fuera-soft` / `on-fuera-soft` | Bloqueado · Fuera · Rechazada |
-| Fuera de uso o neutro | contorno `border-strong` sobre `surface` / `text-muted` | Dado de baja · Recibida |
+| Está bien | `conforme-soft` / `on-conforme-soft` | Activo · Conforme |
+| Pendiente | `pendiente-soft` / `on-pendiente-soft` | Invitación enviada |
+| Requiere atención | `alerta-soft` / `on-alerta-soft` | Suspendido |
+| Impedido | `fuera-soft` / `on-fuera-soft` | Bloqueado · Fuera de límite |
+| Fuera de uso o neutro | contorno `border-strong` sobre `surface` / `text-muted` | Dado de baja |
 
-Siempre icono + palabra. El pera no es un estado, y ningún color de área (`area-*`) se usa como estado.
+Los estados de la muestra (proceso, pago, urgente) tienen sus propios tokens y viven en «EstadoMuestra».
+
+Siempre icono + palabra. El pera no es un estado (Urgente es una marca de prioridad), y ningún color de área (`area-*`) se usa como estado.
 
 La columna **Divisiones** muestra el ícono de área a una tinta (16 px, `text-muted`) y su nombre en `text`. Los colores de área nunca aparecen en tablas: ahí todo color es estatus.
 

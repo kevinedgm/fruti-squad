@@ -53,4 +53,4 @@ La carga es el símbolo: las células de Colonia aparecen una tras otra, 200 ms 
 ## Pendiente
 
 - La interfaz actual del producto usa Verdant WebKit con acento esmeralda. Este sistema propone el azul y pera de Nisa Nabani; falta decidir si sustituye el acento de Verdant o si convive con él.
-- Los nombres de estado de muestra (Recibida, En análisis, En revisión, Liberada, Rechazada) son una propuesta: confirmar con el flujo real del laboratorio.
+- Estados de muestra (componente «EstadoMuestra»): proceso No ingresada, En proceso, Generando informe, Terminada y Cancelada (tokens `muestra-*`); pago No pagada, Pago parcial, Pagada y Cortesía (tokens `pago-*`); y la marca Urgente en `pera`. Son los colores con los que ya trabaja el laboratorio.
