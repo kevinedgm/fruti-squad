@@ -76,3 +76,6 @@ Usuario: «Lima es Lima Design System Governance»: el símbolo debe contar el p
 
 ## Ronda 13 · Bruno (`r13-bruno/bruno.html`)
 1 Interruptor (control con el punto de un lado; recomendada), 2 Foco (anillo punteado; se parece a Coco y Kiwi), 3 Evento (dos marcos unidos; parecen lentes), 4 Pulso (es el icono de wifi).
+
+## Ronda 14 · Bruno · Frontend Implementation Engineer (`r14-bruno/bruno.html`)
+Nombre de producto dado por el usuario. 1 Código (marco entre < >; en pequeño puede leerse ojo), 2 Del plano a la pieza (medio punteado, medio sólido; recomendada), 3 Interruptor, 4 Ensamble (se parece al logotipo de una consola; descartable).
