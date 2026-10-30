@@ -82,3 +82,5 @@ Nombre de producto dado por el usuario. 1 Código (marco entre < >; en pequeño 
 
 ## Ronda 15 · Bruno, combinaciones de Código y Del plano a la pieza (`r15-bruno/bruno.html`)
 Usuario: «me gustan la 2 y la 1». 1 Etiqueta del plano (< > + marco medio punteado), 2 Cierre (diagonal tipo </> que parte el marco; recomendada), 3 Signos en transición (< punteado, > sólido, punto), 4 Plano reforzado (punteado más grueso).
+
+**Bruno elegido: «Cierre»** (diagonal tipo </> que parte el marco: plano punteado → pieza sólida, punto del lado construido).
