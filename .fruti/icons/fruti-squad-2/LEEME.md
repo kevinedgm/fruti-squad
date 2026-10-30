@@ -28,3 +28,9 @@ Identificador del ecosistema: retícula de seis cuadros. Tipografía provisional
 
 ## Ronda 4 · otra marca constante (`r4/simbolos.html`)
 Usuario: «no me gusta [la fruta], dame otra propuesta de símbolos». Se conserva el método (sello, rasgo, color de la ronda 3) y cambia solo la marca del centro: A Monograma F (brazo inferior = punto de evidencia), B La entrega (curva que pasa el punto), C El gajo (un gajo de cítrico), D Hoja que valida (vena = palomita). Nota: con D, Lima tendría dos palomitas (marca + insignia); su rasgo cambiaría.
+
+## Ronda 5 · tres propuestas originales (`r5/propuestas.html`)
+Usuario: «no, preséntame 3 propuestas originales». Sistemas completos con color, sin motivos genéricos:
+- A Personajes: cada agente es su fruta con cara mínima; Bruno = semilla; squad = el grupo.
+- B Cortes: sección transversal geométrica de cada fruta; squad = anillos con los colores de todos.
+- C Etiquetas: la calcomanía de fruta del súper con letra y código (UX·01, DS·02, QA·03, IM·04, DOC·05); forma distinta por integrante.
