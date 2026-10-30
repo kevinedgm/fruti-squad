@@ -58,3 +58,8 @@ Seis opciones desde su descripción: 1 Esqueleto (anillos vacíos = estructura s
 
 ## Ronda 9 · Kiwi como UX Architect (`r9-kiwi/kiwi.html`)
 Usuario: «siento que no representa Kiwi UX Architect». Faltaba el oficio de arquitecto: 1 Clave (arco de cinco puntos, la clave mayor arriba, dos pilares), 2 Plano (puntos sobre ejes punteados), 3 Planta (muros con aberturas y punto de entrada), 4 Tres tamaños (compact, medium, expanded con el punto fijo).
+
+**Kiwi elegido (2026-10-30): «Tres tamaños»** (tres marcos compact/medium/expanded con el punto fijo). Fija el idioma: marcos redondeados en trazo 3.5 + punto lleno.
+
+## Ronda 10 · Lima (`r10-lima/lima.html`)
+En el idioma de Kiwi: 1 Clasificación (marco en cuatro casillas: reuse/extend/new/local; recomendada), 2 Compuerta (quality gate; parece «salir»), 3 Promoción (escalones; parece «señal»), 4 Contrato (marco con sello en la esquina).
