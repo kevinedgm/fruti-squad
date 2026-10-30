@@ -1,7 +1,17 @@
-# Directorio de Oaxaca · brief (borrador 0, 2026-10-30)
+# App de planes en Oaxaca · brief (borrador 1, 2026-10-30)
 
 ## Idea (usuario)
 App/sitio tipo directorio de Oaxaca: cafeterías, hoteles boutique, museos, restaurantes, experiencias y tours. Se ofrece a esos negocios y funciona como **puerta de entrada** para venderles CLNDA Booking o Mesanda.
+
+## Intención (usuario, 2026-10-30)
+«No sabe uno qué plan hacer; siempre visitamos los mismos lugares». Descubrir cafés, restaurantes, tours, talleres y cosas para hacer solo. Orientada a Oaxaca.
+
+Consecuencias (inferencia):
+- No es un directorio (responde «¿dónde está X?», cuando ya sabes qué quieres) sino una app de **planes** (responde «¿qué hago?», cuando no lo sabes). La entrada es por intención, momento y compañía (hoy, este fin, solo, en pareja, con niños), no por categoría.
+- Público principal probable: **gente de Oaxaca** que repite lugares (uso semanal), turistas después. Español primero.
+- Lo nuevo importa: marcar «ya fui», guardar, y destacar lo que no has visitado.
+- Talleres y eventos tienen fecha: el contenido caduca cada semana. Quien lo carga son los negocios (incentivo: exposición gratis), y esa carga es la relación que abre la venta de Booking y Mesanda.
+- Propuesta para curado vs abierto: **híbrido**. Registro abierto (cualquier negocio sube su ficha, talleres y eventos); los planes recomendados se curan.
 
 ## Mecanismo (inferencia)
 Dos lados: **visitantes** que buscan qué hacer y **negocios** que quieren aparecer.
