@@ -92,3 +92,6 @@ Nombre dado por el usuario. 1 Red de conocimiento (puntos enlazados dentro del m
 
 ## Ronda 17 · Fruti Squad, el orquestador (`r17-squad/squad.html`)
 1 Núcleo (centro con cinco radios; recomendada), 2 Ronda (anillo de cinco con el turno activo), 3 Quinteto (cara de dado), 4 Secuencia (cápsula con cinco etapas, la última mayor).
+
+## Ronda 18 · orquestador, más disruptivo (`r18-squad/squad.html`)
+Usuario: «no me gusta, otra ronda más disruptiva, moderna». 1 Sólido (único bloque lleno, estela de perforaciones en diagonal; recomendada), 2 Espiral (marcos anidados girando), 3 Eslabones (dos marcos entrelazados), 4 Entrega (se parece a «editar»).
