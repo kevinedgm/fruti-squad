@@ -8,7 +8,11 @@ App/sitio tipo directorio de Oaxaca: cafeterías, hoteles boutique, museos, rest
 
 Consecuencias (inferencia):
 - No es un directorio (responde «¿dónde está X?», cuando ya sabes qué quieres) sino una app de **planes** (responde «¿qué hago?», cuando no lo sabes). La entrada es por intención, momento y compañía (hoy, este fin, solo, en pareja, con niños), no por categoría.
-- Público principal probable: **gente de Oaxaca** que repite lugares (uso semanal), turistas después. Español primero.
+- Públicos (usuario, 2026-10-30): **gente de Oaxaca y turistas**. Buscar un hotel boutique en una app hecha para Oaxaca no es lo mismo que en Google o Booking.
+  - Local: «¿qué hago hoy?», uso semanal, lo nuevo y los eventos, español.
+  - Turista: «¿dónde me quedo y qué no me pierdo?», uso por viaje (antes y durante), español e inglés, fechas de viaje.
+  - Propuesta: un mismo contenido curado y dos entradas («Vivo aquí» / «Estoy de visita»), no dos apps.
+  - Diferencia frente a Google y OTAs (inferencia): selección local de lugares pequeños y reserva directa con el hotel vía CLNDA Booking, sin comisión de intermediario (las OTAs cobran comisión al hotel; verificar rangos actuales antes de usar cifras).
 - Lo nuevo importa: marcar «ya fui», guardar, y destacar lo que no has visitado.
 - Talleres y eventos tienen fecha: el contenido caduca cada semana. Quien lo carga son los negocios (incentivo: exposición gratis), y esa carga es la relación que abre la venta de Booking y Mesanda.
 - Propuesta para curado vs abierto: **híbrido**. Registro abierto (cualquier negocio sube su ficha, talleres y eventos); los planes recomendados se curan.
