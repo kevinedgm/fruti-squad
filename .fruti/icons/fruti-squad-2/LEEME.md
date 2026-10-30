@@ -87,3 +87,8 @@ Usuario: «me gustan la 2 y la 1». 1 Etiqueta del plano (< > + marco medio punt
 
 ## Ronda 16 · Mora · Documentation & Knowledge Engineer (`r16-mora/mora.html`)
 Nombre dado por el usuario. 1 Red de conocimiento (puntos enlazados dentro del marco; recomendada), 2 Índice (parece «lista»), 3 Página viva (esquina doblada; parece «archivo»), 4 Espejo (código ↔ docs; parece el Evento descartado).
+
+**Mora elegida: «Red de conocimiento»** (marco con puntos enlazados en ramas).
+
+## Ronda 17 · Fruti Squad, el orquestador (`r17-squad/squad.html`)
+1 Núcleo (centro con cinco radios; recomendada), 2 Ronda (anillo de cinco con el turno activo), 3 Quinteto (cara de dado), 4 Secuencia (cápsula con cinco etapas, la última mayor).
