@@ -21,7 +21,9 @@ Riesgos: pérdida de datos si falla la computadora (el respaldo es urgente, no l
 
 ## Complemento Mesanda Reservas (usuario, 2026-10-30)
 Reservas en línea tipo OpenTable. Vive en la nube (de pago), porque el comensal reserva desde internet; se sincroniza con el plano local y la mesa aparece «Reservada · hora».
-Regla propuesta para el modo sin internet: la nube solo confirma sola dentro de un **cupo reservado para internet** (mesas u horarios que el restaurante aparta); fuera del cupo, la reserva queda «por confirmar» hasta que el restaurante la acepte. Así una reserva en línea nunca choca con una mesa asignada en el local mientras la computadora estaba desconectada.
+**Decisión del usuario (2026-10-30): ninguna reserva se acepta en automático; el restaurante la acepta o la rechaza.** (Reemplaza la regla del cupo para internet.)
+Flujo: comensal envía solicitud → «Pendiente» → aparece en «Te necesitan» del plano (y en el teléfono del dueño, con la nube) → Aceptar (la mesa queda «Reservada · hora») o Rechazar con alternativa de horario → aviso al comensal.
+Efecto: desaparece el riesgo de mesa duplicada (el restaurante decide viendo su plano); aparece otro: el comensal espera. Hace falta un **plazo de respuesta** y qué pasa si vence (incógnita).
 Inferencia de venta: cobro fijo mensual frente al cobro por comensal de OpenTable (verificar tarifas actuales antes de usarlo como argumento).
 
 ## Enunciado
