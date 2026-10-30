@@ -1,0 +1,35 @@
+{
+  "marca": "NisaLab",
+  "respaldo": "de Nisa Nabani",
+  "arquitectura": {
+    "empresa": "Nisa Nabani",
+    "sistema": "NisaLab",
+    "productos": "«Producto NisaLab» (por definir)"
+  },
+  "simbolo": "Colonia: cuatro células tangentes con separación constante; una sola en pera, arriba a la derecha",
+  "color": {
+    "azul-real": {
+      "hex": "#052A76",
+      "uso": "símbolo, logotipo y fondo del ícono de app",
+      "blanco_encima": 13.13
+    },
+    "pera": {
+      "hex": "#C2D225",
+      "uso": "una sola célula del símbolo; nunca texto",
+      "sobre_blanco": 1.67,
+      "sobre_azul": 7.84
+    },
+    "tinta": {
+      "hex": "#141B33",
+      "uso": "versión a una tinta en documentos"
+    }
+  },
+  "tipografia": {
+    "logotipo": "«Nisa» Poppins 700 + «Lab» Poppins 400, convertidos a trazos",
+    "interfaz": "Poppins (manual de Nisa Nabani) + IBM Plex Mono para datos"
+  },
+  "tamano_minimo": {
+    "pantalla_px": 16,
+    "impreso_mm": 6
+  }
+}
