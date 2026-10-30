@@ -1,0 +1,3 @@
+# Mesanda · ronda 6 de color (blanco, negro y un acento vivo)
+
+Usuario: blanco + negro + un acento vivo; psicología según el tipo de producto, nada «mexicano», nada opaco. Acentos: 1 Amarillo señal #facc15 (atención, rapidez; negro encima 12.8:1), 2 Rojo tomate #ef2b2d (apetito, urgencia; choca con error), 3 Verde vivo #22c55e (fluidez, listo; choca con «libre»), 4 Azul eléctrico #2f5bff (eficiencia; poco distintivo). El acento marca botón principal y «cuenta pedida». Nota: amarillo sobre blanco 1.5:1, solo como relleno con texto negro; en el lockup claro la estela amarilla es decorativa (los logotipos están exentos de contraste en WCAG). `color.html` / `color.png`.
