@@ -1,4 +1,4 @@
-# App de planes en Oaxaca · brief (borrador 1, 2026-10-30)
+# Convia · app de planes en Oaxaca · brief (borrador 1, 2026-10-30)
 
 ## Idea (usuario)
 App/sitio tipo directorio de Oaxaca: cafeterías, hoteles boutique, museos, restaurantes, experiencias y tours. Se ofrece a esos negocios y funciona como **puerta de entrada** para venderles CLNDA Booking o Mesanda.
@@ -69,7 +69,13 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 ## Pendiente de operación (usuario, 2026-10-30: «tema de operación de negocio», se decide después)
 - Quién carga los primeros lugares al lanzar (curaduría e invitación vs. solicitudes espontáneas) y cuántos necesita la fase 1.
 
+## Identidad (usuario, 2026-10-30)
+- Marca independiente de CLNDA. Evoca Oaxaca sin nombrarla. Español fácil en inglés. Personalidad: amigo que sabe.
+- **Nombre: Convia** (convite + vía; con v). Rondas en `nombres-r1.md` a `nombres-r6.md`.
+- Búsqueda web preliminar (no es búsqueda de marca): existe Convia Inc. (EE. UU., tecnología para edificios; otra clase y mercado) y una app sueca «Convie» de gastronomía y hotelería (nombre parecido, mismo rubro).
+- Pendiente: Marcanet (clases 9, 35, 39, 42), dominios y redes; prueba de recuerdo con 5 personas.
+
 ## Incógnitas
 - ¿Curado (solo lo recomendado) o abierto (cualquier negocio se registra)?
 - ¿Quién paga y qué? (¿listado gratis, destacado de pago, solo como gancho?)
-- Idioma (turista nacional / extranjero), nombre y marca, solo Oaxaca capital o el estado.
+- Idioma (turista nacional / extranjero), solo Oaxaca capital o el estado.
