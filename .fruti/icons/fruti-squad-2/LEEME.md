@@ -63,3 +63,6 @@ Usuario: «siento que no representa Kiwi UX Architect». Faltaba el oficio de ar
 
 ## Ronda 10 · Lima (`r10-lima/lima.html`)
 En el idioma de Kiwi: 1 Clasificación (marco en cuatro casillas: reuse/extend/new/local; recomendada), 2 Compuerta (quality gate; parece «salir»), 3 Promoción (escalones; parece «señal»), 4 Contrato (marco con sello en la esquina).
+
+## Ronda 11 · Lima Design System Governance (`r11-lima/lima.html`)
+Usuario: «Lima es Lima Design System Governance»: el símbolo debe contar el producto completo (sistema + gobernanza). 1 Fuente única (un marco manda, tres heredan; recomendada), 2 Biblioteca (marcos apilados, el de enfrente aprobado), 3 Alineación (piezas a una misma regla), 4 Clasificación.
