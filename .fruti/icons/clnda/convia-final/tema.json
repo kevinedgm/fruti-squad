@@ -1,0 +1,39 @@
+{
+ "nombre": "Convia",
+ "origen": "convite (invitación) + vía (camino)",
+ "simbolo": "Estrella de un solo trazo, hecha a mano e inclinada; abstraída de las estrellas que se cargan en el convite. Fuente: convia-r7/E1b.svg",
+ "color": {
+  "papel": "#f7f5f0",
+  "superficie": "#ffffff",
+  "tinta": "#1b1d1a",
+  "texto_sec": "#5b605a",
+  "linea": "#e2ded4",
+  "cantera": "#2f5a45",
+  "oscuro_fondo": "#141714",
+  "oscuro_superficie": "#1d201c",
+  "oscuro_tinta": "#f2f0ea",
+  "oscuro_texto_sec": "#a9ada6",
+  "cantera_clara": "#8fc4a8"
+ },
+ "contraste": {
+  "cantera/papel": 7.22,
+  "papel/cantera (texto en botón)": 7.22,
+  "tinta/papel": 15.58,
+  "texto_sec/papel": 5.9,
+  "cantera_clara/oscuro_fondo": 9.14,
+  "oscuro_tinta/oscuro_fondo": 15.85,
+  "oscuro_texto_sec/oscuro_fondo": 7.93
+ },
+ "tipografia": {
+  "display": "Gloock 400 (logotipo, títulos)",
+  "texto": "Instrument Sans 400/500/600 (todo lo demás; números tabulares en horarios y precios)",
+  "licencia": "SIL Open Font License (Google Fonts)"
+ },
+ "reglas": [
+  "Un solo color de acento (cantera); la fotografía de los lugares es la protagonista.",
+  "Gloock solo en logotipo y títulos; nunca en horarios, precios ni botones.",
+  "Área de seguridad: media altura de la estrella alrededor del logotipo.",
+  "Tamaño mínimo: estrella 16 px; logotipo 24 px de alto.",
+  "El logotipo nunca se redibuja: se usan los SVG de esta carpeta (texto convertido a trazos)."
+ ]
+}
