@@ -14,7 +14,7 @@ DAT = sv('nisadata-final/svg/app-icon.svg', 'width:56px;height:56px;border-radiu
 LAB_s, DAT_s = LAB.replace('56px;height:56px;border-radius:14px', '28px;height:28px;border-radius:7px'), DAT.replace('56px;height:56px;border-radius:14px', '28px;height:28px;border-radius:7px')
 LAB_W = sv('nisalab-final/svg/logotipo.svg', 'height:26px;width:auto;display:block')
 DAT_W = sv('nisadata-final/svg/logotipo.svg', 'height:26px;width:auto;display:block')
-html = f'''<title>Nisa Nabani Hub</title>
+html = f'''<title>Aplicaciones Nisa Nabani</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
