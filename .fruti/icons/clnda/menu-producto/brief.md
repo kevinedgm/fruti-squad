@@ -14,9 +14,15 @@ App instalable en cada restaurante (incluidos restaurantes de hotel) para admini
 | | reportes y analítica con historial |
 | | facturación CFDI (requiere internet) — inferencia |
 | | cargo a la habitación con CLNDA Booking — inferencia |
+| | **Mesanda Reservas** (complemento tipo OpenTable, usuario 2026-10-30): reservas en línea que llegan al plano como «Reservada · hora» |
 
 Por qué cierra (inferencia): el usuario gratis no genera costo de servidor; el costo y el valor aparecen juntos cuando el dueño quiere ver su negocio desde fuera.
 Riesgos: pérdida de datos si falla la computadora (el respaldo es urgente, no lujo); costo de soporte de instalaciones gratuitas; actualizaciones en equipos sin internet.
+
+## Complemento Mesanda Reservas (usuario, 2026-10-30)
+Reservas en línea tipo OpenTable. Vive en la nube (de pago), porque el comensal reserva desde internet; se sincroniza con el plano local y la mesa aparece «Reservada · hora».
+Regla propuesta para el modo sin internet: la nube solo confirma sola dentro de un **cupo reservado para internet** (mesas u horarios que el restaurante aparta); fuera del cupo, la reserva queda «por confirmar» hasta que el restaurante la acepte. Así una reserva en línea nunca choca con una mesa asignada en el local mientras la computadora estaba desconectada.
+Inferencia de venta: cobro fijo mensual frente al cobro por comensal de OpenTable (verificar tarifas actuales antes de usarlo como argumento).
 
 ## Enunciado
 El **mesero** necesita **tomar la orden de cada comensal y enviarla a cocina** en segundos, porque hoy lo hace en libreta o en un sistema lento de muchas pantallas.

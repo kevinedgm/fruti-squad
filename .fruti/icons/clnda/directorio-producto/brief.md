@@ -11,7 +11,7 @@ Dos lados: **visitantes** que buscan qué hacer y **negocios** que quieren apare
 ## Riesgos
 - Huevo y gallina: sin visitantes, aparecer no le vale nada al negocio; sin buenos negocios, no hay visitantes. Hay que decidir qué lado se arranca primero.
 - Competencia directa: Google Maps y TripAdvisor ya listan todo; un directorio genérico pierde. La diferencia posible: curaduría local y reserva directa.
-- Conexión desigual: Booking encaja técnicamente (botón «Reservar» → sitio del hotel). Mesanda es local y no da nada al visitante; con restaurantes el directorio es canal de venta, no integración.
+- Conexión desigual, resuelta en parte: Booking encaja (botón «Reservar» → sitio del hotel); con el complemento **Mesanda Reservas** (usuario) los restaurantes también tienen botón «Reservar mesa» que llega a su plano.
 
 ## Incógnitas
 - ¿Curado (solo lo recomendado) o abierto (cualquier negocio se registra)?
