@@ -55,3 +55,6 @@ Usuario: «sí, pero los colores no me gustan; trabajemos sobre la A; propuesta 
 
 ## Ronda 8 · uno por uno: Kiwi (`r8-kiwi/kiwi.html`)
 Seis opciones desde su descripción: 1 Esqueleto (anillos vacíos = estructura sin apariencia, un punto lleno = lo primero; recomendada), 2 Jerarquía, 3 Regiones, 4 Flujo (se confunde con «compartir»), 5 Reacomodo (adaptativo), 6 Estados.
+
+## Ronda 9 · Kiwi como UX Architect (`r9-kiwi/kiwi.html`)
+Usuario: «siento que no representa Kiwi UX Architect». Faltaba el oficio de arquitecto: 1 Clave (arco de cinco puntos, la clave mayor arriba, dos pilares), 2 Plano (puntos sobre ejes punteados), 3 Planta (muros con aberturas y punto de entrada), 4 Tres tamaños (compact, medium, expanded con el punto fijo).
