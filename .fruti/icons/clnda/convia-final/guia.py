@@ -5,9 +5,9 @@ T = json.load(open(os.path.join(D, 'tema.json'))); C = T['color']; K = T['contra
 u = lambda f: 'data:image/svg+xml;base64,' + base64.b64encode(open(os.path.normpath(os.path.join(D, 'svg', f)), 'rb').read()).decode()
 og = 'data:image/png;base64,' + base64.b64encode(open(os.path.join(D, 'png', 'og-1200x630.png'), 'rb').read()).decode()
 def sw(n, h, note): return f'<div class="sw"><i style="background:{h}"></i><div><b>{n}</b><code>{h}</code><small>{note}</small></div></div>'
-cats = ''.join(f'''<div class="cat"><div class="catsw"><i style="background:{c['punto']}"></i><i style="background:{c['fondo']}"></i><i style="background:{c['texto']}"></i></div>
+cats = ''.join(f'''<div class="cat"><div class="catsw"><img class="ico" src="{u('../iconos/' + k + '-color.svg')}" alt="Ícono de {c['nombre']}"><i style="background:{c['punto']}"></i><i style="background:{c['fondo']}"></i><i style="background:{c['texto']}"></i></div>
 <span class="chip" style="background:{c['fondo']};color:{c['texto']}"><b class="dot" style="background:{c['punto']}"></b>{c['nombre']}</span>
-<small><code>{c['punto']}</code> punto · <code>{c['fondo']}</code> fondo · <code>{c['texto']}</code> texto {c['texto/fondo']}:1</small></div>''' for c in CAT.values())
+<small><code>{c['punto']}</code> punto · <code>{c['fondo']}</code> fondo · <code>{c['texto']}</code> texto {c['texto/fondo']}:1</small></div>''' for k, c in CAT.items())
 EJ = [('cafes', 'Café Tres Patios', 'Jalatlaco · abierto hasta 21:00'), ('hoteles', 'Hotel Patio de Luz', 'Centro · desde $2,480'),
       ('talleres', 'Barro bruñido para principiantes', 'Sáb 26 · 11:00 · $650'), ('recorridos', 'Caminata de cantera al amanecer', 'Dom 27 · 7:00 · $300')]
 sel = ''.join(f'''<div class="sel"><div class="selr"><img src="{u('../sellos/' + k + '-sello.svg')}" alt="Sello Convia {c['nombre']}"><img src="{u('../sellos/' + k + '-sello-solido.svg')}" alt="Sello sólido Convia {c['nombre']}"></div>
@@ -36,7 +36,7 @@ p{{margin:0;max-width:68ch}}.muted{{color:var(--sec)}}code{{font-size:.86em}}
 .safe{{justify-self:start;padding:28px;border:1px dashed var(--sec);border-radius:var(--r);background:var(--sup)}}.safe img{{height:56px;display:block}}
 .sw{{display:flex;gap:12px;align-items:center;min-width:0}}.sw i{{flex:0 0 52px;height:52px;border-radius:var(--r-s);border:1px solid #0001}}.sw div{{display:grid;line-height:1.3;min-width:0}}.sw code,.sw small{{font-size:12.5px;color:var(--sec)}}
 .prim{{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:10px}}.prim div{{border-radius:var(--r);padding:16px;min-height:120px;display:flex;flex-direction:column;justify-content:flex-end;font-size:13px}}.prim b{{font-size:15px}}
-.cat{{display:grid;gap:10px;background:var(--sup);border:1px solid var(--linea);border-radius:var(--r);padding:16px;min-width:0}}.catsw{{display:flex;gap:6px}}.catsw i{{width:34px;height:34px;border-radius:10px;border:1px solid #0001}}.cat small{{color:var(--sec);font-size:12px;line-height:1.5}}
+.cat{{display:grid;gap:10px;background:var(--sup);border:1px solid var(--linea);border-radius:var(--r);padding:16px;min-width:0}}.catsw{{display:flex;gap:6px;align-items:center}}.ico{{width:46px;height:46px;margin-right:6px}}.catsw i{{width:34px;height:34px;border-radius:10px;border:1px solid #0001}}.cat small{{color:var(--sec);font-size:12px;line-height:1.5}}
 .chip{{display:inline-flex;align-items:center;gap:7px;justify-self:start;border-radius:999px;padding:4px 12px 4px 9px;font-weight:600;font-size:13px}}.dot{{width:9px;height:9px;border-radius:50%;display:inline-block}}
 .card{{background:var(--sup);border:1px solid var(--linea);border-radius:var(--r);padding:12px;display:grid;gap:8px;min-width:0}}.card .ph{{aspect-ratio:4/3;border-radius:var(--r-s);background:var(--arena)}}.card h4{{margin:0;font:500 19px/1.2 var(--display);font-variation-settings:var(--dv)}}.card p{{font-size:14px;color:var(--sec);font-variant-numeric:tabular-nums}}
 .type{{background:var(--sup);border:1px solid var(--linea);border-radius:var(--r);padding:28px;display:grid;gap:20px;min-width:0}}.lbl{{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--sec);display:block;margin-bottom:4px}}
@@ -69,7 +69,8 @@ p{{margin:0;max-width:68ch}}.muted{{color:var(--sec)}}code{{font-size:.86em}}
 <h3>Modo oscuro</h3><div class="g3">{sw('Fondo', C['oscuro_fondo'], 'fondo')}{sw('Tinta', C['oscuro_tinta'], f"{K['oscuro_tinta/oscuro_fondo']}:1")}{sw('Cantera clara', C['cantera_clara'], f"{K['cantera_clara/oscuro_fondo']}:1 · primario en oscuro")}</div></div></section>
 <section><div class="wrap"><p class="n">04 · Categorías</p><h2 class="d">Un color para cada tipo de lugar</h2>
 <p class="muted">Cada categoría tiene tres tonos: <b>punto</b> (marcador del mapa e ícono), <b>fondo</b> (etiqueta) y <b>texto</b> (contraste AA sobre su fondo y sobre papel). El color ayuda a reconocer de un vistazo, pero nunca va solo: la categoría siempre lleva su nombre. Seis colores no se distinguen entre sí sólo por tono para todas las personas; por eso el nombre es obligatorio.</p>
-<div class="g3">{cats}</div><h3>Así se ven en el directorio</h3><div class="g4">{cards}</div>
+<div class="g3">{cats}</div><p class="muted">Íconos de categoría: mismo trazo de plumón con terminaciones redondas que la estrella. Se usan junto al nombre (nunca solos), en marcadores del mapa, filtros y encabezados. Archivos en <code>iconos/</code> (versión <code>currentColor</code> y versión de color sobre su fondo). Mínimo: 16 px.</p>
+<h3>Así se ven en el directorio</h3><div class="g4">{cards}</div>
 <p class="muted">Regla: el color de categoría nunca reemplaza al primario. Un botón de «Ver plan» es cantera aunque esté en una tarjeta de taller.</p>
 <h3>Sellos y logotipos de categoría</h3><p class="muted">Cada categoría es una submarca de Convia: un sello circular (claro y sólido) y un logotipo horizontal «Convia | Categoría». El sello se usa en portadas de sección, redes, distintivos para negocios aprobados y material impreso; el logotipo, en encabezados de sección.</p>
 <div class="g3">{sel}</div>
@@ -88,7 +89,7 @@ p{{margin:0;max-width:68ch}}.muted{{color:var(--sec)}}code{{font-size:.86em}}
 <div><h3>Así no</h3><ul><li>«¡¡Descubre la MAGIA de Oaxaca!!»</li><li>«Los 100 lugares imperdibles.»</li><li>Emojis, mayúsculas sostenidas, superlativos.</li></ul></div></div></div></section>
 <section><div class="wrap"><p class="n">08 · Aplicaciones</p><h2 class="d">Para compartir</h2><img class="og" src="{og}" alt="Imagen para compartir: logotipo de Convia y la frase lo que vale la pena en Oaxaca, escogido por gente de aquí">
 <p class="muted">Imagen para compartir (1200×630), ícono de app (512, 192 y 180 px) y favicon que cambia con el modo claro u oscuro. Archivos en <code>convia-final/</code>.</p></div></section>
-<section><div class="wrap"><p class="n">09 · Pendiente</p><h2 class="d">Antes de publicar</h2><ol class="r"><li>Buscar «Convia» en Marcanet (IMPI), clases 9, 35, 39 y 42; revisar dominios y redes.</li><li>Íconos de categoría (para acompañar color y nombre).</li><li>Guía de fotografía.</li><li>Textos de marca en inglés.</li></ol></div></section>
+<section><div class="wrap"><p class="n">09 · Pendiente</p><h2 class="d">Antes de publicar</h2><ol class="r"><li>Buscar «Convia» en Marcanet (IMPI), clases 9, 35, 39 y 42; revisar dominios y redes.</li><li>Guía de fotografía.</li><li>Textos de marca en inglés.</li></ol></div></section>
 </main>'''
 open(os.path.join(D, 'guia.html'), 'w').write(html)
 print('ok', len(html))

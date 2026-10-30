@@ -15,6 +15,9 @@ Directorio web de planes, lugares y talleres de Oaxaca. Marca independiente.
 - `sellos/<categoria>-sello.svg` (claro), `-sello-solido.svg`, `-logotipo.svg` («Convia | Categoría»); PNG 512 en `png/`. Generar: `python3 sellos.py <carpeta con Fraunces-Suave-500.ttf y Figtree-650.ttf>` y `node sellos-png.cjs`.
 - Sello mínimo 64 px; la estrella del logotipo de categoría siempre en cantera.
 
+## Íconos de categoría
+- `iconos/<categoria>.svg` (currentColor) y `<categoria>-color.svg` (sobre su fondo). Trazo de plumón con terminaciones redondas, familia de la estrella. Generar: `python3 iconos.py`. Siempre junto al nombre; mínimo 16 px.
+
 ## Archivos
 - `svg/`: simbolo, simbolo-oscuro, simbolo-tinta (currentColor), logotipo, logotipo-oscuro, logotipo-tinta, palabra, app-icon, favicon (cambia con el tema), og (1200×630). Texto convertido a trazos.
 - `png/`: app-icon 512/192/180, simbolo 512, og 1200×630.
@@ -24,7 +27,6 @@ Directorio web de planes, lugares y talleres de Oaxaca. Marca independiente.
 
 ## Pendiente
 - Marcanet (IMPI) clases 9, 35, 39, 42; dominios y redes.
-- Íconos de categoría.
 - Guía de fotografía.
 - Aplicar los colores de categoría a la portada web (`../convia-web-r1/`).
 - Textos de marca en inglés.
