@@ -221,10 +221,10 @@
     "Áreas"
   ],
   "lastChange": {
-    "at": "2026-10-30T00:36:33Z",
+    "at": "2026-10-30T02:15:29Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "Nabi pasa a NisaLab: símbolo Colonia y logotipo Poppins en Marca, ocho áreas con su color e ícono (tokens area-*, componente Áreas, grupo de assets Áreas; sale Divisiones), portada y Carga con Colonia."
+    "note": "EncabezadoModulo gana la variante por área: marca Colonia del área, nombre del área junto al título y línea de 3 px en su color; las páginas globales no cambian."
   },
   "layout": "files",
   "libraries": [],
