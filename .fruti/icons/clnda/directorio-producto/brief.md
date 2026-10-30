@@ -66,6 +66,9 @@ Dos lados: **visitantes** que buscan qué hacer y **negocios** que quieren apare
 | Logo, nombre, categoría del establecimiento | Moderado 12–24 h (propuesta, por confirmar) |
 Propuesta (por confirmar): «inmediato» = pasa la validación automática del panel y se publica; queda registrado para revisión posterior.
 
+## Pendiente de operación (usuario, 2026-10-30: «tema de operación de negocio», se decide después)
+- Quién carga los primeros lugares al lanzar (curaduría e invitación vs. solicitudes espontáneas) y cuántos necesita la fase 1.
+
 ## Incógnitas
 - ¿Curado (solo lo recomendado) o abierto (cualquier negocio se registra)?
 - ¿Quién paga y qué? (¿listado gratis, destacado de pago, solo como gancho?)
