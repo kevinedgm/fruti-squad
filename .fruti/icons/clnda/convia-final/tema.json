@@ -13,7 +13,9 @@
   "oscuro_superficie": "#1d201c",
   "oscuro_tinta": "#f2f0ea",
   "oscuro_texto_sec": "#a9ada6",
-  "cantera_clara": "#8fc4a8"
+  "cantera_clara": "#8fc4a8",
+  "cantera_suave": "#e3ece6",
+  "arena": "#ebe6da"
  },
  "contraste": {
   "cantera/papel": 7.22,
@@ -22,16 +24,77 @@
   "texto_sec/papel": 5.9,
   "cantera_clara/oscuro_fondo": 9.14,
   "oscuro_tinta/oscuro_fondo": 15.85,
-  "oscuro_texto_sec/oscuro_fondo": 7.93
+  "oscuro_texto_sec/oscuro_fondo": 7.93,
+  "cantera/cantera_suave": 6.52
+ },
+ "categorias": {
+  "cafes": {
+   "nombre": "Cafés",
+   "punto": "#eda100",
+   "fondo": "#f6e9ce",
+   "texto": "#855a00",
+   "texto/fondo": 5.05,
+   "texto/papel": 5.57,
+   "punto/papel": 1.99
+  },
+  "restaurantes": {
+   "nombre": "Restaurantes",
+   "punto": "#e5622a",
+   "fondo": "#f4e0d4",
+   "texto": "#a5471e",
+   "texto/fondo": 4.68,
+   "texto/papel": 5.48,
+   "punto/papel": 3.15
+  },
+  "hoteles": {
+   "nombre": "Hoteles boutique",
+   "punto": "#2a78d6",
+   "fondo": "#dae4ec",
+   "texto": "#2260ab",
+   "texto/fondo": 4.89,
+   "texto/papel": 5.79,
+   "punto/papel": 4.05
+  },
+  "talleres": {
+   "nombre": "Talleres",
+   "punto": "#c2447a",
+   "fondo": "#f0dcdf",
+   "texto": "#a33966",
+   "texto/fondo": 4.8,
+   "texto/papel": 5.78,
+   "punto/papel": 4.38
+  },
+  "museos": {
+   "nombre": "Museos y galerías",
+   "punto": "#7a3fa0",
+   "fondo": "#e6dce5",
+   "texto": "#7a3fa0",
+   "texto/fondo": 5.17,
+   "texto/papel": 6.33,
+   "punto/papel": 6.33
+  },
+  "recorridos": {
+   "nombre": "Recorridos",
+   "punto": "#1baf7a",
+   "fondo": "#d8ebdf",
+   "texto": "#11704e",
+   "texto/fondo": 4.89,
+   "texto/papel": 5.58,
+   "punto/papel": 2.58
+  }
  },
  "tipografia": {
-  "display": "Gloock 400 (logotipo, títulos)",
-  "texto": "Instrument Sans 400/500/600 (todo lo demás; números tabulares en horarios y precios)",
+  "display": "Fraunces 500 con SOFT 100, WONK 0, opsz 96 (logotipo, títulos)",
+  "texto": "Figtree 400/500/600/700 (todo lo demás; números tabulares en horarios y precios)",
   "licencia": "SIL Open Font License (Google Fonts)"
  },
  "reglas": [
-  "Un solo color de acento (cantera); la fotografía de los lugares es la protagonista.",
-  "Gloock solo en logotipo y títulos; nunca en horarios, precios ni botones.",
+  "Primario: cantera. Apoyo: tinta, papel, arena y cantera suave. La fotografía de los lugares es la protagonista.",
+  "Fraunces solo en logotipo y títulos; horarios, precios y botones van en Figtree.",
+  "Formas suaves: radio 16 px en tarjetas y fotos, 12 px en campos, botones en píldora; hacen juego con la estrella.",
+  "Cada categoría tiene un color, pero nunca se identifica solo por color: siempre lleva su nombre (y su ícono cuando exista).",
+  "El punto de categoría (vivo) se usa en marcadores e íconos sobre fondo de su color o con borde blanco; las etiquetas usan fondo + texto oscuro (AA).",
+  "El color de categoría no sustituye al primario: botones, enlaces y foco siempre en cantera.",
   "Área de seguridad: media altura de la estrella alrededor del logotipo.",
   "Tamaño mínimo: estrella 16 px; logotipo 24 px de alto.",
   "El logotipo nunca se redibuja: se usan los SVG de esta carpeta (texto convertido a trazos)."

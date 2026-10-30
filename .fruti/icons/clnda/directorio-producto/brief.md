@@ -77,7 +77,7 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 - ~~Color: paleta B «Convite + cantera»~~ (2026-10-30: el usuario ya no está convencido; busca **elegancia y pulcritud**, no infantil). Antes:: fondo verde cantera #1f4d3a, principal magenta #d42a66, acento amarillo #ffc53d, apoyo verde #3f8f6b, papel #f6f3ea, tinta #15241d. Contraste WCAG 2.2 AA verificado en `../convia-color-r1/`.
 - **Plataforma (usuario): directorio web** (responsive), no app móvil primero.
 - Dirección visual nueva: elegante y pulcra. Prototipo de portada con tres paletas sobrias en `../convia-web-r1/` (Gloock + Instrument Sans).
-- **Identidad v1** en `../convia-final/` (guía, SVG, PNG, tema.json): paleta Cantera (#2f5a45 sobre papel #f7f5f0) y Gloock + Instrument Sans, elegidas con la dirección del usuario; pendientes de su confirmación.
+- **Identidad v2** en `../convia-final/`: paleta Cantera (primario #2f5a45; apoyo tinta, papel, arena, cantera suave), un color por categoría, Fraunces suave + Figtree (aprobadas por el usuario), formas suaves. Manual: https://claude.ai/artifact/6pcxK7T2c3mKpeSfYgGL51
 - Pendiente: Marcanet (clases 9, 35, 39, 42), dominios y redes; prueba de recuerdo con 5 personas.
 
 ## Incógnitas
