@@ -2,7 +2,7 @@
 import base64, json, os
 D = os.path.dirname(os.path.abspath(__file__))
 T = json.load(open(os.path.join(D, 'tema.json'))); C = T['color']; K = T['contraste']; CAT = T['categorias']
-u = lambda f: 'data:image/svg+xml;base64,' + base64.b64encode(open(os.path.join(D, 'svg', f), 'rb').read()).decode()
+u = lambda f: 'data:image/svg+xml;base64,' + base64.b64encode(open(os.path.normpath(os.path.join(D, 'svg', f)), 'rb').read()).decode()
 og = 'data:image/png;base64,' + base64.b64encode(open(os.path.join(D, 'png', 'og-1200x630.png'), 'rb').read()).decode()
 def sw(n, h, note): return f'<div class="sw"><i style="background:{h}"></i><div><b>{n}</b><code>{h}</code><small>{note}</small></div></div>'
 cats = ''.join(f'''<div class="cat"><div class="catsw"><i style="background:{c['punto']}"></i><i style="background:{c['fondo']}"></i><i style="background:{c['texto']}"></i></div>
@@ -10,6 +10,8 @@ cats = ''.join(f'''<div class="cat"><div class="catsw"><i style="background:{c['
 <small><code>{c['punto']}</code> punto · <code>{c['fondo']}</code> fondo · <code>{c['texto']}</code> texto {c['texto/fondo']}:1</small></div>''' for c in CAT.values())
 EJ = [('cafes', 'Café Tres Patios', 'Jalatlaco · abierto hasta 21:00'), ('hoteles', 'Hotel Patio de Luz', 'Centro · desde $2,480'),
       ('talleres', 'Barro bruñido para principiantes', 'Sáb 26 · 11:00 · $650'), ('recorridos', 'Caminata de cantera al amanecer', 'Dom 27 · 7:00 · $300')]
+sel = ''.join(f'''<div class="sel"><div class="selr"><img src="{u('../sellos/' + k + '-sello.svg')}" alt="Sello Convia {c['nombre']}"><img src="{u('../sellos/' + k + '-sello-solido.svg')}" alt="Sello sólido Convia {c['nombre']}"></div>
+<img class="sl" src="{u('../sellos/' + k + '-logotipo.svg')}" alt="Convia {c['nombre']}"></div>''' for k, c in CAT.items())
 cards = ''.join(f'''<article class="card"><div class="ph"></div><span class="chip" style="background:{CAT[k]['fondo']};color:{CAT[k]['texto']}"><b class="dot" style="background:{CAT[k]['punto']}"></b>{CAT[k]['nombre']}</span>
 <h4>{n}</h4><p>{m}</p></article>''' for k, n, m in EJ)
 html = f'''<title>Convia Marca</title>
@@ -40,6 +42,7 @@ p{{margin:0;max-width:68ch}}.muted{{color:var(--sec)}}code{{font-size:.86em}}
 .type{{background:var(--sup);border:1px solid var(--linea);border-radius:var(--r);padding:28px;display:grid;gap:20px;min-width:0}}.lbl{{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--sec);display:block;margin-bottom:4px}}
 .forma{{display:flex;flex-wrap:wrap;gap:16px;align-items:center}}.btn{{background:var(--cantera);color:#fff;border-radius:999px;padding:12px 22px;font-weight:600}}.btn.l{{background:transparent;color:var(--tinta);border:1px solid var(--tinta)}}.field{{border:1px solid var(--linea);background:var(--papel);border-radius:var(--r-s);padding:11px 14px;min-width:200px;color:var(--sec)}}
 .voz{{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}}.voz div{{background:var(--sup);border:1px solid var(--linea);border-radius:var(--r);padding:20px}}.voz ul{{margin:8px 0 0;padding-left:18px}}
+.sel{{background:var(--sup);border:1px solid var(--linea);border-radius:var(--r);padding:18px;display:grid;gap:14px;min-width:0}}.selr{{display:flex;gap:12px}}.selr img{{width:min(46%,150px);height:auto}}.sl{{height:30px;width:auto;max-width:100%;justify-self:start}}
 .og{{width:100%;height:auto;border:1px solid var(--linea);border-radius:var(--r)}}ol.r{{margin:0;padding-left:20px;display:grid;gap:6px}}
 @media (max-width:860px){{.g2,.g3,.voz{{grid-template-columns:1fr}}.g4{{grid-template-columns:repeat(2,minmax(0,1fr))}}.prim{{grid-template-columns:1fr 1fr}}}}
 @media (max-width:480px){{.g4{{grid-template-columns:1fr}}}}
@@ -67,7 +70,10 @@ p{{margin:0;max-width:68ch}}.muted{{color:var(--sec)}}code{{font-size:.86em}}
 <section><div class="wrap"><p class="n">04 · Categorías</p><h2 class="d">Un color para cada tipo de lugar</h2>
 <p class="muted">Cada categoría tiene tres tonos: <b>punto</b> (marcador del mapa e ícono), <b>fondo</b> (etiqueta) y <b>texto</b> (contraste AA sobre su fondo y sobre papel). El color ayuda a reconocer de un vistazo, pero nunca va solo: la categoría siempre lleva su nombre. Seis colores no se distinguen entre sí sólo por tono para todas las personas; por eso el nombre es obligatorio.</p>
 <div class="g3">{cats}</div><h3>Así se ven en el directorio</h3><div class="g4">{cards}</div>
-<p class="muted">Regla: el color de categoría nunca reemplaza al primario. Un botón de «Ver plan» es cantera aunque esté en una tarjeta de taller.</p></div></section>
+<p class="muted">Regla: el color de categoría nunca reemplaza al primario. Un botón de «Ver plan» es cantera aunque esté en una tarjeta de taller.</p>
+<h3>Sellos y logotipos de categoría</h3><p class="muted">Cada categoría es una submarca de Convia: un sello circular (claro y sólido) y un logotipo horizontal «Convia | Categoría». El sello se usa en portadas de sección, redes, distintivos para negocios aprobados y material impreso; el logotipo, en encabezados de sección.</p>
+<div class="g3">{sel}</div>
+<p class="muted">Tamaño mínimo del sello: 64 px (el texto del aro deja de leerse abajo de eso; en tamaños menores se usa la estrella sobre el fondo de la categoría). El sello no cambia de colores ni se combina con otro. La estrella del logotipo de categoría siempre es cantera: la marca madre manda.</p></div></section>
 <section><div class="wrap"><p class="n">05 · Tipografía</p><h2 class="d">Fraunces suave y Figtree</h2>
 <div class="type"><div><span class="lbl">Display · Fraunces 500 · SOFT 100 · logotipo y títulos</span><p class="d" style="font-size:52px;line-height:1.05;letter-spacing:-.02em">Talleres para ir solo</p></div>
 <div><span class="lbl">Título de sección · Fraunces 500 · 34 px</span><p class="d" style="font-size:34px;line-height:1.1">Esta semana</p></div>
