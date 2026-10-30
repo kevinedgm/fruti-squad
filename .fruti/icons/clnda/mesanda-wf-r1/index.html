@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="true">
+<title>Mesanda wireframe</title>
+<style>
+/* Wireframe F2 en grises: estructura, flujo y conteo de toques. Sin marca a propósito. */
+:root{--g0:#ffffff;--g1:#f4f4f5;--g2:#e4e4e7;--g3:#d4d4d8;--g4:#a1a1aa;--g5:#71717a;--g6:#3f3f46;--g7:#18181b;--r:12px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--g1);color:var(--g7);font:400 15px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;padding:24px max(16px,env(safe-area-inset-left))}
+main{max-width:1240px;margin:0 auto;display:grid;gap:16px}
+h1{font-size:24px;margin:0}
+.lead{margin:0;color:var(--g6);max-width:900px}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--g7);outline-offset:2px}
+[hidden]{display:none!important}
+.bar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;background:var(--g0);border:1px solid var(--g2);border-radius:var(--r);padding:10px 14px}
+.cnt{font-weight:700}
+.cnt b{font-size:20px}
+.reset{margin-left:auto;border:1px solid var(--g3);background:var(--g0);border-radius:8px;padding:6px 12px}
+/* marco de dispositivo: horizontal (computadora o tablet) */
+.dev{background:var(--g0);border:2px solid var(--g3);border-radius:18px;overflow:hidden;min-height:620px;display:flex;flex-direction:column}
+.top{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding:10px 16px;border-bottom:1px solid var(--g2)}
+.logo{font-weight:800;letter-spacing:-.02em}
+.logo::before{content:"";display:inline-block;width:18px;height:18px;border-radius:50%;background:var(--g4);vertical-align:-3px;margin-right:6px}
+.tabs{display:flex;gap:4px;background:var(--g1);border-radius:10px;padding:3px}
+.tabs button{border:0;background:none;border-radius:8px;padding:8px 14px;min-height:44px}
+.tabs button[aria-pressed=true]{background:var(--g0);font-weight:700;box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.who{margin-left:auto;color:var(--g5);font-size:13px}
+/* PLANO */
+.plano{flex:1;display:grid;grid-template-columns:minmax(0,1fr) 260px;min-height:0}
+.sala{position:relative;background:repeating-linear-gradient(0deg,transparent 0 39px,var(--g1) 39px 40px),repeating-linear-gradient(90deg,transparent 0 39px,var(--g1) 39px 40px);min-height:520px}
+.mesa{position:absolute;border:2px solid var(--g4);background:var(--g0);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;text-align:center;padding:4px;min-width:44px;min-height:44px}
+.mesa.red{border-radius:50%}
+.mesa.cua{border-radius:14px}
+.mesa b{font-size:18px}
+.mesa small{font-size:11.5px;line-height:1.2}
+.mesa[data-e=libre]{border-style:dashed}
+.mesa[data-e=ocupada]{background:var(--g6);border-color:var(--g6);color:#fff}
+.mesa[data-e=cuenta]{background:var(--g3);border:3px solid var(--g7)}
+.mesa[data-e=reservada]{background:var(--g1)}
+.mesa[data-e=cuenta]::after{content:"!";position:absolute;top:-8px;right:-8px;width:22px;height:22px;border-radius:50%;background:var(--g7);color:#fff;font-weight:800;display:grid;place-items:center;font-size:13px}
+.lado{border-left:1px solid var(--g2);padding:14px;display:flex;flex-direction:column;gap:12px;background:var(--g0)}
+.lado h3{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--g5);margin:0}
+.att{display:grid;gap:8px}
+.att button{display:flex;justify-content:space-between;gap:8px;text-align:left;border:1px solid var(--g3);background:var(--g1);border-radius:10px;padding:10px 12px;min-height:44px}
+.ley{display:grid;gap:6px;font-size:13px;color:var(--g6)}
+.ley span{display:flex;align-items:center;gap:8px}
+.ley i{width:18px;height:18px;border-radius:50%;border:2px solid var(--g4);display:inline-block}
+/* ORDEN */
+.orden{flex:1;display:grid;grid-template-columns:150px minmax(0,1fr) 300px;min-height:0}
+.com{border-right:1px solid var(--g2);padding:12px;display:flex;flex-direction:column;gap:6px}
+.com button{border:1px solid var(--g3);background:var(--g0);border-radius:10px;padding:10px;min-height:52px;text-align:left}
+.com button[aria-pressed=true]{background:var(--g7);color:#fff;border-color:var(--g7)}
+.com .add{border-style:dashed;color:var(--g5)}
+.menu{padding:12px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.cats{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+.cats button{border:1px solid var(--g3);background:var(--g0);border-radius:999px;padding:8px 14px;min-height:44px;white-space:nowrap}
+.cats button[aria-pressed=true]{background:var(--g7);color:#fff;border-color:var(--g7)}
+.fotos{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.plat{border:1px solid var(--g3);background:var(--g0);border-radius:12px;padding:0;overflow:hidden;text-align:left;display:flex;flex-direction:column}
+.plat .img{aspect-ratio:4/3;background:linear-gradient(135deg,var(--g2),var(--g3));display:grid;place-items:center;color:var(--g5);font-size:12px}
+.plat .tx{padding:8px 10px;display:flex;justify-content:space-between;gap:6px;font-size:14px}
+.plat .tx b{font-weight:600}
+.ticket{border-left:1px solid var(--g2);display:flex;flex-direction:column;min-height:0;background:var(--g0)}
+.ticket header{padding:12px 14px;border-bottom:1px solid var(--g2)}
+.ticket header b{font-size:18px}
+.lineas{flex:1;overflow:auto;padding:8px 14px;display:grid;gap:10px;align-content:start}
+.grupo h4{margin:0 0 4px;font-size:12px;color:var(--g5);text-transform:uppercase;letter-spacing:.05em}
+.lin{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:6px;align-items:center;padding:6px 0;border-bottom:1px dashed var(--g2);font-size:14px}
+.lin .q{font-weight:700}
+.lin .nota{grid-column:2/4;display:flex;flex-wrap:wrap;gap:4px}
+.lin .nota button{border:1px solid var(--g3);background:var(--g1);border-radius:999px;padding:4px 10px;font-size:12px;min-height:32px}
+.lin .nota button[aria-pressed=true]{background:var(--g6);color:#fff;border-color:var(--g6)}
+.enviada{color:var(--g5)}
+.vacio{color:var(--g5);font-size:14px;padding:16px 0}
+.acc{padding:12px 14px;border-top:1px solid var(--g2);display:grid;gap:8px}
+.prim{border:0;background:var(--g7);color:#fff;border-radius:12px;padding:14px;font-weight:700;min-height:52px}
+.prim:disabled{background:var(--g3);color:var(--g5);cursor:not-allowed}
+.sec{border:1px solid var(--g3);background:var(--g0);border-radius:12px;padding:12px;min-height:48px}
+.volver{border:1px solid var(--g3);background:var(--g0);border-radius:10px;padding:8px 12px;min-height:44px}
+/* CUENTA */
+.cuenta{flex:1;display:grid;grid-template-columns:minmax(0,1fr) 340px;min-height:0}
+.det{padding:16px;display:grid;gap:12px;align-content:start}
+.det table{width:100%;border-collapse:collapse;font-size:14px}
+.det td,.det th{padding:8px 6px;border-bottom:1px solid var(--g2);text-align:left}
+.det th{font-size:12px;color:var(--g5);text-transform:uppercase;letter-spacing:.05em}
+.det td:last-child,.det th:last-child{text-align:right}
+.det .sub td{font-weight:700;background:var(--g1)}
+.pago{border-left:1px solid var(--g2);padding:16px;display:grid;gap:12px;align-content:start;background:var(--g0)}
+.tot{display:grid;gap:4px;font-size:14px}
+.tot div{display:flex;justify-content:space-between}
+.tot .gran{font-size:22px;font-weight:800;border-top:2px solid var(--g7);padding-top:6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips button{border:1px solid var(--g3);background:var(--g0);border-radius:10px;padding:10px 12px;min-height:44px}
+.chips button[aria-pressed=true]{background:var(--g7);color:#fff;border-color:var(--g7)}
+.lbl{font-size:12px;color:var(--g5);text-transform:uppercase;letter-spacing:.05em;margin:0}
+/* diálogo de comensales */
+dialog{border:0;border-radius:16px;padding:20px;max-width:420px;width:calc(100% - 32px)}
+dialog::backdrop{background:rgba(24,24,27,.45)}
+dialog h2{margin:0 0 4px;font-size:20px}
+dialog p{margin:0 0 14px;color:var(--g6)}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.nums button{border:1px solid var(--g3);background:var(--g1);border-radius:12px;min-height:60px;font-size:22px;font-weight:700}
+.cerrar{margin-top:12px;border:0;background:none;color:var(--g6);text-decoration:underline;min-height:44px}
+/* notas del boceto */
+.notas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.nota-wf{background:var(--g0);border:1px dashed var(--g4);border-radius:var(--r);padding:14px;font-size:14px;color:var(--g6)}
+.nota-wf b{color:var(--g7);display:block;margin-bottom:4px}
+.estados{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.estados .e{background:var(--g0);border:1px solid var(--g2);border-radius:var(--r);padding:12px;display:grid;gap:6px;font-size:13px;color:var(--g6)}
+.estados .e b{color:var(--g7)}
+.mini{position:relative;width:64px;height:64px;border-radius:50%;border:2px solid var(--g4);display:grid;place-items:center;font-weight:700;background:var(--g0)}
+@media (max-width:980px){
+  .plano,.orden,.cuenta{grid-template-columns:1fr}
+  .lado,.ticket,.pago{border-left:0;border-top:1px solid var(--g2)}
+  .com{flex-direction:row;flex-wrap:wrap;border-right:0;border-bottom:1px solid var(--g2)}
+  .notas,.estados{grid-template-columns:1fr 1fr}
+  .sala{min-height:560px}
+}
+@media (max-width:560px){.notas,.estados{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Mesanda · boceto en grises (ronda 1)</h1>
+  <p class="lead">Las tres pantallas centrales: plano, orden y cuenta. Es clicable: toca una mesa libre, arma una orden y envíala a cocina; el contador mide los toques desde la mesa hasta «Enviar a cocina». Sin colores de marca a propósito: aquí se decide la estructura. Datos de ejemplo.</p>
+
+  <div class="bar" role="status" aria-live="polite">
+    <span class="cnt">Toques de esta orden: <b id="toques">0</b></span>
+    <span id="ult">Empieza tocando la mesa 3 (libre).</span>
+    <button class="reset" id="reset" type="button">Reiniciar ejemplo</button>
+  </div>
+
+  <div class="dev">
+    <div class="top">
+      <span class="logo">Mesanda</span>
+      <div class="tabs" role="group" aria-label="Zona">
+        <button type="button" aria-pressed="true">Salón</button>
+        <button type="button" aria-pressed="false">Terraza</button>
+        <button type="button" aria-pressed="false">Barra</button>
+      </div>
+      <span class="who">Mesero: Ana · 14:32</span>
+    </div>
+
+    <!-- PANTALLA 1 · PLANO -->
+    <section class="plano" id="v-plano" aria-label="Plano del salón">
+      <div class="sala" id="sala"></div>
+      <aside class="lado">
+        <h3>Te necesitan</h3>
+        <div class="att" id="att"></div>
+        <h3>Estados</h3>
+        <div class="ley">
+          <span><i style="border-style:dashed"></i>Libre</span>
+          <span><i style="background:var(--g1)"></i>Reservada (hora)</span>
+          <span><i style="background:var(--g6);border-color:var(--g6)"></i>Ocupada (comensales · tiempo)</span>
+          <span><i style="background:var(--g3);border:3px solid var(--g7)"></i>Cuenta pedida (con «!»)</span>
+        </div>
+      </aside>
+    </section>
+
+    <!-- PANTALLA 2 · ORDEN -->
+    <section class="orden" id="v-orden" aria-label="Orden de la mesa" hidden>
+      <nav class="com" aria-label="Comensales" id="com"></nav>
+      <div class="menu">
+        <div class="cats" role="group" aria-label="Categoría" id="cats"></div>
+        <div class="fotos" id="fotos"></div>
+      </div>
+      <aside class="ticket">
+        <header><button class="volver" type="button" id="aPlano">← Plano</button> <b id="tMesa">Mesa 3</b> <span id="tCom"></span></header>
+        <div class="lineas" id="lineas"></div>
+        <div class="acc">
+          <button class="prim" type="button" id="enviar" disabled>Enviar a cocina</button>
+          <button class="sec" type="button" id="aCuenta">Pedir cuenta</button>
+        </div>
+      </aside>
+    </section>
+
+    <!-- PANTALLA 3 · CUENTA -->
+    <section class="cuenta" id="v-cuenta" aria-label="Cuenta de la mesa" hidden>
+      <div class="det">
+        <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><button class="volver" type="button" id="cVolver">← Orden</button><b id="cMesa" style="font-size:18px">Mesa 7 · cuenta</b></div>
+        <div class="chips" role="group" aria-label="Forma de la cuenta" id="modo">
+          <button type="button" aria-pressed="true" data-m="junta">Una sola cuenta</button>
+          <button type="button" aria-pressed="false" data-m="sep">Por comensal</button>
+        </div>
+        <table><thead><tr><th>Cant.</th><th>Platillo</th><th>Importe</th></tr></thead><tbody id="cLin"></tbody></table>
+      </div>
+      <aside class="pago">
+        <div class="tot" id="tot"></div>
+        <p class="lbl">Propina</p>
+        <div class="chips" role="group" aria-label="Propina" id="prop">
+          <button type="button" aria-pressed="false" data-p="0">Sin</button><button type="button" aria-pressed="true" data-p="10">10 %</button><button type="button" aria-pressed="false" data-p="15">15 %</button><button type="button" aria-pressed="false" data-p="20">20 %</button>
+        </div>
+        <p class="lbl">Forma de pago</p>
+        <div class="chips" role="group" aria-label="Forma de pago" id="fp">
+          <button type="button" aria-pressed="true">Efectivo</button><button type="button" aria-pressed="false">Tarjeta</button><button type="button" aria-pressed="false">Cargar a habitación</button>
+        </div>
+        <button class="prim" type="button" id="cobrar">Cobrar y liberar mesa</button>
+      </aside>
+    </section>
+  </div>
+
+  <h2 style="margin:8px 0 0;font-size:18px">Estados de una mesa</h2>
+  <div class="estados">
+    <div class="e"><span class="mini" style="border-style:dashed">3</span><b>Libre</b>Toque: ¿cuántos comensales? → orden.</div>
+    <div class="e"><span class="mini" style="background:var(--g1)">9</span><b>Reservada · 20:30</b>Toque: ver reserva; «Sentar» la vuelve ocupada.</div>
+    <div class="e"><span class="mini" style="background:var(--g6);border-color:var(--g6);color:#fff">2</span><b>Ocupada · 3 · 25 min</b>Toque: abre su orden para agregar.</div>
+    <div class="e"><span class="mini" style="background:var(--g3);border:3px solid var(--g7)">7</span><b>Cuenta pedida</b>Toque: abre la cuenta. Aparece también en «Te necesitan».</div>
+  </div>
+
+  <div class="notas">
+    <div class="nota-wf"><b>Por qué la mesa es la puerta</b>Todo vive dentro de la mesa: el mesero no busca la orden en una lista, la encuentra donde está el cliente. El plano en «modo servicio» no se mueve; las mesas se acomodan en un modo de edición aparte.</div>
+    <div class="nota-wf"><b>Por qué comensales a la izquierda</b>Elegir comensal antes de tocar platillos hace que la cuenta por persona salga sola. «Mesa (compartido)» es para lo que se pide al centro. Las notas rápidas aparecen solo en el último platillo agregado, que es cuando se piden; en los demás, «+ Nota».</div>
+    <div class="nota-wf"><b>Pendiente de decidir</b>Cómo cambiar de mesa, juntar mesas y cancelar un platillo ya enviado; si la cocina recibe en pantalla o impresora; y si «Cargar a habitación» aparece solo cuando el hotel tiene CLNDA Booking; y si «Por comensal» cobra a cada persona por separado o solo muestra la división.</div>
+  </div>
+</main>
+
+<dialog id="dlg" aria-labelledby="dlgT">
+  <h2 id="dlgT">Mesa 3 · ¿cuántos comensales?</h2>
+  <p>Toca un número para abrir la orden.</p>
+  <div class="nums" id="nums"></div>
+  <button class="cerrar" type="button" id="dlgX">Cancelar</button>
+</dialog>
+
+<script>
+(function(){
+  var MENU={Entradas:[['Ensalada verde',95],['Sopa del día',85],['Guacamole',110],['Pan de la casa',45]],
+    Fuertes:[['Hamburguesa',185],['Pasta al pomodoro',160],['Pescado a la plancha',240],['Pollo rostizado',195],['Arrachera',290],['Bowl de verduras',150]],
+    Bebidas:[['Limonada',45],['Agua mineral',40],['Café americano',38],['Refresco',42]],
+    Postres:[['Pastel de chocolate',90],['Flan',75],['Helado',65]]};
+  var NOTAS=['Sin cebolla','Sin picante','Término medio','Para llevar'];
+  var MESAS0=[
+    {n:1,f:'red',x:6,y:8,w:92,e:'ocupada',c:2,t:'40 min'},{n:2,f:'red',x:24,y:8,w:92,e:'ocupada',c:3,t:'25 min'},
+    {n:3,f:'red',x:42,y:8,w:92,e:'libre'},{n:4,f:'cua',x:62,y:6,w:130,h:92,e:'libre'},
+    {n:5,f:'cua',x:6,y:44,w:130,h:92,e:'reservada',r:'20:30'},{n:6,f:'red',x:30,y:46,w:92,e:'libre'},
+    {n:7,f:'red',x:50,y:46,w:92,e:'cuenta',c:4},{n:8,f:'cua',x:68,y:44,w:92,h:92,e:'ocupada',c:2,t:'10 min'},
+    {n:9,f:'red',x:12,y:78,w:80,e:'libre'},{n:10,f:'red',x:30,y:78,w:80,e:'reservada',r:'21:00'},
+    {n:11,f:'cua',x:52,y:78,w:150,h:80,e:'ocupada',c:6,t:'55 min'}];
+  var CUENTA7=[[1,'Hamburguesa',185,'C1'],[1,'Limonada',45,'C1'],[1,'Arrachera',290,'C2'],[1,'Agua mineral',40,'C2'],[1,'Pasta al pomodoro',160,'C3'],[2,'Café americano',76,'C4'],[1,'Guacamole',110,'Mesa']];
+  var $=function(id){return document.getElementById(id)};
+  var st;
+  function nuevo(){st={mesas:JSON.parse(JSON.stringify(MESAS0)),toques:0,contando:false,mesa:null,com:'C1',ncom:0,cat:'Fuertes',lin:[],cuenta:null};}
+  function toque(){if(st.contando){st.toques++;$('toques').textContent=st.toques;}}
+  function msg(t){$('ult').textContent=t;}
+  function ver(v){['plano','orden','cuenta'].forEach(function(k){$('v-'+k).hidden=(k!==v);});}
+  function etiqueta(m){
+    if(m.e==='libre')return 'Libre';
+    if(m.e==='reservada')return 'Reservada · '+m.r;
+    if(m.e==='cuenta')return 'Cuenta · '+m.c;
+    return m.c+' · '+m.t;}
+  function plano(){
+    var s=$('sala');s.innerHTML='';
+    st.mesas.forEach(function(m){
+      var b=document.createElement('button');b.type='button';b.className='mesa '+m.f;b.dataset.e=m.e;
+      b.style.left=m.x+'%';b.style.top=m.y+'%';b.style.width=m.w+'px';b.style.height=(m.h||m.w)+'px';
+      b.setAttribute('aria-label','Mesa '+m.n+', '+etiqueta(m));
+      b.innerHTML='<b>'+m.n+'</b><small>'+etiqueta(m)+'</small>';
+      b.onclick=function(){abrirMesa(m)};s.appendChild(b);});
+    var a=$('att');a.innerHTML='';
+    st.mesas.filter(function(m){return m.e==='cuenta'}).forEach(function(m){
+      var b=document.createElement('button');b.type='button';b.innerHTML='<span><b>Mesa '+m.n+'</b> pide la cuenta</span><span>→</span>';
+      b.onclick=function(){abrirMesa(m)};a.appendChild(b);});
+    if(!a.children.length)a.innerHTML='<span class="vacio">Nadie por ahora.</span>';
+  }
+  function abrirMesa(m){
+    st.mesa=m;
+    if(m.e==='libre'){st.contando=true;st.toques=0;toque();msg('Mesa '+m.n+': elige comensales.');
+      $('dlgT').textContent='Mesa '+m.n+' · ¿cuántos comensales?';$('dlg').showModal();return;}
+    if(m.e==='cuenta'){abrirCuenta(m);return;}
+    if(m.e==='reservada'){msg('Mesa '+m.n+' reservada a las '+m.r+'. (En el producto: ver reserva y «Sentar».)');return;}
+    st.contando=false;st.ncom=m.c;st.lin=m.lin||[];orden();msg('Mesa '+m.n+' ocupada: agrega a su orden.');
+  }
+  function orden(){
+    var m=st.mesa;$('tMesa').textContent='Mesa '+m.n;
+    var c=$('com');c.innerHTML='';
+    var lista=[];for(var i=1;i<=st.ncom;i++)lista.push('C'+i);lista.push('Mesa');
+    lista.forEach(function(k){var b=document.createElement('button');b.type='button';b.setAttribute('aria-pressed',String(st.com===k));
+      b.textContent=k==='Mesa'?'Mesa (compartido)':'Comensal '+k.slice(1);b.onclick=function(){toque();st.com=k;orden();};c.appendChild(b);});
+    var add=document.createElement('button');add.type='button';add.className='add';add.textContent='+ Comensal';
+    add.onclick=function(){toque();st.ncom++;st.com='C'+st.ncom;orden();};c.appendChild(add);
+    var ct=$('cats');ct.innerHTML='';
+    Object.keys(MENU).forEach(function(k){var b=document.createElement('button');b.type='button';b.textContent=k;b.setAttribute('aria-pressed',String(st.cat===k));
+      b.onclick=function(){toque();st.cat=k;orden();};ct.appendChild(b);});
+    var f=$('fotos');f.innerHTML='';
+    MENU[st.cat].forEach(function(p){var b=document.createElement('button');b.type='button';b.className='plat';
+      b.innerHTML='<span class="img">foto</span><span class="tx"><b>'+p[0]+'</b><span>$'+p[1]+'</span></span>';
+      b.setAttribute('aria-label','Agregar '+p[0]+', '+p[1]+' pesos, a '+(st.com==='Mesa'?'la mesa':'comensal '+st.com.slice(1)));
+      b.onclick=function(){toque();agregar(p);};f.appendChild(b);});
+    lineas();ver('orden');
+  }
+  function agregar(p){
+    var l=st.lin.find(function(x){return x.p===p[0]&&x.c===st.com&&!x.env});
+    if(l)l.q++;else{l={p:p[0],$:p[1],c:st.com,q:1,n:[],env:false};st.lin.push(l);}st.ult=l;
+    msg(p[0]+' → '+(st.com==='Mesa'?'mesa':'comensal '+st.com.slice(1)));lineas();
+  }
+  function lineas(){
+    var L=$('lineas');L.innerHTML='';var pend=0;
+    var grupos={};st.lin.forEach(function(l){(grupos[l.c]=grupos[l.c]||[]).push(l);if(!l.env)pend+=l.q;});
+    if(!st.lin.length)L.innerHTML='<p class="vacio">Toca una foto para agregarla al comensal seleccionado.</p>';
+    Object.keys(grupos).forEach(function(k){
+      var g=document.createElement('div');g.className='grupo';g.innerHTML='<h4>'+(k==='Mesa'?'Mesa (compartido)':'Comensal '+k.slice(1))+'</h4>';
+      grupos[k].forEach(function(l){var d=document.createElement('div');d.className='lin'+(l.env?' enviada':'');
+        d.innerHTML='<span class="q">'+l.q+'×</span><span>'+l.p+(l.env?' · enviado':'')+'</span><span>$'+(l.q*l.$)+'</span>';
+        if(!l.env&&l!==st.ult&&!l.abierta){var o=document.createElement('div');o.className='nota';var ob=document.createElement('button');ob.type='button';ob.textContent=l.n.length?'Nota: '+l.n.join(', '):'+ Nota';
+          ob.onclick=function(){toque();l.abierta=true;lineas();};o.appendChild(ob);d.appendChild(o);}
+        else if(!l.env){var n=document.createElement('div');n.className='nota';
+          NOTAS.forEach(function(t){var b=document.createElement('button');b.type='button';b.textContent=t;b.setAttribute('aria-pressed',String(l.n.indexOf(t)>-1));
+            b.onclick=function(){toque();var i=l.n.indexOf(t);if(i>-1)l.n.splice(i,1);else l.n.push(t);lineas();};n.appendChild(b);});
+          d.appendChild(n);}
+        g.appendChild(d);});
+      L.appendChild(g);});
+    $('tCom').textContent=' · '+st.ncom+' comensales';
+    var e=$('enviar');e.disabled=!pend;e.textContent=pend?'Enviar a cocina ('+pend+')':'Enviar a cocina';
+  }
+  function enviar(){
+    toque();var n=st.toques;
+    st.lin.forEach(function(l){l.env=true});
+    var m=st.mesa;m.e='ocupada';m.c=st.ncom;m.t='0 min';m.lin=st.lin;
+    msg('Enviado a cocina en '+n+' toques. La mesa '+m.n+' ya aparece ocupada.');st.contando=false;plano();ver('plano');
+  }
+  function abrirCuenta(m){
+    st.mesa=m;$('cMesa').textContent='Mesa '+m.n+' · cuenta';
+    var L=m.lin&&m.lin.length?m.lin.map(function(l){return [l.q,l.p,l.q*l.$,l.c]}):CUENTA7;
+    st.cuenta={L:L,modo:'junta',prop:10};cuenta();ver('cuenta');msg('Cuenta de la mesa '+m.n+'.');
+  }
+  function cuenta(){
+    var c=st.cuenta,tb=$('cLin');tb.innerHTML='';var sub=0;
+    if(c.modo==='junta'){c.L.forEach(function(l){sub+=l[2];tb.insertAdjacentHTML('beforeend','<tr><td>'+l[0]+'</td><td>'+l[1]+'</td><td>$'+l[2]+'</td></tr>');});}
+    else{var g={};c.L.forEach(function(l){(g[l[3]]=g[l[3]]||[]).push(l)});
+      Object.keys(g).forEach(function(k){var s=0;g[k].forEach(function(l){s+=l[2];sub+=l[2];tb.insertAdjacentHTML('beforeend','<tr><td>'+l[0]+'</td><td>'+l[1]+'</td><td>$'+l[2]+'</td></tr>');});
+        tb.insertAdjacentHTML('beforeend','<tr class="sub"><td></td><td>'+(k==='Mesa'?'Compartido (se reparte)':'Comensal '+k.slice(1))+'</td><td>$'+s+'</td></tr>');});}
+    var p=Math.round(sub*c.prop/100);
+    $('tot').innerHTML='<div><span>Subtotal</span><span>$'+sub+'</span></div><div><span>Propina '+c.prop+' %</span><span>$'+p+'</span></div><div class="gran"><span>Total</span><span>$'+(sub+p)+'</span></div>';
+    [].forEach.call($('modo').children,function(b){b.setAttribute('aria-pressed',String(b.dataset.m===c.modo))});
+    [].forEach.call($('prop').children,function(b){b.setAttribute('aria-pressed',String(+b.dataset.p===c.prop))});
+  }
+  function init(){
+    nuevo();plano();ver('plano');$('toques').textContent='0';msg('Empieza tocando la mesa 3 (libre).');
+    var nm=$('nums');nm.innerHTML='';
+    for(var i=1;i<=8;i++)(function(i){var b=document.createElement('button');b.type='button';b.textContent=i;
+      b.onclick=function(){toque();st.ncom=i;st.com='C1';st.lin=[];$('dlg').close();orden();msg('Mesa '+st.mesa.n+' · '+i+' comensales. Toca fotos.');};nm.appendChild(b);})(i);
+  }
+  $('dlgX').onclick=function(){$('dlg').close();st.contando=false;st.toques=0;$('toques').textContent='0';msg('Cancelado.');};
+  $('enviar').onclick=enviar;
+  $('aPlano').onclick=function(){plano();ver('plano');msg('De vuelta al plano.');};
+  $('aCuenta').onclick=function(){var m=st.mesa;m.e='cuenta';m.c=st.ncom;m.lin=st.lin;plano();ver('plano');msg('Mesa '+m.n+' marcada «cuenta pedida»: aparece en «Te necesitan».');};
+  $('cVolver').onclick=function(){var m=st.mesa;st.ncom=m.c||4;st.lin=m.lin||[];orden();};
+  $('modo').onclick=function(e){var b=e.target.closest('button');if(!b)return;st.cuenta.modo=b.dataset.m;cuenta();};
+  $('prop').onclick=function(e){var b=e.target.closest('button');if(!b)return;st.cuenta.prop=+b.dataset.p;cuenta();};
+  $('fp').onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(this.children,function(x){x.setAttribute('aria-pressed',String(x===b))});};
+  $('cobrar').onclick=function(){var m=st.mesa;m.e='libre';delete m.lin;plano();ver('plano');msg('Mesa '+m.n+' cobrada y libre.');};
+  $('reset').onclick=init;
+  document.querySelector('.tabs').onclick=function(e){var b=e.target.closest('button');if(!b)return;[].forEach.call(this.children,function(x){x.setAttribute('aria-pressed',String(x===b))});msg('(Boceto: solo el salón tiene mesas.)');};
+  init();
+})();
+</script>
+</body>
+</html>
