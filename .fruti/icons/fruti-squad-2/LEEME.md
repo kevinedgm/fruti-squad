@@ -84,3 +84,6 @@ Nombre de producto dado por el usuario. 1 Código (marco entre < >; en pequeño 
 Usuario: «me gustan la 2 y la 1». 1 Etiqueta del plano (< > + marco medio punteado), 2 Cierre (diagonal tipo </> que parte el marco; recomendada), 3 Signos en transición (< punteado, > sólido, punto), 4 Plano reforzado (punteado más grueso).
 
 **Bruno elegido: «Cierre»** (diagonal tipo </> que parte el marco: plano punteado → pieza sólida, punto del lado construido).
+
+## Ronda 16 · Mora · Documentation & Knowledge Engineer (`r16-mora/mora.html`)
+Nombre dado por el usuario. 1 Red de conocimiento (puntos enlazados dentro del marco; recomendada), 2 Índice (parece «lista»), 3 Página viva (esquina doblada; parece «archivo»), 4 Espejo (código ↔ docs; parece el Evento descartado).
