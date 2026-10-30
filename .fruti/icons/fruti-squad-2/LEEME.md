@@ -13,3 +13,15 @@ Cada concepto llevado a 6 piezas (constante = familia, variable = integrante):
 - A Forma + evidencia: el punto (evidencia) constante; forma por rol (casilla, escudo, lupa, tuerca, separador); squad = punto rodeado por cinco arcos. Se distinguen por silueta a 16 px.
 - B El cajón: casilla constante, marca interior por rol; squad = cajón 2×3. Misma silueta para todos.
 - C Los gajos: fruta constante, gajo saliente por integrante. A 16 px los cinco se confunden (evidencia en `familia.png`).
+
+## Ronda 3 · método Manik / Nisa Nabani (`r3/ecosistema.html`)
+Usuario: «así como hicimos Manik y Nisa Nabani con sus productos, lo mismo aquí». Sello madre (cuadro de color + marca blanca constante: fruta con hoja y semilla calada = «Fruti» + evidencia) y cada producto = mismo sello + rasgo en el borde + color:
+| Producto | Color | Rasgo | Verbo |
+|---|---|---|---|
+| Fruti Squad Workflow Pack (sello madre) | #18181b | ninguno | orquestar |
+| Kiwi UX Architect | #4f8a2b | casilla separada (esquina) | organizar |
+| Lima Design System Governance | #c5e04b (marca en tinta) | insignia con palomita | validar |
+| Coco UI Audit | #8a5a3b | mango de lupa | inspeccionar |
+| Bruno Implementation (nombre provisional) | #2563eb | conector | conectar |
+| Mora Documentation (nombre provisional) | #7e2e8c | ficha detrás (colección) | catalogar |
+Identificador del ecosistema: retícula de seis cuadros. Tipografía provisional.
