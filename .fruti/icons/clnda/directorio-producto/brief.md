@@ -63,8 +63,8 @@ Dos lados: **visitantes** que buscan qué hacer y **negocios** que quieren apare
 | Horario del establecimiento, «cerrado hoy», evento cancelado | Inmediata |
 | Título, descripción, fotos (de un evento existente o del establecimiento) | Moderada 12–24 h |
 | Evento o taller nuevo | Moderado 12–24 h |
-| Logo, nombre, categoría del establecimiento | Moderado 12–24 h |
-Inmediato quiere decir: pasa la validación automática del panel y se publica; queda registrado para revisión posterior.
+| Logo, nombre, categoría del establecimiento | Moderado 12–24 h (propuesta, por confirmar) |
+Propuesta (por confirmar): «inmediato» = pasa la validación automática del panel y se publica; queda registrado para revisión posterior.
 
 ## Incógnitas
 - ¿Curado (solo lo recomendado) o abierto (cualquier negocio se registra)?
