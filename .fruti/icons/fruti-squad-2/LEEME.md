@@ -105,3 +105,5 @@ Paleta viva validada (CVD deutan ≥ 12 sobre #0f0f12): Kiwi #34e0a1, Lima #d4ff
 
 ## Ronda 20 · tipografía (`r20-tipo/tipografia.html`)
 A Bricolage Grotesque (con carácter; recomendada), B Instrument Sans (limpia), C Unbounded (ancha, disruptiva; los nombres largos no caben en una línea).
+
+**Tipografía elegida: Bricolage Grotesque.** Paquete final en `final/`.

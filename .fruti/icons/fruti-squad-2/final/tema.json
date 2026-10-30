@@ -1,0 +1,89 @@
+{
+  "nombre": "Fruti Squad",
+  "sistema": "Átomos: el punto es la evidencia que cada agente produce y entrega; marcos redondeados en trazo 3.5",
+  "color": {
+    "tinta": "#18181b",
+    "blanco": "#ffffff",
+    "oscuro": "#0f0f12",
+    "papel": "#f5f5f2",
+    "sub_claro": "#52525b",
+    "sub_oscuro": "#b9b9b4"
+  },
+  "tipografia": {
+    "marca": "Bricolage Grotesque 700 (opsz 32) en trazos",
+    "producto": "Bricolage Grotesque 400",
+    "web": "https://fonts.google.com/specimen/Bricolage+Grotesque"
+  },
+  "reglas": [
+    "El trazo siempre es neutro (tinta en claro, blanco en oscuro); el color vive solo en el punto.",
+    "Cada integrante firma su evidencia con su color; el orquestador reúne los cinco en degradado.",
+    "En fondo claro se usan los tonos oscurecidos (color_claro); los vivos solo sobre oscuro.",
+    "El color nunca es la única señal: cada integrante se reconoce por su silueta.",
+    "Las plataformas (Codex, Kiro, Claude Code) se nombran en texto; nunca sus logotipos dentro de la marca."
+  ],
+  "productos": {
+    "squad": {
+      "nombre": "Fruti Squad",
+      "producto": "Workflow Pack",
+      "verbo": "orquestar",
+      "color_oscuro": null,
+      "color_claro": null,
+      "contraste": null
+    },
+    "kiwi": {
+      "nombre": "Kiwi",
+      "producto": "UX Architect",
+      "verbo": "estructura",
+      "color_oscuro": "#34e0a1",
+      "color_claro": "#0f9e6e",
+      "contraste": {
+        "vivo/oscuro": 11.23,
+        "claro/blanco": 3.42
+      }
+    },
+    "lima": {
+      "nombre": "Lima",
+      "producto": "Design System Governance",
+      "verbo": "gobierna",
+      "color_oscuro": "#d4ff3a",
+      "color_claro": "#6f8c00",
+      "contraste": {
+        "vivo/oscuro": 16.55,
+        "claro/blanco": 3.87
+      }
+    },
+    "coco": {
+      "nombre": "Coco",
+      "producto": "UI Audit",
+      "verbo": "audita",
+      "color_oscuro": "#ff9f1c",
+      "color_claro": "#c26a00",
+      "contraste": {
+        "vivo/oscuro": 9.32,
+        "claro/blanco": 3.92
+      }
+    },
+    "bruno": {
+      "nombre": "Bruno",
+      "producto": "Frontend Implementation Engineer",
+      "verbo": "implementa",
+      "color_oscuro": "#4361ee",
+      "color_claro": "#3a54d6",
+      "contraste": {
+        "vivo/oscuro": 3.81,
+        "claro/blanco": 6.14
+      }
+    },
+    "mora": {
+      "nombre": "Mora",
+      "producto": "Documentation & Knowledge Engineer",
+      "verbo": "documenta",
+      "color_oscuro": "#f72585",
+      "color_claro": "#d0156e",
+      "contraste": {
+        "vivo/oscuro": 5.06,
+        "claro/blanco": 5.23
+      }
+    }
+  }
+}
