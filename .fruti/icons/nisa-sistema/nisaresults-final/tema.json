@@ -1,0 +1,36 @@
+{
+  "marca": "NisaResults",
+  "respaldo": "de Nisa Nabani",
+  "producto": "Portal de clientes de Nisa Nabani: cada cliente consulta sus resultados e informes, y decide si publica la página de calidad de su agua con un código QR para sus huéspedes.",
+  "arquitectura": "Producto hermano de NisaLab y NisaData; es el que ve el cliente, por eso usa colores del manual de Nisa Nabani. En la página pública manda la marca del cliente y Nisa Nabani firma como laboratorio.",
+  "simbolo": "Banda de control: dos límites y tres células dentro; la del centro, más grande y en cian. Es la gráfica de monitoreo con su zona aceptable convertida en símbolo.",
+  "color": {
+    "azul-real": {
+      "hex": "#052A76",
+      "uso": "símbolo, logotipo, encabezado del portal y acción principal",
+      "blanco_encima": 13.1
+    },
+    "cian": {
+      "hex": "#00B4D8",
+      "uso": "una célula del símbolo, sección activa y el punto del último análisis; nunca texto sobre blanco ni estado",
+      "sobre_blanco": 2.5,
+      "sobre_azul": 5.3
+    }
+  },
+  "semaforo": "Óptimo (verde) y No óptimo (rojo) son estados de resultado, no de marca: la marca nunca usa verde ni rojo.",
+  "tipografia": {
+    "logotipo": "«Nisa» Poppins 700 + «Results» Poppins 400, convertidos a trazos",
+    "interfaz": "Poppins + IBM Plex Mono para valores"
+  },
+  "reglas": [
+    "Una sola célula cian por símbolo.",
+    "La marca nunca usa verde ni rojo: son Óptimo y No óptimo.",
+    "En la página pública manda la marca del cliente; NisaResults no aparece: el sello dice «Analizada por Nisa Nabani».",
+    "Cada resultado público cita contra qué norma o criterio se compara y la fecha de la última muestra.",
+    "Las barras siempre horizontales y el símbolo nunca se rota."
+  ],
+  "tamano_minimo": {
+    "pantalla_px": 16,
+    "impreso_mm": 6
+  }
+}
