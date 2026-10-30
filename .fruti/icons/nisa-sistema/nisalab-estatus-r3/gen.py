@@ -55,6 +55,13 @@ ORDENES = [
     ('OA-2610-032', 'Destilería Santa Fe', None, [('BE-2610-0088', 'Bebidas alcohólicas', '#7A5DA9', 'no-ingresada', 'parcial', False), ('AL-2610-0152', 'Alimentos', '#A6552D', 'terminada', 'cortesia', False)]),
     ('OA-2610-029', 'Purificadora El Manantial', 'cancelada', [('AG-2610-0139', 'Aguas', '#007CA3', 'cancelada', 'no-pagada', False), ('AG-2610-0140', 'Aguas', '#007CA3', 'cancelada', 'no-pagada', False)]),
 ]
+KA = {'Aguas': 'aguas', 'Alimentos': 'alimentos', 'Bebidas alcohólicas': 'bebidas'}
+_t = [0]
+def tinta(a):  # área en tabla: ícono a una tinta en gris, nunca su color
+    s = open(os.path.join(H, '..', 'nisalab-areas-final', 'svg', KA[a], 'icono-1tinta.svg')).read().strip()
+    s = re.sub(r'<title>.*?</title>|\s(role|aria-label)="[^"]*"', '', s); _t[0] += 1
+    s = re.sub(r'id="([^"]+)"', lambda m: f'id="{m.group(1)}-{_t[0]}"', s).replace('url(#i', f'url(#i').replace(f'mask="url(#i{KA[a]})"', f'mask="url(#i{KA[a]}-{_t[0]})"')
+    return s.replace('<svg ', '<svg width="16" height="16" aria-hidden="true" focusable="false" style="color:#646B80;flex:none" ', 1)
 def lista():
     r = ''
     for oa, cli, est, ms in ORDENES:
@@ -62,7 +69,7 @@ def lista():
         res = pastilla('cancelada') if est == 'cancelada' else (f'<span class="nota">{canc} de {len(ms)} muestras cancelada{"s" if canc > 1 else ""}</span>' if canc else '')
         r += f'<tr class="oa"><th colspan="5" scope="rowgroup"><span class="m">{oa}</span> · {cli} · {len(ms)} muestras {res}</th></tr>'
         for fol, a, ac, p, g, urg in ms:
-            r += (f'<tr class="{"urg " if urg else ""}{"off" if p == "cancelada" else ""}"><td class="m fol">{fol}</td><td>{urgente() if urg else ""}</td><td><span class="ar"><i style="background:{ac}"></i>{a}</span></td>'
+            r += (f'<tr class="{"urg " if urg else ""}{"off" if p == "cancelada" else ""}"><td class="m fol">{fol}</td><td>{urgente() if urg else ""}</td><td><span class="ar">{tinta(a)}{a}</span></td>'
                   f'<td>{pastilla(p)}</td><td>{etiqueta(g)}</td></tr>')
     return f'<div class="tw"><table class="ls"><thead><tr><th>Folio</th><th><span class="vh">Prioridad</span></th><th>Área</th><th>Proceso</th><th>Pago</th></tr></thead><tbody>{r}</tbody></table></div>'
 def ref_p():
@@ -77,7 +84,7 @@ sw = lambda c, n: f'<span class="sw"><i style="background:{c}"></i>{n}</span>'
 pres = (dueño('Proceso · pastilla rellena', ''.join(sw(tx, n) for k, n, ic, bg, tx, bd, c in PROCESO))
         + dueño('Pago · etiqueta con contorno', ''.join(sw(c, n) for k, n, ic, c, _ in PAGO))
         + dueño('Urgente · ficha sólida', sw('#C2D225', 'Urgente'))
-        + dueño('Áreas · círculo sólido', ''.join(sw(c, n) for n, c in AREAS))
+        + dueño('Áreas · solo marca y encabezado, nunca en tablas', ''.join(sw(c, n) for n, c in AREAS))
         + dueño('Resultado del análisis · pastilla', sw('#2E7D32', 'Conforme') + sw('#B42318', 'Fuera de límite') + sw('#E9B10A', 'Alerta')))
 ff = ''.join(f"@font-face{{font-family:'Poppins';src:url('file://{F}/Poppins-{w}.woff2');font-weight:{w}}}" for w in (400, 500, 600, 700)) + f"@font-face{{font-family:'IBM Plex Mono';src:url('file://{F}/IBMPlexMono.ttf')}}"
 css = ff + f'''
@@ -111,6 +118,6 @@ html = (f'<!doctype html><html lang="es"><meta charset="utf-8"><meta name="viewp
  f'<section><h2>2 · Pago</h2><p class="id">Etiqueta con contorno (sin relleno) en rojo, naranja y verde, y una moneda que se llena. Cortesía en azul de la marca con un regalo: es la única que propongo yo.</p><div class="flujo">{"".join(etiqueta(k) for k, *_ in PAGO)}</div><h3>Referencia</h3>{ref_g()}</section>'
  f'<section><h2>3 · Urgente</h2><p class="id">Ficha pera con rayo junto al folio y franja pera a la izquierda de la fila. Texto azul real sobre pera: 7.8:1.</p><div class="flujo">{urgente()}</div></section>'
  f'<section><h2>En la lista, agrupada por orden de análisis</h2><p class="id">Si se cancela toda la orden, la orden lleva la pastilla Cancelada y todas sus muestras también. Si se cancela una muestra, la orden dice «1 de 3 muestras cancelada» y sigue su curso.</p>{lista()}<h3>Sin color</h3><div class="gris">{lista()}</div></section>'
- '<section><h2>Reglas</h2><ol class="reg"><li>Proceso, pago y urgencia nunca comparten forma: pastilla, etiqueta con contorno y ficha sólida.</li><li>Un color de estado siempre significa la misma acción en toda la aplicación.</li><li>Siempre ícono + texto; el color nunca es la única señal.</li><li>En una muestra cancelada, el pago se apaga a gris: ya no pide cobrar (incógnita: ¿qué pasa con lo ya pagado, se reembolsa?).</li><li>Cancelada es final: no se regresa a otra etapa sin reabrir la orden (incógnita: ¿se puede reabrir?).</li></ol></section>'
+ '<section><h2>Reglas</h2><ol class="reg"><li>Proceso, pago y urgencia nunca comparten forma: pastilla, etiqueta con contorno y ficha sólida.</li><li>Los colores de área nunca aparecen en tablas: ahí el área va con su ícono en gris y su nombre, así todo color en una tabla es estatus.</li><li>Un color de estado siempre significa la misma acción en toda la aplicación.</li><li>Siempre ícono + texto; el color nunca es la única señal.</li><li>En una muestra cancelada, el pago se apaga a gris: ya no pide cobrar (incógnita: ¿qué pasa con lo ya pagado, se reembolsa?).</li><li>Cancelada es final: no se regresa a otra etapa sin reabrir la orden (incógnita: ¿se puede reabrir?).</li></ol></section>'
  '</body></html>')
 open(os.path.join(H, 'estatus.html'), 'w').write(html); print('ok')

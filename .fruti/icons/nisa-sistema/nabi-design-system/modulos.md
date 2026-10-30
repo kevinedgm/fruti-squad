@@ -72,7 +72,7 @@ El color sigue al significado y es el mismo en todos los módulos:
 
 Siempre icono + palabra. El pera no es un estado, y ningún color de área (`area-*`) se usa como estado.
 
-La columna **Divisiones** muestra el ícono de área de 16 px y su nombre en `text`; el color identifica el área, nunca su estado.
+La columna **Divisiones** muestra el ícono de área a una tinta (16 px, `text-muted`) y su nombre en `text`. Los colores de área nunca aparecen en tablas: ahí todo color es estatus.
 
 ## Interacciones
 

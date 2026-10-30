@@ -28,7 +28,8 @@ Paleta en OKLCH con la misma luminosidad (0.54) e intensidad (0.12); solo cambia
 2. El ícono siempre va en blanco sobre el color del área, o calado en la versión a una tinta.
 3. El nombre del área siempre acompaña a la marca o al ícono: el color no es la única señal.
 4. El racimo de Colonia no se rota ni se reacomoda; solo cambia la célula que creció.
-5. Mínimo 16 px en pantalla; a 24 px o menos, lo que se lee es el color, por eso el nombre es obligatorio.
+5. Los colores de área nunca aparecen en tablas: ahí todo color es estatus. En tablas se usa `icono-1tinta.svg` en gris + nombre.
+6. Mínimo 16 px en pantalla; a 24 px o menos, lo que se lee es el color, por eso el nombre es obligatorio.
 
 ## Pendiente
 - Confirmar si «Bebidas alcohólicas» sustituye a «Bebidas de agave», es un área nueva o queda como en el manual.

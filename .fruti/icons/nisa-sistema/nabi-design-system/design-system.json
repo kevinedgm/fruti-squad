@@ -221,10 +221,10 @@
     "Áreas"
   ],
   "lastChange": {
-    "at": "2026-10-30T02:15:29Z",
+    "at": "2026-10-30T02:25:22Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "EncabezadoModulo gana la variante por área: marca Colonia del área, nombre del área junto al título y línea de 3 px en su color; las páginas globales no cambian."
+    "note": "Los colores de área nunca aparecen en tablas: en TablaUsuarios y ModuloUsuarios el área va con su ícono a una tinta en text-muted; regla añadida a tokens area-*, Áreas, README y módulos."
   },
   "layout": "files",
   "libraries": [],

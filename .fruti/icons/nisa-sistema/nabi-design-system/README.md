@@ -26,7 +26,7 @@ Los primarios de Nisa Nabani ordenan la interfaz; los secundarios del laboratori
 - `primary` (azul real #052A76) es la acción primaria, los enlaces y el encabezado. `primary-soft` para la fila seleccionada.
 - `pera` (#C2D225) es lo que está en curso: la célula que creció del símbolo y la muestra activa. Nunca texto sobre blanco (1.7:1). `pera-soft` para el registro en curso.
 - Estados: `conforme` (#2E7D32), `fuera` (#B42318), `alerta` (texto #8A6100, relleno #E9B10A) y `pendiente` (pizarra #475467). Cada uno con su fondo `*-soft` y su texto `on-*-soft`. Ninguno es color de área.
-- Áreas (`area-*`): ocho colores propios de NisaLab con la misma luminosidad e intensidad (OKLCH 0.54 · 0.12), uno por área: Aguas #007CA3, Agrícolas #946400, Ambiental #2F8247, Alimentos #A6552D, Bebidas #7A5DA9, Bebidas de agave #008478, Farmacia #A14E78, Consultoría #4C6BB4. Solo en el ícono y la marca del área; blanco encima de 4.6 a 5.4:1. Ver el componente «Areas».
+- Áreas (`area-*`): ocho colores propios de NisaLab con la misma luminosidad e intensidad (OKLCH 0.54 · 0.12), uno por área: Aguas #007CA3, Agrícolas #946400, Ambiental #2F8247, Alimentos #A6552D, Bebidas #7A5DA9, Bebidas de agave #008478, Farmacia #A14E78, Consultoría #4C6BB4. Solo en la marca del área, el encabezado de su página y los filtros; nunca en tablas. Blanco encima de 4.6 a 5.4:1. Ver el componente «Areas».
 - Contrastes verificados: todo texto ≥ 4.5:1 sobre su fondo (`text-muted` 6.2:1 sobre `bg`, `text-subtle` 4.7:1 sobre `surface-sunken`); `border-control` 3.3:1 sobre `surface`. Por eso los campos viven sobre `surface`, no sobre `bg` (3.0:1).
 
 ## Tipografía
