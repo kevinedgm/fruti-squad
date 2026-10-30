@@ -24,6 +24,15 @@ Consecuencias (inferencia):
   - Guía de contenido propuesta: fotos horizontales, luz natural, sin texto encimado, sin marcas de agua ni collages, resolución mínima; textos descriptivos, sin mayúsculas sostenidas ni emojis, extensión acotada.
   - Coherencia visual: la app envuelve todo con su propio diseño; la identidad del negocio aparece en lugares controlados (logo, foto de portada), no en sus colores por toda la ficha.
   - Cambios posteriores (eventos, fotos nuevas) también pasan por revisión.
+- **Modelo de operación (usuario, 2026-10-30):** manual de estándares público → el negocio solicita acceso → el equipo revisa el establecimiento → se le genera acceso a un **panel de configuración** → el negocio carga y modifica su información → cada cambio queda en revisión y se publica tras aprobación (12 a 24 h).
+  Dos compuertas: **admisión** (una vez, el establecimiento) y **moderación** (cada cambio, el contenido).
+  Piezas que faltan (propuesta):
+  1. Mientras un cambio está en revisión, sigue publicada la última versión aprobada (publicado vs borrador en revisión); la ficha nunca desaparece.
+  2. Cambio rechazado: motivo que cita la regla del manual + corregir y reenviar.
+  3. Cambios urgentes (cerrado hoy, evento cancelado, cambio de horario del día): quitan información y su riesgo estético es nulo → publicación inmediata o revisión en 1–2 h (por decidir).
+  4. Eventos con fecha: enviarlos con al menos 48 h de anticipación para que la revisión no los deje fuera.
+  5. El panel valida antes de enviar (orientación y resolución de fotos, extensión de textos, mayúsculas sostenidas): menos rechazos, menos carga del equipo.
+  6. Capacidad del equipo: ¿12–24 h también en fin de semana?
 
 ## Fases (usuario, 2026-10-30)
 - **Fase 1 · solo información.** Ficha de cada negocio: descripción, galería, ubicación, horario, contacto y redes sociales. Descubrir (portada curada, filtros) y guardar se mantienen. Sin reservas ni inscripciones: la acción de la ficha es **contactar** (WhatsApp, llamar, redes, cómo llegar).
