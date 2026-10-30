@@ -11,6 +11,9 @@ Consecuencias (inferencia):
 - Públicos (usuario, 2026-10-30): **gente de Oaxaca y turistas**. Buscar un hotel boutique en una app hecha para Oaxaca no es lo mismo que en Google o Booking.
   - Local: «¿qué hago hoy?», uso semanal, lo nuevo y los eventos, español.
   - Turista: «¿dónde me quedo y qué no me pierdo?», uso por viaje (antes y durante), español e inglés, fechas de viaje.
+  - Quien sale solo (usuario, 2026-10-30): busca algo que hacer el fin de semana y **se inscribe**: talleres, clases, tours grupales. Filtro «para ir solo» (actividades donde llegas sin compañía y conoces gente).
+    Datos que exige una actividad con inscripción: fecha y hora, cupo disponible, precio, idioma, nivel, punto de encuentro, política de cancelación. Flujo: ver → inscribirse (con pago o apartado) → confirmación → recordatorio.
+    Inferencia: talleres y operadores de tours necesitan cobrar e inscribir; es otro producto que se les puede vender (inscripciones con cupo, como Booking pero para actividades con fecha).
   - Propuesta: un mismo contenido curado y dos entradas («Vivo aquí» / «Estoy de visita»), no dos apps.
   - Diferencia frente a Google y OTAs (inferencia): selección local de lugares pequeños y reserva directa con el hotel vía CLNDA Booking, sin comisión de intermediario (las OTAs cobran comisión al hotel; verificar rangos actuales antes de usar cifras).
 - Lo nuevo importa: marcar «ya fui», guardar, y destacar lo que no has visitado.
