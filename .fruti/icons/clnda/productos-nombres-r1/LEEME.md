@@ -15,6 +15,9 @@ Encargo (2026-10-30): familia de productos de CLNDA Studio para vender a negocio
 
 Ninguno verificado ante el IMPI. Lockup provisional: símbolo de CLNDA + CLNDA 700 + palabra 400 en índigo; color y símbolo por producto en la siguiente ronda.
 
+## Elección (usuario: «me gusta la opción C»)
+CLNDA Booking (reservas de hotel), CLNDA Shop (tienda en línea), CLNDA Menú (restaurantes).
+
 ## Incógnitas
 - Qué hace el producto de restaurantes (reservas de mesa, menú digital, pedidos): decide entre «Mesa/Table» y «Menú».
 - Si se venderá fuera de México (pesa en el idioma).
