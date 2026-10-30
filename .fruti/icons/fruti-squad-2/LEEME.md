@@ -34,3 +34,10 @@ Usuario: «no, preséntame 3 propuestas originales». Sistemas completos con col
 - A Personajes: cada agente es su fruta con cara mínima; Bruno = semilla; squad = el grupo.
 - B Cortes: sección transversal geométrica de cada fruta; squad = anillos con los colores de todos.
 - C Etiquetas: la calcomanía de fruta del súper con letra y código (UX·01, DS·02, QA·03, IM·04, DOC·05); forma distinta por integrante.
+
+## Ronda 6 · tres sistemas abstractos (`r6/abstractas.html`)
+Usuario: «me gustarían más abstractas, no literales». La fruta solo como pista (color, redondez); el rol lo dice la geometría.
+- A Átomos: el mismo punto (evidencia) en moléculas distintas: retícula (Kiwi), fila que pasa por un anillo (Lima), punto en un lente (Coco), dos puntos unidos (Bruno), columna decreciente (Mora); squad = núcleo con cinco.
+- B Una línea: un trazo por agente: serpentina (Kiwi), compuerta (Lima), espiral (Coco), curva que une dos extremos (Bruno), cinta doblada (Mora); squad = lazo continuo.
+- C Formas suaves: óvalo, triángulo suave, cuadro redondo, cápsula, trébol; squad = superposición que mezcla colores (se ensucia en el centro).
+Colores: Kiwi #2f9e4f, Lima #a8c81e, Coco #c97a3a, Bruno #2f6fe0, Mora #7b3fa0, squad #18181b.
