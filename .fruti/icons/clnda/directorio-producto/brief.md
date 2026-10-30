@@ -20,6 +20,12 @@ Consecuencias (inferencia):
 - Talleres y eventos tienen fecha: el contenido caduca cada semana. Quien lo carga son los negocios (incentivo: exposición gratis), y esa carga es la relación que abre la venta de Booking y Mesanda.
 - Propuesta para curado vs abierto: **híbrido**. Registro abierto (cualquier negocio sube su ficha, talleres y eventos); los planes recomendados se curan.
 
+## Fases (usuario, 2026-10-30)
+- **Fase 1 · solo información.** Ficha de cada negocio: descripción, galería, ubicación, horario, contacto y redes sociales. Descubrir (portada curada, filtros) y guardar se mantienen. Sin reservas ni inscripciones: la acción de la ficha es **contactar** (WhatsApp, llamar, redes, cómo llegar).
+- **Fase 2 · integraciones, poco a poco.** Hoteles → CLNDA Booking; restaurantes → Mesanda Reservas; después talleres y tours (inscripciones). No todo de golpe.
+- Mecanismo (inferencia): en fase 1 se miden los contactos que la app genera por negocio (toques a WhatsApp, llamar, cómo llegar). Ese número es la evidencia para vender la fase 2: «este mes 40 personas te escribieron desde la app; con Booking reservarían directo».
+- Criterio para pasar a fase 2 (propuesta, por definir): suficientes contactos mensuales por negocio para que la integración valga la pena.
+
 ## Mecanismo (inferencia)
 Dos lados: **visitantes** que buscan qué hacer y **negocios** que quieren aparecer.
 - Para el negocio: aparecer (gratis o barato) → relación con CLNDA → venta de Booking (sitio + reservas) o Mesanda (comandero).
