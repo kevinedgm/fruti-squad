@@ -1,0 +1,51 @@
+{
+  "sistema": "NisaLab · tipos de parámetro",
+  "forma": "ficha de elemento: cuadrado redondeado con dos letras",
+  "color": {
+    "ficha": "#052A76",
+    "letras": "#FFFFFF",
+    "contraste": 13.13
+  },
+  "reglas": [
+    "El tipo nunca usa tono: el círculo de color es del área y el color semántico es del estado.",
+    "La ficha siempre va con el nombre del tipo al lado, salvo en columnas angostas con encabezado «Tipo» y nombre en tooltip y lector de pantalla.",
+    "Mayúscula + minúscula, dos letras, sin punto."
+  ],
+  "tipos": [
+    {
+      "clave": "microbiologicos",
+      "nombre": "Microbiológicos",
+      "letras": "Mb",
+      "ejemplos": "Coliformes, E. coli, Salmonella, mohos y levaduras",
+      "token": "parametro-microbiologicos"
+    },
+    {
+      "clave": "fisicoquimicos",
+      "nombre": "Fisicoquímicos",
+      "letras": "Fq",
+      "ejemplos": "pH, conductividad, turbidez, dureza, sólidos",
+      "token": "parametro-fisicoquimicos"
+    },
+    {
+      "clave": "metales",
+      "nombre": "Metales",
+      "letras": "Me",
+      "ejemplos": "Plomo, arsénico, mercurio, cadmio, hierro",
+      "token": "parametro-metales"
+    },
+    {
+      "clave": "organicos",
+      "nombre": "Orgánicos",
+      "letras": "Or",
+      "ejemplos": "Plaguicidas, compuestos volátiles, hidrocarburos",
+      "token": "parametro-organicos"
+    },
+    {
+      "clave": "nutrimentales",
+      "nombre": "Nutrimentales",
+      "letras": "Nu",
+      "ejemplos": "Proteína, grasa, humedad, cenizas, fibra",
+      "token": "parametro-nutrimentales"
+    }
+  ]
+}
