@@ -1,0 +1,30 @@
+/* Convia · tokens de identidad para la web (derivados de tema.json). Fuente: Google Fonts (OFL). */
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Figtree:wght@400;500;600;700&display=swap");
+:root{
+  /* Tipografía */
+  --cv-font-display:"Fraunces",Georgia,"Times New Roman",serif;      /* logotipo y títulos */
+  --cv-font-display-axes:"SOFT" 100,"WONK" 0,"opsz" 96;                /* terminaciones suaves: hacen juego con la estrella */
+  --cv-font-display-weight:500;
+  --cv-font-text:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif; /* todo lo demás */
+  /* Escala (px a 16 base) */
+  --cv-size-display:clamp(44px,6vw,78px); --cv-lh-display:1.04; --cv-track-display:-.02em;
+  --cv-size-h2:34px; --cv-lh-h2:1.1;
+  --cv-size-h3:22px; --cv-lh-h3:1.2;
+  --cv-size-body:16px; --cv-lh-body:1.6;
+  --cv-size-small:14px;
+  --cv-size-label:12px; --cv-track-label:.08em;
+  /* Forma */
+  --cv-radius:16px; --cv-radius-field:12px; --cv-radius-pill:999px;
+  /* Color */
+  --cv-papel:#f7f5f0; --cv-superficie:#ffffff; --cv-tinta:#1b1d1a; --cv-texto-sec:#5b605a; --cv-linea:#e2ded4;
+  --cv-cantera:#2f5a45; --cv-cantera-suave:#e3ece6; --cv-arena:#ebe6da;
+  --cv-cafes:#eda100;        --cv-cafes-fondo:#f6e9ce;        --cv-cafes-texto:#855a00;
+  --cv-restaurantes:#e5622a; --cv-restaurantes-fondo:#f4e0d4; --cv-restaurantes-texto:#a5471e;
+  --cv-hoteles:#2a78d6;      --cv-hoteles-fondo:#dae4ec;      --cv-hoteles-texto:#2260ab;
+  --cv-talleres:#c2447a;     --cv-talleres-fondo:#f0dcdf;     --cv-talleres-texto:#a33966;
+  --cv-museos:#7a3fa0;       --cv-museos-fondo:#e6dce5;       --cv-museos-texto:#7a3fa0;
+  --cv-recorridos:#1baf7a;   --cv-recorridos-fondo:#d8ebdf;   --cv-recorridos-texto:#11704e;
+}
+.cv-display{font-family:var(--cv-font-display);font-weight:var(--cv-font-display-weight);font-variation-settings:var(--cv-font-display-axes)}
+/* Reglas: Fraunces solo en logotipo y títulos; horarios, precios y botones en Figtree con números tabulares. */
+.cv-num{font-family:var(--cv-font-text);font-variant-numeric:tabular-nums}

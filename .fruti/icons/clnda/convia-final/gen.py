@@ -45,7 +45,7 @@ def svg(w, h, body, label):
 files = {}
 for n, f in [('simbolo', C['cantera']), ('simbolo-oscuro', C['cantera_clara']), ('simbolo-tinta', 'currentColor')]:
     files[f'svg/{n}.svg'] = svg(200, 200, star(f, 200), 'Convia')
-# logotipo horizontal: estrella 60 + «Convia» Gloock 58
+# logotipo horizontal: estrella 64 + «Convia» Fraunces suave 58
 tp, tw = text_path('Convia', 58, 74, 52)
 W = 74 + tw + 2
 for n, s, t in [('logotipo', C['cantera'], C['tinta']), ('logotipo-oscuro', C['cantera_clara'], C['oscuro_tinta']), ('logotipo-tinta', 'currentColor', 'currentColor')]:
