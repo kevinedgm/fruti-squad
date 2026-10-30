@@ -2,6 +2,9 @@
 
 Decisiones del usuario (2026-10-30): patrón «CLNDA + palabra clara», familia C de nombres (Booking, Shop, Menú), sistema C de diferenciación (forma + color). La marca del producto la ve solo el negocio; el cliente final ve la marca del negocio y «hecho por CLNDA» (`../final/svg/firma.svg`).
 
+## Modelo de producto (usuario, 2026-10-30)
+CLNDA Booking **no es un marketplace** de varios hoteles (como Booking.com): es un motor de reservas directas que se vende a cada hotel, con la marca del hotel. Una página de reservaciones por hotel; el huésped reserva directo con el hotel. Esto confirma que la marca CLNDA Booking vive en el panel del hotel y en la venta, y frente al huésped solo queda «hecho por CLNDA».
+
 ## Sistema
 - **Llave índigo constante** (#4338ca en claro, #8b8cf8 sobre tinta): lo que hace familia. Nunca toma el color del producto.
 - **El dato es el objeto del oficio**, en el color del producto: Booking = hoja de calendario, Shop = etiqueta de precio, Menú = plato.
