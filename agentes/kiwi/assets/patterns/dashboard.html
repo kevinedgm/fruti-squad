@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-fidelidad" content="F2">
+<meta name="wf-pattern" content="dashboard">
+<title>Wireframe · Dashboard · r01</title>
+<link rel="stylesheet" href="vendor/wireframe-kit.css">
+<style>
+/* Pattern layout only: kit variables, no new colors. */
+.db-head{display:flex;flex-wrap:wrap;gap:var(--wf-s3);align-items:flex-end;justify-content:space-between}
+.db-head h1{margin:0}
+.db-scope{display:flex;flex-wrap:wrap;gap:var(--wf-s2);align-items:flex-end}
+.db-scope .wf-field{min-width:180px}
+.db-fresh{font-size:13px;color:var(--wf-g6);margin:var(--wf-s2) 0 0}
+.db-kpis{display:grid;gap:var(--wf-s3);grid-template-columns:repeat(4,minmax(0,1fr));margin-top:var(--wf-s5)}
+.db-kpi{display:grid;gap:2px;text-decoration:none}
+.db-kpi .lbl{font-size:13px;color:var(--wf-g6)}
+.db-kpi .val{font-size:28px;font-weight:700;line-height:1.15}
+.db-kpi .cmp{font-size:13px}
+.db-body{display:grid;gap:var(--wf-s4);grid-template-columns:minmax(0,2fr) minmax(0,1fr);margin-top:var(--wf-s4);align-items:start}
+.db-body h2{margin:0 0 var(--wf-s3);font-size:17px}
+.db-chart svg{display:block;width:100%;height:auto}
+.db-legend{display:flex;flex-wrap:wrap;gap:var(--wf-s3);font-size:13px;color:var(--wf-g6);margin-top:var(--wf-s2)}
+.db-att li{display:grid;grid-template-columns:1fr auto;gap:var(--wf-s2);align-items:center}
+.db-att small{display:block;color:var(--wf-g6)}
+.db-table{margin-top:var(--wf-s4)}
+.db-table h2{margin:0 0 var(--wf-s3);font-size:17px}
+.db-widget-err{border:1px dashed var(--wf-g6);border-radius:var(--wf-r);padding:var(--wf-s4);display:grid;gap:var(--wf-s2);justify-items:start}
+.db-scroll{overflow-x:auto}
+.wf-bottom[hidden]{display:none}
+@container wf (max-width: 1023px){
+  .db-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .db-body{grid-template-columns:1fr}
+  .db-body .db-att-wrap{order:-1}
+}
+@container wf (max-width: 599px){
+  .db-scope{width:100%}
+  .db-scope .wf-field{flex:1 1 100%}
+  .db-kpi .val{font-size:22px}
+  .db-chart .db-detail{display:none}
+  .db-chart svg text{font-size:24px}   /* svg scales ~0.5 here: keeps labels near 12px */
+}
+</style>
+</head>
+<body class="wf">
+<!-- kiwi · dashboard pattern (F2). Copy as the round's index.html and the kit into vendor/.
+     Replace the domain words (orders, revenue…), the KPIs and the states with the brief's.
+     A dashboard answers "what needs my attention now, and how are we doing?". Do not add color.
+     Set <html lang> to the output language and translate the visible copy. -->
+
+<div class="wf-ctl" role="region" aria-label="Wireframe controls">
+  <strong>Dashboard · r01 · F2</strong>
+  <fieldset><legend>Space</legend>
+    <button data-w="1440" aria-pressed="true">expanded 1440</button>
+    <button data-w="834" aria-pressed="false">medium 834</button>
+    <button data-w="393" aria-pressed="false">compact 393</button>
+  </fieldset>
+  <label>State
+    <select id="wf-state" data-wf-states>
+      <option value="default">Default</option>
+      <option value="loading">Loading</option>
+      <option value="empty">Empty (new account)</option>
+      <option value="filtered">Empty (no data in period)</option>
+      <option value="partial">Partial error (one widget)</option>
+      <option value="error">Error</option>
+      <option value="denied">No permission</option>
+      <option value="offline">Offline</option>
+      <option value="long">Long content</option>
+    </select>
+  </label>
+  <label><input type="checkbox" id="wf-notes" checked> Notes</label>
+</div>
+
+<div class="wf-stage">
+  <p class="wf-frame-label" id="wf-label"></p>
+  <div class="wf-frame" id="wf-frame">
+    <div class="wf-shell">
+      <nav class="wf-side" aria-label="Main navigation">
+        <strong>Product</strong>
+        <ul class="wf-list" style="border:0;margin-top:12px"><li><a href="#" aria-current="page">Dashboard</a></li><li><a href="#">Orders</a></li><li><a href="#">Customers</a></li><li><a href="#">Reports</a></li></ul>
+      </nav>
+      <div>
+        <header class="wf-top"><nav class="wf-small" aria-label="Breadcrumb">Home / <b>Dashboard</b></nav></header>
+        <div id="wf-banner"></div>
+        <main class="wf-main" id="wf-view" tabindex="-1"></main>
+        <div class="wf-bottom" id="wf-bottom"><button class="wf-btn wf-btn--primary" style="flex:1">New order</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const KPIS = [
+  ['Orders today', '128', '▲ 12% vs same day last week'],
+  ['Revenue this week', '$48,200', '▼ 3% vs last week'],
+  ['Pending orders', '17', '5 older than 24 h'],
+  ['Return rate', '2.1%', '= no change'],
+];
+const ATT = [
+  ['5 orders waiting more than 24 h', 'Oldest: 31 h', 'Review'],
+  ['2 payments failed', 'Customer notified', 'Open'],
+  ['Stock low on 3 products', 'Below reorder point', 'View'],
+];
+const ROWS = [
+  ['#10482', 'Ana R.', 'Paid', 'wf-status--on', '$1,240', '10:42'],
+  ['#10481', 'Luis M.', 'Pending', 'wf-status--partial', '$380', '10:15'],
+  ['#10480', 'Sofía T.', 'Draft', 'wf-status--draft', '$95', '09:58'],
+  ['#10479', 'Diego P.', 'Cancelled', 'wf-status--off', '$610', '09:31'],
+];
+const head = (t = 'Dashboard') => `
+  <div class="db-head">
+    <div><h1>${t}</h1><p class="wf-muted" style="margin:0">How the store is doing and what needs attention today.</p></div>
+    <div class="db-scope">
+      <div class="wf-field"><label for="db-period">Period</label><select id="db-period" class="wf-input"><option>Today</option><option selected>Last 7 days</option><option>Last 30 days</option></select></div>
+      <div class="wf-actions"><button class="wf-btn wf-btn--primary" data-wf-persist>New order</button><button class="wf-btn">Export</button></div>
+    </div>
+  </div>
+  <p class="db-fresh" id="db-fresh">Updated 10:42 · <button class="wf-btn--quiet wf-btn" style="min-height:32px;padding:0 4px">Refresh</button></p>
+  <span class="wf-note">The period filter is global scope: it changes every widget at once, so it lives in the header, not inside each card. One primary action; in compact it moves to the bottom bar.</span>`;
+const kpis = (long) => `
+  <section class="db-kpis" aria-label="Key figures">
+    ${KPIS.map(([l, v, c], i) => `<a href="#" class="wf-card db-kpi"><span class="lbl">${long && i === 0 ? 'Orders created today across all sales channels and regions' : l}</span><span class="val">${v}</span><span class="cmp">${c}</span></a>`).join('')}
+  </section>
+  <span class="wf-note">Max 4 KPIs, each answers one question and links to its list. The comparison is text + arrow shape, never only tone. 4 → 2 columns in medium and compact.</span>`;
+const chart = () => `
+  <section class="wf-card db-chart" aria-labelledby="db-ch">
+    <h2 id="db-ch">Orders per day</h2>
+    <svg viewBox="0 0 600 200" role="img" aria-label="Orders per day, last 7 days: rising from 90 on Monday to 128 today">
+      <g stroke="var(--wf-g3)"><line x1="40" y1="20" x2="590" y2="20"/><line x1="40" y1="80" x2="590" y2="80"/><line x1="40" y1="140" x2="590" y2="140"/></g>
+      <line x1="40" y1="180" x2="590" y2="180" stroke="var(--wf-g6)"/>
+      <polyline fill="none" stroke="var(--wf-g4)" stroke-width="2" stroke-dasharray="6 5" points="40,130 130,125 220,120 310,128 400,118 490,115 580,112"/>
+      <polyline fill="none" stroke="var(--wf-g9)" stroke-width="3" points="40,140 130,120 220,126 310,100 400,92 490,70 580,48"/>
+      <g font-size="12" fill="var(--wf-g6)"><text x="0" y="24">150</text><text x="0" y="84">100</text><text x="8" y="144">50</text><text x="40" y="198">Mon</text><text x="590" y="198" text-anchor="end">Today</text></g>
+    </svg>
+    <div class="db-legend"><span>━ This period</span><span>┅ Previous period</span></div>
+    <p class="db-detail wf-small wf-muted" style="margin:8px 0 0">Breakdown by channel on hover / focus of each point.</p>
+    <span class="wf-note">The trend is secondary to attention: it explains, it does not ask for action. In compact the detail hides and the chart keeps the summary in its accessible name.</span>
+  </section>`;
+const attention = () => `
+  <section class="db-att-wrap" aria-labelledby="db-at">
+    <h2 id="db-at">Needs attention</h2>
+    <ul class="wf-list db-att">${ATT.map(([t, s, a]) => `<li><span><b>${t}</b><small>${s}</small></span><a href="#" class="wf-btn" style="min-height:36px">${a}</a></li>`).join('')}</ul>
+    <span class="wf-note">The only block that asks for a decision. Expanded: right column. Medium and compact: moves above the chart (first after KPIs). Sorted by urgency, max 5, then "See all".</span>
+  </section>`;
+const table = () => `
+  <section class="db-table" aria-labelledby="db-tb">
+    <h2 id="db-tb">Latest orders</h2>
+    <div class="db-scroll"><table class="wf-table wf-table--stack">
+      <thead><tr><th>Order</th><th>Customer</th><th>Status</th><th>Total</th><th>Time</th></tr></thead>
+      <tbody>${ROWS.map(([o, c, s, k, t, h]) => `<tr><td data-l="Order"><a href="#">${o}</a></td><td data-l="Customer">${c}</td><td data-l="Status"><span class="wf-status ${k}">${s}</span></td><td data-l="Total">${t}</td><td data-l="Time">${h}</td></tr>`).join('')}</tbody>
+    </table></div>
+    <p style="margin:8px 0 0"><a href="#">See all orders</a></p>
+    <span class="wf-note">Preview, not the full list: 5 rows and a link. In compact each row stacks as a labelled card.</span>
+  </section>`;
+const page = (o = {}) => head(o.title) + kpis(o.long) +
+  `<div class="db-body">${o.chart || chart()}${attention()}</div>` + table();
+
+const V = {
+  default: () => page(),
+  loading: () => `<div class="wf-skel" aria-busy="true"><div class="wf-line" style="height:28px;width:30%"></div><div class="db-kpis">${'<div class="wf-card"><div class="wf-line" style="width:50%"></div><div class="wf-line" style="height:24px;width:40%"></div><div class="wf-line" style="width:70%"></div></div>'.repeat(4)}</div><div class="db-body"><div class="wf-card"><div class="wf-img" style="aspect-ratio:3/1"></div></div><div class="wf-card"><div class="wf-line"></div><div class="wf-line"></div><div class="wf-line"></div></div></div></div><p class="wf-sr" role="status">Loading dashboard</p><span class="wf-note">Each widget keeps its footprint: nothing jumps when data arrives. Widgets load independently.</span>`,
+  empty: () => `${head()}<div class="wf-state"><h2>No orders yet</h2><p class="wf-muted">Figures appear after your first order. Most stores start by adding products.</p><button class="wf-btn wf-btn--primary">Add products</button></div><span class="wf-note">New account: no zeros everywhere. One next step. The header primary is replaced, never duplicated.</span>`.replace('data-wf-persist>New order', 'data-wf-persist hidden>New order'),
+  filtered: () => page({chart: `<section class="wf-card"><h2 style="margin:0 0 8px;font-size:17px">Orders per day</h2><div class="wf-state" style="margin:0;max-width:none"><p><b>No orders in “Today”.</b></p><p class="wf-muted">Try a longer period.</p><button class="wf-btn">Show last 7 days</button></div></section>`}) + '<span class="wf-note">Empty by filter is not empty by account: say which filter caused it and offer the way out.</span>',
+  partial: () => page({chart: `<section class="wf-card"><h2 style="margin:0 0 8px;font-size:17px">Orders per day</h2><div class="db-widget-err" role="alert"><b>We couldn’t load this chart.</b><span class="wf-muted">The other figures are up to date.</span><button class="wf-btn">Retry</button></div></section>`}) + '<span class="wf-note">One failing widget never blanks the page: the error stays inside its card.</span>',
+  error: () => `<div class="wf-state" role="alert"><h2>We couldn’t load the dashboard</h2><p class="wf-muted">Check your connection and try again. Your filters are kept.</p><button class="wf-btn wf-btn--primary">Retry</button></div>`,
+  denied: () => `<div class="wf-state"><h2>You don’t have access to sales figures</h2><p class="wf-muted">An account admin can grant the “Reports” role.</p><button class="wf-btn">Request access</button></div><span class="wf-note">If only some widgets are restricted, hide those and say so in one line instead of blocking the page.</span>`,
+  offline: () => page().replace('Updated 10:42', 'Last updated 10:42 · may be out of date'),
+  long: () => page({title: 'Dashboard for the Northern Region wholesale and retail operations team', long: true}),
+};
+let S = {w: innerWidth < 700 ? 393 : innerWidth < 1200 ? 834 : 1440, state: 'default'};
+function render(){
+  const f = document.getElementById('wf-frame');
+  f.style.setProperty('--wf-w', S.w + 'px');
+  document.getElementById('wf-label').style.setProperty('--wf-w', S.w + 'px');
+  document.getElementById('wf-label').textContent = `Frame ${S.w}px · ${S.w < 600 ? 'compact' : S.w < 1024 ? 'medium' : 'expanded'} (declared reference)`;
+  document.getElementById('wf-view').innerHTML = V[S.state]();
+  document.getElementById('wf-banner').innerHTML = S.state === 'offline' ? '<p class="wf-banner" role="status"><b>Offline.</b> You are seeing the last saved figures.</p>' : '';
+  // The bottom bar carries the page primary; states that replace it with their own action hide it (never two primaries).
+  document.getElementById('wf-bottom').hidden = !['default', 'filtered', 'partial', 'offline', 'long'].includes(S.state);
+  document.querySelectorAll('[data-w]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.w === S.w)));
+}
+document.addEventListener('click', e => { const b = e.target.closest('[data-w]'); if (b) { S.w = +b.dataset.w; render(); } });
+document.getElementById('wf-state').addEventListener('change', e => { S.state = e.target.value; render(); });
+document.getElementById('wf-notes').addEventListener('change', e => document.body.classList.toggle('wf-no-notes', !e.target.checked));
+render();
+</script>
+</body>
+</html>

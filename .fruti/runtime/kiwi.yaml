@@ -66,6 +66,8 @@ operations:
   wireframe:
     references: [agentes/kiwi/references/wireframing.md, agentes/kiwi/references/geometry-contract.md, .fruti/contracts/adaptativo.md]
     assets_on_demand: [agentes/kiwi/assets/wireframe-kit.css, agentes/kiwi/assets/wireframe-base.html]
+    patterns_on_demand:   # start from a pattern instead of the base only when the surface matches
+      dashboard: agentes/kiwi/assets/patterns/dashboard.html
   validate:
     references: [agentes/kiwi/references/validacion.md]
   handoff:
