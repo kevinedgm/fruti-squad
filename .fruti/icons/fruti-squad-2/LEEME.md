@@ -52,3 +52,6 @@ Usuario: «sí, pero los colores no me gustan; trabajemos sobre la A; propuesta 
 | Coco | Hallazgo (retícula + lente sobre el desviado) | Medición (base + regla) |
 | Bruno | Interruptor (estado que cambia) | Foco (anillo de foco punteado) |
 | Mora | Índice (punto + entrada) | Espejo (código ↔ documentación) |
+
+## Ronda 8 · uno por uno: Kiwi (`r8-kiwi/kiwi.html`)
+Seis opciones desde su descripción: 1 Esqueleto (anillos vacíos = estructura sin apariencia, un punto lleno = lo primero; recomendada), 2 Jerarquía, 3 Regiones, 4 Flujo (se confunde con «compartir»), 5 Reacomodo (adaptativo), 6 Estados.
