@@ -13,7 +13,9 @@ NN_w = NN.replace('rgb(1.998901%, 16.499329%, 46.299744%)', '#FFFFFF').replace('
 NN_m = NN.replace('height:44px', 'height:36px')
 LAB = sv('nisalab-final/svg/app-icon.svg', 'width:56px;height:56px;border-radius:14px;display:block;flex:none')
 DAT = sv('nisadata-final/svg/app-icon.svg', 'width:56px;height:56px;border-radius:14px;display:block;flex:none')
+STU = sv('nisastudio-final/svg/app-icon.svg', 'width:56px;height:56px;border-radius:14px;display:block;flex:none')
 LAB_s, DAT_s = LAB.replace('56px;height:56px;border-radius:14px', '28px;height:28px;border-radius:7px'), DAT.replace('56px;height:56px;border-radius:14px', '28px;height:28px;border-radius:7px')
+STU_s = STU.replace('56px;height:56px;border-radius:14px', '28px;height:28px;border-radius:7px').replace('id="nsg"', 'id="nsg-s"').replace('url(#nsg)', 'url(#nsg-s)')
 LAB_W = sv('nisalab-final/svg/logotipo.svg', 'height:26px;width:auto;display:block')
 DAT_W = sv('nisadata-final/svg/logotipo.svg', 'height:26px;width:auto;display:block')
 html = f'''<title>Aplicaciones Nisa Nabani</title>
@@ -58,7 +60,7 @@ form{{display:grid;gap:14px}}label{{display:grid;gap:6px;font:500 14px var(--san
 .who{{display:flex;align-items:center;gap:10px;background:var(--sf);border:1px solid var(--ln);border-radius:999px;padding:4px 14px 4px 4px;font-size:14px;cursor:pointer}}.av{{width:32px;height:32px;border-radius:50%;background:#E8EDF7;color:var(--az);display:grid;place-items:center;font:600 12px var(--sans)}}
 .who small{{display:block;color:var(--mu);font-size:12px;line-height:1.2}}.who b{{display:block;font-weight:600;line-height:1.2}}
 main.lz{{max-width:1080px;margin:0 auto;display:grid;gap:22px}}.hola h1{{font:600 28px/1.25 var(--sans)}}.hola p{{color:var(--mu)}}
-.grid{{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}}
+.grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}}
 .app{{background:var(--sf);border:1px solid var(--ln);border-radius:18px;padding:22px;display:grid;gap:16px;text-decoration:none;color:inherit;transition:box-shadow .15s ease,transform .15s ease;min-width:0}}
 .app:hover{{box-shadow:0 1px 2px rgba(20,27,51,.05),0 14px 30px -18px rgba(5,42,118,.35);transform:translateY(-2px)}}
 .an{{font:400 24px/1.1 var(--sans);letter-spacing:-.01em}}.an b{{font-weight:700}}.ah{{display:flex;align-items:center;gap:14px}}.ah p{{color:var(--mu);font-size:14px;margin-top:4px}}
@@ -72,7 +74,7 @@ main.lz{{max-width:1080px;margin:0 auto;display:grid;gap:22px}}.hola h1{{font:60
 <section class="acc" id="v-acceso" aria-label="Iniciar sesión">
 <div class="marca" aria-hidden="false"><div class="cel" aria-hidden="true"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i><i class="c5"></i><i class="c6"></i></div>
 <div class="mt">{NN_w}</div><div class="mm"><h2>Todo el laboratorio,<br>con una sola cuenta.</h2>
-<ul class="prods"><li>{LAB_s}<span><b>NisaLab</b>Muestras, resultados e informes</span></li><li>{DAT_s}<span><b>NisaData</b>Tendencias y salud del laboratorio</span></li></ul></div>
+<ul class="prods"><li>{LAB_s}<span><b>NisaLab</b>Muestras, resultados e informes</span></li><li>{DAT_s}<span><b>NisaData</b>Tendencias y salud del laboratorio</span></li><li>{STU_s}<span><b>NisaStudio</b>Piezas para redes y avisos</span></li></ul></div>
 <p class="mb">hub.nisanabani.com</p></div>
 <div class="form"><div class="fi-in"><div class="solo-movil">{NN_m}</div><div><h1>Inicia sesión</h1><p class="sub">Usa tu cuenta del laboratorio.</p></div>
 <form id="f" novalidate><label for="correo">Correo<span class="fld"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><input id="correo" type="email" autocomplete="username" value="k.mendez@nisanabani.mx" aria-describedby="e-correo"></span></label><span class="err" id="e-correo" hidden>Escribe tu correo del laboratorio.</span>
@@ -89,7 +91,10 @@ main.lz{{max-width:1080px;margin:0 auto;display:grid;gap:22px}}.hola h1{{font:60
 <div class="ult"><span>Última vez: Recepción · Aguas, hoy 08:12</span><span class="abrir">Abrir NisaLab →</span></div></a>
 <a class="app" href="#"><div class="ah">{DAT}<div><h2 class="an" style="color:#1F2532"><b>Nisa</b>Data</h2><p>Tendencias, comportamiento y salud del laboratorio.</p></div></div>
 <div class="dato"><div><b>3.6 días</b><span>tiempo de entrega · meta 4</span></div><div><b>91 %</b><span>entregadas a tiempo</span></div></div>
-<div class="ult"><span>Última vez: Panel, ayer 17:40</span><span class="abrir">Abrir NisaData →</span></div></a></div>
+<div class="ult"><span>Última vez: Panel, ayer 17:40</span><span class="abrir">Abrir NisaData →</span></div></a>
+<a class="app" href="#"><div class="ah">{STU}<div><h2 class="an" style="color:#3730A3"><b>Nisa</b>Studio</h2><p>Piezas para redes, avisos y efemérides con la marca de Nisa Nabani.</p></div></div>
+<div class="dato"><div><b>2 nov</b><span>próxima fecha · Día de Muertos</span></div><div><b>4</b><span>borradores sin publicar</span></div></div>
+<div class="ult"><span>Última vez: «¿Sabías que…?» sarro, lunes</span><span class="abrir">Abrir NisaStudio →</span></div></a></div>
 <p class="nota">Cuando se sume otra aplicación (por ejemplo, la administración de NisaResults) aparece aquí como una tarjeta más, solo para quien tenga permiso. Datos de ejemplo.</p></main>
 <footer class="pie"><span>hub.nisanabani.com</span><button class="lnk" type="button" id="salir">Cerrar sesión</button></footer></div>
 <script>

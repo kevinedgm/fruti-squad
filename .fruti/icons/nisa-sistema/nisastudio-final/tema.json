@@ -1,0 +1,44 @@
+{
+  "marca": "NisaStudio",
+  "respaldo": "de Nisa Nabani",
+  "producto": "App interna de Nisa Nabani para crear piezas de redes y avisos con plantillas de la marca: efemérides, avisos, promoción de servicios y carruseles «¿Sabías que…?».",
+  "arquitectura": "Cuarta app de la familia (después de NisaLab, NisaData y NisaResults); entra por hub.nisanabani.com. Su color es de producto: las piezas que genera llevan la identidad de Nisa Nabani, no la de NisaStudio.",
+  "simbolo": "Encuadre: dos esquinas de recorte y tres células dentro; la mediana, arriba a la derecha, en acento. Componer una pieza.",
+  "color": {
+    "indigo": {
+      "hex": "#4F46E5",
+      "uso": "inicio del degradado; fondo con texto blanco",
+      "blanco_encima": 6.3
+    },
+    "turquesa": {
+      "hex": "#14B8A6",
+      "uso": "fin del degradado y acento del símbolo sobre blanco; nunca texto",
+      "blanco_encima": 2.5
+    },
+    "indigo-profundo": {
+      "hex": "#3730A3",
+      "uso": "logotipo y símbolo sobre fondos claros",
+      "sobre_blanco": 9.9
+    },
+    "amarillo-claro": {
+      "hex": "#FDE68A",
+      "uso": "acento del símbolo sobre el degradado",
+      "sobre_indigo": 5.0
+    }
+  },
+  "degradado": "135°, #4F46E5 → #14B8A6",
+  "tipografia": {
+    "logotipo": "«Nisa» Poppins 700 + «Studio» Poppins 400, convertidos a trazos",
+    "interfaz": "Poppins"
+  },
+  "reglas": [
+    "El texto blanco pequeño va sobre el lado índigo del degradado; sobre el turquesa solo títulos grandes.",
+    "Una sola célula de acento por símbolo.",
+    "El índigo y el turquesa son de la app; las piezas que salen de NisaStudio usan la identidad de Nisa Nabani.",
+    "No rotar el encuadre ni mover las células fuera de las esquinas."
+  ],
+  "tamano_minimo": {
+    "pantalla_px": 16,
+    "impreso_mm": 6
+  }
+}
