@@ -18,7 +18,12 @@ Consecuencias (inferencia):
   - Diferencia frente a Google y OTAs (inferencia): selección local de lugares pequeños y reserva directa con el hotel vía CLNDA Booking, sin comisión de intermediario (las OTAs cobran comisión al hotel; verificar rangos actuales antes de usar cifras).
 - Lo nuevo importa: marcar «ya fui», guardar, y destacar lo que no has visitado.
 - Talleres y eventos tienen fecha: el contenido caduca cada semana. Quien lo carga son los negocios (incentivo: exposición gratis), y esa carga es la relación que abre la venta de Booking y Mesanda.
-- Propuesta para curado vs abierto: **híbrido**. Registro abierto (cualquier negocio sube su ficha, talleres y eventos); los planes recomendados se curan.
+- ~~Híbrido con registro abierto~~ → **Decisión del usuario (2026-10-30): entrada con aprobación.** Evitar negocios no establecidos o informales y cuidar la estética (imágenes, textos, identidad de marca).
+  - Entrada: el negocio solicita (o se le invita) → el equipo revisa con criterios objetivos → aprobado o no.
+  - Criterios propuestos (por validar): establecimiento físico o operador con registro verificable (RFC; para turismo, Registro Nacional de Turismo — verificar requisito vigente), domicilio y horario fijos, identidad de marca propia (logo), fotos que cumplan la guía.
+  - Guía de contenido propuesta: fotos horizontales, luz natural, sin texto encimado, sin marcas de agua ni collages, resolución mínima; textos descriptivos, sin mayúsculas sostenidas ni emojis, extensión acotada.
+  - Coherencia visual: la app envuelve todo con su propio diseño; la identidad del negocio aparece en lugares controlados (logo, foto de portada), no en sus colores por toda la ficha.
+  - Cambios posteriores (eventos, fotos nuevas) también pasan por revisión.
 
 ## Fases (usuario, 2026-10-30)
 - **Fase 1 · solo información.** Ficha de cada negocio: descripción, galería, ubicación, horario, contacto y redes sociales. Descubrir (portada curada, filtros) y guardar se mantienen. Sin reservas ni inscripciones: la acción de la ficha es **contactar** (WhatsApp, llamar, redes, cómo llegar).
