@@ -16,3 +16,16 @@ Registrabilidad (inferencia): lo que se registra es la palabra completa, nueva y
 Recomendación: **Verdia**. Une la ciudad (su apodo y su piedra) con lo que hace el producto (ver lo que hay hoy) y se pronuncia igual en español e inglés.
 
 Criterio de salida (propuesto al usuario): elegir 2 finalistas → probarlos con 5 personas con la frase «fíjate en ___, ¿cuáles hay?» → buscar solo esos 2 en Marcanet (clases 9, 35, 39, 42) y dominios.
+
+## Afinación (usuario, 2026-10-30): abstraer de «Verde Antequera» o de «convite»
+«Convite»: en español, invitación (de convidar); en Oaxaca, además, el recorrido festivo que invita a una fiesta. Es palabra del español, no de una lengua originaria; abstraída en una palabra nueva, el riesgo de apropiación es bajo (inferencia).
+
+| Nombre | Se arma con | «Fíjate en ___» | Inglés | Nota |
+|---|---|---|---|---|
+| **Verdia** | Verde (Antequera) + ver + día | «Fíjate en Verdia» | ver-DEE-ah | La ciudad y el «qué hay hoy» |
+| **Convia** | convite + vía | «Fíjate en Convia» | kon-VEE-ah | La invitación y el camino: el amigo que te invita y te lleva |
+| **Convita** | convite + -ita | «Fíjate en Convita» | kon-VEE-tah | La más cálida; suena a nombre de persona |
+| **Antevia** | Antequera + vía | «Fíjate en Antevia» | an-teh-VEE-ah | Menos clara de oído |
+| ~~Convidia~~ | convidar + día | — | — | Descartada: suena a «envidia» |
+
+Finalistas propuestos: **Verdia** y **Convia**.
