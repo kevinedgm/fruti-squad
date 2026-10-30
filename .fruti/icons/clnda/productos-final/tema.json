@@ -1,0 +1,68 @@
+{
+  "familia": "CLNDA · productos",
+  "sistema": "C · forma + color: llave índigo constante; el dato es el objeto del oficio en el color del producto",
+  "base": {
+    "tinta": "#0e0f1c",
+    "fondo": "#f5f6fb",
+    "indigo": "#4338ca",
+    "indigo-oscuro": "#8b8cf8"
+  },
+  "productos": {
+    "booking": {
+      "nombre": "CLNDA Booking",
+      "uso": "Reservas para hoteles",
+      "objeto": "hoja de calendario",
+      "color": {
+        "marca": "#0891b2",
+        "texto": "#0e7490",
+        "oscuro": "#22d3ee"
+      },
+      "contraste": {
+        "marca/blanco": 3.68,
+        "texto/blanco": 5.36,
+        "texto/fondo": 4.96,
+        "oscuro/tinta": 10.53
+      }
+    },
+    "shop": {
+      "nombre": "CLNDA Shop",
+      "uso": "Tienda en línea",
+      "objeto": "etiqueta de precio",
+      "color": {
+        "marca": "#db2777",
+        "texto": "#be185d",
+        "oscuro": "#f472b6"
+      },
+      "contraste": {
+        "marca/blanco": 4.6,
+        "texto/blanco": 6.04,
+        "texto/fondo": 5.59,
+        "oscuro/tinta": 7.18
+      }
+    },
+    "menu": {
+      "nombre": "CLNDA Menú",
+      "uso": "Restaurantes",
+      "objeto": "plato",
+      "color": {
+        "marca": "#ea580c",
+        "texto": "#c2410c",
+        "oscuro": "#fb923c"
+      },
+      "contraste": {
+        "marca/blanco": 3.56,
+        "texto/blanco": 5.18,
+        "texto/fondo": 4.8,
+        "oscuro/tinta": 8.41
+      }
+    }
+  },
+  "reglas": {
+    "llave": "siempre índigo (#4338ca en claro, #8b8cf8 sobre tinta); nunca toma el color del producto",
+    "marca": "color del objeto y de la palabra del producto en lockups (texto grande, ≥ 24 px)",
+    "texto": "enlaces, etiquetas y texto de interfaz en color de producto por debajo de 24 px",
+    "oscuro": "objeto y palabra sobre tinta",
+    "interfaz": "acción primaria del panel sigue siendo índigo (familia); el color del producto es acento: icono activo, chip, gráfica principal",
+    "cliente_final": "el huésped o comprador ve la marca del negocio y la firma «hecho por CLNDA» (sin nombre de producto)"
+  }
+}
