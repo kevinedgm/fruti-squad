@@ -109,3 +109,4 @@ A Bricolage Grotesque (con carácter; recomendada), B Instrument Sans (limpia), 
 **Tipografía elegida: Bricolage Grotesque.** Paquete final en `final/`.
 
 ## Guía de marca y kit de marketplace (`guia/`)
+- 2026-10-30: brief estratégico; el usuario decide «b la nueva». Manual v0.1 (fase 1) en `manual/`.
