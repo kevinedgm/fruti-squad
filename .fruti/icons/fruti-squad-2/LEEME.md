@@ -95,3 +95,8 @@ Nombre dado por el usuario. 1 Red de conocimiento (puntos enlazados dentro del m
 
 ## Ronda 18 · orquestador, más disruptivo (`r18-squad/squad.html`)
 Usuario: «no me gusta, otra ronda más disruptiva, moderna». 1 Sólido (único bloque lleno, estela de perforaciones en diagonal; recomendada), 2 Espiral (marcos anidados girando), 3 Eslabones (dos marcos entrelazados), 4 Entrega (se parece a «editar»).
+
+**Orquestador elegido: «Espiral»** (marcos anidados girando, punto al centro). Familia de símbolos completa.
+
+## Ronda 19 · color (`r19-color/color.html`)
+Paleta viva validada (CVD deutan ≥ 12 sobre #0f0f12): Kiwi #34e0a1, Lima #d4ff3a, Coco #ff9f1c, Bruno #4361ee, Mora #f72585. A Blanco y negro + un acento (punto magenta), B Un color por integrante (versiones oscurecidas en claro), C Duotono: trazo neutro y el punto en el color de quien produce la evidencia; el orquestador reúne los cinco en degradado (recomendada).
