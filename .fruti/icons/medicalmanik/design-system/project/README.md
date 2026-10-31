@@ -11,6 +11,14 @@ Comparte la identidad del directorio Manik (Urbanist, cian del pin y fondos de l
 - **Ecosistema Manik** es el conjunto. Su identificador es el mosaico de seis cuadros: el botón que abre el selector desde cualquier app.
 - **Flujo:** inicio de sesión único → **Inicio del ecosistema** (todas las apps; la persona elige) → la app. Desde cualquier app, el botón del ecosistema abre el selector y lleva de vuelta al inicio.
 
+## Administración Manik (interna, aprobada 2026-10-31)
+
+- App del equipo MedicalManik: usuarios activos y configuración del sistema y de cada app. Sello: engrane separado en la esquina superior derecha; color grafito `app-administracion` #3A4558.
+- **Solo la ven las cuentas de la empresa.** A diferencia de las apps sin acceso (apagadas con candado), para una clínica Administración no existe: no se muestra.
+- En el inicio va en su propia fila, «Herramientas internas», con el chip «Solo equipo MedicalManik». El mosaico del ecosistema sigue de seis cuadros.
+- El sello nunca sustituye al ícono de ajustes dentro de las apps (engrane de Lucide sin cuadro): el sello siempre lleva el cuadro con la línea de pulso.
+- Prototipo: `../../administracion-r1/`.
+
 ## Los sellos
 
 La línea de pulso es idéntica en los siete. Cada producto cambia solo el borde del contenedor, nunca la línea:
@@ -23,6 +31,7 @@ La línea de pulso es idéntica en los siete. Cada producto cambia solo el borde
 | Farmacia | cruz | pieza separada |
 | Impulsa | flecha que sale de la esquina | pieza separada |
 | Grupos | segunda tarjeta detrás | silueta |
+| Administración (interna) | engrane en la esquina superior derecha | pieza separada |
 
 - Las piezas separadas llevan un corte transparente: el sello funciona sobre cualquier fondo.
 - La cruz de Farmacia va siempre en el color del producto, nunca en rojo (la cruz roja es un emblema protegido).
@@ -46,6 +55,7 @@ Por qué: tres colores de producto coinciden con estados (Farmacia ≈ éxito, C
 | Farmacia | #1B7F52 | 5.0:1 |
 | Impulsa | #504CA1 | 7.27:1 |
 | Grupos | #C73A55 | 5.04:1 |
+| Administración (interna) | #3A4558 | 9.67:1 |
 
 - Neutros con un sesgo al azul: `canvas` #F5F7FB, `surface` blanco, `ink` #14213D (15.97:1), `muted` #4A5674 (7.31:1). `subtle` es solo gráfico.
 - **Navegación clara.** El azul Manik y el violeta de Impulsa no alcanzan 3:1 sobre azul noche; por eso barras y menús van en `surface`. `noche` queda para planos oscuros puntuales.

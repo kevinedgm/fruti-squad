@@ -3,7 +3,7 @@
 MedicalManik es la empresa y el sello madre. Cada producto se nombra «<Producto> Manik».
 
 ## Archivos
-- `svg/<producto>.svg`: color, fondo transparente (los cortes son máscaras). Productos: medicalmanik (sello madre), expediente, agenda, compras, farmacia, impulsa, grupos.
+- `svg/<producto>.svg`: color, fondo transparente (los cortes son máscaras). Productos: medicalmanik (sello madre), expediente, agenda, compras, farmacia, impulsa, grupos, y la app interna administracion (engrane, grafito #3A4558; generada con `../administracion-r1/gen.py`, no con `gen.py`, para no sumarla al mosaico).
 - `svg/<producto>-1tinta.svg`: una tinta en `currentColor`; la línea queda calada.
 - `svg/ecosistema.svg` / `ecosistema-1tinta.svg`: identificador del selector de apps (retícula 24, botón de interfaz).
 - `png/<archivo>-{16,32,64,128,512}.png`: exportaciones en color con transparencia.
@@ -19,6 +19,9 @@ MedicalManik es la empresa y el sello madre. Cada producto se nombra «<Producto
 6. El identificador del ecosistema es un emblema fijo de seis cuadros: no cambia si se suman productos; el selector sí muestra todas las apps.
 8. Impulsa usa #504CA1, el violeta `accent-deep` que ya tiene su sistema en producción.
 7. Nombre en interfaz: el producto en peso 600 y «Manik» en peso regular.
+
+9. Administración Manik es interna: solo la ven cuentas de la empresa; queda fuera del mosaico y del orden de los seis.
+10. Dos sellos en la misma página HTML en línea comparten ids de máscara: usar `<img>` o renombrar ids al incrustarlos.
 
 ## Pendiente
 - Confirmar si existe un inicio de sesión único entre apps (la maqueta del selector lo menciona como supuesto).

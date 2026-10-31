@@ -26,4 +26,6 @@ Publicado: https://claude.ai/artifact/SUKp1wxWLiJb2K5FhEaqnu · `python3 gen.py 
 ## Verificación
 Playwright 1300 y 390 px: sin desbordes ni errores JS; en la cuenta de médica no aparece Administración.
 
-[pendiente: elección de sello y color; qué más administra («a nivel…»)]
+**Elegido por el usuario (2026-10-31): B · Engrane, color grafito #3A4558.** Integrado en `../final/svg/administracion*.svg`, `../final/png/`, `../final/tema.json`, tokens y README del sistema.
+
+[pendiente: qué más administra («a nivel…», mensaje cortado)]

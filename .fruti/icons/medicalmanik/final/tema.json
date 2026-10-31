@@ -51,6 +51,14 @@
       "para": "administradores de clínicas y hospitales",
       "contraste_blanco": 5.04,
       "contraste_noche": 3.31
+    },
+    "Administración": {
+      "hex": "#3A4558",
+      "para": "equipo MedicalManik (uso interno)",
+      "contraste_blanco": 9.67,
+      "contraste_noche": 1.73,
+      "interno": true,
+      "regla": "Solo visible para cuentas de la empresa; no aparece (ni apagada) para clínicas. Fuera del mosaico de seis."
     }
   }
 }
