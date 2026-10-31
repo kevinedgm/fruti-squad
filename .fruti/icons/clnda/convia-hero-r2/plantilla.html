@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Convia Hero Temporadas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Convia · hero r2: portal de arcos (B) + cielo vivo (C) + temporadas tipo doodle. Lo fijo: arcos, buscador, intenciones, palabra «Convia».
+   Lo que cambia por temporada: cielo, papel picado, adorno, estrella del logo, título y enlace. Tema claro por decisión de marca. */
+:root{--perla:#f9f9f7;--sup:#fff;--tinta:#1b1d1a;--sec:#5c5f5b;--linea:#e6e6e2;--cantera:%cantera%;--suave:%suave%;
+--display:"Fraunces",Georgia,serif;--dv:"SOFT" 100,"WONK" 0,"opsz" 96;--text:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;background:var(--perla);color:var(--tinta);font:400 16px/1.5 var(--text)}a{color:inherit}button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--cantera);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.d{font-family:var(--display);font-weight:500;font-variation-settings:var(--dv);letter-spacing:-.02em}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.proto{background:var(--tinta);color:#fff;font-size:12.5px}.proto .wrap{padding-block:6px}
+.demo{background:#efeee9;border-bottom:1px solid var(--linea)}.demo .wrap{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding-block:8px}.demo b{font-size:13px;margin-right:4px}
+.demo button{border:1px solid var(--linea);background:var(--sup);border-radius:999px;padding:4px 12px;min-height:36px;font-size:13.5px;font-weight:600;cursor:pointer}.demo button[aria-pressed="true"]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+header.top{background:var(--sup);border-bottom:1px solid var(--linea)}header.top .wrap{display:flex;align-items:center;gap:12px;height:64px}
+.logo{display:flex;align-items:center;text-decoration:none}.logo svg{height:34px;width:auto;display:block;overflow:visible}
+.hdr-r{margin-left:auto;display:flex;gap:8px}.hdr-r span{display:inline-grid;place-items:center;height:44px;padding:0 16px;border:1px solid var(--linea);border-radius:999px;font-weight:600;background:var(--sup)}
+/* hero */
+.hero{padding-block:18px 8px}
+.panel{position:relative;border:2px solid var(--cantera);border-radius:32px;overflow:hidden;min-height:620px;display:flex;flex-direction:column;justify-content:space-between;isolation:isolate}
+.escena{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.top-h{display:flex;justify-content:space-between;gap:16px;padding:26px 26px 0;align-items:flex-start}
+.card{background:rgba(249,249,247,.9);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-radius:24px;padding:22px 24px 20px;max-width:600px;box-shadow:0 20px 40px -26px rgba(0,0,0,.5)}
+.temp{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--acc,var(--cantera));margin:0 0 6px}
+.temp i{width:8px;height:8px;border-radius:50%;background:var(--acc,var(--cantera))}
+.card h1{font-size:clamp(34px,4.6vw,60px);line-height:1;margin:0}.card .lema{margin:8px 0 16px;color:var(--sec);font-size:16.5px}
+.buscar{display:flex;align-items:center;gap:10px;background:var(--sup);border:1px solid var(--linea);border-radius:999px;padding:0 8px 0 18px;min-height:56px}
+.buscar input{flex:1;align-self:stretch;border:0;background:transparent;font:16px var(--text);min-width:0;outline:none}.buscar svg{width:20px;height:20px;flex:none}
+.buscar button{border:0;background:var(--cantera);color:#fff;border-radius:999px;min-height:44px;padding:0 18px;font-weight:700;cursor:pointer}
+.intents{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.intent{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:9px 14px;min-height:44px;font-weight:600;font-size:14.5px;text-decoration:none;border:1px solid var(--linea);background:var(--sup)}.intent .ico{width:19px;height:19px}
+.ver-temp{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-weight:700;color:var(--acc,var(--cantera));min-height:44px}
+.hoy{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.hoy span{background:rgba(27,29,26,.74);color:#fff;border-radius:999px;padding:6px 12px;font-size:13.5px;font-weight:600}
+.portal{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;padding:20px 30px 0;position:relative}
+.arco{position:relative;display:block;text-decoration:none;color:var(--t)}.arco svg{width:100%;height:auto;display:block}
+.arco .fondo{fill:var(--f);transition:fill .25s}.arco .piedra{stroke:var(--piedra,#2f5a45)}.arco:hover .fondo,.arco:focus-visible .fondo{fill:color-mix(in srgb,var(--f) 70%,var(--p))}
+.arco-i{position:absolute;left:50%;top:40%;transform:translate(-50%,-50%);transition:transform .25s}.arco-i .ico{width:50px;height:50px}.arco:hover .arco-i{transform:translate(-50%,-60%)}
+.arco-n{position:absolute;left:0;right:0;bottom:12%;text-align:center;font:600 14px var(--text)}
+.suelo{height:16px;background:var(--suelo,#e6e2d8)}
+.credito{font-size:13px;color:var(--sec);margin:10px 4px 0}
+/* adornos animados */
+.cae{animation:cae linear infinite}@keyframes cae{from{transform:translateY(-60px) rotate(0)}to{transform:translateY(680px) rotate(300deg)}}
+.vaiven{animation:vaiven 5s ease-in-out infinite;transform-box:fill-box;transform-origin:top center}@keyframes vaiven{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+.titila{animation:titila 2.4s ease-in-out infinite}@keyframes titila{0%,100%{opacity:1}50%{opacity:.55}}
+@media (prefers-reduced-motion:reduce){.cae,.vaiven,.titila{animation:none}.arco .fondo,.arco-i{transition:none}}
+.after{padding-block:22px 48px}.after .ph{height:110px;border:1px dashed #c9cbc6;border-radius:18px;display:grid;place-items:center;color:var(--sec);font-size:14px}
+.cfg{margin-top:18px;background:var(--sup);border:1px solid var(--linea);border-radius:18px;padding:16px 18px;font-size:14px}.cfg h2{font-size:20px;margin:0 0 6px}.cfg pre{margin:8px 0 0;background:var(--perla);border-radius:12px;padding:12px;overflow-x:auto;font-size:12.5px;line-height:1.45}
+@media (max-width:900px){.panel{min-height:0}.top-h{flex-direction:column-reverse;align-items:stretch;padding:14px 14px 0}.top-h>*{min-width:0}.hoy{justify-content:flex-start}.card{max-width:none;width:100%;min-width:0;padding:18px}
+ .portal{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:116px;overflow-x:auto;scrollbar-width:none;padding:20px 14px 0;margin-top:56px}}
+@media (max-width:640px){.buscar button{display:none}.intents{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-18px;padding-inline:18px}.intent{white-space:nowrap}.hdr-r span:last-child{display:none}.logo svg{height:30px}}
+</style>
+</head>
+<body>
+<div class="proto" role="note"><div class="wrap">Hero r2 · arcos + cielo + temporadas. En producción la temporada se elige sola por fecha; aquí puedes probarlas todas.</div></div>
+<div class="demo"><div class="wrap" role="group" aria-label="Ver la portada como (solo demo)"><b>Ver como:</b><span id="sel"></span></div></div>
+<header class="top"><div class="wrap"><a class="logo" href="#" data-demo id="logo"></a><div class="hdr-r"><span>Avisos</span><span>Mis lugares</span></div></div></header>
+<main>
+<section class="hero wrap" aria-labelledby="h1"><div class="panel" id="panel">
+<svg class="escena" id="escena" viewBox="0 0 1200 640" preserveAspectRatio="xMidYMax slice" aria-hidden="true"></svg>
+<div class="top-h"><div class="card"><p class="temp" id="temp"><i aria-hidden="true"></i><span></span></p><h1 class="d" id="h1"></h1><p class="lema" id="lema"></p>
+<form class="buscar" role="search" onsubmit="return false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><label for="q" class="vh">Buscar</label><input id="q" type="search" placeholder="Un café, un taller, un barrio…"><button type="submit">Buscar</button></form>
+<div class="intents" id="intents"></div><a class="ver-temp" href="#" data-demo id="vt" hidden></a></div>
+<p class="hoy" id="hoy"><span>Hoy: 4 actividades</span><span>1 exposición en curso</span></p></div>
+<div><nav class="portal" aria-label="Giros y agenda"><!--ARCOS--></nav><div class="suelo"></div></div>
+</div><p class="credito" id="credito"></p></section>
+<div class="wrap after"><div class="ph">↓ aquí sigue el directorio (estantes, agenda)</div>
+<div class="cfg"><h2 class="d">Así se define una temporada</h2>Es solo un registro de datos; no hay que tocar el diseño. Ejemplo de la edición activa:<pre id="cfg"></pre></div></div>
+</main>
+<script>
+/*DATA*/
+// ---- TEMPORADAS: cada edición es un dato. desde/hasta en MM-DD (se repite cada año). Fuera de temporada: «cotidiano» con cielo según la hora.
+const TEMPORADAS=[
+ {id:'muertos',nombre:'Día de Muertos',desde:'10-31',hasta:'11-02',acc:'#b4501a',
+  cielo:['#2a1f45','#7a3f6b'],cerro:'#3a2a4f',astro:'#f6d784',suelo:'#e9d7c2',piedra:'#f1e4d4',papel:['#e88a1a','#c2447a','#7a3fa0','#f6c453','#e5622a'],adorno:'petalos',
+  estrella:{fill:'#e88a1a',extra:'petalos'},titulo:'Estos días se recuerda. Y se sale.',lema:'Altares, panes, música y recorridos: lo que vale la pena estos días.',enlace:'Agenda de Muertos ›'},
+ {id:'guelaguetza',nombre:'Guelaguetza',desde:'07-12',hasta:'07-27',acc:'#a33966',
+  cielo:['#7cc4ec','#fdf1d8'],cerro:'#7fae8c',astro:'#f6c453',suelo:'#efe5cf',piedra:'#2f5a45',papel:['#c2447a','#2a78d6','#1baf7a','#eda100','#e5622a'],adorno:'listones',
+  estrella:{fill:'#c2447a',extra:'listones'},titulo:'Julio sube al cerro.',lema:'Dónde comer, dormir y qué hacer en los días de los Lunes del Cerro.',enlace:'Agenda de julio ›'},
+ {id:'rabanos',nombre:'Noche de Rábanos',desde:'12-20',hasta:'12-23',acc:'#b0263a',
+  cielo:['#0f1f33','#2d4766'],cerro:'#1f3a2e',astro:'#f2f0ea',suelo:'#e3e7e1',piedra:'#e3e7e1',papel:['#c8223a','#2f5a45','#f2f0ea','#c8223a','#2f5a45'],adorno:'rabanos',
+  estrella:{fill:'#c8223a',extra:'hojas'},titulo:'Diciembre se talla en rábano.',lema:'Antes y después del zócalo: cenas, cafés y planes de la temporada.',enlace:'Agenda de diciembre ›'},
+];
+const COTIDIANO={id:'cotidiano',nombre:'Cotidiano',acc:'#2f5a45',titulo:'¿Qué quieres hacer hoy?',lema:'Lo que vale la pena en Oaxaca, escogido por gente de aquí.',papel:['#eda100','#e5622a','#2a78d6','#7a3fa0','#c2447a','#1baf7a'],estrella:{fill:'#2f5a45'},piedra:'#2f5a45',suelo:'#e6e2d8'};
+const MOM={manana:{cielo:['#bfe0f3','#fbeed6'],cerro:'#9fbfa9',astro:'#f6c453'},tarde:{cielo:['#f4b88a','#f9e2c4'],cerro:'#9fbfa9',astro:'#e5622a'},noche:{cielo:['#14243a','#3b4e6b'],cerro:'#2c4a3c',astro:'#f2f0ea'}};
+const HOY=new Date(2026,9,31,18,0); // fecha fija de la demo: sáb 31 oct 2026, 18:00
+function temporadaDe(d){const md=String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');return TEMPORADAS.find(t=>md>=t.desde&&md<=t.hasta)}
+function cotidiano(d){const h=d.getHours();const m=h>=19||h<6?'noche':h>=15?'tarde':'manana';return {...COTIDIANO,...MOM[m],nombre:'Cotidiano · '+({manana:'mañana',tarde:'tarde',noche:'noche'})[m]}}
+// ---- estrella del logo por temporada (la palabra «Convia» no cambia)
+const R=(s=>()=>(s=(s*16807)%2147483647)/2147483647)(7);
+function estrella(e){const S=`<path d="${STAR}" fill="${e.fill}"/>`;let x='';
+ if(e.extra==='petalos')x=[[18,30],[182,40],[30,178],[176,170],[100,6]].map(([a,b])=>flor(a,b,13,'#f6a21a')).join('');
+ if(e.extra==='listones')x=['#2a78d6','#1baf7a','#eda100','#e5622a'].map((c,i)=>`<path d="M${70+i*20} 170 q-10 30 4 52 q12 22 -2 40" fill="none" stroke="${c}" stroke-width="9" stroke-linecap="round"/>`).join('');
+ if(e.extra==='hojas')x='<path d="M100 22 C80 -10 60 0 70 22 Z M100 22 C122 -12 142 0 128 24 Z" fill="#2f7d4a"/>';
+ return `<g transform="translate(0 2) scale(.32)">${x}${S}</g>`}
+function flor(x,y,r,c){return `<g transform="translate(${x} ${y})">${[0,72,144,216,288].map(a=>`<circle cx="${(r*.55*Math.cos(a*Math.PI/180)).toFixed(1)}" cy="${(r*.55*Math.sin(a*Math.PI/180)).toFixed(1)}" r="${(r*.5).toFixed(1)}" fill="${c}"/>`).join('')}<circle r="${(r*.32).toFixed(1)}" fill="#b4501a"/></g>`}
+function logo(t){document.getElementById('logo').innerHTML=`<svg viewBox="-8 -8 260 84" role="img" aria-label="Convia${t.id==='cotidiano'?'':', edición '+t.nombre}">${estrella(t.estrella)}<g fill="#1b1d1a">${LOGO_TXT.replace(/fill="[^"]*"/g,'')}</g></svg>`}
+// ---- escena
+function escena(t){const W=1200,H=640;let s=`<defs><linearGradient id="cg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${t.cielo[0]}"/><stop offset="1" stop-color="${t.cielo[1]}"/></linearGradient></defs><rect width="${W}" height="${H}" fill="url(#cg)"/>`;
+ const noche=['noche','muertos','rabanos'].some(k=>t.id===k||t.nombre.includes(k));
+ if(t.id!=='guelaguetza'&&(t.cielo[0].startsWith('#1')||t.cielo[0].startsWith('#2')))s+=Array.from({length:40},()=>`<circle class="titila" style="animation-delay:-${(R()*3).toFixed(1)}s" cx="${(R()*W).toFixed(0)}" cy="${(R()*260).toFixed(0)}" r="${(R()*1.8+.6).toFixed(1)}" fill="#fff" opacity=".7"/>`).join('');
+ s+=`<circle cx="960" cy="150" r="46" fill="${t.astro}"/>`;
+ s+=`<path d="M0 470 C150 380 300 430 430 380 C560 330 690 420 820 380 C950 345 1080 400 1200 370 V640 H0 Z" fill="${t.cerro}"/>`;
+ // papel picado
+ s+=`<path d="M-10 46 C300 96 900 96 1210 46" fill="none" stroke="#1b1d1a" stroke-opacity=".45" stroke-width="1.5"/>`;
+ for(let i=0;i<13;i++){const x=20+i*92,y=46+Math.sin(i/12*Math.PI)*42,c=t.papel[i%t.papel.length];
+  s+=`<g class="vaiven" style="animation-delay:-${(i*.4).toFixed(1)}s"><path fill-rule="evenodd" d="M${x} ${y} h46 v44 l-8 8 l-8 -8 l-7 8 l-8 -8 l-7 8 l-8 -8 Z M${x+12} ${y+14} a5 5 0 1 0 0.1 0 Z M${x+30} ${y+14} a5 5 0 1 0 0.1 0 Z M${x+21} ${y+28} a5 5 0 1 0 0.1 0 Z" fill="${c}"/></g>`}
+ if(t.adorno==='petalos')s+=Array.from({length:26},(_,i)=>`<g class="cae" style="animation-duration:${(9+R()*7).toFixed(1)}s;animation-delay:-${(R()*14).toFixed(1)}s">${flor((R()*W).toFixed(0),(R()*120).toFixed(0),8+R()*7,['#f6a21a','#e88a1a','#f6c453'][i%3])}</g>`).join('');
+ if(t.adorno==='listones')s+=['#c2447a','#2a78d6','#1baf7a','#eda100','#e5622a','#7a3fa0'].map((c,i)=>`<path class="vaiven" style="animation-delay:-${i*.7}s" d="M${640+i*70} 60 q-24 70 6 140 q26 70 -6 150" fill="none" stroke="${c}" stroke-width="12" stroke-linecap="round" opacity=".9"/>`).join('');
+ if(t.adorno==='rabanos')s+=[[700,330],[830,300],[1090,320]].map(([x,y],i)=>`<g transform="translate(${x} ${y}) rotate(${[-12,8,-4][i]})"><path d="M0 -40 C-30 -80 -46 -60 -30 -30 Z M0 -40 C24 -86 46 -64 30 -30 Z" fill="#2f7d4a"/><ellipse cx="0" cy="0" rx="40" ry="44" fill="#c8223a"/><path d="M-14 -10 q14 10 28 0 M-18 10 q18 12 36 0" stroke="#f2f0ea" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M0 44 q4 20 -2 34" stroke="#c8223a" stroke-width="4" fill="none"/></g>`).join('');
+ document.getElementById('escena').innerHTML=s}
+// ---- aplicar
+const INT=[['Esta semana','recorridos'],['Un café nuevo','cafes'],['Dónde comer hoy','restaurantes'],['Un taller para ir solo','talleres'],['Dónde dormir','hoteles']];
+document.getElementById('intents').innerHTML=INT.map(([n,k])=>`<a class="intent" href="#" data-demo>${ICO[k]}${n}</a>`).join('');
+function aplicar(t){const p=document.getElementById('panel');p.style.setProperty('--acc',t.acc);p.style.setProperty('--piedra',t.piedra);p.style.setProperty('--suelo',t.suelo);
+ escena(t);logo(t);document.getElementById('h1').textContent=t.titulo;document.getElementById('lema').textContent=t.lema;
+ const tp=document.getElementById('temp');tp.style.setProperty('--acc',t.acc);tp.querySelector('span').textContent=t.id==='cotidiano'?'Hoy en Oaxaca':`Edición ${t.nombre}`;
+ const vt=document.getElementById('vt');vt.hidden=!t.enlace;vt.textContent=t.enlace||'';
+ document.getElementById('credito').textContent=t.id==='cotidiano'?'Fuera de temporada, el cielo sigue la hora del día.':`Ilustración de temporada: ${t.nombre}. Propuesta: encargar cada edición a una ilustradora o ilustrador de Oaxaca y darle crédito aquí.`;
+ const {id,nombre,desde,hasta,cielo,papel,adorno,estrella:e,titulo,lema,enlace}=t;document.getElementById('cfg').textContent=JSON.stringify({id,nombre,desde,hasta,cielo,papel,adorno,estrella:e,titulo,lema,enlace},null,1);
+ document.querySelectorAll('#sel button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===t.id||(t.id==='cotidiano'&&b.dataset.t.startsWith('cot-')&&t.nombre.endsWith(b.textContent.toLowerCase()))))}
+const OPC=[...TEMPORADAS.map(t=>[t.id,t.nombre]),['cot-manana','Mañana'],['cot-tarde','Tarde'],['cot-noche','Noche']];
+document.getElementById('sel').innerHTML=OPC.map(([k,n])=>`<button type="button" data-t="${k}">${n}</button>`).join(' ');
+document.addEventListener('click',e=>{const b=e.target.closest('#sel button');if(b){const k=b.dataset.t;if(k.startsWith('cot-')){const m=k.slice(4);aplicar({...COTIDIANO,...MOM[m],nombre:'Cotidiano · '+({manana:'mañana',tarde:'tarde',noche:'noche'})[m]})}else aplicar(TEMPORADAS.find(t=>t.id===k));return}
+ if(e.target.closest('[data-demo]'))e.preventDefault()});
+aplicar(temporadaDe(HOY)||cotidiano(HOY));
+</script>
+</body>
+</html>
