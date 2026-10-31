@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Panel de usuario Manik</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300..700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Ecosistema Manik · panel de usuario r1 (antes «inicio del ecosistema»): apps + «Tu perfil en Manik» (directorio público) + «Tu cuenta».
+   Tokens del sistema Manik; el directorio aporta su pin cian y su cian de interfaz (#00788A). Tema claro únicamente. */
+:root{--canvas:#F5F7FB;--surface:#FFFFFF;--surface-soft:#EEF1F7;--ink:#14213D;--muted:#4A5674;--subtle:#7A849C;--line:#E1E6F0;--line-control:#858EA5;
+--manik:#234899;--manik-hover:#1E3C7D;--manik-soft:#E9EDF5;--bruma:#F5FAFB;--luz-cian:#D3F0F4;--luz-calida:#FFEFD2;--noche:#0F1C3F;
+--dir:#009BB0;--dir-ui:#00788A;--dir-soft:#E8F5F7;
+--exito:#15814B;--exito-soft:#E8F2ED;--on-exito-soft:#157C4A;--aviso:#A75F00;--aviso-soft:#F6EFE6;--on-aviso-soft:#A05C03;--info:#3F7695;--info-soft:#ECF1F4;--on-info-soft:#3D7291;
+--r-sm:10px;--r-md:14px;--r-lg:18px;--r-2xl:24px;--pill:999px;--sh-hover:0 2px 4px rgba(20,33,61,.06),0 8px 20px rgba(20,33,61,.08);--sh-pop:0 2px 8px rgba(20,33,61,.08),0 18px 44px rgba(20,33,61,.16);
+--display:"Urbanist","Segoe UI",system-ui,sans-serif;--sans:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;background:var(--bruma);color:var(--ink);font:400 16px/24px var(--sans)}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;margin:0;text-wrap:balance}p{margin:0}:focus-visible{outline:2px solid var(--manik);outline-offset:2px}[hidden]{display:none!important}
+.proto{background:var(--noche);color:#fff;font-size:13px;line-height:18px;padding:7px 16px}
+.demo{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;padding:12px 16px;background:var(--surface);border-bottom:1px solid var(--line)}
+.demo .lb{font-size:14px;font-weight:600}.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line-control);border-radius:var(--r-md);overflow:hidden;background:var(--surface)}
+.seg button{font:600 14px/20px var(--sans);min-height:40px;padding:0 12px;border:0;background:transparent;color:var(--ink);cursor:pointer}.seg button+button{border-left:1px solid var(--line)}.seg button[aria-pressed="true"]{background:var(--manik-soft);color:var(--manik)}
+/* página */
+.pag{position:relative;isolation:isolate;overflow:hidden;min-height:100vh}
+.pag::before,.pag::after{content:"";position:absolute;z-index:-1;border-radius:50%;filter:blur(10px)}.pag::before{width:720px;height:480px;left:-200px;top:-220px;background:radial-gradient(closest-side,var(--luz-cian),transparent)}
+.pag::after{width:620px;height:460px;right:-200px;top:200px;background:radial-gradient(closest-side,var(--luz-calida),transparent)}
+.barra{display:flex;align-items:center;gap:12px;max-width:1180px;margin:0 auto;padding:14px 16px}.barra .eco{display:flex;align-items:center;gap:10px;font:400 17px/1 var(--display);color:var(--muted);margin-right:auto}.barra .eco b{font-weight:600;color:var(--ink)}.barra .eco img{width:28px;height:28px}
+.av{width:44px;height:44px;border-radius:50%;border:0;background:var(--manik-soft);color:var(--manik);font:700 15px/1 var(--sans);display:grid;place-items:center;cursor:pointer}
+.cont{max-width:1180px;margin:0 auto;padding:12px 16px 56px;display:grid;gap:24px}
+.saludo h1{font:300 40px/44px var(--display);letter-spacing:-.03em}.saludo p{color:var(--muted);margin-top:6px}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:20px;align-items:start}
+.ov{font:700 12px/16px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.apps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:10px}
+.app{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:16px;display:flex;gap:14px;align-items:flex-start;text-decoration:none;color:inherit;min-width:0;transition:box-shadow .15s}
+.app:hover{box-shadow:var(--sh-hover)}.app img{width:52px;height:52px;flex:none}.app b{display:block;font:600 16px/22px var(--display)}.app b span{font-weight:400}.app .q{display:block;font-size:14px;line-height:20px;color:var(--muted);margin-top:2px}
+.app.off{background:var(--surface-soft)}.app.off img{filter:grayscale(1);opacity:.45}.app.off b{color:var(--muted)}
+.lado{display:grid;gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-2xl);padding:18px;display:grid;gap:14px}
+/* perfil en Manik */
+.perfil{border-color:#BFE3E8;background:linear-gradient(180deg,var(--dir-soft),var(--surface) 46%)}
+.ph{display:flex;align-items:center;gap:10px}.ph .pin{width:30px;height:auto;flex:none}.ph h2{font-size:18px;line-height:24px}.ph h2 span{font-weight:400;color:var(--muted)}
+.ficha{display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:12px}
+.foto{width:52px;height:52px;border-radius:50%;background:#D7E3F4;color:var(--manik);display:grid;place-items:center;font:700 17px/1 var(--sans);flex:none;position:relative}
+.foto.sin{background:var(--surface-soft);color:var(--subtle);border:1.5px dashed var(--line-control)}
+.ficha b{display:block;font:600 16px/22px var(--display)}.ficha small{display:block;font-size:14px;line-height:20px;color:var(--muted)}
+.est{display:inline-flex;align-items:center;gap:6px;border-radius:var(--pill);padding:3px 12px 3px 8px;font:600 14px/20px var(--sans);justify-self:start}.est svg{width:18px;height:18px}
+.est.visible{background:var(--exito-soft);color:var(--on-exito-soft)}.est.oculto{background:var(--surface-soft);color:var(--muted)}.est.incompleto{background:var(--aviso-soft);color:var(--on-aviso-soft)}.est.revision{background:var(--info-soft);color:var(--on-info-soft)}
+.estxt{font-size:14px;line-height:20px;color:var(--muted)}
+.faltan{margin:0;padding:0;list-style:none;display:grid;gap:6px}.faltan li{display:flex;gap:8px;align-items:center;font-size:14px;line-height:20px}.faltan svg{width:18px;height:18px;color:var(--aviso);flex:none}
+.barra-p{height:6px;border-radius:3px;background:var(--surface-soft);overflow:hidden}.barra-p span{display:block;height:100%;background:var(--dir-ui);border-radius:3px}
+.url{font-size:14px;line-height:20px;color:var(--muted);display:flex;gap:6px;align-items:center;flex-wrap:wrap}.url code{font-family:ui-monospace,Menlo,monospace;font-size:13px;color:var(--ink)}
+.acts{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font:600 15px/20px var(--sans);min-height:44px;padding:0 16px;border-radius:var(--r-md);border:1px solid var(--line-control);background:var(--surface);color:var(--manik);display:inline-flex;align-items:center;gap:8px;cursor:pointer;text-decoration:none}
+.btn:hover{background:var(--surface-soft)}.btn.p{background:var(--manik);border-color:var(--manik);color:#fff}.btn.p:hover{background:var(--manik-hover)}.btn.t3{border-color:transparent;background:transparent}.btn svg{width:18px;height:18px}
+/* cuenta */
+.cuenta h2{font-size:18px;line-height:24px}
+.filas{list-style:none;margin:0;padding:0;display:grid}.filas a{display:flex;gap:12px;align-items:center;padding:10px 4px;border-top:1px solid var(--line);text-decoration:none;color:inherit;min-height:52px}.filas li:first-child a{border-top:0}
+.filas a:hover{background:var(--surface-soft);border-radius:10px}.filas .ic{width:36px;height:36px;border-radius:10px;background:var(--manik-soft);color:var(--manik);display:grid;place-items:center;flex:none}.filas .ic svg{width:18px;height:18px}
+.filas b{display:block;font-weight:600;font-size:15px;line-height:20px}.filas small{display:block;font-size:13px;line-height:18px;color:var(--muted)}.filas .ch{margin-left:auto;color:var(--subtle);width:18px;height:18px;flex:none}
+.filas .chip{margin-left:auto;font-size:13px;line-height:18px;font-weight:600;border-radius:var(--pill);padding:1px 8px;background:var(--aviso-soft);color:var(--on-aviso-soft);white-space:nowrap}
+/* vista pública (diálogo) y edición (hoja) */
+dialog{border:0;padding:0;border-radius:var(--r-2xl);box-shadow:var(--sh-pop);color:var(--ink);background:var(--surface);width:min(460px,calc(100vw - 24px))}dialog::backdrop{background:rgba(15,28,63,.4)}
+.pub-top{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;color:var(--muted)}.pub-top img{height:22px}.pub-top .x{margin-left:auto}
+.x{width:44px;height:44px;border-radius:12px;border:0;background:transparent;color:var(--muted);display:grid;place-items:center;cursor:pointer}.x:hover{background:var(--surface-soft)}.x svg{width:20px;height:20px}
+.pub{padding:20px;display:grid;gap:14px}.pub .cab{display:flex;gap:14px;align-items:center}.pub .foto{width:72px;height:72px;font-size:22px}
+.pub h3{font:600 22px/28px var(--display)}.pub .esp{color:var(--dir-ui);font-weight:600}.pub dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;margin:0;font-size:15px;line-height:22px}.pub dt{color:var(--muted)}.pub dd{margin:0}
+.pub .agendar{font:600 16px/20px var(--sans);min-height:48px;border-radius:var(--pill);border:0;background:var(--dir-ui);color:#fff;cursor:default}
+.aviso-pub{margin:0 20px 20px;border-radius:var(--r-md);padding:10px 12px;font-size:14px;line-height:20px;background:var(--info-soft);color:var(--on-info-soft)}
+dialog.hoja{width:min(520px,100vw);height:100vh;max-height:100vh;margin:0 0 0 auto;border-radius:var(--r-2xl) 0 0 var(--r-2xl)}
+dialog.hoja[open]{display:flex;flex-direction:column}.hoja .hh{display:flex;align-items:flex-start;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line)}.hoja .hh h3{font-size:20px;line-height:28px}.hoja .hh p{font-size:14px;color:var(--muted)}.hoja .hh .x{margin-left:auto}
+.hoja .hb{padding:16px 20px;overflow:auto;display:grid;gap:16px;align-content:start;flex:1}
+.vis{display:flex;gap:14px;align-items:flex-start;border:1px solid var(--line);border-radius:var(--r-lg);padding:14px}.vis b{display:block;font-weight:600}.vis small{display:block;font-size:14px;line-height:20px;color:var(--muted)}
+.sw{margin-left:auto;flex:none;width:52px;height:32px;border-radius:999px;border:0;background:var(--line-control);position:relative;cursor:pointer}.sw::after{content:"";position:absolute;left:4px;top:4px;width:24px;height:24px;border-radius:50%;background:#fff;transition:left .15s}
+.sw[aria-checked="true"]{background:var(--exito)}.sw[aria-checked="true"]::after{left:24px}.sw[aria-disabled="true"]{opacity:.45;cursor:not-allowed}
+.secs{list-style:none;margin:0;padding:0;display:grid;gap:8px}.secs li{display:flex;gap:12px;align-items:center;border:1px solid var(--line);border-radius:var(--r-md);padding:12px 14px}
+.secs svg{width:20px;height:20px;flex:none}.secs .ok{color:var(--exito)}.secs .fa{color:var(--aviso)}.secs b{font-weight:600;font-size:15px}.secs small{display:block;font-size:13px;color:var(--muted)}.secs .ed{margin-left:auto;font-weight:600;font-size:14px;color:var(--manik)}
+.confirma{border:1px solid var(--aviso);background:var(--aviso-soft);border-radius:var(--r-lg);padding:14px;display:grid;gap:10px;font-size:15px;line-height:22px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:980px){.cols{grid-template-columns:1fr}}
+@media (max-width:600px){.apps{grid-template-columns:1fr}.saludo h1{font-size:30px;line-height:36px}dialog.hoja{border-radius:0}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="proto" role="note">Ecosistema Manik · panel de usuario · r1 · persona ficticia · la dirección «manik.mx/…» es provisional (dominio sin confirmar)</div>
+<div class="demo"><span class="lb" id="l1">Estado del perfil</span><div class="seg" role="group" aria-labelledby="l1"><button type="button" data-e="visible" aria-pressed="true">Visible</button><button type="button" data-e="oculto" aria-pressed="false">Oculto</button><button type="button" data-e="incompleto" aria-pressed="false">Incompleto</button><button type="button" data-e="revision" aria-pressed="false">En revisión</button></div>
+<span class="lb" id="l2">Quién entra</span><div class="seg" role="group" aria-labelledby="l2"><button type="button" data-r="medica" aria-pressed="true">Médica</button><button type="button" data-r="asistente" aria-pressed="false">Asistente (sin perfil público)</button></div></div>
+<div class="pag">
+<header class="barra"><span class="eco"><img src="" alt="" id="eco"><span><b>Ecosistema</b> Manik</span></span><button type="button" class="av" id="av" aria-label="Tu cuenta: Lucía Ramírez">LR</button></header>
+<main class="cont"><div class="saludo"><h1 id="sal"></h1><p id="sub"></p></div>
+<div class="cols"><section aria-labelledby="ha"><h2 class="ov" id="ha">Tus apps</h2><div class="apps" id="apps"></div></section>
+<aside class="lado"><section class="card perfil" id="perfil" aria-labelledby="hp"></section>
+<section class="card cuenta" aria-labelledby="hc"><h2 id="hc">Tu cuenta</h2><ul class="filas" id="filas"></ul></section></aside></div></main></div>
+<dialog id="dpub" aria-labelledby="pt"></dialog>
+<dialog id="dhoja" class="hoja" aria-labelledby="ht"></dialog>
+<div class="sr" aria-live="polite" id="vivo"></div>
+<script>
+/*DATA*/
+const P={ojo:'<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',ojoNo:'<path d="M10.7 5.1A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-2.2 3.2M6.6 6.6C3.9 8.4 2 12 2 12s3.6 7 10 7a10 10 0 0 0 5.4-1.6M9.9 9.9a3 3 0 0 0 4.2 4.2M2 2l20 20"/>',
+ alerta:'<path d="m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3M12 9v4M12 17h.01"/>',reloj:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',ext:'<path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
+ lapiz:'<path d="M17 3a2.8 2.8 0 0 1 4 4L7.5 20.5 2 22l1.5-5.5z"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',candado:'<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+ campana:'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10.3 21a1.9 1.9 0 0 0 3.4 0"/>',salir:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/>',ch:'<path d="m9 18 6-6-6-6"/>',
+ ok:'<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',x:'<path d="M18 6 6 18M6 6l12 12"/>',circ:'<circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/>'};
+const ic=(k,c='')=>`<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[k]}</svg>`;
+const vivo=document.getElementById('vivo');let est='visible',rol='medica';
+document.getElementById('eco').src=DATA.eco;
+const SECS=[['Datos públicos','Nombre, especialidad, cédula profesional',true],['Foto de perfil','Una foto de rostro, de frente',false],['Consultorios y horario','Dirección y días de consulta',false],['Servicios y costos','Lo que ofreces y desde cuánto',true]];
+const E={
+ visible:{pill:['visible','ojo','Visible en Manik'],txt:'Los pacientes pueden encontrarte en el directorio y pedir cita.',acts:'ver,editar'},
+ oculto:{pill:['oculto','ojoNo','Oculto'],txt:'Ocultaste tu perfil el 12 oct 2026. Los pacientes no lo ven; tus datos se conservan.',acts:'mostrar,editar'},
+ incompleto:{pill:['incompleto','alerta','No publicado · faltan 2 datos'],txt:'Completa tu perfil para que aparezca en Manik.',acts:'completar,ver'},
+ revision:{pill:['revision','reloj','En revisión'],txt:'Estamos verificando tu cédula profesional. Te avisaremos por correo cuando tu perfil se publique.',acts:'ver,editar'}};
+function render(){const med=rol==='medica';
+ document.getElementById('sal').textContent=med?'Buenos días, Dra. Ramírez':'Buenos días, Sofía';
+ document.getElementById('sub').textContent=med?'Clínica del Valle · ¿A qué app quieres ir?':'Asistente · Clínica del Valle · ¿A qué app quieres ir?';
+ document.getElementById('av').textContent=med?'LR':'SM';document.getElementById('av').setAttribute('aria-label',med?'Tu cuenta: Lucía Ramírez':'Tu cuenta: Sofía Méndez');
+ const tiene=med?['expediente','agenda','farmacia']:['agenda'];
+ document.getElementById('apps').innerHTML=DATA.apps.map(a=>{const on=tiene.includes(a.id);return `<a class="app${on?'':' off'}" href="#"${on?'':' aria-disabled="true"'}><img src="${a.img}" alt=""><span><b>${a.n} <span>Manik</span></b><span class="q">${on?a.q:'Sin acceso · pídelo a tu administrador de grupo'}</span></span></a>`}).join('');
+ const pf=document.getElementById('perfil');pf.hidden=!med;
+ if(med){const e=E[est],inc=est==='incompleto';
+  const A={ver:`<button type="button" class="btn" data-a="ver">${ic('ojo')}${inc?'Vista previa':'Ver mi perfil público'}</button>`,editar:`<button type="button" class="btn t3" data-a="editar">${ic('lapiz')}Editar perfil</button>`,
+   mostrar:`<button type="button" class="btn" data-a="mostrar">${ic('ojo')}Mostrar en Manik</button>`,completar:`<button type="button" class="btn" data-a="editar">${ic('lapiz')}Completar perfil</button>`};
+  pf.innerHTML=`<div class="ph"><img class="pin" src="${DATA.pin}" alt=""><h2 id="hp">Tu perfil en Manik <span>· directorio</span></h2></div>
+  <div class="ficha"><span class="foto${inc?' sin':''}" aria-hidden="true">${inc?ic('user'):'LR'}</span><span><b>Dra. Lucía Ramírez Ortega</b><small>Medicina interna · Oaxaca de Juárez</small></span></div>
+  <span class="est ${e.pill[0]}">${ic(e.pill[1])}${e.pill[2]}</span><p class="estxt">${e.txt}</p>
+  ${inc?`<div class="barra-p" role="img" aria-label="Perfil completo al 50 %"><span style="width:50%"></span></div><ul class="faltan">${SECS.filter(s=>!s[2]).map(s=>`<li>${ic('alerta')}Falta: ${s[0].toLowerCase()}</li>`).join('')}</ul>`:''}
+  ${est==='visible'?`<p class="url">Tu dirección: <code>manik.mx/dra-lucia-ramirez</code></p>`:''}
+  <div class="acts">${e.acts.split(',').map(k=>A[k]).join('')}</div>`}
+ document.getElementById('filas').innerHTML=[['user','Datos personales','Nombre, correo y teléfono'],['candado','Seguridad','Contraseña y verificación en dos pasos',med?'':'Activa la verificación'],['campana','Avisos','Correo y notificaciones de cada app'],['salir','Cerrar sesión','En este dispositivo']]
+  .map(([i,t,d,c])=>`<li><a href="#"><span class="ic">${ic(i)}</span><span><b>${t}</b><small>${d}</small></span>${c?`<span class="chip">${c}</span>`:ic('ch','ch')}</a></li>`).join('');
+ document.querySelectorAll('a[href="#"]').forEach(a=>a.onclick=e=>e.preventDefault())}
+function vista(){const d=document.getElementById('dpub'),inc=est==='incompleto',vis=est==='visible';
+ d.innerHTML=`<div class="pub-top"><img src="${DATA.logo}" alt="Manik">${vis?'Así te ven los pacientes':'Vista previa · los pacientes aún no la ven'}<button type="button" class="x" id="cpub" aria-label="Cerrar vista">${ic('x')}</button></div>
+ <div class="pub"><div class="cab"><span class="foto${inc?' sin':''}" aria-hidden="true">${inc?ic('user'):'LR'}</span><div><h3 id="pt">Dra. Lucía Ramírez Ortega</h3><span class="esp">Medicina interna</span></div></div>
+ <dl><dt>Consultorio</dt><dd>${inc?'<span style="color:var(--on-aviso-soft)">Falta agregarlo</span>':'Clínica del Valle · Oaxaca de Juárez'}</dd><dt>Cédula</dt><dd>${est==='revision'?'En verificación':'Verificada'}</dd><dt>Consulta</dt><dd>Desde $600</dd></dl>
+ <button type="button" class="agendar" aria-disabled="true">Agendar cita</button></div>${vis?'':`<p class="aviso-pub">${est==='oculto'?'Tu perfil está oculto: nadie puede abrirlo.':est==='revision'?'Se publicará al terminar la verificación.':'Completa los datos que faltan para publicarlo.'}</p>`}`;
+ d.showModal();document.getElementById('cpub').onclick=()=>d.close();document.getElementById('cpub').focus()}
+function hoja(){const d=document.getElementById('dhoja'),vis=est==='visible',bloq=est==='incompleto'||est==='revision';
+ d.innerHTML=`<div class="hh"><div><h3 id="ht">Editar tu perfil en Manik</h3><p>Lo que ven los pacientes en el directorio</p></div><button type="button" class="x" id="chj" aria-label="Cerrar">${ic('x')}</button></div>
+ <div class="hb"><div class="vis"><span><b id="lvis">Visible en Manik</b><small>${bloq?(est==='incompleto'?'Se podrá activar cuando el perfil esté completo.':'Se activa al terminar la verificación de tu cédula.'):vis?'Los pacientes pueden encontrarte y pedir cita.':'Oculto: nadie puede abrir tu perfil.'}</small></span>
+ <button type="button" class="sw" role="switch" id="sw" aria-labelledby="lvis" aria-checked="${vis}"${bloq?' aria-disabled="true"':''}></button></div><div id="conf"></div>
+ <ul class="secs">${SECS.map(([t,dd,ok])=>{const fal=!ok&&est==='incompleto';return `<li>${fal?ic('circ','fa'):ic('ok','ok')}<span><b>${t}</b><small>${fal?'Falta':dd}</small></span><span class="ed">${fal?'Agregar':'Editar'}</span></li>`}).join('')}</ul></div>`;
+ d.showModal();document.getElementById('chj').onclick=()=>d.close();document.getElementById('chj').focus();
+ document.getElementById('sw').onclick=e=>{const s=e.currentTarget;if(s.getAttribute('aria-disabled')==='true')return;const c=document.getElementById('conf');
+  if(s.getAttribute('aria-checked')==='true'){c.innerHTML=`<div class="confirma"><p><b>¿Ocultar tu perfil?</b> Los pacientes dejarán de encontrarte y no podrán pedir cita en Manik. Tus datos se conservan y puedes volver a mostrarlo cuando quieras.</p><div class="acts"><button type="button" class="btn" id="si" style="border-color:var(--aviso);color:var(--on-aviso-soft)">Ocultar perfil</button><button type="button" class="btn t3" id="no">Cancelar</button></div></div>`;
+   document.getElementById('si').onclick=()=>{est='oculto';marca();render();d.close();vivo.textContent='Perfil oculto en Manik.'};document.getElementById('no').onclick=()=>{c.innerHTML='';s.focus()};document.getElementById('si').focus()}
+  else{est='visible';marca();render();d.close();vivo.textContent='Perfil visible en Manik.'}}}
+function marca(){document.querySelectorAll('[data-e]').forEach(x=>x.setAttribute('aria-pressed',x.dataset.e===est))}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-e]');if(b){est=b.dataset.e;marca();render()}
+ const r=e.target.closest('[data-r]');if(r){rol=r.dataset.r;document.querySelectorAll('[data-r]').forEach(x=>x.setAttribute('aria-pressed',x===r));render()}
+ const a=e.target.closest('[data-a]');if(a){const k=a.dataset.a;if(k==='ver')vista();else if(k==='editar')hoja();else if(k==='mostrar'){est='visible';marca();render();vivo.textContent='Perfil visible en Manik.'}}});
+render();
+</script>
+</body>
+</html>

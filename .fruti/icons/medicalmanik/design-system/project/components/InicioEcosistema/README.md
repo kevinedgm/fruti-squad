@@ -8,3 +8,7 @@ La primera pantalla después de iniciar sesión: el ecosistema completo para que
 - Apps sin acceso: visibles pero apagadas (sello en gris), con candado y «Sin acceso · pídelo a tu administrador de grupo»; `aria-disabled`. Así la persona sabe que existen y a quién pedirlas.
 - Si la persona solo tiene una app, el inicio se salta y entra directo (propuesta, por confirmar).
 - El consumidor provee: nombre y tratamiento, clínica o grupo activo, apps con y sin acceso, último uso.
+
+## Panel de usuario (r1, 2026-10-31, propuesta)
+
+El inicio pasa a llamarse **panel de usuario** y suma, junto a las apps, «Tu perfil en Manik · directorio» (estado de visibilidad: visible, oculto, incompleto, en revisión; ver perfil público; editar) y «Tu cuenta». Ocultar el perfil pide confirmación. Prototipo: `../../../../panel-usuario-r1/`.
