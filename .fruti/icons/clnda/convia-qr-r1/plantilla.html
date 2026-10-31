@@ -34,7 +34,7 @@
 .tA .cab{background:var(--c);color:var(--ct);padding:7mm 7mm 6mm;display:flex;gap:4mm;align-items:center}
 .mono{width:15mm;height:15mm;border-radius:50%;flex:none;display:grid;place-items:center;border:.6mm solid currentColor;font:500 6.4mm/1 var(--display);font-variation-settings:var(--dv)}
 .tA .nom{font:500 6.6mm/1.02 var(--display);font-variation-settings:var(--dv);letter-spacing:-.01em}.tA .sub{font-size:2.9mm;opacity:.85;margin-top:1mm}
-.tA .cuerpo{flex:1;display:flex;flex-direction:column;align-items:center;padding:5mm 7mm 0}
+.tA .cuerpo{flex:1;display:flex;flex-direction:column;align-items:center;padding:4mm 7mm 0;min-height:0}
 .que{font:500 8mm/1 var(--display);font-variation-settings:var(--dv);margin:0}.que i{font-style:italic;font-weight:400;font-size:4.6mm;color:#5c5f5b;margin-left:2mm}
 .qr{display:block;background:#fff}.tA .qr{width:56mm;height:56mm;margin-top:3mm}
 .acc{display:flex;gap:5mm;justify-content:center;margin-top:2mm;font-size:2.9mm;line-height:1.25;text-align:left}.acc span{display:flex;gap:1.6mm;align-items:center}.acc svg{width:5.2mm;height:5.2mm;flex:none}.acc small{display:block;color:#5c5f5b;font-size:2.5mm}
@@ -43,6 +43,7 @@
 .cv{display:inline-flex;align-items:center;gap:1mm}.cv svg{width:3mm;height:3mm}
 /* B · calca redonda 80 mm */
 .tB{width:80mm;height:80mm;display:block;filter:drop-shadow(0 12px 18px rgba(0,0,0,.18))}
+.eqr{display:block;overflow:visible}.eqr.a{width:80mm;height:80mm;margin:-5mm 0 -6mm}.eqr.b{width:96mm;height:96mm}.eqr.c{width:54mm;height:54mm;margin:-4mm 0 -6mm}
 /* C · tarjeta de barra 55 × 85 mm */
 .tC{width:55mm;height:85mm;background:#fff;border-radius:3mm;overflow:hidden;display:flex;flex-direction:column;align-items:center;box-shadow:0 14px 30px -20px rgba(0,0,0,.45);border:.3mm solid #e2e2de}
 .tC .cab{width:100%;background:var(--c);color:var(--ct);padding:4mm;text-align:center;font:500 4.6mm/1.05 var(--display);font-variation-settings:var(--dv)}
@@ -56,8 +57,8 @@
 </head>
 <body>
 <div class="proto" role="note"><div class="wrap">Kit de QR de mesa · r1 · negocios de ejemplo · en la demo el QR abre el menú publicado en vista de mesa · la dirección corta «convia.mx/m/…» es provisional (dominio sin confirmar)</div></div>
-<header class="intro wrap"><h1 class="d">El QR de la mesa</h1><p>El comensal ve primero el lugar donde está sentado; Convia firma en pequeño. El mismo diseño sirve para restaurantes (Menú) y cafés (Carta).</p>
-<ol class="reglas"><li><b>El establecimiento</b> arriba, con su nombre o logo y su color.</li><li><b>Qué hacer</b>: escanear o acercar el teléfono, en español e inglés.</li><li><b>El QR</b> grande, negro sobre blanco, sin nada encima, con su dirección corta debajo.</li><li><b>Convia</b> al pie: estrellita y «Menú en Convia», pequeño.</li></ol></header>
+<header class="intro wrap"><h1 class="d">El QR de la mesa</h1><p><b>La estrella pone la forma; el lugar pone el color.</b> El QR vive dentro de la estrella de Convia, pintada con el color del establecimiento: se reconoce Convia sin quitarle el protagonismo al lugar. Sirve para restaurantes (Menú) y cafés (Carta).</p>
+<ol class="reglas"><li><b>El establecimiento</b> arriba, con su nombre o logo y su color.</li><li><b>Qué hacer</b>: escanear o acercar el teléfono, en español e inglés.</li><li><b>El QR dentro de la estrella</b>: la estrella de Convia detrás, del color del lugar; el QR en su panel blanco, limpio.</li><li><b>Convia</b> se reconoce por la forma; al pie solo «Menú en Convia».</li></ol></header>
 <div class="ctl"><div class="wrap">
 <label>Establecimiento <select id="neg"></select></label>
 <span class="g" role="group" aria-label="Color del establecimiento">Su color <span id="sws" style="display:flex;gap:6px"></span><input type="color" id="cc" aria-label="Otro color"></span>
@@ -68,7 +69,7 @@
 <main class="wrap"><div class="piezas" id="piezas"></div>
 <section class="notas" aria-label="Cómo se usa"><div><h2 class="d">NFC</h2><p>Una etiqueta NFC pegada detrás del ícono de teléfono, grabada con la misma dirección. Así quien no quiere abrir la cámara solo acerca el teléfono.</p></div>
 <div><h2 class="d">Un QR por establecimiento</h2><p>El número de mesa va impreso para el mesero; el QR es el mismo en todas las mesas, así un cambio de menú no obliga a reimprimir.</p></div>
-<div><h2 class="d">Lo que no se hace</h2><p>Nada encima del QR (ni la estrella de Convia), colores claros en el QR ni QR menor de 2.5 cm: son lo que más falla al escanear.</p></div></section></main>
+<div><h2 class="d">Lo que no se hace</h2><p>Nada encima del QR, colores claros en el QR ni QR menor de 2.5 cm: son lo que más falla al escanear. La estrella va detrás del panel blanco, nunca sobre los cuadritos.</p></div></section></main>
 <script>
 /*DATA*/
 const I={cam:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.6"/></svg>',
@@ -79,25 +80,30 @@ function hazQR(n){if(n.qr)return n.qr;if(typeof qrcode!=='function')return n.qr=
  for(let y=0;y<m;y++)for(let x=0;x<m;x++)if(q.isDark(y,x))d+=`M${x+b} ${y+b}h1v1h-1z`;return n.qr={n:m+2*b,d}}
 const lum=h=>{const c=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(v=>v<=.03928?v/12.92:((v+.055)/1.055)**2.4);return .2126*c[0]+.7152*c[1]+.0722*c[2]};
 const contraste=(a,b)=>{const[x,y]=[lum(a),lum(b)].sort((m,n)=>n-m);return (x+.05)/(y+.05)};
-const cv=q=>`<span class="cv"><svg viewBox="0 0 200 200" aria-hidden="true"><path d="${STAR}" fill="#2f5a45"/></svg>${q} en Convia</span>`;
+const cv=q=>`<span class="cv">${q} en Convia</span>`;
 function qrSvg(n,color,cls){return `<svg class="qr ${cls||''}" viewBox="0 0 ${n.qr.n} ${n.qr.n}" shape-rendering="crispEdges" role="img" aria-label="Código QR: ${n.que.toLowerCase()} de ${n.n}"><rect width="100%" height="100%" fill="#fff"/><path d="${n.qr.d}" fill="${color}"/></svg>`}
+// La estrella de Convia tal cual (contorno dibujado a mano) en el color del lugar, girada como sello; el QR va encima en un panel blanco
+// que tapa el centro y deja ver las seis puntas. En la calca, debajo va la silueta blanca (línea de recorte) para que el sticker sea la estrella.
+// El centro de la estrella original está en (100.4,106.6) de su caja de 200: se recentra en (100,100).
+function estrellaQR(n,color,qc,{panel=.5,texto='',cls='',rot=-6,calca=false}={}){const L=200*panel,x=100-L/2,alto=texto?L*1.24:L;const y=100-alto/2+(texto?4:0);
+ const g=`transform="rotate(${rot} 100 100) translate(-0.4 -6.6)"`;
+ return `<svg class="eqr ${cls}" viewBox="0 0 200 200" role="img" aria-label="Código QR ${n.que.toLowerCase()} de ${n.n}, dentro de la estrella de Convia">
+ <defs><filter id="so${cls}" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="1.2" stdDeviation="1.8" flood-opacity="${calca?.28:.18}"/></filter></defs>
+ ${calca?`<g ${g} filter="url(#so${cls})"><path d="${STAR}" fill="#fff" stroke="#fff" stroke-width="22" stroke-linejoin="round"/></g>`:''}
+ <g ${g}><path d="${STAR}" fill="${color}" stroke="${color}" stroke-width="2.5" stroke-linejoin="round"/></g>
+ <rect x="${x}" y="${y}" width="${L}" height="${alto}" rx="${L*.08}" fill="#fff" ${calca?'':`filter="url(#so${cls})"`}/>
+ <svg x="${x+L*.03}" y="${y+L*.03}" width="${L*.94}" height="${L*.94}" viewBox="0 0 ${n.qr.n} ${n.qr.n}" shape-rendering="crispEdges"><path d="${n.qr.d}" fill="${qc}"/></svg>
+ ${texto?`<text x="100" y="${y+L*1.1}" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="${L*.075}" fill="#1b1d1a">${texto}</text>`:''}</svg>`}
 function render(){const n=NEG[k],c=col||n.colores[0];hazQR(n);
  const ct=contraste(c,'#ffffff')>=4.5?'#ffffff':'#1b1d1a';                      // texto sobre el color del negocio
  const qc=contraste(c,'#ffffff')>=7?c:'#1b1d1a';                                 // el QR solo toma el color si es muy oscuro
  const av=document.getElementById('aviso');const msg=n.qr.falla?'No se pudo cargar el generador de QR (revisa la conexión).':qc===c?'':'Este color es claro para el QR: el código se imprime en negro y el color queda en la cabecera.';av.hidden=!msg;av.textContent=msg;
  const acc=`<p class="acc"><span>${I.cam}<span>Escanea<small>Scan</small></span></span>${nfc?`<span>${I.nfc}<span>Acerca tu teléfono<small>Tap your phone</small></span></span>`:''}</p>`;
  const A=`<figure class="pieza"><div class="tA" style="--c:${c};--ct:${ct}"><div class="cab"><span class="mono" aria-hidden="true">${n.ini}</span><div><div class="nom">${n.n}</div><div class="sub">${n.sub}</div></div></div>
-  <div class="cuerpo"><p class="que">${n.que}<i>${n.what}</i></p>${qrSvg(n,qc)}${acc}<p class="url">convia.mx/m/${n.slug}</p></div><div class="pie"><b>Mesa ${mesa}</b>${cv(n.que)}</div></div><figcaption><b>A · Tarjeta de mesa</b> · 10 × 14 cm, en carpa o en atril</figcaption></figure>`;
- // B: calca redonda con el nombre en el arco superior
- const r=40;const B=`<figure class="pieza"><svg class="tB" viewBox="0 0 80 80" role="img" aria-label="Calca redonda de ${n.n} con código QR">
-  <defs><path id="arcA" d="M 7.2 40 A 32.8 32.8 0 0 1 72.8 40"/><path id="arcB" d="M 3.6 40 A 36.4 36.4 0 0 0 76.4 40"/></defs>
-  <circle cx="40" cy="40" r="39.5" fill="${c}"/><circle cx="40" cy="40" r="30" fill="#fff"/>
-  <text font-family="Fraunces, Georgia, serif" font-size="5" fill="${ct}" letter-spacing=".3" text-anchor="middle"><textPath href="#arcA" startOffset="50%">${n.n}</textPath></text>
-  <text font-family="Figtree, sans-serif" font-size="2.9" font-weight="700" fill="${ct}" letter-spacing=".5" text-anchor="middle"><textPath href="#arcB" startOffset="50%">${n.que.toUpperCase()} · ${n.what.toUpperCase()} · ESCANEA · SCAN${nfc?' · NFC':''}</textPath></text>
-  <svg x="23" y="19.5" width="34" height="34" viewBox="0 0 ${n.qr.n} ${n.qr.n}" shape-rendering="crispEdges"><path d="${n.qr.d}" fill="${qc}"/></svg>
-  <g transform="translate(34.3 54.6) scale(.014)"><path d="${STAR}" fill="#2f5a45"/></g><text x="38" y="57.2" font-family="Figtree, sans-serif" font-size="1.9" fill="#6a6d68">en Convia</text></svg>
-  <figcaption><b>B · Calca redonda</b> · 8 cm, para pegar en la mesa</figcaption></figure>`;
- const C=`<figure class="pieza"><div class="tC" style="--c:${c};--ct:${ct}"><div class="cab">${n.n}</div>${qrSvg(n,qc)}<p class="que">${n.que}<i>${n.what}</i></p><p class="acc"><span>${I.cam}Escanea · Scan</span>${nfc?`<span>${I.nfc}NFC</span>`:''}</p><div class="pie">${cv(n.que)}</div></div><figcaption><b>C · Tarjeta de barra</b> · 5.5 × 8.5 cm, en bloque de acrílico</figcaption></figure>`;
+  <div class="cuerpo"><p class="que">${n.que}<i>${n.what}</i></p>${estrellaQR(n,c,qc,{cls:'a',panel:.54})}${acc}<p class="url">convia.mx/m/${n.slug}</p></div><div class="pie"><b>Mesa ${mesa}</b>${cv(n.que)}</div></div><figcaption><b>A · Tarjeta de mesa</b> · 10 × 14 cm, en carpa o en atril</figcaption></figure>`;
+ // B: calca recortada con la silueta de la estrella; QR y nombre en el centro
+ const B=`<figure class="pieza">${estrellaQR(n,c,qc,{panel:.5,texto:n.n,cls:'b',rot:-4,calca:true})}<figcaption><b>B · Calca estrella</b> · 9.5 cm, recortada con la silueta de la estrella</figcaption></figure>`;
+ const C=`<figure class="pieza"><div class="tC" style="--c:${c};--ct:${ct}"><div class="cab">${n.n}</div>${estrellaQR(n,c,qc,{cls:'c',panel:.62})}<p class="que">${n.que}<i>${n.what}</i></p><p class="acc"><span>${I.cam}Escanea · Scan</span>${nfc?`<span>${I.nfc}NFC</span>`:''}</p><div class="pie">${cv(n.que)}</div></div><figcaption><b>C · Tarjeta de barra</b> · 5.5 × 8.5 cm, en bloque de acrílico</figcaption></figure>`;
  document.getElementById('piezas').innerHTML=A+B+C;
  document.querySelectorAll('.sw').forEach(b=>b.setAttribute('aria-pressed',b.dataset.c===c));document.getElementById('cc').value=c}
 function sws(){document.getElementById('sws').innerHTML=NEG[k].colores.map(x=>`<button class="sw" type="button" data-c="${x}" style="background:${x}" aria-label="Color ${x}"></button>`).join('')}
