@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Convia Hero Doodle</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Convia · hero r3: el logo es el protagonista y el doodle de temporada. Centrado: logo → frase → buscador → sellos.
+   Fondo discreto (perla + tinte de temporada) para no competir con el logo. Tema claro por decisión de marca. */
+:root{--perla:#f9f9f7;--sup:#fff;--tinta:#1b1d1a;--sec:#5c5f5b;--linea:#e6e6e2;--cantera:%cantera%;--suave:%suave%;
+--display:"Fraunces",Georgia,serif;--dv:"SOFT" 100,"WONK" 0,"opsz" 96;--text:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;background:var(--perla);color:var(--tinta);font:400 16px/1.5 var(--text)}a{color:inherit}button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--cantera);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1240px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left,0px))}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.proto{background:var(--tinta);color:#fff;font-size:12.5px}.proto .wrap{padding-block:6px}
+.demo{background:#efeee9;border-bottom:1px solid var(--linea)}.demo .wrap{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding-block:8px}.demo b{font-size:13px;margin-right:4px}
+.demo button{border:1px solid var(--linea);background:var(--sup);border-radius:999px;padding:4px 12px;min-height:36px;font-size:13.5px;font-weight:600;cursor:pointer}.demo button[aria-pressed="true"]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+header.top .wrap{display:flex;justify-content:flex-end;gap:8px;height:64px;align-items:center}header.top span{display:inline-grid;place-items:center;height:44px;padding:0 16px;border:1px solid var(--linea);border-radius:999px;font-weight:600;background:var(--sup)}
+/* hero centrado */
+.hero{position:relative;text-align:center;padding:12px 0 40px;overflow:hidden}
+.hero::before{content:"";position:absolute;left:50%;top:-80px;width:min(1100px,140vw);height:560px;transform:translateX(-50%);background:radial-gradient(closest-side,var(--aura,transparent),transparent);opacity:.55;z-index:-1;pointer-events:none}
+.doodle{display:block;width:min(640px,92vw);height:auto;margin:0 auto;overflow:visible}
+h1{margin:0}
+.frase{font:500 clamp(22px,2.6vw,30px)/1.2 var(--display);font-variation-settings:var(--dv);letter-spacing:-.01em;margin:4px auto 0;max-width:24ch}
+.temp{display:inline-flex;align-items:center;gap:8px;margin:12px 0 0;font-size:13px;font-weight:700;color:var(--acc,var(--cantera))}.temp a{color:inherit;font-weight:700}
+.buscar{display:flex;align-items:center;gap:10px;background:var(--sup);border:1px solid var(--linea);border-radius:999px;padding:0 8px 0 20px;min-height:60px;max-width:640px;margin:24px auto 0;box-shadow:0 12px 30px -20px rgba(0,0,0,.35)}
+.buscar:focus-within{border-color:var(--cantera)}.buscar input{flex:1;align-self:stretch;border:0;background:transparent;font:17px var(--text);min-width:0;outline:none}.buscar svg{width:21px;height:21px;flex:none}
+.buscar button{border:0;background:var(--cantera);color:#fff;border-radius:999px;min-height:46px;padding:0 20px;font-weight:700;cursor:pointer}
+/* intenciones como sellos */
+.sellos{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin:30px auto 0;padding:6px}
+.sello{position:relative;width:118px;height:118px;border-radius:50%;background:var(--f);color:var(--t);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-decoration:none;transform:rotate(var(--r));transition:transform .25s;flex:none}
+.sello .aro{position:absolute;inset:6px;border-radius:50%;border:1.5px dashed currentColor;opacity:.45}.sello .ico{width:32px;height:32px}
+.sello .sl{font-size:12.5px;font-weight:700;line-height:1.15;max-width:84px}.sello:hover,.sello:focus-visible{transform:rotate(0) scale(1.05)}
+.hoy{margin:22px 0 0;font-size:14px;color:var(--sec)}.hoy a{font-weight:700;color:var(--cantera)}
+.credito{font-size:12.5px;color:var(--sec);margin:18px 0 0}
+/* animaciones del doodle */
+.cae{animation:cae linear infinite}@keyframes cae{from{transform:translateY(-30px) rotate(0)}to{transform:translateY(240px) rotate(260deg)}}
+.vaiven{animation:vaiven 4.5s ease-in-out infinite;transform-box:fill-box;transform-origin:top center}@keyframes vaiven{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.flama{animation:flama 1.6s ease-in-out infinite;transform-box:fill-box;transform-origin:bottom center}@keyframes flama{0%,100%{transform:scale(1,1)}50%{transform:scale(.85,1.12)}}
+.gira{animation:gira 14s linear infinite;transform-box:fill-box;transform-origin:center}@keyframes gira{to{transform:rotate(360deg)}}
+.titila{animation:titila 2.2s ease-in-out infinite}@keyframes titila{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.cae,.vaiven,.flama,.gira,.titila{animation:none}.sello{transition:none}}
+.after .ph{height:110px;border:1px dashed #c9cbc6;border-radius:18px;display:grid;place-items:center;color:var(--sec);font-size:14px;margin-bottom:48px}
+@media (max-width:640px){.buscar button{display:none}.buscar{min-height:56px}.sellos{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;scrollbar-width:none;margin-inline:-16px;padding:6px 16px}.sello{width:100px;height:100px}.sello .ico{width:28px;height:28px}.sello .sl{font-size:12px;max-width:74px}header.top span:last-child{display:none}}
+</style>
+</head>
+<body>
+<div class="proto" role="note"><div class="wrap">Hero r3 · el logo es el doodle. En producción la temporada se elige sola por fecha; aquí puedes probarlas.</div></div>
+<div class="demo"><div class="wrap" role="group" aria-label="Ver la portada como (solo demo)"><b>Ver como:</b><span id="sel"></span></div></div>
+<header class="top"><div class="wrap"><span>Avisos</span><span>Mis lugares</span></div></header>
+<main>
+<section class="hero" id="hero" aria-labelledby="h1"><div class="wrap">
+<h1 id="h1"><svg class="doodle" id="doodle" viewBox="0 0 640 230" role="img"></svg></h1>
+<p class="frase" id="frase"></p><p class="temp" id="temp"></p>
+<form class="buscar" role="search" onsubmit="return false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><label for="q" class="vh">Buscar en Convia</label><input id="q" type="search" placeholder="Un café, un taller, un barrio…"><button type="submit">Buscar</button></form>
+<nav class="sellos" aria-label="Ideas para empezar"><!--SELLOS--></nav>
+<p class="hoy">Hoy: 4 actividades · 1 exposición en curso · <a href="#" data-demo>Ver agenda</a></p>
+<p class="credito" id="credito"></p></div></section>
+<div class="wrap after"><div class="ph">↓ aquí siguen las pestañas del directorio (Todo · Cafés · Restaurantes · Hoteles · Museos · Agenda) y los estantes</div></div>
+</main>
+<script>
+/*DATA*/
+// ---- TEMPORADAS: cada edición es un dato (MM-DD, se repite cada año). Fuera de temporada: logo normal.
+const TEMPORADAS=[
+ {id:'muertos',nombre:'Día de Muertos',desde:'10-31',hasta:'11-02',acc:'#b4501a',aura:'#f6c27a',estrella:'#e88a1a',adorno:'muertos',frase:'Estos días se recuerda. Y se sale.',enlace:'Agenda de Muertos'},
+ {id:'guelaguetza',nombre:'Guelaguetza',desde:'07-12',hasta:'07-27',acc:'#a33966',aura:'#f4b3cf',estrella:'#c2447a',adorno:'guelaguetza',frase:'Julio sube al cerro.',enlace:'Agenda de julio'},
+ {id:'rabanos',nombre:'Noche de Rábanos',desde:'12-20',hasta:'12-23',acc:'#b0263a',aura:'#f2a7b0',estrella:'#c8223a',adorno:'rabanos',frase:'Diciembre se talla en rábano.',enlace:'Agenda de diciembre'},
+];
+const COTIDIANO={id:'cotidiano',nombre:'Cotidiano',acc:'#2f5a45',aura:'#cfe3d6',estrella:'#2f5a45',adorno:'',frase:'Lo que vale la pena en Oaxaca, escogido por gente de aquí.'};
+const HOY=new Date(2026,9,31); // fecha fija de la demo: sáb 31 oct 2026
+const temporadaDe=d=>{const md=String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');return TEMPORADAS.find(t=>md>=t.desde&&md<=t.hasta)};
+let sd=11;const R=()=>(sd=(sd*16807)%2147483647)/2147483647;
+const flor=(x,y,r,c,cls='')=>`<g class="${cls}" transform="translate(${x} ${y})">${[0,72,144,216,288].map(a=>`<circle cx="${(r*.55*Math.cos(a*Math.PI/180)).toFixed(1)}" cy="${(r*.55*Math.sin(a*Math.PI/180)).toFixed(1)}" r="${(r*.52).toFixed(1)}" fill="${c}"/>`).join('')}<circle r="${(r*.3).toFixed(1)}" fill="#a3471a"/></g>`;
+const papel=(x0,x1,y,cols,n)=>{let s=`<path d="M${x0} ${y} Q${(x0+x1)/2} ${y+26} ${x1} ${y}" fill="none" stroke="#1b1d1a" stroke-opacity=".5" stroke-width="1.2"/>`;
+ for(let i=0;i<n;i++){const t=(i+.5)/n,x=x0+(x1-x0)*t,yy=y+26*4*t*(1-t)*.5,c=cols[i%cols.length];
+  s+=`<g class="vaiven" style="animation-delay:-${(i*.35).toFixed(2)}s"><path fill-rule="evenodd" d="M${x-14} ${yy} h28 v26 l-5 5 l-4.5 -5 l-4.5 5 l-4.5 -5 l-4.5 5 l-5 -5 Z M${x-6} ${yy+9} a3 3 0 1 0 .1 0 Z M${x+6} ${yy+9} a3 3 0 1 0 .1 0 Z M${x} ${yy+18} a3 3 0 1 0 .1 0 Z" fill="${c}"/></g>`}return s};
+// logo grande: la estrella y el nombre van en la misma posición que el logotipo oficial (escala 2.2) para que siempre se reconozca
+const LX=40,LY=56,LS=2.2;
+function doodle(t){sd=11;let fondo='',estrellaExtra='',frente='';
+ if(t.adorno==='muertos'){fondo=papel(150,600,12,['#e88a1a','#7a3fa0','#c2447a','#f6c453','#e5622a'],9);
+  estrellaExtra=[[14,30],[184,44],[26,176],[178,172],[100,4]].map(([a,b])=>flor(a,b,15,'#f6a21a')).join('');
+  frente=Array.from({length:12},(_,i)=>`<g class="cae" style="animation-duration:${(7+R()*6).toFixed(1)}s;animation-delay:-${(R()*12).toFixed(1)}s">${flor((150+R()*460).toFixed(0),(40+R()*20).toFixed(0),5+R()*4,['#f6a21a','#e88a1a','#f6c453'][i%3])}</g>`).join('')
+   +`<g transform="translate(606 168)"><rect x="-9" y="0" width="18" height="44" rx="3" fill="#f2e6d0" stroke="#a3471a" stroke-width="1.5"/><path class="flama" d="M0 -26 C10 -12 8 -2 0 0 C-8 -2 -10 -12 0 -26 Z" fill="#f6a21a"/></g>`}
+ if(t.adorno==='guelaguetza'){fondo=papel(150,600,12,['#c2447a','#2a78d6','#1baf7a','#eda100','#e5622a','#7a3fa0'],9);
+  estrellaExtra=['#2a78d6','#1baf7a','#eda100','#e5622a','#7a3fa0'].map((c,i)=>`<path class="vaiven" style="animation-delay:-${i*.6}s" d="M${64+i*16} 168 q-14 34 4 60 q16 26 -4 50" fill="none" stroke="${c}" stroke-width="10" stroke-linecap="round"/>`).join('');
+  frente=Array.from({length:16},(_,i)=>`<circle class="titila" style="animation-delay:-${(R()*2).toFixed(1)}s" cx="${(160+R()*440).toFixed(0)}" cy="${(48+R()*16).toFixed(0)}" r="${(2+R()*2.5).toFixed(1)}" fill="${['#c2447a','#2a78d6','#1baf7a','#eda100','#e5622a'][i%5]}"/>`).join('')}
+ if(t.adorno==='rabanos'){fondo=Array.from({length:14},()=>`<path class="titila" style="animation-delay:-${(R()*2).toFixed(1)}s" d="M${(150+R()*450).toFixed(0)} ${(14+R()*34).toFixed(0)} l2 6 l6 2 l-6 2 l-2 6 l-2 -6 l-6 -2 l6 -2 Z" fill="#c8a24a"/>`).join('');
+  estrellaExtra='<path class="vaiven" d="M100 26 C74 -18 46 -6 62 24 Z M100 26 C130 -20 156 -4 136 28 Z" fill="#2f7d4a"/>';
+  frente=`<g transform="translate(618 180) rotate(-8) scale(.82)"><path d="M0 -34 C-22 -66 -38 -50 -24 -26 Z M0 -34 C18 -70 38 -52 24 -26 Z" fill="#2f7d4a"/><ellipse cx="0" cy="0" rx="26" ry="30" fill="#c8223a"/><path d="M-10 -8 q10 8 20 0 M-12 8 q12 9 24 0" stroke="#f2f0ea" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M0 30 q3 14 -2 24" stroke="#c8223a" stroke-width="3" fill="none"/></g>`}
+ const est=`<g transform="translate(0 2) scale(.32)"><g class="${t.adorno?'':'gira-no'}">${estrellaExtra}<path d="${STAR}" fill="${t.estrella}"/></g></g>`;
+ const svg=document.getElementById('doodle');svg.setAttribute('aria-label',t.id==='cotidiano'?'Convia':`Convia, edición ${t.nombre}`);
+ svg.innerHTML=fondo+`<g transform="translate(${LX} ${LY}) scale(${LS})">${est}<g fill="#1b1d1a">${LOGO_TXT}</g></g>`+frente}
+function aplicar(t){const h=document.getElementById('hero');h.style.setProperty('--aura',t.aura);h.style.setProperty('--acc',t.acc);doodle(t);
+ document.getElementById('frase').textContent=t.frase;const tp=document.getElementById('temp');
+ tp.innerHTML=t.id==='cotidiano'?'':`Edición ${t.nombre} · <a href="#" data-demo>${t.enlace} ›</a>`;tp.hidden=t.id==='cotidiano';
+ document.getElementById('credito').textContent=t.id==='cotidiano'?'':`Doodle de temporada. Propuesta: encargar cada edición a una ilustradora o un ilustrador de Oaxaca y darle crédito aquí.`;
+ document.querySelectorAll('#sel button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.t===t.id))}
+document.getElementById('sel').innerHTML=[...TEMPORADAS,COTIDIANO].map(t=>`<button type="button" data-t="${t.id}">${t.id==='cotidiano'?'Sin temporada':t.nombre}</button>`).join(' ');
+document.addEventListener('click',e=>{const b=e.target.closest('#sel button');if(b){aplicar([...TEMPORADAS,COTIDIANO].find(t=>t.id===b.dataset.t));return}if(e.target.closest('[data-demo]'))e.preventDefault()});
+aplicar(temporadaDe(HOY)||COTIDIANO);
+</script>
+</body>
+</html>

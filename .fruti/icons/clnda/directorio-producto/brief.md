@@ -119,6 +119,7 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 - Corrección 2026-10-31: las fechas de los perfiles tenían el día de la semana corrido; se ajustó el número del día y se verificó contra el calendario 2026.
 - **Directorio r11** `../convia-web-r11/`: el modelo llega al directorio: pestaña **Agenda** (actividades por día, «Organiza · En», filtros y «Solo lo que sigo»), **Quiénes organizan** con «Seguir», **campana de avisos**, «Actividades aquí» en cada lugar y enlaces a los perfiles completos.
 - **Hero del directorio** (usuario 2026-10-31: hero art moderno, único, que enmarque): ronda 1 con tres direcciones en `../convia-hero-r1/` (A convite de estrellas · B portal de arcos · C ventana del día). → el usuario eligió **B + C** y pidió **temporadas tipo doodle**. Hero r2 `../convia-hero-r2/`: arcos fijos + cielo vivo; por temporada cambian cielo, adornos, estrella del logo y texto; cada temporada es un dato y se elige por fecha. [propuesta: encargar cada edición a artistas de Oaxaca; pendiente: verificar uso del nombre «Guelaguetza»]
+  - r3 (usuario): **el logo de Convia al centro es el protagonista y el doodle**; debajo frase de temporada, buscador e intenciones como **sellos**. Fondo discreto; los arcos salen del hero. `../convia-hero-r3/`
 
 ## Pendiente de operación (usuario, 2026-10-30: «tema de operación de negocio», se decide después)
 - Quién carga los primeros lugares al lanzar (curaduría e invitación vs. solicitudes espontáneas) y cuántos necesita la fase 1.
