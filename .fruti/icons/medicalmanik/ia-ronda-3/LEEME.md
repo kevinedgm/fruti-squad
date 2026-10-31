@@ -23,4 +23,6 @@ Paciente ficticia. Códigos CIE-10 reales usados como ejemplo (J02.9, J03.9, R50
 ## Verificación
 Playwright 1300 y 390 px: sin desbordes ni errores JS; flujo completo con teclado y ratón (respira, analiza, redacta, acepta, descarta); controles ≥ 20 px (casillas 20 px; botones 44 px).
 
-[pendiente: aprobación de los tres significados; luego diálogo de revisión por función]
+**Aprobado por el usuario (2026-10-31): la regla «respira, orbita, traza».**
+
+[pendiente: diálogo de revisión por función; tokens `ia`, `ia-hover`, `ia-destello` a materializar en `design-system/project/tokens.json`]

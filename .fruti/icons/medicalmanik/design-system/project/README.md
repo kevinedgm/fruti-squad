@@ -71,6 +71,15 @@ Por qué: tres colores de producto coinciden con estados (Farmacia ≈ éxito, C
 
 Lucide, trazo 2, retícula 24 (el mismo set de Impulsa). Un concepto, un icono; con texto al lado llevan `aria-hidden`. Estados: circle-check, triangle-alert, circle-x, info.
 
+## IA (aprobado 2026-10-31)
+
+La IA es una **función «IA»**, no un personaje ni un producto: los botones dicen verbo + «con IA». Prototipos: `../../ia-ronda-1/` a `../../ia-ronda-3/`.
+
+- **Forma:** píldora azul noche (`ia` #0F1C3F, `ia-hover` #1B2B57) con el destello doble en cian claro (`ia-destello` #5FD3E2). La píldora la separa del botón primario (azul Manik, radio 14): la IA nunca es la acción principal de la vista. [tokens propuestos, aún no en `tokens.json`]
+- **Todo lo que produce es borrador:** marca «Sugerido por IA», borde punteado; no entra al expediente sin confirmación del médico, completa o dato por dato; al aceptarse pierde la marca.
+- **Cada dato muestra su origen** (frase del dictado o registro).
+- **Movimiento con significado:** respira (halo, 1 vez) = invitación al pasar el cursor o con foco; orbita (bucle) = analizando datos («Analizando…»); traza (bucle) = redactando («Redactando…»); el destello del sello se traza una vez al llegar un resultado. Quieta en reposo; `prefers-reduced-motion` la apaga.
+
 ## Voz
 
 Directa y clínica: el verbo dice lo que pasa («Guardar receta», «Surtir»). Los errores dicen el límite («Fuera de rango: máximo 100 mg al día»). Trato de usted o por título profesional en saludos («Buenos días, Dra. Ramírez»).
