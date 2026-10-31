@@ -103,6 +103,9 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 - **Menú (usuario, 2026-10-31): se captura en línea en Convia** y el restaurante pone un **QR en la mesa** que abre ese menú en Convia: es el gancho de adquisición. Perfil de restaurante r1: `../convia-perfil-restaurante-r1/`.
   - Riesgo: capturar cuesta; [propuesta] Convia hace la primera captura desde la foto del menú como parte de la admisión, y el negocio solo actualiza precios.
   - [propuesta] La vista QR prioriza el menú; nada de anuncios ni registro para verlo.
+- **Cocinas de restaurantes (usuario, 2026-10-31):** buscar por tipo de comida, incluidas las **8 regiones de Oaxaca**. Catálogo cerrado `../convia-final/cocinas.py`. Directorio r10 `../convia-web-r10/` (filtro «¿Qué se te antoja?»).
+  - [propuesta] 1 cocina principal + hasta 2 más; la regional se respalda con ≥2 platillos de esa región en el menú de Convia; «vegana» no es cocina (ya es rasgo); «variada» no se usa.
+  - Pendiente: validar la lista de «Otras» y si conviene un mapa de las 8 regiones (requiere datos geográficos reales, no dibujarlo de memoria).
 
 ## Pendiente de operación (usuario, 2026-10-30: «tema de operación de negocio», se decide después)
 - Quién carga los primeros lugares al lanzar (curaduría e invitación vs. solicitudes espontáneas) y cuántos necesita la fase 1.

@@ -151,8 +151,11 @@ footer .wrap{padding-block:24px 32px;display:flex;gap:10px;flex-wrap:wrap;justif
 .upd{font-size:12.5px;color:var(--sec);margin:12px 2px 0}
 .qr-end{margin:18px 0 0;background:var(--acc-bg);border-radius:18px;padding:16px;display:grid;gap:10px}.qr-end p{margin:0;font-weight:600;color:var(--acc)}.qr-end .row2{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 /* modo QR (llega desde la mesa) */
+.coc{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0 0}.coc>small{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--sec);margin-right:2px}
+.cz{display:inline-flex;align-items:center;gap:5px;background:var(--acc-bg);color:var(--acc);border-radius:8px;padding:3px 9px;font-size:13px;font-weight:700}.cz.pri::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--acc)}
+.mt .rg{background:var(--acc-bg);border-color:transparent;color:var(--acc);padding-left:9px}
 .qrbar{display:none}.qrbar .back{white-space:nowrap;flex:none}
-body.qr .mos,body.qr .ticket,body.qr .ficha .vbp,body.qr .ficha .mine,body.qr .ficha .zona,body.qr .ficha .vol-l{display:none}
+body.qr .mos,body.qr .ticket,body.qr .ficha .vbp,body.qr .ficha .mine,body.qr .ficha .zona,body.qr .ficha .vol-l,body.qr .ficha .coc{display:none}
 body.qr .ficha{margin:12px 0 0;padding:14px 16px}body.qr .ficha h1{font-size:26px;margin-right:60px}body.qr .sello-w{width:48px;height:48px;top:12px}
 body.qr .qrbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:12px;font-size:13.5px;color:var(--sec)}
 body.qr .fab{display:none}body.qr{padding-bottom:calc(var(--nav) + 24px)}
@@ -203,7 +206,7 @@ return `<div class="ph-h"><h2 class="d">${lang==='es'?'Menú':'Menu'}</h2><small
 <div class="mtop"><div class="seg" role="group" aria-label="Idioma del menú"><button type="button" data-lang="es" aria-pressed="${lang==='es'}" lang="es">Español</button><button type="button" data-lang="en" aria-pressed="${lang==='en'}" lang="en">English</button></div>
 <button class="vegt" type="button" data-veg aria-pressed="${soloVeg}">${LEAF}${t.veg}</button></div>
 <nav class="secnav" aria-label="${lang==='es'?'Secciones del menú':'Menu sections'}">${secs.map(s=>`<a href="#m-${s.id}">${s[lang]}</a>`).join('')}</nav>
-<div lang="${lang}">${secs.map(s=>`<section class="ms" id="m-${s.id}" aria-labelledby="mh-${s.id}"><h3 id="mh-${s.id}">${s[lang]}<small>${s.its.length}</small></h3><ul class="mi">${s.its.length?s.its.map(i=>`<li><b>${i[lang]}</b><span class="pr">$${i.p}</span><p>${lang==='es'?i.des:i.den}</p>${i.veg||i.pic||i.dest?`<span class="mt">${i.dest?`<span class="casa">${t.casa}</span>`:''}${i.veg?`<span>${LEAF}${t.vegano}</span>`:''}${i.pic?`<span>${I.chile}${t.pic}</span>`:''}</span>`:''}</li>`).join(''):`<li><span class="vacio">${t.nada}</span></li>`}</ul></section>`).join('')}</div>
+<div lang="${lang}">${secs.map(s=>`<section class="ms" id="m-${s.id}" aria-labelledby="mh-${s.id}"><h3 id="mh-${s.id}">${s[lang]}<small>${s.its.length}</small></h3><ul class="mi">${s.its.length?s.its.map(i=>`<li><b>${i[lang]}</b><span class="pr">$${i.p}</span><p>${lang==='es'?i.des:i.den}</p>${i.veg||i.pic||i.dest||i.reg?`<span class="mt">${i.dest?`<span class="casa">${t.casa}</span>`:''}${i.reg?`<span class="rg">${COC[i.reg]}</span>`:''}${i.veg?`<span>${LEAF}${t.vegano}</span>`:''}${i.pic?`<span>${I.chile}${t.pic}</span>`:''}</span>`:''}</li>`).join(''):`<li><span class="vacio">${t.nada}</span></li>`}</ul></section>`).join('')}</div>
 <p class="upd">${t.upd} ${R.actualizado}.</p>
 ${document.body.classList.contains('qr')?`<div class="qr-end"><p>¿Te gustó? Guárdalo para volver o recomendarlo.</p><div class="row2"><button class="btn" type="button" data-act="quiero">${I.guardar}Guardar</button><a class="btn" href="#">Ver el lugar</a></div></div>`:''}`}
 const P={
@@ -229,6 +232,7 @@ document.getElementById('app').innerHTML=`
 <section class="ficha" aria-labelledby="h1"><span class="sello-w" aria-hidden="true">${SELLO}</span><span class="kick">${R.kick}</span><h1 class="d" id="h1">${R.n}</h1>
 <p class="zona">Fuertes de <b>$${Math.min(...precios)}</b> a <b>$${Math.max(...precios)}</b> · menú de temporada</p>
 <p class="vol-l" aria-label="${n10} de cada 10 personas volverían, ${R.v} visitas">${dots(n10)}<span><b>${n10} de cada 10</b> volverían</span>${fav?`<span class="fav">${star}Favorito Convia</span>`:''}</p>
+<p class="coc"><small>Cocina</small>${R.coc.map((k,i)=>`<span class="cz${i?'':' pri'}">${COC[k]}${i?'':'<span class="vh"> (principal)</span>'}</span>`).join('')}</p>
 <ul class="vbp" aria-label="Va bien para, revisado por Convia">${R.ras.map(k=>`<li><span class="s">${RAS[k].ico}</span>${RAS[k].n}</li>`).join('')}<li class="rev">✓ revisado por Convia</li></ul>
 <div class="mine" id="mine">${mine()}</div></section>
 <div class="ticket" role="group" aria-label="Datos de hoy"><div><small>${H0[0]}</small><b>${H0[1]||'—'}</b></div><div><small>Precio</small><b>${R.precio}</b></div><div><small>Reserva</small><b>vie–dom</b></div></div>

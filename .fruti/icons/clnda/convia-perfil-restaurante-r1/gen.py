@@ -6,7 +6,7 @@
 import os, re, json, sys
 D = os.path.dirname(os.path.abspath(__file__)); F = os.path.join(D, '..', 'convia-final')
 sys.path.insert(0, F)
-import rasgos as RG, amenidades as AM
+import rasgos as RG, amenidades as AM, cocinas as CO
 G = 'restaurantes'
 T = json.load(open(os.path.join(F, 'tema.json'))); K = T['categorias'][G]
 N = dict(perla='#f9f9f7', sup='#ffffff', tinta='#1b1d1a', sec='#5c5f5b', linea='#e6e6e2', foto='#ececea', gtexto=K['texto'], gfondo=K['fondo'], gpunto=K['punto'], gdk='#843818')
@@ -19,7 +19,7 @@ STAR = re.search(r'd="([^"]+)"', raw('svg/simbolo.svg')).group(1)
 ICO_G = clean(raw(f'iconos/{G}.svg'), 'ico')
 v = lambda es, en, des, den, p, *f: dict(es=es, en=en, des=des, den=den, p=p, veg='veg' in f, pic='pic' in f, dest='dest' in f)
 R = dict(
- n='Cocina Siete Fuegos', kick='Restaurante · Xochimilco', precio='$$$', v=80, w=71, fav=.5, ras=['vegano', 'accesible'],
+ n='Cocina Siete Fuegos', coc=['valles', 'mixteca'], kick='Restaurante · Xochimilco', precio='$$$', v=80, w=71, fav=.5, ras=['vegano', 'accesible'],
  d='Menú corto de temporada que cambia cada semana. Cocina de leña, maíz nixtamalizado en casa y producto de productores de los Valles Centrales.',
  # horario por día (0 = domingo); None = cerrado
  hor={'0': ['13:00', '20:00'], '1': None, '2': ['13:00', '22:00'], '3': ['13:00', '22:00'], '4': ['13:00', '22:00'], '5': ['13:00', '23:00'], '6': ['13:00', '23:00']},
@@ -35,7 +35,8 @@ R = dict(
    v('Mole negro con pollo de rancho', 'Black mole with free-range chicken', 'Receta de la casa, con arroz blanco.', 'House recipe, served with white rice.', 280, 'dest'),
    v('Mole amarillo de verduras con chochoyotes', 'Yellow vegetable mole with masa dumplings', 'Chile chilcostle, ejote, chayote y papa.', 'Chilcostle chile, green beans, chayote and potato.', 230, 'veg', 'dest'),
    v('Pescado a la talla', 'Grilled fish a la talla', 'Pesca del día con adobo de chile guajillo.', 'Catch of the day with guajillo chile adobo.', 310, 'pic'),
-   v('Costilla en chileajo', 'Pork rib in chileajo', 'Chileajo rojo, papas de rancho.', 'Red chileajo sauce, country potatoes.', 295, 'pic')]),
+   v('Costilla en chileajo', 'Pork rib in chileajo', 'Chileajo rojo, papas de rancho.', 'Red chileajo sauce, country potatoes.', 295, 'pic'),
+   v('Mole de caderas (temporada)', 'Mole de caderas (seasonal)', 'De octubre a noviembre: caldo espeso de chivo con ejote y guaje.', 'October to November: rich goat stew with green beans and guaje.', 320, 'dest')]),
   dict(id='postres', es='Postres', en='Desserts', items=[
    v('Nicuatole de coco', 'Coconut nicuatole', 'Dulce de maíz y coco, con grana.', 'Corn and coconut pudding.', 75, 'veg'),
    v('Pan de yema con helado de chocolate', 'Egg-yolk bread with chocolate ice cream', 'Helado de chocolate de metate.', 'Stone-ground chocolate ice cream.', 90)]),
@@ -52,11 +53,18 @@ R = dict(
         ('2026-10-07', '7 oct 2026', 'Ya abrimos domingos de 13:00 a 20:00.', ''),
         ('2026-09-15', '15 sep 2026', 'Llegó el chile chilcostle de la temporada: vuelve el mole amarillo de verduras.', '07.jpg')],
 )
+# Región de cada platillo (respalda la cocina regional del perfil; demo: asignación ilustrativa que el restaurante y Convia validarían).
+REG = {'Tetelas de frijol con hoja de aguacate': 'mixteca', 'Mole de caderas (temporada)': 'mixteca', 'Tlayuda chica de asiento y quesillo': 'valles', 'Sopa de guías': 'valles',
+       'Mole negro con pollo de rancho': 'valles', 'Mole amarillo de verduras con chochoyotes': 'valles', 'Nicuatole de coco': 'valles', 'Agua de chilacayota': 'valles', 'Chocolate de agua': 'valles'}
+for sec in R['menu']:
+    for it in sec['items']: it['reg'] = REG.get(it['es'], '')
+for k in R['coc']: assert sum(it['reg'] == k for sec in R['menu'] for it in sec['items']) >= 2, k  # regla: ≥2 platillos por cocina regional
+COC = {k: v['n'] for k, v in CO.COCINAS.items()}
 RAS = {k: dict(n=n, ico=RG.svg(k, cls='ico')) for k, (n, c, _) in RG.RASGOS.items()}
 AMS = {k: dict(n=n, ico=AM.svg(k, cls='ico')) for k, n in AM.NOMBRES.items()}
 html = open(os.path.join(D, 'plantilla.html')).read()
 html = (html.replace('/*DATA*/', 'const R=' + json.dumps(R, ensure_ascii=False) + ';const RAS=' + json.dumps(RAS, ensure_ascii=False) + ';const AMS=' + json.dumps(AMS, ensure_ascii=False)
-                     + ';const ICO_G=' + json.dumps(ICO_G) + ';const SELLO=' + json.dumps(SELLO) + ';const LEAF=' + json.dumps(RG.svg('vegano', cls='ico')) + ';')
+                     + ';const COC=' + json.dumps(COC, ensure_ascii=False) + ';const ICO_G=' + json.dumps(ICO_G) + ';const SELLO=' + json.dumps(SELLO) + ';const LEAF=' + json.dumps(RG.svg('vegano', cls='ico')) + ';')
         .replace('<!--LOGO-->', logo).replace('<!--LOGOBASE-->', LOGO_BASE).replace('%STAR%', STAR))
 for k, x in N.items(): html = html.replace('%' + k + '%', x)
 OUT = sys.argv[1] if len(sys.argv) > 1 else D

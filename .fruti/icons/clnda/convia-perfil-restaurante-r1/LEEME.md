@@ -17,5 +17,6 @@ Aplica el patrón aprobado del hotel r2 (tema del giro, mosaico, ficha llavero, 
 - Boleto: estado de hoy calculado con el horario (abierto / hoy abre / mañana abre), precio, cuándo conviene reservar.
 - El lugar: horario semanal con el día de hoy marcado, amenidades (las declara el negocio), «No tiene», novedades.
 - Restaurante, menú, precios, contactos y dirección **ficticios**; fotos de relleno desenfocadas, fuera del repo.
+- r1.1: cocina en la ficha («Valles Centrales» principal · «Mixteca») y región en cada platillo; la cocina regional se respalda con ≥2 platillos (el generador lo valida).
 - Pendiente: tarjeta de mesa con QR (la librería `qrcode` no está en esta sesión; `convia-final/distintivo.py` ya sabe dibujar QR).
 - Uso: `python3 gen.py <carpeta con img/>`.
