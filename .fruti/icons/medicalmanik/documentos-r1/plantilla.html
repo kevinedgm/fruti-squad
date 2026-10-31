@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Documentos del paciente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400..700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Expediente Manik · documentos para el paciente r1. Hoja carta (816 × 1056 px a 96 ppp). El médico es el protagonista:
+   su logo, su nombre y un acento que él elige de una paleta sobria. Expediente Manik solo firma al pie, en gris y pequeño.
+   La interfaz del prototipo usa los tokens del sistema; la hoja usa --acento (elegido por el médico) y grises neutros. */
+:root{--canvas:#EEF1F5;--surface:#FFFFFF;--ink:#14213D;--muted:#4A5674;--line:#E1E6F0;--line-control:#858EA5;--manik:#234899;--manik-soft:#E9EDF5;--noche:#0F1C3F;
+--h-ink:#1C2230;--h-muted:#5A6170;--h-line:#DADDE3;--h-soft:#F4F5F7;--acento:#1F2A44;
+--display:"Urbanist","Segoe UI",system-ui,sans-serif;--sans:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:400 15px/22px var(--sans)}p{margin:0}h1,h2,h3{margin:0}
+:focus-visible{outline:2px solid var(--manik);outline-offset:2px}[hidden]{display:none!important}
+.proto{background:var(--noche);color:#fff;font-size:13px;line-height:18px;padding:7px 16px}
+.ctl{position:sticky;top:0;z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}.ctl .w{max-width:1180px;margin:0 auto;padding:12px 16px;display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center}
+.lb{font-size:14px;font-weight:600}.grp{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.seg{display:inline-flex;border:1px solid var(--line-control);border-radius:12px;overflow:hidden}.seg button{font:600 14px/20px var(--sans);min-height:40px;padding:0 12px;border:0;background:var(--surface);color:var(--ink);cursor:pointer}.seg button+button{border-left:1px solid var(--line)}.seg button[aria-pressed="true"]{background:var(--manik-soft);color:var(--manik)}
+.sw{width:32px;height:32px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--line-control);cursor:pointer;padding:0}.sw[aria-pressed="true"]{box-shadow:0 0 0 2px var(--ink)}
+.chk{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:600}.chk input{width:20px;height:20px;margin:0;accent-color:var(--manik)}
+.marco{max-width:1180px;margin:0 auto;padding:24px 16px 56px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start}
+.lienzo{min-width:0}.escala{transform-origin:top left}
+.notas{display:grid;gap:12px;position:sticky;top:80px}.nota{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 16px;font-size:14px;line-height:20px;color:var(--muted)}.nota b{display:block;color:var(--ink);font:600 16px/22px var(--display);margin-bottom:4px}
+/* ===== la hoja ===== */
+.pagina{width:816px;height:1056px;background:#fff;box-shadow:0 1px 3px rgba(20,33,61,.08),0 10px 30px rgba(20,33,61,.10);padding:52px 60px 40px;display:flex;flex-direction:column;color:var(--h-ink);font:400 12.5px/1.5 var(--sans);position:relative}
+.membrete{display:flex;gap:18px;align-items:flex-start;padding-bottom:16px;border-bottom:1.5px solid var(--acento)}
+.logo{width:64px;height:64px;border-radius:12px;border:1.5px solid var(--acento);color:var(--acento);display:grid;place-items:center;font:600 22px/1 var(--display);letter-spacing:.02em;flex:none}
+.medico{flex:1;min-width:0}.medico h1{font:600 19px/1.2 var(--display);color:var(--h-ink)}.medico .esp{font-size:13px;color:var(--acento);font-weight:600;margin-top:2px}
+.medico p{font-size:11.5px;line-height:1.5;color:var(--h-muted)}
+.doc{text-align:right;flex:none}.doc h2{font:600 17px/1.2 var(--display);color:var(--acento);text-transform:none}.doc p{font-size:11.5px;color:var(--h-muted);line-height:1.5;font-variant-numeric:tabular-nums}
+.paciente{display:grid;grid-template-columns:2.2fr 1fr 1fr 1.4fr;gap:8px 18px;padding:12px 0 14px;border-bottom:1px solid var(--h-line)}
+.campo small{display:block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--h-muted);font-weight:700}.campo span{font-size:13px;font-weight:600;font-variant-numeric:tabular-nums}
+.sec{padding-top:16px;display:grid;gap:8px}.sec h3{font:700 10.5px/1.3 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--acento)}
+.medidas{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.med{border:1px solid var(--h-line);border-radius:10px;padding:10px 12px;display:grid;gap:6px}
+.med .top{display:flex;align-items:baseline;gap:8px}.med .n{font-size:12px;color:var(--h-muted);font-weight:600}.med .v{margin-left:auto;font:600 18px/1 var(--sans);font-variant-numeric:tabular-nums}.med .v small{font-size:11px;font-weight:500;color:var(--h-muted);margin-left:2px}
+.rango{position:relative;height:22px}
+.rango .tramos{display:flex;height:6px;border-radius:3px;overflow:hidden;gap:2px;margin-top:4px}.rango .tramos i{display:block;height:100%;background:var(--h-soft);border-radius:2px}.rango .tramos i.act{background:color-mix(in srgb,var(--acento) 28%,#fff)}
+.rango .pin{position:absolute;top:0;width:2px;height:14px;background:var(--acento);border-radius:1px;transform:translateX(-1px)}
+.rango .lbls{display:flex;gap:2px;font-size:9.5px;color:var(--h-muted);margin-top:3px}.rango .lbls span{text-align:center}.rango .lbls span.act{color:var(--h-ink);font-weight:700}
+.med .lect{font-size:11.5px;color:var(--h-muted)}.med .lect b{color:var(--h-ink)}
+.mini{display:flex;gap:18px;font-size:12px;color:var(--h-muted);font-variant-numeric:tabular-nums;flex-wrap:wrap}.mini b{color:var(--h-ink);font-weight:600}
+.txt{font-size:13px;line-height:1.55;color:var(--h-ink)}
+.ind{margin:0;padding-left:18px;display:grid;gap:4px;font-size:12.5px}
+.prox{display:flex;gap:16px;align-items:center;border:1px solid var(--h-line);border-radius:10px;padding:10px 12px;font-size:12.5px}.prox b{font-weight:600}
+.firma{margin-top:auto;display:flex;justify-content:flex-end;padding-top:18px}.firma div{width:240px;text-align:center;border-top:1px solid var(--h-ink);padding-top:6px;font-size:11.5px;line-height:1.4;color:var(--h-muted)}.firma b{display:block;color:var(--h-ink);font-size:12.5px}
+.pie{display:flex;align-items:center;gap:10px;padding-top:12px;margin-top:14px;border-top:1px solid var(--h-line);font-size:9.5px;line-height:1.4;color:#8A909B}
+.pie .aviso{flex:1}.pie .gen{display:flex;align-items:center;gap:5px;white-space:nowrap}.pie .gen img{width:11px;height:11px;opacity:.55}
+.alerta{display:flex;gap:10px;align-items:center;border:1.5px solid var(--acento);border-radius:10px;padding:8px 12px}.alerta svg{width:18px;height:18px;color:var(--acento);flex:none}.alerta b{font-weight:700}
+.ant{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 22px}
+.ant div{display:grid;grid-template-columns:18px minmax(0,1fr);gap:2px 8px;align-items:start}.ant svg{width:16px;height:16px;color:var(--h-muted);margin-top:1px}
+.ant b{font-size:11.5px;font-weight:700}.ant p{grid-column:2;font-size:12px;line-height:1.45}.ant p.vacio{color:var(--h-muted);font-style:italic}
+table.cons{border-collapse:collapse;width:100%;font-size:11.5px}table.cons th{text-align:left;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--h-muted);border-bottom:1px solid var(--h-line);padding:4px 8px 4px 0}
+table.cons td{border-bottom:1px solid var(--h-line);padding:6px 8px 6px 0;vertical-align:top}table.cons td:first-child{white-space:nowrap;font-variant-numeric:tabular-nums}.cod{font-weight:700;font-variant-numeric:tabular-nums}
+@media (max-width:980px){.marco{grid-template-columns:1fr}.notas{position:static}}
+@media print{.proto,.ctl,.notas{display:none}body{background:#fff}.marco{display:block;padding:0}.escala{transform:none!important}.lienzo{height:auto!important}.pagina{box-shadow:none}@page{size:letter;margin:0}}
+</style>
+</head>
+<body>
+<div class="proto" role="note">Expediente Manik · documentos para el paciente · r1 · médico, paciente, cédula y folios ficticios</div>
+<div class="ctl"><div class="w">
+ <span class="grp"><span class="lb" id="l1">Documento</span><span class="seg" role="group" aria-labelledby="l1"><button type="button" data-d="estado" aria-pressed="true">Estado de salud</button><button type="button" data-d="resumen" aria-pressed="false">Resumen clínico</button></span></span>
+ <span class="grp" role="group" aria-labelledby="l2"><span class="lb" id="l2">Acento del médico</span><span id="sws" style="display:flex;gap:6px"></span></span>
+ <label class="chk"><input type="checkbox" id="logo" checked> Logo del consultorio</label>
+</div></div>
+<div class="marco"><div class="lienzo" id="lienzo"><div class="escala" id="escala"><article class="pagina" id="pagina" aria-label="Vista previa del documento"></article></div></div>
+<aside class="notas">
+ <div class="nota"><b>El médico al frente</b>Membrete con su logo (o sus iniciales), nombre, especialidad, cédula y consultorio. El color lo elige él entre cinco tonos sobrios; tinta por defecto.</div>
+ <div class="nota"><b>Manik al pie</b>Solo una línea gris de 9.5 px con el sello a una tinta: «Generado con Expediente Manik» y el folio. Sin colores de la marca en la hoja.</div>
+ <div class="nota"><b>Para el paciente</b>Lenguaje claro, cada medida con su rango de referencia y la lectura en palabras. Los rangos usan el acento, no rojo y verde: informan sin alarmar.</div>
+ <div class="nota"><b>Por validar</b>Rangos de referencia (NOM-008, NOM-030, NOM-015), campos obligatorios del membrete y del resumen clínico (NOM-004) con el área médica y legal.</div>
+</aside></div>
+<script>
+/*DATA*/
+const ACENTOS=[['Tinta','#1F2A44'],['Azul','#2B4C7E'],['Verde','#2F6B57'],['Vino','#7A3B4B'],['Grafito','#4A4F57']];
+let doc='estado',ac=ACENTOS[0][1],conLogo=true;
+const al='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3M12 9v4M12 17h.01"/></svg>';
+const membrete=(titulo,lineas)=>`<header class="membrete">${conLogo?'<span class="logo" aria-label="Logo del consultorio">AV</span>':''}<div class="medico"><h1>Dr. Andrés Villalobos Mena</h1><p class="esp">Medicina Interna</p>
+ <p>Céd. prof. 0000000 · Céd. esp. 0000000 · Universidad de ejemplo<br>Consultorio 304, Torre Médica Reforma · Av. Reforma 1200, Puebla, Pue.<br>Tel. 222 000 0000 · consultorio@ejemplo.com</p></div>
+ <div class="doc"><h2>${titulo}</h2><p>${lineas}</p></div></header>`;
+const paciente=()=>`<div class="paciente"><div class="campo"><small>Paciente</small><span>Carmen Ortiz Ramos</span></div><div class="campo"><small>Edad</small><span>46 años</span></div><div class="campo"><small>Sexo</small><span>Femenino</span></div><div class="campo"><small>Expediente</small><span>EXP-004218</span></div></div>`;
+const pie=(folio,pag)=>`<footer class="pie"><span class="aviso">Documento confidencial con datos personales sensibles. ${doc==='estado'?'Es informativo y no sustituye la consulta médica.':'Copia del resumen clínico entregada a la paciente.'}</span><span class="gen"><img src="${SELLO}" alt="">Generado con Expediente Manik · ${folio} · ${pag}</span></footer>`;
+const firma=()=>`<div class="firma"><div><b>Dr. Andrés Villalobos Mena</b>Medicina Interna · Céd. prof. 0000000</div></div>`;
+// rango: tramos [desde,hasta,etiqueta], escala [min,max], valor
+function rango(tramos,min,max,val){const pct=v=>Math.max(0,Math.min(100,(v-min)/(max-min)*100));const act=tramos.findIndex(t=>val>=t[0]&&val<t[1]);
+ return `<div class="rango" role="img" aria-label="Valor ${val}: ${tramos[act][2]}"><span class="pin" style="left:${pct(val)}%"></span><span class="tramos">${tramos.map((t,i)=>`<i class="${i===act?'act':''}" style="flex:${pct(t[1])-pct(t[0])}"></i>`).join('')}</span><span class="lbls" aria-hidden="true">${tramos.map((t,i)=>`<span class="${i===act?'act':''}" style="flex:${pct(t[1])-pct(t[0])}">${t[2]}</span>`).join('')}</span></div>`}
+function estado(){return membrete('Estado de salud','Consulta del 31 oct 2026<br>Folio EM-2026-0042')+paciente()+`
+ <section class="sec"><h3>Sus medidas de hoy</h3><div class="medidas">
+  <div class="med"><div class="top"><span class="n">Índice de masa corporal</span><span class="v">27.6<small>kg/m²</small></span></div>${rango([[15,18.5,'Bajo'],[18.5,25,'Adecuado'],[25,30,'Sobrepeso'],[30,40,'Obesidad']],15,40,27.6)}<p class="lect">Peso 72.4 kg · talla 1.62 m. <b>Sobrepeso.</b> Su peso adecuado está entre 48.6 y 65.3 kg.</p></div>
+  <div class="med"><div class="top"><span class="n">Presión arterial</span><span class="v">128/82<small>mmHg</small></span></div>${rango([[100,120,'Óptima'],[120,130,'Normal'],[130,140,'Normal alta'],[140,160,'Alta']],100,160,128)}<p class="lect"><b>Normal.</b> Siga midiéndola en cada consulta.</p></div>
+  <div class="med"><div class="top"><span class="n">Glucosa en ayuno</span><span class="v">104<small>mg/dL</small></span></div>${rango([[60,100,'Normal'],[100,126,'Alterada'],[126,160,'Diabetes']],60,160,104)}<p class="lect"><b>Ligeramente alta.</b> No es diabetes; es una señal para cuidarse.</p></div>
+  <div class="med"><div class="top"><span class="n">Cintura</span><span class="v">92<small>cm</small></span></div>${rango([[60,80,'Adecuada'],[80,120,'Con riesgo']],60,120,92)}<p class="lect"><b>Con riesgo.</b> En mujeres, la meta es menos de 80 cm.</p></div></div>
+  <p class="mini"><span>Frecuencia cardiaca <b>74 lpm</b></span><span>Temperatura <b>36.6 °C</b></span><span>Oxigenación <b>97 %</b></span></p></section>
+ <section class="sec"><h3>Lo que encontramos</h3><p class="txt">Tiene sobrepeso y la glucosa en ayuno un poco alta. Juntos aumentan el riesgo de diabetes, pero hoy no hay diabetes y se puede prevenir con cambios en la alimentación y la actividad.</p></section>
+ <section class="sec"><h3>Indicaciones</h3><ol class="ind"><li>Camine 30 minutos al día, cinco días a la semana.</li><li>Cambie refrescos y jugos por agua natural.</li><li>Haga el estudio de hemoglobina glucosilada (HbA1c) antes de su próxima cita.</li><li>Siga tomando levotiroxina 50 µg, una tableta en ayunas.</li></ol></section>
+ <section class="sec"><div class="prox"><span>Próxima cita</span><b>Viernes 28 de noviembre de 2026 · 10:30</b><span style="margin-left:auto;color:var(--h-muted)">Traiga su resultado de HbA1c</span></div></section>
+ ${firma()}${pie('Folio EM-2026-0042','Pág. 1 de 1')}`}
+const ANT=[['non-pathological-history','Personales no patológicos','No fuma. Alcohol ocasional. Camina tres veces por semana.'],['pathological-history','Personales patológicos','Hipotiroidismo desde 2018, en control con levotiroxina.'],
+ ['surgeries','Cirugías','Colecistectomía laparoscópica, 2015. Sin complicaciones.'],['vaccines','Vacunas','Influenza, oct 2026. COVID-19, refuerzo 2025.'],
+ ['family-history','Heredofamiliares','Madre con diabetes tipo 2. Padre con hipertensión arterial.'],['gyneco-obstetric-history','Ginecoobstétricos','Menarca a los 12 años. Dos embarazos, dos partos. Última menstruación: 10 oct 2026.'],
+ ['perinatal-history','Perinatales','']];
+function resumen(){return membrete('Resumen clínico','Solicitado el 30 oct 2026<br>Entregado el 31 oct 2026 · Folio RC-2026-0007')+paciente()+`
+ <section class="sec"><h3>Ficha de identificación</h3><p class="mini"><span>Nacimiento <b>14 mar 1980</b></span><span>Tipo de sangre <b>O+</b></span><span>Primera consulta <b>20 ene 2022</b></span><span>Médico tratante <b>Dr. A. Villalobos</b></span></p></section>
+ <section class="sec"><h3>Alergias</h3><div class="alerta">${al}<span><b>Penicilina</b> · urticaria generalizada (2019). <b>Sin otras alergias conocidas.</b></span></div></section>
+ <section class="sec"><h3>Antecedentes</h3><div class="ant">${ANT.map(([id,t,x])=>`<div>${ICON[id]}<b>${t}</b><p class="${x?'':'vacio'}">${x||'Sin información registrada.'}</p></div>`).join('')}</div></section>
+ <section class="sec"><h3>Consultas recientes</h3><table class="cons"><thead><tr><th>Fecha</th><th>Motivo</th><th>Diagnóstico (CIE-10)</th><th>Tratamiento</th></tr></thead><tbody>
+  <tr><td>31 oct 2026</td><td>Control metabólico</td><td><span class="cod">R73.9</span> Hiperglucemia, no especificada</td><td>Cambios en alimentación y actividad; HbA1c</td></tr>
+  <tr><td>14 jun 2026</td><td>Revisión de tiroides</td><td><span class="cod">E03.9</span> Hipotiroidismo, no especificado</td><td>Levotiroxina 50 µg diaria</td></tr>
+  <tr><td>20 ene 2026</td><td>Dolor de garganta</td><td><span class="cod">J02.9</span> Faringitis aguda, no especificada</td><td>Tratamiento sintomático</td></tr></tbody></table></section>
+ <section class="sec"><h3>Medicamentos actuales</h3><p class="txt">Levotiroxina 50 µg · una tableta diaria en ayunas.</p></section>
+ ${firma()}${pie('Folio RC-2026-0007','Pág. 1 de 2')}`}
+function render(){const pg=document.getElementById('pagina');pg.style.setProperty('--acento',ac);pg.innerHTML=doc==='estado'?estado():resumen();
+ pg.querySelectorAll('.ant svg').forEach(s=>{s.setAttribute('width','16');s.setAttribute('height','16')});
+ document.querySelectorAll('[data-d]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.d===doc));document.querySelectorAll('.sw').forEach(b=>b.setAttribute('aria-pressed',b.dataset.c===ac));escala()}
+function escala(){const L=document.getElementById('lienzo'),E=document.getElementById('escala'),s=Math.min(1,L.clientWidth/816);E.style.transform=`scale(${s})`;L.style.height=(1056*s)+'px'}
+document.getElementById('sws').innerHTML=ACENTOS.map(([n,c])=>`<button type="button" class="sw" data-c="${c}" style="background:${c}" aria-label="Acento ${n}"></button>`).join('');
+document.addEventListener('click',e=>{const d=e.target.closest('[data-d]');if(d){doc=d.dataset.d;render()}const s=e.target.closest('.sw');if(s){ac=s.dataset.c;render()}});
+document.getElementById('logo').onchange=e=>{conLogo=e.target.checked;render()};
+addEventListener('resize',escala);render();
+</script>
+</body>
+</html>
