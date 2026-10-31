@@ -1,0 +1,152 @@
+<title>Convia Directorio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Convia r6 (demo interna con fotos reales): directorio por giro + «Mis lugares» (quiero ir / ya fui con escala propia, sin estrellas) + sellos personales.
+   Fondo perla (el usuario descartó el beige). Tema claro por decisión de marca. */
+:root{--perla:%perla%;--sup:%sup%;--tinta:%tinta%;--sec:%sec%;--linea:%linea%;--foto:%foto%;--cantera:%cantera%;--suave:%suave%;
+--display:"Fraunces",Georgia,"Times New Roman",serif;--dv:"SOFT" 100,"WONK" 0,"opsz" 96;--text:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;--r:16px;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;background:var(--perla);color:var(--tinta);font:400 16px/1.55 var(--text)}
+a{color:inherit}button{font:inherit;color:inherit}:focus-visible{outline:2px solid var(--cantera);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.d{font-family:var(--display);font-weight:500;font-variation-settings:var(--dv);letter-spacing:-.015em}
+.proto{background:var(--tinta);color:#fff;font-size:12.5px}.proto .wrap{padding-block:5px}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--sup);border-bottom:1px solid var(--linea)}
+header.top .wrap{display:flex;align-items:center;gap:20px;padding-block:12px}.logo{height:30px;width:auto;display:block;flex:none}
+.buscar{flex:1;max-width:520px;display:flex;align-items:center;gap:10px;background:var(--perla);border:1px solid var(--linea);border-radius:999px;padding:0 16px;min-height:44px}
+.buscar input{flex:1;border:0;background:transparent;font:16px var(--text);min-width:0;outline:none}.buscar svg{width:18px;height:18px;flex:none}
+.pas-btn{margin-left:auto;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--tinta);border-radius:999px;padding:8px 16px;min-height:44px;background:transparent;cursor:pointer;font-weight:600;white-space:nowrap}
+.pas-btn .star{width:20px;height:20px}.pas-btn b{background:var(--cantera);color:#fff;border-radius:999px;padding:0 8px;font-size:13px;min-width:24px;text-align:center}
+.intro .wrap{padding-block:36px 18px}.intro h1{font-size:clamp(34px,5vw,58px);line-height:1.05;margin:0;max-width:18ch}
+.intents{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.intent{display:inline-flex;align-items:center;gap:8px;background:var(--sup);border:1px solid var(--linea);border-radius:999px;padding:10px 16px;min-height:44px;cursor:pointer;font-weight:500}
+.intent:hover{border-color:var(--tinta)}.intent .ico{width:20px;height:20px}
+.tabs-w{position:sticky;top:calc(env(safe-area-inset-top,0px) + 69px);z-index:9;background:var(--perla);border-bottom:1px solid var(--linea)}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;padding-block:10px}.tabs::-webkit-scrollbar{display:none}
+.tab{display:inline-flex;align-items:center;gap:7px;border:0;background:transparent;border-radius:999px;padding:9px 14px;min-height:44px;cursor:pointer;white-space:nowrap;color:var(--sec);font-weight:600}
+.tab .ico{width:20px;height:20px}.tab[aria-selected="true"]{background:var(--tinta);color:#fff}.tab:not([aria-selected="true"]):hover{color:var(--tinta);background:var(--sup)}
+.shelf{padding-block:26px 6px;scroll-margin-top:150px}.pasaporte,.mis{scroll-margin-top:80px}.shelf-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}
+.shelf h2{font-size:clamp(24px,2.6vw,30px);margin:0;line-height:1.15}.shelf-h p{margin:2px 0 0;color:var(--sec);font-size:14.5px}.shelf-h a{font-size:14.5px;color:var(--sec);white-space:nowrap}
+.row{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(220px,260px);gap:16px;overflow-x:auto;padding-bottom:12px;scroll-snap-type:x mandatory;scrollbar-width:thin}
+.card{scroll-snap-align:start;background:var(--sup);border:1px solid var(--linea);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.ph{aspect-ratio:4/3;background:var(--foto);position:relative}.ph .tag{position:absolute;left:10px;top:10px;background:var(--sup);border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700}
+.ph .tag.nuevo{background:var(--tinta);color:#fff}.ph .stamp{position:absolute;right:8px;bottom:-26px;width:78px;height:78px;transform:rotate(-12deg) scale(.4);opacity:0;transition:transform .35s cubic-bezier(.2,1.6,.4,1),opacity .2s}
+.card.visited .stamp{opacity:1;transform:rotate(-12deg) scale(1)}.stamp .sello{width:100%;height:100%}
+@media (prefers-reduced-motion:reduce){.ph .stamp{transition:none}}
+.cb{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px;flex:1}
+.chip{display:inline-flex;align-self:flex-start;align-items:center;gap:6px;background:var(--f);color:var(--t);border-radius:999px;padding:3px 10px 3px 7px;font-size:12px;font-weight:600}.chip .ico{width:16px;height:16px}
+.card h3{font:500 19px/1.2 var(--display);font-variation-settings:var(--dv);margin:2px 0 0}.card h3 a{text-decoration:none}.card h3 a:hover{text-decoration:underline}
+.meta{margin:0;color:var(--sec);font-size:14px}.when{font-weight:600;color:var(--tinta);font-variant-numeric:tabular-nums}
+.fui{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--linea);background:var(--perla);border-radius:999px;padding:6px 12px;min-height:36px;cursor:pointer;font-size:13.5px;font-weight:600}
+.fui .star{width:16px;height:16px}.fui[aria-pressed="true"]{background:var(--suave);border-color:var(--cantera);color:var(--cantera)}
+.empty{color:var(--sec);padding:16px 0}
+/* pasaporte */
+.pasaporte .wrap{padding-block:40px 64px}.pas{background:var(--sup);border:1px solid var(--linea);border-radius:24px;padding:28px;display:grid;gap:22px}
+.pas-h{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}.pas h2{font-size:clamp(28px,3.4vw,40px);margin:0}.pas-h p{margin:4px 0 0;color:var(--sec);max-width:52ch}
+.badges{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px}
+.badge{display:grid;justify-items:center;text-align:center;gap:6px}.badge .sw{width:100%;max-width:128px;aspect-ratio:1;position:relative}.badge .sello{width:100%;height:100%}
+.badge.lock .sw{filter:grayscale(1);opacity:.35}.badge b{font:500 17px var(--display);font-variation-settings:var(--dv)}.badge small{color:var(--sec);font-size:13px}
+.bar{width:100%;max-width:128px;height:6px;border-radius:6px;background:var(--linea);overflow:hidden}.bar i{display:block;height:100%;background:var(--cantera)}
+.lista-fui{margin:0;padding:0;list-style:none;display:flex;gap:8px;flex-wrap:wrap}.lista-fui li{background:var(--perla);border:1px solid var(--linea);border-radius:999px;padding:4px 12px;font-size:13.5px}
+.nota{font-size:13px;color:var(--sec);margin:0}
+footer .wrap{padding-block:24px 40px;border-top:1px solid var(--linea);display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;align-items:center;font-size:13.5px;color:var(--sec)}footer .logo{height:24px}
+@media (max-width:820px){.badges{grid-template-columns:repeat(3,minmax(0,1fr))}.tabs-w{top:calc(env(safe-area-inset-top,0px) + 121px)}header.top .wrap{flex-wrap:wrap}.buscar{order:3;flex-basis:100%;max-width:none}}
+@media (max-width:480px){.intents{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:-20px;padding-inline:20px}.intent{white-space:nowrap}.pas-btn span{display:none}.pas{padding:20px}.row{grid-auto-columns:78%}}
+.acts{margin-top:auto;display:flex;gap:6px;flex-wrap:wrap}
+.want{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--linea);background:var(--sup);border-radius:999px;padding:6px 12px;min-height:36px;cursor:pointer;font-size:13.5px;font-weight:600}
+.want svg{width:15px;height:15px}.want[aria-pressed="true"]{background:var(--tinta);color:#fff;border-color:var(--tinta)}
+.info{margin:0;font-size:13px;color:var(--sec);font-variant-numeric:tabular-nums}
+.rate{border:0;margin:6px 0 0;padding:10px;background:var(--suave);border-radius:12px;display:grid;gap:6px}.rate legend{float:left;font-size:12.5px;font-weight:700;color:var(--cantera);margin-bottom:4px;padding:0}
+.rate .opts{display:flex;flex-wrap:wrap;gap:4px;clear:both}.rate label{cursor:pointer;position:relative}.rate input{position:absolute;opacity:0;pointer-events:none}
+.rate span{display:inline-block;border:1px solid #c9d8cf;background:var(--sup);border-radius:999px;padding:3px 9px;font-size:12px;font-weight:600}
+.rate input:checked+span{background:var(--cantera);border-color:var(--cantera);color:#fff}.rate input:focus-visible+span{outline:2px solid var(--cantera);outline-offset:2px}
+.mis .wrap{padding-block:40px 24px}.mis-box{background:var(--sup);border:1px solid var(--linea);border-radius:24px;padding:28px;display:grid;gap:18px}
+.mis-h{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}.mis h2{font-size:clamp(28px,3.4vw,40px);margin:0}.mis-h p{margin:4px 0 0;color:var(--sec);max-width:56ch}
+.seg{display:inline-flex;background:var(--perla);border:1px solid var(--linea);border-radius:999px;padding:4px;gap:4px}.seg button{border:0;background:transparent;border-radius:999px;padding:8px 16px;min-height:40px;font-weight:600;cursor:pointer;color:var(--sec)}
+.seg button[aria-selected="true"]{background:var(--tinta);color:#fff}
+.ml{list-style:none;margin:0;padding:0;display:grid;gap:0;border-top:1px solid var(--linea)}
+.ml li{display:grid;grid-template-columns:64px 1fr auto;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--linea)}
+.ml .th{width:64px;height:64px;border-radius:12px;background:var(--foto)}.ml b{font:500 18px/1.2 var(--display);font-variation-settings:var(--dv)}.ml small{display:block;color:var(--sec);font-size:13px}
+.ml .rl{font-size:13px;font-weight:700;color:var(--cantera);background:var(--suave);border-radius:999px;padding:4px 10px;white-space:nowrap}
+.ml .go{border:1px solid var(--tinta);background:transparent;border-radius:999px;padding:6px 12px;min-height:36px;font-weight:600;font-size:13.5px;cursor:pointer;white-space:nowrap}
+.ml .empty-li{display:block;color:var(--sec);border:0}
+.ph img.pimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.ph img.contain{object-fit:contain;background:#fff;padding:14px}.ph.has-img::after{content:none}
+.ph .ej{position:absolute;right:10px;top:10px;background:rgba(255,255,255,.9);border-radius:6px;padding:2px 6px;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--sec)}
+.ph .tag,.ph .stamp{z-index:1}
+.ph::after{content:"Foto";position:absolute;right:10px;bottom:8px;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#9a9c98}.card.visited .ph img.pimg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.ph img.contain{object-fit:contain;background:#fff;padding:14px}.ph.has-img::after{content:none}
+.ph .ej{position:absolute;right:10px;top:10px;background:rgba(255,255,255,.9);border-radius:6px;padding:2px 6px;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--sec)}
+.ph .tag,.ph .stamp{z-index:1}
+.ph::after{content:none}
+@media (max-width:480px){.ml li{grid-template-columns:48px 1fr}.ml .th{width:48px;height:48px}.ml li>:last-child{grid-column:2}}
+</style>
+<div class="proto" role="note"><div class="wrap">Demo interna r6 · fotos y nombres de negocios reales sin permiso aún: no compartir fuera del equipo · lo marcado «Ejemplo» es ficticio · tus listas se guardan solo en tu navegador</div></div>
+<header class="top"><div class="wrap"><a href="#" aria-label="Convia, inicio"><!--LOGO--></a>
+<label class="buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+<span class="sr" style="position:absolute;left:-9999px">Buscar</span><input id="q" type="search" placeholder="Busca un café, un taller, un barrio…" autocomplete="off"></label>
+<button class="pas-btn" type="button" id="goPas"><svg class="star" viewBox="0 0 200 200" aria-hidden="true"><path fill="%cantera%" d="%STAR%"/></svg><span>Mis lugares</span><b id="cnt">0</b></button></div></header>
+<main>
+<section class="intro"><div class="wrap"><h1 class="d">¿Qué quieres hacer en Oaxaca?</h1>
+<div class="intents" id="intents"></div></div></section>
+<div class="tabs-w"><div class="wrap"><div class="tabs" role="tablist" aria-label="Giros" id="tabs"></div></div></div>
+<div id="shelves" role="tabpanel" aria-live="polite"></div>
+<section class="mis" id="mis"><div class="wrap"><div class="mis-box"><div class="mis-h"><div><h2 class="d">Mis lugares</h2><p>Tu lista personal, para ti o para salir con tus amigos: guarda lo que quieres conocer y, cuando vayas, márcalo y di qué tal te pareció.</p></div>
+<div class="seg" role="tablist" aria-label="Mis listas"><button type="button" role="tab" data-m="quiero" aria-selected="true" id="m-q">Quiero ir · 0</button><button type="button" role="tab" data-m="fui" aria-selected="false" id="m-f">Ya fui · 0</button></div></div>
+<ul class="ml" id="ml" role="tabpanel"></ul></div></div></section>
+<section class="pasaporte" id="pasaporte"><div class="wrap"><div class="pas"><div class="pas-h"><div><h2 class="d">Tus sellos</h2><p>Cada lugar al que vas suma un sello de su giro; con cinco de un mismo giro ganas su insignia. Es solo para ti: no compite con nadie.</p></div><p class="nota" id="resumen"></p></div>
+<div class="badges" id="badges"></div></div></div></section>
+</main>
+<footer><div class="wrap"><!--LOGO--><span>Lo que vale la pena en Oaxaca, escogido por gente de aquí.</span><span>Prototipo · datos ficticios</span></div></footer>
+<script>
+/*DATA*/
+const META=5, KEY='convia-r6-mis';
+const ESCALA=['No era para mí','Estuvo bien','Me gustó','Volvería','De mis favoritos'];
+let M={};try{M=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+if(!Object.keys(M).length)M={c7:{s:'fui',r:4},e1:{s:'fui',r:3},c9:{s:'quiero'},t5:{s:'quiero'},h6:{s:'quiero'}}; // ejemplo inicial de la demo
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(M))}catch(e){}};
+const st=id=>M[id]?.s, fuiN=()=>Object.values(M).filter(v=>v.s==='fui').length;
+const starSvg='<svg class="star" viewBox="0 0 200 200" aria-hidden="true"><path fill="currentColor" d="%STAR%"/></svg>';
+const heart='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>';
+let giro='todo', q='', vista='quiero';
+const INTENTS=[['Este fin de semana','finde',null,'recorridos'],['Un café nuevo','nuevo','cafes','cafes'],['Dónde comer hoy',null,'restaurantes','restaurantes'],['Un taller para ir solo',null,'talleres','talleres'],['Dónde dormir',null,'hoteles','hoteles']];
+function rateBox(p){if(st(p.id)!=='fui')return'';const r=M[p.id].r;
+return `<fieldset class="rate"><legend>¿Qué tal te pareció?</legend><div class="opts">${ESCALA.map((t,i)=>`<label><input type="radio" name="r-${p.id}-${Math.random().toString(36).slice(2,6)}" data-rate="${i}" data-id="${p.id}" ${r===i?'checked':''}><span>${t}</span></label>`).join('')}</div></fieldset>`}
+function card(p){const c=CAT[p.cat];const s=st(p.id);const tag=p.tags.includes('nuevo')?'<span class="tag nuevo">Nuevo</span>':(p.tags.includes('buscado')?'<span class="tag">Más buscado</span>':'');
+return `<article class="card${s==='fui'?' visited':''}" data-id="${p.id}" style="--f:${c.fondo};--t:${c.texto}"><div class="ph${p.img?' has-img':''}">${p.img?`<img class="pimg${p.fit==='contain'?' contain':''}" src="img/${p.img}" alt="${p.alt}" loading="lazy">`:''}${tag}${p.ej?'<span class="ej">Ejemplo</span>':''}<span class="stamp">${SVG.sello[p.cat]}</span></div>
+<div class="cb"><span class="chip">${SVG.ico[p.cat]}${c.nombre}</span><h3><a href="#">${p.n}</a></h3><p class="meta">${p.when?`<span class="when">${p.when}</span> · `:''}${p.z} · ${p.d}</p>${p.info?`<p class="info">${p.info}</p>`:''}
+<div class="acts"><button class="want" type="button" data-act="quiero" aria-pressed="${s==='quiero'}">${heart}<span>${s==='quiero'?'En mi lista':'Quiero ir'}</span></button>
+<button class="fui" type="button" data-act="fui" aria-pressed="${s==='fui'}">${starSvg}<span>${s==='fui'?'Ya fui':'¿Ya fuiste?'}</span></button></div>${rateBox(p)}</div></article>`}
+function shelf(id,title,sub,items){return items.length?`<section class="shelf" id="s-${id}"><div class="wrap"><div class="shelf-h"><div><h2 class="d">${title}</h2>${sub?`<p>${sub}</p>`:''}</div><a href="#">Ver todos</a></div><div class="row" tabindex="0" aria-label="${title}">${items.map(card).join('')}</div></div></section>`:''}
+function render(){const by=t=>DATA.filter(p=>(giro==='todo'||p.cat===giro)&&(!t||p.tags.includes(t))&&(!q||(p.n+p.z+p.d+CAT[p.cat].nombre).toLowerCase().includes(q)));
+let h='';if(q){h=shelf('q',`Resultados para «${q}»`,'',by(null))||'<div class="wrap"><p class="empty">No encontramos nada con esa palabra. Prueba con un barrio o un giro.</p></div>'}
+else if(giro==='todo'){h=shelf('nuevo','Nuevos en Convia','Lugares que acaban de pasar la revisión.',by('nuevo'))+shelf('buscado','Los más buscados','Lo que más consulta la gente esta semana.',by('buscado'))+shelf('finde','Este fin de semana','Talleres, recorridos y planes con fecha.',by('finde'))}
+else{const n=CAT[giro].nombre;h=shelf('nuevo',`${n} nuevos`,'Recién llegados al directorio.',by('nuevo'))+shelf('buscado',`${n} más buscados`,'',by('buscado'))+shelf('finde',`${n} este fin de semana`,'',by('finde'))+shelf('todos',`Todos los ${n.toLowerCase()}`,'',by(null))}
+document.getElementById('shelves').innerHTML=h;renderMis()}
+function renderMis(){const qN=Object.values(M).filter(v=>v.s==='quiero').length,fN=fuiN();
+document.getElementById('cnt').textContent=qN+fN;document.getElementById('goPas').setAttribute('aria-label',`Mis lugares: ${qN} por conocer, ${fN} visitados`);
+document.getElementById('m-q').textContent=`Quiero ir · ${qN}`;document.getElementById('m-f').textContent=`Ya fui · ${fN}`;
+document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-selected',b.dataset.m===vista));
+const items=DATA.filter(p=>st(p.id)===vista);
+document.getElementById('ml').innerHTML=items.length?items.map(p=>`<li>${p.img?`<img class="th" src="img/${p.img}" alt="" style="object-fit:${p.fit||'cover'}">`:'<span class="th" aria-hidden="true"></span>'}<div><b>${p.n}</b><small>${CAT[p.cat].nombre} · ${p.z}${p.when?' · '+p.when:''}</small></div>
+${vista==='quiero'?`<button class="go" type="button" data-act="fui" data-id="${p.id}">Ya fui</button>`:`<span class="rl">${M[p.id].r!=null?ESCALA[M[p.id].r]:'Sin calificar'}</span>`}</li>`).join(''):
+`<li class="empty-li">${vista==='quiero'?'Tu lista está vacía. Toca «Quiero ir» en cualquier lugar para guardarlo.':'Todavía no marcas ningún lugar como visitado.'}</li>`;
+document.getElementById('badges').innerHTML=Object.entries(CAT).map(([k,c])=>{const n=DATA.filter(p=>p.cat===k&&st(p.id)==='fui').length;const got=n>=META;
+return `<div class="badge${n?'':' lock'}"><div class="sw">${got?SVG.sello[k]:SVG.selloL[k]}</div><b>${c.insignia}</b><small>${got?'Insignia ganada':`${n} de ${META} ${c.nombre.toLowerCase()}`}</small><div class="bar" aria-hidden="true"><i style="width:${Math.min(100,n/META*100)}%"></i></div></div>`}).join('');
+document.getElementById('resumen').textContent=`${fN} lugares visitados · ${Object.keys(CAT).filter(k=>DATA.filter(p=>p.cat===k&&st(p.id)==='fui').length>=META).length} insignias`}
+function tabs(){const t=[['todo','Todo',null],...Object.entries(CAT).map(([k,c])=>[k,c.nombre,k])];
+document.getElementById('tabs').innerHTML=t.map(([k,n,ic])=>`<button class="tab" role="tab" type="button" data-g="${k}" aria-selected="${giro===k}">${ic?SVG.ico[ic]:''}${n}</button>`).join('')}
+document.getElementById('intents').innerHTML=INTENTS.map(([n,t,g,ic],i)=>`<button class="intent" type="button" data-i="${i}">${SVG.ico[ic]}${n}</button>`).join('');
+const smooth=()=>matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth';
+function setState(id,act){const cur=st(id);if(act==='quiero'){if(cur==='quiero')delete M[id];else M[id]={s:'quiero'}}else{if(cur==='fui')M[id]={s:'quiero'};else M[id]={s:'fui',r:null}}save();
+const p=DATA.find(x=>x.id===id);document.querySelectorAll(`.card[data-id="${id}"]`).forEach(x=>{x.outerHTML=card(p)});renderMis()}
+document.addEventListener('click',e=>{const tb=e.target.closest('.tab');if(tb){giro=tb.dataset.g;q='';document.getElementById('q').value='';tabs();render();return}
+const it=e.target.closest('.intent');if(it){const [,t,g]=INTENTS[+it.dataset.i];giro=g||'todo';q='';tabs();render();const s=document.getElementById('s-'+(t||'nuevo'))||document.getElementById('shelves');s.scrollIntoView({behavior:smooth(),block:'start'});return}
+const sg=e.target.closest('.seg button');if(sg){vista=sg.dataset.m;renderMis();return}
+const ac=e.target.closest('[data-act]');if(ac){const id=ac.dataset.id||ac.closest('.card').dataset.id;setState(id,ac.dataset.act);return}
+if(e.target.closest('#goPas'))document.getElementById('mis').scrollIntoView({behavior:smooth()})});
+document.addEventListener('change',e=>{const r=e.target.closest('[data-rate]');if(!r)return;M[r.dataset.id].r=+r.dataset.rate;save();
+document.querySelectorAll(`.card[data-id="${r.dataset.id}"] input[data-rate="${r.dataset.rate}"]`).forEach(x=>x.checked=true);renderMis()});
+document.getElementById('q').addEventListener('input',e=>{q=e.target.value.trim().toLowerCase();render()});
+document.getElementById('tabs').addEventListener('keydown',e=>{if(!['ArrowRight','ArrowLeft'].includes(e.key))return;const b=[...document.querySelectorAll('.tab')];const i=b.indexOf(document.activeElement);if(i<0)return;const n=b[(i+(e.key==='ArrowRight'?1:-1)+b.length)%b.length];n.focus();n.click();document.querySelector(`.tab[data-g="${giro}"]`).focus()});
+tabs();render();
+</script>
