@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Manik IA Animaciones</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300..700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Ecosistema Manik · IA ronda 2: muestrario de animaciones sobre la dirección C (tinta noche + destello doble), elegida por el usuario,
+   con el borde segmentado que gira de la dirección A como una de las opciones. Tokens del sistema; --ia-* son propuesta. */
+:root{--canvas:#F5F7FB;--surface:#FFFFFF;--surface-soft:#EEF1F7;--ink:#14213D;--muted:#4A5674;--subtle:#7A849C;--line:#E1E6F0;--line-control:#858EA5;
+--noche:#0F1C3F;--manik:#234899;--manik-hover:#1E3C7D;--manik-soft:#E9EDF5;--cian:#009BB0;
+--ia:#0F1C3F;--ia-hover:#1B2B57;--ia-destello:#5FD3E2;
+--r-sm:10px;--r-md:14px;--r-lg:18px;--r-2xl:24px;--pill:999px;--sh-card:0 1px 2px rgba(20,33,61,.05),0 5px 14px rgba(20,33,61,.05);
+--display:"Urbanist","Segoe UI",system-ui,sans-serif;--sans:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:400 16px/24px var(--sans)}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px}h1,h2,h3{font-family:var(--display);font-weight:600;margin:0}
+:focus-visible{outline:2px solid var(--manik);outline-offset:2px}
+.proto{background:var(--noche);color:#fff;font-size:13px;line-height:18px}.proto .wrap{padding-block:7px}
+.intro{padding-block:32px 8px}.intro h1{font-weight:300;font-size:clamp(32px,4.4vw,44px);line-height:1.08;letter-spacing:-.03em}.intro p{color:var(--muted);max-width:76ch;margin:10px 0 0}.intro p b{color:var(--ink)}
+.ctl{position:sticky;top:0;z-index:5;background:var(--canvas);border-bottom:1px solid var(--line);margin-top:20px}.ctl .wrap{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;padding-block:12px}
+.ctl .lb{font-size:14px;font-weight:600}
+.seg{display:inline-flex;border:1px solid var(--line-control);border-radius:var(--r-md);overflow:hidden;background:var(--surface)}
+.seg button{font:600 14px/20px var(--sans);min-height:40px;padding:0 14px;border:0;background:transparent;color:var(--ink);cursor:pointer}.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--manik-soft);color:var(--manik)}
+.pausa{margin-left:auto;font:600 14px/20px var(--sans);min-height:40px;padding:0 14px;border-radius:var(--r-md);border:1px solid var(--line-control);background:var(--surface);color:var(--manik);cursor:pointer}
+.ctl p{margin:0;flex-basis:100%;font-size:13px;line-height:18px;color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-block:24px 12px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-2xl);padding:20px;display:grid;gap:14px;align-content:start}
+.card header{display:grid;gap:2px}.card .n{font-size:12px;line-height:16px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.card h2{font-size:20px;line-height:28px}.card p{margin:0;font-size:14px;line-height:20px;color:var(--muted)}
+.esc{background:var(--surface-soft);border-radius:var(--r-lg);padding:16px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.tile{width:64px;height:64px;border-radius:18px;background:var(--ia);display:grid;place-items:center;position:relative;overflow:hidden;flex:none}
+.tile svg{width:34px;height:34px}
+.btns{display:grid;gap:10px;justify-items:start}
+.ia{font:600 15px/20px var(--sans);min-height:44px;padding:0 18px 0 14px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;position:relative;white-space:nowrap;
+ border-radius:var(--pill);border:0;color:#fff;background:var(--ia);overflow:hidden;isolation:isolate}
+.ia:hover{background:var(--ia-hover)}.ia svg{width:20px;height:20px;flex:none;overflow:visible}
+.ia.sq{width:44px;padding:0;justify-content:center}
+.cuando{font-size:13px!important;line-height:18px!important}.cuando b{color:var(--ink)}
+.pq{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none;font-size:13px;line-height:18px}.pq li{border:1px solid var(--line);border-radius:var(--pill);padding:3px 10px;color:var(--muted)}.pq b{color:var(--ink)}
+/* partes del destello doble */
+.g,.c{fill:var(--ia-destello);transform-box:fill-box;transform-origin:center}
+.dib .g,.dib .c{fill:transparent;stroke:var(--ia-destello);stroke-width:1.3;stroke-linejoin:round}
+/* ===== animaciones (clase on = activa) ===== */
+/* 1 titileo: los dos destellos laten a destiempo */
+.a1.on .g{animation:lat 1.6s ease-in-out infinite}.a1.on .c{animation:lat2 1.6s ease-in-out infinite}
+@keyframes lat{0%,100%{transform:scale(1)}50%{transform:scale(.78)}}@keyframes lat2{0%,100%{transform:scale(.5) rotate(0)}50%{transform:scale(1.15) rotate(90deg)}}
+/* 2 borde segmentado que gira (de la dirección A) */
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+.a2 .ia,.a2 .tile{border:2px solid transparent;background:linear-gradient(var(--ia),var(--ia)) padding-box,linear-gradient(var(--ia),var(--ia)) border-box}
+.a2 .on.ia,.a2 .on.tile{background:linear-gradient(var(--ia),var(--ia)) padding-box,conic-gradient(from var(--ang),transparent 0 55%,var(--ia-destello) 75%,#fff 80%,var(--manik) 92%,transparent 100%) border-box;animation:gira 1.8s linear infinite}
+.a2 .ia{padding:0 16px 0 12px}.a2 .ia.sq{padding:0}
+@keyframes gira{to{--ang:360deg}}
+/* 3 brillo que barre */
+.a3 .on::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(105deg,transparent 30%,rgba(95,211,226,.38) 50%,transparent 70%);transform:translateX(-100%);animation:barre 2s ease-in-out infinite}
+.a3 .on .c{animation:lat2 2s ease-in-out infinite}
+@keyframes barre{60%,100%{transform:translateX(100%)}}
+/* 4 órbita: el destello chico gira alrededor del grande */
+.a4 .on .orb{animation:orb 2.4s linear infinite;transform-origin:10px 11.5px}.a4 .on .g{animation:lat 2.4s ease-in-out infinite}
+@keyframes orb{to{transform:rotate(360deg)}}
+/* 5 respiración: un halo cian crece y se apaga */
+.a5 .on svg{animation:halo 2s ease-in-out infinite}.a5 .on.ia{animation:haloB 2s ease-in-out infinite}
+@keyframes halo{0%,100%{filter:drop-shadow(0 0 0 rgba(95,211,226,0))}50%{filter:drop-shadow(0 0 5px rgba(95,211,226,.95))}}
+@keyframes haloB{0%,100%{box-shadow:0 0 0 0 rgba(95,211,226,0)}50%{box-shadow:0 0 0 4px rgba(95,211,226,.28)}}
+/* 6 trazo: el destello se dibuja y se rellena */
+.a6 .on .g,.a6 .on .c{stroke:var(--ia-destello);stroke-width:1.2;stroke-dasharray:60;animation:traza 2.2s ease-in-out infinite}
+.a6 .on .c{animation-delay:.25s}
+@keyframes traza{0%{stroke-dashoffset:60;fill-opacity:0}45%{stroke-dashoffset:0;fill-opacity:0}65%,85%{stroke-dashoffset:0;fill-opacity:1}100%{stroke-dashoffset:0;fill-opacity:1}}
+/* pausado o movimiento reducido */
+body.quieto *{animation-play-state:paused!important}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+.reco{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-2xl);padding:18px 20px;margin-bottom:48px}
+.reco h2{font-size:20px;line-height:28px;margin-bottom:6px}.reco ul{margin:0;padding-left:20px;color:var(--muted);font-size:14px;line-height:22px}.reco b{color:var(--ink)}
+@media (max-width:980px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.cards{grid-template-columns:1fr}.pausa{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="proto" role="note"><div class="wrap">Ecosistema Manik · IA · ronda 2 · animaciones sobre la dirección C (tinta noche) · prototipo, la IA no está conectada</div></div>
+<header class="intro wrap"><h1>Cómo se mueve la IA</h1>
+<p>Base: <b>dirección C</b>, píldora azul noche con el destello doble cian. De la A se toma el <b>borde segmentado que gira</b> (animación 2). Seis maneras de animar el ícono y el botón para que se lea «IA» de un vistazo. Compara cada una en bucle y luego como funcionaría de verdad: <b>quieta en reposo, se mueve al pasar el cursor y en bucle mientras genera</b>.</p></header>
+<div class="ctl"><div class="wrap">
+<span class="lb" id="lm">Ver</span><div class="seg" role="group" aria-labelledby="lm"><button type="button" data-m="bucle" aria-pressed="true">En bucle</button><button type="button" data-m="real" aria-pressed="false">Como en la app</button></div>
+<button type="button" class="pausa" id="pausa" aria-pressed="false">Pausar animaciones</button>
+<p id="ayuda">En bucle: todas se mueven para compararlas. «Como en la app»: quietas; pasa el cursor o el foco por un botón y «Generando…» se mueve siempre.</p></div></div>
+<main class="wrap"><div class="cards" id="cards"></div>
+<section class="reco" aria-labelledby="rh"><h2 id="rh">Reglas de movimiento (propuesta)</h2><ul>
+<li><b>En reposo, quieta.</b> Un expediente se lee durante horas; algo que se mueve sin parar roba atención clínica y cansa.</li>
+<li><b>Al pasar el cursor o con foco:</b> una vuelta de la animación (la invitación). <b>Al aparecer</b> un resultado nuevo: una vez.</li>
+<li><b>Generando:</b> en bucle hasta terminar, con el texto «Generando…» y aviso para lector de pantalla; nunca solo movimiento.</li>
+<li><b>Movimiento reducido:</b> si el sistema lo pide, nada se anima; el texto cambia igual.</li></ul></section></main>
+<script>
+const SPARK=(cls='')=>`<svg viewBox="0 0 24 24" aria-hidden="true" class="${cls}"><path class="g" d="M10 3.5c.45 4.2 3.8 7.55 8 8-4.2.45-7.55 3.8-8 8-.45-4.2-3.8-7.55-8-8 4.2-.45 7.55-3.8 8-8z"/><g class="orb"><path class="c" d="M19 2c.2 1.6 1.4 2.8 3 3-1.6.2-2.8 1.4-3 3-.2-1.6-1.4-2.8-3-3 1.6-.2 2.8-1.4 3-3z"/></g></svg>`;
+const A=[
+ ['a1','Titileo','Los dos destellos laten a destiempo, como una estrella que parpadea.','<b>Fuerza</b>: la más ligera; se lee «IA» sin ruido','<b>Riesgo</b>: a 20 px el latido es sutil'],
+ ['a2','Borde segmentado','De la dirección A: un segmento de luz cian recorre el borde de la píldora y del ícono.','<b>Fuerza</b>: se ve de lejos; dice «trabajando» muy claro','<b>Riesgo</b>: es la más llamativa; solo para generar'],
+ ['a3','Brillo que barre','Un reflejo cian cruza el botón de lado a lado, como luz sobre vidrio.','<b>Fuerza</b>: elegante; muy usada en productos de IA','<b>Riesgo</b>: se confunde con «cargando» genérico'],
+ ['a4','Órbita','El destello chico gira alrededor del grande.','<b>Fuerza</b>: única y fácil de recordar','<b>Riesgo</b>: puede sentirse lúdica en un expediente'],
+ ['a5','Respiración','Un halo cian crece y se apaga alrededor del destello y del botón.','<b>Fuerza</b>: calmada, sin cambiar la forma','<b>Riesgo</b>: poco visible sobre fondos claros'],
+ ['a6','Trazo','El destello se dibuja con una línea cian y después se rellena.','<b>Fuerza</b>: dice «está escribiendo»; ideal para redactar','<b>Riesgo</b>: tarda más en leerse completo']];
+document.getElementById('cards').innerHTML=A.map(([k,t,d,f,r],i)=>`<article class="card ${k}" aria-labelledby="h${k}"><header><span class="n">Animación ${i+1}</span><h2 id="h${k}">${t}</h2></header><p>${d}</p>
+ <div class="esc"><span class="tile an" aria-hidden="true">${SPARK()}</span><div class="btns">
+  <button type="button" class="ia an">${SPARK()}Sugerir con IA</button>
+  <span style="display:flex;gap:10px"><button type="button" class="ia gen an" aria-label="Generando con IA">${SPARK()}Generando…</button><button type="button" class="ia sq an" aria-label="Funciones de IA">${SPARK()}</button></span></div></div>
+ <ul class="pq"><li>${f}</li><li>${r}</li></ul></article>`).join('');
+let modo='bucle';
+const red=matchMedia('(prefers-reduced-motion: reduce)');
+function aplica(){document.querySelectorAll('.an').forEach(e=>e.classList.toggle('on',modo==='bucle'||e.classList.contains('gen')))}
+// modo «como en la app»: una vuelta al pasar el cursor o con foco
+document.addEventListener('pointerover',e=>{const b=e.target.closest('.ia.an');if(b&&modo==='real'&&!b.classList.contains('gen'))una(b)});
+document.addEventListener('focusin',e=>{const b=e.target.closest('.ia.an');if(b&&modo==='real'&&!b.classList.contains('gen'))una(b)});
+function una(b){if(b.classList.contains('on'))return;b.classList.add('on');const tile=b.closest('.esc').querySelector('.tile');tile.classList.add('on');
+ clearTimeout(b._t);b._t=setTimeout(()=>{if(modo==='real'){b.classList.remove('on');tile.classList.remove('on')}},2400)}
+document.querySelectorAll('[data-m]').forEach(x=>x.onclick=()=>{modo=x.dataset.m;document.querySelectorAll('[data-m]').forEach(y=>y.setAttribute('aria-pressed',y===x));aplica()});
+document.getElementById('pausa').onclick=e=>{const q=document.body.classList.toggle('quieto');e.target.setAttribute('aria-pressed',q);e.target.textContent=q?'Reanudar animaciones':'Pausar animaciones'};
+aplica();
+</script>
+</body>
+</html>

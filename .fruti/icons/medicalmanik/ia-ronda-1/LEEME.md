@@ -25,6 +25,6 @@ Menú con `aria-haspopup`/`role="menu"`, flechas, Inicio/Fin, Esc devuelve el fo
 Playwright 1300 y 390 px con Urbanist y Atkinson locales: sin desbordes, sin errores JS, objetivos ≥ 24 px; flujo con teclado en B. Corregido en prueba: `[hidden]` anulado por `display` (mensaje de guardado visible antes de tiempo); barra de consulta que se partía; botón de aceptar pasó a secundario (una sola acción primaria por vista).
 
 ## Pendiente
-- [pendiente: elección de dirección]
+- **Usuario (2026-10-31): dirección C** (prefiere C sobre A); de A toma el borde segmentado. Animaciones en `../ia-ronda-2/`.
 - Diálogo de cada función (revisar, editar, aceptar), empezando por «Redactar padecimiento actual».
 - Comportamiento clínico de cada función (fuentes, límites, responsabilidad): fuera de la identidad.
