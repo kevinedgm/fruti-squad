@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Convia QR Sello</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Convia · kit de QR de mesa r3 con el sello Convia (propuesta B de r2, elegida por el usuario).
+   Un solo sello para las tres piezas: anillo del color del lugar con su nombre en arco, «Menú · Escanea · Scan» abajo, estrellas de Convia
+   como separadores y el QR al centro sobre blanco pleno. Las piezas se dibujan en milímetros reales (SVG con width/height en mm). */
+:root{--perla:#f9f9f7;--sup:#fff;--tinta:#1b1d1a;--sec:#5c5f5b;--linea:#e6e6e2;--cantera:#2f5a45;
+--display:"Fraunces",Georgia,serif;--dv:"SOFT" 100,"WONK" 0,"opsz" 96;--text:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;background:var(--perla);color:var(--tinta);font:400 16px/1.5 var(--text)}
+.wrap{max-width:1160px;margin:0 auto;padding-inline:16px}.d{font-family:var(--display);font-weight:500;font-variation-settings:var(--dv);letter-spacing:-.015em}
+.proto{background:var(--tinta);color:#fff;font-size:12.5px}.proto .wrap{padding-block:6px}
+.intro{padding-block:28px 4px}.intro h1{font-size:clamp(30px,4vw,44px);margin:0;line-height:1.05}.intro p{margin:8px 0 0;color:var(--sec);max-width:72ch}.intro p b{color:var(--tinta)}
+.ctl{position:sticky;top:0;z-index:5;background:var(--perla);border-bottom:1px solid var(--linea);margin-top:18px}.ctl .wrap{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;padding-block:12px}
+.ctl label,.ctl .g{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600}
+.ctl select,.ctl input[type=number]{border:1px solid var(--linea);background:var(--sup);border-radius:10px;min-height:40px;padding:0 10px;font:inherit}.ctl input[type=number]{width:72px}
+.ctl input[type=checkbox]{width:20px;height:20px;margin:0}
+.sw{width:32px;height:32px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px var(--linea);cursor:pointer;padding:0}.sw[aria-pressed="true"]{box-shadow:0 0 0 2px var(--tinta)}
+.ctl input[type=color]{width:40px;height:34px;border:1px solid var(--linea);border-radius:8px;background:var(--sup);padding:2px}
+.print{margin-left:auto;border:0;background:var(--cantera);color:#fff;border-radius:999px;min-height:44px;padding:0 18px;font:700 15px var(--text);cursor:pointer}
+:focus-visible{outline:2px solid var(--tinta);outline-offset:2px}
+.aviso{font-size:13px;color:#7f3313;margin:0;flex-basis:100%}
+.piezas{display:flex;flex-wrap:wrap;gap:34px 44px;align-items:flex-start;padding-block:28px 20px}
+.pieza{margin:0;display:grid;gap:8px;justify-items:center}.pieza figcaption{font-size:13.5px;color:var(--sec);text-align:center}.pieza figcaption b{color:var(--tinta)}
+.pieza svg{display:block;max-width:calc(100vw - 32px);height:auto}
+.calca{filter:drop-shadow(0 1px 2px rgba(0,0,0,.18))}.tarj{filter:drop-shadow(0 1px 3px rgba(0,0,0,.12))}
+.notas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding-block:8px 48px}.notas div{background:var(--sup);border:1px solid var(--linea);border-radius:14px;padding:14px 16px}
+.notas h2{font-size:19px;margin:0 0 4px}.notas p{margin:0;font-size:14px;color:var(--sec)}
+@media (max-width:760px){.notas{grid-template-columns:1fr}.print{margin-left:0}}
+@media print{.proto,.intro,.ctl,.notas,.pieza figcaption{display:none}body{background:#fff}.piezas{padding:0;gap:8mm}.calca,.tarj{filter:none}.tarj>rect:first-child{stroke:#999;stroke-width:.2;stroke-dasharray:1 1}.pieza svg{max-width:none}@page{size:A4;margin:10mm}}
+</style>
+</head>
+<body>
+<div class="proto" role="note"><div class="wrap">Kit de QR de mesa · r3 · negocios de ejemplo · el QR abre el menú publicado en vista de mesa · la dirección corta «convia.mx/m/…» es provisional (dominio sin confirmar) · verificar el escaneo con un teléfono antes de imprimir</div></div>
+<header class="intro wrap"><h1 class="d">El sello de la mesa</h1><p><b>El lugar pone el nombre y el color; Convia pone el sello.</b> El mismo sello en las tres piezas: el nombre del establecimiento en el arco, la acción abajo, las estrellas de Convia a los lados y el QR al centro, limpio sobre blanco.</p></header>
+<div class="ctl"><div class="wrap">
+<label>Establecimiento <select id="neg"></select></label>
+<span class="g" role="group" aria-label="Color del establecimiento">Su color <span id="sws" style="display:flex;gap:6px"></span><input type="color" id="cc" aria-label="Otro color"></span>
+<label>Mesa <input type="number" id="mesa" min="1" max="99" value="4"></label>
+<label><input type="checkbox" id="nfc" checked> Con NFC</label>
+<button class="print" type="button" onclick="print()">Imprimir a tamaño real</button>
+<p class="aviso" id="aviso" hidden></p></div></div>
+<main class="wrap"><div class="piezas" id="piezas"></div>
+<section class="notas" aria-label="Cómo se usa"><div><h2 class="d">Tamaño del QR</h2><p>Con su margen blanco, el QR mide 3.9 cm en la calca y la tarjeta de mesa, y 2.5 cm en la de barra (unos 2 cm de cuadritos): lo mínimo para escanear cómodo a un palmo de distancia.</p></div>
+<div><h2 class="d">NFC</h2><p>Una etiqueta NFC pegada detrás del ícono del teléfono, grabada con la misma dirección. Quien no quiere abrir la cámara solo acerca el teléfono.</p></div>
+<div><h2 class="d">Un QR por establecimiento</h2><p>El número de mesa va impreso para el mesero; el QR es el mismo en todas las mesas, así un cambio de menú no obliga a reimprimir.</p></div></section></main>
+<script>
+/*DATA*/
+let k='fuegos',col=null,mesa=4,nfc=true,uid=0;
+// QR: una vez por establecimiento (corrección de errores M, zona de silencio de 4 módulos)
+function hazQR(n){if(n.qr)return n.qr;if(typeof qrcode!=='function')return n.qr={n:21,d:'',falla:true};const q=qrcode(0,'M');q.addData(n.url);q.make();const m=q.getModuleCount(),b=4;let d='';
+ for(let y=0;y<m;y++)for(let x=0;x<m;x++)if(q.isDark(y,x))d+=`M${x+b} ${y+b}h1v1h-1z`;return n.qr={n:m+2*b,d}}
+const lum=h=>{const c=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(v=>v<=.03928?v/12.92:((v+.055)/1.055)**2.4);return .2126*c[0]+.7152*c[1]+.0722*c[2]};
+const con=(a,b)=>{const[x,y]=[lum(a),lum(b)].sort((m,n)=>n-m);return (x+.05)/(y+.05)};
+const tx=c=>con(c,'#ffffff')>=4.5?'#ffffff':'#1b1d1a';           // texto sobre el color del lugar
+const qcol=c=>con(c,'#ffffff')>=7?c:'#1b1d1a';                     // el QR solo toma el color si es muy oscuro
+const est=(x,y,s,fill,rot=0)=>`<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s/200}) translate(-100.4 -106.6)"><path d="${STAR}" fill="${fill}"/></g>`;
+const I={cam:'<path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.6"/>',
+ nfc:'<rect x="6" y="3" width="10" height="18" rx="2"/><path d="M18.5 8.5a5 5 0 0 1 0 7M20.8 6.3a8.5 8.5 0 0 1 0 11.4"/>'};
+const ico=(k,x,y,s,c)=>`<svg x="${x}" y="${y}" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="${c}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[k]}</svg>`;
+// Sello en una caja de 240: anillo (r 118 → 92) con textos en arco y estrellas a las 3 y a las 9; disco blanco r 92 con aro punteado y el QR.
+// El disco es más grande que en r2 (79 → 92) para que el QR llegue a 2.5 cm en la tarjeta de barra; el QR ocupa el cuadrado inscrito menos un margen.
+const RI=92,QL=Math.floor((RI-8)*Math.SQRT2);
+function sello(n,c,cx,cy,D){const id='s'+(uid++),t=tx(c),o=120-QL/2,nm=n.n.toUpperCase(),fs=Math.min(14.5,210/(nm.length*.74));
+ return `<g transform="translate(${cx-D/2} ${cy-D/2}) scale(${D/240})">
+ <defs><path id="${id}t" d="M 22 120 A 98 98 0 0 1 218 120"/><path id="${id}b" d="M 14 120 A 106 106 0 0 0 226 120"/></defs>
+ <circle cx="120" cy="120" r="118" fill="${c}"/><circle cx="120" cy="120" r="112.5" fill="none" stroke="${t}" stroke-width="1.2" opacity=".85"/>
+ <text font-family="Fraunces, Georgia, serif" font-size="${fs.toFixed(2)}" fill="${t}" text-anchor="middle" letter-spacing="1"><textPath href="#${id}t" startOffset="50%">${nm}</textPath></text>
+ <text font-family="Figtree, sans-serif" font-size="9.5" font-weight="700" fill="${t}" text-anchor="middle" letter-spacing="2"><textPath href="#${id}b" startOffset="50%">${n.que.toUpperCase()} · ESCANEA · SCAN</textPath></text>
+ ${est(13.5,120,15,t,-8)}${est(226.5,120,15,t,8)}
+ <circle cx="120" cy="120" r="${RI}" fill="#fff"/><circle cx="120" cy="120" r="${RI-4.5}" fill="none" stroke="${c}" stroke-width="1.2" stroke-dasharray="2.5 4"/>
+ <svg x="${o}" y="${o}" width="${QL}" height="${QL}" viewBox="0 0 ${n.qr.n} ${n.qr.n}" shape-rendering="crispEdges"><path d="${n.qr.d}" fill="${qcol(c)}"/></svg></g>`}
+const lbl=n=>`${n.que} de ${n.n}: código QR dentro del sello de Convia`;
+// Calca redonda 80 mm
+const calca=(n,c)=>`<svg class="calca" width="80mm" height="80mm" viewBox="0 0 80 80" role="img" aria-label="Calca. ${lbl(n)}">${sello(n,c,40,40,80)}</svg>`;
+// Tarjeta de mesa 100 × 140 mm: sello arriba, acción bilingüe, dirección corta, franja del color con la mesa y «Menú en Convia»
+function mesaT(n,c){const t=tx(c),W=100,H=140,b1=nfc?8:38;
+ const acc=`${ico('cam',b1,92,7,'#1b1d1a')}<text x="${b1+9.5}" y="95.6" font-family="Figtree, sans-serif" font-size="3.6" font-weight="700" fill="#1b1d1a">Escanea</text><text x="${b1+9.5}" y="99.6" font-family="Figtree, sans-serif" font-size="3" fill="#5c5f5b">Scan</text>`
+ +(nfc?`${ico('nfc',53,92,7,'#1b1d1a')}<text x="62.5" y="95.6" font-family="Figtree, sans-serif" font-size="3.6" font-weight="700" fill="#1b1d1a">Acerca tu teléfono</text><text x="62.5" y="99.6" font-family="Figtree, sans-serif" font-size="3" fill="#5c5f5b">Tap your phone</text>`:'');
+ return `<svg class="tarj" width="${W}mm" height="${H}mm" viewBox="0 0 ${W} ${H}" role="img" aria-label="Tarjeta de mesa ${mesa}. ${lbl(n)}">
+ <rect width="${W}" height="${H}" rx="4" fill="#fff"/>${sello(n,c,50,47,80)}${acc}
+ <text x="50" y="111" text-anchor="middle" font-family="Figtree, sans-serif" font-size="2.9" fill="#5c5f5b" letter-spacing=".1">convia.mx/m/${n.slug}</text>
+ <path d="M0 120 H${W} V${H-4} a4 4 0 0 1 -4 4 H4 a4 4 0 0 1 -4 -4 Z" fill="${c}"/>
+ <text x="7" y="133.2" font-family="Fraunces, Georgia, serif" font-size="7.4" fill="${t}">Mesa ${mesa}</text>
+ <text x="${W-12.5}" y="132" text-anchor="end" font-family="Figtree, sans-serif" font-size="3.1" font-weight="600" fill="${t}">${n.que} en Convia</text>${est(W-8,130.9,5,t,-8)}</svg>`}
+// Tarjeta de barra 55 × 85 mm: sello de 51 mm (QR de 2.5 cm), acción y franja con «Carta en Convia»
+function barraT(n,c){const t=tx(c),W=55,H=85;
+ return `<svg class="tarj" width="${W}mm" height="${H}mm" viewBox="0 0 ${W} ${H}" role="img" aria-label="Tarjeta de barra. ${lbl(n)}">
+ <rect width="${W}" height="${H}" rx="3" fill="#fff"/>${sello(n,c,27.5,28,51)}
+ <text x="27.5" y="61.6" text-anchor="middle" font-family="Figtree, sans-serif" font-size="2.9" font-weight="700" fill="#1b1d1a">Escanea · Scan</text>
+ ${nfc?`<text x="27.5" y="66" text-anchor="middle" font-family="Figtree, sans-serif" font-size="2.5" fill="#5c5f5b">o acerca tu teléfono · NFC</text>`:''}
+ <path d="M0 73 H${W} V${H-3} a3 3 0 0 1 -3 3 H3 a3 3 0 0 1 -3 -3 Z" fill="${c}"/>
+ <text x="${W/2+2.4}" y="80.2" text-anchor="middle" font-family="Figtree, sans-serif" font-size="2.8" font-weight="600" fill="${t}">${n.que} en Convia</text>${est(W/2-10.6,79.2,4,t,-8)}</svg>`}
+function render(){const n=NEG[k],c=col||n.colores[0];hazQR(n);uid=0;
+ const av=document.getElementById('aviso');const msg=n.qr.falla?'No se pudo cargar el generador de QR (revisa la conexión).':qcol(c)===c?'':'Este color es claro para el QR: el código se imprime en tinta y el color queda en el anillo.';av.hidden=!msg;av.textContent=msg;
+ document.getElementById('piezas').innerHTML=
+  `<figure class="pieza">${calca(n,c)}<figcaption><b>Calca redonda</b> · 8 cm, para la mesa o la puerta</figcaption></figure>`+
+  `<figure class="pieza">${mesaT(n,c)}<figcaption><b>Tarjeta de mesa</b> · 10 × 14 cm, en carpa o en atril</figcaption></figure>`+
+  `<figure class="pieza">${barraT(n,c)}<figcaption><b>Tarjeta de barra</b> · 5.5 × 8.5 cm, en bloque de acrílico</figcaption></figure>`;
+ document.querySelectorAll('.sw').forEach(b=>b.setAttribute('aria-pressed',b.dataset.c===c));document.getElementById('cc').value=c}
+function sws(){document.getElementById('sws').innerHTML=NEG[k].colores.map(x=>`<button class="sw" type="button" data-c="${x}" style="background:${x}" aria-label="Color ${x}"></button>`).join('')}
+document.getElementById('neg').innerHTML=Object.entries(NEG).map(([id,n])=>`<option value="${id}">${n.n} (${n.que.toLowerCase()})</option>`).join('');
+document.getElementById('neg').onchange=e=>{k=e.target.value;col=null;sws();render()};
+document.addEventListener('click',e=>{const b=e.target.closest('.sw');if(b){col=b.dataset.c;render()}});
+document.getElementById('cc').oninput=e=>{col=e.target.value;render()};
+document.getElementById('mesa').oninput=e=>{mesa=Math.max(1,Math.min(99,+e.target.value||1));render()};
+document.getElementById('nfc').onchange=e=>{nfc=e.target.checked;render()};
+sws();render();
+</script>
+</body>
+</html>
