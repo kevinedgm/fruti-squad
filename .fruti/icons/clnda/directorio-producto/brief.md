@@ -98,6 +98,7 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 - Distinción en el perfil: **rasgos** «Va bien para» = revisados por Convia; **amenidades** = las declara el negocio. [propuesta]
 - Hotel r1: `../convia-perfil-hotel-r1/` (estructura en su LEEME).
 - r1 rechazado por el usuario: «no copiar Facebook». Pide **diseño propio con el tema de color del giro**, logo «Convia | <Giro>», portada en mosaico, cuartos en miniatura y todo **al alcance del pulgar** (uso mayoritario en teléfono). Hotel r2: `../convia-perfil-hotel-r2/`.
+- **Aprobado por el usuario (2026-10-31): perfil de hotel r2.** Queda como patrón base de los perfiles por giro: tema de color del giro, logo «Convia | <Giro>», portada en mosaico, ficha llavero con sello, boleto de datos clave, pestañas abajo en celular + botón flotante de contacto, listas compactas con miniatura que se despliegan. Cada giro cambia sus pestañas y su contenido, no esta base.
 - Logotipos de giro de un color: `../convia-final/sellos/<giro>-logotipo-giro.svg` (Cafés, Restaurantes, Hoteles, Talleres, Museos, Recorridos). [propuesta: «Hoteles» vs. «Alojamiento»]
 - Pendiente: cómo cargan los restaurantes su menú (foto/PDF vs. capturado platillo por platillo).
 
