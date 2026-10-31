@@ -21,4 +21,4 @@ El QR nunca se deforma ni se tapa: siempre va sobre blanco pleno con su margen d
 ## Verificación
 - Playwright 1300 y 390 px: sin desbordes, sin errores JS, ningún texto sale de su pieza.
 - El QR de la prueba local es un simulador (no escanea); en el artefacto publicado el QR se genera con qrcode-generator 1.4.4. **Escaneo con teléfono: no verificado.**
-- [pendiente: elección del usuario]
+- **Elegida por el usuario (2026-10-31): B · Sello Convia.** Siguiente: llevar el sello a las piezas reales (calca, tarjeta de mesa, tarjeta de barra) e impresión a tamaño real.
