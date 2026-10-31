@@ -93,6 +93,7 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 - r9 (usuario): en la tarjeta los rasgos van solo como **sellitos de ícono** (nombre en texto oculto y al pasar el cursor); el nombre y la regla se leen en el **perfil del lugar**. Tarjetas de tamaño único, solo datos básicos.
 
 ## Perfiles de negocio por giro (usuario, 2026-10-31)
+- **Modelo aprobado (2026-10-31): perfil + actividad + sede** → `../convia-final/modelo-datos.md`. Eventos, talleres, recorridos y exposiciones son actividades con organizador y sede; los independientes son perfiles `organizador`.
 - Perfil completo «tipo Instagram/Facebook» que al negocio le dé gusto tener; **cada giro con su propia configuración**. Orden pedido: hoteles primero; luego restaurantes y cafés (menú con precios), recorridos (lugares, desde cuántas personas, precio), talleres, museos (exposiciones, eventos y talleres pasados y próximos, cuántos asistieron).
 - Convia **no hace reservaciones**: el perfil da contacto directo (WhatsApp, teléfono, correo, web), horarios y enlace a Google Maps.
 - Distinción en el perfil: **rasgos** «Va bien para» = revisados por Convia; **amenidades** = las declara el negocio. [propuesta]
@@ -112,6 +113,8 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 - **Café r1** `../convia-perfil-cafe-r1/`: acción principal «Cómo llegar» (no se reserva); bloque «¿Sirve para trabajar?»; pestaña Encuentros; carta con origen del café y modo QR; muestra el estado «Recién llegado» (van 6 de 10 visitas).
   - **Aprobado por el usuario (2026-10-31).**
 - **Taller r1** `../convia-perfil-taller-r1/`: el perfil es del **estudio**; hoja por taller con «Te llevas», «Qué vas a hacer», lugares × precio (empieza en 1, tope = cupo de la fecha), mínimo para confirmar, qué llevar; pestañas Piezas (de alumnos) y Maestros.
+- **Museo r1** `../convia-perfil-museo-r1/`: primer perfil sobre el modelo perfil + actividad + sede; pestaña Actividades (Ahora · Próximas · Pasadas) con «Organiza» y «Dónde» en cada una; pasadas con «N marcaron que fueron».
+- Pendiente: llevar el modelo al directorio (Talleres/Recorridos/Eventos como tipos de actividad por fecha, con «Organiza» y «En») y crear el perfil `organizador` independiente.
 
 ## Pendiente de operación (usuario, 2026-10-30: «tema de operación de negocio», se decide después)
 - Quién carga los primeros lugares al lanzar (curaduría e invitación vs. solicitudes espontáneas) y cuántos necesita la fase 1.
