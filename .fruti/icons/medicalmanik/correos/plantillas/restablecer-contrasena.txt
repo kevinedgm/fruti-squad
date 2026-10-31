@@ -1,7 +1,5 @@
 Restablezca su contraseña de MedicalManik
 
-MedicalManik
-
 Restablezca su contraseña
 Recibimos una solicitud para cambiar la contraseña de {{correo}}.
 Crear nueva contraseña ({{restablecer_url}})

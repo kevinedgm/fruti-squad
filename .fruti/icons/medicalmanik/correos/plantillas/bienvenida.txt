@@ -1,7 +1,5 @@
 Le damos la bienvenida a MedicalManik, {{tratamiento}} {{apellido}}
 
-MedicalManik
-
 Le damos la bienvenida, {{tratamiento}} {{apellido}}
 Su cuenta está lista. Con estos tres pasos su consultorio queda funcionando y los pacientes pueden encontrarlo en Manik.
 1

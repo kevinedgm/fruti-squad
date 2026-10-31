@@ -1,7 +1,5 @@
 Su Plan {{plan}} está activo
 
-MedicalManik
-
 Su Plan {{plan}} está activo
 Gracias, {{tratamiento}} {{apellido}}. Recibimos su pago y su plan ya está funcionando.
 Plan {{plan}} · {{periodo}}

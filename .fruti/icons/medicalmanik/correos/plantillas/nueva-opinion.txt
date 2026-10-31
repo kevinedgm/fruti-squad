@@ -1,7 +1,5 @@
 Un paciente opinó sobre su consulta
 
-MedicalManik
-
 Tiene una opinión nueva
 Un paciente que atendió el {{fecha_consulta}} calificó su consulta en Manik.
 ★★★★★ {{calificacion}} de 5

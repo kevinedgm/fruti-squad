@@ -11,12 +11,12 @@ os.makedirs(os.path.join(H, 'plantillas'), exist_ok=True)
 # --- tokens (tema.json de final/ y manik-final/) ---
 AZUL, TINTA, MUTED, LINEA, FONDO = '#234899', '#14213D', '#4A5674', '#E1E6F0', '#F3F5F9'
 IMPULSA, MANIK_UI, OK, AVISO, ERROR, ESTRELLA = '#504CA1', '#00788A', '#15814B', '#A75F00', '#C33F4E', '#E3A21C'
-TIT = "'Sora',Arial,Helvetica,sans-serif"
+TIT = "'Urbanist',Arial,Helvetica,sans-serif"  # tipografía única de la marca (manual 2026): Urbanist + Atkinson
 TXT = "'Atkinson Hyperlegible Next',Arial,Helvetica,sans-serif"
-FUENTES = 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=Sora:wght@600&display=swap'
+FUENTES = 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=Urbanist:wght@600&display=swap'
 
 MARCAS = {  # cabecera: imagen, ancho, alto, texto alternativo, nombre visible, color del producto
-    'ecosistema': ('medicalmanik-128.png', 36, 36, 'MedicalManik', 'MedicalManik', AZUL),
+    'ecosistema': ('medicalmanik-logotipo.png', 180, 31, 'MedicalManik', None, AZUL),  # logotipo oficial (palabra en vector del manual anterior)
     'expediente': ('expediente-128.png', 36, 36, 'Expediente Manik', 'Expediente Manik', AZUL),
     'impulsa': ('impulsa-128.png', 36, 36, 'Impulsa Manik', 'Impulsa Manik', IMPULSA),
     'manik': ('manik-logotipo.png', 110, 25, 'Manik', None, MANIK_UI),

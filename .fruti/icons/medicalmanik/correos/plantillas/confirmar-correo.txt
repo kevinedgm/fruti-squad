@@ -1,7 +1,5 @@
 Su código de confirmación: {{codigo}}
 
-MedicalManik
-
 Confirme su correo
 Escriba este código en la pantalla de registro de MedicalManik:
 {{codigo}}

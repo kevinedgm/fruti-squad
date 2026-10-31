@@ -116,7 +116,7 @@ th{text-align:left;font-weight:600;color:var(--muted);border-bottom:1px solid va
   <li><a href="#color">Paleta de color<span></span></a></li><li><a href="#tipografia">Tipografía<span></span></a></li><li><a href="#personalidad">Personalidad y tono<span></span></a></li>
   <li><a href="#ecosistema">Ecosistema Manik<span></span></a></li><li><a href="#directorio">Manik, el directorio<span></span></a></li><li><a href="#ia">Manik IA<span></span></a></li>
   <li><a href="#iconografia">Iconografía<span></span></a></li><li><a href="#contenido">Generación de contenido<span></span></a></li><li><a href="#gimmick">Gimmick<span></span></a></li>
-  <li><a href="#aplicaciones">Aplicaciones<span></span></a></li><li><a href="#cambios">Cambios y pendientes<span></span></a></li></ol></div>
+  <li><a href="#aplicaciones">Aplicaciones y correos<span></span></a></li><li><a href="#cambios">Cambios y pendientes<span></span></a></li></ol></div>
 </nav>
 
 <section id="intro" aria-labelledby="h1"><div class="cab"><span class="eti">Introducción</span><h2 id="h1">Acerca de</h2></div>
@@ -174,6 +174,10 @@ th{text-align:left;font-weight:600;color:var(--muted);border-bottom:1px solid va
   <div class="sw"><span class="m" style="background:#181C33;color:#fff">Tinta</span><span class="t"><b>#181C33</b>CMYK 53·45·0·80 · texto</span></div></div>
  <div class="cambio"><b>Ajuste:</b> el manual anterior daba el azul como #23439C. El logotipo oficial en vector usa <b>#234899</b>, y es el que usan todos los sellos; la diferencia no se ve (1.04:1), así que se unifica en #234899.</div>
  <p class="texto">Los primarios van en mayor proporción, en bloques o en el degradado de cian a azul; los acentos, en menor proporción. Siempre debe haber al menos un primario: nunca solo acentos.</p>
+ <h3>Degradado de marca</h3>
+ <div class="lam"><span style="height:88px;border-radius:16px;background:linear-gradient(120deg,#234899 0%,#3E7CC6 55%,#5FC9D8 100%);display:flex;align-items:center;padding:0 22px"><img src="{{LOGOB}}" alt="" style="width:min(240px,60%);height:auto"></span>
+ <p class="nota"><span class="mono">linear-gradient(120deg, #234899 0%, #3E7CC6 55%, #5FC9D8 100%)</span> · siempre de azul a cian, nunca al revés.</p>
+ <ol class="reglas"><li><b>Solo como fondo</b> de comunicación: portadas, cierres de redes, cabeceras de presentación, firma de correo A.</li><li><b>Nunca dentro del sello</b>, ni en botones, texto o íconos, ni en las apps. El sello es siempre sólido: azul sobre claro, blanco sobre el degradado o sobre fotografía oscura. Así hay un solo sello en todos lados, se imprime a una tinta y se lee a 16 px.</li><li><b>Texto y logotipo en el lado azul</b> (el primer 55 %): el blanco sobre el extremo cian no alcanza contraste (1.9:1).</li><li>En redes, el sello de las esquinas va sólido, no en degradado.</li></ol></div>
  <h3>Texto sobre color</h3>
  <p class="nota">Medido con WCAG 2.2 (texto normal pide 4.5:1). Cuatro combinaciones del manual anterior no alcanzan y se retiran.</p>
  <div class="combo">
@@ -196,12 +200,12 @@ th{text-align:left;font-weight:600;color:var(--muted);border-bottom:1px solid va
 </section>
 
 <section id="tipografia" aria-labelledby="h5"><div class="cab"><span class="eti">Tipografía</span><h2 id="h5">Tipografía</h2></div>
- <p class="texto">Dos contextos, cuatro familias. En comunicación se conservan las tipografías del manual anterior; en las apps se usan familias abiertas pensadas para leer datos clínicos sin error.</p>
+ <p class="texto">Una sola pareja tipográfica para toda la marca: comunicación, presentaciones, correos y apps. Un post, un correo y la pantalla de Expediente se ven de la misma familia.</p>
  <div class="tipo">
-  <div class="lam"><span class="nota">Comunicación · títulos, subtítulos y llamados</span><h4 style="font-size:26px;color:var(--ink)">Filson Pro Regular y Bold</h4><p class="nota">La palabra MedicalManik está trazada en Filson Pro. Licencia comercial; esta página la sustituye por Urbanist en pantalla.</p></div>
-  <div class="lam"><span class="nota">Comunicación · párrafos e información secundaria</span><h4 style="font-size:26px;color:var(--ink);font-family:var(--sans);font-weight:400">Scandia Regular</h4><p class="nota">Licencia comercial; aquí se sustituye por Atkinson.</p></div>
-  <div class="lam"><span class="nota">Apps · marca, saludos y títulos</span><p class="muestra" style="font-family:var(--display);font-weight:300">Buenos días, Dra. Ramírez</p><p class="abc" style="font-family:var(--display)">Urbanist · 300 grande en el panel; 600 en títulos y nombres de app. Nunca en datos clínicos.</p></div>
-  <div class="lam"><span class="nota">Apps · toda la interfaz y todo dato</span><p class="muestra" style="font-family:var(--sans);font-weight:600;font-variant-numeric:tabular-nums">Losartán 50 mg · 120/80</p><p class="abc">Atkinson Hyperlegible Next · distingue 1 l I y 0 O; cifras tabulares; nada clínico por debajo de 13 px.</p></div></div>
+  <div class="lam"><span class="nota">Primaria · marca, títulos, subtítulos y llamados</span><p class="muestra" style="font-family:var(--display);font-weight:700">Cada consulta cuenta</p><p class="muestra" style="font-family:var(--display);font-weight:300;font-size:28px">Buenos días, Dra. Ramírez</p><p class="abc" style="font-family:var(--display)">Urbanist · 300, 400, 600 y 700. Geométrica como la palabra MedicalManik, así el logotipo y los títulos conviven. Nunca en párrafos largos ni en datos clínicos.</p></div>
+  <div class="lam"><span class="nota">Secundaria · párrafos, interfaz y todo dato</span><p class="muestra" style="font-family:var(--sans);font-weight:600;font-variant-numeric:tabular-nums">Losartán 50 mg · 120/80</p><p class="abc">Atkinson Hyperlegible Next · 400 a 700. Hecha para distinguir 1 l I y 0 O; cifras tabulares en tablas y dosis; nada clínico por debajo de 13 px.</p></div></div>
+ <div class="cambio"><b>Decisión 2026:</b> se unifica en Urbanist y Atkinson. <b>Filson Pro</b> vive solo dentro del logotipo (ya está trazado en vector: no se escribe con ella). <b>Scandia</b> se retira. Por qué: las dos eran de licencia comercial, y la marca la producen muchas manos (diseño, mercadotecnia, desarrollo, soporte en correos y presentaciones); Urbanist y Atkinson son libres y están en Google Fonts, así que cualquiera las usa sin comprar licencias. Además Atkinson ya es la letra de las apps por legibilidad clínica: una sola pareja evita que la comunicación prometa una marca y el producto muestre otra. Los impresos actuales se usan hasta agotarse.</div>
+ <p class="nota">En correos, Gmail y Outlook no cargan fuentes web: el respaldo es Arial. Por eso un correo nunca depende de la letra para verse bien.</p>
 </section>
 
 <section id="personalidad" aria-labelledby="h6"><div class="cab"><span class="eti">Personalidad</span><h2 id="h6">Personalidad y tono de voz</h2></div>
@@ -275,26 +279,36 @@ th{text-align:left;font-weight:600;color:var(--muted);border-bottom:1px solid va
  <div class="cambio"><b>Nueva regla:</b> Manix vive en comunicación, bienvenida y estados vacíos. <b>No es la voz de Manik IA</b> ni aparece en resultados clínicos: la IA es una función sin personaje.</div><p class="nota">Ilustración aproximada; las expresiones originales están en el manual anterior.</p></div></div>
 </section>
 
-<section id="aplicaciones" aria-labelledby="h13"><div class="cab"><span class="eti">Aplicaciones</span><h2 id="h13">Firma de correo</h2></div>
+<section id="aplicaciones" aria-labelledby="h13"><div class="cab"><span class="eti">Aplicaciones</span><h2 id="h13">Aplicaciones</h2></div>
+ <h3>Firma de correo</h3>
  <p class="texto">Dos versiones; se usa cualquiera de las dos. Datos de ejemplo.</p>
- <div class="firma" style="background:linear-gradient(110deg,#3C86C9,var(--azul) 70%);color:#fff"><img src="{{LOGOB}}" alt="MedicalManik"><div class="d"><b style="color:#fff">Nombre Apellido</b><span>Puesto en MedicalManik</span><span style="margin-top:8px">nombre.apellido@medicalmanik.mx</span><span>55 0000 0000</span></div></div>
- <div class="firma" style="background:var(--surface);color:var(--azul);border:1px solid var(--line)"><img src="{{LOGO}}" alt="MedicalManik"><div class="d"><b>Nombre Apellido</b><span>Puesto en MedicalManik</span><span style="margin-top:8px">nombre.apellido@medicalmanik.mx</span><span>55 0000 0000</span></div></div>
- <p class="nota">Versión A: sobre el degradado de marca, más cargado al azul que en el manual anterior, porque el blanco sobre el cian claro no alcanza contraste (1.9:1). Versión B: sobre blanco.</p>
+ <div class="firma" style="background:linear-gradient(110deg,#3C86C9,var(--azul) 70%);color:#fff"><img src="{{LOGOB}}" alt="MedicalManik"><div class="d"><b style="color:#fff">Nombre Apellido</b><span>Puesto en MedicalManik</span><span style="margin-top:8px">nombre.apellido@medicalmanik.com</span><span>55 0000 0000</span></div></div>
+ <div class="firma" style="background:var(--surface);color:var(--azul);border:1px solid var(--line)"><img src="{{LOGO}}" alt="MedicalManik"><div class="d"><b>Nombre Apellido</b><span>Puesto en MedicalManik</span><span style="margin-top:8px">nombre.apellido@medicalmanik.com</span><span>55 0000 0000</span></div></div>
+ <p class="nota" id="notaFirma">Versión A: sobre el degradado de marca, más cargado al azul que en el manual anterior, porque el blanco sobre el cian claro no alcanza contraste (1.9:1). Versión B: sobre blanco.</p>
+ <h3>Plantillas de correo</h3>
+ <div class="dos"><div class="texto"><p>Once correos del ecosistema y del directorio, listos para el servicio de envío, con versión de texto plano y variables <span class="mono">&#123;&#123;así&#125;&#125;</span>.</p>
+ <ol class="reglas"><li><b>Cabecera:</b> franja de 4 px del color del producto, y el logotipo: MedicalManik, el sello del producto con su nombre, o manik para pacientes.</li><li><b>Un botón principal</b> por correo, en el color del producto; lo demás son enlaces.</li><li><b>Trato:</b> de usted a médicos; de tú a pacientes en manik.</li><li><b>Pie:</b> quién envía, a dónde escribir y por qué lo recibe. Solo el resumen semanal lleva «darse de baja»; los de cuenta y pagos son transaccionales.</li><li><b>Técnica:</b> tablas, estilos en línea, 600 px de ancho, Urbanist y Atkinson con respaldo Arial, texto alternativo en imágenes y texto previo oculto.</li></ol></div>
+ <div class="lam" style="padding:16px;background:#F3F5F9"><img src="{{C1}}" alt="Correo de bienvenida de MedicalManik con logotipo, tres pasos y botón Entrar a MedicalManik" style="width:100%;height:auto;border-radius:12px"></div></div>
+ <div class="rejilla"><div class="lam" style="padding:16px;background:#F3F5F9"><img src="{{C2}}" alt="Correo de cita confirmada para pacientes, con el logotipo de manik" style="width:100%;height:auto;border-radius:12px"><p class="nota">Pacientes · manik · trato de tú.</p></div>
+ <div class="lam" style="padding:16px;background:#F3F5F9"><img src="{{C3}}" alt="Correo de factura disponible de MedicalManik" style="width:100%;height:auto;border-radius:12px"><p class="nota">Pagos · CFDI · transaccional.</p></div></div>
+ <div class="lam tabla"><table><thead><tr><th>Grupo</th><th>Correo</th><th>Marca</th><th>Cuándo se envía</th></tr></thead><tbody><tr><td>Cuenta</td><td>Bienvenida al registrarse</td><td>MedicalManik</td><td>Al terminar el registro.</td></tr><tr><td>Cuenta</td><td>Confirmar correo</td><td>MedicalManik</td><td>Al crear la cuenta o al cambiar de correo.</td></tr><tr><td>Cuenta</td><td>Restablecer contraseña</td><td>MedicalManik</td><td>Cuando el usuario pide cambiar su contraseña.</td></tr><tr><td>Pagos</td><td>Compra de plan (Plan Pro)</td><td>MedicalManik</td><td>Al confirmarse el pago de un plan o un cambio de plan.</td></tr><tr><td>Pagos</td><td>Compra de créditos Impulsa</td><td>Impulsa Manik</td><td>Al confirmarse el pago de créditos.</td></tr><tr><td>Pagos</td><td>Aviso de renovación</td><td>MedicalManik</td><td>7 días antes de cada renovación.</td></tr><tr><td>Pagos</td><td>Pago no procesado</td><td>MedicalManik</td><td>Cuando el banco rechaza un cobro de renovación.</td></tr><tr><td>Pagos</td><td>Factura disponible (CFDI)</td><td>MedicalManik</td><td>Al timbrarse una factura solicitada.</td></tr><tr><td>Actividad</td><td>Estadísticas de la semana</td><td>Expediente Manik</td><td>Cada lunes a las 7:00, con los datos de la semana anterior.</td></tr><tr><td>Actividad</td><td>Nueva opinión de paciente</td><td>MedicalManik</td><td>Cuando un paciente publica una opinión en Manik.</td></tr><tr><td>Pacientes</td><td>Cita confirmada (paciente, Manik)</td><td>manik (pacientes)</td><td>Al agendar una cita en el directorio.</td></tr></tbody></table></div>
+ <p class="nota">Pendiente: probar en Gmail, Outlook para Windows y Apple Mail antes de activarlos; confirmar nombres de planes y precios reales. Datos de ejemplo.</p>
 </section>
 
 <section id="cambios" aria-labelledby="h14"><div class="cab"><span class="eti">Control</span><h2 id="h14">Cambios y pendientes</h2></div>
  <div class="lam tabla"><table class="cambios"><thead><tr><th>Tema</th><th>Manual anterior</th><th>Esta versión</th></tr></thead><tbody>
-  <tr><td>Logotipo</td><td>Sello con degradado como principal</td><td>Sello sólido azul como principal (el vector oficial); el degradado queda para fondos de comunicación.</td></tr>
+  <tr><td>Logotipo</td><td>Sello con degradado como principal</td><td>Sello siempre sólido (el vector oficial). El degradado es solo fondo de comunicación, con fórmula fija.</td></tr>
   <tr><td>Azul</td><td>#23439C</td><td>#234899, el del vector oficial (diferencia imperceptible).</td></tr>
   <tr><td>Texto sobre color</td><td>Blanco sobre cian, lavanda y lima; cian sobre blanco</td><td>Retirados: no alcanzan 4.5:1.</td></tr>
   <tr><td>Submarca</td><td>Mi Médico Manik</td><td>manik, el directorio (pin cian, minúsculas).</td></tr>
   <tr><td>Productos</td><td>No documentados</td><td>Ecosistema Manik: seis apps, Administración interna, panel de usuario.</td></tr>
   <tr><td>Inteligencia artificial</td><td>«Recomendar tratamientos»</td><td>Manik IA sugiere; el médico decide. Manual propio.</td></tr>
-  <tr><td>Tipografía</td><td>Filson Pro y Scandia</td><td>Se conservan en comunicación; Urbanist y Atkinson en las apps.</td></tr>
+  <tr><td>Tipografía</td><td>Filson Pro y Scandia</td><td>Urbanist y Atkinson en toda la marca; Filson Pro solo dentro del logotipo; Scandia se retira.</td></tr>
   <tr><td>Tono</td><td>Un ejemplo repetido en «sí» y «no»</td><td>Corregido.</td></tr>
   <tr><td>Manix</td><td>Compañero dentro del sistema</td><td>Solo comunicación y estados vacíos; no es la voz de la IA.</td></tr>
-  <tr><td>Firma de correo</td><td>Datos de una persona real</td><td>Datos de ejemplo.</td></tr></tbody></table></div>
- <ol class="reglas"><li><b>Pendiente:</b> confirmar si Filson Pro y Scandia siguen siendo las tipografías de comunicación o si se unifica todo en Urbanist y Atkinson.</li><li><b>Pendiente:</b> confirmar el uso del degradado (solo fondos, o también en el sello de redes).</li><li><b>Pendiente:</b> dominio <code>medicalmanik.mx</code> y <code>manik.mx</code> sin confirmar; las direcciones de esta página son de ejemplo.</li><li><b>Pendiente:</b> fotografías e ilustraciones propias para reemplazar las de banco.</li></ol>
+  <tr><td>Firma de correo</td><td>Datos de una persona real</td><td>Datos de ejemplo.</td></tr>
+  <tr><td>Correos</td><td>No documentados</td><td>Once plantillas con reglas de cabecera, botón, trato y pie.</td></tr></tbody></table></div>
+ <ol class="reglas"><li><b>Pendiente:</b> dominios <code>medicalmanik.com</code> y <code>manik.mx</code> sin confirmar; las direcciones de esta página son de ejemplo.</li><li><b>Pendiente:</b> fotografías e ilustraciones propias para reemplazar las de banco.</li></ol>
  <p class="pie"><span>MedicalManik · Manual de identidad 2026</span><span>Reemplaza al manual anterior (22 páginas)</span></p>
 </section>
 </main>

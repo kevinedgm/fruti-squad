@@ -1,7 +1,5 @@
 Su Plan {{plan}} se renueva el {{proximo_cobro}}
 
-MedicalManik
-
 Su plan se renueva en 7 días
 El {{proximo_cobro}} renovaremos su Plan {{plan}}. No tiene que hacer nada si quiere seguir igual.
 Plan {{plan}} · {{periodo}}

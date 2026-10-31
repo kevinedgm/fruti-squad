@@ -11,7 +11,8 @@
 
 ## Reglas usadas
 - Tablas de maquetación, estilos en línea y ancho máximo de 600 px.
-- Letra Sora y Atkinson Hyperlegible Next con respaldo Arial (Gmail y Outlook usan el respaldo).
+- Letra Urbanist y Atkinson Hyperlegible Next con respaldo Arial (Gmail y Outlook usan el respaldo). Antes Sora; cambiado por la tipografía única del manual 2026.
+- Cabecera de MedicalManik con el logotipo oficial (`img/medicalmanik-logotipo.png`, 360×62 para mostrarse a 180×31), hecho con la palabra original en vector.
 - Botones hechos con tablas, texto alternativo en las imágenes y texto previo oculto.
 - Médicos: trato de usted. Pacientes (Manik): trato de tú.
 - Color de cada producto solo en la franja superior y en el botón principal.

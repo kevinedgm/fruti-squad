@@ -1,7 +1,5 @@
 No pudimos cobrar su Plan {{plan}}
 
-MedicalManik
-
 No pudimos cobrar su plan
 Pago rechazado: {{motivo_rechazo}}
 

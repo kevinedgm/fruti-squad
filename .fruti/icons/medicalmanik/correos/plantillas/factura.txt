@@ -1,7 +1,5 @@
 Factura {{folio}} de MedicalManik
 
-MedicalManik
-
 Su factura está lista
 Adjuntamos su factura en PDF y XML.
 Folio {{folio}}
