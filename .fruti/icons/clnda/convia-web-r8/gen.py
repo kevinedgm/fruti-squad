@@ -1,3 +1,4 @@
+# r8.1: los «Ejemplo» llevan foto de relleno desenfocada con placa de vidrio y su nombre (solo demo).
 # Convia · página principal r8 = r7 + «rasgos» (Va bien para…: trabajar, intercambio de idiomas, networking, inglés, ir solo, mascota, vegano, silla de ruedas) como etiquetas neutras en tarjetas y filtros. Solo en lugares «Ejemplo»: de los negocios reales no sabemos estos datos.
 # Convia · página principal r7 = r6 + métrica «X de cada 10 volverían» (umbral 10 visitas; antes «Recién llegado»), distintivo «Favorito Convia», sello en encabezados de sección y «Organiza» en talleres/eventos.
 # Las métricas son SIMULADAS y solo se asignan a lugares «Ejemplo»; los negocios reales no llevan cifras.
@@ -73,6 +74,15 @@ SIM = {  # métricas simuladas solo para «Ejemplo»: visitas registradas, cuán
  'm1': (50, 38, .3), 'm2': (9, 8, 0), 'm3': (11, 8, .2)}
 data = [dict(id=i, cat=c, n=n, z=z, d=d, tags=t, when=w, info=x, img=im, alt=al, fit=fi) for i, c, n, z, d, t, w, x, im, al, fi in R] + \
        [dict(id=i, cat=c, n=n, z=z, d=d, tags=t, when=w, info=x, ej=True) for i, c, n, z, d, t, w, x in L]
+# Fotos de relleno para «Ejemplo» (pedido del usuario 2026-10-31): solo fotos sin letreros ni logotipos, siempre desenfocadas
+# y con placa de vidrio con el nombre ficticio, para que no se reconozca el negocio real de la foto.
+RELLENO = {'cafes': ['07.jpg', '03.jpg', '02.jpg'], 'restaurantes': ['03.jpg', '07.jpg', '02.jpg', '13.jpg'], 'hoteles': ['11.jpg', '12.jpg', '13.jpg'],
+           'talleres': ['03.jpg', '07.jpg', '13.jpg', '12.jpg'], 'recorridos': ['02.jpg', '11.jpg', '07.jpg'], 'museos': ['13.jpg', '12.jpg', '02.jpg']}
+_n = {}
+for p in data:
+    if p.get('ej'):
+        k = p['cat']; i = _n.get(k, 0); _n[k] = i + 1
+        p.update(img=RELLENO[k][i % len(RELLENO[k])], alt='', fit='cover', relleno=True)
 for p in data:
     p['org'] = ORG.get(p['id'], '')
     p['ras'] = [r if isinstance(r, tuple) else (r, '') for r in RAS.get(p['id'], [])]

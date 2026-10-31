@@ -93,9 +93,15 @@ footer .wrap{padding-block:24px 40px;border-top:1px solid var(--linea);display:f
 .crit-g{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}.crit-g li{background:var(--sup);border:1px solid var(--linea);border-radius:var(--r);padding:16px;display:grid;gap:6px;align-content:start}
 .crit-g b{display:flex;align-items:center;gap:8px}.crit-g .ico{width:24px;height:24px}.crit-g p{margin:0;font-size:14px;color:var(--sec)}
 @media (max-width:640px){.shelf{scroll-margin-top:190px}.rasf{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;padding-bottom:4px;margin-inline:-16px;padding-inline:16px}.rf{white-space:nowrap}}
+.ph.relleno{overflow:hidden}.ph.relleno .pimg{filter:blur(7px) saturate(1.15);transform:scale(1.12)}
+.glass{position:absolute;inset:0;display:grid;place-items:center;padding:40px 14px 48px;background:linear-gradient(160deg,rgba(255,255,255,.10),rgba(27,29,26,.28))}
+.glass span{max-width:100%;padding:8px 14px;border-radius:16px;background:rgba(27,29,26,.34);border:1px solid rgba(255,255,255,.45);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 8px 24px rgba(27,29,26,.18);
+-webkit-backdrop-filter:blur(10px) saturate(1.3);backdrop-filter:blur(10px) saturate(1.3);color:#fff;text-align:center;font:500 19px/1.12 var(--display);font-variation-settings:var(--dv);text-shadow:0 1px 8px rgba(27,29,26,.45)}
+.glass small{display:block;font:700 10.5px/1.4 var(--text);letter-spacing:.08em;text-transform:uppercase;opacity:.92;margin-bottom:2px}
+.th.relleno{filter:blur(3px)}
 .sh-t{display:flex;align-items:center;gap:12px}.sh-sello{width:58px;height:58px;flex:none;transform:rotate(-8deg)}.sh-sello .sello{width:100%;height:100%}
 </style>
-<div class="proto" role="note"><div class="wrap">Demo interna r8 · fotos y nombres de negocios reales sin permiso aún: no compartir fuera del equipo · lo marcado «Ejemplo» es ficticio, igual que sus cifras de «volverían» y sus rasgos «Va bien para» · tus listas se guardan solo en tu navegador</div></div>
+<div class="proto" role="note"><div class="wrap">Demo interna r8 · fotos y nombres de negocios reales sin permiso aún: no compartir fuera del equipo · lo marcado «Ejemplo» es ficticio, igual que sus cifras de «volverían» y sus rasgos «Va bien para»; sus fotos son de relleno, desenfocadas · tus listas se guardan solo en tu navegador</div></div>
 <header class="top"><div class="wrap"><a href="#" aria-label="Convia, inicio"><!--LOGO--></a>
 <label class="buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
 <span class="sr" style="position:absolute;left:-9999px">Buscar</span><input id="q" type="search" placeholder="Busca un café, un taller, un barrio…" autocomplete="off"></label>
@@ -135,7 +141,7 @@ return `<fieldset class="rate"><legend>¿Qué tal te pareció?</legend><div clas
 function rasList(p){if(!p.ras.length)return'';const r=[...p.ras].sort((a,b)=>rasSel.has(b[0])-rasSel.has(a[0]));const v=r.slice(0,2),x=r.length-v.length;
 return `<ul class="ras" aria-label="Va bien para">${v.map(([k,f])=>`<li${rasSel.has(k)?' class="on"':''}>${SVG.ras[k]}${RAS[k].n}${f?` · <time>${f}</time>`:''}</li>`).join('')}${x?`<li class="mas" title="${r.slice(2).map(([k])=>RAS[k].n).join(', ')}">+${x} más<span style="position:absolute;left:-9999px">: ${r.slice(2).map(([k])=>RAS[k].n).join(', ')}</span></li>`:''}</ul>`}
 function card(p){const c=CAT[p.cat];const s=st(p.id);const tag=p.tags.includes('nuevo')?'<span class="tag nuevo">Nuevo</span>':(p.tags.includes('buscado')?'<span class="tag">Más buscado</span>':'');
-return `<article class="card${s==='fui'?' visited':''}" data-id="${p.id}" style="--f:${c.fondo};--t:${c.texto}"><div class="ph${p.img?' has-img':''}">${p.img?`<img class="pimg${p.fit==='contain'?' contain':''}" src="img/${p.img}" alt="${p.alt}" loading="lazy">`:''}${tag}${p.ej?'<span class="ej">Ejemplo</span>':''}${isFav(p)?`<span class="favb">${starSvg}Favorito Convia</span>`:''}<span class="stamp">${SVG.sello[p.cat]}</span></div>
+return `<article class="card${s==='fui'?' visited':''}" data-id="${p.id}" style="--f:${c.fondo};--t:${c.texto}"><div class="ph${p.img?' has-img':''}${p.relleno?' relleno':''}">${p.img?`<img class="pimg${p.fit==='contain'?' contain':''}" src="img/${p.img}" alt="${p.alt}" loading="lazy">`:''}${p.relleno?`<span class="glass" aria-hidden="true"><span><small>${c.nombre}</small>${p.n}</span></span>`:''}${tag}${p.ej?'<span class="ej">Ejemplo</span>':''}${isFav(p)?`<span class="favb">${starSvg}Favorito Convia</span>`:''}<span class="stamp">${SVG.sello[p.cat]}</span></div>
 <div class="cb"><span class="chip">${SVG.ico[p.cat]}${c.nombre}</span><h3><a href="#">${p.n}</a></h3>${p.org?`<p class="org">Organiza: <b>${p.org}</b></p>`:''}<p class="meta">${p.when?`<span class="when">${p.when}</span> · `:''}${p.z} · ${p.d}</p>${p.info?`<p class="info">${p.info}</p>`:''}${rasList(p)}${metric(p)}
 <div class="acts"><button class="want" type="button" data-act="quiero" aria-pressed="${s==='quiero'}">${heart}<span>${s==='quiero'?'En mi lista':'Quiero ir'}</span></button>
 <button class="fui" type="button" data-act="fui" aria-pressed="${s==='fui'}">${starSvg}<span>${s==='fui'?'Ya fui':'¿Ya fuiste?'}</span></button></div>${rateBox(p)}</div></article>`}
@@ -152,7 +158,7 @@ document.getElementById('cnt').textContent=qN+fN;document.getElementById('goPas'
 document.getElementById('m-q').textContent=`Quiero ir · ${qN}`;document.getElementById('m-f').textContent=`Ya fui · ${fN}`;
 document.querySelectorAll('.seg button').forEach(b=>b.setAttribute('aria-selected',b.dataset.m===vista));
 const items=DATA.filter(p=>st(p.id)===vista);
-document.getElementById('ml').innerHTML=items.length?items.map(p=>`<li>${p.img?`<img class="th" src="img/${p.img}" alt="" style="object-fit:${p.fit||'cover'}">`:'<span class="th" aria-hidden="true"></span>'}<div><b>${p.n}</b><small>${CAT[p.cat].nombre} · ${p.z}${p.when?' · '+p.when:''}</small></div>
+document.getElementById('ml').innerHTML=items.length?items.map(p=>`<li>${p.img?`<img class="th${p.relleno?' relleno':''}" src="img/${p.img}" alt="" style="object-fit:${p.fit||'cover'}">`:'<span class="th" aria-hidden="true"></span>'}<div><b>${p.n}</b><small>${CAT[p.cat].nombre} · ${p.z}${p.when?' · '+p.when:''}</small></div>
 ${vista==='quiero'?`<button class="go" type="button" data-act="fui" data-id="${p.id}">Ya fui</button>`:`<span class="rl">${M[p.id].r!=null?ESCALA[M[p.id].r]:'Sin calificar'}</span>`}</li>`).join(''):
 `<li class="empty-li">${vista==='quiero'?'Tu lista está vacía. Toca «Quiero ir» en cualquier lugar para guardarlo.':'Todavía no marcas ningún lugar como visitado.'}</li>`;
 document.getElementById('badges').innerHTML=Object.entries(CAT).map(([k,c])=>{const n=DATA.filter(p=>p.cat===k&&st(p.id)==='fui').length;const got=n>=META;
