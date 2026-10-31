@@ -1,0 +1,348 @@
+<title>Manik IA</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300..700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Manual de marca · Manik IA, la capa de IA de Expediente Manik.
+   Composición: índice fijo a la izquierda en pantallas anchas; una columna de lectura con láminas (specimens) más anchas.
+   Tema claro únicamente, como el Ecosistema Manik (decisión del sistema): se fijan fondo y colores de forma explícita.
+   Tokens de IA (propios de este manual) + tokens heredados de Expediente Manik (solo se citan, no se redefinen en el sistema). */
+:root{
+ /* IA */
+ --ia:#0F1C3F;--ia-hover:#1B2B57;--ia-destello:#5FD3E2;--ia-estrella:#3DB8C9;--ia-suave:#E9EDF5;
+ --ia-filo:linear-gradient(90deg,#5FD3E2,#234899 60%,rgba(35,72,153,.25));--ia-lavado:linear-gradient(180deg,#F3FAFB,#FFFFFF 85%);
+ /* heredados de Expediente Manik */
+ --canvas:#F5F7FB;--surface:#FFFFFF;--surface-soft:#EEF1F7;--ink:#14213D;--muted:#4A5674;--line:#E1E6F0;--line-control:#858EA5;
+ --manik:#234899;--manik-hover:#1E3C7D;--manik-soft:#E9EDF5;--exito:#15814B;--aviso-soft:#F6EFE6;--on-aviso-soft:#A05C03;--error:#C33F4E;
+ --r-sm:10px;--r-md:14px;--r-lg:18px;--r-2xl:24px;--pill:999px;
+ --sh-card:0 1px 2px rgba(20,33,61,.05),0 5px 14px rgba(20,33,61,.05);--sh-pop:0 2px 8px rgba(20,33,61,.08),0 18px 44px rgba(20,33,61,.16);
+ --display:"Urbanist","Segoe UI",system-ui,sans-serif;--sans:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+ color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--canvas);color:var(--ink);font:400 16px/1.6 var(--sans);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3,h4{font-family:var(--display);font-weight:600;margin:0;text-wrap:balance;color:var(--ink)}
+p{margin:0}a{color:var(--manik)}:focus-visible{outline:2px solid var(--manik);outline-offset:2px}
+.marco{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:200px minmax(0,1fr);gap:48px;padding-block:40px 80px}
+/* índice */
+.indice{position:sticky;top:calc(env(safe-area-inset-top,0px) + 24px);align-self:start;display:grid;gap:14px}
+.indice .firma{display:flex;align-items:center;gap:10px;font:600 16px/1 var(--display)}.indice .firma .pl{width:32px;height:32px;border-radius:10px}
+.indice ol{list-style:none;margin:0;padding:0;display:grid;gap:2px;counter-reset:s}
+.indice a{display:flex;gap:10px;align-items:baseline;text-decoration:none;color:var(--muted);font-size:14px;line-height:20px;padding:5px 8px;border-radius:8px;counter-increment:s}
+.indice a::before{content:counter(s,decimal-leading-zero);font-variant-numeric:tabular-nums;font-size:12px;color:var(--line-control)}
+.indice a:hover{background:var(--surface-soft);color:var(--ink)}
+/* contenido */
+main{display:grid;gap:72px;min-width:0}
+section{display:grid;gap:20px;scroll-margin-top:24px}
+.eti{font:700 12px/16px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+section>header{display:grid;gap:6px;max-width:68ch}section>header h2{font-size:32px;line-height:38px;letter-spacing:-.015em}section>header p{color:var(--muted)}
+h3{font-size:20px;line-height:28px}
+.lectura{max-width:68ch;display:grid;gap:12px}.lectura p{color:var(--ink)}
+.lamina{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-2xl);padding:24px;display:grid;gap:16px;min-width:0}
+.lamina.gris{background:var(--surface-soft);border-color:transparent}
+.nota{font-size:14px;line-height:20px;color:var(--muted)}
+.fila{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.rejilla{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+code,.mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace;font-size:13px;background:var(--surface-soft);border-radius:6px;padding:1px 6px}
+.tabla{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:14px;line-height:20px}th{text-align:left;font-weight:600;color:var(--muted);border-bottom:1px solid var(--line);padding:8px 12px 8px 0;white-space:nowrap}
+td{border-bottom:1px solid var(--line);padding:10px 12px 10px 0;vertical-align:top}td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+/* portada */
+.portada{display:grid;gap:22px;padding-block:8px 0}
+.portada .sello{width:96px;height:96px;border-radius:28px;background:var(--ia);display:grid;place-items:center;position:relative}
+.portada .sello svg{width:56px;height:56px;overflow:visible}
+.portada h1{font-weight:300;font-size:clamp(44px,7vw,76px);line-height:1;letter-spacing:-.035em}.portada h1 b{font-weight:600}
+.portada p.tesis{font-size:20px;line-height:30px;max-width:46ch;color:var(--ink)}
+.portada .filo{height:3px;border-radius:2px;background:var(--ia-filo);max-width:420px}
+.datos{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px;color:var(--muted)}.datos b{color:var(--ink);font-weight:600}
+/* principios */
+.princ{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.pr{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:18px 20px;display:grid;gap:6px;align-content:start}
+.pr h3{font-size:18px;line-height:24px}.pr p{font-size:15px;line-height:22px;color:var(--muted)}
+/* símbolo */
+.simbolos{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:16px}
+.cons{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-2xl);padding:20px;display:grid;place-items:center}
+.cons svg{width:100%;max-width:320px;height:auto}
+.tam{display:flex;flex-wrap:wrap;gap:18px;align-items:end}.tam figure{margin:0;display:grid;gap:6px;justify-items:center;font-size:13px;color:var(--muted)}
+.pl{background:var(--ia);display:grid;place-items:center;flex:none}.pl svg{overflow:visible}
+.mal{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.mal figure{margin:0;display:grid;gap:8px;font-size:13px;line-height:18px;color:var(--muted)}
+.mal .caja{height:96px;border-radius:var(--r-lg);border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;position:relative}
+.mal .caja::after{content:"No";position:absolute;right:8px;top:8px;font:700 12px/18px var(--sans);color:#fff;background:var(--error);border-radius:999px;padding:0 8px}
+/* color */
+.colores{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.col{border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;background:var(--surface);display:grid}
+.col .m{height:84px;display:flex;align-items:flex-end;padding:10px 12px;font:600 14px/1 var(--sans)}
+.col .t{padding:10px 12px;display:grid;gap:2px;font-size:13px;line-height:18px}.col .t b{font-size:14px}.col .t span{color:var(--muted)}
+/* botón IA */
+.ia{font:600 15px/20px var(--sans);min-height:44px;padding:0 18px 0 14px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;white-space:nowrap;border-radius:var(--pill);border:0;color:#fff;background:var(--ia)}
+.ia:hover{background:var(--ia-hover)}.ia svg{width:20px;height:20px;flex:none;overflow:visible}.ia.sq{width:44px;padding:0;justify-content:center}
+.ia[aria-disabled="true"]{background:var(--surface-soft);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line-control);cursor:not-allowed}.ia[aria-disabled="true"] .g,.ia[aria-disabled="true"] .c{fill:#7A849C}
+.ia2{font:600 15px/20px var(--sans);min-height:44px;padding:0 16px 0 12px;border-radius:var(--pill);border:1.5px solid var(--ia);background:var(--surface);color:var(--ia);display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.ia2:hover{background:var(--surface-soft)}.ia2 svg{width:18px;height:18px;overflow:visible}.ia2 .g,.ia2 .c{fill:var(--ia)}
+.btn{font:600 15px/20px var(--sans);min-height:44px;padding:0 18px;border-radius:var(--r-md);border:1px solid var(--line-control);background:var(--surface);color:var(--manik);display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.btn.p{background:var(--manik);border-color:var(--manik);color:#fff}.btn.t3{border-color:transparent;background:transparent}
+.estados{display:flex;flex-wrap:wrap;gap:14px 18px;align-items:flex-start}.estados figure{margin:0;display:grid;gap:6px;justify-items:start;font-size:13px;color:var(--muted)}
+/* destello y movimiento */
+.g,.c{fill:var(--ia-destello);transform-box:fill-box;transform-origin:center}
+.orbita .orb{animation:orb 1.8s cubic-bezier(.45,.05,.55,.95) infinite;transform-origin:10px 11.5px}.orbita .g{animation:lat 1.8s ease-in-out infinite}
+@keyframes orb{to{transform:rotate(360deg)}}@keyframes lat{0%,100%{transform:scale(1)}50%{transform:scale(.82)}}
+.trazo .g,.trazo .c,.una .g,.una .c{stroke:var(--ia-destello);stroke-width:1.2;stroke-dasharray:60;stroke-linejoin:round}
+.trazo .g,.trazo .c{animation:traza 2s ease-in-out infinite}.trazo .c{animation-delay:.2s}
+.una .g,.una .c{animation:traza 1.4s ease-out 1 both}.una .c{animation-delay:.15s}
+@keyframes traza{0%{stroke-dashoffset:60;fill-opacity:0}50%{stroke-dashoffset:0;fill-opacity:0}75%,100%{stroke-dashoffset:0;fill-opacity:1}}
+.resp svg{animation:halo 1.6s ease-in-out 1}.resp.ia,.resp.pl{animation:haloB 1.6s ease-in-out 1}
+@keyframes halo{0%,100%{filter:drop-shadow(0 0 0 rgba(95,211,226,0))}45%{filter:drop-shadow(0 0 5px rgba(95,211,226,.95))}}
+@keyframes haloB{0%,100%{box-shadow:0 0 0 0 rgba(95,211,226,0)}45%{box-shadow:0 0 0 5px rgba(95,211,226,.3)}}
+.movs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.mov{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-2xl);padding:20px;display:grid;gap:12px;align-content:start}
+.mov .esc{background:var(--surface-soft);border-radius:var(--r-lg);padding:16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.mov .pl{width:56px;height:56px;border-radius:16px}.mov .pl svg{width:30px;height:30px}
+.mov dl{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:0;font-size:13px;line-height:18px}.mov dt{color:var(--muted)}.mov dd{margin:0;font-variant-numeric:tabular-nums}
+.mov p{font-size:14px;line-height:20px;color:var(--muted)}
+.ver{font:600 14px/20px var(--sans);min-height:40px;padding:0 14px;border-radius:var(--r-md);border:1px solid var(--line-control);background:var(--surface);color:var(--manik);cursor:pointer;justify-self:start}
+/* menú */
+.menu{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-pop);padding:8px;max-width:390px;width:100%}
+.menu .grp{font:700 12px/16px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px 10px 4px}
+.mi{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;border:0;background:transparent;border-radius:var(--r-sm);padding:10px;font:inherit;color:var(--ink)}
+.mi:hover{background:var(--surface-soft)}.mi .mic{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;flex:none;background:var(--ia-suave);color:var(--ia)}.mi .mic svg{width:18px;height:18px}
+.mi b{display:block;font-weight:600;font-size:15px;line-height:20px}.mi .d{display:block;font-size:13px;line-height:18px;color:var(--muted)}
+.mi.off b{color:var(--muted)}.req{display:inline-block;margin-top:2px;font-size:13px;line-height:18px;color:var(--on-aviso-soft);background:var(--aviso-soft);border-radius:var(--pill);padding:0 8px}
+.menu .pie{border-top:1px solid var(--line);margin-top:6px;padding:10px 10px 4px;font-size:13px;line-height:18px;color:var(--muted)}
+.tipo{font-size:12px;font-weight:700;color:var(--muted);margin-left:6px;letter-spacing:.04em}
+/* chip y resultado */
+.chip{font:600 13px/18px var(--sans);border-radius:var(--pill);padding:2px 10px 2px 6px;display:inline-flex;align-items:center;gap:4px;background:var(--ia-suave);color:var(--ia)}.chip svg{width:16px;height:16px;overflow:visible}.chip .g,.chip .c{fill:var(--ia)}
+.res{border:1.5px dashed var(--line-control);border-radius:var(--r-2xl);padding:16px 18px;background:var(--surface);display:grid;gap:10px;max-width:560px}.res.ok{border-style:solid;border-color:var(--exito)}
+.res h4{font-size:18px;line-height:26px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}.res .sub{font-size:14px;line-height:20px;color:var(--muted)}
+.vals{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.vals li{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:2px 12px;align-items:center;border:1px solid var(--line);border-radius:var(--r-md);padding:8px 12px}
+.vals .k{font-size:14px;font-weight:600;color:var(--muted);min-width:48px}.vals .v{font-weight:600;font-variant-numeric:tabular-nums;justify-self:end}
+.vals q{grid-column:2/4;font-size:13px;line-height:18px;color:var(--muted);quotes:"«" "»"}.vals input{width:20px;height:20px;margin:0;accent-color:var(--manik)}
+.acts{display:flex;flex-wrap:wrap;gap:8px}.okm{font-size:14px;color:var(--exito)}
+/* diálogo de IA (lámina estática + real) */
+.dlg{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-2xl);box-shadow:var(--sh-pop);overflow:hidden;position:relative;max-width:620px;width:100%;display:flex;flex-direction:column}
+.dlg::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;z-index:6;background:var(--ia-filo)}
+.dlg .dh{flex:none;display:flex;gap:14px;align-items:flex-start;padding:22px 20px 16px;background:var(--ia-lavado);border-bottom:1px solid var(--line);position:relative;overflow:hidden;isolation:isolate}
+.dlg .dh::after{content:"";position:absolute;right:-60px;top:-80px;width:260px;height:200px;z-index:-1;border-radius:50%;background:radial-gradient(closest-side,rgba(95,211,226,.16),transparent)}
+.dlg .pl{width:40px;height:40px;border-radius:12px}.dlg .pl svg{width:24px;height:24px}
+.dlg .tt{flex:1;min-width:0}.dlg .tt h4{font-size:20px;line-height:28px}.dlg .tt p{font-size:14px;line-height:20px;color:var(--muted);display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px}
+.dlg .x{width:44px;height:44px;border-radius:12px;border:0;background:transparent;color:var(--muted);display:grid;place-items:center;cursor:pointer;flex:none}.dlg .x:hover{background:var(--surface-soft)}.dlg .x svg{width:20px;height:20px}
+.dlg .db{flex:1 1 auto;min-height:0;padding:16px 20px;display:grid;gap:14px;overflow:auto;transition:filter .6s ease,opacity .6s ease}
+.dlg .clave{border-left:2px solid var(--ia-destello);padding:2px 0 2px 14px;font-size:17px;line-height:26px}
+.dlg .df{flex:none;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;padding:14px 20px;border-top:1px solid var(--line)}.dlg .df .izq{margin-right:auto}
+.dlg .al{background:var(--aviso-soft);color:var(--on-aviso-soft);border-radius:var(--r-md);padding:10px 12px;font-size:15px;line-height:22px}.dlg .al b{color:var(--ink)}
+.dlg.piensa .db{filter:blur(3px);opacity:.55}
+.velo{position:absolute;left:0;right:0;top:var(--top,90px);bottom:var(--pie,74px);z-index:5;display:grid;place-items:center;overflow:hidden;background:rgba(255,255,255,.55);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .6s ease}
+.piensa .velo{opacity:1;pointer-events:auto}
+.velo .est{position:absolute;width:var(--t);height:var(--t);opacity:0;animation:tintin var(--d) ease-in-out var(--r) infinite}.velo .est svg{width:100%;height:100%;display:block}
+@keyframes tintin{0%,100%{opacity:0;transform:scale(.3) rotate(0)}40%{opacity:var(--o);transform:scale(1) rotate(25deg)}70%{opacity:0;transform:scale(.6) rotate(45deg)}}
+.velo .centro{position:relative;display:grid;justify-items:center;gap:6px;text-align:center;padding:12px 18px}
+.velo .orbe svg{width:30px;height:30px;overflow:visible}.velo .orbe .g,.velo .orbe .c{fill:var(--manik)}
+.velo b{font:600 16px/22px var(--display)}.velo .paso{font-size:14px;line-height:20px;color:var(--muted)}
+.anat{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:20px;align-items:start}
+.anat ol{margin:0;padding-left:20px;display:grid;gap:8px;font-size:15px;line-height:22px}.anat ol b{font-weight:600}
+.lista{margin:0;padding-left:20px;display:grid;gap:6px}
+.si-no{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.si-no div{border-radius:var(--r-lg);padding:16px 18px;display:grid;gap:8px;background:var(--surface);border:1px solid var(--line)}
+.si-no h4{font:700 12px/16px var(--sans);letter-spacing:.1em;text-transform:uppercase}.si-no .si h4{color:var(--exito)}.si-no .no h4{color:var(--error)}
+.si-no ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:15px;line-height:22px}
+.voz td:first-child{color:var(--exito);font-weight:600}.voz td:nth-child(2){color:var(--error);text-decoration:line-through;text-decoration-color:rgba(195,63,78,.5)}
+.pie{border-top:1px solid var(--line);padding-top:20px;font-size:14px;color:var(--muted);display:grid;gap:6px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:980px){.marco{grid-template-columns:1fr;gap:24px}.indice{position:static}.indice ol{grid-template-columns:repeat(2,minmax(0,1fr))}.movs{grid-template-columns:1fr}.anat,.simbolos{grid-template-columns:1fr}}
+@media (max-width:640px){.princ,.si-no{grid-template-columns:1fr}.lamina{padding:16px}section>header h2{font-size:26px;line-height:32px}.dlg .df .izq{flex-basis:100%}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.velo .est{display:none}}
+</style>
+
+<div class="marco">
+<nav class="indice" aria-label="Contenido del manual">
+ <span class="firma"><span class="pl" aria-hidden="true" data-sp="20"></span>Manik IA</span>
+ <ol><li><a href="#principios">Principios</a></li><li><a href="#nombre">Nombre y voz</a></li><li><a href="#simbolo">Símbolo</a></li><li><a href="#color">Color</a></li><li><a href="#tipografia">Tipografía</a></li>
+ <li><a href="#movimiento">Movimiento</a></li><li><a href="#boton">Botón</a></li><li><a href="#menu">Menú de acciones</a></li><li><a href="#resultado">Resultado sugerido</a></li><li><a href="#dialogo">Diálogo</a></li>
+ <li><a href="#velo">Velo de pensamiento</a></li><li><a href="#accesibilidad">Accesibilidad</a></li><li><a href="#alcance">Alcance</a></li></ol>
+</nav>
+<main>
+<header class="portada">
+ <span class="sello" aria-hidden="true" id="selloPortada"></span>
+ <h1><b>Manik</b> IA</h1>
+ <span class="filo" aria-hidden="true"></span>
+ <p class="tesis">La capa de inteligencia artificial de Expediente Manik. Ayuda al médico a leer, ordenar y redactar; nunca decide por él.</p>
+ <p class="datos"><span><b>Vive en</b> Expediente Manik</span><span><b>Versión</b> 1.0 · 31 oct 2026</span><span><b>Hereda</b> tipografía, azul de acción y estados del sistema Manik</span></p>
+</header>
+
+<section id="principios" aria-labelledby="h-pr"><header><span class="eti">01</span><h2 id="h-pr">Principios</h2><p>Cuatro reglas que valen para cada pieza de este manual. Si una decisión de diseño choca con ellas, ganan ellas.</p></header>
+ <div class="princ">
+  <div class="pr"><h3>Es una función, no un personaje</h3><p>La IA no tiene nombre propio, cara ni voz en primera persona. Se presenta por lo que hace: «Detectar signos vitales con IA».</p></div>
+  <div class="pr"><h3>Ayuda, no decide</h3><p>Nunca es la acción principal de una vista. «Guardar consulta» sigue siendo el botón azul Manik; la IA va en su píldora azul noche.</p></div>
+  <div class="pr"><h3>Todo lo que escribe es borrador</h3><p>Llega marcado «Sugerido por IA» y no entra al expediente hasta que el médico lo acepta, completo o dato por dato. Al aceptarse pierde la marca: ya es dato del médico.</p></div>
+  <div class="pr"><h3>Muestra de dónde lo sacó</h3><p>Cada dato trae la frase del dictado o el registro que lo sustenta, para verificarlo en segundos. Lo que solo se lee, como un resumen, dice de qué consultas sale.</p></div>
+ </div></section>
+
+<section id="nombre" aria-labelledby="h-no"><header><span class="eti">02</span><h2 id="h-no">Nombre y voz</h2><p>«Manik IA» nombra al sistema en documentos, ventas y capacitación. Dentro de la interfaz, el médico solo ve «IA».</p></header>
+ <div class="lectura"><p><b>En la interfaz:</b> verbo + objeto + «con IA» en botones que hacen algo concreto («Sugerir códigos con IA»); «IA» sola en el botón que abre el menú. Los estados dicen qué hace: <b>Analizando…</b> cuando busca en datos, <b>Redactando…</b> cuando escribe.</p>
+ <p><b>Voz:</b> clínica, directa e impersonal, con trato de usted. Sin primera persona, sin opiniones, sin entusiasmo.</p></div>
+ <div class="lamina tabla"><table class="voz"><thead><tr><th scope="col">Así</th><th scope="col">Así no</th><th scope="col">Por qué</th></tr></thead><tbody>
+  <tr><td>Se encontraron 3 valores en el dictado.</td><td>¡Encontré 3 valores para ti!</td><td>Es una función: no habla en primera persona ni celebra.</td></tr>
+  <tr><td>Sugerido por IA</td><td>Diagnóstico de la IA</td><td>La IA sugiere; el diagnóstico es del médico.</td></tr>
+  <tr><td>Revise antes de pasar a la nota.</td><td>Todo listo, ya puedes guardar.</td><td>Recuerda el principio de borrador.</td></tr>
+  <tr><td>No se pudo preparar el resumen. Las consultas siguen en el expediente completo.</td><td>Ups, algo salió mal 😕</td><td>El error dice qué pasó y a dónde ir.</td></tr>
+ </tbody></table></div></section>
+
+<section id="simbolo" aria-labelledby="h-si"><header><span class="eti">03</span><h2 id="h-si">Símbolo</h2><p>El destello doble: una estrella grande de cuatro puntas y una pequeña arriba a la derecha. Es la convención que médicos y pacientes ya asocian con IA, dibujada en la retícula de 24 de los íconos Manik.</p></header>
+ <div class="simbolos">
+  <div class="cons" aria-label="Construcción del símbolo en la retícula de 24">
+   <svg viewBox="-2 -2 28 28" role="img" aria-label="Retícula de 24 con el destello doble">
+    <defs><pattern id="ret" width="1" height="1" patternUnits="userSpaceOnUse"><path d="M1 0H0V1" fill="none" stroke="#E1E6F0" stroke-width=".04"/></pattern></defs>
+    <rect x="0" y="0" width="24" height="24" fill="url(#ret)" stroke="#C9D0DE" stroke-width=".06"/>
+    <circle cx="10" cy="11.5" r="8" fill="none" stroke="#5FD3E2" stroke-width=".06" stroke-dasharray=".3 .3"/>
+    <path d="M10 3.5c.45 4.2 3.8 7.55 8 8-4.2.45-7.55 3.8-8 8-.45-4.2-3.8-7.55-8-8 4.2-.45 7.55-3.8 8-8z" fill="#0F1C3F"/>
+    <path d="M19 2c.2 1.6 1.4 2.8 3 3-1.6.2-2.8 1.4-3 3-.2-1.6-1.4-2.8-3-3 1.6-.2 2.8-1.4 3-3z" fill="#0F1C3F"/>
+    <g fill="#4A5674" font-family="ui-monospace,Menlo,monospace" font-size=".9"><text x="10" y="1.6" text-anchor="middle">centro 10 · 11.5</text><text x="19" y="9.6" text-anchor="middle">r 3</text><text x="1.4" y="23.2">16 de alto</text></g>
+   </svg></div>
+  <div class="lamina" style="align-content:start">
+   <h3>Tamaños</h3>
+   <div class="tam">
+    <figure><span class="pl" style="width:96px;height:96px;border-radius:28px" data-sp="56"></span>Portada · 96</figure>
+    <figure><span class="pl" style="width:40px;height:40px;border-radius:12px" data-sp="24"></span>Diálogo · 40</figure>
+    <figure><span style="display:grid;place-items:center;width:40px;height:40px" data-sp="20" data-tinta="1"></span>Botón · 20</figure>
+    <figure><span style="display:grid;place-items:center;width:40px;height:40px" data-sp="16" data-tinta="1"></span>Chip · 16</figure>
+   </div>
+   <p class="nota">Mínimo 16 px. En placa azul noche el destello va en cian <span class="mono">ia-destello</span>; sobre blanco, en azul noche <span class="mono">ia</span>. Placa con radio del 28–30 % de su lado. Área libre alrededor: un cuarto del lado de la placa.</p>
+  </div></div>
+ <h3>Usos incorrectos</h3>
+ <div class="mal">
+  <figure><span class="caja"><svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3.5c.45 4.2 3.8 7.55 8 8-4.2.45-7.55 3.8-8 8-.45-4.2-3.8-7.55-8-8 4.2-.45 7.55-3.8 8-8z" fill="#7B4FD6"/><path d="M19 2c.2 1.6 1.4 2.8 3 3-1.6.2-2.8 1.4-3 3-.2-1.6-1.4-2.8-3-3 1.6-.2 2.8-1.4 3-3z" fill="#E05BB5"/></svg></span>Violeta o degradados de «IA genérica». Se confunde con Impulsa Manik.</figure>
+  <figure><span class="caja"><svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3.5c.45 4.2 3.8 7.55 8 8-4.2.45-7.55 3.8-8 8-.45-4.2-3.8-7.55-8-8 4.2-.45 7.55-3.8 8-8z" fill="#5FD3E2"/><path d="M19 2c.2 1.6 1.4 2.8 3 3-1.6.2-2.8 1.4-3 3-.2-1.6-1.4-2.8-3-3 1.6-.2 2.8-1.4 3-3z" fill="#5FD3E2"/></svg></span>Cian sobre blanco: 1.76:1, no se ve.</figure>
+  <figure><span class="caja"><svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3.5c.45 4.2 3.8 7.55 8 8-4.2.45-7.55 3.8-8 8-.45-4.2-3.8-7.55-8-8 4.2-.45 7.55-3.8 8-8z" fill="#0F1C3F"/></svg></span>Una sola estrella o estrellas sueltas: pierde la forma reconocible.</figure>
+  <figure><span class="caja"><span class="pl" style="width:44px;height:44px;border-radius:12px;background:#234899" data-sp="26"></span></span>Placa en azul Manik: se lee como acción principal.</figure>
+ </div></section>
+
+<section id="color" aria-labelledby="h-co"><header><span class="eti">04</span><h2 id="h-co">Color</h2><p>Pocos colores propios: el azul noche, su tono al pasar el cursor y el cian del destello, más un cian oscurecido para las estrellitas del velo. Todo lo demás se hereda de Expediente Manik.</p></header>
+ <div class="colores">
+  <div class="col"><span class="m" style="background:var(--ia);color:#fff">ia</span><span class="t"><b>#0F1C3F</b><span>Píldora, placa del símbolo, texto del chip. Blanco encima 16.69:1.</span></span></div>
+  <div class="col"><span class="m" style="background:var(--ia-hover);color:#fff">ia-hover</span><span class="t"><b>#1B2B57</b><span>Cursor encima de la píldora. Blanco 13.73:1.</span></span></div>
+  <div class="col"><span class="m" style="background:var(--ia-destello);color:var(--ia)">ia-destello</span><span class="t"><b>#5FD3E2</b><span>El destello sobre noche (9.46:1) y el filo. Nunca texto ni sobre blanco.</span></span></div>
+  <div class="col"><span class="m" style="background:var(--ia-suave);color:var(--ia)">ia-suave</span><span class="t"><b>#E9EDF5</b><span>Fondo del chip y de los íconos del menú (= manik-soft). Noche encima 14.22:1.</span></span></div>
+ </div>
+ <div class="rejilla">
+  <div class="lamina"><h3>Filo y lavado</h3><span style="height:3px;border-radius:2px;background:var(--ia-filo)"></span><span style="height:56px;border-radius:12px;background:var(--ia-lavado);border:1px solid var(--line)"></span><p class="nota">Filo de 3 px: cian → azul Manik → se desvanece. Lavado: de <span class="mono">#F3FAFB</span> a blanco. Solo en la cabecera de diálogos de IA.</p></div>
+  <div class="lamina"><h3>Estrellitas del velo</h3><p class="fila" style="gap:10px"><span style="width:14px;height:14px" data-star="#3DB8C9"></span><span style="width:10px;height:10px" data-star="#234899"></span><span style="width:12px;height:12px" data-star="#3DB8C9"></span><span style="width:8px;height:8px" data-star="#234899"></span></p><p class="nota">Cian oscurecido <span class="mono">#3DB8C9</span> y azul Manik. Decorativas: no llevan información.</p></div>
+  <div class="lamina"><h3>Heredados</h3><p class="nota">Azul Manik <span class="mono">#234899</span> (acción principal), tinta, gris, divisores, <b>éxito</b> (dato aceptado) y <b>aviso</b> (requisito, pendiente). Valores en el manual del Ecosistema Manik.</p></div>
+ </div></section>
+
+<section id="tipografia" aria-labelledby="h-ti"><header><span class="eti">05</span><h2 id="h-ti">Tipografía</h2><p>La IA no trae letras propias: un dato sugerido se lee igual que uno escrito por el médico.</p></header>
+ <div class="rejilla">
+  <div class="lamina"><span class="eti">Urbanist · títulos</span><p style="font:600 24px/30px var(--display)">Antecedentes de Roberto</p><p class="nota">Títulos de diálogo y de tarjetas de resultado, 600. En portada de este manual, 300.</p></div>
+  <div class="lamina"><span class="eti">Atkinson Hyperlegible Next · todo dato</span><p style="font:600 22px/28px var(--sans);font-variant-numeric:tabular-nums">138/88 mmHg · 92 lpm</p><p class="nota">Botones, menús, valores y textos generados. Cifras tabulares. Piso de 13 px.</p></div>
+ </div></section>
+
+<section id="movimiento" aria-labelledby="h-mo"><header><span class="eti">06</span><h2 id="h-mo">Movimiento</h2><p>Quieta en reposo. Se mueve solo cuando el movimiento dice algo, y cada movimiento dice una sola cosa.</p></header>
+ <div class="movs" id="movs"></div>
+ <div class="lamina tabla"><table><thead><tr><th>Momento</th><th>Movimiento</th><th>Veces</th><th>Duración</th><th>Curva</th></tr></thead><tbody>
+  <tr><td>Cursor o foco sobre «IA»</td><td>Respira</td><td class="num">1</td><td class="num">1.6 s</td><td>ease-in-out</td></tr>
+  <tr><td>Analiza datos (signos, CIE-10, contraindicaciones, resumen)</td><td>Orbita</td><td>bucle</td><td class="num">1.8 s / vuelta</td><td>cubic-bezier(.45,.05,.55,.95)</td></tr>
+  <tr><td>Redacta (padecimiento, cuidados)</td><td>Traza</td><td>bucle</td><td class="num">2 s</td><td>ease-in-out</td></tr>
+  <tr><td>Llega un resultado (destello del chip o del diálogo)</td><td>Traza</td><td class="num">1</td><td class="num">1.4 s</td><td>ease-out</td></tr>
+  <tr><td>Abre o actualiza un diálogo de IA</td><td>Velo con estrellitas</td><td>micropausa</td><td class="num">≈ 1.4 s</td><td>fundido 0.6 s</td></tr>
+ </tbody></table></div>
+ <p class="nota">Con movimiento reducido activado en el sistema, nada se anima: cambian los textos y el velo aparece sin estrellitas.</p></section>
+
+<section id="boton" aria-labelledby="h-bo"><header><span class="eti">07</span><h2 id="h-bo">Botón</h2><p>Una píldora azul noche con el destello cian. La forma píldora la separa del botón principal (rectángulo de radio 14, azul Manik).</p></header>
+ <div class="lamina"><div class="estados">
+  <figure><button type="button" class="ia" data-ia>Sugerir con IA</button>Reposo</figure>
+  <figure><span class="ia resp" style="animation-iteration-count:infinite" data-ia="resp">Sugerir con IA</span>Cursor: respira</figure>
+  <figure><span class="ia orbita" data-ia="orbita">Analizando…</span>Analiza</figure>
+  <figure><span class="ia trazo" data-ia="trazo">Redactando…</span>Redacta</figure>
+  <figure><span class="ia" aria-disabled="true" data-ia>Sugerir con IA</span>Sin dictado aún</figure>
+  <figure><button type="button" class="ia sq" aria-label="Funciones de IA" data-ia></button>Cuadrado 44</figure>
+ </div>
+ <div class="estados"><figure><button type="button" class="ia2" data-ia2>Actualizar resumen</button>Secundario de IA: contorno noche, para acciones de IA dentro de un diálogo</figure></div></div>
+ <div class="si-no"><div class="si"><h4>Sí</h4><ul><li>Junto al botón principal, a su izquierda, con menor peso visual.</li><li>Texto «IA» o verbo + «con IA».</li><li>Altura 44 px, como todos los controles Manik.</li></ul></div>
+ <div class="no"><h4>No</h4><ul><li>Como único botón sólido de una vista donde hay que guardar.</li><li>Con el destello solo, sin texto, salvo el cuadrado con nombre accesible.</li><li>Animado mientras nadie lo usa.</li></ul></div></div></section>
+
+<section id="menu" aria-labelledby="h-me"><header><span class="eti">08</span><h2 id="h-me">Menú de acciones</h2><p>El botón «IA» abre un menú con las funciones disponibles en ese momento, agrupadas por lo que miran.</p></header>
+ <div class="anat"><div class="menu" aria-hidden="true" id="menuEj"></div>
+  <ol><li><b>Grupos:</b> «De esta consulta» y «Del paciente».</li><li><b>Cada función:</b> ícono, verbo + objeto, una línea de qué usa. Entre paréntesis, si analiza o redacta (define su movimiento).</li><li><b>Requisito:</b> si falta algo, la función se ve atenuada con el motivo en aviso («Necesita una receta»).</li><li><b>Pie fijo:</b> «La IA sugiere; usted decide. Nada entra al expediente sin su confirmación.»</li><li><b>Teclado:</b> flechas, Inicio/Fin, Esc cierra y devuelve el foco al botón.</li></ol></div></section>
+
+<section id="resultado" aria-labelledby="h-re"><header><span class="eti">09</span><h2 id="h-re">Resultado sugerido</h2><p>Cuando la IA escribe algo que puede entrar al expediente, llega como borrador.</p></header>
+ <div class="anat"><div id="resEj"></div>
+  <ol><li><b>Borde punteado:</b> es borrador.</li><li><b>Chip «Sugerido por IA»</b> junto al título; su destello se traza una vez al llegar.</li><li><b>Un dato por fila</b> con casilla y su origen debajo.</li><li><b>Acciones:</b> aceptar (secundario, para no competir con «Guardar consulta») y descartar.</li><li><b>Al aceptar:</b> borde sólido verde, desaparece el chip. Ya es dato del médico.</li></ol></div></section>
+
+<section id="dialogo" aria-labelledby="h-di"><header><span class="eti">10</span><h2 id="h-di">Diálogo</h2><p>Para lo que la IA prepara por su cuenta, como el resumen de antecedentes al abrir una consulta. Ligero: la personalidad está en el marco, no en los datos.</p></header>
+ <div class="anat"><div class="dlg" id="dlgEj">
+   <div class="dh"><span class="pl" aria-hidden="true" data-sp="24" id="dlgTile"></span><div class="tt"><h4>Antecedentes de Roberto</h4><p>Resumen de sus últimas 3 consultas (jul a sep 2026) · <span class="chip" data-chip>Sugerido por IA</span></p></div><button type="button" class="x" aria-label="Cerrar (ejemplo)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+   <div class="db"><p class="clave">Hipertensión y diabetes tipo 2 en seguimiento. <b>La presión ha bajado</b> desde que inició losartán (152/96 → 138/88); <b>la glucosa en ayuno sigue alta</b> (161 → 148 mg/dL).</p>
+    <p class="al"><b>HbA1c pendiente.</b> Se solicitó el 12 sep y no hay resultado registrado.</p>
+    <p class="nota">Resumen hecho por IA a partir de las 3 consultas anteriores. Es solo para leer: no se guarda en el expediente.</p></div>
+   <div class="df"><span class="izq"><button type="button" class="btn t3">Ver expediente completo</button></span><button type="button" class="ia2" id="actualizar" data-ia2>Actualizar resumen</button><button type="button" class="btn p">Empezar consulta</button></div>
+   <div class="velo" aria-hidden="true"><div id="estrellas"></div><div class="centro"><span class="orbe" id="orbe"></span><b>Analizando antecedentes</b><span class="paso" id="paso">Leyendo 3 consultas anteriores…</span></div></div>
+  </div>
+  <ol><li><b>Filo</b> de 3 px arriba: la firma de la IA.</li><li><b>Cabecera blanca</b> con lavado de luz casi imperceptible; placa de 40 px con el destello; título Urbanist 600; subtítulo que dice de dónde sale + chip.</li><li><b>Cuerpo</b> blanco con la letra clínica. La idea principal con filo cian de 2 px.</li><li><b>Pie:</b> acción secundaria de IA (contorno noche) y una sola acción principal azul Manik.</li><li>La cabecera y el pie no se encogen; solo el cuerpo se desplaza. En móvil, hoja inferior.</li><li>Prueba <b>«Actualizar resumen»</b> para ver el velo.</li></ol></div>
+ <div class="si-no"><div class="si"><h4>Diálogo de IA</h4><ul><li>Filo de color, destello, chip «Sugerido por IA».</li><li>Velo con estrellitas al abrir o actualizar.</li><li>Nota de origen al final del cuerpo.</li></ul></div>
+ <div class="no"><h4>Diálogo normal del sistema</h4><ul><li>Cabecera blanca con divisor, sin filo ni destello.</li><li>Aparece sin pausa.</li><li>Nunca lleva «Sugerido por IA».</li></ul></div></div></section>
+
+<section id="velo" aria-labelledby="h-ve"><header><span class="eti">11</span><h2 id="h-ve">Velo de pensamiento</h2><p>Una micropausa al abrir o actualizar un diálogo de IA. Discreta: un velo blanco transparente con estrellitas que aparecen y se apagan alrededor.</p></header>
+ <div class="lamina tabla"><table><thead><tr><th>Capa</th><th>Especificación</th></tr></thead><tbody>
+  <tr><td>Cubre</td><td>Solo el cuerpo. La cabecera queda visible con su destello en órbita; el pie queda libre para que el médico nunca espere a la IA.</td></tr>
+  <tr><td>Velo</td><td>Blanco al 55 %, desenfoque de 2 px. El contenido debajo, desenfoque de 3 px y 55 % de opacidad.</td></tr>
+  <tr><td>Estrellitas</td><td>15 destellos de 4 puntas, 6–12 px, cian oscurecido y azul Manik, repartidos alrededor del centro. Aparecen, giran 45° y se apagan; ritmos de 2.2 a 3.6 s, desfasados.</td></tr>
+  <tr><td>Centro</td><td>Destello pequeño en órbita, título del paso («Analizando antecedentes») y paso actual en gris. Sin caja ni barra.</td></tr>
+  <tr><td>Tiempo</td><td>≈ 1.4 s aunque el resultado ya esté listo; si no lo está, se queda hasta que llegue. Fundido de salida 0.6 s.</td></tr>
+ </tbody></table></div></section>
+
+<section id="accesibilidad" aria-labelledby="h-ac"><header><span class="eti">12</span><h2 id="h-ac">Accesibilidad</h2><p>WCAG 2.2 AA, igual que todo Manik.</p></header>
+ <ul class="lista lectura"><li>El movimiento nunca es la única señal: cada estado cambia el texto («Analizando…», «Redactando…»).</li><li>Mientras trabaja: <span class="mono">aria-busy</span> en el botón o el diálogo y una región viva que anuncia el inicio y el final.</li><li>Al llegar un resultado, el foco pasa a su título; al cerrar un diálogo, vuelve al botón que lo abrió.</li><li><span class="mono">prefers-reduced-motion</span> apaga todas las animaciones.</li><li>El destello va oculto a lectores de pantalla; el botón cuadrado lleva nombre accesible («Funciones de IA»).</li><li>Contrastes: blanco sobre <span class="mono">ia</span> 16.69:1; destello sobre <span class="mono">ia</span> 9.46:1; noche sobre <span class="mono">ia-suave</span> 14.22:1.</li><li>Controles de 44 px; casillas de 20 px.</li></ul></section>
+
+<section id="alcance" aria-labelledby="h-al"><header><span class="eti">13</span><h2 id="h-al">Alcance</h2><p>Dónde vive Manik IA y cómo se relaciona con el resto.</p></header>
+ <div class="lectura"><p><b>Solo en Expediente Manik.</b> No es un producto del ecosistema: no tiene sello, no aparece en el inicio ni en el selector de apps.</p>
+ <p><b>Hereda, no redefine.</b> Usa la tipografía, el azul de acción, los estados, el espaciado y los radios de Expediente Manik. Este manual solo añade lo propio de la IA: sus colores, el símbolo, el movimiento y sus componentes.</p>
+ <p><b>Funciones de la versión 1:</b> redactar padecimiento actual, detectar signos vitales del dictado, sugerir códigos CIE-10, revisar contraindicaciones, sugerencias de cuidado, resumir expediente y antecedentes al abrir la consulta.</p></div>
+ <div class="pie"><p>Pendiente: confirmar CIE-10 o CIE-11; materializar <span class="mono">ia</span>, <span class="mono">ia-hover</span>, <span class="mono">ia-destello</span> y <span class="mono">ia-estrella</span> como tokens de Expediente; comportamiento clínico de cada función (fuentes, límites, responsabilidad).</p><p>Datos de pacientes en este manual: ficticios.</p></div></section>
+</main></div>
+<div class="sr" aria-live="polite" id="vivo"></div>
+<script>
+const SP=(c='')=>`<svg viewBox="0 0 24 24" aria-hidden="true" class="${c}"><path class="g" d="M10 3.5c.45 4.2 3.8 7.55 8 8-4.2.45-7.55 3.8-8 8-.45-4.2-3.8-7.55-8-8 4.2-.45 7.55-3.8 8-8z"/><g class="orb"><path class="c" d="M19 2c.2 1.6 1.4 2.8 3 3-1.6.2-2.8 1.4-3 3-.2-1.6-1.4-2.8-3-3 1.6-.2 2.8-1.4 3-3z"/></g></svg>`;
+const STAR=c=>`<svg viewBox="0 0 24 24" aria-hidden="true" style="width:100%;height:100%;display:block"><path d="M12 1c.6 5.6 5.4 10.4 11 11-5.6.6-10.4 5.4-11 11-.6-5.6-5.4-10.4-11-11 5.6-.6 10.4-5.4 11-11z" fill="${c}"/></svg>`;
+const I={nota:'<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',pulso:'<path d="M3 12h4l2.5-6 4 12 2.5-6H21"/>',
+ tag:'<path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"/><circle cx="7.5" cy="7.5" r="1.2"/>',
+ escudo:'<path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.7 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M12 8v4M12 16h.01"/>',
+ cuidado:'<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/>',lista:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>'};
+const ic=k=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[k]}</svg>`;
+const red=matchMedia('(prefers-reduced-motion: reduce)'),vivo=document.getElementById('vivo');
+// destellos en placas y botones
+document.querySelectorAll('[data-sp]').forEach(e=>{const n=e.dataset.sp;e.innerHTML=SP();const s=e.querySelector('svg');s.style.width=s.style.height=n+'px';if(e.dataset.tinta)s.querySelectorAll('.g,.c').forEach(p=>p.style.fill='#0F1C3F')});
+document.querySelectorAll('[data-star]').forEach(e=>e.innerHTML=STAR(e.dataset.star));
+document.querySelectorAll('[data-ia]').forEach(e=>e.insertAdjacentHTML('afterbegin',SP()));
+document.querySelectorAll('[data-ia2]').forEach(e=>e.insertAdjacentHTML('afterbegin',SP()));
+document.querySelectorAll('[data-chip]').forEach(e=>e.insertAdjacentHTML('afterbegin',SP('una')));
+document.getElementById('selloPortada').innerHTML=SP('una');
+// respira al pasar el cursor por cualquier botón IA real
+document.querySelectorAll('button.ia').forEach(b=>{const r=()=>{if(!b.classList.contains('resp'))b.classList.add('resp')};b.addEventListener('pointerenter',r);b.addEventListener('focus',r);b.addEventListener('animationend',e=>{if(e.animationName==='haloB')b.classList.remove('resp')})});
+// movimiento
+const MOV=[['resp','Respira','«Te invito»','Un halo cian crece y se apaga, una vez, al pasar el cursor o con foco.','IA',[['Veces','1'],['Duración','1.6 s']]],
+ ['orbita','Orbita','«Estoy analizando»','El destello chico gira alrededor del grande mientras la IA busca en datos.','Analizando…',[['Veces','en bucle'],['Duración','1.8 s por vuelta']]],
+ ['trazo','Traza','«Estoy redactando»','El destello se dibuja y se rellena mientras escribe. Una sola vez cuando llega un resultado.','Redactando…',[['Veces','bucle · 1 al llegar'],['Duración','2 s · 1.4 s']]]];
+document.getElementById('movs').innerHTML=MOV.map(([k,t,q,d,l,s])=>`<article class="mov" aria-labelledby="m${k}"><span class="eti">${t}</span><h3 id="m${k}">${q}</h3><div class="esc" data-k="${k}"><span class="pl ${k}">${SP()}</span><span class="ia ${k}" aria-hidden="true">${SP()}${l}</span></div><p>${d}</p><dl>${s.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join('')}</dl><button type="button" class="ver" data-v="${k}">Ver de nuevo</button></article>`).join('');
+// en reposo, quietos: «respira» se muestra una vez; las demás en bucle
+document.querySelectorAll('[data-v]').forEach(b=>b.onclick=()=>{const esc=document.querySelector(`.esc[data-k="${b.dataset.v}"]`);esc.querySelectorAll(`.${b.dataset.v}`).forEach(x=>{x.classList.remove(b.dataset.v);void x.offsetWidth;x.classList.add(b.dataset.v)})});
+// menú
+const ACC=[['nota','Redactar padecimiento actual','Del dictado, en lenguaje clínico','redacta'],['pulso','Detectar signos vitales','Del dictado: presión, frecuencia, temperatura, SpO₂','analiza'],['tag','Sugerir códigos CIE-10','Según el padecimiento y los hallazgos','analiza'],['escudo','Revisar contraindicaciones','La receta contra alergias y medicamentos activos','analiza','Necesita una receta'],['cuidado','Sugerencias de cuidado','Indicaciones para el paciente en lenguaje claro','redacta']];
+const mi=([i,t,d,ti,req])=>`<div class="mi${req?' off':''}"><span class="mic">${ic(i)}</span><span><b>${t}<span class="tipo">(${ti})</span></b><span class="d">${d}</span>${req?`<span class="req">${req}</span>`:''}</span></div>`;
+document.getElementById('menuEj').innerHTML=`<div class="grp">De esta consulta</div>${ACC.map(mi).join('')}<div class="grp">Del paciente</div>${mi(['lista','Resumir expediente','Consultas, diagnósticos y tratamientos previos','analiza'])}<div class="pie">La IA sugiere; usted decide. Nada entra al expediente sin su confirmación.</div>`;
+// resultado
+function res(){document.getElementById('resEj').innerHTML=`<div class="res" id="resCard"><h4>Signos vitales del dictado <span class="chip">${SP('una')}Sugerido por IA</span></h4><p class="sub">Se encontraron 3 valores en la grabación de hoy. Marque los que quiere pasar a Signos vitales.</p>
+ <ul class="vals">${[['TA','138/88 mmHg','…está en ciento treinta y ocho sobre ochenta y ocho…'],['FC','92 lpm','…el pulso anda en noventa y dos…'],['Temp.','37.8 °C','…trae treinta y siete ocho de temperatura…']].map(([k,v,q],i)=>`<li><input type="checkbox" checked id="rv${i}"><label class="k" for="rv${i}">${k}</label><span class="v">${v}</span><q>${q}</q></li>`).join('')}</ul>
+ <div class="acts" id="resActs"><button type="button" class="btn" id="aceptar">Pasar a signos vitales</button><button type="button" class="btn t3" id="reiniciar">Descartar</button></div></div>`;
+ document.getElementById('aceptar').onclick=()=>{const c=document.getElementById('resCard');c.classList.add('ok');c.querySelector('.chip').remove();document.getElementById('resActs').innerHTML='<span class="okm">Guardado en Signos vitales. Ya es dato del médico.</span><button type="button" class="btn t3" id="otra">Ver de nuevo</button>';document.getElementById('otra').onclick=res;vivo.textContent='Signos vitales guardados.'};
+ document.getElementById('reiniciar').onclick=res}
+res();
+// diálogo con velo
+const E=[[8,14,10],[18,62,7],[30,26,12],[12,84,9],[44,8,6],[70,18,11],[86,40,8],[78,76,12],[92,88,7],[58,90,9],[24,46,6],[66,56,7],[50,72,10],[38,92,6],[94,12,9]];
+document.getElementById('estrellas').innerHTML=E.map(([x,y,t],i)=>`<span class="est" style="left:${x}%;top:${y}%;--t:${t}px;--d:${2.2+(i%4)*.45}s;--r:${(i*.27)%2.1}s;--o:${i%3?.85:.55}">${STAR(i%3===1?'#234899':'#3DB8C9')}</span>`).join('');
+const dlg=document.getElementById('dlgEj'),PASOS=['Leyendo 3 consultas anteriores…','Comparando signos y recetas…','Preparando el resumen…'];let tP,tF;
+function piensa(){clearInterval(tP);clearTimeout(tF);dlg.style.setProperty('--top',dlg.querySelector('.dh').offsetHeight+'px');dlg.style.setProperty('--pie',dlg.querySelector('.df').offsetHeight+'px');
+ dlg.classList.add('piensa');dlg.setAttribute('aria-busy','true');document.getElementById('orbe').innerHTML=SP('orbita');document.getElementById('dlgTile').innerHTML=SP('orbita');document.querySelector('#dlgTile svg').style.cssText='width:24px;height:24px';
+ let i=0;const p=document.getElementById('paso');p.textContent=PASOS[0];vivo.textContent='Analizando antecedentes…';const ms=red.matches?500:1400;
+ tP=setInterval(()=>{i=Math.min(i+1,2);p.textContent=PASOS[i]},ms/3);
+ tF=setTimeout(()=>{clearInterval(tP);dlg.classList.remove('piensa');dlg.removeAttribute('aria-busy');document.getElementById('dlgTile').innerHTML=SP('una');document.querySelector('#dlgTile svg').style.cssText='width:24px;height:24px';vivo.textContent='Resumen actualizado.'},ms)}
+document.getElementById('actualizar').onclick=piensa;
+</script>

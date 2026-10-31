@@ -73,6 +73,8 @@ Lucide, trazo 2, retícula 24 (el mismo set de Impulsa). Un concepto, un icono; 
 
 ## IA (aprobado 2026-10-31)
 
+Manual propio: **Manik IA** (`../../manik-ia/`), aislado de este manual; aquí solo el resumen.
+
 La IA es una **función «IA»**, no un personaje ni un producto: los botones dicen verbo + «con IA». Prototipos: `../../ia-ronda-1/` a `../../ia-ronda-3/`.
 
 - **Forma:** píldora azul noche (`ia` #0F1C3F, `ia-hover` #1B2B57) con el destello doble en cian claro (`ia-destello` #5FD3E2). La píldora la separa del botón primario (azul Manik, radio 14): la IA nunca es la acción principal de la vista. [tokens propuestos, aún no en `tokens.json`]
