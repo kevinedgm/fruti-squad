@@ -23,17 +23,17 @@ YO = 'Museo del Hilo'
 A = [
  dict(id='puntadas', tipo='exposicion', n='Puntadas que cuentan', sub='Bordado contemporáneo de Oaxaca', org=YO, rango=('3 oct', '30 nov 2026'), sala='Sala temporal', precio='Incluida con tu entrada',
       d='Doce bordadoras y bordadores de distintas regiones muestran cómo el bordado cuenta historias de hoy.', estado='ahora', fotos=['13.jpg', '12.jpg']),
- dict(id='relleno', tipo='taller', n='Bordado de relleno para principiantes', org='Colectivo Hilo Largo', orgtipo='Organizador independiente', fechas=[('Sáb 8 nov', '11:00', 4), ('Sáb 22 nov', '11:00', 9)],
+ dict(id='relleno', tipo='taller', n='Bordado de relleno para principiantes', org='Colectivo Hilo Largo', orgtipo='Organizador independiente', fechas=[('Sáb 7 nov', '11:00', 4), ('Sáb 21 nov', '11:00', 9)],
       precio=450, cupo=10, edad='Desde 14 años', dur='3 h', tellevas='Tu muestra bordada en bastidor.', d='Puntadas de relleno sobre manta con hilo de algodón; bastidor y materiales incluidos.', estado='proxima', fotos=['07.jpg']),
- dict(id='timbre', tipo='taller', n='Pinta tu timbre postal', org='Ana P., ilustradora', orgtipo='Organizadora independiente', fechas=[('Dom 16 nov', '11:00', 12)],
+ dict(id='timbre', tipo='taller', n='Pinta tu timbre postal', org='Ana P., ilustradora', orgtipo='Organizadora independiente', fechas=[('Dom 15 nov', '11:00', 12)],
       precio=250, cupo=12, edad='Desde 7 años', dur='1.5 h', tellevas='Tu timbre pintado, impreso en tamaño postal.', d='Para niñas, niños y adultos: diseñas y pintas un timbre inspirado en los bordados de la sala.', estado='proxima', fotos=['03.jpg']),
- dict(id='charla', tipo='evento', n='Charla: tintes naturales de Oaxaca', org=YO, fechas=[('Jue 13 nov', '18:00', 40)], precio='Entrada libre', cupo=40, dur='1 h',
+ dict(id='charla', tipo='evento', n='Charla: tintes naturales de Oaxaca', org=YO, fechas=[('Jue 12 nov', '18:00', 40)], precio='Entrada libre', cupo=40, dur='1 h',
       d='Grana, añil y pericón: de dónde salen los colores del textil oaxaqueño.', estado='proxima', fotos=['12.jpg']),
  dict(id='costa', tipo='exposicion', n='Hilos de la Costa', sub='Huipiles y telar de cintura', org=YO, rango=('5 dic 2026', '28 feb 2027'), sala='Sala temporal', precio='Incluida con tu entrada',
       d='Piezas de comunidades de la Costa, con video de sus tejedoras.', estado='proxima', fotos=['02.jpg']),
  dict(id='telar', tipo='exposicion', n='Telar de cintura: oficio vivo', org=YO, rango=('1 jun', '15 sep 2026'), fueron=312, v=312, w=280, estado='pasada', fotos=['13.jpg']),
- dict(id='grana', tipo='taller', n='Teñido con grana', org='Colectivo Hilo Largo', orgtipo='Organizador independiente', fechas=[('Sáb 20 sep 2026', '11:00', 0)], fueron=10, v=10, w=9, cupo=10, estado='pasada', fotos=['07.jpg']),
- dict(id='noche', tipo='evento', n='Noche de museos', org=YO, fechas=[('Vie 26 sep 2026', '19:00', 0)], fueron=140, v=140, w=118, estado='pasada', fotos=['11.jpg']),
+ dict(id='grana', tipo='taller', n='Teñido con grana', org='Colectivo Hilo Largo', orgtipo='Organizador independiente', fechas=[('Sáb 19 sep 2026', '11:00', 0)], fueron=10, v=10, w=9, cupo=10, estado='pasada', fotos=['07.jpg']),
+ dict(id='noche', tipo='evento', n='Noche de museos', org=YO, fechas=[('Vie 25 sep 2026', '19:00', 0)], fueron=140, v=140, w=118, estado='pasada', fotos=['11.jpg']),
 ]
 M = dict(
  n=YO, kick='Museo · Centro', v=58, w=51, fav=.44, ras=['accesible', 'ingles'], entrada='$50', libre='Domingos entrada libre',

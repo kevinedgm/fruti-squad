@@ -22,14 +22,14 @@ SEDES = {  # sede: perfil «lugar» (con giro) o dirección suelta
  'andador': dict(n='Andador Macedonio Alcalá', giro='', zona='Centro', perfil=False, dir='Espacio público'),
 }
 A = [
- dict(tipo='taller', n='Bordado de relleno para principiantes', sede='museo', fechas=[('Sáb 8 nov', '11:00', 4), ('Sáb 22 nov', '11:00', 9)], precio=450, cupo=10, dur='3 h', edad='Desde 14 años',
+ dict(tipo='taller', n='Bordado de relleno para principiantes', sede='museo', fechas=[('Sáb 7 nov', '11:00', 4), ('Sáb 21 nov', '11:00', 9)], precio=450, cupo=10, dur='3 h', edad='Desde 14 años',
       tellevas='Tu muestra bordada en bastidor.', d='Puntadas de relleno sobre manta con hilo de algodón; bastidor y materiales incluidos.', estado='proxima', fotos=['07.jpg']),
- dict(tipo='taller', n='Telar de cintura: introducción', sede='propio', fechas=[('Vie 14 nov', '17:00', 6)], precio=700, cupo=6, dur='3 h', edad='Desde 15 años',
+ dict(tipo='taller', n='Telar de cintura: introducción', sede='propio', fechas=[('Vie 13 nov', '17:00', 6)], precio=700, cupo=6, dur='3 h', edad='Desde 15 años',
       tellevas='Una tira tejida por ti, de unos 30 cm.', d='Armas el telar, aprendes la urdimbre y tejes tu primera tira con Teresa.', estado='proxima', fotos=['13.jpg']),
- dict(tipo='evento', n='Tarde de puntadas', sede='cafe', fechas=[('Jue 20 nov', '18:00', 12)], precio=150, cupo=12, dur='2 h',
+ dict(tipo='evento', n='Tarde de puntadas', sede='cafe', fechas=[('Jue 19 nov', '18:00', 12)], precio=150, cupo=12, dur='2 h',
       tellevas='Lo que avances de tu bordado (y un café incluido).', d='Trae tu bordado o empieza uno con hilo y manta que te damos. Ambiente de café, sin prisa.', estado='proxima', fotos=['03.jpg']),
- dict(tipo='taller', n='Teñido con grana', sede='museo', fechas=[('Sáb 20 sep 2026', '11:00', 0)], fueron=10, v=10, w=9, estado='pasada', fotos=['07.jpg']),
- dict(tipo='evento', n='Puntadas en el andador', sede='andador', fechas=[('Dom 14 sep 2026', '10:00', 0)], fueron=46, v=46, w=41, estado='pasada', fotos=['02.jpg']),
+ dict(tipo='taller', n='Teñido con grana', sede='museo', fechas=[('Sáb 19 sep 2026', '11:00', 0)], fueron=10, v=10, w=9, estado='pasada', fotos=['07.jpg']),
+ dict(tipo='evento', n='Puntadas en el andador', sede='andador', fechas=[('Dom 13 sep 2026', '10:00', 0)], fueron=46, v=46, w=41, estado='pasada', fotos=['02.jpg']),
 ]
 O = dict(
  n=YO, ini='HL', tipo='Organizador independiente · colectivo', desde_anio='2018', v=56, w=50, fav=.45, ras=['solo'],

@@ -29,7 +29,7 @@ C = dict(
           ('reloj', 'Quedarte', 'Sin presión para volver a consumir')],
  origenes=[('Pluma Hidalgo', 'Lavado · chocolate y naranja'), ('Sierra Mazateca', 'Natural · frutos rojos')],
  encuentros=[dict(dia='Jueves', h='9:00', n='Desayuno de freelancers', tipo='Networking', ras='networking', d='Llega con tu laptop; cada quien se presenta en un minuto. Gratis, consumo aparte.', cada='Cada semana'),
-             dict(dia='Sábado 8 nov', h='11:00', n='Catación abierta', tipo='Taller corto', ras='', d='Probamos tres cafés de Oaxaca y cómo cambian según el método. $120, cupo de 8.', cada='Una vez al mes')],
+             dict(dia='Sábado 7 nov', h='11:00', n='Catación abierta', tipo='Taller corto', ras='', d='Probamos tres cafés de Oaxaca y cómo cambian según el método. $120, cupo de 8.', cada='Una vez al mes')],
  actualizado='25 oct 2026',
  menu=[
   dict(id='espresso', es='Espresso y con leche', en='Espresso & milk', items=[
