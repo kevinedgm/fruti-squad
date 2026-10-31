@@ -83,6 +83,14 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 - Fotos reales libres para la simulación: bloqueadas por la red de la sesión (Unsplash, Openverse, Wikimedia); pendiente habilitar un dominio.
 - Implica cuentas de usuario (fase 1 era solo información): [pendiente de decisión].
 
+## Rasgos «Va bien para…» (usuario, 2026-10-31: intercambio de idiomas, cowork, networking; r8 en `../convia-web-r8/`)
+- Familia nueva, distinta de: sello de giro (qué es), Favorito Convia (lo gana con visitas) e insignias del pasaporte (son tuyas). Por eso no se llaman «insignias».
+- Un rasgo es un **hecho comprobable**, no una opinión: cada uno tiene regla escrita, se revisa en la visita anual y cualquiera puede avisar si ya no se cumple. [propuesta: quién verifica]
+- Lista propuesta (8): Para trabajar, Intercambio de idiomas, Networking, Te atienden en inglés, Para ir solo, Con mascota, Opciones veganas, Silla de ruedas. Reglas en `../convia-final/rasgos.py`. [propuesta: lista y nombres]
+- Intercambio de idiomas y Networking son **encuentros con día y hora**: la etiqueta siempre muestra cuándo.
+- Tarjeta: máximo 2 rasgos visibles (+N más), etiqueta neutra punteada para no competir con el color del giro. Filtros combinables (todos a la vez).
+- Negocios reales: sin rasgos hasta que el negocio los declare y se revisen.
+
 ## Pendiente de operación (usuario, 2026-10-30: «tema de operación de negocio», se decide después)
 - Quién carga los primeros lugares al lanzar (curaduría e invitación vs. solicitudes espontáneas) y cuántos necesita la fase 1.
 

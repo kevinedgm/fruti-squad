@@ -69,9 +69,10 @@ def svg(k, col, bg=None, size=None):
     g = f'<g fill="none" stroke="{col}" stroke-linecap="round" stroke-linejoin="round">' + I[k].replace('currentFill', col) + '</g>'
     if bg: g = f'<circle cx="100" cy="100" r="100" fill="{bg}"/><g transform="translate(30 30) scale(.7)">{g}</g>'
     return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"{wh} role="img" aria-label="{CAT[k]["nombre"]}">{g}</svg>'
-for k, c in CAT.items():
-    open(os.path.join(D, 'iconos', f'{k}.svg'), 'w').write(svg(k, 'currentColor'))
-    open(os.path.join(D, 'iconos', f'{k}-color.svg'), 'w').write(svg(k, c['texto'], c['fondo']))
-rows = ''.join(f'''<div class="c"><div class="r">{svg(k, C['tinta'], size=72)}{svg(k, c['texto'], c['fondo'], 72)}{svg(k, C['tinta'], size=24)}{svg(k, C['tinta'], size=16)}</div><b style="color:{c['texto']}">{c['nombre']}</b></div>''' for k, c in CAT.items())
-open(os.path.join(D, 'iconos', 'vista.html'), 'w').write(f'<!doctype html><meta charset="utf-8"><style>body{{margin:0;padding:28px;background:{C["papel"]};font:600 15px sans-serif}}main{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}}.c{{background:#fff;border:1px solid {C["linea"]};border-radius:16px;padding:18px;display:grid;gap:10px}}.r{{display:flex;gap:16px;align-items:center}}</style><main>{rows}</main>')
-print('ok')
+if __name__ == '__main__':
+    for k, c in CAT.items():
+        open(os.path.join(D, 'iconos', f'{k}.svg'), 'w').write(svg(k, 'currentColor'))
+        open(os.path.join(D, 'iconos', f'{k}-color.svg'), 'w').write(svg(k, c['texto'], c['fondo']))
+    rows = ''.join(f'''<div class="c"><div class="r">{svg(k, C['tinta'], size=72)}{svg(k, c['texto'], c['fondo'], 72)}{svg(k, C['tinta'], size=24)}{svg(k, C['tinta'], size=16)}</div><b style="color:{c['texto']}">{c['nombre']}</b></div>''' for k, c in CAT.items())
+    open(os.path.join(D, 'iconos', 'vista.html'), 'w').write(f'<!doctype html><meta charset="utf-8"><style>body{{margin:0;padding:28px;background:{C["papel"]};font:600 15px sans-serif}}main{{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}}.c{{background:#fff;border:1px solid {C["linea"]};border-radius:16px;padding:18px;display:grid;gap:10px}}.r{{display:flex;gap:16px;align-items:center}}</style><main>{rows}</main>')
+    print('ok')
