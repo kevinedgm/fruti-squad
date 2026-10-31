@@ -97,6 +97,8 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 - Convia **no hace reservaciones**: el perfil da contacto directo (WhatsApp, teléfono, correo, web), horarios y enlace a Google Maps.
 - Distinción en el perfil: **rasgos** «Va bien para» = revisados por Convia; **amenidades** = las declara el negocio. [propuesta]
 - Hotel r1: `../convia-perfil-hotel-r1/` (estructura en su LEEME).
+- r1 rechazado por el usuario: «no copiar Facebook». Pide **diseño propio con el tema de color del giro**, logo «Convia | <Giro>», portada en mosaico, cuartos en miniatura y todo **al alcance del pulgar** (uso mayoritario en teléfono). Hotel r2: `../convia-perfil-hotel-r2/`.
+- Logotipos de giro de un color: `../convia-final/sellos/<giro>-logotipo-giro.svg` (Cafés, Restaurantes, Hoteles, Talleres, Museos, Recorridos). [propuesta: «Hoteles» vs. «Alojamiento»]
 - Pendiente: cómo cargan los restaurantes su menú (foto/PDF vs. capturado platillo por platillo).
 
 ## Pendiente de operación (usuario, 2026-10-30: «tema de operación de negocio», se decide después)
