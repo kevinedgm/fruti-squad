@@ -107,6 +107,7 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
   - [propuesta] 1 cocina principal + hasta 2 más; la regional se respalda con ≥2 platillos de esa región en el menú de Convia; «vegana» no es cocina (ya es rasgo); «variada» no se usa.
   - **Aprobado por el usuario (2026-10-31): la lista de cocinas (8 regiones + Otras) y cómo se muestra** (filtro «¿Qué se te antoja?», cocina en tarjeta, ficha y platillos). Las reglas de límite y respaldo siguen como propuesta.
   - Pendiente: si conviene un mapa de las 8 regiones (requiere datos geográficos reales, no dibujarlo de memoria).
+- **Recorridos r1** `../convia-perfil-recorridos-r1/`: el perfil es del **operador**; cada recorrido abre una hoja con ruta por paradas, calculadora de precio según cuántos van (tabla por tamaño de grupo, mínimo y máximo), salidas con cupo, incluye/no incluye, punto de encuentro y mensaje de WhatsApp prellenado con «Lo vi en Convia». [propuesta: ese texto sirve para medir cuántos contactos llegan por Convia]
 
 ## Pendiente de operación (usuario, 2026-10-30: «tema de operación de negocio», se decide después)
 - Quién carga los primeros lugares al lanzar (curaduría e invitación vs. solicitudes espontáneas) y cuántos necesita la fase 1.
