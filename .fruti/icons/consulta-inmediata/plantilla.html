@@ -5,7 +5,7 @@
 <style>
 /* Uva · consulta inmediata r1 para el botón flotante de Agenda Manik. Tres variantes, prueba de confusiones dentro del botón y el botón en contexto.
    Tokens del sistema Manik; botón principal en azul Manik. Tema claro únicamente, como el ecosistema. */
-:root{--canvas:#F5F7FB;--surface:#FFFFFF;--surface-soft:#EEF1F7;--ink:#14213D;--muted:#4A5674;--line:#E1E6F0;--line-control:#858EA5;--manik:#234899;--manik-hover:#1E3C7D;--manik-soft:#E9EDF5;--agenda:#007C8C;--exito:#15814B;
+:root{--canvas:#F5F7FB;--surface:#FFFFFF;--surface-soft:#EEF1F7;--ink:#14213D;--muted:#4A5674;--line:#E1E6F0;--line-control:#858EA5;--manik:#234899;--manik-hover:#1E3C7D;--manik-soft:#E9EDF5;--agenda:#234899;--exito:#15814B;
 --display:"Urbanist","Segoe UI",system-ui,sans-serif;--sans:"Atkinson Hyperlegible Next",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
 *{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:400 15px/22px var(--sans);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 h1,h2,h3{font-family:var(--display);font-weight:600;margin:0;text-wrap:balance}p{margin:0}:focus-visible{outline:2px solid var(--manik);outline-offset:3px}
@@ -25,7 +25,7 @@ h1,h2,h3{font-family:var(--display);font-weight:600;margin:0;text-wrap:balance}p
 .pantalla{position:relative;border:1px solid var(--line);border-radius:16px;background:var(--canvas);overflow:hidden}
 .pantalla .bar{height:44px;background:var(--surface);border-bottom:1px solid var(--line);display:flex;align-items:center;gap:8px;padding:0 12px;font:600 14px/1 var(--display)}.pantalla .bar i{width:22px;height:22px;border-radius:6px;background:var(--agenda);display:block}
 .cal{display:grid;grid-template-columns:44px repeat(5,1fr);gap:1px;background:var(--line);padding:0}.cal span{background:var(--surface);height:38px;font-size:11px;color:var(--muted);padding:4px}
-.cal .c{background:#E6F2F3;border-left:3px solid var(--agenda);font-size:11px;color:var(--ink)}
+.cal .c{background:#E9EDF5;border-left:3px solid var(--agenda);font-size:11px;color:var(--ink)}
 .efab{position:absolute;right:16px;bottom:16px;display:inline-flex;align-items:center;gap:10px;min-height:56px;padding:0 20px 0 16px;border-radius:18px;border:0;background:var(--manik);color:#fff;font:700 15px/1 var(--sans);box-shadow:0 6px 16px rgba(35,72,153,.32);cursor:pointer}
 .efab:hover{background:var(--manik-hover)}.efab svg{width:24px;height:24px}
 .movil{width:100%;max-width:300px;justify-self:center;aspect-ratio:9/17}.movil .cal{grid-template-columns:40px 1fr}.movil .efab{padding:0;width:56px;justify-content:center}.movil .efab span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
@@ -34,13 +34,13 @@ h1,h2,h3{font-family:var(--display);font-weight:600;margin:0;text-wrap:balance}p
 @media (max-width:860px){.vars,.ctx{grid-template-columns:1fr}}
 </style>
 <main class="hoja">
-<header class="intro"><h1>Consulta inmediata</h1><p>El botón flotante de Agenda Manik para atender <b>ahora, sin cita</b>. No es una urgencia: por eso no usa sirena ni ambulancia, que dicen «emergencia». Tres variantes; toca una para verla en las pruebas de abajo.</p></header>
+<header class="intro"><h1>Consulta inmediata</h1><p>El botón flotante de Expediente Manik para que el médico atienda <b>ahora, sin cita</b>. No es una urgencia: por eso no usa sirena ni ambulancia, que dicen «emergencia». Tres variantes; toca una para verla en las pruebas de abajo.</p></header>
 <div class="vars" id="vars" role="group" aria-label="Variantes del icono"></div>
 <section class="sec" aria-labelledby="hc"><h2 id="hc">¿Con qué se confunde dentro del botón?</h2><p>El botón flotante casi siempre lleva «+ agregar». La variante elegida, junto a los íconos de la librería que podrían leerse igual.</p><div class="conf" id="conf"></div></section>
-<section class="sec" aria-labelledby="hx"><h2 id="hx">En la agenda</h2><p>En computadora el botón lleva el texto al lado; en el teléfono queda solo el icono, con nombre accesible y una etiqueta que aparece al tocarlo o al pasar el cursor.</p>
- <div class="ctx"><div class="pantalla" aria-label="Agenda en computadora"><div class="bar"><i></i>Agenda Manik · Hoy</div><div class="cal" id="calD"></div><button type="button" class="efab" id="fabD"><span>Consulta inmediata</span></button></div>
+<section class="sec" aria-labelledby="hx"><h2 id="hx">En Expediente</h2><p>En computadora el botón lleva el texto al lado; en el teléfono queda solo el icono, con nombre accesible y una etiqueta que aparece al tocarlo o al pasar el cursor.</p>
+ <div class="ctx"><div class="pantalla" aria-label="Agenda en computadora"><div class="bar"><i></i>Expediente Manik · Hoy</div><div class="cal" id="calD"></div><button type="button" class="efab" id="fabD"><span>Consulta inmediata</span></button></div>
  <div class="pantalla movil" aria-label="Agenda en teléfono"><div class="bar"><i></i>Hoy</div><div class="cal" id="calM"></div><span class="tip" aria-hidden="true">Consulta inmediata</span><button type="button" class="efab" id="fabM"><span>Consulta inmediata</span></button></div></div></section>
-<section class="sec" aria-labelledby="hr"><h2 id="hr">Reglas del botón</h2><ol class="reglas"><li>Siempre con texto en pantallas anchas: «Consulta inmediata». El icono solo no basta para algo nuevo.</li><li>Azul Manik, como toda acción principal; un solo botón flotante por pantalla.</li><li>Quieto en reposo. Si hay pacientes esperando consulta inmediata, el número va en una insignia, no en una animación.</li><li>Abajo a la derecha, a 16 px de los bordes y por encima de la barra inferior en el teléfono.</li></ol></section>
+<section class="sec" aria-labelledby="hr"><h2 id="hr">Reglas del botón</h2><ol class="reglas"><li>Siempre con texto en pantallas anchas: «Consulta inmediata». El icono solo no basta para algo nuevo.</li><li>Azul Manik, como toda acción principal; un solo botón flotante por pantalla.</li><li>Pareja con «Agendar cita» (calendario con +) en la barra lateral: agendar para después y atender ahora. La barra deja de decir «Nueva consulta».</li><li>Quieto en reposo. Si hay pacientes en sala esperando, el número va en una insignia, no en una animación.</li><li>Abajo a la derecha, a 16 px de los bordes y por encima de la barra inferior en el teléfono.</li></ol></section>
 </main>
 <script>
 /*DATA*/
@@ -50,7 +50,7 @@ function render(){const x=V.find(v=>v.v===sel);
  document.getElementById('conf').innerHTML=`<figure class="yo"><span class="fab">${x.svg}</span>Consulta inmediata (${sel.toUpperCase()})</figure>`+[['plus','Agregar'],['calendar-plus','Nueva cita'],['zap','Rayo'],['timer','Temporizador'],['cross','Cruz'],['siren','Sirena: urgencia']].map(([k,t])=>`<figure><span class="fab ref">${CONF[k]}</span>${t}</figure>`).join('');
  ['fabD','fabM'].forEach(id=>{const b=document.getElementById(id);b.querySelector('svg')?.remove();b.insertAdjacentHTML('afterbegin',x.svg)});
  document.getElementById('fabM').setAttribute('aria-label','Consulta inmediata')}
-document.getElementById('vars').innerHTML=V.map(x=>`<button type="button" class="var" data-v="${x.v}" aria-pressed="false"><span class="muestra">${sz(x.svg,64)}${sz(x.svg,24)}${sz(x.svg,16)}<span class="fab">${x.svg}</span></span>${x.v==='a'?'<span class="reco">Recomendada</span>':''}<b>${x.v.toUpperCase()} · ${x.n}</b><span class="h">${x.h}</span></button>`).join('');
+document.getElementById('vars').innerHTML=V.map(x=>`<button type="button" class="var" data-v="${x.v}" aria-pressed="false"><span class="muestra">${sz(x.svg,64)}${sz(x.svg,24)}${sz(x.svg,16)}<span class="fab">${x.svg}</span></span>${x.v==='a'?'<span class="reco">Elegida</span>':''}<b>${x.v.toUpperCase()} · ${x.n}</b><span class="h">${x.h}</span></button>`).join('');
 const horas=['9:00','9:30','10:00','10:30','11:00','11:30'];
 document.getElementById('calD').innerHTML=horas.map((h,i)=>`<span>${h}</span>`+[0,1,2,3,4].map(d=>`<span class="${(i+d)%3===0?'c':''}">${(i+d)%3===0?'Cita':''}</span>`).join('')).join('');
 document.getElementById('calM').innerHTML=horas.concat(['12:00','12:30','13:00']).map((h,i)=>`<span>${h}</span><span class="${i%2===0?'c':''}">${i%2===0?'Cita':''}</span>`).join('');

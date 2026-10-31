@@ -1,4 +1,4 @@
-# Uva · consulta inmediata (Agenda Manik, botón flotante). Pedido del usuario (2026-10-31).
+# Uva · consulta inmediata (Expediente Manik, botón flotante del médico; variante A elegida). Pedido del usuario (2026-10-31).
 # Concepto: «ahora, sin cita» (no «urgencia»). Retícula 24, trazo 2 (Lucide de las apps Manik). Uso: python3 gen.py → variantes/*.svg, variantes.json, revision.html
 import os, json
 D = os.path.dirname(os.path.abspath(__file__)); V = os.path.join(D, 'variantes'); os.makedirs(V, exist_ok=True)

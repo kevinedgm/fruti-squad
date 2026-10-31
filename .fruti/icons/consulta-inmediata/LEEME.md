@@ -1,4 +1,4 @@
-# Uva · consulta inmediata (Agenda Manik) · r1
+# Uva · consulta inmediata (Expediente Manik) · r1
 
 Pedido del usuario (2026-10-31): icono para «consulta inmediata» (alguien quiere consulta médica ya), en un botón flotante en una esquina de la agenda.
 
@@ -18,5 +18,11 @@ Revisión: https://claude.ai/artifact/X94LrvANnnwxHX4u1WexqH · `python3 gen.py`
 ## Reglas del botón [propuesta]
 Con texto en pantallas anchas («Consulta inmediata»); solo icono en el teléfono con `aria-label` y etiqueta al tocar/pasar el cursor · azul Manik, un solo botón flotante por pantalla · quieto en reposo; pacientes en espera como insignia numérica · abajo a la derecha a 16 px, por encima de la barra inferior.
 
+## Decisión del usuario (2026-10-31)
+**Variante A, calendario con rayo.** La usa **el médico desde Expediente Manik** (no Agenda). Archivo final `immediate-consult.svg`; entrada propuesta en `registro.yaml`.
+
+## Consecuencia [propuesta]
+El botón «+ Nueva consulta» de la barra lateral de Expediente (prototipo `../medicalmanik/calendario/`) pasa a «Agendar cita» con calendar-plus, para no tener dos formas de «crear consulta»: agendar (después) y consulta inmediata (ahora).
+
 ## Pendiente
-Elección del usuario · ¿quién lo usa? (supuesto: la asistente registra a un paciente que llega sin cita; si es el paciente desde manik, cambia el texto, no el icono) · registro semántico (Lima).
+Registro semántico en el proyecto (Lima) · aplicar el cambio de la barra lateral.

@@ -1,0 +1,18 @@
+# Entrada propuesta del registro semántico de iconos (norma §5.1). Es una propuesta: el registro del proyecto lo gobierna Lima.
+semanticName: immediate-consult
+icon: { library: custom, name: uva-immediate-consult, file: immediate-consult.svg }
+category: action
+meaning: "Iniciar una consulta ahora, sin cita previa (no es urgencia)"
+accessibility: { defaultLabel: Consulta inmediata, hiddenByDefault: true }
+direction: { rtl: fixed }
+motion: { allowed: none }
+style: { source: project_lucide, stroke: 2, cap: round, join: round }
+pair: calendar-plus               # «Agendar cita» (después) · calendario con rayo (ahora)
+sizes: { tested: [16, 24, 64], recommended: [20, 24] }
+smallVariant: false
+confusionsTested: [plus, calendar-plus, zap, timer, cross, siren]
+alternatives: { lucide: calendar-clock }
+status: approved                  # usuario 2026-10-31: variante A
+usage:
+  surface: "Expediente Manik, botón flotante abajo a la derecha (lo usa el médico)"
+  label: "con texto «Consulta inmediata» en pantallas anchas; solo icono con aria-label en el teléfono"
