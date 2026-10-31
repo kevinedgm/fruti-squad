@@ -121,8 +121,19 @@ ORGS = {
  'mto': dict(n='Museo Textil de Oaxaca', tipo='Museo', real=True), 'xiadani': dict(n='Xiadani Tours', tipo='Operador de recorridos', real=True),
 }
 PERFIL = {'c2': A1 + '7HoET7Tj5544sRNVzESfdh', 'r1': A1 + 'MMk5Ck3qhFLxzx1dYcc2HF', 'h1': A1 + 'Q39D6bxh733WB2cVWFPKWF', 'm3': A1 + 'VLXvEMM7XVw6T5MbYVhG5u'}
+# Prototipo (pedido del usuario 2026-10-31): cualquier tarjeta abre la página completa de SU GIRO, aunque se repita la misma para todos los del giro.
+PGIRO = {'cafes': A1 + '7HoET7Tj5544sRNVzESfdh', 'restaurantes': A1 + 'MMk5Ck3qhFLxzx1dYcc2HF', 'hoteles': A1 + 'Q39D6bxh733WB2cVWFPKWF', 'museos': A1 + 'VLXvEMM7XVw6T5MbYVhG5u'}
+PTIPO = {'taller': A1 + '5WRkf4WB9J64pmTM1JWMRK', 'recorrido': A1 + '5SJK5By7AyzoAjE7g6zJuf', 'organizador': A1 + 'VKn5a1v2ZNpzYg1Mh3ebpo'}
 for p in data:
-    if p['id'] in PERFIL: p['url'] = PERFIL[p['id']]
+    p['url'] = PGIRO[p['cat']]
+_giro = {p['id']: p['cat'] for p in data}
+for k, o in ORGS.items():  # todo organizador tiene página: lugar → la de su giro; operador → recorridos; estudio/escuela → taller; colectivo/persona → organizador
+    if o.get('url'): continue
+    if o.get('lugar'): o['url'] = PGIRO[_giro[o['lugar']]]
+    elif o['tipo'].startswith('Operador'): o['url'] = PTIPO['recorrido']
+    elif o['tipo'] == 'Museo': o['url'] = PGIRO['museos']
+    elif o['tipo'] in ('Estudio', 'Escuela de cocina'): o['url'] = PTIPO['taller']
+    else: o['url'] = PTIPO['organizador']
 # actividad: id, tipo, nombre, organizador, sede (id de lugar o texto), fecha ISO, hora, precio, publicada (ISO)
 ACT = [dict(id=a, tipo=t, n=n, org=o, sede=sd, f=f, h=h, p=pr, pub=pb) for a, t, n, o, sd, f, h, pr, pb in [
  ('a1', 'recorrido', 'Caminata de cantera al amanecer', 'caminantes', 'Atrio de Santo Domingo', '2026-11-01', '7:00', '$300', '2026-10-20'),

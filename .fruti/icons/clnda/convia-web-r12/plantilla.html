@@ -175,7 +175,7 @@ a.ph{display:block;color:inherit}
 @media (max-width:820px){.pf-g{grid-template-columns:1fr;gap:20px}.pf-f{grid-template-columns:1fr}}
 .sh-t{display:flex;align-items:center;gap:12px}.sh-sello{width:58px;height:58px;flex:none;transform:rotate(-8deg)}.sh-sello .sello{width:100%;height:100%}
 </style>
-<div class="proto" role="note"><div class="wrap">Demo interna r12 · fecha de la demo: sáb 31 oct 2026 · temporada: <span class="temporada-demo" id="tsel"></span> · fotos y nombres de negocios reales sin permiso aún: no compartir fuera del equipo · lo marcado «Ejemplo» es ficticio, igual que sus cifras de «volverían» y sus rasgos «Va bien para»; sus fotos son de relleno, desenfocadas · tus listas se guardan solo en tu navegador</div></div>
+<div class="proto" role="note"><div class="wrap">Demo interna r12 · cada tarjeta abre la página de ejemplo de su giro (se repite para todos) · fecha de la demo: sáb 31 oct 2026 · temporada: <span class="temporada-demo" id="tsel"></span> · fotos y nombres de negocios reales sin permiso aún: no compartir fuera del equipo · lo marcado «Ejemplo» es ficticio, igual que sus cifras de «volverían» y sus rasgos «Va bien para»; sus fotos son de relleno, desenfocadas · tus listas se guardan solo en tu navegador</div></div>
 <header class="top en-hero" id="hdr"><div class="wrap"><a class="h-logo" href="#" aria-label="Convia, inicio"><!--LOGO--></a>
 <label class="buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
 <span class="sr" style="position:absolute;left:-9999px">Buscar</span><input id="q" type="search" placeholder="Busca un café, un taller, un barrio…" autocomplete="off"></label>
@@ -230,9 +230,9 @@ return `<ul class="sellos-r" aria-label="Va bien para">${p.ras.map(([k,f])=>{con
 function metricC(p){if(!(p.v>=UMBRAL))return '<p class="met new">Recién llegado</p>';const n=Math.round(p.w/p.v*10);return `<p class="met"><b>${n} de cada 10</b> volverían</p>`}
 function acts(p){const s=st(p.id);return `<div class="acts"><button class="want" type="button" data-act="quiero" data-id="${p.id}" aria-pressed="${s==='quiero'}">${heart}<span>${s==='quiero'?'En mi lista':'Quiero ir'}</span></button>
 <button class="fui" type="button" data-act="fui" data-id="${p.id}" aria-pressed="${s==='fui'}">${starSvg}<span>${s==='fui'?'Ya fui':'¿Ya fuiste?'}</span></button></div>`}
-function card(p){const c=CAT[p.cat];const s=st(p.id);const href=`#lugar/${p.id}`;
-return `<article class="card${s==='fui'?' visited':''}" data-id="${p.id}" style="--f:${c.fondo};--t:${c.texto}"><a class="${phCls(p)}" href="${href}" tabindex="-1" aria-hidden="true">${foto(p,'',true)}<span class="stamp">${SVG.sello[p.cat]}</span></a>
-<div class="cb"><span class="chip">${SVG.ico[p.cat]}${c.nombre}</span><h3><a href="${href}">${p.n}</a></h3><p class="meta">${p.coc&&p.coc.length?`<b>${COC[p.coc[0]].n}</b> · `:''}${p.when?`<span class="when">${p.when}</span> · `:''}${p.z}${p.when?'':precio(p)}</p>${sellitos(p)}${metricC(p)}
+function card(p){const c=CAT[p.cat];const s=st(p.id);const href=p.url;const tb=' target="_blank" rel="noopener"';
+return `<article class="card${s==='fui'?' visited':''}" data-id="${p.id}" style="--f:${c.fondo};--t:${c.texto}"><a class="${phCls(p)}" href="${href}"${tb} tabindex="-1" aria-hidden="true">${foto(p,'',true)}<span class="stamp">${SVG.sello[p.cat]}</span></a>
+<div class="cb"><span class="chip">${SVG.ico[p.cat]}${c.nombre}</span><h3><a href="${href}"${tb}>${p.n}</a></h3><p class="meta">${p.coc&&p.coc.length?`<b>${COC[p.coc[0]].n}</b> · `:''}${p.when?`<span class="when">${p.when}</span> · `:''}${p.z}${p.when?'':precio(p)}</p>${sellitos(p)}${metricC(p)}
 ${acts(p)}</div></article>`}
 function perfil(p){const c=CAT[p.cat];const facts=[['Cocina',(p.coc||[]).map(k=>COC[k].n).join(' · ')],['Cuándo',p.when],['Zona',p.z],['Horario y precio',p.info],['Organiza',p.org]].filter(x=>x[1]);
 return `<div class="wrap pf"><a class="volver" href="#inicio">← Volver al directorio</a><div class="pf-g">
