@@ -74,6 +74,11 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 - Fondo **perla** (#f9f9f7), sin beige; superficies blancas.
 - Estructura de **directorio por giro** (pestañas) con estantes: este fin de semana, nuevos, más buscados; entrada por intención («¿qué hago este fin?», «un café nuevo»).
 - **Mis lugares (usuario, 2026-10-31)**: registro **personal** (para uno o con amigos), no verificación: lista «Quiero ir» → al ir se marca «Ya fui» y se califica con **escala propia, sin estrellas**: No era para mí · Estuvo bien · Me gustó · Volvería · De mis favoritos. La visita es autodeclarada.
+- **Métrica pública (usuario, 2026-10-31): «X de cada 10 volverían»** = (Volvería + De mis favoritos) / visitas registradas. Sin estrellas ni likes; «No era para mí» y «Estuvo bien» cuentan en el total pero nunca se muestran aparte.
+  - Menos de 10 visitas: «Recién llegado · sé de los primeros en ir» (sin número). [propuesta: umbral 10]
+  - Distintivo **«Favorito Convia»**: ≥10 visitas y ≥40 % «De mis favoritos». [propuesta: umbrales] No es ranking.
+- Sello del giro en el **encabezado de sección**; en la tarjeta solo el sello personal de «ya fui».
+- Talleres y eventos muestran **«Organiza: …»**.
 - Sellos personales: 5 de un giro = insignia [propuesta: número]. Prototipo r5 en `../convia-web-r5/`.
 - Fotos reales libres para la simulación: bloqueadas por la red de la sesión (Unsplash, Openverse, Wikimedia); pendiente habilitar un dominio.
 - Implica cuentas de usuario (fase 1 era solo información): [pendiente de decisión].
