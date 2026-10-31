@@ -114,7 +114,8 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
   - **Aprobado por el usuario (2026-10-31).**
 - **Taller r1** `../convia-perfil-taller-r1/`: el perfil es del **estudio**; hoja por taller con «Te llevas», «Qué vas a hacer», lugares × precio (empieza en 1, tope = cupo de la fecha), mínimo para confirmar, qué llevar; pestañas Piezas (de alumnos) y Maestros.
 - **Museo r1** `../convia-perfil-museo-r1/`: primer perfil sobre el modelo perfil + actividad + sede; pestaña Actividades (Ahora · Próximas · Pasadas) con «Organiza» y «Dónde» en cada una; pasadas con «N marcaron que fueron».
-- Pendiente: llevar el modelo al directorio (Talleres/Recorridos/Eventos como tipos de actividad por fecha, con «Organiza» y «En») y crear el perfil `organizador` independiente.
+- **Organizador independiente r1** `../convia-perfil-organizador-r1/`: verde base de Convia (no tiene giro), avatar, revisión visible, «Seguir», pestaña Dónde con sus sedes; cada actividad dice «En» con el color del giro de la sede. [propuesta: color, «Seguir» implica avisos]
+- Pendiente: llevar el modelo al directorio (Talleres/Recorridos/Eventos como tipos de actividad por fecha, con «Organiza» y «En»).
 
 ## Pendiente de operación (usuario, 2026-10-30: «tema de operación de negocio», se decide después)
 - Quién carga los primeros lugares al lanzar (curaduría e invitación vs. solicitudes espontáneas) y cuántos necesita la fase 1.
