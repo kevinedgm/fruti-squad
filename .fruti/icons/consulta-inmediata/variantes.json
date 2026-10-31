@@ -1,0 +1,20 @@
+[
+ {
+  "v": "a",
+  "n": "Calendario con rayo",
+  "h": "Una cita que ocurre ya: el calendario dice «agenda», el rayo dice «al instante». Riesgo: el rayo también es «energía» o «flash».",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-immediate-consult\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-immediate-consult{stroke-width:var(--uva-stroke,2)}</style><path d=\"M8 2v3M16 2v3\"/><path d=\"M21 10V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h7\"/><path d=\"M3 9h18\"/><path d=\"M18.5 12 14.5 17.5h4l-1.5 4.5 4.5-6h-4z\"/></svg>"
+ },
+ {
+  "v": "b",
+  "n": "Cronómetro con cruz",
+  "h": "Atención médica medida en minutos: el cronómetro dice «ya», la cruz dice «consulta». Riesgo: puede leerse como «tiempo de espera».",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-immediate-consult\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-immediate-consult{stroke-width:var(--uva-stroke,2)}</style><path d=\"M10 2h4\"/><path d=\"M12 2v3\"/><path d=\"m19 6.5-1.5 1.5\"/><circle cx=\"12\" cy=\"14\" r=\"8\"/><path d=\"M12 10.5v7M8.5 14h7\"/></svg>"
+ },
+ {
+  "v": "c",
+  "n": "Cruz con estela",
+  "h": "La cruz médica en movimiento: líneas de velocidad a la izquierda. Riesgo: dentro de un botón flotante la cruz puede leerse como «+ agregar».",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-immediate-consult\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-immediate-consult{stroke-width:var(--uva-stroke,2)}</style><path d=\"M12 4h4.5v4.5H21v4.5h-4.5v4.5H12v-4.5H7.5V8.5H12z\"/><path d=\"M2 8.5h2.5M2 12.75h3M2 17h2.5\"/></svg>"
+ }
+]
