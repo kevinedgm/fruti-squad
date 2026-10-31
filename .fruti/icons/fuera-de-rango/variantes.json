@@ -1,0 +1,20 @@
+[
+ {
+  "v": "a",
+  "n": "Banda con flecha que sale",
+  "h": "Dos líneas marcan el rango normal; la flecha lo atraviesa hacia arriba (alto) o hacia abajo (bajo) y la línea que cruza se abre. Dice «salió del rango» y hacia dónde.",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-out-of-range\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-out-of-range{stroke-width:var(--uva-stroke,2)}.uva-out-of-range__sup{opacity:calc(1 - var(--uva-alto,0))}.uva-out-of-range__supr{opacity:var(--uva-alto,0)}.uva-out-of-range__inf{opacity:calc(1 - var(--uva-bajo,0))}.uva-out-of-range__infr{opacity:var(--uva-bajo,0)}.uva-out-of-range__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor)}.uva-out-of-range__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor)}.uva-out-of-range__normal{opacity:var(--uva-normal,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor)}</style><path class=\"uva-out-of-range__sup\" d=\"M3 9h18\"/><path class=\"uva-out-of-range__supr\" d=\"M3 9h5.5M15.5 9H21\"/><path class=\"uva-out-of-range__inf\" d=\"M3 15h18\"/><path class=\"uva-out-of-range__infr\" d=\"M3 15h5.5M15.5 15H21\"/><path class=\"uva-out-of-range__alto\" d=\"M12 13V3M8.5 6.5 12 3l3.5 3.5\"/><path class=\"uva-out-of-range__bajo\" d=\"M12 11v10M8.5 17.5 12 21l3.5-3.5\"/><circle class=\"uva-out-of-range__normal\" cx=\"12\" cy=\"12\" r=\"1.5\"/></svg>"
+ },
+ {
+  "v": "b",
+  "n": "Medidor",
+  "h": "Un medidor de aguja: hacia la derecha alto, hacia la izquierda bajo, al centro normal. Riesgo: izquierda/derecha se lee menos rápido que arriba/abajo, y parece velocímetro.",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-out-of-range\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-out-of-range{stroke-width:var(--uva-stroke,2)}.uva-out-of-range__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor)}.uva-out-of-range__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor)}.uva-out-of-range__normal{opacity:var(--uva-normal,0);stroke:var(--uva-accent,currentColor)}</style><path d=\"M3.5 17a8.5 8.5 0 0 1 17 0\"/><path d=\"M5.2 11.5l1.4 1M18.8 11.5l-1.4 1\"/><path class=\"uva-out-of-range__alto\" d=\"M12 17l7-3.5\"/><path class=\"uva-out-of-range__bajo\" d=\"M12 17 5 13.5\"/><path class=\"uva-out-of-range__normal\" d=\"M12 17V10\"/><path d=\"M12 17h.01\"/></svg>"
+ },
+ {
+  "v": "c",
+  "n": "Escala con punto fuera",
+  "h": "Una caja es el rango normal; el punto queda dentro (normal), arriba (alto) o abajo (bajo). Se lee como «la medida cayó fuera de la caja».",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-out-of-range\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-out-of-range{stroke-width:var(--uva-stroke,2)}.uva-out-of-range__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor)}.uva-out-of-range__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor)}.uva-out-of-range__normal{opacity:var(--uva-normal,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor)}</style><rect x=\"8.5\" y=\"8\" width=\"7\" height=\"8\" rx=\"2\"/><path d=\"M12 2.5v2M12 19.5v2\"/><circle class=\"uva-out-of-range__alto\" cx=\"12\" cy=\"3.5\" r=\"1.6\"/><circle class=\"uva-out-of-range__normal\" cx=\"12\" cy=\"12\" r=\"1.6\"/><circle class=\"uva-out-of-range__bajo\" cx=\"12\" cy=\"20.5\" r=\"1.6\"/></svg>"
+ }
+]

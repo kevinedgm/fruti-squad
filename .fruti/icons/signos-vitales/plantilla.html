@@ -1,0 +1,63 @@
+<title>Indicadores de signos vitales</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300..700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Uva · indicadores de signos vitales r1 (Expediente Manik, captura de signos). Un SVG por signo; el estado y el color salen de variables CSS
+   en el contenedor. Colores de estado del sistema Manik: alto = error, bajo = info, normal = éxito. Tema claro únicamente. */
+:root{--canvas:#F5F7FB;--surface:#FFFFFF;--surface-soft:#EEF1F7;--ink:#14213D;--muted:#4A5674;--line:#E1E6F0;--line-control:#858EA5;--manik:#234899;--manik-soft:#E9EDF5;
+--exito:#15814B;--exito-soft:#E8F2ED;--error:#C33F4E;--error-soft:#F9ECED;--info:#3F7695;--info-soft:#ECF1F4;
+--display:"Urbanist","Segoe UI",system-ui,sans-serif;--sans:"Atkinson Hyperlegible Next",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:400 15px/22px var(--sans);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);font-weight:600;margin:0;text-wrap:balance}p{margin:0}:focus-visible{outline:2px solid var(--manik);outline-offset:2px}
+.hoja{max-width:1120px;margin:0 auto;padding-block:32px 64px;display:grid;gap:24px}
+.intro{display:grid;gap:8px;max-width:74ch}.intro h1{font-size:38px;line-height:1.05;font-weight:300;letter-spacing:-.02em}.intro p{color:var(--muted)}.intro b{color:var(--ink)}
+/* estados por variables (lo que haría el componente real) */
+.st-alto{--uva-alto:1;--uva-accent:var(--error)}.st-bajo{--uva-bajo:1;--uva-accent:var(--info)}.st-normal{--uva-normal:1;--uva-accent:var(--exito)}
+.estilos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.es{border:1.5px solid var(--line);border-radius:18px;padding:14px;display:grid;gap:8px;background:var(--surface);cursor:pointer;text-align:left;font:inherit;color:inherit}
+.es:hover{border-color:var(--line-control)}.es[aria-pressed="true"]{border-color:var(--manik);box-shadow:inset 0 0 0 1px var(--manik)}
+.es .m{display:flex;gap:14px}.es .m span{display:grid;justify-items:center;gap:2px;font-size:11px;color:var(--muted)}.es svg{width:36px;height:36px}
+.es b{font-weight:600}.es .h{font-size:13.5px;line-height:19px;color:var(--muted)}
+.reco{display:inline-flex;font:700 11px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--exito);background:var(--exito-soft);border-radius:999px;padding:1px 8px;justify-self:start}
+.sec{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;display:grid;gap:12px}.sec h2{font-size:20px}.sec>p{color:var(--muted);font-size:14px;max-width:74ch}
+.tabla{overflow-x:auto}table{border-collapse:collapse;width:100%}th{text-align:left;font:600 13px/18px var(--sans);color:var(--muted);padding:8px 12px;border-bottom:1px solid var(--line)}
+td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}td .t{display:flex;align-items:flex-end;gap:12px}td svg{display:block}
+.cap{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.vit{border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;grid-template-columns:auto minmax(0,1fr);gap:2px 12px;align-items:center}
+.vit svg{width:28px;height:28px;grid-row:span 2}.vit .n{font-size:13px;color:var(--muted)}.vit .v{font:600 20px/26px var(--sans);font-variant-numeric:tabular-nums}.vit .v small{font-size:13px;font-weight:500;color:var(--muted);margin-left:3px}
+.vit .e{grid-column:2;justify-self:start;display:inline-flex;font:600 12.5px/18px var(--sans);border-radius:999px;padding:0 8px}
+.vit.st-alto{border-color:#E6C2C8;background:linear-gradient(180deg,var(--error-soft),var(--surface) 70%)}.vit.st-alto .e{background:var(--error-soft);color:#BA3D4D}
+.vit.st-bajo{border-color:#C6D6E0;background:linear-gradient(180deg,var(--info-soft),var(--surface) 70%)}.vit.st-bajo .e{background:var(--info-soft);color:#3D7291}
+.vit.st-normal .e{background:var(--exito-soft);color:#157C4A}
+pre{margin:0;background:#0F1C3F;color:#E6ECF7;border-radius:14px;padding:14px 16px;font:13px/1.55 ui-monospace,Menlo,monospace;overflow-x:auto}
+.reglas{margin:0;padding-left:20px;display:grid;gap:6px;font-size:14px;line-height:20px;max-width:78ch}
+@media (max-width:860px){.estilos{grid-template-columns:1fr}}
+</style>
+<main class="hoja">
+<header class="intro"><h1>Indicadores de signos vitales</h1><p>Un icono por signo vital con su indicador de <b>alto</b> o <b>bajo</b>. Es un solo SVG por signo: el componente le pone el estado y el color con variables de CSS, sin cambiar de archivo. Trazo 2, como los íconos de las apps Manik. Elige el estilo del indicador:</p></header>
+<div class="estilos" id="estilos" role="group" aria-label="Estilo del indicador"></div>
+<section class="sec" aria-labelledby="hm"><h2 id="hm">Los cinco signos en sus estados</h2><p>Alto en el color de error, bajo en el de información. El significado no depende del color: la dirección del indicador y el texto lo dicen.</p><div class="tabla"><table><thead><tr><th>Signo</th><th>Normal</th><th>Alto</th><th>Bajo</th></tr></thead><tbody id="mat"></tbody></table></div></section>
+<section class="sec" aria-labelledby="hc"><h2 id="hc">En la captura de signos</h2><p>Valores de ejemplo de una consulta. Cada tarjeta lleva el valor, la palabra del estado y el icono.</p><div class="cap" id="cap"></div></section>
+<section class="sec" aria-labelledby="hu"><h2 id="hu">Cómo se usa</h2><pre id="code"></pre>
+<ol class="reglas"><li>El SVG va en línea (o con <code>&lt;use&gt;</code>): como <code>&lt;img&gt;</code> no recibe las variables y queda sin indicador.</li><li>Siempre con texto: «38.9 °C · Alta». El icono solo no sustituye la palabra.</li><li>Quieto: es un estado que dura toda la consulta; nada se anima.</li><li>Los umbrales (qué es alto o bajo) los decide el área médica por edad y contexto, no el icono.</li></ol></section>
+</main>
+<script>
+/*DATA*/
+let est='a';const ids=[...new Set(V.map(x=>x.id))];
+const get=(id,e)=>V.find(x=>x.id===id&&x.e===e).svg;const sz=(s,n)=>s.replace('<svg ',`<svg width="${n}" height="${n}" `);
+const EJ=[['vital-temperature','38.9','°C','alto','Alta'],['vital-blood-pressure','88/56','mmHg','bajo','Baja'],['vital-heart-rate','118','lpm','alto','Alta'],['vital-respiratory-rate','16','rpm','normal','Normal'],['vital-spo2','89','%','bajo','Baja']];
+function render(){document.querySelectorAll('.es').forEach(b=>b.setAttribute('aria-pressed',b.dataset.e===est));
+ document.getElementById('mat').innerHTML=ids.map(id=>`<tr><th scope="row" style="color:var(--ink);font-weight:600">${V.find(x=>x.id===id).n}</th>${['normal','alto','bajo'].map(s=>`<td><span class="t st-${s}">${sz(get(id,est),40)}${sz(get(id,est),24)}${sz(get(id,est),16)}</span></td>`).join('')}</tr>`).join('');
+ document.getElementById('cap').innerHTML=EJ.map(([id,v,u,s,t])=>`<div class="vit st-${s}">${get(id,est)}<span class="n">${V.find(x=>x.id===id).n}</span><span class="v">${v}<small>${u}</small></span><span class="e">${t}</span></div>`).join('');
+ document.getElementById('code').textContent=`<!-- El componente pone el estado en el contenedor -->
+<span class="signo signo--alto">  <svg class="uva-icon uva-vital-temperature">…</svg>  38.9 °C · Alta</span>
+
+.signo--alto { --uva-alto: 1; --uva-accent: var(--error); }
+.signo--bajo { --uva-bajo: 1; --uva-accent: var(--info); }${est==='c'?`
+.signo--normal { --uva-normal: 1; --uva-accent: var(--exito); }`:''}
+/* sin clase de estado: solo el glifo, sin indicador */`}
+document.getElementById('estilos').innerHTML=Object.entries(EST).map(([k,x])=>`<button type="button" class="es" data-e="${k}" aria-pressed="false"><span class="m">${['normal','alto','bajo'].map(s=>`<span class="st-${s}">${get('vital-temperature',k)}${s}</span>`).join('')}</span>${k==='a'?'<span class="reco">Recomendado</span>':''}<b>${k.toUpperCase()} · ${x.n}</b><span class="h">${x.h}</span></button>`).join('');
+document.addEventListener('click',e=>{const b=e.target.closest('.es');if(b){est=b.dataset.e;render()}});
+render();
+</script>

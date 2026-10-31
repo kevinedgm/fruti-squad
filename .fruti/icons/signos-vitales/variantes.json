@@ -1,0 +1,92 @@
+[
+ {
+  "id": "vital-temperature",
+  "n": "Temperatura",
+  "e": "a",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-vital-temperature\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-vital-temperature{stroke-width:var(--uva-stroke,2)}.uva-vital-temperature__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor);}.uva-vital-temperature__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor);}</style><path d=\"M11 4v10.5a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0z\"/><path d=\"M9 10v6\"/><path class=\"uva-vital-temperature__alto\" d=\"M19.5 10V3M17 5.5 19.5 3 22 5.5\"/><path class=\"uva-vital-temperature__bajo\" d=\"M19.5 3v7M17 7.5l2.5 2.5L22 7.5\"/></svg>"
+ },
+ {
+  "id": "vital-temperature",
+  "n": "Temperatura",
+  "e": "b",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-vital-temperature\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-vital-temperature{stroke-width:var(--uva-stroke,2)}.uva-vital-temperature__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-temperature__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}</style><path d=\"M11 4v10.5a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0z\"/><path d=\"M9 10v6\"/><path class=\"uva-vital-temperature__alto\" d=\"M19.5 3.5 22 8h-5z\"/><path class=\"uva-vital-temperature__bajo\" d=\"M19.5 8.5 22 4h-5z\"/></svg>"
+ },
+ {
+  "id": "vital-temperature",
+  "n": "Temperatura",
+  "e": "c",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-vital-temperature\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-vital-temperature{stroke-width:var(--uva-stroke,2)}.uva-vital-temperature__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-temperature__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-temperature__normal{opacity:var(--uva-normal,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-temperature__riel{opacity:var(--uva-riel,.35)}</style><path d=\"M11 4v10.5a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0z\"/><path d=\"M9 10v6\"/><path class=\"uva-vital-temperature__riel\" d=\"M19.5 4.5v14\"/><circle class=\"uva-vital-temperature__alto\" cx=\"19.5\" cy=\"5\" r=\"1.8\"/><circle class=\"uva-vital-temperature__normal\" cx=\"19.5\" cy=\"11.75\" r=\"1.8\"/><circle class=\"uva-vital-temperature__bajo\" cx=\"19.5\" cy=\"18.5\" r=\"1.8\"/></svg>"
+ },
+ {
+  "id": "vital-blood-pressure",
+  "n": "Presión arterial",
+  "e": "a",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-vital-blood-pressure\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-vital-blood-pressure{stroke-width:var(--uva-stroke,2)}.uva-vital-blood-pressure__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor);}.uva-vital-blood-pressure__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor);}</style><circle cx=\"9\" cy=\"13\" r=\"7\"/><path d=\"m9 13 3.3-3.3\"/><path d=\"M4.6 13h1.1M9 8.1v1.1M13.4 13h-1.1\"/><path class=\"uva-vital-blood-pressure__alto\" d=\"M19.5 10V3M17 5.5 19.5 3 22 5.5\"/><path class=\"uva-vital-blood-pressure__bajo\" d=\"M19.5 3v7M17 7.5l2.5 2.5L22 7.5\"/></svg>"
+ },
+ {
+  "id": "vital-blood-pressure",
+  "n": "Presión arterial",
+  "e": "b",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-vital-blood-pressure\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-vital-blood-pressure{stroke-width:var(--uva-stroke,2)}.uva-vital-blood-pressure__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-blood-pressure__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}</style><circle cx=\"9\" cy=\"13\" r=\"7\"/><path d=\"m9 13 3.3-3.3\"/><path d=\"M4.6 13h1.1M9 8.1v1.1M13.4 13h-1.1\"/><path class=\"uva-vital-blood-pressure__alto\" d=\"M19.5 3.5 22 8h-5z\"/><path class=\"uva-vital-blood-pressure__bajo\" d=\"M19.5 8.5 22 4h-5z\"/></svg>"
+ },
+ {
+  "id": "vital-blood-pressure",
+  "n": "Presión arterial",
+  "e": "c",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-vital-blood-pressure\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-vital-blood-pressure{stroke-width:var(--uva-stroke,2)}.uva-vital-blood-pressure__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-blood-pressure__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-blood-pressure__normal{opacity:var(--uva-normal,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-blood-pressure__riel{opacity:var(--uva-riel,.35)}</style><circle cx=\"9\" cy=\"13\" r=\"7\"/><path d=\"m9 13 3.3-3.3\"/><path d=\"M4.6 13h1.1M9 8.1v1.1M13.4 13h-1.1\"/><path class=\"uva-vital-blood-pressure__riel\" d=\"M19.5 4.5v14\"/><circle class=\"uva-vital-blood-pressure__alto\" cx=\"19.5\" cy=\"5\" r=\"1.8\"/><circle class=\"uva-vital-blood-pressure__normal\" cx=\"19.5\" cy=\"11.75\" r=\"1.8\"/><circle class=\"uva-vital-blood-pressure__bajo\" cx=\"19.5\" cy=\"18.5\" r=\"1.8\"/></svg>"
+ },
+ {
+  "id": "vital-heart-rate",
+  "n": "Frecuencia cardiaca",
+  "e": "a",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-vital-heart-rate\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-vital-heart-rate{stroke-width:var(--uva-stroke,2)}.uva-vital-heart-rate__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor);}.uva-vital-heart-rate__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor);}</style><path d=\"M9 19.5s-6.5-4-6.5-9a3.6 3.6 0 0 1 6.5-2.2 3.6 3.6 0 0 1 6.5 2.2c0 5-6.5 9-6.5 9z\"/><path class=\"uva-vital-heart-rate__alto\" d=\"M19.5 10V3M17 5.5 19.5 3 22 5.5\"/><path class=\"uva-vital-heart-rate__bajo\" d=\"M19.5 3v7M17 7.5l2.5 2.5L22 7.5\"/></svg>"
+ },
+ {
+  "id": "vital-heart-rate",
+  "n": "Frecuencia cardiaca",
+  "e": "b",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-vital-heart-rate\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-vital-heart-rate{stroke-width:var(--uva-stroke,2)}.uva-vital-heart-rate__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-heart-rate__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}</style><path d=\"M9 19.5s-6.5-4-6.5-9a3.6 3.6 0 0 1 6.5-2.2 3.6 3.6 0 0 1 6.5 2.2c0 5-6.5 9-6.5 9z\"/><path class=\"uva-vital-heart-rate__alto\" d=\"M19.5 3.5 22 8h-5z\"/><path class=\"uva-vital-heart-rate__bajo\" d=\"M19.5 8.5 22 4h-5z\"/></svg>"
+ },
+ {
+  "id": "vital-heart-rate",
+  "n": "Frecuencia cardiaca",
+  "e": "c",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-vital-heart-rate\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-vital-heart-rate{stroke-width:var(--uva-stroke,2)}.uva-vital-heart-rate__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-heart-rate__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-heart-rate__normal{opacity:var(--uva-normal,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-heart-rate__riel{opacity:var(--uva-riel,.35)}</style><path d=\"M9 19.5s-6.5-4-6.5-9a3.6 3.6 0 0 1 6.5-2.2 3.6 3.6 0 0 1 6.5 2.2c0 5-6.5 9-6.5 9z\"/><path class=\"uva-vital-heart-rate__riel\" d=\"M19.5 4.5v14\"/><circle class=\"uva-vital-heart-rate__alto\" cx=\"19.5\" cy=\"5\" r=\"1.8\"/><circle class=\"uva-vital-heart-rate__normal\" cx=\"19.5\" cy=\"11.75\" r=\"1.8\"/><circle class=\"uva-vital-heart-rate__bajo\" cx=\"19.5\" cy=\"18.5\" r=\"1.8\"/></svg>"
+ },
+ {
+  "id": "vital-respiratory-rate",
+  "n": "Frecuencia respiratoria",
+  "e": "a",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-vital-respiratory-rate\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-vital-respiratory-rate{stroke-width:var(--uva-stroke,2)}.uva-vital-respiratory-rate__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor);}.uva-vital-respiratory-rate__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor);}</style><path d=\"M9 3v5.5M9 8.5l-2 2M9 8.5l2 2\"/><path d=\"M6 8.5c-2 1-3.5 3.7-3.5 7.5 0 2.3 1 3.5 2.5 3.5 1.7 0 2.5-1.3 2.5-3.5v-4\"/><path d=\"M12 8.5c2 1 3.5 3.7 3.5 7.5 0 2.3-1 3.5-2.5 3.5-1.7 0-2.5-1.3-2.5-3.5v-4\"/><path class=\"uva-vital-respiratory-rate__alto\" d=\"M19.5 10V3M17 5.5 19.5 3 22 5.5\"/><path class=\"uva-vital-respiratory-rate__bajo\" d=\"M19.5 3v7M17 7.5l2.5 2.5L22 7.5\"/></svg>"
+ },
+ {
+  "id": "vital-respiratory-rate",
+  "n": "Frecuencia respiratoria",
+  "e": "b",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-vital-respiratory-rate\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-vital-respiratory-rate{stroke-width:var(--uva-stroke,2)}.uva-vital-respiratory-rate__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-respiratory-rate__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}</style><path d=\"M9 3v5.5M9 8.5l-2 2M9 8.5l2 2\"/><path d=\"M6 8.5c-2 1-3.5 3.7-3.5 7.5 0 2.3 1 3.5 2.5 3.5 1.7 0 2.5-1.3 2.5-3.5v-4\"/><path d=\"M12 8.5c2 1 3.5 3.7 3.5 7.5 0 2.3-1 3.5-2.5 3.5-1.7 0-2.5-1.3-2.5-3.5v-4\"/><path class=\"uva-vital-respiratory-rate__alto\" d=\"M19.5 3.5 22 8h-5z\"/><path class=\"uva-vital-respiratory-rate__bajo\" d=\"M19.5 8.5 22 4h-5z\"/></svg>"
+ },
+ {
+  "id": "vital-respiratory-rate",
+  "n": "Frecuencia respiratoria",
+  "e": "c",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-vital-respiratory-rate\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-vital-respiratory-rate{stroke-width:var(--uva-stroke,2)}.uva-vital-respiratory-rate__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-respiratory-rate__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-respiratory-rate__normal{opacity:var(--uva-normal,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-respiratory-rate__riel{opacity:var(--uva-riel,.35)}</style><path d=\"M9 3v5.5M9 8.5l-2 2M9 8.5l2 2\"/><path d=\"M6 8.5c-2 1-3.5 3.7-3.5 7.5 0 2.3 1 3.5 2.5 3.5 1.7 0 2.5-1.3 2.5-3.5v-4\"/><path d=\"M12 8.5c2 1 3.5 3.7 3.5 7.5 0 2.3-1 3.5-2.5 3.5-1.7 0-2.5-1.3-2.5-3.5v-4\"/><path class=\"uva-vital-respiratory-rate__riel\" d=\"M19.5 4.5v14\"/><circle class=\"uva-vital-respiratory-rate__alto\" cx=\"19.5\" cy=\"5\" r=\"1.8\"/><circle class=\"uva-vital-respiratory-rate__normal\" cx=\"19.5\" cy=\"11.75\" r=\"1.8\"/><circle class=\"uva-vital-respiratory-rate__bajo\" cx=\"19.5\" cy=\"18.5\" r=\"1.8\"/></svg>"
+ },
+ {
+  "id": "vital-spo2",
+  "n": "Saturación de oxígeno (SpO₂)",
+  "e": "a",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-vital-spo2\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-vital-spo2{stroke-width:var(--uva-stroke,2)}.uva-vital-spo2__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor);}.uva-vital-spo2__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor);}</style><rect x=\"4\" y=\"3.5\" width=\"10\" height=\"8.5\" rx=\"2.5\"/><path d=\"M7.5 7.5h3\"/><path d=\"M7 12v9M11 12v9\"/><path class=\"uva-vital-spo2__alto\" d=\"M19.5 10V3M17 5.5 19.5 3 22 5.5\"/><path class=\"uva-vital-spo2__bajo\" d=\"M19.5 3v7M17 7.5l2.5 2.5L22 7.5\"/></svg>"
+ },
+ {
+  "id": "vital-spo2",
+  "n": "Saturación de oxígeno (SpO₂)",
+  "e": "b",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-vital-spo2\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-vital-spo2{stroke-width:var(--uva-stroke,2)}.uva-vital-spo2__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-spo2__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}</style><rect x=\"4\" y=\"3.5\" width=\"10\" height=\"8.5\" rx=\"2.5\"/><path d=\"M7.5 7.5h3\"/><path d=\"M7 12v9M11 12v9\"/><path class=\"uva-vital-spo2__alto\" d=\"M19.5 3.5 22 8h-5z\"/><path class=\"uva-vital-spo2__bajo\" d=\"M19.5 8.5 22 4h-5z\"/></svg>"
+ },
+ {
+  "id": "vital-spo2",
+  "n": "Saturación de oxígeno (SpO₂)",
+  "e": "c",
+  "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"uva-icon uva-vital-spo2\" aria-hidden=\"true\" focusable=\"false\"><style>.uva-vital-spo2{stroke-width:var(--uva-stroke,2)}.uva-vital-spo2__alto{opacity:var(--uva-alto,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-spo2__bajo{opacity:var(--uva-bajo,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-spo2__normal{opacity:var(--uva-normal,0);stroke:var(--uva-accent,currentColor);fill:var(--uva-accent,currentColor);}.uva-vital-spo2__riel{opacity:var(--uva-riel,.35)}</style><rect x=\"4\" y=\"3.5\" width=\"10\" height=\"8.5\" rx=\"2.5\"/><path d=\"M7.5 7.5h3\"/><path d=\"M7 12v9M11 12v9\"/><path class=\"uva-vital-spo2__riel\" d=\"M19.5 4.5v14\"/><circle class=\"uva-vital-spo2__alto\" cx=\"19.5\" cy=\"5\" r=\"1.8\"/><circle class=\"uva-vital-spo2__normal\" cx=\"19.5\" cy=\"11.75\" r=\"1.8\"/><circle class=\"uva-vital-spo2__bajo\" cx=\"19.5\" cy=\"18.5\" r=\"1.8\"/></svg>"
+ }
+]
