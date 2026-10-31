@@ -43,15 +43,15 @@
 .cv{display:inline-flex;align-items:center;gap:1mm}.cv svg{width:3mm;height:3mm}
 /* B · calca redonda 80 mm */
 .tB{width:80mm;height:80mm;display:block;filter:drop-shadow(0 12px 18px rgba(0,0,0,.18))}
-.eqr{display:block;overflow:visible}.eqr.a{width:80mm;height:80mm;margin:-5mm 0 -6mm}.eqr.b{width:96mm;height:96mm}.eqr.c{width:54mm;height:54mm;margin:-4mm 0 -6mm}
+.eqr{display:block;overflow:visible}.eqr.a{width:96mm;height:96mm;margin:-11mm -5mm -6mm;max-width:none}.eqr.b{width:110mm;height:110mm}.eqr.c{width:70mm;height:70mm;margin:-6mm -8mm -8mm;max-width:none}
 /* C · tarjeta de barra 55 × 85 mm */
 .tC{width:55mm;height:85mm;background:#fff;border-radius:3mm;overflow:hidden;display:flex;flex-direction:column;align-items:center;box-shadow:0 14px 30px -20px rgba(0,0,0,.45);border:.3mm solid #e2e2de}
-.tC .cab{width:100%;background:var(--c);color:var(--ct);padding:4mm;text-align:center;font:500 4.6mm/1.05 var(--display);font-variation-settings:var(--dv)}
+.tC .cab{width:100%;background:var(--c);color:var(--ct);padding:3mm;text-align:center;font:500 4.2mm/1.05 var(--display);font-variation-settings:var(--dv)}
 .tC .qr{width:38mm;height:38mm;margin-top:3mm}.tC .que{font-size:5mm;margin-top:1mm}.tC .que i{font-size:3mm}.tC .acc{font-size:2.4mm;gap:3mm}.tC .acc svg{width:4mm;height:4mm}
 .tC .pie{width:100%;margin-top:auto;padding:2mm 3mm;justify-content:center;font-size:2.2mm}
 .notas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;padding-block:6px 48px}.notas div{background:var(--sup);border:1px solid var(--linea);border-radius:14px;padding:14px 16px;font-size:14px}.notas h2{font-size:18px;margin:0 0 4px}.notas p{margin:0;color:var(--sec)}
 @media (max-width:820px){.reglas,.notas{grid-template-columns:1fr 1fr}.piezas{justify-content:center}}
-@media (max-width:520px){.reglas,.notas{grid-template-columns:1fr}.tA{zoom:.86}}
+@media (max-width:520px){.reglas,.notas{grid-template-columns:1fr}.tA{zoom:.86}.eqr.b{width:min(110mm,calc(100vw - 32px));height:auto}}
 @media print{.proto,.intro,.ctl,.notas,.pieza figcaption{display:none}body{background:#fff}.piezas{padding:0;gap:8mm}.tA,.tC{box-shadow:none;border:.2mm dashed #999}.tB{filter:none}@page{size:A4;margin:10mm}}
 </style>
 </head>
@@ -82,28 +82,29 @@ const lum=h=>{const c=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(v=>v<=
 const contraste=(a,b)=>{const[x,y]=[lum(a),lum(b)].sort((m,n)=>n-m);return (x+.05)/(y+.05)};
 const cv=q=>`<span class="cv">${q} en Convia</span>`;
 function qrSvg(n,color,cls){return `<svg class="qr ${cls||''}" viewBox="0 0 ${n.qr.n} ${n.qr.n}" shape-rendering="crispEdges" role="img" aria-label="Código QR: ${n.que.toLowerCase()} de ${n.n}"><rect width="100%" height="100%" fill="#fff"/><path d="${n.qr.d}" fill="${color}"/></svg>`}
-// La estrella de Convia tal cual (contorno dibujado a mano) en el color del lugar, girada como sello; el QR va encima en un panel blanco
-// que tapa el centro y deja ver las seis puntas. En la calca, debajo va la silueta blanca (línea de recorte) para que el sticker sea la estrella.
-// El centro de la estrella original está en (100.4,106.6) de su caja de 200: se recentra en (100,100).
-function estrellaQR(n,color,qc,{panel=.5,texto='',cls='',rot=-6,calca=false}={}){const L=200*panel,x=100-L/2,alto=texto?L*1.24:L;const y=100-alto/2+(texto?4:0);
- const g=`transform="rotate(${rot} 100 100) translate(-0.4 -6.6)"`;
+// Estrella sólida (silueta) del color del lugar, girada −9° para que el QR quede derecho: con seis puntas, −9° equivale al giro de 69° en el que
+// cabe el QR más grande dentro de la silueta (46 % de su ancho, medido). Encima, un brillo blanco difuminado con la forma del QR: el color va de intenso
+// en las puntas a blanco en el centro. Debajo de los cuadritos, el blanco es pleno (contraste del QR intacto). Centro de la estrella en (100.4,106.6) → (100,100).
+const QH=36.3;
+function estrellaQR(n,color,qc,{cls='',calca=false}={}){const g='transform="rotate(-9 100 100) translate(-0.4 -6.6)"',x=100-QH,L=2*QH,gl=9;
  return `<svg class="eqr ${cls}" viewBox="0 0 200 200" role="img" aria-label="Código QR ${n.que.toLowerCase()} de ${n.n}, dentro de la estrella de Convia">
- <defs><filter id="so${cls}" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="1.2" stdDeviation="1.8" flood-opacity="${calca?.28:.18}"/></filter></defs>
- ${calca?`<g ${g} filter="url(#so${cls})"><path d="${STAR}" fill="#fff" stroke="#fff" stroke-width="22" stroke-linejoin="round"/></g>`:''}
- <g ${g}><path d="${STAR}" fill="${color}" stroke="${color}" stroke-width="2.5" stroke-linejoin="round"/></g>
- <rect x="${x}" y="${y}" width="${L}" height="${alto}" rx="${L*.08}" fill="#fff" ${calca?'':`filter="url(#so${cls})"`}/>
- <svg x="${x+L*.03}" y="${y+L*.03}" width="${L*.94}" height="${L*.94}" viewBox="0 0 ${n.qr.n} ${n.qr.n}" shape-rendering="crispEdges"><path d="${n.qr.d}" fill="${qc}"/></svg>
- ${texto?`<text x="100" y="${y+L*1.1}" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="${L*.075}" fill="#1b1d1a">${texto}</text>`:''}</svg>`}
+ <defs><filter id="bl${cls}" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter><clipPath id="cl${cls}"><path ${g} d="${SIL}"/></clipPath>
+ ${calca?`<filter id="so${cls}" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="1.4" stdDeviation="2" flood-opacity=".28"/></filter>`:''}</defs>
+ ${calca?`<path ${g} d="${SIL}" fill="#fff" stroke="#fff" stroke-width="9" stroke-linejoin="round" filter="url(#so${cls})"/>`:''}
+ <path ${g} d="${SIL}" fill="${color}"/>
+ <g clip-path="url(#cl${cls})">${[0,1,2].map(()=>`<rect x="${x-gl}" y="${x-gl}" width="${L+2*gl}" height="${L+2*gl}" rx="${QH*.5}" fill="#fff" filter="url(#bl${cls})"/>`).join('')}</g>
+ <rect x="${x+L*.06}" y="${x+L*.06}" width="${L*.88}" height="${L*.88}" fill="#fff"/>
+ <svg x="${x}" y="${x}" width="${L}" height="${L}" viewBox="0 0 ${n.qr.n} ${n.qr.n}" shape-rendering="crispEdges"><path d="${n.qr.d}" fill="${qc}"/></svg></svg>`}
 function render(){const n=NEG[k],c=col||n.colores[0];hazQR(n);
  const ct=contraste(c,'#ffffff')>=4.5?'#ffffff':'#1b1d1a';                      // texto sobre el color del negocio
  const qc=contraste(c,'#ffffff')>=7?c:'#1b1d1a';                                 // el QR solo toma el color si es muy oscuro
  const av=document.getElementById('aviso');const msg=n.qr.falla?'No se pudo cargar el generador de QR (revisa la conexión).':qc===c?'':'Este color es claro para el QR: el código se imprime en negro y el color queda en la cabecera.';av.hidden=!msg;av.textContent=msg;
  const acc=`<p class="acc"><span>${I.cam}<span>Escanea<small>Scan</small></span></span>${nfc?`<span>${I.nfc}<span>Acerca tu teléfono<small>Tap your phone</small></span></span>`:''}</p>`;
- const A=`<figure class="pieza"><div class="tA" style="--c:${c};--ct:${ct}"><div class="cab"><span class="mono" aria-hidden="true">${n.ini}</span><div><div class="nom">${n.n}</div><div class="sub">${n.sub}</div></div></div>
-  <div class="cuerpo"><p class="que">${n.que}<i>${n.what}</i></p>${estrellaQR(n,c,qc,{cls:'a',panel:.54})}${acc}<p class="url">convia.mx/m/${n.slug}</p></div><div class="pie"><b>Mesa ${mesa}</b>${cv(n.que)}</div></div><figcaption><b>A · Tarjeta de mesa</b> · 10 × 14 cm, en carpa o en atril</figcaption></figure>`;
+ const A=`<figure class="pieza"><div class="tA" style="--c:${c};--ct:${ct}"><div class="cab"><span class="mono" aria-hidden="true">${n.ini}</span><div><div class="nom">${n.n}</div><div class="sub">${n.que} · ${n.what} · ${n.sub.split(' · ')[1]||''}</div></div></div>
+  <div class="cuerpo">${estrellaQR(n,c,qc,{cls:'a'})}${acc}<p class="url">convia.mx/m/${n.slug}</p></div><div class="pie"><b>Mesa ${mesa}</b>${cv(n.que)}</div></div><figcaption><b>A · Tarjeta de mesa</b> · 10 × 14 cm, en carpa o en atril</figcaption></figure>`;
  // B: calca recortada con la silueta de la estrella; QR y nombre en el centro
- const B=`<figure class="pieza">${estrellaQR(n,c,qc,{panel:.5,texto:n.n,cls:'b',rot:-4,calca:true})}<figcaption><b>B · Calca estrella</b> · 9.5 cm, recortada con la silueta de la estrella</figcaption></figure>`;
- const C=`<figure class="pieza"><div class="tC" style="--c:${c};--ct:${ct}"><div class="cab">${n.n}</div>${estrellaQR(n,c,qc,{cls:'c',panel:.62})}<p class="que">${n.que}<i>${n.what}</i></p><p class="acc"><span>${I.cam}Escanea · Scan</span>${nfc?`<span>${I.nfc}NFC</span>`:''}</p><div class="pie">${cv(n.que)}</div></div><figcaption><b>C · Tarjeta de barra</b> · 5.5 × 8.5 cm, en bloque de acrílico</figcaption></figure>`;
+ const B=`<figure class="pieza">${estrellaQR(n,c,qc,{cls:'b',calca:true})}<figcaption><b>B · Calca estrella</b> · 9 cm, recortada con la silueta de la estrella</figcaption></figure>`;
+ const C=`<figure class="pieza"><div class="tC" style="--c:${c};--ct:${ct}"><div class="cab">${n.n}</div>${estrellaQR(n,c,qc,{cls:'c'})}<p class="acc"><span>${I.cam}${n.que} · Escanea · Scan</span>${nfc?`<span>${I.nfc}NFC</span>`:''}</p><div class="pie">${cv(n.que)}</div></div><figcaption><b>C · Tarjeta de barra</b> · 5.5 × 8.5 cm, en bloque de acrílico</figcaption></figure>`;
  document.getElementById('piezas').innerHTML=A+B+C;
  document.querySelectorAll('.sw').forEach(b=>b.setAttribute('aria-pressed',b.dataset.c===c));document.getElementById('cc').value=c}
 function sws(){document.getElementById('sws').innerHTML=NEG[k].colores.map(x=>`<button class="sw" type="button" data-c="${x}" style="background:${x}" aria-label="Color ${x}"></button>`).join('')}

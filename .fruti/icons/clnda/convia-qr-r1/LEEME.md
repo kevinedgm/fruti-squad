@@ -5,6 +5,12 @@ Pedido del usuario (2026-10-31): identidad de los QR que el restaurante (o café
 ## Ajuste r1.1 (usuario: «se pierde el sello de Convia; que el QR esté integrado en la estrella»)
 **La estrella pone la forma; el lugar pone el color.** El QR vive dentro de la estrella E1b de Convia (contorno dibujado a mano, sin deformar), pintada con el color del establecimiento y girada como sello; el QR va en un panel blanco que tapa el centro y deja ver las seis puntas. Medición: el hueco libre de la estrella es solo el 19 % de su ancho, por eso el QR va encima del centro y no dentro del hueco.
 
+## Ajuste r1.2 (usuario: «estrella más grande; el QR debe encajar al centro, sin que se vea recortado el logo; un difuminado de intenso a blanco»)
+- **Estrella sólida** (silueta exterior calculada con `convia-final/silueta.cjs` → `svg/simbolo-silueta.svg`) en el color del lugar, **girada −9°**: con seis puntas equivale al giro de 69° en el que cabe el QR más grande **dentro** de la silueta (46 % de su ancho, medido). Así el QR queda derecho y no se sale de la estrella.
+- **Difuminado**: un brillo blanco con la forma del QR, desenfocado, hace que el color vaya de intenso en las puntas a blanco en el centro; no hay recuadro visible. Debajo de los cuadritos el blanco es pleno (contraste intacto).
+- Se descartaron (prueba visual): degradado circular (la estrella se desarma en rayos sueltos), degradado + contorno y semitono.
+- Tamaños del QR completo (con su margen blanco), a tamaño real: tarjeta de mesa 3.5 cm, calca 4 cm, tarjeta de barra 2.5 cm. Sin choques entre estrella, textos y pie (medido).
+
 ## Jerarquía
 1. **El establecimiento**: cabecera con su nombre (o logo) y **su color**.
 2. **Qué hacer**: «Escanea · Scan» y «Acerca tu teléfono · Tap your phone» (NFC), en español e inglés.
