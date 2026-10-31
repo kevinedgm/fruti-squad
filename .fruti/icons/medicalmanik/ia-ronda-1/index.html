@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Manik IA Identidad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300..700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Ecosistema Manik · identidad de la IA, ronda 1: tres direcciones (A pulso que destella · B luz de marca · C tinta noche).
+   La IA es una FUNCIÓN, no un personaje (decisión del usuario 2026-10-31). Tokens del sistema Manik; los únicos valores nuevos son los de la IA
+   y quedan marcados como propuesta (--ia-*) hasta que se elija una dirección. */
+:root{--canvas:#F5F7FB;--surface:#FFFFFF;--surface-soft:#EEF1F7;--ink:#14213D;--muted:#4A5674;--subtle:#7A849C;--line:#E1E6F0;--line-control:#858EA5;
+--noche:#0F1C3F;--manik:#234899;--manik-hover:#1E3C7D;--manik-soft:#E9EDF5;--cian:#009BB0;--bruma:#F5FAFB;--luz-cian:#D3F0F4;--luz-calida:#FFEFD2;
+--exito:#15814B;--aviso:#A75F00;--aviso-soft:#F6EFE6;--on-aviso-soft:#A05C03;
+--r-sm:10px;--r-md:14px;--r-lg:18px;--r-2xl:24px;--pill:999px;
+--sh-card:0 1px 2px rgba(20,33,61,.05),0 5px 14px rgba(20,33,61,.05);--sh-pop:0 2px 8px rgba(20,33,61,.08),0 18px 44px rgba(20,33,61,.16);
+--display:"Urbanist","Segoe UI",system-ui,sans-serif;--sans:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:400 16px/24px var(--sans)}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px}
+h1,h2,h3{font-family:var(--display);font-weight:600;margin:0}
+:focus-visible{outline:2px solid var(--manik);outline-offset:2px}
+.proto{background:var(--noche);color:#fff;font-size:13px;line-height:18px}.proto .wrap{padding-block:7px}
+.intro{padding-block:32px 8px}.intro h1{font-weight:300;font-size:clamp(32px,4.4vw,44px);line-height:1.08;letter-spacing:-.03em}.intro>p{color:var(--muted);max-width:74ch;margin:10px 0 0}
+.reglas{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;counter-reset:r}
+.reglas li{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:14px 16px;font-size:14px;line-height:20px;color:var(--muted);counter-increment:r}
+.reglas b{display:block;color:var(--ink);font-size:15px;margin-bottom:2px}.reglas li::before{content:counter(r);display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--manik-soft);color:var(--manik);font-size:12px;font-weight:700;margin-bottom:6px}
+.dir{padding-block:36px 8px;border-top:1px solid var(--line);margin-top:28px}
+.dir>.wrap>header{display:grid;gap:6px;max-width:80ch}.dir h2{font-size:28px;line-height:34px;letter-spacing:-.01em}.dir header p{margin:0;color:var(--muted)}
+.pq{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 0;padding:0;list-style:none;font-size:14px;line-height:20px}.pq li{background:var(--surface);border:1px solid var(--line);border-radius:var(--pill);padding:5px 12px}
+.grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:16px;margin-top:20px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-2xl);padding:20px}
+.panel h3{font-size:18px;line-height:26px;margin-bottom:12px}.ov{font-size:12px;line-height:16px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+.marca{display:flex;align-items:center;gap:18px;flex-wrap:wrap}.marca .big{width:72px;height:72px;border-radius:20px;display:grid;place-items:center}.marca .big svg{width:40px;height:40px}
+.marca .sm{display:flex;gap:12px;align-items:center;color:var(--muted);font-size:14px}.marca .sm svg{width:20px;height:20px}
+.marca p{margin:0;font-size:14px;line-height:20px;color:var(--muted);flex-basis:100%}
+.estados{display:flex;flex-wrap:wrap;gap:12px 14px;align-items:flex-start;margin-top:16px}.estados figure{margin:0;display:grid;gap:6px;justify-items:start}.estados figcaption{font-size:13px;line-height:18px;color:var(--muted)}
+/* barra de consulta: dónde vive el botón */
+.barra{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--surface-soft);border-radius:var(--r-lg);padding:12px}
+.barra .t{font-weight:600;margin-right:auto;display:grid;grid-template-columns:auto 1fr;align-items:center;column-gap:8px;min-width:0;line-height:20px}.barra .t small{grid-column:2;font-weight:400;color:var(--muted);font-size:14px}
+.dot{width:8px;height:8px;border-radius:50%;background:#C33F4E}
+.btn{font:600 15px/20px var(--sans);min-height:44px;padding:0 18px;border-radius:var(--r-md);border:1px solid var(--line-control);background:var(--surface);color:var(--manik);display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.btn.p{background:var(--manik);border-color:var(--manik);color:#fff}.btn.p:hover{background:var(--manik-hover)}.btn.t3{border-color:transparent;background:transparent}
+.btn svg,.ia svg{width:20px;height:20px;flex:none}
+.anc{position:relative}
+/* ---- botón de IA, base común ---- */
+.ia{font:600 15px/20px var(--sans);min-height:44px;padding:0 16px 0 14px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;position:relative;white-space:nowrap}
+.ia .cv{width:16px;height:16px;margin-left:2px;opacity:.8}
+.ia[aria-disabled="true"]{cursor:not-allowed}
+.ia .lbl-g{display:none}.ia.gen .lbl-n{display:none}.ia.gen .lbl-g{display:inline}
+.ia.sq{padding:0;width:44px;justify-content:center}
+/* A · pulso que destella: borde degradado cian → azul Manik sobre blanco; texto azul Manik; radio de botón del sistema */
+.A .ia{border-radius:var(--r-md);border:2px solid transparent;color:var(--manik);background:linear-gradient(var(--surface),var(--surface)) padding-box,linear-gradient(120deg,var(--cian),var(--manik)) border-box}
+.A .ia:hover,.A .ia.hv{background:linear-gradient(#F2F8FB,#F2F8FB) padding-box,linear-gradient(120deg,var(--cian),var(--manik)) border-box}
+.A .ia.gen{background:linear-gradient(var(--surface),var(--surface)) padding-box,conic-gradient(from var(--ang),var(--cian),var(--manik),#BFE6EC,var(--cian)) border-box;animation:gira 1.6s linear infinite}
+.A .ia[aria-disabled="true"]{color:var(--muted);background:linear-gradient(var(--surface-soft),var(--surface-soft)) padding-box,linear-gradient(var(--line-control),var(--line-control)) border-box}
+.A .mk{background:linear-gradient(135deg,#E6F6F8,var(--manik-soft))}
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}@keyframes gira{to{--ang:360deg}}
+/* B · luz de marca: relleno con las dos luces (cian y cálida), texto tinta, forma píldora */
+.B .ia{border-radius:var(--pill);border:1px solid #9FCFD7;color:var(--ink);background:linear-gradient(100deg,var(--luz-cian),#EAF6F3 55%,var(--luz-calida));background-size:180% 100%;background-position:0 0}
+.B .ia:hover,.B .ia.hv{background-position:100% 0;border-color:var(--cian)}
+.B .ia.gen{animation:luz 1.4s ease-in-out infinite alternate}
+.B .ia[aria-disabled="true"]{background:var(--surface-soft);border-color:var(--line-control);color:var(--muted)}
+.B .ia .ic{color:var(--cian)}.B .ia[aria-disabled="true"] .ic{color:var(--subtle)}
+.B .mk{background:radial-gradient(circle at 35% 35%,var(--luz-cian),var(--luz-calida))}
+@keyframes luz{to{background-position:100% 0}}
+/* C · tinta noche: píldora azul noche con destello cian; la forma píldora la separa del botón primario (radio 14) */
+.C .ia{border-radius:var(--pill);border:0;color:#fff;background:var(--noche);overflow:hidden}
+.C .ia:hover,.C .ia.hv{background:#1B2B57}
+.C .ia .ic{color:#5FD3E2}
+.C .ia.gen::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:40%;background:#5FD3E2;animation:barra 1.2s ease-in-out infinite}
+.C .ia[aria-disabled="true"]{background:var(--surface-soft);color:var(--muted);box-shadow:inset 0 0 0 1px var(--line-control)}.C .ia[aria-disabled="true"] .ic{color:var(--subtle)}
+.C .mk{background:var(--noche);color:#5FD3E2}
+@keyframes barra{from{left:-40%}to{left:100%}}
+.A .mk{color:var(--manik)}.B .mk{color:var(--ink)}
+/* menú de acciones */
+.menu{position:absolute;z-index:20;top:calc(100% + 8px);right:0;width:min(380px,calc(100vw - 32px));background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-pop);padding:8px;display:none}
+.menu.open{display:block;animation:sube .16s ease-out}.menu.static{display:block;position:static;box-shadow:var(--sh-card);width:100%;max-width:400px}
+@keyframes sube{from{opacity:0;transform:translateY(-4px)}}
+.menu .grp{font-size:12px;line-height:16px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px 10px 4px}
+.mi{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;border:0;background:transparent;border-radius:var(--r-sm);padding:10px;cursor:pointer;font:inherit;color:var(--ink);min-height:44px}
+.mi:hover,.mi:focus-visible{background:var(--surface-soft)}.mi:focus-visible{outline-offset:-2px}
+.mi .mic{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;flex:none}.mi .mic svg{width:18px;height:18px}
+.mi b{display:block;font-weight:600;font-size:15px;line-height:20px}.mi span.d{display:block;font-size:13px;line-height:18px;color:var(--muted)}
+.mi[aria-disabled="true"]{cursor:not-allowed}.mi[aria-disabled="true"] b{color:var(--muted)}
+.mi .req{display:inline-block;margin-top:2px;font-size:13px;line-height:18px;color:var(--on-aviso-soft);background:var(--aviso-soft);border-radius:var(--pill);padding:0 8px}
+.A .mic{background:#E6F6F8;color:var(--manik)}.B .mic{background:var(--luz-cian);color:var(--ink)}.C .mic{background:var(--manik-soft);color:var(--noche)}
+.menu .pie{border-top:1px solid var(--line);margin-top:6px;padding:10px 10px 4px;font-size:13px;line-height:18px;color:var(--muted);display:flex;gap:8px}.menu .pie svg{width:16px;height:16px;flex:none;margin-top:1px}
+/* resultado sugerido */
+.res{margin-top:14px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-2xl);padding:16px 18px;position:relative}
+.res[hidden]{display:none}.res.entra{animation:sube .24s ease-out}
+.res h4{margin:0;font:600 18px/26px var(--display);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.chip{font:600 13px/18px var(--sans);border-radius:var(--pill);padding:2px 10px 2px 6px;display:inline-flex;align-items:center;gap:4px}.chip svg{width:16px;height:16px}
+.res p.sub{margin:2px 0 10px;font-size:14px;line-height:20px;color:var(--muted)}
+.vals{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.vals li{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:4px 12px;align-items:center;border:1px solid var(--line);border-radius:var(--r-md);padding:8px 12px}
+.vals .k{font-size:14px;line-height:20px;font-weight:600;color:var(--muted);min-width:56px}.vals .v{font-weight:600;font-variant-numeric:tabular-nums;font-size:16px}
+.vals q{grid-column:2/4;font-size:13px;line-height:18px;color:var(--muted);quotes:"«" "»"}
+.vals input{width:20px;height:20px;margin:0;accent-color:var(--manik);grid-row:1}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.A .res{border-left:4px solid transparent;background:linear-gradient(var(--surface),var(--surface)) padding-box,linear-gradient(180deg,var(--cian),var(--manik)) border-box}
+.A .chip{background:var(--manik-soft);color:var(--manik)}
+.B .res{background:linear-gradient(160deg,#EEF9FA,var(--surface) 45%,#FFF8EC);border-color:#BFE3E8}
+.B .chip{background:var(--luz-cian);color:var(--ink)}
+.C .res{border:1.5px dashed var(--line-control)}.C .res.ok{border-style:solid;border-color:var(--exito)}
+.C .chip{background:var(--noche);color:#fff}.C .chip svg{color:#5FD3E2}
+.ok-msg{margin:10px 0 0;font-size:14px;color:var(--exito);display:flex;gap:6px;align-items:center}.ok-msg svg{width:18px;height:18px}
+.res:focus{outline:none}[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.cierre{padding-block:28px 56px;color:var(--muted);font-size:14px;line-height:20px}
+@media (max-width:900px){.grid,.reglas{grid-template-columns:1fr}}
+@media (max-width:520px){.barra .t{flex-basis:100%}.menu{right:auto;left:0}.ia .lbl-x{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="proto" role="note"><div class="wrap">Ecosistema Manik · identidad de la IA · ronda 1 · tres direcciones · datos de paciente ficticios · prototipo: la IA no está conectada; los resultados son de ejemplo</div></div>
+<header class="intro wrap"><h1>La IA en el Ecosistema Manik</h1>
+<p>La IA es una <b>función</b>, no un personaje: se llama «IA» y siempre dice qué va a hacer («Detectar signos vitales con IA»). Tres direcciones para reconocerla de un vistazo en Expediente y en las demás apps. Prueba cada una: abre su menú, elige una acción y mira cómo llega el resultado.</p>
+<ol class="reglas">
+<li><b>Ayuda, no decide</b>La IA nunca es la acción principal de la vista (esa sigue siendo «Guardar consulta», azul Manik). Por eso su botón tiene otra forma o borde, no otro azul.</li>
+<li><b>Todo lo que escribe es borrador</b>Cada resultado llega marcado «Sugerido por IA» y no entra al expediente hasta que el médico lo acepta, completo o dato por dato.</li>
+<li><b>Muestra de dónde lo sacó</b>Cada dato trae la frase del dictado o el registro de donde salió, para que verificarlo tome segundos y no haya que confiar a ciegas.</li></ol></header>
+<main id="dirs"></main>
+<p class="wrap cierre">Los nombres de las acciones, los códigos CIE-10 y los textos son de ejemplo para evaluar la identidad; el comportamiento clínico de cada función se define aparte. Siguiente paso tras elegir dirección: el diálogo de cada función (revisar, editar y aceptar).</p>
+<div class="sr" aria-live="polite" id="vivo"></div>
+<script>
+const P={ // íconos de trazo, retícula 24 (estilo Lucide del sistema)
+ cv:'<path d="m6 9 6 6 6-6"/>',
+ nota:'<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+ pulso:'<path d="M3 12h4l2.5-6 4 12 2.5-6H21"/>',
+ tag:'<path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"/><circle cx="7.5" cy="7.5" r="1.2"/>',
+ escudo:'<path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.7 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M12 8v4M12 16h.01"/>',
+ cuidado:'<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/>',
+ lista:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+ info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
+ ok:'<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>'};
+const ic=(k,c='')=>`<svg class="${c}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[k]}</svg>`;
+// Marcas de IA (una por dirección)
+const DESTELLO='M12 2.5c.5 4.6 4.9 9 9.5 9.5-4.6.5-9 4.9-9.5 9.5-.5-4.6-4.9-9-9.5-9.5 4.6-.5 9-4.9 9.5-9.5z';
+const M={
+ // A: la línea de pulso de Manik termina en un destello: «el pulso que se ilumina»
+ A:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true" class="ic"><path d="M2 14h3.5l2-4.5 3 8.5 2.5-6.5h2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M19 3c.3 2.4 1.6 3.7 4 4-2.4.3-3.7 1.6-4 4-.3-2.4-1.6-3.7-4-4 2.4-.3 3.7-1.6 4-4z" fill="var(--cian)"/></svg>',
+ // B: destello dentro de un halo de luz: «la luz sobre el expediente»
+ B:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true" class="ic"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6" opacity=".55"/><path d="M12 5.5c.35 3.3 3.2 6.15 6.5 6.5-3.3.35-6.15 3.2-6.5 6.5-.35-3.3-3.2-6.15-6.5-6.5 3.3-.35 6.15-3.2 6.5-6.5z" fill="currentColor"/></svg>',
+ // C: el destello doble, la convención que la gente ya asocia con IA
+ C:'<svg viewBox="0 0 24 24" fill="none" aria-hidden="true" class="ic"><path d="M10 3.5c.45 4.2 3.8 7.55 8 8-4.2.45-7.55 3.8-8 8-.45-4.2-3.8-7.55-8-8 4.2-.45 7.55-3.8 8-8z" fill="currentColor"/><path d="M19 2c.2 1.6 1.4 2.8 3 3-1.6.2-2.8 1.4-3 3-.2-1.6-1.4-2.8-3-3 1.6-.2 2.8-1.4 3-3z" fill="currentColor"/></svg>'};
+const ACC=[ // [id, título, descripción, ícono, grupo, requisito]
+ ['pad','Redactar padecimiento actual','Del dictado de la consulta, en lenguaje clínico','nota','consulta'],
+ ['sv','Detectar signos vitales','Del dictado: presión, frecuencia, temperatura, SpO₂','pulso','consulta'],
+ ['cie','Sugerir códigos CIE-10','Según el padecimiento y los hallazgos registrados','tag','consulta'],
+ ['ci','Revisar contraindicaciones','La receta contra alergias, padecimientos y medicamentos activos','escudo','consulta','Necesita una receta'],
+ ['cu','Sugerencias de cuidado','Indicaciones para el paciente en lenguaje claro','cuidado','consulta'],
+ ['res','Resumir expediente','Consultas, diagnósticos y tratamientos previos','lista','paciente']];
+const DIRS=[
+ ['A','Pulso que destella','La marca nace del sello de Manik: la misma línea de pulso, que termina en un destello cian. El botón es blanco con un borde que va del cian al azul Manik; al trabajar, el borde gira. Es la más «de la casa».',
+  ['<b>Fuerza</b>: propia del ecosistema; nadie más la tiene','<b>Riesgo</b>: el destello es pequeño; se apoya en el texto «IA»']],
+ ['B','Luz de marca','La IA usa las dos luces de la portada de Manik (cian y cálida) como relleno, en forma de píldora; la marca es un destello dentro de un halo. Al trabajar, la luz se desplaza. Es la más calmada: no compite con nada clínico.',
+  ['<b>Fuerza</b>: suave y amable; reconocible por el color de luz','<b>Riesgo</b>: menos contraste; en pantallas de baja calidad la luz se pierde']],
+ ['C','Tinta noche','Píldora azul noche con el destello doble en cian: la convención que médicos y pacientes ya asocian con IA. Los resultados llegan con borde punteado (borrador) que se vuelve sólido verde al aceptarlos.',
+  ['<b>Fuerza</b>: se reconoce al instante; el borrador punteado es muy claro','<b>Riesgo</b>: es oscura y pesa casi como el botón principal']]];
+const btn=(d,{st='',sq=false,dis=false,menu=false,label='IA'}={})=>`<button type="button" class="ia${st?' '+st:''}${sq?' sq':''}"${dis?' aria-disabled="true"':''}${menu?` aria-haspopup="menu" aria-expanded="false" aria-controls="m${d}" id="b${d}"`:''}${sq?' aria-label="Funciones de IA"':''}>${M[d]}${sq?'':`<span class="lbl-n">${label}</span><span class="lbl-g">Generando…</span>${menu?ic('cv','cv'):''}`}</button>`;
+const menu=(d,stat)=>`<div class="menu${stat?' static':''}" ${stat?'aria-hidden="true"':`id="m${d}" role="menu" aria-labelledby="b${d}"`}>
+ <div class="grp">De esta consulta</div>${ACC.filter(a=>a[4]==='consulta').map(a=>item(d,a,stat)).join('')}
+ <div class="grp">Del paciente</div>${ACC.filter(a=>a[4]==='paciente').map(a=>item(d,a,stat)).join('')}
+ <div class="pie">${ic('info')}<span>La IA sugiere; usted decide. Nada entra al expediente sin su confirmación.</span></div></div>`;
+const item=(d,[id,t,ds,i,,req],stat)=>`<button type="button" class="mi" ${stat?'tabindex="-1"':'role="menuitem" tabindex="-1"'} data-a="${id}"${req?' aria-disabled="true"':''}><span class="mic">${ic(i)}</span><span><b>${t}</b><span class="d">${ds}</span>${req?`<span class="req">${req}</span>`:''}</span></button>`;
+const SV=[['TA','138/88 mmHg','…le tomé la presión, está en ciento treinta y ocho sobre ochenta y ocho…'],['FC','92 lpm','…el pulso anda en noventa y dos…'],['Temp.','37.8 °C','…trae treinta y siete ocho de temperatura desde ayer…']];
+const res=d=>`<section class="res" id="r${d}" hidden tabindex="-1" aria-labelledby="rh${d}"><h4 id="rh${d}">Signos vitales del dictado <span class="chip">${M[d]}Sugerido por IA</span></h4>
+ <p class="sub">Encontré 3 valores en la grabación de hoy. Marque los que quiere pasar a Signos vitales.</p>
+ <ul class="vals">${SV.map(([k,v,q],i)=>`<li><input type="checkbox" checked id="c${d}${i}" aria-label="Pasar ${k} ${v}"><label class="k" for="c${d}${i}">${k}</label><span class="v">${v}</span><q>${q}</q></li>`).join('')}</ul>
+ <div class="acts"><button type="button" class="btn" data-ok="${d}">Pasar a signos vitales</button><button type="button" class="btn t3" data-no="${d}">Descartar</button></div><p class="ok-msg" hidden>${ic('ok')}Guardado en Signos vitales. La IA ya no lo marca: ahora es dato del médico.</p></section>`;
+document.getElementById('dirs').innerHTML=DIRS.map(([d,t,txt,pq])=>`<section class="dir ${d}" aria-labelledby="h${d}"><div class="wrap"><header><p class="ov">Dirección ${d}</p><h2 id="h${d}">${t}</h2><p>${txt}</p><ul class="pq">${pq.map(x=>`<li>${x}</li>`).join('')}</ul></header>
+ <div class="grid"><div class="panel"><h3>Marca y botón</h3>
+  <div class="marca"><span class="big mk">${M[d]}</span><span class="sm">${M[d]} 20 px en botones y chips</span><p>Siempre junto a la palabra «IA» o al verbo de la acción; nunca sola salvo en el botón cuadrado, que lleva nombre accesible.</p></div>
+  <div class="estados">
+   <figure>${btn(d,{label:'Sugerir con IA'})}<figcaption>Reposo</figcaption></figure>
+   <figure>${btn(d,{st:'hv',label:'Sugerir con IA'})}<figcaption>Cursor encima</figcaption></figure>
+   <figure>${btn(d,{st:'gen',label:'Sugerir con IA'})}<figcaption>Generando</figcaption></figure>
+   <figure>${btn(d,{dis:true,label:'Sugerir con IA'})}<figcaption>Sin dictado aún</figcaption></figure>
+   <figure>${btn(d,{sq:true})}<figcaption>Cuadrado, 44 px</figcaption></figure></div>
+  <p class="ov" style="margin-top:18px">Menú de acciones</p>${menu(d,true)}</div>
+ <div class="panel"><h3>Pruébalo en la consulta</h3>
+  <div class="barra"><span class="t"><span class="dot" aria-hidden="true"></span>Consulta de Mariana Ruiz<small>Dictado de 6 min</small></span>
+   <span class="anc">${btn(d,{menu:true,label:'IA'})}${menu(d,false)}</span><button type="button" class="btn p">Guardar consulta</button></div>
+  <p class="ov" style="margin-top:14px">Elige «Detectar signos vitales» en el menú de IA</p>
+  ${res(d)}</div></div></div></section>`).join('');
+const vivo=document.getElementById('vivo'),reducir=matchMedia('(prefers-reduced-motion: reduce)');
+let abierto=null;
+function cerrar(foco=true){if(!abierto)return;const[b,m]=abierto;m.classList.remove('open');b.setAttribute('aria-expanded','false');if(foco)b.focus();abierto=null}
+function abrir(b){const m=document.getElementById(b.getAttribute('aria-controls'));cerrar(false);m.classList.add('open');b.setAttribute('aria-expanded','true');abierto=[b,m];m.querySelector('.mi:not([aria-disabled])').focus()}
+document.addEventListener('click',e=>{
+ const b=e.target.closest('[aria-haspopup="menu"]');if(b){if(b.classList.contains('gen'))return;b.getAttribute('aria-expanded')==='true'?cerrar():abrir(b);return}
+ const mi=e.target.closest('.menu:not(.static) .mi');if(mi){if(mi.getAttribute('aria-disabled')==='true')return;elegir(mi);return}
+ const ok=e.target.closest('[data-ok]');if(ok){const r=document.getElementById('r'+ok.dataset.ok);r.classList.add('ok');r.querySelector('.ok-msg').hidden=false;r.querySelector('.chip').hidden=true;r.querySelector('.acts').hidden=true;vivo.textContent='Signos vitales guardados.';return}
+ const no=e.target.closest('[data-no]');if(no){const d=no.dataset.no;document.getElementById('r'+d).hidden=true;document.getElementById('b'+d).focus();vivo.textContent='Sugerencia descartada.';return}
+ if(abierto&&!e.target.closest('.menu'))cerrar(false)});
+document.addEventListener('keydown',e=>{if(!abierto)return;const[b,m]=abierto;const its=[...m.querySelectorAll('.mi')];const i=its.indexOf(document.activeElement);
+ if(e.key==='Escape'){e.preventDefault();cerrar()}else if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();its[(i+(e.key==='ArrowDown'?1:-1)+its.length)%its.length].focus()}
+ else if(e.key==='Home'||e.key==='End'){e.preventDefault();its[e.key==='Home'?0:its.length-1].focus()}else if(e.key==='Tab')cerrar(false)});
+function elegir(mi){const[b]=abierto;const d=b.id.slice(1),a=mi.dataset.a;cerrar();
+ if(a!=='sv'){vivo.textContent='En esta ronda solo «Detectar signos vitales» tiene resultado de ejemplo.';mi.blur();b.focus();return}
+ const r=document.getElementById('r'+d);r.hidden=true;r.classList.remove('ok','entra');r.querySelector('.ok-msg').hidden=true;r.querySelector('.chip').hidden=false;r.querySelector('.acts').hidden=false;
+ b.classList.add('gen');b.setAttribute('aria-busy','true');vivo.textContent='Detectando signos vitales en el dictado…';
+ setTimeout(()=>{b.classList.remove('gen');b.removeAttribute('aria-busy');r.hidden=false;if(!reducir.matches)r.classList.add('entra');r.focus();vivo.textContent='Listo: 3 signos vitales sugeridos para revisar.'},reducir.matches?400:1600)}
+</script>
+</body>
+</html>
