@@ -21,8 +21,8 @@ Con texto en pantallas anchas («Consulta inmediata»); solo icono en el teléfo
 ## Decisión del usuario (2026-10-31)
 **Variante A, calendario con rayo.** La usa **el médico desde Expediente Manik** (no Agenda). Archivo final `immediate-consult.svg`; entrada propuesta en `registro.yaml`.
 
-## Consecuencia [propuesta]
-El botón «+ Nueva consulta» de la barra lateral de Expediente (prototipo `../medicalmanik/calendario/`) pasa a «Agendar cita» con calendar-plus, para no tener dos formas de «crear consulta»: agendar (después) y consulta inmediata (ahora).
+## Consecuencia propuesta (rechazada por el usuario, 2026-10-31)
+Se propuso que el botón «+ Nueva consulta» de la barra lateral de Expediente (prototipo `../medicalmanik/calendario/`) pasa a «Agendar cita» con calendar-plus, para no tener dos formas de «crear consulta»: agendar (después) y consulta inmediata (ahora). **El usuario dijo que no: la barra lateral se queda como está.**
 
 ## Pendiente
-Registro semántico en el proyecto (Lima) · aplicar el cambio de la barra lateral.
+Registro semántico en el proyecto (Lima).
