@@ -110,6 +110,8 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 - **Recorridos r1** `../convia-perfil-recorridos-r1/`: el perfil es del **operador**; cada recorrido abre una hoja con ruta por paradas, calculadora de precio según cuántos van (tabla por tamaño de grupo, mínimo y máximo), salidas con cupo, incluye/no incluye, punto de encuentro y mensaje de WhatsApp prellenado con «Lo vi en Convia». [propuesta: ese texto sirve para medir cuántos contactos llegan por Convia]
   - **Aprobado por el usuario (2026-10-31).**
 - **Café r1** `../convia-perfil-cafe-r1/`: acción principal «Cómo llegar» (no se reserva); bloque «¿Sirve para trabajar?»; pestaña Encuentros; carta con origen del café y modo QR; muestra el estado «Recién llegado» (van 6 de 10 visitas).
+  - **Aprobado por el usuario (2026-10-31).**
+- **Taller r1** `../convia-perfil-taller-r1/`: el perfil es del **estudio**; hoja por taller con «Te llevas», «Qué vas a hacer», lugares × precio (empieza en 1, tope = cupo de la fecha), mínimo para confirmar, qué llevar; pestañas Piezas (de alumnos) y Maestros.
 
 ## Pendiente de operación (usuario, 2026-10-30: «tema de operación de negocio», se decide después)
 - Quién carga los primeros lugares al lanzar (curaduría e invitación vs. solicitudes espontáneas) y cuántos necesita la fase 1.
