@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Convia QR Propuestas</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Convia · QR de mesa, ronda 2: tres maneras de integrar el QR con la identidad (calca estrella, sello, etiqueta con estrella calada).
+   Regla común: nada sobre los cuadritos del QR; el QR siempre sobre blanco pleno; el lugar pone el color, Convia pone la forma. Medidas reales en mm. */
+:root{--perla:#f9f9f7;--sup:#fff;--tinta:#1b1d1a;--sec:#5c5f5b;--linea:#e6e6e2;--cantera:#2f5a45;
+--display:"Fraunces",Georgia,serif;--dv:"SOFT" 100,"WONK" 0,"opsz" 96;--text:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;background:var(--perla);color:var(--tinta);font:400 16px/1.5 var(--text)}
+.wrap{max-width:1160px;margin:0 auto;padding-inline:16px}.d{font-family:var(--display);font-weight:500;font-variation-settings:var(--dv);letter-spacing:-.015em}
+.proto{background:var(--tinta);color:#fff;font-size:12.5px}.proto .wrap{padding-block:6px}
+.intro{padding-block:28px 4px}.intro h1{font-size:clamp(30px,4vw,44px);margin:0;line-height:1.05}.intro p{margin:8px 0 0;color:var(--sec);max-width:72ch}
+.prop{padding-block:30px 10px;border-bottom:1px solid var(--linea)}.prop h2{font-size:clamp(24px,3vw,32px);margin:0}.prop>.wrap>p{margin:6px 0 0;color:var(--sec);max-width:70ch}
+.pq{display:flex;gap:10px 18px;flex-wrap:wrap;margin:10px 0 0;padding:0;list-style:none;font-size:14px}.pq li{background:var(--sup);border:1px solid var(--linea);border-radius:999px;padding:4px 12px}.pq b{font-weight:700}
+.fila{display:flex;flex-wrap:wrap;gap:30px 44px;align-items:center;padding-block:24px 10px}
+.fila figure{margin:0;display:grid;gap:8px;justify-items:center}.fila figcaption{font-size:13px;color:var(--sec)}
+.piece{display:block;overflow:visible}
+.pA{width:92mm;height:92mm}.pB{width:80mm;height:80mm}.pC{width:62mm;height:100mm}
+@media (max-width:520px){.pA{width:min(92mm,calc(100vw - 32px));height:auto}.pB{width:min(80mm,calc(100vw - 32px));height:auto}.pC{width:min(62mm,calc(100vw - 32px));height:auto}}
+.cierre{padding-block:24px 48px;font-size:14px;color:var(--sec)}
+</style>
+</head>
+<body>
+<div class="proto" role="note"><div class="wrap">QR de mesa · ronda 2 · tres propuestas · negocios de ejemplo · el QR abre el menú publicado en vista de mesa · verificar el escaneo con un teléfono antes de imprimir</div></div>
+<header class="intro wrap"><h1 class="d">Tres maneras de integrar el QR</h1><p>Punto de partida: la calca de la ronda anterior. En las tres, el QR va limpio sobre blanco (nada encima de los cuadritos) y la identidad la pone el contorno: <b>el lugar pone el color, Convia pone la forma</b>.</p></header>
+<main id="props"></main>
+<p class="wrap cierre">Medidas reales (mm) para imprimir. Mesa de ejemplo: 4.</p>
+<script>
+/*DATA*/
+function hazQR(n){if(n.qr)return n.qr;if(typeof qrcode!=='function')return n.qr={n:21,d:''};const q=qrcode(0,'M');q.addData(n.url);q.make();const m=q.getModuleCount(),b=4;let d='';
+ for(let y=0;y<m;y++)for(let x=0;x<m;x++)if(q.isDark(y,x))d+=`M${x+b} ${y+b}h1v1h-1z`;return n.qr={n:m+2*b,d}}
+const lum=h=>{const c=[1,3,5].map(i=>parseInt(h.slice(i,i+2),16)/255).map(v=>v<=.03928?v/12.92:((v+.055)/1.055)**2.4);return .2126*c[0]+.7152*c[1]+.0722*c[2]};
+const con=(a,b)=>{const[x,y]=[lum(a),lum(b)].sort((m,n)=>n-m);return (x+.05)/(y+.05)};
+const tx=c=>con(c,'#ffffff')>=4.5?'#fff':'#1b1d1a', qcol=c=>con(c,'#ffffff')>=7?c:'#1b1d1a';
+const qr=(n,x,y,s,c)=>`<svg x="${x}" y="${y}" width="${s}" height="${s}" viewBox="0 0 ${n.qr.n} ${n.qr.n}" shape-rendering="crispEdges"><rect width="100%" height="100%" fill="#fff"/><path d="${n.qr.d}" fill="${c}"/></svg>`;
+const est=(x,y,s,fill,rot=0)=>`<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s/200}) translate(-100.4 -106.6)"><path d="${STAR}" fill="${fill}"/></g>`;
+let uid=0;
+// A · calca estrella: silueta blanca de recorte + contorno de la estrella en el color del lugar; QR y nombre en un panel blanco al centro
+function A(n,c){const id='a'+(uid++),g='transform="rotate(-6 100 100) translate(-0.4 -6.6)"',L=100,x=50,y=44;
+ return `<svg class="piece pA" viewBox="0 0 200 200" role="img" aria-label="Calca estrella de ${n.n} con código QR">
+ <defs><filter id="${id}" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="1.5" stdDeviation="2" flood-opacity=".25"/></filter></defs>
+ <g ${g} filter="url(#${id})"><path d="${SIL}" fill="#fff" stroke="#fff" stroke-width="12" stroke-linejoin="round"/></g>
+ <g ${g}><path d="${STAR}" fill="${c}"/></g>
+ <rect x="${x}" y="${y}" width="${L}" height="${L*1.16}" rx="9" fill="#fff"/><rect x="${x+.6}" y="${y+.6}" width="${L-1.2}" height="${L*1.16-1.2}" rx="8.5" fill="none" stroke="${c}" stroke-width="1.2" stroke-dasharray="2.4 2.4"/>
+ ${qr(n,x+5,y+4,L-10,qcol(c))}
+ <text x="100" y="${y+L*1.07}" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="7.6" fill="#1b1d1a">${n.n}</text>
+ <text x="100" y="${y+L*1.13}" text-anchor="middle" font-family="Figtree, sans-serif" font-size="4.4" font-weight="700" letter-spacing=".6" fill="${c===qcol(c)?c:'#5c5f5b'}">${n.que.toUpperCase()} · ESCANEA · SCAN</text></svg>`}
+// B · sello Convia: anillo del color del lugar con textos en arco y estrellas separadoras, aro punteado, disco blanco con el QR
+function B(n,c){const id='b'+(uid++),t=tx(c);
+ return `<svg class="piece pB" viewBox="0 0 240 240" role="img" aria-label="Sello de ${n.n} con código QR">
+ <defs><path id="${id}t" d="M 30 120 A 90 90 0 0 1 210 120"/><path id="${id}b" d="M 21 120 A 99 99 0 0 0 219 120"/></defs>
+ <circle cx="120" cy="120" r="118" fill="${c}"/><circle cx="120" cy="120" r="110" fill="none" stroke="${t}" stroke-width="1.4" opacity=".8"/>
+ <text font-family="Fraunces, Georgia, serif" font-size="15" fill="${t}" text-anchor="middle" letter-spacing="1"><textPath href="#${id}t" startOffset="50%">${n.n.toUpperCase()}</textPath></text>
+ <text font-family="Figtree, sans-serif" font-size="10.5" font-weight="700" fill="${t}" text-anchor="middle" letter-spacing="2"><textPath href="#${id}b" startOffset="50%">${n.que.toUpperCase()} · ESCANEA · SCAN</textPath></text>
+ ${est(15.5,120,19,t,-8)}${est(224.5,120,19,t,8)}
+ <circle cx="120" cy="120" r="79" fill="#fff"/><circle cx="120" cy="120" r="74" fill="none" stroke="${c}" stroke-width="1.2" stroke-dasharray="2.5 4"/>
+ ${qr(n,120-48,120-48,96,qcol(c))}
+ ${est(120,206,0,t)}</svg>`}
+// C · etiqueta con estrella calada: banda del color del lugar con la estrella perforada (se ve a través), línea de corte, QR abajo
+function C(n,c){const id='c'+(uid++),t=tx(c),W=62,H=100;
+ return `<svg class="piece pC" viewBox="0 0 ${W} ${H}" role="img" aria-label="Etiqueta de ${n.n} con código QR">
+ <defs><mask id="${id}"><rect width="${W}" height="${H}" fill="#fff"/><g transform="translate(31 17) rotate(-8) scale(.12) translate(-100.4 -106.6)"><path d="${SIL}" fill="#000"/></g><circle cx="31" cy="4.6" r="1.9" fill="#000"/></mask>
+ <filter id="${id}s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy=".8" stdDeviation="1.2" flood-opacity=".22"/></filter></defs>
+ <g mask="url(#${id})" filter="url(#${id}s)"><rect width="${W}" height="${H}" rx="5" fill="#fff"/><path d="M0 5 a5 5 0 0 1 5 -5 h${W-10} a5 5 0 0 1 5 5 v32.5 h-${W} Z" fill="${c}"/>
+ <g transform="translate(31 17) rotate(-8) scale(.12) translate(-100.4 -106.6)"><path d="${STAR}" fill="${t}" opacity=".9"/></g></g>
+ <text x="31" y="33.4" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="4.4" fill="${t}">${n.n}</text>
+ <line x1="3" y1="39.4" x2="${W-3}" y2="39.4" stroke="#c9cbc6" stroke-width=".4" stroke-dasharray="1.4 1.2"/>
+ ${qr(n,31-19,41,38,qcol(c))}
+ <text x="31" y="84" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="4.4" fill="#1b1d1a">${n.que} <tspan font-style="italic" font-size="3.2" fill="#5c5f5b">${n.what}</tspan></text>
+ <text x="31" y="89.4" text-anchor="middle" font-family="Figtree, sans-serif" font-size="2.6" fill="#5c5f5b">Escanea · Scan · NFC</text>
+ <text x="5" y="96" font-family="Figtree, sans-serif" font-size="2.6" font-weight="700" fill="#1b1d1a">Mesa 4</text><text x="${W-5}" y="96" text-anchor="end" font-family="Figtree, sans-serif" font-size="2.3" fill="#6a6d68">${n.que} en Convia</text></svg>`}
+const PROPS=[
+ ['A · Calca estrella','La que te gustó, refinada. Un sticker recortado con la silueta de la estrella; el contorno dibujado a mano lleva el color del lugar y el QR descansa en un panel blanco con borde punteado, con el nombre debajo. La estrella enmarca el QR: no lo tapa ni se difumina.',A,'9 cm, sticker recortado',['<b>Fuerza</b>: la estrella entera y reconocible','<b>Riesgo</b>: el panel cubre el centro de la estrella']],
+ ['B · Sello Convia','El QR es el centro de un sello redondo, de la misma familia que los sellos de giro: nombre en el arco de arriba, «Menú · Escanea · Scan» en el de abajo, aro punteado y estrellas de Convia como separadores.',B,'8 cm, calca redonda o posavasos',['<b>Fuerza</b>: el QR cabe natural en el círculo; se siente oficial, como sello','<b>Riesgo</b>: la estrella es pequeña; Convia se reconoce por el formato']],
+ ['C · Etiqueta con estrella calada','Una ficha tipo llavero o boleto, como la ficha de los perfiles: arriba el color del lugar con la estrella de Convia perforada (se ve a través) y su contorno; línea de corte punteada; abajo el QR limpio, el menú y la mesa.',C,'6.2 × 10 cm, en atril o colgada',['<b>Fuerza</b>: QR grande y limpio; la estrella calada es un detalle de imprenta memorable','<b>Riesgo</b>: perforar cuesta un poco más (suajado)']]];
+document.getElementById('props').innerHTML=PROPS.map(([t,d,f,m,pq])=>`<section class="prop"><div class="wrap"><h2 class="d">${t}</h2><p>${d}</p><ul class="pq">${pq.map(x=>`<li>${x}</li>`).join('')}</ul>
+<div class="fila">${Object.values(NEG).map(n=>{hazQR(n);return [n.colores[0],n.colores[1]].map(c=>`<figure>${f(n,c)}<figcaption>${n.n} · ${m}</figcaption></figure>`).join('')}).join('')}</div></div></section>`).join('');
+</script>
+</body>
+</html>
