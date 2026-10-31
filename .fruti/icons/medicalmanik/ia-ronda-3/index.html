@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Manik IA Movimiento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300..700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Ecosistema Manik · IA ronda 3: dirección C (tinta noche + destello doble) con tres animaciones elegidas por el usuario (4 órbita, 5 respiración, 6 trazo),
+   cada una con un significado: respiración = invitación, órbita = analizando, trazo = redactando. Tokens del sistema; --ia-* son propuesta. */
+:root{--canvas:#F5F7FB;--surface:#FFFFFF;--surface-soft:#EEF1F7;--ink:#14213D;--muted:#4A5674;--subtle:#7A849C;--line:#E1E6F0;--line-control:#858EA5;
+--noche:#0F1C3F;--manik:#234899;--manik-hover:#1E3C7D;--manik-soft:#E9EDF5;--exito:#15814B;--aviso-soft:#F6EFE6;--on-aviso-soft:#A05C03;
+--ia:#0F1C3F;--ia-hover:#1B2B57;--ia-destello:#5FD3E2;
+--r-sm:10px;--r-md:14px;--r-lg:18px;--r-2xl:24px;--pill:999px;
+--sh-card:0 1px 2px rgba(20,33,61,.05),0 5px 14px rgba(20,33,61,.05);--sh-pop:0 2px 8px rgba(20,33,61,.08),0 18px 44px rgba(20,33,61,.16);
+--display:"Urbanist","Segoe UI",system-ui,sans-serif;--sans:"Atkinson Hyperlegible Next","Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:400 16px/24px var(--sans)}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px}h1,h2,h3,h4{font-family:var(--display);font-weight:600;margin:0}
+:focus-visible{outline:2px solid var(--manik);outline-offset:2px}[hidden]{display:none!important}
+.proto{background:var(--noche);color:#fff;font-size:13px;line-height:18px}.proto .wrap{padding-block:7px}
+.intro{padding-block:32px 8px}.intro h1{font-weight:300;font-size:clamp(32px,4.4vw,44px);line-height:1.08;letter-spacing:-.03em}.intro p{color:var(--muted);max-width:76ch;margin:10px 0 0}.intro p b{color:var(--ink)}
+.ov{font-size:12px;line-height:16px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}
+/* tarjetas de significado */
+.tres{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;padding-block:22px 8px}
+.sig{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-2xl);padding:20px;display:grid;gap:12px;align-content:start}
+.sig h2{font-size:20px;line-height:28px}.sig p{margin:0;font-size:14px;line-height:20px;color:var(--muted)}.sig p b{color:var(--ink)}
+.esc{background:var(--surface-soft);border-radius:var(--r-lg);padding:16px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.tile{width:64px;height:64px;border-radius:18px;background:var(--ia);display:grid;place-items:center;flex:none}.tile svg{width:34px;height:34px;overflow:visible}
+.spec{display:grid;grid-template-columns:auto 1fr;gap:2px 12px;margin:0;font-size:13px;line-height:18px}.spec dt{color:var(--muted)}.spec dd{margin:0;font-variant-numeric:tabular-nums}
+.repetir{font:600 14px/20px var(--sans);min-height:40px;padding:0 14px;border-radius:var(--r-md);border:1px solid var(--line-control);background:var(--surface);color:var(--manik);cursor:pointer;justify-self:start}
+/* botón de IA */
+.ia{font:600 15px/20px var(--sans);min-height:44px;padding:0 18px 0 14px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;position:relative;white-space:nowrap;border-radius:var(--pill);border:0;color:#fff;background:var(--ia)}
+.ia:hover{background:var(--ia-hover)}.ia svg{width:20px;height:20px;flex:none;overflow:visible}.ia .cv{width:16px;height:16px;opacity:.85}
+.ia.busy{cursor:progress}
+.g,.c{fill:var(--ia-destello);transform-box:fill-box;transform-origin:center}
+/* 5 · respiración (invitación): halo cian, una vez ~1.6 s */
+.resp svg{animation:halo 1.6s ease-in-out 1}.ia.resp{animation:haloB 1.6s ease-in-out 1}
+@keyframes halo{0%,100%{filter:drop-shadow(0 0 0 rgba(95,211,226,0))}45%{filter:drop-shadow(0 0 5px rgba(95,211,226,.95))}}
+@keyframes haloB{0%,100%{box-shadow:0 0 0 0 rgba(95,211,226,0)}45%{box-shadow:0 0 0 5px rgba(95,211,226,.3)}}
+/* 4 · órbita (analizando): el destello chico gira alrededor del grande, en bucle */
+.orbita .orb{animation:orb 1.8s cubic-bezier(.45,.05,.55,.95) infinite;transform-origin:10px 11.5px}.orbita .g{animation:lat 1.8s ease-in-out infinite}
+@keyframes orb{to{transform:rotate(360deg)}}@keyframes lat{0%,100%{transform:scale(1)}50%{transform:scale(.82)}}
+/* 6 · trazo (redactando): se dibuja y se rellena, en bucle; «una» = una sola vez al aparecer un resultado */
+.trazo .g,.trazo .c,.una .g,.una .c{stroke:var(--ia-destello);stroke-width:1.2;stroke-dasharray:60;stroke-linejoin:round}
+.trazo .g,.trazo .c{animation:traza 2s ease-in-out infinite}.trazo .c{animation-delay:.2s}
+.una .g,.una .c{animation:traza 1.4s ease-out 1 both}.una .c{animation-delay:.15s}
+@keyframes traza{0%{stroke-dashoffset:60;fill-opacity:0}50%{stroke-dashoffset:0;fill-opacity:0}75%,100%{stroke-dashoffset:0;fill-opacity:1}}
+.demo-loop .g,.demo-loop .c,.demo-loop svg,.demo-loop .orb,.demo-loop.ia{animation-iteration-count:infinite!important}
+/* consulta */
+.consulta{margin-block:28px 48px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-2xl);padding:20px;display:grid;gap:14px}
+.consulta>header{display:grid;gap:4px}.consulta h2{font-size:24px;line-height:32px}.consulta header p{margin:0;color:var(--muted);font-size:14px;line-height:20px}
+.barra{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:var(--surface-soft);border-radius:var(--r-lg);padding:12px}
+.barra .t{font-weight:600;margin-right:auto;display:grid;grid-template-columns:auto 1fr;align-items:center;column-gap:8px;line-height:20px}.barra .t small{grid-column:2;font-weight:400;color:var(--muted);font-size:14px}
+.dot{width:8px;height:8px;border-radius:50%;background:#C33F4E}
+.btn{font:600 15px/20px var(--sans);min-height:44px;padding:0 18px;border-radius:var(--r-md);border:1px solid var(--line-control);background:var(--surface);color:var(--manik);display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.btn.p{background:var(--manik);border-color:var(--manik);color:#fff}.btn.p:hover{background:var(--manik-hover)}.btn.t3{border-color:transparent;background:transparent}.btn svg{width:18px;height:18px}
+.anc{position:relative}
+.menu{position:absolute;z-index:20;top:calc(100% + 8px);right:0;width:min(390px,calc(100vw - 32px));background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-pop);padding:8px;display:none}
+.menu.open{display:block;animation:sube .16s ease-out}@keyframes sube{from{opacity:0;transform:translateY(-4px)}}
+.menu .grp{font-size:12px;line-height:16px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px 10px 4px;display:flex;align-items:center;gap:6px}
+.menu .grp svg{width:16px;height:16px;overflow:visible}.menu .grp .g,.menu .grp .c{fill:var(--noche)}
+.mi{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;border:0;background:transparent;border-radius:var(--r-sm);padding:10px;cursor:pointer;font:inherit;color:var(--ink);min-height:44px}
+.mi:hover,.mi:focus-visible{background:var(--surface-soft)}.mi:focus-visible{outline-offset:-2px}
+.mi .mic{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;flex:none;background:var(--manik-soft);color:var(--noche)}.mi .mic svg{width:18px;height:18px}
+.mi b{display:block;font-weight:600;font-size:15px;line-height:20px}.mi .d{display:block;font-size:13px;line-height:18px;color:var(--muted)}
+.mi[aria-disabled="true"]{cursor:not-allowed}.mi[aria-disabled="true"] b{color:var(--muted)}
+.mi .req{display:inline-block;margin-top:2px;font-size:13px;line-height:18px;color:var(--on-aviso-soft);background:var(--aviso-soft);border-radius:var(--pill);padding:0 8px}
+.menu .pie{border-top:1px solid var(--line);margin-top:6px;padding:10px 10px 4px;font-size:13px;line-height:18px;color:var(--muted)}
+.res{border:1.5px dashed var(--line-control);border-radius:var(--r-2xl);padding:16px 18px;animation:sube .24s ease-out}.res.ok{border-style:solid;border-color:var(--exito)}
+.res:focus{outline:none}.res h4{font-size:18px;line-height:26px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.chip{font:600 13px/18px var(--sans);border-radius:var(--pill);padding:2px 10px 2px 6px;display:inline-flex;align-items:center;gap:4px;background:var(--noche);color:#fff}.chip svg{width:16px;height:16px;overflow:visible}
+.res .sub{margin:2px 0 10px;font-size:14px;line-height:20px;color:var(--muted)}
+.vals{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.vals li{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:4px 12px;align-items:center;border:1px solid var(--line);border-radius:var(--r-md);padding:8px 12px}
+.vals .k{font-size:14px;line-height:20px;font-weight:600;color:var(--muted);min-width:56px}.vals .v{font-weight:600;font-variant-numeric:tabular-nums;justify-self:end}
+.vals q,.vals .por{grid-column:2/4;font-size:13px;line-height:18px;color:var(--muted);quotes:"«" "»"}
+.vals input{width:20px;height:20px;margin:0;accent-color:var(--manik)}
+.cod{font-variant-numeric:tabular-nums;font-weight:700;color:var(--noche);background:var(--manik-soft);border-radius:8px;padding:0 8px}
+.borr{border:1px solid var(--line);border-radius:var(--r-md);padding:12px 14px;margin:0;line-height:26px;min-height:120px}
+.borr .cur{display:inline-block;width:2px;height:18px;background:var(--noche);vertical-align:-3px;margin-left:1px;animation:parp 1s steps(1) infinite}@keyframes parp{50%{opacity:0}}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.ok-msg{margin:10px 0 0;font-size:14px;color:var(--exito);display:flex;gap:6px;align-items:center}.ok-msg svg{width:18px;height:18px}
+.vacio{color:var(--muted);font-size:14px;margin:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:900px){.tres{grid-template-columns:1fr}}
+@media (max-width:520px){.barra .t{flex-basis:100%}.menu{right:auto;left:0}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="proto" role="note"><div class="wrap">Ecosistema Manik · IA · ronda 3 · dirección C con las animaciones 4, 5 y 6 · paciente y datos ficticios · la IA no está conectada; los resultados son de ejemplo</div></div>
+<header class="intro wrap"><h1>Tres movimientos, tres significados</h1>
+<p>Te gustaron la <b>órbita</b>, la <b>respiración</b> y el <b>trazo</b>. En vez de escoger una, cada una dice algo distinto, así el médico sabe qué está haciendo la IA sin leer: <b>respira</b> cuando la invitas, <b>orbita</b> cuando analiza datos y <b>traza</b> cuando escribe.</p></header>
+<main class="wrap">
+<div class="tres" id="tres"></div>
+<section class="consulta" aria-labelledby="ch"><header><p class="ov">Pruébalo</p><h2 id="ch">Consulta de ejemplo</h2><p>Pasa el cursor por «IA» (respira). Elige «Detectar signos vitales» o «Sugerir códigos CIE-10» (orbita: analiza) o «Redactar padecimiento actual» (traza: escribe).</p></header>
+<div class="barra"><span class="t"><span class="dot" aria-hidden="true"></span>Mariana Ruiz · 34 años<small>Dictado de 6 min · consulta de hoy</small></span>
+<span class="anc"><button type="button" class="ia" id="bIA" aria-haspopup="menu" aria-expanded="false" aria-controls="mIA"><span class="ico"></span><span class="lbl">IA</span><svg class="cv" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><div class="menu" id="mIA" role="menu" aria-labelledby="bIA"></div></span>
+<button type="button" class="btn p">Guardar consulta</button></div>
+<div id="salida"><p class="vacio">Aquí llegan las sugerencias de la IA.</p></div>
+</section></main>
+<div class="sr" aria-live="polite" id="vivo"></div>
+<script>
+const SP=(c='')=>`<svg viewBox="0 0 24 24" aria-hidden="true" class="${c}"><path class="g" d="M10 3.5c.45 4.2 3.8 7.55 8 8-4.2.45-7.55 3.8-8 8-.45-4.2-3.8-7.55-8-8 4.2-.45 7.55-3.8 8-8z"/><g class="orb"><path class="c" d="M19 2c.2 1.6 1.4 2.8 3 3-1.6.2-2.8 1.4-3 3-.2-1.6-1.4-2.8-3-3 1.6-.2 2.8-1.4 3-3z"/></g></svg>`;
+const P={nota:'<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',pulso:'<path d="M3 12h4l2.5-6 4 12 2.5-6H21"/>',
+ tag:'<path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"/><circle cx="7.5" cy="7.5" r="1.2"/>',
+ escudo:'<path d="M20 13c0 5-3.5 7.5-7.7 9a1 1 0 0 1-.7 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.2-2.7a1.2 1.2 0 0 1 1.6 0C14.5 3.8 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M12 8v4M12 16h.01"/>',
+ cuidado:'<path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/>',lista:'<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+ ok:'<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>'};
+const ic=k=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[k]}</svg>`;
+// Significados: cada acción declara si analiza (órbita) o redacta (trazo)
+const SIG=[['resp','5 · Respiración','Te invito','Al pasar el cursor o con foco sobre «IA». Una sola vez: un halo cian crece y se apaga.',[['Cuándo','cursor o foco'],['Veces','1'],['Duración','1.6 s']]],
+ ['orbita','4 · Órbita','Estoy analizando','Mientras la IA busca en datos: signos vitales, códigos CIE-10, contraindicaciones, resumen. El texto dice «Analizando…».',[['Cuándo','mientras analiza'],['Veces','en bucle'],['Duración','1.8 s por vuelta']]],
+ ['trazo','6 · Trazo','Estoy redactando','Mientras escribe: padecimiento actual, sugerencias de cuidado. El texto dice «Redactando…». Al llegar un resultado, el destello del sello «Sugerido por IA» se traza una vez.',[['Cuándo','mientras escribe · al llegar'],['Veces','en bucle · 1'],['Duración','2 s · 1.4 s']]]];
+document.getElementById('tres').innerHTML=SIG.map(([k,t,q,d,s])=>`<article class="sig" aria-labelledby="h${k}"><p class="ov">${t}</p><h2 id="h${k}">«${q}»</h2>
+ <div class="esc"><span class="tile demo-loop ${k}" aria-hidden="true">${SP()}</span><span class="ia demo-loop ${k}" aria-hidden="true">${SP()}${k==='resp'?'IA':k==='orbita'?'Analizando…':'Redactando…'}</span></div>
+ <p>${d}</p><dl class="spec">${s.map(([a,b])=>`<dt>${a}</dt><dd>${b}</dd>`).join('')}</dl></article>`).join('');
+const ACC=[['pad','Redactar padecimiento actual','Del dictado, en lenguaje clínico','nota','trazo','c'],['sv','Detectar signos vitales','Del dictado: presión, frecuencia, temperatura, SpO₂','pulso','orbita','c'],
+ ['cie','Sugerir códigos CIE-10','Según el padecimiento y los hallazgos','tag','orbita','c'],['ci','Revisar contraindicaciones','La receta contra alergias y medicamentos activos','escudo','orbita','c','Necesita una receta'],
+ ['cu','Sugerencias de cuidado','Indicaciones para el paciente en lenguaje claro','cuidado','trazo','c'],['res','Resumir expediente','Consultas, diagnósticos y tratamientos previos','lista','orbita','p']];
+const it=([id,t,d,i,,,req])=>`<button type="button" class="mi" role="menuitem" tabindex="-1" data-a="${id}"${req?' aria-disabled="true"':''}><span class="mic">${ic(i)}</span><span><b>${t}</b><span class="d">${d}</span>${req?`<span class="req">${req}</span>`:''}</span></button>`;
+const mIA=document.getElementById('mIA'),bIA=document.getElementById('bIA'),vivo=document.getElementById('vivo'),sal=document.getElementById('salida'),red=matchMedia('(prefers-reduced-motion: reduce)');
+mIA.innerHTML=`<div class="grp">De esta consulta</div>${ACC.filter(a=>a[5]==='c').map(it).join('')}<div class="grp">Del paciente</div>${ACC.filter(a=>a[5]==='p').map(it).join('')}<div class="pie">La IA sugiere; usted decide. Nada entra al expediente sin su confirmación.</div>`;
+const ico=bIA.querySelector('.ico'),lbl=bIA.querySelector('.lbl');ico.outerHTML=SP('ico');
+// 5 · respiración al pasar el cursor o con foco
+const respira=()=>{if(bIA.classList.contains('busy')||bIA.classList.contains('resp'))return;bIA.classList.add('resp')};
+bIA.addEventListener('pointerenter',respira);bIA.addEventListener('focus',respira);bIA.addEventListener('animationend',e=>{if(e.animationName==='haloB')bIA.classList.remove('resp')});
+let abierto=false;
+function abrir(){mIA.classList.add('open');bIA.setAttribute('aria-expanded','true');abierto=true;mIA.querySelector('.mi:not([aria-disabled])').focus()}
+function cerrar(f=true){mIA.classList.remove('open');bIA.setAttribute('aria-expanded','false');abierto=false;if(f)bIA.focus()}
+bIA.onclick=()=>{if(bIA.classList.contains('busy'))return;abierto?cerrar():abrir()};
+document.addEventListener('click',e=>{if(abierto&&!e.target.closest('.anc'))cerrar(false);const mi=e.target.closest('.mi');if(mi&&mi.getAttribute('aria-disabled')!=='true')elegir(mi.dataset.a);
+ const ok=e.target.closest('[data-ok]');if(ok){const r=ok.closest('.res');r.classList.add('ok');r.querySelector('.chip').hidden=true;r.querySelector('.acts').hidden=true;r.querySelector('.ok-msg').hidden=false;vivo.textContent='Guardado en el expediente.'}
+ const no=e.target.closest('[data-no]');if(no){sal.innerHTML='<p class="vacio">Sugerencia descartada.</p>';bIA.focus();vivo.textContent='Sugerencia descartada.'}});
+document.addEventListener('keydown',e=>{if(!abierto)return;const its=[...mIA.querySelectorAll('.mi')],i=its.indexOf(document.activeElement);
+ if(e.key==='Escape'){e.preventDefault();cerrar()}else if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();its[(i+(e.key==='ArrowDown'?1:-1)+its.length)%its.length].focus()}
+ else if(e.key==='Home'||e.key==='End'){e.preventDefault();its[e.key==='Home'?0:its.length-1].focus()}else if(e.key==='Tab')cerrar(false)});
+const chip=`<span class="chip">${SP('una')}Sugerido por IA</span>`;
+const pie=t=>`<div class="acts"><button type="button" class="btn" data-ok>${t}</button><button type="button" class="btn t3" data-no>Descartar</button></div><p class="ok-msg" hidden>${ic('ok')}Guardado. Ya no lleva la marca de IA: ahora es dato del médico.</p>`;
+const PAD='Paciente femenina de 34 años que acude por cuadro de 3 días de evolución caracterizado por odinofagia, fiebre de 37.8 °C y malestar general. Niega tos y disnea. Refiere ingesta de paracetamol 500 mg con mejoría parcial de la fiebre. Sin alergias conocidas.';
+const R={
+ sv:()=>`<section class="res" tabindex="-1" aria-labelledby="rt"><h4 id="rt">Signos vitales del dictado ${chip}</h4><p class="sub">Encontré 3 valores. Marque los que quiere pasar a Signos vitales.</p>
+  <ul class="vals">${[['TA','138/88 mmHg','…está en ciento treinta y ocho sobre ochenta y ocho…'],['FC','92 lpm','…el pulso anda en noventa y dos…'],['Temp.','37.8 °C','…trae treinta y siete ocho de temperatura…']].map(([k,v,q],i)=>`<li><input type="checkbox" checked id="v${i}"><label class="k" for="v${i}">${k}</label><span class="v">${v}</span><q>${q}</q></li>`).join('')}</ul>${pie('Pasar a signos vitales')}</section>`,
+ cie:()=>`<section class="res" tabindex="-1" aria-labelledby="rt"><h4 id="rt">Códigos CIE-10 sugeridos ${chip}</h4><p class="sub">Según el padecimiento y los hallazgos de hoy. Marque los que aplican.</p>
+  <ul class="vals">${[['J02.9','Faringitis aguda, no especificada','odinofagia de 3 días y fiebre'],['J03.9','Amigdalitis aguda, no especificada','si hay hallazgos en amígdalas (no registrados aún)'],['R50.9','Fiebre, no especificada','temperatura de 37.8 °C']].map(([c,n,p],i)=>`<li><input type="checkbox" ${i===1?'':'checked'} id="c${i}" aria-label="${c} ${n}"><span class="cod">${c}</span><label for="c${i}">${n}</label><span class="por">Por: ${p}</span></li>`).join('')}</ul>${pie('Agregar al diagnóstico')}</section>`,
+ pad:()=>`<section class="res" tabindex="-1" aria-labelledby="rt"><h4 id="rt">Padecimiento actual ${chip}</h4><p class="sub">Borrador a partir del dictado. Puede editarlo antes de pasarlo a la nota.</p><p class="borr" id="borr" contenteditable="false"></p>${pie('Pasar a la nota')}</section>`};
+function elegir(a){cerrar();const acc=ACC.find(x=>x[0]===a);
+ if(!R[a]){sal.innerHTML=`<p class="vacio">«${acc[1]}» no tiene ejemplo en esta ronda; su movimiento sería ${acc[4]==='trazo'?'el trazo (redacta)':'la órbita (analiza)'}.</p>`;return}
+ const tipo=acc[4],txt=tipo==='trazo'?'Redactando…':'Analizando…';bIA.classList.remove('resp');bIA.classList.add('busy',tipo);bIA.setAttribute('aria-busy','true');lbl.textContent=txt;vivo.textContent=(tipo==='trazo'?'Redactando ':'Analizando ')+acc[1].toLowerCase()+'…';
+ sal.innerHTML='';const fin=()=>{bIA.classList.remove('busy',tipo);bIA.removeAttribute('aria-busy');lbl.textContent='IA';sal.innerHTML=R[a]();const r=sal.querySelector('.res');r.focus();
+  if(a==='pad')escribe();else vivo.textContent='Listo: sugerencias para revisar.'};
+ setTimeout(fin,red.matches?300:2200)}
+function escribe(){const el=document.getElementById('borr');if(red.matches){el.textContent=PAD;el.contentEditable='true';vivo.textContent='Listo: borrador del padecimiento para revisar.';return}
+ const w=PAD.split(' ');let i=0;el.innerHTML='<span class="cur"></span>';const t=setInterval(()=>{i++;el.innerHTML=w.slice(0,i).join(' ')+'<span class="cur"></span>';if(i>=w.length){clearInterval(t);el.textContent=PAD;el.contentEditable='true';vivo.textContent='Listo: borrador del padecimiento para revisar.'}},45)}
+</script>
+</body>
+</html>
