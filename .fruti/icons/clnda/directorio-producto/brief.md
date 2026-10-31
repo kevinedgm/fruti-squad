@@ -90,6 +90,7 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 - Intercambio de idiomas y Networking son **encuentros con día y hora**: la etiqueta siempre muestra cuándo.
 - Tarjeta: máximo 2 rasgos visibles (+N más), etiqueta neutra punteada para no competir con el color del giro. Filtros combinables (todos a la vez).
 - Negocios reales: sin rasgos hasta que el negocio los declare y se revisen.
+- r9 (usuario): en la tarjeta los rasgos van solo como **sellitos de ícono** (nombre en texto oculto y al pasar el cursor); el nombre y la regla se leen en el **perfil del lugar**. Tarjetas de tamaño único, solo datos básicos.
 
 ## Pendiente de operación (usuario, 2026-10-30: «tema de operación de negocio», se decide después)
 - Quién carga los primeros lugares al lanzar (curaduría e invitación vs. solicitudes espontáneas) y cuántos necesita la fase 1.
