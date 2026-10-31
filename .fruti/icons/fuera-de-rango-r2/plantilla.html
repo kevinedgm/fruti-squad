@@ -1,0 +1,61 @@
+<title>Indicador fuera de rango</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300..700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Uva · indicador único «fuera de rango» r2 (más simple) (captura de signos vitales, Expediente Manik). Un solo SVG para todos los signos; estado y color
+   por variables CSS en el contenedor. Colores de estado del sistema Manik: alto = error, bajo = info, normal = éxito. Tema claro únicamente. */
+:root{--canvas:#F5F7FB;--surface:#FFFFFF;--ink:#14213D;--muted:#4A5674;--line:#E1E6F0;--line-control:#858EA5;--manik:#234899;
+--exito:#15814B;--exito-soft:#E8F2ED;--error:#C33F4E;--error-soft:#F9ECED;--info:#3F7695;--info-soft:#ECF1F4;
+--display:"Urbanist","Segoe UI",system-ui,sans-serif;--sans:"Atkinson Hyperlegible Next",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;background:var(--canvas);color:var(--ink);font:400 15px/22px var(--sans);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2{font-family:var(--display);font-weight:600;margin:0;text-wrap:balance}p{margin:0}:focus-visible{outline:2px solid var(--manik);outline-offset:2px}
+.hoja{max-width:1120px;margin:0 auto;padding-block:32px 64px;display:grid;gap:24px}
+.intro{display:grid;gap:8px;max-width:74ch}.intro h1{font-size:38px;line-height:1.05;font-weight:300;letter-spacing:-.02em}.intro p{color:var(--muted)}.intro b{color:var(--ink)}
+.st-alto{--uva-alto:1;--uva-accent:var(--error)}.st-bajo{--uva-bajo:1;--uva-accent:var(--info)}.st-normal{--uva-normal:1;--uva-accent:var(--exito)}
+.vars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.var{border:1.5px solid var(--line);border-radius:18px;padding:14px;display:grid;gap:8px;background:var(--surface);cursor:pointer;text-align:left;font:inherit;color:inherit;align-content:start}
+.var:hover{border-color:var(--line-control)}.var[aria-pressed="true"]{border-color:var(--manik);box-shadow:inset 0 0 0 1px var(--manik)}
+.var .m{display:flex;gap:14px}.var .m span{display:grid;justify-items:center;gap:2px;font-size:11px;color:var(--muted)}.var svg{width:40px;height:40px}
+.var b{font-weight:600}.var .h{font-size:13.5px;line-height:19px;color:var(--muted)}
+.reco{display:inline-flex;font:700 11px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--exito);background:var(--exito-soft);border-radius:999px;padding:1px 8px;justify-self:start}
+.sec{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;display:grid;gap:12px}.sec h2{font-size:20px}.sec>p{color:var(--muted);font-size:14px;max-width:74ch}
+.estados{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.estados figure{margin:0;border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:8px;justify-items:start;font-size:13px;color:var(--muted)}
+.estados .t{display:flex;align-items:flex-end;gap:12px}.estados svg{display:block}
+.cap{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.vit{border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;gap:2px}
+.vit .n{font-size:13px;color:var(--muted)}.vit .fila{display:flex;align-items:center;gap:8px}.vit .v{font:600 22px/28px var(--sans);font-variant-numeric:tabular-nums}.vit .v small{font-size:13px;font-weight:500;color:var(--muted);margin-left:3px}
+.vit svg{width:22px;height:22px;flex:none}.vit .e{font:600 12.5px/18px var(--sans);border-radius:999px;padding:0 8px;justify-self:start}
+.vit.st-alto{border-color:#E6C2C8;background:linear-gradient(180deg,var(--error-soft),var(--surface) 70%)}.vit.st-alto .e{background:var(--error-soft);color:#BA3D4D}
+.vit.st-bajo{border-color:#C6D6E0;background:linear-gradient(180deg,var(--info-soft),var(--surface) 70%)}.vit.st-bajo .e{background:var(--info-soft);color:#3D7291}
+.vit.st-normal .e{background:var(--exito-soft);color:#157C4A}
+pre{margin:0;background:#0F1C3F;color:#E6ECF7;border-radius:14px;padding:14px 16px;font:13px/1.55 ui-monospace,Menlo,monospace;overflow-x:auto}
+.reglas{margin:0;padding-left:20px;display:grid;gap:6px;font-size:14px;line-height:20px;max-width:78ch}
+@media (max-width:1000px){.vars{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:560px){.vars{grid-template-columns:1fr}.estados{grid-template-columns:repeat(2,minmax(0,1fr))}}
+</style>
+<main class="hoja">
+<header class="intro"><h1>Indicador fuera de rango · ronda 2</h1><p><b>Un solo icono para todos los signos vitales.</b> Junto a cualquier valor dice si está dentro del rango, por arriba o por abajo; el componente cambia el estado y el color con variables de CSS. Qué signo es lo dice la etiqueta del campo, no el icono. Esta ronda es más simple: una sola forma, sin bandas ni escalas. Elige:</p></header>
+<div class="vars" id="vars" role="group" aria-label="Variantes del indicador"></div>
+<section class="sec" aria-labelledby="he"><h2 id="he">Sus cuatro estados</h2><p>Sin estado (todavía no hay lectura: no se ve nada), normal, alto y bajo. A 40, 24 y 16 px.</p><div class="estados" id="estados"></div></section>
+<section class="sec" aria-labelledby="hc"><h2 id="hc">En la captura de signos</h2><p>El mismo icono en los cinco signos. Valores de ejemplo de una consulta.</p><div class="cap" id="cap"></div></section>
+<section class="sec" aria-labelledby="hu"><h2 id="hu">Cómo se usa</h2><pre id="code"></pre>
+<ol class="reglas"><li>Un solo archivo, <code>out-of-range.svg</code>, en línea o con <code>&lt;use&gt;</code>: como <code>&lt;img&gt;</code> no recibe las variables.</li><li>Siempre con texto: «38.9 °C · Alta». El color y la forma refuerzan; la palabra decide.</li><li>Quieto: el estado dura toda la consulta.</li><li>Los umbrales de cada signo los define el área médica (por edad y contexto); el icono solo muestra el resultado.</li></ol></section>
+</main>
+<script>
+/*DATA*/
+let sel='b';const sz=(s,n)=>s.replace('<svg ',`<svg width="${n}" height="${n}" `);const cur=()=>V.find(x=>x.v===sel).svg;
+const EJ=[['Temperatura','38.9','°C','alto','Alta'],['Presión arterial','88/56','mmHg','bajo','Baja'],['Frecuencia cardiaca','118','lpm','alto','Alta'],['Frecuencia respiratoria','16','rpm','normal','Normal'],['SpO₂','89','%','bajo','Baja']];
+function render(){document.querySelectorAll('.var').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v===sel));const s=cur();
+ document.getElementById('estados').innerHTML=[['','Sin estado'],['st-normal','Normal'],['st-alto','Alto'],['st-bajo','Bajo']].map(([c,t])=>`<figure><span class="t ${c}">${sz(s,40)}${sz(s,24)}${sz(s,16)}</span>${t}</figure>`).join('');
+ document.getElementById('cap').innerHTML=EJ.map(([n,v,u,st,t])=>`<div class="vit st-${st}"><span class="n">${n}</span><span class="fila"><span class="v">${v}<small>${u}</small></span>${s}</span><span class="e">${t}</span></div>`).join('');
+ document.getElementById('code').textContent=`<!-- Un solo icono; el estado lo pone el contenedor -->
+<span class="medida medida--alto">38.9 °C <svg class="uva-icon uva-out-of-range">…</svg> Alta</span>
+
+.medida--alto   { --uva-alto: 1;   --uva-accent: var(--error); }
+.medida--bajo   { --uva-bajo: 1;   --uva-accent: var(--info); }
+.medida--normal { --uva-normal: 1; --uva-accent: var(--exito); }
+/* sin clase: el icono neutro, sin lectura */`}
+document.getElementById('vars').innerHTML=V.map(x=>`<button type="button" class="var" data-v="${x.v}" aria-pressed="false"><span class="m">${[['st-normal','normal'],['st-alto','alto'],['st-bajo','bajo']].map(([c,t])=>`<span class="${c}">${x.svg}${t}</span>`).join('')}</span>${x.v==='b'?'<span class="reco">Recomendada</span>':''}<b>${x.v.toUpperCase()} · ${x.n}</b><span class="h">${x.h}</span></button>`).join('');
+document.addEventListener('click',e=>{const b=e.target.closest('.var');if(b){sel=b.dataset.v;render()}});
+render();
+</script>
