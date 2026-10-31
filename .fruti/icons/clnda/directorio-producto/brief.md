@@ -100,7 +100,9 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 - r1 rechazado por el usuario: «no copiar Facebook». Pide **diseño propio con el tema de color del giro**, logo «Convia | <Giro>», portada en mosaico, cuartos en miniatura y todo **al alcance del pulgar** (uso mayoritario en teléfono). Hotel r2: `../convia-perfil-hotel-r2/`.
 - **Aprobado por el usuario (2026-10-31): perfil de hotel r2.** Queda como patrón base de los perfiles por giro: tema de color del giro, logo «Convia | <Giro>», portada en mosaico, ficha llavero con sello, boleto de datos clave, pestañas abajo en celular + botón flotante de contacto, listas compactas con miniatura que se despliegan. Cada giro cambia sus pestañas y su contenido, no esta base.
 - Logotipos de giro de un color: `../convia-final/sellos/<giro>-logotipo-giro.svg` (Cafés, Restaurantes, Hoteles, Talleres, Museos, Recorridos). [propuesta: «Hoteles» vs. «Alojamiento»]
-- Pendiente: cómo cargan los restaurantes su menú (foto/PDF vs. capturado platillo por platillo).
+- **Menú (usuario, 2026-10-31): se captura en línea en Convia** y el restaurante pone un **QR en la mesa** que abre ese menú en Convia: es el gancho de adquisición. Perfil de restaurante r1: `../convia-perfil-restaurante-r1/`.
+  - Riesgo: capturar cuesta; [propuesta] Convia hace la primera captura desde la foto del menú como parte de la admisión, y el negocio solo actualiza precios.
+  - [propuesta] La vista QR prioriza el menú; nada de anuncios ni registro para verlo.
 
 ## Pendiente de operación (usuario, 2026-10-30: «tema de operación de negocio», se decide después)
 - Quién carga los primeros lugares al lanzar (curaduría e invitación vs. solicitudes espontáneas) y cuántos necesita la fase 1.
