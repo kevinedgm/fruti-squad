@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Convia Perfil Hotel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..700,0..100,0..1&family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Convia · perfil de hotel r1 (demo interna). Mismo sistema que la página principal r9: perla, Cantera, Fraunces suave + Figtree. Tema claro por decisión de marca. */
+:root{--perla:%perla%;--sup:%sup%;--tinta:%tinta%;--sec:%sec%;--linea:%linea%;--foto:%foto%;--cantera:%cantera%;--suave:%suave%;--hf:%hfondo%;--ht:%htexto%;
+--display:"Fraunces",Georgia,"Times New Roman",serif;--dv:"SOFT" 100,"WONK" 0,"opsz" 96;--text:"Figtree",system-ui,-apple-system,"Segoe UI",sans-serif;--r:16px;--hh:55px;color-scheme:light}
+*{box-sizing:border-box}html{scroll-padding-top:120px}body{margin:0;background:var(--perla);color:var(--tinta);font:400 16px/1.55 var(--text)}
+a{color:inherit}button{font:inherit;color:inherit}:focus-visible{outline:2px solid var(--cantera);outline-offset:3px;border-radius:8px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+.d{font-family:var(--display);font-weight:500;font-variation-settings:var(--dv);letter-spacing:-.015em}
+.vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.proto{background:var(--tinta);color:#fff;font-size:12.5px}.proto .wrap{padding-block:5px}
+header.top{position:sticky;top:0;z-index:20;background:var(--sup);border-bottom:1px solid var(--linea)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:var(--hh)}.logo{height:28px;width:auto;display:block}
+.volver{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-weight:600;text-decoration:none}.volver:hover{text-decoration:underline}
+/* fotos de relleno */
+.ph{position:relative;overflow:hidden;background:var(--foto)}.ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:blur(6px) saturate(1.1);transform:scale(1.1)}
+.ej{position:absolute;right:12px;top:12px;z-index:1;background:rgba(255,255,255,.92);border-radius:6px;padding:2px 7px;font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--sec)}
+/* portada e identidad */
+.hero{padding-top:20px}
+.cover{aspect-ratio:21/8;border-radius:24px}
+.cover-all{position:absolute;right:14px;bottom:14px;z-index:1;display:inline-flex;align-items:center;gap:8px;background:var(--sup);border:0;border-radius:999px;padding:8px 16px;min-height:44px;font-weight:600;cursor:pointer;box-shadow:0 2px 10px rgba(27,29,26,.15)}
+.cover-all svg{width:18px;height:18px}
+.id{display:grid;grid-template-columns:auto 1fr auto;gap:8px 24px;align-items:start;padding-inline:24px;position:relative}.avatar{margin-top:-52px}.id-t{padding-top:14px}.id-a{padding-top:14px}
+.avatar{width:128px;height:128px;border-radius:50%;background:var(--hf);color:var(--ht);border:5px solid var(--perla);display:grid;place-items:center;font:500 46px/1 var(--display);font-variation-settings:var(--dv);letter-spacing:-.02em}
+.id-t{padding-bottom:4px;min-width:0}.id h1{font-size:clamp(32px,4vw,48px);line-height:1.05;margin:6px 0 4px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--hf);color:var(--ht);border-radius:999px;padding:3px 10px 3px 7px;font-size:12.5px;font-weight:600}.chip .ico{width:16px;height:16px}
+.sub-l{margin:0;color:var(--sec)}.sub-l b{color:var(--tinta)}
+.met{margin:6px 0 0;color:var(--cantera);display:flex;align-items:center;flex-wrap:wrap;gap:6px 8px;font-size:15px}.met b{font-weight:700}.met small{color:var(--sec);font-size:13.5px}
+.dots{display:inline-flex;gap:3px}.dots i{width:8px;height:8px;border-radius:50%;background:var(--linea)}.dots i.on{background:var(--cantera)}
+.favb{display:inline-flex;align-items:center;gap:5px;background:var(--cantera);color:#fff;border-radius:999px;padding:3px 10px 3px 7px;font-size:12.5px;font-weight:700}.favb svg{width:14px;height:14px}
+.id-a{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;padding-bottom:6px;max-width:420px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--linea);background:var(--sup);border-radius:999px;padding:8px 16px;min-height:44px;font-weight:600;text-decoration:none;cursor:pointer;white-space:nowrap}
+.btn svg{width:18px;height:18px;flex:none}.btn:hover{border-color:var(--tinta)}
+.btn.pri{background:var(--cantera);border-color:var(--cantera);color:#fff}.btn.pri:hover{background:#264a39}
+.btn[aria-pressed="true"]{background:var(--suave);border-color:var(--cantera);color:var(--cantera)}
+/* subnavegación */
+.subnav{position:sticky;top:var(--hh);z-index:15;background:var(--perla);border-bottom:1px solid var(--linea);margin-top:24px}
+.subnav ul{list-style:none;margin:0;padding:0;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.subnav a{display:inline-flex;align-items:center;min-height:48px;padding:0 12px;text-decoration:none;font-weight:600;color:var(--sec);border-bottom:2px solid transparent;white-space:nowrap}
+.subnav a:hover{color:var(--tinta)}.subnav a[aria-current="true"]{color:var(--tinta);border-bottom-color:var(--tinta)}
+/* cuerpo */
+.body{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:40px;align-items:start;padding-block:8px 64px}
+.sec{padding-top:36px}.sec+.sec{border-top:1px solid var(--linea);margin-top:36px}
+.sec h2{font-size:clamp(26px,2.8vw,32px);margin:0 0 6px}.sec .lead{margin:0 0 18px;color:var(--sec);font-size:14.5px}
+.desc{font-size:17.5px;max-width:62ch;margin:6px 0 20px}
+.datos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 24px}.datos div{background:var(--sup);border:1px solid var(--linea);border-radius:12px;padding:10px 14px}
+.datos dt{font-size:12.5px;font-weight:700;color:var(--sec)}.datos dd{margin:2px 0 0;font-weight:600;font-variant-numeric:tabular-nums}
+.h3{font-size:15px;font-weight:700;margin:0 0 10px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}.h3 small{font-weight:500;color:var(--sec);font-size:13px}
+.vbp{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.vbp li{display:inline-flex;align-items:center;gap:10px;background:var(--sup);border:1px solid var(--linea);border-radius:999px;padding:5px 14px 5px 5px;font-weight:600;font-size:14.5px}
+.sello{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--perla);border:1px dashed #9ea19b;transform:rotate(-6deg);flex:none}.sello .ico{width:19px;height:19px}
+.ok{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:var(--cantera);background:var(--suave);border-radius:999px;padding:2px 8px}
+/* habitaciones */
+.rooms{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.room{background:var(--sup);border:1px solid var(--linea);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.room .ph{aspect-ratio:4/3;border:0;padding:0;cursor:pointer;width:100%;display:block}
+.cnt{position:absolute;left:10px;bottom:10px;z-index:1;display:inline-flex;align-items:center;gap:6px;background:rgba(27,29,26,.72);color:#fff;border-radius:999px;padding:3px 10px;font-size:12.5px;font-weight:600}.cnt svg{width:14px;height:14px}
+.room-b{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}.room h3{font:500 21px/1.2 var(--display);font-variation-settings:var(--dv);margin:0}
+.spec{margin:0;color:var(--sec);font-size:14px}.tags{list-style:none;margin:0;padding:0;display:flex;gap:6px;flex-wrap:wrap}.tags li{background:var(--perla);border:1px solid var(--linea);border-radius:999px;padding:2px 10px;font-size:12.5px;font-weight:600}
+.price{margin:auto 0 0;padding-top:8px;border-top:1px solid var(--linea);display:flex;align-items:baseline;gap:6px;font-variant-numeric:tabular-nums}.price b{font:500 24px var(--display);font-variation-settings:var(--dv)}.price small{color:var(--sec)}
+.nota{font-size:13px;color:var(--sec);margin:14px 0 0}
+/* galería */
+.gal{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:150px;gap:8px}
+.gal button{border:0;padding:0;border-radius:12px;cursor:pointer}.gal button:first-child{grid-column:span 2;grid-row:span 2}
+.gal .more{position:absolute;inset:0;z-index:1;display:grid;place-items:center;background:rgba(27,29,26,.55);color:#fff;font:500 24px var(--display);font-variation-settings:var(--dv)}
+.gal figcaption{position:absolute;left:8px;bottom:8px;z-index:1;background:rgba(255,255,255,.92);border-radius:6px;padding:1px 7px;font-size:12px;font-weight:600}
+/* amenidades */
+.amen{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.amen li{display:flex;align-items:center;gap:12px;background:var(--sup);border:1px solid var(--linea);border-radius:12px;padding:10px 14px;font-weight:600}
+.amen .ico{width:30px;height:30px;flex:none}.amen small{display:block;font-weight:500;color:var(--sec);font-size:13px}
+.amen.no li{background:transparent;border-style:dashed;color:var(--sec)}.amen.no .ico{opacity:.55}
+/* volverían */
+.vol{display:grid;grid-template-columns:auto 1fr;gap:20px;align-items:center;background:var(--sup);border:1px solid var(--linea);border-radius:20px;padding:22px}
+.big{font:500 64px/1 var(--display);font-variation-settings:var(--dv);color:var(--cantera);font-variant-numeric:tabular-nums}.big small{font-size:24px;color:var(--sec)}
+.vol p{margin:0}.vol .dots i{width:11px;height:11px}
+.rate{border:0;margin:16px 0 0;padding:14px;background:var(--suave);border-radius:14px}.rate legend{float:left;width:100%;font-size:13.5px;font-weight:700;color:var(--cantera);margin-bottom:8px;padding:0}
+.rate .opts{display:flex;flex-wrap:wrap;gap:6px;clear:both}.rate label{position:relative;cursor:pointer}.rate input{position:absolute;opacity:0;inset:0}
+.rate span{display:inline-block;border:1px solid #c9d8cf;background:var(--sup);border-radius:999px;padding:6px 12px;font-size:13.5px;font-weight:600}
+.rate input:checked+span{background:var(--cantera);border-color:var(--cantera);color:#fff}.rate input:focus-visible+span{outline:2px solid var(--cantera);outline-offset:2px}
+/* ubicación */
+.map{aspect-ratio:16/7;border-radius:20px;border:1px solid var(--linea);background:#eef0ec}.map svg{width:100%;height:100%;display:block}
+.dirb{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px}.dirb p{margin:0;font-weight:600}.dirb small{display:block;font-weight:400;color:var(--sec)}
+/* novedades */
+.tl{list-style:none;margin:0;padding:0 0 0 22px;border-left:2px solid var(--linea);display:grid;gap:22px}
+.tl li{position:relative}.tl li::before{content:"";position:absolute;left:-29px;top:6px;width:12px;height:12px;border-radius:50%;background:var(--perla);border:2px solid var(--cantera)}
+.tl time{font-size:13px;font-weight:700;color:var(--sec)}.tl p{margin:2px 0 0;max-width:60ch}
+.tl .ph{margin-top:10px;max-width:420px;aspect-ratio:16/9;border-radius:14px}
+/* lateral */
+.side{position:sticky;top:calc(var(--hh) + 64px);display:grid;gap:14px;padding-top:36px}
+.card{background:var(--sup);border:1px solid var(--linea);border-radius:20px;padding:20px}.card h2{font-size:22px;margin:0 0 4px}.card>p{margin:0 0 14px;color:var(--sec);font-size:14px}
+.cl{list-style:none;margin:0;padding:0;display:grid}.cl li+li{border-top:1px solid var(--linea)}
+.cl a{display:flex;align-items:center;gap:12px;padding:10px 0;text-decoration:none;min-height:48px}.cl a:hover b{text-decoration:underline}
+.cl svg{width:20px;height:20px;flex:none;color:var(--cantera)}.cl small{display:block;color:var(--sec);font-size:12.5px}.cl b{font-weight:600;font-variant-numeric:tabular-nums}
+.card .btn.pri{width:100%;margin-bottom:6px}
+.hor{margin:0;display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:14.5px}.hor dt{color:var(--sec)}.hor dd{margin:0;font-weight:600;text-align:right;font-variant-numeric:tabular-nums}
+/* barra móvil, visor, aviso */
+.barm{display:none}
+dialog{border:0;padding:0;border-radius:20px;width:min(960px,94vw);background:var(--tinta);color:#fff}dialog::backdrop{background:rgba(15,16,14,.82)}
+.lb-f{margin:0}.lb-f .ph{aspect-ratio:3/2}.lb-c{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px}
+.lb-c p{margin:0;font-weight:600}.lb-c small{display:block;font-weight:400;opacity:.8}.lb-n{display:flex;gap:8px}
+.lb-c button{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:999px;min-width:44px;min-height:44px;padding:0 14px;font-weight:600;cursor:pointer}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:50;background:var(--tinta);color:#fff;border-radius:12px;padding:10px 16px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .2s;max-width:90vw}.toast.on{opacity:1}
+footer .wrap{padding-block:24px 40px;border-top:1px solid var(--linea);display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;align-items:center;font-size:13.5px;color:var(--sec)}footer .logo{height:22px}
+@media (max-width:980px){.body{grid-template-columns:1fr;gap:0}.side{position:static;padding-top:36px}.id{grid-template-columns:auto 1fr}.id-a{grid-column:1/-1;justify-content:flex-start;max-width:none}}
+@media (max-width:640px){.cover{aspect-ratio:16/10;border-radius:18px}.id{grid-template-columns:1fr;padding-inline:4px}.id-t{padding-top:0}.avatar{width:88px;height:88px;font-size:32px;border-width:4px}
+.id-a .btn.pri,.id-a [data-demo]{display:none}.datos{grid-template-columns:repeat(2,minmax(0,1fr))}.gal{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:120px}
+.rooms{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:84%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}.room{scroll-snap-align:start}.vol{grid-template-columns:1fr}.big{font-size:52px}.map{aspect-ratio:4/3}
+.barm{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--sup);border-top:1px solid var(--linea);padding:10px max(12px,env(safe-area-inset-left,0px)) calc(10px + env(safe-area-inset-bottom,0px))}
+.barm .btn{padding:8px 10px;font-size:14.5px}body{padding-bottom:76px}html{scroll-padding-top:110px}}
+@media (prefers-reduced-motion:reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+<div class="proto" role="note"><div class="wrap">Demo interna · perfil de hotel r1 · «Hotel Patio de Luz» es ficticio: sus fotos son de relleno (de otros lugares, desenfocadas), y sus contactos, dirección, precios y novedades son inventados</div></div>
+<header class="top"><div class="wrap"><a href="#" aria-label="Convia, inicio"><!--LOGO--></a><a class="volver" href="#" data-demo>← Volver al directorio</a></div></header>
+<main id="app"></main>
+<footer><div class="wrap"><!--LOGO--><span>Lo que vale la pena en Oaxaca, escogido por gente de aquí.</span><span>Prototipo · datos ficticios</span></div></footer>
+<dialog id="lb" aria-label="Fotos"><figure class="lb-f"><div class="ph" id="lb-ph"></div><figcaption class="lb-c"><p id="lb-t"></p><span class="lb-n"><button type="button" id="lb-p" aria-label="Foto anterior">←</button><button type="button" id="lb-s" aria-label="Foto siguiente">→</button><button type="button" id="lb-x">Cerrar</button></span></figcaption></figure></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+/*DATA*/
+const KEY='convia-hotel-r1';const ESCALA=['No era para mí','Estuvo bien','Me gustó','Volvería','De mis favoritos'];
+let M={};try{M=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(M))}catch(e){}};
+const star='<svg viewBox="0 0 200 200" aria-hidden="true"><path fill="currentColor" d="%STAR%"/></svg>';
+const I={ // íconos funcionales de contacto (trazo simple)
+ whatsapp:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-3.8A8 8 0 1 1 8 19z"/><path d="M9 9.5c.3 1.8 2 3.6 4 4.3l1.3-1 1.7.8-.5 1.6c-3.6.2-7.3-3.3-7.4-6.7l1.5-.6.9 1.6z"/></svg>',
+ tel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l1.5 4.5-2.3 1.4a11 11 0 0 0 5.9 5.9l1.4-2.3L20 15v4a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 5.6 1.5 1.5 0 0 1 5 4z"/></svg>',
+ mail:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5L12 13l8.5-6.5"/></svg>',
+ web:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/></svg>',
+ ig:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>',
+ pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>',
+ fotos:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 8"/></svg>',
+ guardar:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-6-4-6 4z"/></svg>'};
+const ph=(img,cls='')=>`<span class="ph ${cls}" style="display:block">${img?`<img src="img/${img}" alt="" loading="lazy">`:''}</span>`;
+const n10=Math.round(H.w/H.v*10), fav=H.v>=10&&H.fav>=.4;
+const dots=n=>`<span class="dots" aria-hidden="true">${'<i class=on></i>'.repeat(n)}${'<i></i>'.repeat(10-n)}</span>`;
+const st=()=>M.s;
+function acts(){const s=st();return `<button class="btn" type="button" data-act="quiero" aria-pressed="${s==='quiero'}">${I.guardar}${s==='quiero'?'En mi lista':'Quiero ir'}</button><button class="btn" type="button" data-act="fui" aria-pressed="${s==='fui'}">${star}${s==='fui'?'Ya fui':'¿Ya fuiste?'}</button>`}
+function rateBox(){if(st()!=='fui')return'';return `<fieldset class="rate"><legend>Ya fuiste: ¿qué tal te pareció?</legend><div class="opts">${ESCALA.map((t,i)=>`<label><input type="radio" name="rate" value="${i}" ${M.r===i?'checked':''}><span>${t}</span></label>`).join('')}</div></fieldset>`}
+const GAL=H.galeria.map(([f,t])=>({f,t}));
+const SECS=[['resumen','Resumen'],['habitaciones','Habitaciones'],['galeria','Galería'],['amenidades','Amenidades'],['volverian','¿Volverían?'],['ubicacion','Cómo llegar'],['novedades','Novedades']];
+const contacto=H.contacto.map(([k,t,v])=>`<li><a href="#" data-demo>${I[k]}<span><small>${t}</small><b>${v}</b></span></a></li>`).join('');
+document.getElementById('app').innerHTML=`
+<section class="wrap hero" aria-label="Portada">
+<div class="cover ph">${`<img src="img/${GAL[0].f}" alt="">`}<span class="ej">Ejemplo · fotos de relleno</span><button class="cover-all" type="button" data-gal="0">${I.fotos}Ver las ${GAL.length} fotos</button></div>
+<div class="id"><div class="avatar" aria-hidden="true">PL</div>
+<div class="id-t"><span class="chip">${ICO_H}Hoteles boutique</span><h1 class="d">${H.n}</h1><p class="sub-l">${H.zona} · Desde <b>${H.desde}</b> por noche</p>
+<p class="met" aria-label="${n10} de cada 10 personas volverían, ${H.v} visitas">${dots(n10)}<b>${n10} de cada 10</b> volverían<small>· ${H.v} visitas</small>${fav?`<span class="favb">${star}Favorito Convia</span>`:''}</p></div>
+<div class="id-a"><a class="btn pri" href="#" data-demo>${I.whatsapp}Reservar por WhatsApp</a><a class="btn" href="#" data-demo>${I.tel}Llamar</a><span id="acts-top" style="display:contents">${acts()}</span></div></div>
+</section>
+<nav class="subnav" aria-label="Secciones del perfil"><div class="wrap"><ul>${SECS.map(([id,t])=>`<li><a href="#${id}">${t}</a></li>`).join('')}</ul></div></nav>
+<div class="wrap body"><div class="main">
+<section class="sec" id="resumen" aria-labelledby="h-res"><h2 class="d" id="h-res">Sobre el hotel</h2><p class="desc">${H.d}</p>
+<dl class="datos">${H.datos.map(([k,v])=>`<div><dt>${k}</dt><dd>${v}</dd></div>`).join('')}</dl>
+<p class="h3">Va bien para <span class="ok">✓ revisado por Convia</span></p>
+<ul class="vbp">${H.ras.map(k=>`<li title="${RAS[k].crit}"><span class="sello">${RAS[k].ico}</span>${RAS[k].n}</li>`).join('')}</ul></section>
+<section class="sec" id="habitaciones" aria-labelledby="h-hab"><h2 class="d" id="h-hab">Habitaciones</h2><p class="lead">Precios de referencia por noche, con impuestos. La tarifa y la disponibilidad las confirma el hotel.</p>
+<div class="rooms">${H.cuartos.map((c,i)=>`<article class="room"><button class="ph" type="button" data-room="${i}" aria-label="Ver ${c.fotos.length} fotos de ${c.n}"><img src="img/${c.fotos[0]}" alt=""><span class="cnt">${I.fotos}${c.fotos.length} fotos</span></button>
+<div class="room-b"><h3>${c.n}</h3><p class="spec">${c.cap} · ${c.cama} · ${c.m2}</p><ul class="tags">${c.extra.map(x=>`<li>${x}</li>`).join('')}</ul>
+<p class="price"><small>desde</small><b>${c.p}</b><small>por noche</small></p></div></article>`).join('')}</div></section>
+<section class="sec" id="galeria" aria-labelledby="h-gal"><h2 class="d" id="h-gal">Galería</h2><p class="lead">Fotos que sube el propio hotel.</p>
+<div class="gal">${GAL.slice(0,5).map((g,i)=>`<button class="ph" type="button" data-gal="${i}" aria-label="${i===4&&GAL.length>5?`Ver las ${GAL.length} fotos`:`Ver foto: ${g.t}`}"><img src="img/${g.f}" alt="" loading="lazy">${i===4&&GAL.length>5?`<span class="more" aria-hidden="true">+${GAL.length-4}</span>`:`<figcaption aria-hidden="true">${g.t}</figcaption>`}</button>`).join('')}</div></section>
+<section class="sec" id="amenidades" aria-labelledby="h-am"><h2 class="d" id="h-am">Amenidades</h2><p class="lead">Las declara el hotel.</p>
+<ul class="amen">${H.amen.map(a=>{const [k,x]=Array.isArray(a)?a:[a,''];return `<li>${AMS[k].ico}<span>${AMS[k].n}${x?`<small>${x}</small>`:''}</span></li>`}).join('')}</ul>
+${H.no.length?`<p class="h3" style="margin-top:18px">No tiene</p><ul class="amen no">${H.no.map(([k,x])=>`<li>${AMS[k].ico}<span>${AMS[k].n}<small>${x}</small></span></li>`).join('')}</ul>`:''}</section>
+<section class="sec" id="volverian" aria-labelledby="h-vol"><h2 class="d" id="h-vol">¿La gente volvería?</h2><p class="lead">Lo dicen quienes marcaron que ya fueron. Sin estrellas: cuenta cuántos volverían o lo tienen entre sus favoritos.</p>
+<div class="vol"><p class="big">${n10}<small> de 10</small></p><div><p>${dots(n10)}</p><p style="margin-top:6px"><b>${n10} de cada 10 personas volverían</b> · ${H.v} visitas registradas</p>${fav?'<p class="nota" style="margin-top:6px"><b>Favorito Convia:</b> 10 visitas o más y al menos 4 de cada 10 lo marcaron «De mis favoritos».</p>':''}</div></div>
+<div id="rate-w">${rateBox()}</div></section>
+<section class="sec" id="ubicacion" aria-labelledby="h-ub"><h2 class="d" id="h-ub">Cómo llegar</h2>
+<div class="map" role="img" aria-label="Mapa ilustrativo de la ubicación del hotel"><svg viewBox="0 0 800 350" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><g stroke="#fff" stroke-width="18" stroke-linecap="round">${[60,170,280].map(y=>`<path d="M-20 ${y}H820"/>`).join('')}${[90,250,410,570,730].map(x=>`<path d="M${x} -20V370"/>`).join('')}</g><path d="M-20 330 C200 300 420 360 820 310" stroke="#d6e2ec" stroke-width="26" fill="none"/><rect x="430" y="80" width="120" height="70" rx="10" fill="#dfe8dc"/><g transform="translate(372 98)"><circle r="30" fill="#2f5a45"/><g transform="translate(-18 -18) scale(.18)"><path fill="#fff" d="%STAR%"/></g></g></svg></div>
+<div class="dirb"><p>${H.dir}<small>A tres calles del andador · dirección ficticia de la demo</small></p><a class="btn" href="#" data-demo>${I.pin}Abrir en Google Maps</a></div></section>
+<section class="sec" id="novedades" aria-labelledby="h-nov"><h2 class="d" id="h-nov">Novedades</h2><p class="lead">Lo que el hotel publica: aperturas, temporadas, avisos.</p>
+<ol class="tl">${H.posts.map(([iso,f,t,img,alt])=>`<li><time datetime="${iso}">${f}</time><p>${t}</p>${img?ph(img):''}</li>`).join('')}</ol></section>
+</div>
+<aside class="side" aria-label="Contacto y horarios"><div class="card"><h2 class="d">Para reservar</h2><p>Convia no hace reservaciones: escribes directo al hotel, sin comisión ni intermediarios.</p>
+<a class="btn pri" href="#" data-demo>${I.whatsapp}Escribir por WhatsApp</a><ul class="cl">${contacto}</ul></div>
+<div class="card"><h2 class="d">Horarios</h2><dl class="hor"><dt>Llegada</dt><dd>desde 15:00</dd><dt>Salida</dt><dd>hasta 12:00</dd><dt>Recepción</dt><dd>24 h</dd><dt>Desayuno</dt><dd>8:00 – 11:00</dd></dl></div></aside>
+</div>
+<div class="barm" aria-label="Contacto rápido"><a class="btn pri" href="#" data-demo>${I.whatsapp}WhatsApp</a><a class="btn" href="#" data-demo>${I.tel}Llamar</a><a class="btn" href="#" data-demo>${I.pin}Llegar</a></div>`;
+// visor de fotos
+const lb=document.getElementById('lb');let set=GAL,ix=0;
+function show(){const g=set[ix];document.getElementById('lb-ph').innerHTML=`<img src="img/${g.f}" alt="">`;document.getElementById('lb-t').innerHTML=`${g.t}<small>${ix+1} de ${set.length} · foto de relleno</small>`}
+function open(list,i){set=list;ix=i;show();lb.showModal()}
+document.getElementById('lb-p').onclick=()=>{ix=(ix-1+set.length)%set.length;show()};document.getElementById('lb-s').onclick=()=>{ix=(ix+1)%set.length;show()};document.getElementById('lb-x').onclick=()=>lb.close();
+lb.addEventListener('keydown',e=>{if(e.key==='ArrowLeft')document.getElementById('lb-p').click();if(e.key==='ArrowRight')document.getElementById('lb-s').click()});
+lb.addEventListener('click',e=>{if(e.target===lb)lb.close()});
+// acciones
+let tt;function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2600)}
+document.addEventListener('click',e=>{const g=e.target.closest('[data-gal]');if(g){open(GAL,+g.dataset.gal);return}
+const r=e.target.closest('[data-room]');if(r){const c=H.cuartos[+r.dataset.room];open(c.fotos.map((f,i)=>({f,t:`${c.n} · foto ${i+1}`})),0);return}
+const d=e.target.closest('[data-demo]');if(d){e.preventDefault();toast('Demo: los contactos, la dirección y los enlaces son ficticios.');return}
+const a=e.target.closest('[data-act]');if(a){const k=a.dataset.act;if(k==='quiero')M=M.s==='quiero'?{}:{s:'quiero'};else M=M.s==='fui'?{s:'quiero'}:{s:'fui',r:null};save();
+document.getElementById('acts-top').innerHTML=acts();document.querySelector(`#acts-top [data-act="${k}"]`).focus();document.getElementById('rate-w').innerHTML=rateBox();
+if(k==='fui'&&M.s==='fui')toast('Marcado como «Ya fui». Califícalo en «¿Volverían?».')}});
+document.addEventListener('change',e=>{if(e.target.name==='rate'){M.r=+e.target.value;save()}});
+// sección activa en la subnavegación
+const links=[...document.querySelectorAll('.subnav a')];
+const io=new IntersectionObserver(es=>{es.forEach(en=>{if(en.isIntersecting)links.forEach(l=>l.setAttribute('aria-current',l.getAttribute('href')==='#'+en.target.id))})},{rootMargin:'-30% 0px -60% 0px'});
+SECS.forEach(([id])=>io.observe(document.getElementById(id)));
+</script>
+</body>
+</html>

@@ -92,6 +92,13 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 - Negocios reales: sin rasgos hasta que el negocio los declare y se revisen.
 - r9 (usuario): en la tarjeta los rasgos van solo como **sellitos de ícono** (nombre en texto oculto y al pasar el cursor); el nombre y la regla se leen en el **perfil del lugar**. Tarjetas de tamaño único, solo datos básicos.
 
+## Perfiles de negocio por giro (usuario, 2026-10-31)
+- Perfil completo «tipo Instagram/Facebook» que al negocio le dé gusto tener; **cada giro con su propia configuración**. Orden pedido: hoteles primero; luego restaurantes y cafés (menú con precios), recorridos (lugares, desde cuántas personas, precio), talleres, museos (exposiciones, eventos y talleres pasados y próximos, cuántos asistieron).
+- Convia **no hace reservaciones**: el perfil da contacto directo (WhatsApp, teléfono, correo, web), horarios y enlace a Google Maps.
+- Distinción en el perfil: **rasgos** «Va bien para» = revisados por Convia; **amenidades** = las declara el negocio. [propuesta]
+- Hotel r1: `../convia-perfil-hotel-r1/` (estructura en su LEEME).
+- Pendiente: cómo cargan los restaurantes su menú (foto/PDF vs. capturado platillo por platillo).
+
 ## Pendiente de operación (usuario, 2026-10-30: «tema de operación de negocio», se decide después)
 - Quién carga los primeros lugares al lanzar (curaduría e invitación vs. solicitudes espontáneas) y cuántos necesita la fase 1.
 
