@@ -73,7 +73,9 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 ## Página principal r4 (usuario, 2026-10-31)
 - Fondo **perla** (#f9f9f7), sin beige; superficies blancas.
 - Estructura de **directorio por giro** (pestañas) con estantes: este fin de semana, nuevos, más buscados; entrada por intención («¿qué hago este fin?», «un café nuevo»).
-- **Pasaporte Convia**: el usuario marca «ya fui», junta sellos por giro; 5 de un giro = insignia. [propuesta: cuántos por insignia y cómo se valida la visita — autodeclarado vs. escanear el QR de la tarjeta de mostrador]
+- **Mis lugares (usuario, 2026-10-31)**: registro **personal** (para uno o con amigos), no verificación: lista «Quiero ir» → al ir se marca «Ya fui» y se califica con **escala propia, sin estrellas**: No era para mí · Estuvo bien · Me gustó · Volvería · De mis favoritos. La visita es autodeclarada.
+- Sellos personales: 5 de un giro = insignia [propuesta: número]. Prototipo r5 en `../convia-web-r5/`.
+- Fotos reales libres para la simulación: bloqueadas por la red de la sesión (Unsplash, Openverse, Wikimedia); pendiente habilitar un dominio.
 - Implica cuentas de usuario (fase 1 era solo información): [pendiente de decisión].
 
 ## Pendiente de operación (usuario, 2026-10-30: «tema de operación de negocio», se decide después)
