@@ -70,6 +70,12 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 - Negocios aprobados reciben calca de ventana (10 cm) y tarjeta de mostrador con QR.
 - **Vigencia anual por año calendario**: vence el 31 de diciembre; renovación en enero con revisión ligera (sigue abierto, fotos y horarios al día, sin reportes). Quien entra después del 1 de octubre recibe la del año siguiente. La visita de renovación es el momento de ofrecer la fase 2.
 
+## Página principal r4 (usuario, 2026-10-31)
+- Fondo **perla** (#f9f9f7), sin beige; superficies blancas.
+- Estructura de **directorio por giro** (pestañas) con estantes: este fin de semana, nuevos, más buscados; entrada por intención («¿qué hago este fin?», «un café nuevo»).
+- **Pasaporte Convia**: el usuario marca «ya fui», junta sellos por giro; 5 de un giro = insignia. [propuesta: cuántos por insignia y cómo se valida la visita — autodeclarado vs. escanear el QR de la tarjeta de mostrador]
+- Implica cuentas de usuario (fase 1 era solo información): [pendiente de decisión].
+
 ## Pendiente de operación (usuario, 2026-10-30: «tema de operación de negocio», se decide después)
 - Quién carga los primeros lugares al lanzar (curaduría e invitación vs. solicitudes espontáneas) y cuántos necesita la fase 1.
 
