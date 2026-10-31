@@ -117,7 +117,7 @@ Propuesta (por confirmar): «inmediato» = pasa la validación automática del p
 - **Organizador independiente r1** `../convia-perfil-organizador-r1/`: verde base de Convia (no tiene giro), avatar, revisión visible, «Seguir», pestaña Dónde con sus sedes; cada actividad dice «En» con el color del giro de la sede. [propuesta: color, «Seguir» implica avisos]
 - **«Seguir» con avisos de nuevas actividades: aprobado por el usuario (2026-10-31).** [pendiente: canal del aviso (correo, notificación web o WhatsApp)]
 - Corrección 2026-10-31: las fechas de los perfiles tenían el día de la semana corrido; se ajustó el número del día y se verificó contra el calendario 2026.
-- Pendiente: llevar el modelo al directorio (Talleres/Recorridos/Eventos como tipos de actividad por fecha, con «Organiza» y «En»).
+- **Directorio r11** `../convia-web-r11/`: el modelo llega al directorio: pestaña **Agenda** (actividades por día, «Organiza · En», filtros y «Solo lo que sigo»), **Quiénes organizan** con «Seguir», **campana de avisos**, «Actividades aquí» en cada lugar y enlaces a los perfiles completos.
 
 ## Pendiente de operación (usuario, 2026-10-30: «tema de operación de negocio», se decide después)
 - Quién carga los primeros lugares al lanzar (curaduría e invitación vs. solicitudes espontáneas) y cuántos necesita la fase 1.
