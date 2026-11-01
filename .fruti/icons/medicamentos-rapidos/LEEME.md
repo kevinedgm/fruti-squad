@@ -10,4 +10,4 @@ Pedido: un icono para reutilizar los medicamentos de la última consulta y otro 
 - Pendiente (usuario): elegir variantes; confirmar si los recomendados salen de un protocolo fijo o de la IA.
 
 Archivos: `gen.py` (genera `variantes/`, `variantes.json`, `revision.html`), `plantilla.html`.
-Revisión: https://claude.ai/artifact/ (ver respuesta de publicación)
+Revisión: https://claude.ai/artifact/RdJsJJVbS5rEk8vj8RbCdo
