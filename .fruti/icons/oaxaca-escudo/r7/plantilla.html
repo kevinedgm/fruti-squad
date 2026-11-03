@@ -1,0 +1,85 @@
+<title>Oaxaca · identidad r7</title>
+<meta name="claude:viewport-fit-sides" content="true">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--tinta:#111;--bg:#fff;--gris:#5b5b5b;--linea:#E3E3E3;--fondo:#F6F6F4;color-scheme:light}
+body.vino{--tinta:#3E0F2E}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fondo);color:#111;font:400 14px/1.5 Montserrat,system-ui,sans-serif}
+main{max-width:1240px;margin:0 auto;padding:28px max(16px,env(safe-area-inset-right)) 48px max(16px,env(safe-area-inset-left))}
+
+header.top{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;margin-bottom:8px;color:var(--tinta)}
+header.top .marca{font:800 clamp(36px,6vw,58px)/1 Montserrat;letter-spacing:-.02em}
+header.top .sep{width:2px;align-self:stretch;background:currentColor;min-height:48px}
+header.top .gob b{display:block;font:700 24px/1.2 Montserrat}header.top .gob span{font:500 13px Montserrat;letter-spacing:.14em;text-transform:uppercase}
+.aviso{font:600 12px Montserrat;letter-spacing:.06em;text-transform:uppercase;color:var(--gris);margin:6px 0 16px}
+.ctl{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;align-items:center;font-size:13px;color:var(--gris)}
+.ctl button{font:600 13px Montserrat;min-height:40px;padding:6px 16px;border-radius:999px;border:2px solid #111;background:#fff;color:#111;cursor:pointer}
+.ctl button[aria-pressed=true]{background:#111;color:#fff}
+.ctl button:focus-visible{outline:3px solid #3E0F2E;outline-offset:2px}
+.props{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px}
+.prop{background:#fff;border:1px solid var(--linea);border-radius:18px;padding:20px;color:var(--tinta);min-width:0}
+.prop.reco{border:2px solid var(--tinta)}
+.tit{display:flex;gap:8px;align-items:center}
+.tag{font:700 12px Montserrat;background:var(--tinta);color:#fff;padding:4px 12px;border-radius:6px}
+.chip{font:700 11px Montserrat;letter-spacing:.06em;text-transform:uppercase;border:1.5px solid var(--tinta);padding:2px 8px;border-radius:999px}
+.prop h2{font:800 24px/1.15 Montserrat;margin:10px 0 6px}
+.desc{margin:0 0 14px;color:var(--gris);font-size:13.5px}
+.prop h3{font:700 13px Montserrat;margin:18px 0 10px;padding-top:14px;border-top:1px solid var(--linea)}
+.hero{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:center}
+.hero .principal .em{width:100%;max-width:200px}.hero h3{border:0;margin:0 0 8px;padding:0}
+.ley{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.ley li{display:flex;gap:10px;align-items:center}
+.ley .ic{width:34px;height:28px;flex:none}
+.ley b{display:block;font:700 12.5px/1.2 Montserrat}.ley span{font-size:11.5px;color:var(--gris);line-height:1.3;display:block}
+.em{display:block;height:auto}
+.wm{display:flex;flex-direction:column;line-height:1}
+.wm b{font:800 30px/1 Montserrat;letter-spacing:.01em}.wm i{font:600 9.4px/1 Montserrat;font-style:normal;letter-spacing:.2em;margin-top:5px}
+.wm.c{align-items:center}.wm b,.wm i{white-space:nowrap}
+.v{display:flex;flex-direction:column;align-items:center;gap:6px}
+.v .em{width:110px}
+.h{display:flex;align-items:center;gap:10px}
+.h .em{width:62px}.h .div{width:2px;height:46px;background:currentColor}
+.fila{display:grid;grid-template-columns:repeat(3,auto);justify-content:space-between;align-items:end;gap:10px}
+.fila figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;min-width:0}
+figcaption{font:600 11.5px/1.3 Montserrat;color:#111}figcaption small{font-weight:400;color:var(--gris)}
+.vers .v .em{width:62px}.vers .v .wm b{font-size:18px}.vers .v .wm i{font-size:6px}
+.vers .h .em{width:40px}.vers .h .wm b{font-size:18px}.vers .h .wm i{font-size:5.6px}.vers .h .div{height:30px}
+.em.iso{width:56px}
+.esc .h.g .em{width:46px}.esc .h.g .wm b{font-size:20px}.esc .h.g .wm i{font-size:6.2px}.esc .h.g .div{height:34px}
+.esc .h.m .em{width:32px}.esc .h.m .wm b{font-size:14px}.esc .h.m .wm i{font-size:4.4px;letter-spacing:.14em}.esc .h.m .div{height:24px;width:1.5px}
+.em.min{width:40px}
+.prot{position:relative;border:1.5px dashed #BDBDBD;padding:26px 30px;display:flex;justify-content:center}
+.prot .x{position:absolute;font:600 10px Montserrat;color:var(--gris);border:1px solid #CCC;width:16px;height:16px;display:grid;place-items:center}
+.tl{top:4px;left:4px}.tr{top:4px;right:4px}.bl{bottom:4px;left:4px}.br{bottom:4px;right:4px}
+.prot .em{width:52px}.prot .wm b{font-size:22px}.prot .wm i{font-size:6.8px}.prot .div{height:36px}
+.sis{margin-top:14px;background:#fff;border:1px solid var(--linea);border-radius:18px;padding:18px 20px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;align-items:center;color:var(--tinta)}
+.sis>div{display:flex;gap:12px;align-items:center}
+.sis b{display:block;font:700 13px Montserrat}.sis span.t{font-size:12px;color:var(--gris)}
+.neg{background:var(--tinta);border-radius:12px;padding:8px;--bg:var(--tinta);color:#fff;flex:none}.neg .em{width:48px}
+.adm{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.adm .h .em{width:40px}.adm .wm b{font-size:18px}.adm .wm i{font-size:5.6px}.adm .h .div,.adm>.div{height:30px;width:2px;background:currentColor}
+.admt{font:600 11px/1.3 Montserrat}
+.notas{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.notas div{background:#fff;border:1px solid var(--linea);border-radius:14px;padding:14px 16px;font-size:13px;color:var(--gris)}.notas b{display:block;color:#111;font-size:14px;margin-bottom:4px}
+@media (max-width:520px){.hero{grid-template-columns:1fr}.fila{grid-template-columns:1fr 1fr}.prop{padding:16px}}
+</style>
+<main>
+<header class="top"><span class="marca">Oaxaca</span><span class="sep" aria-hidden="true"></span><span class="gob"><b>Gobierno del Estado</b><span>Sistema de identidad institucional permanente</span></span></header>
+<p class="aviso">Propuesta · ejercicio de diseño, no es la identidad oficial · una sola tinta</p>
+<div class="ctl" role="group" aria-label="Tinta"><span>Tinta:</span><button type="button" aria-pressed="true" data-t="">Negro</button><button type="button" aria-pressed="false" data-t="vino">Vino</button></div>
+<div class="props">{{CARDS}}</div>
+<div class="sis">
+<div>{{NEG}}<div><b>Versión en negativo</b><span class="t">Trazo blanco sobre la tinta institucional.</span></div></div>
+<div><div><b>Uso con administración</b><span class="t">Opcional, solo en texto y separado por una línea. Ningún gobierno agrega logo, lema ni colores propios.</span></div></div>
+<div>{{ADM}}</div>
+</div>
+<div class="notas">
+<div><b>Reglas de construcción</b>1) Un solo grosor de trazo en todo el emblema, sin rellenos. 2) Medidas principales en múltiplos de 4 (los puntos en arco y las diagonales se calculan). 3) Simetría exacta: cada pieza se dibuja por mitades y se refleja. 4) Ningún hueco entre trazos es más delgado que el trazo.</div>
+<div><b>Verificado en el render</b>{{QA}}</div>
+<div><b>El águila</b>Única excepción a la simetría: la cabeza mira a la izquierda, como en el escudo actual. Es un águila propia, no el escudo nacional (la ley federal no permite redibujarlo). Tipografía provisional: Montserrat.</div>
+</div>
+</main>
+<script>
+document.querySelectorAll('.ctl button').forEach(b=>b.onclick=()=>{document.body.className=b.dataset.t;document.querySelectorAll('.ctl button').forEach(x=>x.setAttribute('aria-pressed',x===b))});
+</script>
