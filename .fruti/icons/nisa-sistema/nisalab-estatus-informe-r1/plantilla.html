@@ -1,0 +1,89 @@
+<title>Estatus del informe NisaLab</title>
+<meta name="claude:viewport-fit-sides" content="true">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--az:#052A76;--tinta:#141B33;--gris:#4F5870;--borde:#DDE2EC;--bg:#EEF1F6;--sup:#fff;--pera:#C2D225;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tinta);font:400 14px/1.55 Poppins,system-ui,sans-serif}
+main{max-width:1120px;margin:0 auto;padding:32px max(16px,env(safe-area-inset-right)) 48px max(16px,env(safe-area-inset-left))}
+h1{font:700 26px/1.2 Poppins;color:var(--az);margin:0 0 6px}
+.lead{color:var(--gris);max-width:760px;margin:0 0 24px}
+.card{background:var(--sup);border:1px solid var(--borde);border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 1px 2px rgba(20,27,51,.05)}
+h2{font:600 18px/1.3 Poppins;margin:0 0 4px}
+.sub{color:var(--gris);margin:0 0 14px;font-size:13px}
+h3{font:600 11px/1 Poppins;letter-spacing:.06em;text-transform:uppercase;color:var(--gris);margin:18px 0 8px}
+.seg{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.seg button{font:500 13px Poppins;min-height:36px;padding:6px 12px;border-radius:999px;border:1px solid var(--borde);background:var(--sup);color:var(--tinta);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--az);border-color:var(--az);color:#fff}
+.seg button:focus-visible,.ver:focus-visible{outline:2px solid var(--az);outline-offset:2px}
+.ps{display:inline-flex;align-items:center;gap:6px;font:500 13px/18px Poppins;white-space:nowrap;border-radius:999px;padding:3px 10px 3px 7px}
+.ps svg{width:14px;height:14px;flex:none;--uva-stroke:2.4}
+.flujo{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.flujo b{color:var(--gris);font-weight:400}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:520px}
+th{text-align:left;font-weight:500;color:var(--gris);background:#F3F5F9;padding:8px 10px}
+td{padding:9px 10px;border-top:1px solid var(--borde)}
+.m{font-family:'IBM Plex Mono',monospace;font-size:12px}
+.gr{filter:grayscale(1)}
+.dirs{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.dir{border:1px solid var(--borde);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:8px}
+.dir.sel{border-color:var(--az);box-shadow:0 0 0 1px var(--az)}
+.grandes{display:flex;gap:18px;color:var(--tinta)}
+.grandes figure{margin:0;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;color:var(--gris);text-align:center;width:60px}
+.grandes svg{width:40px;height:40px}
+.pills{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.chip{align-self:flex-start;font:600 11px Poppins;letter-spacing:.04em;text-transform:uppercase;background:#DCFCE7;color:#166534;padding:2px 8px;border-radius:999px}
+.dir h4{font:600 15px Poppins;margin:0}
+.dir p{margin:0;font-size:13px;color:var(--gris)}
+.ver{align-self:flex-start;margin-top:auto;font:500 13px Poppins;color:var(--az);background:none;border:0;padding:8px 0;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.notas{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.notas div{background:var(--sup);border:1px solid var(--borde);border-radius:12px;padding:14px 16px;font-size:13px;color:var(--gris)}
+.notas strong{display:block;color:var(--tinta);font:600 14px Poppins;margin-bottom:4px}
+</style>
+<main>
+<h1>Estatus del informe · iconos</h1>
+<p class="lead">Tres estados del camino de la muestra, de recepción a la emisión del informe. Los colores son los de siempre (EstadoMuestra); aquí solo cambia el icono. Cuatro direcciones, la primera es la actual. Siempre van icono y texto juntos.</p>
+<section class="card" aria-labelledby="t-ctx">
+<h2 id="t-ctx">En la lista de muestras</h2>
+<p class="sub">Elige una dirección para verla en la tabla, en color y en gris (como la vería alguien que no distingue el color).</p>
+<div class="seg" role="group" aria-label="Dirección" id="seg"></div>
+<div class="flujo" id="flujo"></div>
+<h3>Con color</h3><div class="tw" id="tc"></div>
+<h3>Sin color</h3><div class="tw gr" id="tg" aria-hidden="true"></div>
+</section>
+<section class="card" aria-labelledby="t-dir">
+<h2 id="t-dir">Las cuatro direcciones</h2>
+<p class="sub">Icono a 40 px y dentro de la pastilla a 14 px, su tamaño real.</p>
+<div class="dirs" id="dirs"></div>
+</section>
+<div class="notas">
+<div><strong>Los nombres cambian</strong>«Generando informe» pasa a «Listo para generar informe» y «Terminada» a «Informe generado». Falta confirmar si «Informe generado» incluye «enviado».</div>
+<div><strong>El color no se toca</strong>Azul cielo, morado y verde siguen siendo las mismas acciones que el personal ya reconoce.</div>
+<div><strong>Si eliges la insignia</strong>No ingresada usa el círculo punteado <span id="x1"></span> y Cancelada el prohibido <span id="x2"></span>: los cinco estados quedan en la misma familia.</div>
+</div>
+</main>
+<script>
+/*DATA*/
+const FILAS=[['AG-2611-0201','Hotel Las Palmas','Aguas',0],['BE-2611-0094','Destilería Santa Fe','Bebidas alcohólicas',1],['AL-2611-0158','Panadería La Espiga','Alimentos',2],['AG-2611-0202','Purificadora El Manantial','Aguas',1]];
+let sel=D.findIndex(d=>d.reco);
+const pill=(d,i)=>`<span class="ps" style="background:${E[i][2]};color:${E[i][3]}">${d.ic[i]}${E[i][1]}</span>`;
+function tabla(d){return `<table><thead><tr><th scope="col">Folio</th><th scope="col">Cliente</th><th scope="col">Área</th><th scope="col">Estatus</th></tr></thead><tbody>${FILAS.map(f=>`<tr><td class="m">${f[0]}</td><td>${f[1]}</td><td>${f[2]}</td><td>${pill(d,f[3])}</td></tr>`).join('')}</tbody></table>`}
+function pinta(){
+ const d=D[sel];
+ document.getElementById('seg').innerHTML=D.map((x,i)=>`<button type="button" aria-pressed="${i===sel}" data-i="${i}">${x.v.toUpperCase()} · ${x.nom.split(' · ')[0]}</button>`).join('');
+ document.getElementById('flujo').innerHTML=E.map((e,i)=>pill(d,i)).join('<b aria-hidden="true">→</b>');
+ document.getElementById('tc').innerHTML=tabla(d);document.getElementById('tg').innerHTML=tabla(d);
+ document.querySelectorAll('.dir').forEach((el,i)=>el.classList.toggle('sel',i===sel));
+}
+document.getElementById('dirs').innerHTML=D.map((d,i)=>`<article class="dir">
+ <div class="grandes">${d.ic.map((s,k)=>`<figure>${s}<figcaption>${['En proceso','Listo','Generado'][k]}</figcaption></figure>`).join('')}</div>
+ ${d.reco?'<span class="chip">Recomendada</span>':''}
+ <h4>${d.v.toUpperCase()} · ${d.nom}</h4><p>${d.met}</p><p>${d.hip}</p>
+ <div class="pills">${E.map((e,k)=>pill(d,k)).join('')}</div>
+ <button type="button" class="ver" data-i="${i}">Ver en la lista</button></article>`).join('');
+document.addEventListener('click',ev=>{const b=ev.target.closest('[data-i]');if(!b)return;sel=+b.dataset.i;pinta();if(b.classList.contains('ver'))document.getElementById('t-ctx').scrollIntoView({behavior:'smooth'})});
+const mini=s=>s.replace('<svg ','<svg width="16" height="16" style="vertical-align:-3px" ');
+document.getElementById('x1').innerHTML=mini(X['no-ingresada']);document.getElementById('x2').innerHTML=mini(X['cancelada']);
+pinta();
+</script>
