@@ -14,3 +14,4 @@ Pedido: «genera un artifact con un prototipo del directorio Manik». Regenerar:
 - 2026-11-04: «Agendar» de la ficha lleva al perfil (Agenda tu cita, consultorio elegido); se retira la pantalla «Elige día y hora».
 - 2026-11-04: «Cita confirmada» aprobada (cita-confirmada/r01): resumen, calendario .ics, vista del mensaje; aviso de horario ocupado en «Confirma tu cita».
 - 2026-11-04: «Detalle de su cita» aprobado (detalle-cita/r01): #cita y #cita-cambiar; cancelar con diálogo; regla de 24 h; la hora se reserva al confirmar y se libera al cambiar o cancelar.
+- 2026-11-04: «Busca por lo que sientes» con sellos circulares en tres tamaños (categorias/r02).

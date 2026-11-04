@@ -8,7 +8,7 @@
   --bruma:#F5FAFB;--blanco:#FFFFFF;--lavado:#EEF3F5;--tinta:#14213D;--muted:#4A5674;--linea:#DCE4EA;--linea-control:#6B7590;
   --cian:#009BB0;--cian-ui:#00788A;--cian-ui-hover:#00606F;--luz-cian:#D3F0F4;--luz-calida:#FFEFD2;--estrella:#E3A21C;
   --exito:#15814B;--exito-suave:#E7F5EE;--on-exito-suave:#157B4A;--cat-cian:#E4F5F7;--cat-calida:#FFF4E0;--cat-azul:#EEF2F8;
-  --texto-calido:#6B4A00;--foto-inicio:#CDEEF2;--foto-fin:#FBE7C9;--confianza-icono:#7FDCE6;--confianza-texto:#C7D2E4;--velo:rgba(20,33,61,.38);
+  --texto-calido:#6B4A00;--icono-calido:#8A5A00;--foto-inicio:#CDEEF2;--foto-fin:#FBE7C9;--confianza-icono:#7FDCE6;--confianza-texto:#C7D2E4;--velo:rgba(20,33,61,.38);
   --display:"Urbanist",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;--sans:"Onest",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --sombra-buscador:0 1px 2px rgba(20,33,61,.06),0 12px 32px rgba(20,33,61,.10);--sombra-hover:0 12px 30px rgba(20,33,61,.08);
   color-scheme:light;
@@ -79,6 +79,18 @@ a{color:inherit}
 .trust div{display:grid;gap:8px;align-content:start}.trust .ic{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.1);color:var(--confianza-icono)}
 .trust b{font:600 20px/26px var(--display)}.trust p{color:var(--confianza-texto);font-size:15px;line-height:22px}
 .pie{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;padding-block:32px 48px;color:var(--muted);font-size:15px}.pie img{height:22px;width:auto;display:block}
+
+/* Sellos de categoría (categorias/r02, aprobado 2026-11-04) */
+.sellos{container:sellos/inline-size}.scats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 10px;--s:88px}
+@container sellos (min-width:560px){.scats{--s:112px;gap:12px}}@container sellos (min-width:900px){.scats{grid-template-columns:repeat(6,minmax(0,1fr));--s:132px}}
+.scat{display:grid;justify-items:center;align-content:start;gap:4px;background:none;border:0;color:var(--tinta);padding:6px 2px 10px;border-radius:20px;text-align:center;cursor:pointer;font:inherit}
+.scat:nth-child(3n+1){--sf:var(--cat-cian);--sc:var(--cian-ui)}.scat:nth-child(3n+2){--sf:var(--cat-calida);--sc:var(--icono-calido)}.scat:nth-child(3n){--sf:var(--cat-azul);--sc:var(--tinta)}
+.sello{width:min(100%,var(--s));height:auto;margin-bottom:6px;color:var(--sc);transition:transform .35s ease}.scat:hover .sello{transform:rotate(-8deg)}
+.sello .fo{fill:var(--sf)}.sello .tr{fill:none;stroke:var(--sc)}.sello .bl{fill:var(--blanco)}.sello .ley{fill:var(--sc);font-family:var(--sans)}
+.g-comp{display:none}@container sellos (max-width:559px){.g-ley{display:none}.g-comp{display:inline}}
+.scat b{font:600 15px/1.15 var(--display);display:block}.scat small{display:block;color:var(--muted);font-size:12px;line-height:16px}
+@container sellos (min-width:560px){.scat b{font-size:17px}.scat small{font-size:13px;line-height:18px}}
+@media (prefers-reduced-motion:reduce){.scat:hover .sello{transform:none}}
 
 /* Inicio r03 (aprobado 2026-11-04) */
 .hero{grid-template-columns:minmax(0,1fr)}.htxt{display:grid;gap:20px;align-content:center;min-width:0}
@@ -326,6 +338,12 @@ const nav = (act) => `<header class="wrap nav"><a class="logo" href="#inicio" ar
 
 // Vistas
 const V = {};
+const icS = (n, x, w) => `<svg x="${x}" y="${x}" width="${w}" height="${w}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${ICONS[n]||''}</svg>`;
+function sello(c, k){ const ley = `${c[1].toUpperCase()} · ${c[2].toUpperCase()} · `, rep = Math.max(1, Math.round(314 / (ley.length * 8)));
+  return `<button class="scat" data-cat="${c[1]}"><svg class="sello" viewBox="0 0 140 140" aria-hidden="true"><defs><path id="arc-s${k}" d="M70,70 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0"/></defs>
+  <circle class="fo" cx="70" cy="70" r="68"/><circle class="tr" cx="70" cy="70" r="63" stroke-width="1.5"/>
+  <g class="g-ley"><circle class="bl" cx="70" cy="70" r="37"/><circle class="tr" cx="70" cy="70" r="37" stroke-width="1.5" stroke-dasharray="2 3.2"/><text class="ley" font-size="11" font-weight="600" letter-spacing="1.4"><textPath href="#arc-s${k}" textLength="312" lengthAdjust="spacing">${ley.repeat(rep)}</textPath></text>${icS(c[0], 52, 36)}</g>
+  <g class="g-comp"><circle class="bl" cx="70" cy="70" r="50"/><circle class="tr" cx="70" cy="70" r="50" stroke-width="2" stroke-dasharray="2.5 4"/>${icS(c[0], 43, 54)}</g></svg><b>${c[1]}</b><small>${c[2]}</small></button>`; }
 const HOY = () => MED.map(m => { const c = m.cons.find(c => c.manik && c.ag && c.ag[0]); return c ? {m, c} : null; }).filter(Boolean).sort((a,b)=>a.c.km-b.c.km);
 const PREG = [['¿El acné en adultos se quita solo?','soto',2],['Se me cae mucho el cabello, ¿a qué especialista voy?','luna',3]];
 // Portadas de ejemplo (abstractas): en producción, la imagen que sube el médico
@@ -340,7 +358,7 @@ V.inicio = () => { const hoy = HOY(); return `<div class="halo">${nav('')}
 <p class="donde"><span>${ic('map-pin')}Cerca de <b>${S.donde}</b> (aproximado)</span><button class="ubi" data-ubi-ini>${ic('locate-fixed')}Usar mi ubicación</button></p></div>
 <div class="foto" aria-hidden="true">Foto de marca 4:5 (pendiente)</div></section></div>
 <section class="wrap sec" aria-labelledby="h-cat"><div><h2 class="h2" id="h-cat">Busca por <b>lo que sientes</b></h2><p class="sub">Si no sabes a qué especialista ir, empieza por aquí.</p></div>
-<div class="cats">${CATS.map(c=>`<button class="cat" data-cat="${c[1]}"><span class="ic">${ic(c[0])}</span><span><b>${c[1]}</b><small>${c[2]}</small></span></button>`).join('')}</div><button class="lnk" data-toast="El listado de especialidades aún no está en el prototipo">Ver todas las especialidades</button></section>
+<div class="sellos"><div class="scats">${CATS.map((c,k)=>sello(c,k)).join('')}</div></div><button class="lnk" data-toast="El listado de especialidades aún no está en el prototipo">Ver todas las especialidades</button></section>
 ${hoy.length ? `<section class="wrap sec" aria-labelledby="h-hoy"><h2 class="h2" id="h-hoy">Con lugar <b>hoy</b> cerca de ti</h2>
 <div class="hoy">${hoy.map(({m,c})=>`<article class="mf">${avatar(m)}<b><a href="#medico-${m.id}">${m.n}</a></b><small><span class="nw">${m.esp}</span> · <span class="nw">${c.km} km</span> · <span class="nw">${peso(c.pr)}</span> · <span class="nw">Hoy ${c.ag[0][0]}</span></small>${ced(m)}<a class="btn secundario" href="#medico-${m.id}" aria-label="Ver a ${m.n}">Ver</a></article>`).join('')}</div>
 <button class="lnk" data-hoy>Ver todos con lugar hoy</button></section>` : ''}

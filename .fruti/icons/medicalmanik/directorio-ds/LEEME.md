@@ -39,3 +39,5 @@ Decisiones / correcciones:
 - Pedido del usuario: se retira la etiqueta. Sin opiniones, la ficha muestra solo «Cédula verificada». Aplicado en el sistema, el prototipo y la aprobación de r03.
 
 - 2026-11-04: FichaMedico y prototipo muestran cédulas con número («Céd. Prof. · Céd. Esp.») en lugar de «Cédula verificada». DS versión 9.
+
+- 2026-11-04: TarjetaCategoria → sello circular en tres tamaños (categorias/r02); tercer color «tinta» en lugar de azul-medicalmanik. DS versión 10.

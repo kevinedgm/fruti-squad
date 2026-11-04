@@ -267,10 +267,10 @@
     "Iconos"
   ],
   "lastChange": {
-    "at": "2026-11-04T19:46:15Z",
+    "at": "2026-11-04T20:37:11Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "FichaMedico muestra las cédulas con número («Céd. Prof. · Céd. Esp.») en lugar de la etiqueta «Cédula verificada» (enmienda a r03 C pedida por el usuario)."
+    "note": "TarjetaCategoria pasa a sello circular en tres tamaños (compacto 88 sin leyenda, mediano 112, grande 132); tercer color con «tinta» (azul-medicalmanik está reservado)."
   },
   "layout": "files",
   "libraries": [],

@@ -1,8 +1,3 @@
 # TarjetaCategoria
 
-Tarjeta de categoría de «Busca por lo que sientes»: la entrada para quien no sabe a qué especialista ir.
-
-- Nombre en palabras del paciente (`categoria`, Urbanist 600) y la especialidad debajo en «muted».
-- Fondos que rotan cada tres: `categoria-cian`, `categoria-calida`, `categoria-azul`. Icono Lucide en `cian-ui` dentro de un cuadro blanco de 48 px.
-- Seis por fila en escritorio, tres en tableta y dos en celular. Al pasar el cursor sube 3 px (sin movimiento con `prefers-reduced-motion`).
-- El consumidor provee: icono, nombre, especialidad y destino.
+Sello de categoría de «Busca por lo que sientes»: la entrada para quien no sabe a qué especialista ir. Aprobado el 2026-11-04 (categorias/r02, dirección A · sello circular).\n\n**Anatomía**\n- Sello circular: fondo de categoría, doble anillo y círculo interior blanco con el pictograma (Lucide, en el color del sello).\n- Debajo, texto real: nombre en palabras del paciente (Urbanist 600) y la especialidad en «muted».\n- La leyenda del arco («PIEL · DERMATOLOGÍA») es decorativa (`aria-hidden`); se repite entera tantas veces como quepa.\n\n**Color (rota cada tres)**\n- `categoria-cian` + `cian-ui` · `categoria-calida` + `icono-calido` · `categoria-azul` + `tinta`. Nunca `azul-medicalmanik` (reservado al respaldo).\n\n**Tamaños (según el ancho del contenedor)**\n- Compacto, menos de 560 px: sello de 88 px, 3 por fila, sin leyenda; círculo interior y pictograma más grandes (la leyenda quedaría en menos de 8 px).\n- Mediano, 560–899 px: 112 px con leyenda.\n- Grande, 900 px o más: 132 px con leyenda, 6 en fila.\n\n**Interacción:** toda la tarjeta es el enlace; al pasar el cursor el sello gira 8°; sin movimiento con `prefers-reduced-motion`. Foco visible de 3 px.\n\nEl consumidor provee: pictograma, nombre, especialidad y destino.

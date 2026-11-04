@@ -198,12 +198,37 @@ comps['Chip'] = ('Búsqueda', 150, f'<div class="row" role="group" aria-label="F
 .quick a .ico{{width:18px;height:18px;color:var(--cian-ui,{P['ui']})}}.quick a:hover{{background:var(--blanco,#fff);border-color:var(--linea-control,{P['control']})}}''',
  'Dos píldoras de búsqueda con papeles distintos.\n\n- **Filtro** (`button` con `aria-pressed`): «Con lugar hoy», «Agenda en Manik», «Hasta $800». Activo: fondo `tinta`, texto blanco. 42 px.\n- **Atajo** (enlace): debajo del buscador; icono en `cian-ui` y la categoría en palabras del paciente («Piel», no «Dermatología»).\n- Borde `linea` en reposo y `linea-control` al pasar el cursor.\n- En celular y tableta, los filtros viven en la hoja de BarraFiltros; los atajos se quedan bajo el buscador y pasan a la línea siguiente, nunca se salen de la pantalla.\n- El consumidor provee: etiqueta, estado y destino.')
 cats = [('scan-face', 'Piel', 'Dermatología'), ('brain', 'Salud mental', 'Psicología y psiquiatría'), ('apple', 'Alimentación', 'Nutrición'), ('flower-2', 'Salud íntima', 'Ginecología y urología'), ('baby', 'Niñas y niños', 'Pediatría'), ('stethoscope', 'Chequeo general', 'Medicina general')]
-comps['TarjetaCategoria'] = ('Búsqueda', 400, '<div class="cats">' + ''.join(f'<a class="cat" href="#res"><span class="ic">{ico(i)}</span><span><b>{a}</b><small>{b}</small></span></a>' for i, a, b in cats) + '</div>',
- f'''.cats{{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}}.cat{{display:grid;gap:26px;align-content:space-between;text-decoration:none;color:var(--tinta,{T});border-radius:var(--radius-cat,24px);padding:18px;min-height:168px;transition:transform .2s ease}}
-.cat:nth-child(3n+1){{background:var(--categoria-cian,{P['catc']})}}.cat:nth-child(3n+2){{background:var(--categoria-calida,{P['catk']})}}.cat:nth-child(3n){{background:var(--categoria-azul,{P['cata']})}}.cat:hover{{transform:translateY(-3px)}}
-.cat .ic{{display:grid;place-items:center;width:48px;height:48px;border-radius:var(--radius-icono-cat,16px);background:var(--blanco,#fff);color:var(--cian-ui,{P['ui']})}}.cat .ico{{width:22px;height:22px}}.cat b{{font:600 19px/22px var(--font-display,"Urbanist",sans-serif);display:block}}.cat small{{color:var(--muted,{P['muted']});font-size:14px;line-height:20px}}
-@media (prefers-reduced-motion:reduce){{.cat{{transition:none}}.cat:hover{{transform:none}}}}''',
- 'Tarjeta de categoría de «Busca por lo que sientes»: la entrada para quien no sabe a qué especialista ir.\n\n- Nombre en palabras del paciente (`categoria`, Urbanist 600) y la especialidad debajo en «muted».\n- Fondos que rotan cada tres: `categoria-cian`, `categoria-calida`, `categoria-azul`. Icono Lucide en `cian-ui` dentro de un cuadro blanco de 48 px.\n- Seis por fila en escritorio, tres en tableta y dos en celular. Al pasar el cursor sube 3 px (sin movimiento con `prefers-reduced-motion`).\n- El consumidor provee: icono, nombre, especialidad y destino.')
+def sello(k, icono, nombre, esp, pre='s'):
+    ley = f'{nombre.upper()} · {esp.upper()} · '
+    rep = max(1, round(314 / (len(ley) * 8.0)))
+    ic_s = lambda x, y, w: ico(icono).replace('<svg class="ico"', f'<svg x="{x}" y="{y}" width="{w}" height="{w}"')
+    return (f'<a class="scat" href="#res"><svg class="sello" viewBox="0 0 140 140" aria-hidden="true">'
+            f'<defs><path id="arc-{pre}{k}" d="M70,70 m-50,0 a50,50 0 1,1 100,0 a50,50 0 1,1 -100,0"/></defs>'
+            f'<circle class="fo" cx="70" cy="70" r="68"/><circle class="tr" cx="70" cy="70" r="63" stroke-width="1.5"/>'
+            f'<g class="g-ley"><circle class="bl" cx="70" cy="70" r="37"/><circle class="tr" cx="70" cy="70" r="37" stroke-width="1.5" stroke-dasharray="2 3.2"/>'
+            f'<text class="ley" font-size="11" font-weight="600" letter-spacing="1.4"><textPath href="#arc-{pre}{k}" textLength="312" lengthAdjust="spacing">{ley * rep}</textPath></text>{ic_s(52, 52, 36)}</g>'
+            f'<g class="g-comp"><circle class="bl" cx="70" cy="70" r="50"/><circle class="tr" cx="70" cy="70" r="50" stroke-width="2" stroke-dasharray="2.5 4"/>{ic_s(43, 43, 54)}</g></svg>'
+            f'<b>{nombre}</b><small>{esp}</small></a>')
+SELLO_CSS = f'''.sellos{{container:sellos/inline-size}}.cats{{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 10px;--s:88px}}
+@container sellos (min-width:560px){{.cats{{--s:112px;gap:12px}}}}@container sellos (min-width:900px){{.cats{{grid-template-columns:repeat(6,minmax(0,1fr));--s:132px}}}}
+.scat{{display:grid;justify-items:center;align-content:start;gap:4px;text-decoration:none;color:var(--tinta,{T});padding:6px 2px 10px;border-radius:20px;text-align:center}}
+.scat:nth-child(3n+1){{--sf:var(--categoria-cian,{P['catc']});--sc:var(--cian-ui,{P['ui']})}}.scat:nth-child(3n+2){{--sf:var(--categoria-calida,{P['catk']});--sc:var(--icono-calido,{P['icalido']})}}.scat:nth-child(3n){{--sf:var(--categoria-azul,{P['cata']});--sc:var(--tinta,{T})}}
+.sello{{width:min(100%,var(--s));height:auto;margin-bottom:6px;color:var(--sc);transition:transform .35s ease}}.scat:hover .sello{{transform:rotate(-8deg)}}
+.sello .fo{{fill:var(--sf)}}.sello .tr{{fill:none;stroke:var(--sc)}}.sello .bl{{fill:var(--blanco,#fff)}}.sello .ley{{fill:var(--sc);font-family:var(--font-sans,"Onest",sans-serif)}}
+.g-comp{{display:none}}@container sellos (max-width:559px){{.g-ley{{display:none}}.g-comp{{display:inline}}}}
+.scat b{{font:600 15px/1.15 var(--font-display,"Urbanist",sans-serif);display:block}}.scat small{{display:block;color:var(--muted,{P['muted']});font-size:12px;line-height:16px}}
+@container sellos (min-width:560px){{.scat b{{font-size:17px}}.scat small{{font-size:13px;line-height:18px}}}}
+.scat:focus-visible{{outline:3px solid var(--focus,{P['ui']});outline-offset:2px}}
+@media (prefers-reduced-motion:reduce){{.sello{{transition:none}}.scat:hover .sello{{transform:none}}}}'''
+def sellos(pre): return '<div class="sellos"><div class="cats">' + ''.join(sello(k, i, a, b, pre) for k, (i, a, b) in enumerate(cats)) + '</div></div>'
+comps['TarjetaCategoria'] = ('Búsqueda', 900, f'<div class="marco cel"><b>Celular · compacto (88 px, 3 por fila)</b>{sellos("c")}</div><div class="marco" style="max-width:720px;margin-top:24px"><b>Tableta · mediano (112 px)</b>{sellos("t")}</div><div class="marco" style="margin-top:24px"><b>Escritorio · grande (132 px, 6 en fila)</b>{sellos("e")}</div>',
+ SELLO_CSS + '\n.marco{display:grid;gap:8px}.marco>b{font:600 13px/18px var(--font-sans,"Onest",sans-serif);color:var(--muted,#4A5674);letter-spacing:.04em;text-transform:uppercase}.cel{max-width:390px}',
+ 'Sello de categoría de «Busca por lo que sientes»: la entrada para quien no sabe a qué especialista ir. Aprobado el 2026-11-04 (categorias/r02, dirección A · sello circular).\\n\\n'
+ '**Anatomía**\\n- Sello circular: fondo de categoría, doble anillo y círculo interior blanco con el pictograma (Lucide, en el color del sello).\\n- Debajo, texto real: nombre en palabras del paciente (Urbanist 600) y la especialidad en «muted».\\n- La leyenda del arco («PIEL · DERMATOLOGÍA») es decorativa (`aria-hidden`); se repite entera tantas veces como quepa.\\n\\n'
+ '**Color (rota cada tres)**\\n- `categoria-cian` + `cian-ui` · `categoria-calida` + `icono-calido` · `categoria-azul` + `tinta`. Nunca `azul-medicalmanik` (reservado al respaldo).\\n\\n'
+ '**Tamaños (según el ancho del contenedor)**\\n- Compacto, menos de 560 px: sello de 88 px, 3 por fila, sin leyenda; círculo interior y pictograma más grandes (la leyenda quedaría en menos de 8 px).\\n- Mediano, 560–899 px: 112 px con leyenda.\\n- Grande, 900 px o más: 132 px con leyenda, 6 en fila.\\n\\n'
+ '**Interacción:** toda la tarjeta es el enlace; al pasar el cursor el sello gira 8°; sin movimiento con `prefers-reduced-motion`. Foco visible de 3 px.\\n\\n'
+ 'El consumidor provee: pictograma, nombre, especialidad y destino.')
 FC_CSS = f'''.lista{{container-type:inline-size;display:grid;gap:12px}}
 .fm{{background:var(--blanco,#fff);border:1px solid var(--linea,{P['linea']});border-radius:24px;padding:14px;display:grid;gap:12px;grid-template-columns:var(--foto-ficha-movil,72px) minmax(0,1fr);align-items:start;transition:box-shadow .2s ease}}
 .fm:hover{{box-shadow:var(--shadow-hover,0 12px 30px rgba(20,33,61,.08))}}
