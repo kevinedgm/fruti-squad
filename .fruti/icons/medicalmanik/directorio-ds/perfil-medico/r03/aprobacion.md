@@ -16,7 +16,7 @@
 - Aviso de privacidad como texto con enlace («Al confirmar aceptas…»), sin casilla: no añade un toque. Se quita «Motivo» (r03 aprobó solo nombre + celular).
 - El Dr. Mario Díaz Soto (contenido del usuario) se agrega en la categoría «Niñas y niños»; teléfono, cédulas y precio ($800) de ejemplo; 190 km desde Puebla porque su consultorio está en Xalapa.
 - Estados en el prototipo: Dr. Hernández = perfil mínimo; Dra. Quiroz = a medias.
-- La «Agendar» de la ficha en resultados sigue abriendo «Elige día y hora» (pantalla por aprobar).
+- «Agendar» de la ficha en resultados abre el perfil con ese consultorio elegido, en «Agenda tu cita» (decisión del usuario, 2026-11-04). Se retira la pantalla «Elige día y hora»: un solo camino para agendar.
 
 ## Sin resolver
 - Precio real del Dr. Díaz; fotos de la galería (de ejemplo); páginas «todas las opiniones» y «más fechas».

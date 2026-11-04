@@ -391,24 +391,6 @@ V.medico = (id) => {
   ${jump}<div class="pf-cuerpo">${agB}${sec.map(x=>`<section class="bloque" id="sec-${x[0]}" aria-labelledby="h-${x[0]}">${x[2]}</section>`).join('')}</div></main>${barra}`;
 };
 
-V.agendar = () => {
-  const m = MED.find(x=>x.id===S.med), c = m && m.cons.find(x=>x.id===S.cons);
-  if (!c || !c.manik) { location.hash = 'resultados'; return ''; }
-  const ks = Array.from({length:10}, (_,i)=>i);
-  if (S.dia === null || !c.ag[S.dia]) S.dia = Object.keys(c.ag).map(Number).sort((a,b)=>a-b)[0];
-  const dias = ks.map(k => { const d = dia(k); const hay = !!c.ag[k];
-    return `<button data-dia="${k}" aria-pressed="${k===S.dia}" ${hay?'':'disabled'} aria-label="${fechaLarga(k)}${hay?'':', sin horarios'}"><small>${k===0?'Hoy':k===1?'Mañana':DIAS[d.getDay()].slice(0,3)}</small><b>${d.getDate()}</b><small>${hay?c.ag[k].length+' lugar'+(c.ag[k].length>1?'es':''):'—'}</small></button>`; }).join('');
-  const horas = (c.ag[S.dia]||[]).map(h=>`<button data-elige="${h}" aria-pressed="${S.hora===h}">${h}</button>`).join('');
-  const listo = !!S.hora;
-  return `${nav('buscar')}<main class="wrap"><a class="volver" href="#medico-${m.id}">${ic('arrow-left')}${m.n}</a>
-  <div class="paso"><span class="prop">Pantalla propuesta · por aprobar</span><h1>Elige día y hora</h1>
-  <div class="res">${avatar(m)}<div><b>${m.n}</b><span>${c.lu} · ${c.dir} · Consulta ${peso(c.pr)}</span></div></div>
-  <div><p class="franja" style="margin-bottom:8px">Días con lugar</p><div class="dias" role="group" aria-label="Días">${dias}</div></div>
-  <div><p class="franja" style="margin-bottom:8px">${fechaLarga(S.dia).replace(/^./, x=>x.toUpperCase())}</p><div class="horas" role="group" aria-label="Horarios">${horas}</div></div>
-  ${c.tel ? `<p class="spec">¿Prefieres llamar? <a class="inl" href="tel:+52${c.tel.replace(/ /g,'')}" data-llamar="${c.tel}">${c.tel}</a></p>` : ''}</div></main>
-  <div class="pie-paso"><div class="in"><div>${listo ? `<b>${nombreDia(S.dia, true)}, ${S.hora}</b>${c.lu}` : '<b>Elige un horario</b>para continuar'}</div><button class="btn primario" data-ir="confirmar" aria-disabled="${!listo}">Continuar</button></div></div>`;
-};
-
 V.confirmar = () => {
   const m = MED.find(x=>x.id===S.med), c = m && m.cons.find(x=>x.id===S.cons);
   if (!c || !S.hora) { location.hash = 'resultados'; return ''; }
@@ -469,7 +451,8 @@ function render(){
   else html = (V[h] || V.inicio)();
   if (html) $('#app').innerHTML = html;
 }
-addEventListener('hashchange', () => { render(); const d = location.hash === '#dudas' && $('#dudas'); d ? d.scrollIntoView() : scrollTo(0,0); $('#app').focus?.(); });
+addEventListener('hashchange', () => { render(); const d = (location.hash === '#dudas' && $('#dudas')) || (S.irAgenda && $('#sec-agenda')); S.irAgenda = false;
+  if (d) { d.scrollIntoView({behavior:'instant', block:'start'}); d.setAttribute('tabindex','-1'); d.focus({preventScroll:true}); } else { scrollTo(0,0); $('#app').focus?.(); } });
 document.addEventListener('click', e => {
   const t = e.target;
   const ab = t.closest('[data-abrir]'); if (ab) { abrir(ab.dataset.abrir, ab); return; }
@@ -482,13 +465,12 @@ document.addEventListener('click', e => {
   if (t.closest('[data-ubi]')) { $('#w1').value = 'Cerca de ti (ejemplo)'; return; }
   const f = t.closest('[data-f]'); if (f) { const k = f.dataset.f; if (k==='p800') S.f.precio = S.f.precio===800?0:800; else S.f[k] = !S.f[k]; render(); return; }
   if (t.closest('[data-limpiar]')) { S.f = {manik:false,hoy:false,precio:0}; render(); return; }
-  const ag = t.closest('[data-agendar]'); if (ag) { const [mid, cid] = ag.dataset.agendar.split('|'); if (S.med !== mid || S.cons !== cid) { S.dia = null; S.hora = null; } S.med = mid; S.cons = cid; location.hash = 'agendar'; return; }
+  const ag = t.closest('[data-agendar]'); if (ag) { const [mid, cid] = ag.dataset.agendar.split('|'); S.med = mid; S.cons = cid; S.dia = null; S.hora = null; S.verH = false; S.irAgenda = true; location.hash = 'medico-' + mid; return; }
   const co = t.closest('[data-cons]'); if (co) { S.cons = co.dataset.cons; S.dia = null; S.hora = null; S.verH = false; render(); $(`[data-cons="${S.cons}"]`)?.focus(); return; }
   const hr = t.closest('[data-hora]'); if (hr) { const [k, h] = hr.dataset.hora.split('|'); S.dia = +k; S.hora = h; location.hash = 'confirmar'; return; }
   const sc = t.closest('[data-sec]'); if (sc) { const el = document.getElementById(sc.dataset.sec); if (el) { el.scrollIntoView({block:'start'}); el.setAttribute('tabindex','-1'); el.focus({preventScroll:true}); } return; }
   if (t.closest('[data-verh]')) { S.verH = true; render(); return; }
   const di = t.closest('[data-dia]'); if (di && !di.disabled) { S.dia = +di.dataset.dia; S.hora = null; render(); $(`[data-dia="${S.dia}"]`)?.focus(); return; }
-  const el = t.closest('[data-elige]'); if (el) { S.hora = el.dataset.elige; render(); $(`[data-elige="${S.hora}"]`)?.focus(); return; }
   const ir = t.closest('[data-ir]'); if (ir) { if (ir.getAttribute('aria-disabled') === 'true') { toast('Elige un horario primero'); return; } location.hash = ir.dataset.ir; return; }
   const cp = t.closest('[data-copiar]'); if (cp) { const n = cp.dataset.copiar; (navigator.clipboard?.writeText(n) || Promise.reject()).then(()=>toast('Número copiado'), ()=>toast('Copia el número: ' + n)); return; }
   if (t.closest('[data-confirmar]')) { confirmar(); return; }
