@@ -489,7 +489,7 @@ document.addEventListener('click', e => {
   const cp = t.closest('[data-copiar]'); if (cp) { const n = cp.dataset.copiar; (navigator.clipboard?.writeText(n) || Promise.reject()).then(()=>toast('Número copiado'), ()=>toast('Copia el número: ' + n)); return; }
   const cf = t.closest('[data-confirmar]'); if (cf) { if (cf.getAttribute('aria-disabled') === 'true') { toast('Elige otro horario primero'); $('#ocupado')?.focus(); return; } confirmar(); return; }
   const alt = t.closest('[data-alt]'); if (alt) { S.datos.nombre = $('#nombre')?.value || S.datos.nombre; S.datos.cel = $('#cel')?.value || S.datos.cel; const [k, h] = alt.dataset.alt.split('|'); S.dia = +k; S.hora = h; S.ocupado = false; render(); toast('Horario cambiado a ' + nombreDia(S.dia) + ', ' + h); $('[data-confirmar]')?.focus(); return; }
-  if (t.closest('[data-ics]')) { const m = MED.find(x=>x.id===S.med), c = m.cons.find(x=>x.id===S.cons); try { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([ics(m, c)], {type:'text/calendar'})); a.download = 'cita-manik.ics'; document.body.appendChild(a); a.click(); a.remove(); } catch(_) {} toast('En el producto se descarga el archivo .ics; este visor de prototipos no permite descargarlo'); return; }
+  if (t.closest('[data-ics]')) { toast('En el producto se descarga el archivo .ics para Apple u Outlook; este visor de prototipos no permite descargarlo'); return; }
 });
 document.addEventListener('change', e => { if (e.target.id === 'orden') { S.orden = e.target.value; render(); $('#orden')?.focus(); } });
 document.addEventListener('input', e => { if (['nombre','cel','motivo'].includes(e.target.id)) S.datos[e.target.id] = e.target.value; });
@@ -502,9 +502,6 @@ function cercanas(c){ const out = []; Object.keys(c.ag||{}).map(Number).sort((a,
 function gcal(m, c){ const d = dia(S.dia), [hh, mm] = S.hora.split(':').map(Number), f = x=>String(x).padStart(2,'0');
   const fecha = `${d.getFullYear()}${f(d.getMonth()+1)}${f(d.getDate())}`, q = new URLSearchParams({action:'TEMPLATE', text:`Cita con ${m.n}`, dates:`${fecha}T${f(hh)}${f(mm)}00/${fecha}T${f(hh+1)}${f(mm)}00`, ctz:'America/Mexico_City', location:`${c.lu}, ${c.dir}`, details:`Consulta ${peso(c.pr)}, pagas en el consultorio.`});
   return 'https://calendar.google.com/calendar/render?' + q.toString(); }
-function ics(m, c){ const d = dia(S.dia), [hh, mm] = S.hora.split(':').map(Number); const f = (x)=>String(x).padStart(2,'0');
-  const ini = `${d.getFullYear()}${f(d.getMonth()+1)}${f(d.getDate())}T${f(hh)}${f(mm)}00`, fin = `${d.getFullYear()}${f(d.getMonth()+1)}${f(d.getDate())}T${f(hh+1)}${f(mm)}00`;
-  return ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Manik//Directorio//ES','BEGIN:VEVENT',`UID:${Date.now()}@manik.example`,`DTSTART:${ini}`,`DTEND:${fin}`,`SUMMARY:Cita con ${m.n}`,`LOCATION:${c.lu}, ${c.dir}`,`DESCRIPTION:Consulta ${peso(c.pr)}, pagas en el consultorio.`,'END:VEVENT','END:VCALENDAR'].join('\r\n'); }
 function confirmar(){
   if (S.ocupado) { toast('Elige otro horario primero'); $('#ocupado')?.focus(); return; }
   const nombre = $('#nombre').value.trim(), cel = $('#cel').value.replace(/\D/g,'');
