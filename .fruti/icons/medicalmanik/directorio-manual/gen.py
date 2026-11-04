@@ -21,6 +21,7 @@ def cr(a, b):
 e = html.escape
 IMG = {k: uri(f'manik-final/svg/{k}.svg') for k in ['simbolo', 'simbolo-1tinta', 'simbolo-blanco', 'logotipo', 'logotipo-vertical', 'logotipo-endoso', 'logotipo-blanco', 'logotipo-1tinta', 'app-icon', 'favicon']}
 AV = {k: uri(f'directorio-ds/avatares/avatar-{k}.svg') for k in ['mujer', 'hombre', 'neutro']}
+MM_LOGO = uri('final/svg/medicalmanik-logotipo.svg'); ECO = uri('final/svg/ecosistema.svg')
 IMPULSA = 'data:image/svg+xml;base64,' + base64.b64encode(open(os.path.join(M, 'directorio-ds/ecosistema/sello-impulsa.svg'), 'rb').read()).decode()
 
 # ---------- Color: grupos con contraste calculado
@@ -175,9 +176,9 @@ S('esencia', '01 · Esencia', 'Tu médico, <b>a la mano</b>.', 'Manik es lo que 
   <div class="card"><h3>Cómo se nombra</h3><p>En textos, «Manik» con mayúscula, sin «Mi» ni «Directorio» delante. En el logotipo, «manik». Se respalda con «de MedicalManik».</p></div></div>
   <h3>Fundamentos</h3><ul class="lista"><li><b>El paciente decide rápido.</b> Cada pantalla responde primero quién, dónde, cuándo y cuánto cuesta.</li><li><b>Luz, no color.</b> Bruma y blanco dominan; la luz cian y la cálida dan ambiente; tinta para leer; cian de interfaz para lo que se toca.</li>
   <li><b>Confianza demostrable.</b> Cédulas con número, opiniones solo de citas agendadas y precios a la vista.</li><li><b>Personas reales.</b> Médicos con su foto o su silueta; nada de bancos de imágenes.</li></ul>
-  <h3>La familia MedicalManik</h3><div class="fam"><div class="card"><img src="{IMG['simbolo']}" alt=""><b>MedicalManik</b><p>La empresa y el sello madre. Aparece como respaldo: «de MedicalManik».</p></div>
+  <h3>La familia MedicalManik</h3><div class="fam"><div class="card"><img src="{MM_LOGO}" alt="" style="width:auto;height:30px;max-width:100%"><b>MedicalManik</b><p>La empresa y el sello madre. Aparece como respaldo: «de MedicalManik».</p></div>
   <div class="card"><img src="{IMG['app-icon']}" alt=""><b>Manik · directorio</b><p>Para pacientes. Urbanist y Onest, luz cian y cálida. Este manual.</p></div>
-  <div class="card"><img src="{IMPULSA}" alt=""><b>Ecosistema Manik</b><p>Herramientas para clínicas («Producto Manik»: Expediente, Agenda, Impulsa…). Su propio sistema; comparten Urbanist, el cian del pin y la luz en marca.</p></div></div>'''),
+  <div class="card"><img src="{ECO}" alt=""><b>Ecosistema Manik</b><p>Herramientas para clínicas («Producto Manik»: Expediente, Agenda, Impulsa…). Su propio sistema; comparten Urbanist, el cian del pin y la luz en marca.</p></div></div>'''),
 S('marca', '02 · Marca', 'Símbolo y <b>logotipo</b>', 'El símbolo es la línea de pulso de la familia (una M que es un latido) en un cuadro con punta de pin: «aquí, cerca de ti». Se usan siempre los archivos; nunca se redibuja ni se reescribe con fuente.',
   f'''<div class="grid3"><div><div class="lienzo claro"><img src="{IMG['logotipo']}" alt="Logotipo manik"></div><p class="pie">Horizontal · uso principal</p></div>
   <div><div class="lienzo bruma"><img src="{IMG['logotipo-vertical']}" alt="Logotipo manik vertical" style="max-height:110px"></div><p class="pie">Vertical · espacios cuadrados</p></div>
