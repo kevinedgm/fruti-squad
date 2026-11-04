@@ -48,7 +48,7 @@ El 70 % del uso será en celular y tableta, el 30 % en escritorio. Se diseña pr
 | `tinta` | #14213D | Texto y logotipo (16.0:1 sobre blanco). |
 | `muted` | #4A5674 | Texto secundario (7.3:1). |
 | `bruma` | #F5FAFB | Fondo de página. |
-| `luz-cian` / `luz-calida` | #D3F0F4 / #FFEFD2 | Halos de fondo; «Nuevo en Manik» y anuncios en la cálida. |
+| `luz-cian` / `luz-calida` | #D3F0F4 / #FFEFD2 | Halos de fondo; anuncios en la cálida. |
 | `estrella` | #E3A21C | Solo la estrella (2.2:1): siempre con el número en tinta. |
 | `exito` / `on-exito-suave` | #15814B / #157B4A | Confirmaciones; «Cédula verificada» usa el segundo sobre `exito-suave` (4.7:1). |
 | `azul-medicalmanik` | #234899 | Solo en «de MedicalManik». |

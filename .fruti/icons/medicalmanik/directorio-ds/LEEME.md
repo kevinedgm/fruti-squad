@@ -34,3 +34,6 @@ Decisiones / correcciones:
 ## Cambio 2026-11-04 · FichaMedico aprobada
 - El usuario aprobó el wireframe FichaMedico r03, opción C (`ficha-medico/r03/aprobacion.md`); r04 (C + horarios) descartada.
 - Componente FichaMedico reescrito en F3 con esa anatomía: médico arriba; consultorios en filas (máx. 2 + «Ver n más») con lugar · distancia · precio, forma de agendar + próximo lugar o teléfono, y su acción; «o llama al …» si agenda de las dos formas; un solo sólido por ficha. Sin tokens nuevos.
+
+## Cambio 2026-11-04 · sin «Nuevo en Manik»
+- Pedido del usuario: se retira la etiqueta. Sin opiniones, la ficha muestra solo «Cédula verificada». Aplicado en el sistema, el prototipo y la aprobación de r03.

@@ -3,7 +3,8 @@
 Decisión del usuario: «apruebo FichaMedico · r03 · F2 opción C». La r04 (C + horarios) queda descartada.
 
 ## Anatomía congelada (R3: no se rediseña al implementar)
-1. **Médico:** foto o avatar de silueta · nombre · especialidad · cédula verificada · calificación con número de opiniones (o «Nuevo en Manik»).
+1. **Médico:** foto o avatar de silueta · nombre · especialidad · cédula verificada · calificación con número de opiniones; sin opiniones, solo la cédula.
+   - Cambio 2026-11-04 (usuario): se retira «Nuevo en Manik».
 2. **Consultorios en filas** (máx. 2 visibles; con 3+: «Ver n consultorios más»). Orden: el más cercano que cumple los filtros primero.
    - Línea 1: lugar · distancia · precio de consulta.
    - Línea 2: forma de agendar + próximo lugar («Agenda en Manik · Hoy, 16:30») o «Por teléfono · número». Fecha y hora nunca se separan.
