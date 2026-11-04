@@ -428,7 +428,7 @@ const ART = [['Qué es la dermatitis atópica','ramos','scan-face',5,PORTADA('#D
 const medDe = id => MED.find(m => m.id === id);
 V.inicio = () => { const hoy = HOY(); return `<div class="halo">${nav('')}
 <section class="wrap hero" aria-labelledby="h-ini"><div class="htxt"><span class="pill"><span>${ic('shield-check')}</span>Médicos con registro verificado</span>
-<h1 class="h1" id="h-ini">Encuentra a tu médico, ve cuánto cuesta y <b>agenda</b>.</h1><p class="lead">La consulta es en su consultorio. Buscar y agendar es gratis.</p>
+<h1 class="h1" id="h-ini">Encuentra a tu médico <b>cerca de ti</b>.</h1><p class="lead">Mira cuánto cuesta antes de ir y agenda sin pagar nada.</p>
 <button class="campo" data-abrir="buscar" aria-haspopup="dialog">${ic('search')}<span><b>¿Qué necesitas?</b><small>Especialidad, síntoma o nombre del médico</small></span></button>
 <form class="buscador" role="search" data-form="buscar"><div class="f">${ic('search')}<div><label for="q">Qué necesitas</label><input id="q" value="${S.q}" placeholder="Especialidad, síntoma o médico" autocomplete="off"></div></div><div class="f">${ic('map-pin')}<div><label for="w">Dónde</label><input id="w" value="${S.donde}" placeholder="Colonia o ciudad" autocomplete="off"></div></div><button class="btn oscuro" type="submit">Buscar</button></form>
 <p class="donde"><span>${ic('map-pin')}Cerca de <b>${S.donde}</b> (aproximado)</span><button class="ubi" data-ubi-ini>${ic('locate-fixed')}Usar mi ubicación</button></p></div>

@@ -4,6 +4,11 @@
 - **Congelado:** navegación (Especialidades · Preguntas · Artículos · Soy médico, sin «Entrar»), hero (registro verificado, titular, buscador, «Dónde» aproximado + «Usar mi ubicación», foto 4:5 desde tableta), «Busca por lo que sientes», «Con lugar hoy» (tarjeta con cédulas y «Ver» de contorno), «Resuelve tus dudas» (preguntas con quien responde + «Haz tu pregunta»; artículos con autor), «Cómo funciona», franja de confianza, «¿Eres médico?», pie. Una sola primaria: Buscar.
 - **Implementado en:** `directorio-prototipo/` (prototipo v4).
 
+## Enmienda 2026-11-04 · leyenda del inicio (opción B · Cercanía, elegida por el usuario)
+- Título: «Encuentra a tu médico **cerca de ti**.» (antes: «Encuentra a tu médico, ve cuánto cuesta y agenda.»).
+- Subtítulo: «Mira cuánto cuesta antes de ir y agenda sin pagar nada.» (antes: «La consulta es en su consultorio. Buscar y agendar es gratis.», ambiguo en «su consultorio»).
+- Efecto medido: el título ocupa 2 líneas en celular (390 px) y el buscador queda visible sin desplazarse. Prototipo v16.
+
 ## Sin resolver (no se infirió)
 - Foto de marca: no hay foto aprobada; panel de reemplazo «pendiente». Dueño: marca/Lima.
 - Formato de precio: el wireframe usaba «MXN 900»; el prototipo sigue el DS («$900»). Dueño: Lima.
