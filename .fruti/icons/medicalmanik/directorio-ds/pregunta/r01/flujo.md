@@ -14,7 +14,10 @@ flowchart TD
     S2 --> FI{"Filtro de calidad"}
     FI -- "Aprobada" --> PU["Pregunta publicada"]
     PU -.-> C2(["Correo 2: Tu pregunta fue publicada (enlace)"])
-    FI -- "No aprobada" --> NO["¿Se avisa y se dice por qué? [incógnita]"]
+    FI -- "No aprobada" --> NO["No se publica"]
+    NO -.-> C4(["Correo 4: Tu pregunta necesita cambios + motivo + enlace para reescribir"])
+    C4 -- "Abre el enlace" --> RW["Formulario con su pregunta y el motivo arriba"]
+    RW -- "Reenviar (sin volver a confirmar el correo)" --> FI
     PU --> MR["Un médico del expediente Manik responde"]
     MR -.-> C3(["Correo 3: «Dra. X respondió a tu pregunta» (enlace)"])
     C3 --> VR["Ve la respuesta → ficha del médico → agendar"]
@@ -27,5 +30,5 @@ flowchart TD
 | En revisión | No | Abrir el enlace de confirmación | — |
 | Publicada (sin respuesta) | Sí | Pasa el filtro | Correo 2 |
 | Respondida | Sí | Responde un médico | Correo 3 (uno por médico [supuesto]) |
-| No aprobada | No | No pasa el filtro | [incógnita] |
+| Necesita cambios | No | No pasa el filtro | Correo 4 (motivo + enlace para reescribir) |
 | Vencida | No | No se confirma a tiempo | [incógnita] |

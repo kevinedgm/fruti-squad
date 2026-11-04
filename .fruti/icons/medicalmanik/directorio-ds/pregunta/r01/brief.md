@@ -12,6 +12,7 @@
 3. La pregunta no se publica sola: pasa por un filtro de calidad.
 4. Si se aprueba, se publica y se avisa por correo.
 5. Cuando un médico responde, llega un correo con quién respondió.
+6. Si el filtro no la aprueba, llega un correo con el motivo para que la reescriba (respuesta del usuario).
 
 ## Inferencias
 - Sin cuenta, el correo es la única forma de seguir la pregunta: cada correo lleva enlace directo.
@@ -24,7 +25,7 @@
 - **No es consulta:** la respuesta orienta, no diagnostica; esto se dice junto a cada respuesta.
 
 ## Incógnitas
-1. Si el filtro no aprueba: ¿se avisa por correo y se dice el motivo (para que la reescriba)?
+1. ~~Si el filtro no aprueba~~ → resuelto: correo con motivo y enlace para reescribir. Inferencia: al reescribir no se vuelve a confirmar el correo (el enlace ya lo prueba). Pendiente: ¿hay límite de intentos? ¿Los motivos son una lista fija (p. ej. «incluye datos personales», «es una urgencia», «no es una pregunta de salud»)?
 2. ¿El filtro es una persona, automático o ambos? (cambia el tiempo de espera que prometemos).
 3. ¿Cuánto dura el enlace de confirmación y qué pasa si nunca se confirma?
 4. ¿Llega un correo por cada médico que responde, o solo el primero?
