@@ -13,3 +13,8 @@ Decisiones / correcciones:
 - Estado del perfil: aviso #A15D02 e info #3C7190 (oscurecidos para 4.5:1).
 - Estrella #E3A21C (manual v2) sobre #F2B33D (paquete anterior).
 - Escala de espacio tomada del prototipo (por confirmar).
+
+## Cambio 2026-11-04 · consultorios y avatar
+- Decisión del usuario: precio y forma de agendar son de cada consultorio. La ficha muestra el consultorio más cercano que cumpla los filtros y «Atiende en N consultorios · ver todos».
+- Decisión del usuario: sin foto, avatar de silueta de médica u hombre (reemplaza la regla de iniciales del manual v2); neutro si el perfil no indica «Dr./Dra.». `avatares.py` → `avatares/`, subidos al grupo «Avatares».
+- Propuesta: un consultorio se publica solo con dirección, precio y una forma de agendar; si falta, el perfil queda «Incompleto».

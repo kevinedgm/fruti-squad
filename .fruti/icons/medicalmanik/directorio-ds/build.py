@@ -11,6 +11,8 @@ IC = {'apple': ('59c9026f4361579d6565e002d37aa394', 434), 'arrow-right': ('c02f1
       'brain': ('c7725c8635a7359d0ae861fa9af3b491', 644), 'calendar-check': ('78a88b0185e49d97e7630d94b7ae4933', 400), 'clock': ('6e298b6e404e6880d3284d52df90d99b', 291), 'flower-2': ('06649d68a358dfe2e5b5d6143b3ed2fe', 541),
       'map-pin': ('8389860ec5dca7cc8b2708df2f5563d2', 381), 'message-circle-heart': ('21dc1a574f46993477af211b735ed84a', 503), 'scan-face': ('5be0694cbd64b077ce08b3219fcd45ef', 501), 'search': ('0235df5ca74a7d93874a616fc4ebfb4e', 296),
       'shield-check': ('b060ab8579ae54758d78049bac18ec9c', 440), 'stethoscope': ('8923094109ea7baf0b0f7d5c7ac2537a', 440)}
+AV = {'avatar-mujer.svg': ('5763706af92fba364ea1dc94fdb3780f', 993), 'avatar-hombre.svg': ('fac2739f409e7fb1f8d316a107789c08', 988), 'avatar-neutro.svg': ('e90aec85c1eaced6d13e1aef3c2cd58c', 894)}
+B.update(AV)
 blob = lambda n: f'/_blob/{B[n][0]}'
 def lum(h):
     h = h.lstrip('#'); c = [int(h[i:i+2], 16) / 255 for i in (0, 2, 4)]; c = [v / 12.92 if v <= .04045 else ((v + .055) / 1.055) ** 2.4 for v in c]
@@ -43,8 +45,11 @@ col = [
  t('categoria-azul', P['cata'], f"Fondo de tarjeta de categoría (3.ª de cada tres). Tinta encima {cr(T, P['cata'])}:1."),
  t('texto-calido', P['calido'], f"Etiqueta «Patrocinado» sobre blanco: {cr(P['calido'], W)}:1."),
  t('icono-calido', P['icalido'], f"Icono dentro del círculo de «luz-calida» ({cr(P['icalido'], P['sun'])}:1)."),
- t('foto-inicio', P['f0'], 'Inicio del degradado de «sin foto» (iniciales en Urbanist 300). Solo en ese respaldo.'),
- t('foto-fin', P['f1'], 'Fin del degradado de «sin foto».'),
+ t('foto-inicio', P['f0'], 'Inicio del degradado de fondo del avatar sin foto. Solo ahí.'),
+ t('foto-fin', P['f1'], 'Fin del degradado de fondo del avatar sin foto.'),
+ t('silueta', '#93AAB9', 'Silueta del avatar sin foto (cabeza y bata). Gráfico decorativo: el nombre del médico siempre va en texto al lado.'),
+ t('silueta-pelo', '#7F97A7', 'Cabello de las siluetas de mujer y hombre.'),
+ t('silueta-linea', '#E9F3F3', 'Solapas y estetoscopio sobre la silueta.'),
  t('confianza-icono', P['cicono'], f"Iconos sobre la franja de confianza (tinta): {cr(P['cicono'], T)}:1."),
  t('confianza-texto', P['ctexto'], f"Texto secundario sobre la franja de confianza: {cr(P['ctexto'], T)}:1."),
  t('azul-medicalmanik', P['azul'], 'Solo en el respaldo «de MedicalManik». Nunca en la interfaz del directorio.'),
@@ -108,19 +113,21 @@ def page(grp, h, body, css=''):
     return f'<!-- @dsCard group="{grp}" height={h} -->\n<!doctype html><html lang="es"><head><meta charset="utf-8">{FONTS}<style>{BASE}{css}</style></head><body>{body}</body></html>'
 DOC_CSS = f'''.doc{{background:var(--blanco,#fff);border:1px solid var(--linea,{P['linea']});border-radius:var(--radius-ficha,28px);padding:16px;display:grid;grid-template-columns:var(--foto-ficha,132px) minmax(0,1fr);gap:18px;transition:box-shadow .2s ease;max-width:640px}}
 .doc:hover{{box-shadow:var(--shadow-hover,0 12px 30px rgba(20,33,61,.08))}}
-.face{{border-radius:var(--radius-foto,20px);aspect-ratio:3/4;display:grid;place-items:end start;padding:10px 12px;font:300 34px var(--font-display,"Urbanist",sans-serif);letter-spacing:-.02em;color:var(--tinta,{T});background:linear-gradient(160deg,var(--foto-inicio,{P['f0']}),var(--foto-fin,{P['f1']}))}}
+.face{{border-radius:var(--radius-foto,20px);aspect-ratio:3/4;overflow:hidden;background:linear-gradient(160deg,var(--foto-inicio,{P['f0']}),var(--foto-fin,{P['f1']}))}}.face img{{width:100%;height:100%;display:block;object-fit:cover}}
+.price{{text-align:right}}.price small{{display:block;font:400 13px/18px var(--font-sans,"Onest",sans-serif);color:var(--muted,{P['muted']})}}.mas{{font-size:15px;line-height:22px;color:var(--tinta,{T});font-weight:600;text-underline-offset:3px}}.mas span{{font-weight:400;color:var(--muted,{P['muted']})}}
 .info{{display:grid;gap:8px;align-content:start;min-width:0}}.tl{{display:flex;justify-content:space-between;gap:10px;align-items:start}}
 .doc h3{{margin:0;font:600 22px/26px var(--font-display,"Urbanist",sans-serif);letter-spacing:-.01em}}.doc h3 a{{color:inherit;text-decoration:none}}.doc h3 a:hover{{text-decoration:underline}}
 .spec{{color:var(--muted,{P['muted']});font-size:15px;line-height:22px}}.price{{font:600 18px/24px var(--font-display,"Urbanist",sans-serif);white-space:nowrap}}
 .when{{font-size:15px;font-weight:600;margin-top:4px}}.when span{{font-weight:400;color:var(--muted,{P['muted']})}}
 .tel{{font:600 22px/28px var(--font-display,"Urbanist",sans-serif);font-variant-numeric:tabular-nums;user-select:all}}
 .agendar,.contorno{{justify-self:start}}@media (prefers-reduced-motion:reduce){{.doc{{transition:none}}}}
-@media (max-width:560px){{.doc{{grid-template-columns:88px minmax(0,1fr);gap:14px;border-radius:24px}}.face{{font-size:26px}}.tl{{flex-direction:column;gap:2px}}}}'''
-def ficha(ini, nombre, spec, precio, meta, cuerpo):
-    return (f'<article class="doc"><div class="face" role="img" aria-label="Sin foto: {nombre}">{ini}</div><div class="info"><div class="tl"><div><h3><a href="#perfil">{nombre}</a></h3><p class="spec">{spec}</p></div><p class="price">{precio}</p></div>'
-            f'<div class="meta">{meta}</div>{cuerpo}</div></article>')
+@media (max-width:560px){{.doc{{grid-template-columns:88px minmax(0,1fr);gap:14px;border-radius:24px}}.tl{{flex-direction:column;gap:2px}}.price{{text-align:left}}}}'''
+def ficha(av, nombre, spec, precio, meta, cuerpo, mas=None):
+    extra = f'<a class="mas" href="#consultorios">Atiende en {mas} consultorios <span>· ver todos</span></a>' if mas else ''
+    return (f'<article class="doc"><div class="face"><img src="{blob("avatar-" + av + ".svg")}" alt="Sin foto: {nombre}"></div><div class="info"><div class="tl"><div><h3><a href="#perfil">{nombre}</a></h3><p class="spec">{spec}</p></div><p class="price"><small>Consulta</small>{precio}</p></div>'
+            f'<div class="meta">{meta}</div>{cuerpo}{extra}</div></article>')
 ST = lambda r, n: f'<span class="st"><b aria-hidden="true">★</b> {r} · {n} opiniones</span>'
-KM = lambda k: f'<span>{ico("map-pin")}{k} km</span>'
+KM = lambda k, c=None: f'<span>{ico("map-pin")}{(c + " · ") if c else ""}{k} km</span>'
 VER = f'<span class="v">{ico("badge-check")}Cédula verificada</span>'
 TIMES = lambda hs, sel=None: '<div class="times" role="group" aria-label="Horarios">' + ''.join(f'<button type="button" class="num" aria-pressed="{"true" if h == sel else "false"}">{h}</button>' for h in hs) + '</div>'
 comps = {}
@@ -145,18 +152,18 @@ comps['TarjetaCategoria'] = ('Búsqueda', 400, '<div class="cats">' + ''.join(f'
 .cat .ic{{display:grid;place-items:center;width:48px;height:48px;border-radius:var(--radius-icono-cat,16px);background:var(--blanco,#fff);color:var(--cian-ui,{P['ui']})}}.cat .ico{{width:22px;height:22px}}.cat b{{font:600 19px/22px var(--font-display,"Urbanist",sans-serif);display:block}}.cat small{{color:var(--muted,{P['muted']});font-size:14px;line-height:20px}}
 @media (prefers-reduced-motion:reduce){{.cat{{transition:none}}.cat:hover{{transform:none}}}}''',
  'Tarjeta de categoría de «Busca por lo que sientes»: la entrada para quien no sabe a qué especialista ir.\n\n- Nombre en palabras del paciente (`categoria`, Urbanist 600) y la especialidad debajo en «muted».\n- Fondos que rotan cada tres: `categoria-cian`, `categoria-calida`, `categoria-azul`. Icono Lucide en `cian-ui` dentro de un cuadro blanco de 48 px.\n- Seis por fila en escritorio, tres en tableta y dos en celular. Al pasar el cursor sube 3 px (sin movimiento con `prefers-reduced-motion`).\n- El consumidor provee: icono, nombre, especialidad y destino.')
-f1 = ficha('MS', 'Dra. Mariana Soto', 'Dermatóloga · acné y lunares', '$900', ST('4.9', 312) + KM('1.8') + VER, '<p class="when">Hoy <span>· toca una hora</span></p>' + TIMES(['16:30', '17:00', '18:30'], '17:00') + f'<button type="button" class="btn agendar">Agendar {ico("arrow-right")}</button>')
-f2 = ficha('FQ', 'Dra. Fernanda Quiroz', 'Dermatóloga · cosmética', '$750', ST('4.7', 41) + KM('3.1') + VER, '<p class="when">Agenda por teléfono <span>· llama y pide tu cita</span></p><span class="tel">222 555 0187</span><button type="button" class="btn contorno">Copiar número</button>')
-f3 = ficha('IH', 'Dr. Iván Hernández', 'Dermatólogo · alergias de piel', '$700', '<span class="new">Nuevo en Manik</span>' + KM('4.0') + VER, '<p class="when">Lunes 3 <span>· su primer día libre</span></p>' + TIMES(['10:00', '11:00']) + f'<button type="button" class="btn agendar">Agendar {ico("arrow-right")}</button>')
-comps['FichaMedico'] = ('Resultados', 920, f'<div style="display:grid;gap:16px">{f1}{f2}{f3}</div>', DOC_CSS,
- 'La ficha del médico en los resultados: quién, qué atiende, cuánto cuesta, qué tan lejos y cuándo hay lugar.\n\n- Orden fijo (la voz: «primero lo que el paciente necesita saber»): nombre (`nombre`) y especialidad; precio a la derecha (`precio`); chips de datos; cuándo; horarios; acción.\n- Foto 3:4 a 132 px (88 px en celular) con `radius-foto`; sin foto, iniciales en Urbanist 300 sobre el degradado `foto-inicio` → `foto-fin` (ver FotoMedico).\n- Chips: calificación (estrella + número en tinta), distancia, «Cédula verificada» (`exito`), «Nuevo en Manik» (`luz-calida`) en lugar de la calificación cuando aún no hay opiniones.\n- Tres variantes por cómo se agenda: **en línea** (horarios + «Agendar»), **por teléfono** (número en `telefono` + «Copiar número»: no se usa `tel:` porque no siempre abre), **nuevo** (primer día libre).\n- Tarjeta blanca, borde `linea`, `radius-ficha`; `shadow-hover` al pasar el cursor.\n- El consumidor provee: médico, especialidad, precio, calificación y número de opiniones, distancia, verificación, próxima fecha y horarios o teléfono. Datos de ejemplo.')
+f1 = ficha('mujer', 'Dra. Mariana Soto', 'Dermatóloga · acné y lunares', '$900', ST('4.9', 312) + KM('1.8', 'Angelópolis') + VER, '<p class="when">Hoy <span>· toca una hora</span></p>' + TIMES(['16:30', '17:00', '18:30'], '17:00') + f'<button type="button" class="btn agendar">Agendar {ico("arrow-right")}</button>', 2)
+f2 = ficha('mujer', 'Dra. Fernanda Quiroz', 'Dermatóloga · cosmética', '$750', ST('4.7', 41) + KM('3.1', 'Centro') + VER, '<p class="when">Agenda por teléfono <span>· llama y pide tu cita</span></p><span class="tel">222 555 0187</span><button type="button" class="btn contorno">Copiar número</button>')
+f3 = ficha('hombre', 'Dr. Iván Hernández', 'Dermatólogo · alergias de piel', '$700', '<span class="new">Nuevo en Manik</span>' + KM('4.0', 'La Paz') + VER, '<p class="when">Lunes 3 <span>· su primer día libre</span></p>' + TIMES(['10:00', '11:00']) + f'<button type="button" class="btn agendar">Agendar {ico("arrow-right")}</button>')
+comps['FichaMedico'] = ('Resultados', 1000, f'<div style="display:grid;gap:16px">{f1}{f2}{f3}</div>', DOC_CSS,
+ 'La ficha del médico en los resultados: quién, qué atiende, dónde, cuánto cuesta y cuándo hay lugar. Muestra UN consultorio: el más cercano a donde busca el paciente.\n\n- **Precio y forma de agendar son de cada consultorio** (decisión 2026-11-04). La ficha muestra el precio, la distancia y la forma de agendar del consultorio que enseña; nunca mezcla datos de dos consultorios.\n- Si el médico atiende en más de uno: «Atiende en N consultorios · ver todos», que abre la lista en el perfil.\n- Orden fijo («primero lo que el paciente necesita saber»): nombre (`nombre`) y especialidad; «Consulta» + precio a la derecha (`precio`); chips (calificación, consultorio y distancia, cédula); cuándo; horarios; acción.\n- Foto 3:4 a 132 px (88 px en celular) con `radius-foto`; sin foto, el avatar de silueta (ver FotoMedico).\n- Chips: calificación (estrella + número en tinta), distancia, «Cédula verificada» (`exito`), «Nuevo en Manik» (`luz-calida`) en lugar de la calificación cuando aún no hay opiniones.\n- Tres variantes por cómo se agenda: **en línea** (horarios + «Agendar»), **por teléfono** (número en `telefono` + «Copiar número»: no se usa `tel:` porque no siempre abre), **nuevo** (primer día libre).\n- Tarjeta blanca, borde `linea`, `radius-ficha`; `shadow-hover` al pasar el cursor.\n- Filtros: «Cita en línea» y «Hasta $800» se evalúan por consultorio; si el más cercano no cumple pero otro sí, la ficha muestra el que cumple.\n- El consumidor provee: médico, especialidad, sexo para el avatar, consultorio mostrado (nombre, distancia, precio, forma de agendar, horarios o teléfono), número de consultorios, calificación y verificación. Datos de ejemplo.')
 comps['Horarios'] = ('Resultados', 120, '<p class="when" style="font-size:15px;font-weight:600;margin-bottom:8px">Hoy <span class="mut" style="font-weight:400">· toca una hora</span></p>' + TIMES(['9:30', '11:30', '12:00', '16:30', '17:00'], '11:30'), '',
  'Horarios disponibles como botones en píldora: tocar uno lo elige; «Agendar» confirma.\n\n- Contorno y texto `cian-ui`; elegido: fondo `cian-ui`, texto blanco. `aria-pressed` dice cuál está elegido.\n- Cifras tabulares (`horario`) para que las horas se alineen; formato 24 h sin ceros a la izquierda (9:30).\n- Arriba, el día en palabras («Hoy», «Mañana», «Lunes 3») y una ayuda en «muted».\n- 42 px de alto: holgado para el dedo. Máximo una fila en la ficha; «Ver más horarios» lleva al perfil.\n- El consumidor provee: fecha, horarios y el elegido.')
 comps['Insignias'] = ('Resultados', 100, f'<div class="meta">{ST("4.9", 312)}{KM("1.8")}{VER}<span class="new">Nuevo en Manik</span></div>', '',
  'Chips de datos dentro de la ficha. Cada uno es un dato, no una acción.\n\n- **Calificación:** estrella `estrella` (solo gráfico, 2.2:1) y el número escrito en tinta: «4.9 · 312 opiniones».\n- **Distancia:** icono map-pin y «1.8 km».\n- **Cédula verificada:** `exito` sobre `exito-suave`, icono badge-check. Solo cuando Manik revisó la cédula.\n- **Nuevo en Manik:** `luz-calida`, en lugar de la calificación mientras no hay opiniones.\n- Fondo `bruma` para los neutros; 14 px (`dato`).\n- El consumidor provee: calificación y número de opiniones, distancia, verificación.')
-comps['FotoMedico'] = ('Resultados', 300, '<div class="fl"><figure><div class="face" role="img" aria-label="Sin foto: Dra. Lucía Herrera">LH</div><figcaption>Sin foto: iniciales</figcaption></figure><figure><div class="face" style="font-size:26px;width:88px" role="img" aria-label="Sin foto: Dr. Iván Hernández">IH</div><figcaption>En celular, 88 px</figcaption></figure><div class="reg"><b class="d">Retrato del médico</b><p>Vertical 3:4, cara centrada. Mínimo 900 × 1200 px al subirla; se sirve a 480 × 640 en WebP, 120 KB máximo. Luz natural, fondo liso y claro, sin filtros. La foto llega recta: la interfaz pone las esquinas de 20 px.</p></div></div>',
- DOC_CSS + f'''.fl{{display:flex;gap:20px;flex-wrap:wrap;align-items:end}}figure{{margin:0;display:grid;gap:8px;width:132px}}figcaption{{font-size:13px;line-height:18px;color:var(--muted,{P['muted']})}}.reg{{flex:1;min-width:220px;display:grid;gap:6px}}.reg b{{font-size:18px}}.reg p{{font-size:15px;line-height:22px;color:var(--muted,{P['muted']})}}''',
- 'La cara del médico en la ficha y el perfil.\n\n- **Con foto:** 3:4 vertical, `radius-foto`. Reglas de la sección Fotografía del manual: mínimo 900 × 1200 px, servida a 480 × 640 en WebP (≤ 120 KB), luz natural, fondo liso, sin filtros ni retoque que cambie rasgos.\n- **Sin foto:** iniciales en Urbanist 300 sobre el degradado `foto-inicio` → `foto-fin`, mismo tamaño 3:4. Nunca silueta genérica ni avatar de dibujo: parecen perfiles falsos.\n- Texto alternativo: «Dra. Lucía Herrera, dermatóloga»; en el respaldo, «Sin foto: Dra. Lucía Herrera».\n- El consumidor provee: URL de la foto o iniciales, nombre y especialidad.')
+comps['FotoMedico'] = ('Resultados', 330, '<div class="fl">' + ''.join(f'<figure><div class="face"><img src="{blob("avatar-" + k + ".svg")}" alt="{alt}"></div><figcaption>{cap}</figcaption></figure>' for k, alt, cap in (('mujer', 'Sin foto: Dra. Lucía Herrera', 'Mujer · «Dra.»'), ('hombre', 'Sin foto: Dr. Iván Hernández', 'Hombre · «Dr.»'), ('neutro', 'Sin foto: Alex Ramos, psicología', 'Neutro · sin dato'))) + '<div class="reg"><b class="d">Retrato del médico</b><p>Vertical 3:4, cara centrada. Mínimo 900 × 1200 px al subirla; se sirve a 480 × 640 en WebP, 120 KB máximo. Luz natural, fondo liso y claro, sin filtros. La foto llega recta: la interfaz pone las esquinas de 20 px.</p></div></div>',
+ DOC_CSS + f'''.fl{{display:flex;gap:16px;flex-wrap:wrap;align-items:end}}figure{{margin:0;display:grid;gap:8px;width:120px}}figcaption{{font-size:13px;line-height:18px;color:var(--muted,{P['muted']})}}.reg{{flex:1;min-width:220px;display:grid;gap:6px}}.reg b{{font-size:18px}}.reg p{{font-size:15px;line-height:22px;color:var(--muted,{P['muted']})}}''',
+ 'La cara del médico en la ficha y el perfil.\n\n- **Con foto:** 3:4 vertical, `radius-foto`. Reglas de la sección Fotografía: mínimo 900 × 1200 px, servida a 480 × 640 en WebP (≤ 120 KB), luz natural, fondo liso, sin filtros ni retoque que cambie rasgos.\n- **Sin foto: avatar de silueta** (decisión 2026-11-04): médica o médico con bata y estetoscopio, en `silueta` sobre el degradado `foto-inicio` → `foto-fin`, mismo formato 3:4. Archivos en el grupo «Avatares».\n- Cuál silueta: «Dra.» → mujer; «Dr.» → hombre; si el perfil no dice tratamiento ni sexo, la **neutra**. Nunca se adivina por el nombre.\n- La silueta es un respaldo, no un perfil: el panel del médico le sigue pidiendo su foto («Los pacientes eligen con más confianza cuando ven tu cara»).\n- Texto alternativo: con foto «Dra. Lucía Herrera, dermatóloga»; sin foto «Sin foto: Dra. Lucía Herrera».\n- El consumidor provee: URL de la foto o el tipo de avatar, nombre y especialidad.')
 comps['Anuncio'] = ('Resultados', 110, f'<aside class="ad" aria-label="Anuncio"><span class="lbl">Patrocinado</span><span>Clínica Dermalia: revisión de lunares, $650 hasta el 30 de noviembre.</span><a href="#promo">Ver promoción</a></aside>',
  f'''.ad{{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;background:var(--luz-calida,{P['sun']});border-radius:22px;padding:16px 20px;font-size:16px;line-height:24px}}.lbl{{font-weight:700;font-size:13px;line-height:18px;color:var(--texto-calido,{P['calido']});background:var(--blanco,#fff);border-radius:999px;padding:3px 10px}}.ad a{{margin-left:auto;font-weight:600;color:var(--tinta,{T})}}''',
  'Franja de anuncio entre los resultados: siempre dice que es pagada.\n\n- Fondo `luz-calida`; la etiqueta «Patrocinado» en `texto-calido` sobre blanco, primero y siempre visible.\n- Una línea con quién anuncia, qué ofrece, precio y vigencia; enlace «Ver promoción» a la derecha.\n- Ocupa el ancho de la lista y nunca imita una ficha de médico: así no se confunde con un resultado.\n- `aside` con `aria-label="Anuncio"`. El consumidor provee: anunciante, oferta, vigencia y destino.')
@@ -170,10 +177,10 @@ comps['Encabezado'] = ('Navegación', 120, f'<header class="nav"><a class="logo"
 .me{{margin-left:auto;color:var(--tinta,{T});text-decoration:none;font-weight:600;padding:10px 18px;border-radius:999px;background:var(--blanco,#fff)}}''',
  'Barra superior del directorio, sobre los halos de luz (sin fondo propio).\n\n- Logotipo horizontal a 30 px de alto (archivo, nunca reescrito con fuente). Enlaces en píldora; el actual con fondo blanco y `aria-current="page"`.\n- «Soy médico» a la derecha: la puerta para que un médico publique o administre su perfil.\n- En celular los enlaces pasan a un botón «Menú» de 44 px.\n- El consumidor provee: secciones y la actual.')
 EST = [('Visible', P['onexito'], P['exitos'], 'Visible en Manik', 'Los pacientes te encuentran en manik.mx/dra-lucia-herrera.'), ('Oculto', P['muted'], '#EEF1F5', 'Oculto desde el 2 nov', 'Los pacientes no te encuentran. Puedes mostrarlo cuando quieras.'),
-       ('Incompleto', '#A15D02', '#FDF1E1', 'No publicado · faltan 2 datos', 'Agrega tu foto y tus horarios para aparecer en Manik.'), ('En revisión', '#3C7190', '#E9F1F6', 'Revisando tu cédula', 'Te avisamos por correo cuando esté lista, normalmente en 2 días hábiles.')]
+       ('Incompleto', '#A15D02', '#FDF1E1', 'No publicado · faltan 2 datos', 'Agrega el precio de consulta y una forma de agendar en tu consultorio Centro.'), ('En revisión', '#3C7190', '#E9F1F6', 'Revisando tu cédula', 'Te avisamos por correo cuando esté lista, normalmente en 2 días hábiles.')]
 comps['EstadoPerfil'] = ('Médico', 300, '<div class="eg">' + ''.join(f'<div class="ep"><span class="pill" style="color:{c};background:{s}">{e}</span><b class="d">{a}</b><p class="mut">{b}</p></div>' for e, c, s, a, b in EST) + '</div>',
  '.eg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.ep{display:grid;gap:6px;align-content:start;background:var(--blanco,#fff);border:1px solid var(--linea,#DCE4EA);border-radius:20px;padding:16px}.pill{justify-self:start;font:600 13px/18px var(--font-sans,"Onest",sans-serif);border-radius:999px;padding:3px 10px}.ep b{font-size:17px;line-height:22px}.ep p{font-size:14px;line-height:20px}',
- 'Estado del perfil público del médico, tal como lo ve él en su panel (no el paciente). **Propuesta** del panel de usuario r1, pendiente de confirmar.\n\n- **Visible:** aparece en búsquedas; acciones «Ver mi perfil público» y «Editar perfil».\n- **Oculto:** no aparece; «Mostrar en Manik». Ocultar pide confirmación; mostrar no.\n- **Incompleto:** no se publica hasta completar los datos que faltan (foto, horarios…).\n- **En revisión:** se está verificando la cédula; el interruptor de visibilidad queda bloqueado.\n- Siempre texto + color; aviso e información toman los tonos del ecosistema oscurecidos para llegar a 4.5:1 sobre su fondo (#A15D02, #3C7190); aún no son tokens del directorio.\n- El consumidor provee: estado, fecha y datos faltantes. Supuestos: solo médicos tienen perfil público; la verificación de cédula existe.')
+ 'Estado del perfil público del médico, tal como lo ve él en su panel (no el paciente). **Propuesta** del panel de usuario r1, pendiente de confirmar.\n\n- **Visible:** aparece en búsquedas; acciones «Ver mi perfil público» y «Editar perfil».\n- **Oculto:** no aparece; «Mostrar en Manik». Ocultar pide confirmación; mostrar no.\n- **Incompleto:** no se publica hasta completar lo obligatorio de cada consultorio: dirección, precio de consulta y una forma de agendar (en línea o teléfono). La foto se pide pero no bloquea: sin ella sale el avatar.\n- **En revisión:** se está verificando la cédula; el interruptor de visibilidad queda bloqueado.\n- Siempre texto + color; aviso e información toman los tonos del ecosistema oscurecidos para llegar a 4.5:1 sobre su fondo (#A15D02, #3C7190); aún no son tokens del directorio.\n- El consumidor provee: estado, fecha y datos faltantes. Supuestos: solo médicos tienen perfil público; la verificación de cédula existe.')
 for name, (grp, h, body, css, md) in comps.items():
     os.makedirs(f'components/{name}', exist_ok=True)
     open(f'components/{name}/preview.html', 'w').write(page(grp, h, body, css))
@@ -264,10 +271,20 @@ De tú, claro y sin tecnicismos, como una persona que conoce buenos médicos y t
 | «Te mandamos un recordatorio un día antes» | «Su cita ha sido registrada exitosamente en el sistema» |
 | «124 pacientes opinaron sobre la Dra. Herrera» | «¡Los mejores doctores!» |
 
+## Consultorios
+
+Un médico puede atender en varios consultorios. **Precio, horarios y forma de agendar son de cada consultorio**, no del médico (decisión 2026-11-04).
+
+- **Para publicar**, cada consultorio necesita dirección, precio de consulta y al menos una forma de agendar: en línea (horarios) o por teléfono. Sin precio o sin forma de agendar, el consultorio no se publica y el perfil queda «Incompleto» [propuesta].
+- **En resultados**, la ficha muestra un consultorio: el más cercano a donde busca el paciente que cumpla los filtros. Si hay más: «Atiende en N consultorios · ver todos».
+- **Filtros por consultorio:** «Cita en línea», «Hasta $800» y «Con lugar hoy» se evalúan en cada consultorio.
+- **Formas mixtas:** un consultorio puede agendar en línea y otro solo por teléfono; cada uno muestra la suya.
+- En el perfil público, la lista de consultorios con su dirección, precio y forma de agendar [pendiente de diseñar].
+
 ## Fotografía
 
 - **Retratos de médicos:** los sube cada médico. 3:4 vertical, mínimo 900 × 1200 px, servidos a 480 × 640 en WebP (≤ 120 KB). Luz natural, fondo liso y claro, sin filtros. Revisión antes de publicar: solo bloquea lo que confunde al paciente (que no sea la persona o no se vea su cara); la calidad se sugiere.
-- **Sin foto:** iniciales en Urbanist 300 sobre el degradado `foto-inicio` → `foto-fin`. Nunca silueta genérica.
+- **Sin foto:** avatar de silueta de médica o médico (o neutro si el perfil no lo indica) sobre el degradado `foto-inicio` → `foto-fin`. Decisión 2026-11-04; reemplaza la regla anterior de iniciales. La foto se sigue pidiendo en el panel.
 - **Fotos de marca:** personas cuidándose en su vida diaria, México real; portada 4:5 en escritorio y 1:1 en celular.
 
 ## Accesibilidad
@@ -280,24 +297,28 @@ WCAG 2.2 AA: texto 4.5:1 en su fondo, controles de 42 px o más, foco visible de
 - Estrella: el manual v2 usa {P['estrella']}; el paquete de marca anterior decía #F2B33D. Aquí manda el manual v2 (más reciente).
 - Aviso e información (estado del perfil) usan los colores del ecosistema; decidir si pasan a tokens del directorio.
 - Estado del perfil público: propuesta del panel de usuario, por confirmar (¿clínicas con perfil?, ¿verificación de cédula?).
+- Perfil público con la lista de consultorios: por diseñar.
+- Varios precios en un mismo consultorio (primera vez / subsecuente): sin decidir.
 - Dominio `manik.mx` sin confirmar; datos de médicos, precios y teléfonos son de ejemplo.
 - Escala de espacio tomada del prototipo; confirmar con desarrollo.
 '''
 open('README.md', 'w').write(README)
-os.makedirs('assets/Marca', exist_ok=True); os.makedirs('assets/Logotipos', exist_ok=True); os.makedirs('assets/Iconos', exist_ok=True)
+os.makedirs('assets/Marca', exist_ok=True); os.makedirs('assets/Logotipos', exist_ok=True); os.makedirs('assets/Iconos', exist_ok=True); os.makedirs('assets/Avatares', exist_ok=True)
 open('assets/Marca/README.md', 'w').write('# Marca\n\nSímbolo de Manik (pin cian con la línea de pulso) en color, una tinta (`currentColor`) y blanco; ícono de app (1024) y favicon. Mínimo 24 px; área de respeto de un cuarto del ancho del símbolo. Nunca degradados, rotación, sombras ni otro color.\n')
 open('assets/Logotipos/README.md', 'w').write('# Logotipos\n\n«manik» en Sora 600 convertido a trazos: horizontal (uso general), vertical (espacios angostos), con respaldo «de MedicalManik» (institucional), en blanco y a una tinta. Siempre el archivo; nunca reescrito con fuente.\n')
+open('assets/Avatares/README.md', 'w').write('# Avatares\n\nRespaldo cuando el médico no tiene foto: silueta de médica, médico o neutra, con bata y estetoscopio, 3:4 sobre el degradado de luz. «Dra.» → mujer, «Dr.» → hombre; sin dato → neutra. Nunca se elige por el nombre.\n')
 open('assets/Iconos/README.md', 'w').write('# Iconos\n\nLucide (licencia ISC), trazo 2, retícula 24, `currentColor`: los que usa el directorio en búsqueda, categorías, ficha y confianza. En interfaz van en `cian-ui`.\n')
 now = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
 rec = lambda n, b: {'name': n, 'blob': b[0], 'size': b[1], 'type': 'image/svg+xml'}
 om = ['simbolo.svg', 'simbolo-1tinta.svg', 'simbolo-blanco.svg', 'app-icon.svg', 'favicon.svg']; ol = ['logotipo.svg', 'logotipo-vertical.svg', 'logotipo-endoso.svg', 'logotipo-blanco.svg', 'logotipo-1tinta.svg']
-oi = [k + '.svg' for k in IC]
+oi = [k + '.svg' for k in IC]; oa = list(AV)
 json.dump({'v': 3, 'layout': 'files', 'createdOnFiles': {'v': 1, 'at': now}, 'title': 'Directorio Manik', 'namespace': 'DirectorioManik', 'libraries': [], 'sections': {},
-  'groups': ['Marca', 'Logotipos', 'Iconos'],
+  'groups': ['Marca', 'Logotipos', 'Avatares', 'Iconos'],
   'assetGroups': {'Marca': {'name': 'Marca', 'tile': 'm', 'order': om, 'files': {n: rec(n, B[n]) for n in om}},
                   'Logotipos': {'name': 'Logotipos', 'tile': 'l', 'order': ol, 'files': {n: rec(n, B[n]) for n in ol}},
+                  'Avatares': {'name': 'Avatares', 'tile': 's', 'order': oa, 'files': {n: rec(n, AV[n]) for n in oa}},
                   'Iconos': {'name': 'Iconos', 'tile': 'xs', 'order': oi, 'files': {k + '.svg': rec(k + '.svg', IC[k]) for k in IC}}},
   'blobs': {}, 'docs': {'readme': 'project/README.md', 'sections': []},
-  'lastChange': {'at': now, 'by': 'Kevin', 'via': 'Claude Code', 'note': 'Primera versión: tokens, 11 componentes y marca del directorio Manik a partir del manual v2 y del prototipo bienestar.'}},
+  'lastChange': {'at': now, 'by': 'Kevin', 'via': 'Claude Code', 'note': 'Consultorios: precio y forma de agendar por consultorio; avatar de silueta (mujer, hombre, neutro) cuando no hay foto.'}},
  open('design-system.json', 'w'), indent=2, ensure_ascii=False)
 print('ok', sorted(os.listdir('components')))

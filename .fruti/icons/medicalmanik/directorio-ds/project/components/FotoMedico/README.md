@@ -2,7 +2,9 @@
 
 La cara del médico en la ficha y el perfil.
 
-- **Con foto:** 3:4 vertical, `radius-foto`. Reglas de la sección Fotografía del manual: mínimo 900 × 1200 px, servida a 480 × 640 en WebP (≤ 120 KB), luz natural, fondo liso, sin filtros ni retoque que cambie rasgos.
-- **Sin foto:** iniciales en Urbanist 300 sobre el degradado `foto-inicio` → `foto-fin`, mismo tamaño 3:4. Nunca silueta genérica ni avatar de dibujo: parecen perfiles falsos.
-- Texto alternativo: «Dra. Lucía Herrera, dermatóloga»; en el respaldo, «Sin foto: Dra. Lucía Herrera».
-- El consumidor provee: URL de la foto o iniciales, nombre y especialidad.
+- **Con foto:** 3:4 vertical, `radius-foto`. Reglas de la sección Fotografía: mínimo 900 × 1200 px, servida a 480 × 640 en WebP (≤ 120 KB), luz natural, fondo liso, sin filtros ni retoque que cambie rasgos.
+- **Sin foto: avatar de silueta** (decisión 2026-11-04): médica o médico con bata y estetoscopio, en `silueta` sobre el degradado `foto-inicio` → `foto-fin`, mismo formato 3:4. Archivos en el grupo «Avatares».
+- Cuál silueta: «Dra.» → mujer; «Dr.» → hombre; si el perfil no dice tratamiento ni sexo, la **neutra**. Nunca se adivina por el nombre.
+- La silueta es un respaldo, no un perfil: el panel del médico le sigue pidiendo su foto («Los pacientes eligen con más confianza cuando ven tu cara»).
+- Texto alternativo: con foto «Dra. Lucía Herrera, dermatóloga»; sin foto «Sin foto: Dra. Lucía Herrera».
+- El consumidor provee: URL de la foto o el tipo de avatar, nombre y especialidad.

@@ -72,10 +72,20 @@ De tú, claro y sin tecnicismos, como una persona que conoce buenos médicos y t
 | «Te mandamos un recordatorio un día antes» | «Su cita ha sido registrada exitosamente en el sistema» |
 | «124 pacientes opinaron sobre la Dra. Herrera» | «¡Los mejores doctores!» |
 
+## Consultorios
+
+Un médico puede atender en varios consultorios. **Precio, horarios y forma de agendar son de cada consultorio**, no del médico (decisión 2026-11-04).
+
+- **Para publicar**, cada consultorio necesita dirección, precio de consulta y al menos una forma de agendar: en línea (horarios) o por teléfono. Sin precio o sin forma de agendar, el consultorio no se publica y el perfil queda «Incompleto» [propuesta].
+- **En resultados**, la ficha muestra un consultorio: el más cercano a donde busca el paciente que cumpla los filtros. Si hay más: «Atiende en N consultorios · ver todos».
+- **Filtros por consultorio:** «Cita en línea», «Hasta $800» y «Con lugar hoy» se evalúan en cada consultorio.
+- **Formas mixtas:** un consultorio puede agendar en línea y otro solo por teléfono; cada uno muestra la suya.
+- En el perfil público, la lista de consultorios con su dirección, precio y forma de agendar [pendiente de diseñar].
+
 ## Fotografía
 
 - **Retratos de médicos:** los sube cada médico. 3:4 vertical, mínimo 900 × 1200 px, servidos a 480 × 640 en WebP (≤ 120 KB). Luz natural, fondo liso y claro, sin filtros. Revisión antes de publicar: solo bloquea lo que confunde al paciente (que no sea la persona o no se vea su cara); la calidad se sugiere.
-- **Sin foto:** iniciales en Urbanist 300 sobre el degradado `foto-inicio` → `foto-fin`. Nunca silueta genérica.
+- **Sin foto:** avatar de silueta de médica o médico (o neutro si el perfil no lo indica) sobre el degradado `foto-inicio` → `foto-fin`. Decisión 2026-11-04; reemplaza la regla anterior de iniciales. La foto se sigue pidiendo en el panel.
 - **Fotos de marca:** personas cuidándose en su vida diaria, México real; portada 4:5 en escritorio y 1:1 en celular.
 
 ## Accesibilidad
@@ -88,5 +98,7 @@ WCAG 2.2 AA: texto 4.5:1 en su fondo, controles de 42 px o más, foco visible de
 - Estrella: el manual v2 usa #E3A21C; el paquete de marca anterior decía #F2B33D. Aquí manda el manual v2 (más reciente).
 - Aviso e información (estado del perfil) usan los colores del ecosistema; decidir si pasan a tokens del directorio.
 - Estado del perfil público: propuesta del panel de usuario, por confirmar (¿clínicas con perfil?, ¿verificación de cédula?).
+- Perfil público con la lista de consultorios: por diseñar.
+- Varios precios en un mismo consultorio (primera vez / subsecuente): sin decidir.
 - Dominio `manik.mx` sin confirmar; datos de médicos, precios y teléfonos son de ejemplo.
 - Escala de espacio tomada del prototipo; confirmar con desarrollo.
