@@ -19,3 +19,4 @@ Pedido: «genera un artifact con un prototipo del directorio Manik». Regenerar:
 - 2026-11-04: «con Impulsa Manik» en la tarjeta y sello de Impulsa al pie de la página de la promoción.
 - 2026-11-04: 9 médicos de ejemplo más (salud mental, alimentación, salud íntima, chequeo general, pediatría), completos y con poca información; todas las categorías tienen resultados; «Con lugar hoy» muestra 3; maestrías con su propia cédula; sin número de teléfono repetido en consultorios solo por teléfono.
 - 2026-11-04: leyenda del inicio, opción B («Encuentra a tu médico cerca de ti.»).
+- 2026-11-04: simulación de la foto de marca 4:5 en el inicio (ilustración + tarjetas flotantes; etiqueta «Simulación»).

@@ -110,7 +110,13 @@ a{color:inherit}
 /* Inicio r03 (aprobado 2026-11-04) */
 .hero{grid-template-columns:minmax(0,1fr)}.htxt{display:grid;gap:20px;align-content:center;min-width:0}
 .donde{display:flex;flex-wrap:wrap;align-items:center;gap:2px 12px;font-size:15px;line-height:22px;color:var(--muted)}.donde .ico{width:16px;height:16px;color:var(--cian-ui)}.donde>span{display:inline-flex;align-items:center;gap:6px}.donde b{color:var(--tinta);font-weight:600}
-.foto{display:none;aspect-ratio:4/5;border-radius:32px;background:linear-gradient(160deg,var(--foto-inicio),var(--foto-fin));align-items:end;padding:16px;font-size:13px;color:var(--muted)}
+.foto{display:none;position:relative;aspect-ratio:4/5;border-radius:32px;overflow:hidden;background:linear-gradient(160deg,var(--foto-inicio),var(--foto-fin))}
+.foto svg.esc{position:absolute;inset:0;width:100%;height:100%}
+.foto .sim{position:absolute;top:14px;right:14px;font-size:12px;font-weight:600;color:var(--muted);background:rgba(255,255,255,.85);border-radius:999px;padding:3px 10px}
+.foto .flota{position:absolute;display:flex;align-items:center;gap:10px;background:var(--blanco);border-radius:18px;padding:10px 14px;box-shadow:0 12px 30px rgba(20,33,61,.14);font-size:14px;line-height:1.25}
+.foto .flota b{display:block;font:600 15px/1.2 var(--display)}.foto .flota small{color:var(--muted);font-size:13px}
+.foto .f1{left:6%;top:12%}.foto .f1 .face{width:36px;border-radius:10px}.foto .f2{left:6%;bottom:6%;display:none}@media (min-width:1024px){.foto .f2{display:flex}}.foto .f2 .ico{color:var(--cian-ui)}
+.foto .f2 b{font-size:20px}
 @media (min-width:640px){.hero{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:32px;align-items:center}.foto{display:flex}}
 .lnk{justify-self:start;font-weight:600;color:var(--tinta);text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:44px;background:none;border:0;padding:0;font-size:16px;font-family:var(--sans);cursor:pointer}
 .hoy{display:grid;gap:12px}@media (min-width:640px){.hoy{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.hoy{grid-template-columns:repeat(3,minmax(0,1fr))}}
@@ -432,7 +438,15 @@ V.inicio = () => { const hoy = HOY(); return `<div class="halo">${nav('')}
 <button class="campo" data-abrir="buscar" aria-haspopup="dialog">${ic('search')}<span><b>¿Qué necesitas?</b><small>Especialidad, síntoma o nombre del médico</small></span></button>
 <form class="buscador" role="search" data-form="buscar"><div class="f">${ic('search')}<div><label for="q">Qué necesitas</label><input id="q" value="${S.q}" placeholder="Especialidad, síntoma o médico" autocomplete="off"></div></div><div class="f">${ic('map-pin')}<div><label for="w">Dónde</label><input id="w" value="${S.donde}" placeholder="Colonia o ciudad" autocomplete="off"></div></div><button class="btn oscuro" type="submit">Buscar</button></form>
 <p class="donde"><span>${ic('map-pin')}Cerca de <b>${S.donde}</b> (aproximado)</span><button class="ubi" data-ubi-ini>${ic('locate-fixed')}Usar mi ubicación</button></p></div>
-<div class="foto" aria-hidden="true">Foto de marca 4:5 (pendiente)</div></section></div>
+<div class="foto" aria-hidden="true"><svg class="esc" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice"><circle cx="300" cy="120" r="150" fill="#fff" opacity=".45"/><circle cx="60" cy="430" r="130" fill="#fff" opacity=".3"/>
+<path d="M118 228 C112 170 158 140 196 142 C238 144 274 176 268 232 L272 330 C250 344 140 344 116 330Z" fill="#14213D"/>
+<path d="M82 500 C84 410 120 350 192 338 C264 350 300 410 302 500Z" fill="#00788A"/><path d="M166 336 L192 372 L218 336Z" fill="#F3D9C4"/><rect x="178" y="296" width="28" height="44" rx="12" fill="#F3D9C4"/>
+<ellipse cx="192" cy="250" rx="54" ry="62" fill="#F3D9C4"/><path d="M138 238 C140 180 246 176 248 236 C232 206 156 204 138 238Z" fill="#14213D"/>
+<path d="M168 252 q8 7 16 0 M202 252 q8 7 16 0" fill="none" stroke="#14213D" stroke-width="3.5" stroke-linecap="round"/><path d="M178 282 q14 12 28 0" fill="none" stroke="#B0563F" stroke-width="3.5" stroke-linecap="round"/>
+<path d="M226 500 C228 448 250 416 288 410 C326 416 348 448 350 500Z" fill="#E3A21C"/>
+<circle cx="288" cy="362" r="40" fill="#F3D9C4"/><path d="M248 356 C250 314 326 312 328 356 C318 334 258 334 248 356Z" fill="#8A5A00"/><circle cx="252" cy="340" r="9" fill="#8A5A00"/>
+<path d="M272 366 q6 5 12 0 M294 366 q6 5 12 0" fill="none" stroke="#14213D" stroke-width="3" stroke-linecap="round"/><path d="M280 384 q8 7 16 0" fill="none" stroke="#B0563F" stroke-width="3" stroke-linecap="round"/>
+<path d="M236 420 C258 392 292 398 312 430" fill="none" stroke="#00788A" stroke-width="30" stroke-linecap="round"/><circle cx="314" cy="434" r="15" fill="#F3D9C4"/></svg><span class="sim">Simulación · foto de marca pendiente</span><span class="flota f1"><span class="face"><img src="${IMG.mujer}" alt=""></span><span><b>Dra. Mariana Soto</b><small>Hoy, 16:30 · Agenda en Manik</small></span></span><span class="flota f2">${ic('badge-check')}<span><b>$900</b><small>Consulta · precio a la vista</small></span></span></div></section></div>
 <section class="wrap sec" aria-labelledby="h-cat"><div><h2 class="h2" id="h-cat">Busca por <b>lo que sientes</b></h2><p class="sub">Si no sabes a qué especialista ir, empieza por aquí.</p></div>
 <div class="sellos"><div class="scats">${CATS.map((c,k)=>sello(c,k)).join('')}</div></div><button class="lnk" data-toast="El listado de especialidades aún no está en el prototipo">Ver todas las especialidades</button></section>
 ${hoy.length ? `<section class="wrap sec" aria-labelledby="h-hoy"><h2 class="h2" id="h-hoy">Con lugar <b>hoy</b> cerca de ti</h2>

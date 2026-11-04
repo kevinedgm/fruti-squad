@@ -9,6 +9,11 @@
 - Subtítulo: «Mira cuánto cuesta antes de ir y agenda sin pagar nada.» (antes: «La consulta es en su consultorio. Buscar y agendar es gratis.», ambiguo en «su consultorio»).
 - Efecto medido: el título ocupa 2 líneas en celular (390 px) y el buscador queda visible sin desplazarse. Prototipo v16.
 
+## Simulación de foto de marca (2026-11-04, pedido del usuario)
+- El panel 4:5 lleva una ilustración de reemplazo (mamá con su hija, colores del DS) con la etiqueta «Simulación · foto de marca pendiente», y dos tarjetas flotantes de la interfaz: «Dra. Mariana Soto · Hoy, 16:30 · Agenda en Manik» (desde tableta) y «$900 · Consulta · precio a la vista» (solo escritorio, para no tapar caras en tableta).
+- Decorativa (`aria-hidden`); no aparece en celular, como en el diseño aprobado.
+- No es la foto final: la foto de marca sigue pendiente (dueño: marca). Al reemplazarla, conservar las tarjetas flotantes y no taparlas caras.
+
 ## Sin resolver (no se infirió)
 - Foto de marca: no hay foto aprobada; panel de reemplazo «pendiente». Dueño: marca/Lima.
 - Formato de precio: el wireframe usaba «MXN 900»; el prototipo sigue el DS («$900»). Dueño: Lima.
