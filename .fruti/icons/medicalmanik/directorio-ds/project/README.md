@@ -11,6 +11,19 @@ Este sistema sigue el manual de marca del directorio (dirección «bienestar», 
 - **Confianza demostrable.** Cédula verificada, opiniones solo de citas agendadas y precios a la vista.
 - **Personas reales.** Fotos de médicos reales en 3:4 y fotos de marca de México real; sin bancos de imágenes.
 
+## Celular primero
+
+El 70 % del uso será en celular y tableta, el 30 % en escritorio. Se diseña primero a 390 px; tableta y escritorio son ampliaciones.
+
+- **Cortes:** celular < 640 px · tableta 640–1023 px · escritorio ≥ 1024 px (`bp-tableta`, `bp-escritorio`). Los componentes se adaptan al ancho de su contenedor (container queries) cuando pueden; la ficha cambia a 560 px (`ficha-amplia`).
+- **Prioridad en la ficha:** nombre y especialidad → consultorio y distancia → precio → calificación y cédula → cuándo → hasta 3 horarios → acción. Unas dos fichas por pantalla de 390 × 844.
+- **Pulgar:** la acción principal va abajo o a todo el ancho: «Buscar» al pie de la búsqueda, «Ver N especialistas» al pie de los filtros, barra de acción fija en el perfil (BarraAccion).
+- **Llamar:** en un consultorio que agenda por teléfono, «Llamar» (`tel:`) es la acción principal y «Copiar número» la secundaria. El número siempre va escrito.
+- **Nada se sale de la pantalla:** filtros en hoja inferior (BarraFiltros), chips que pasan de línea, máximo 3 horarios en la ficha.
+- **Tableta:** dos columnas de fichas; búsqueda y filtros como en celular en vertical. **Escritorio:** buscador en píldora doble, filtros en fila; lista con mapa [propuesta].
+- **Datos móviles:** fotos en WebP de 176 × 234 en la ficha de celular (≤ 20 KB); 480 × 640 solo en perfil y ficha amplia. Fuentes con `display=swap`.
+- **Insets del dispositivo:** barras y hojas fijas al pie suman `env(safe-area-inset-bottom)`.
+
 ## Lugar en la familia MedicalManik
 
 - **MedicalManik**: la empresa, sello madre.
@@ -55,7 +68,7 @@ Este sistema sigue el manual de marca del directorio (dirección «bienestar», 
 - Radios: icono 14, icono de categoría 16, foto 20, categoría 24, ficha 28 (24 en celular).
 - Espacio: 4 · 8 · 12 · 16 · 24 · 36 · 44 · 56, tomado del prototipo (por confirmar con desarrollo).
 - Sombras suaves teñidas de tinta: buscador, ficha al pasar el cursor y tarjetitas flotantes. El resto se separa con borde `linea` y aire.
-- Controles de 42 a 54 px; ancho máximo 1280 px.
+- Controles de 42 a 60 px; botones de cierre e iconos de 44 px; ancho máximo 1280 px.
 
 ## Iconografía
 
@@ -84,13 +97,13 @@ Un médico puede atender en varios consultorios. **Precio, horarios y forma de a
 
 ## Fotografía
 
-- **Retratos de médicos:** los sube cada médico. 3:4 vertical, mínimo 900 × 1200 px, servidos a 480 × 640 en WebP (≤ 120 KB). Luz natural, fondo liso y claro, sin filtros. Revisión antes de publicar: solo bloquea lo que confunde al paciente (que no sea la persona o no se vea su cara); la calidad se sugiere.
+- **Retratos de médicos:** los sube cada médico. 3:4 vertical, mínimo 900 × 1200 px; servidos en WebP a 176 × 234 en la ficha de celular (≤ 20 KB) y a 480 × 640 en perfil y ficha amplia (≤ 120 KB). Luz natural, fondo liso y claro, sin filtros. Revisión antes de publicar: solo bloquea lo que confunde al paciente (que no sea la persona o no se vea su cara); la calidad se sugiere.
 - **Sin foto:** avatar de silueta de médica o médico (o neutro si el perfil no lo indica) sobre el degradado `foto-inicio` → `foto-fin`. Decisión 2026-11-04; reemplaza la regla anterior de iniciales. La foto se sigue pidiendo en el panel.
 - **Fotos de marca:** personas cuidándose en su vida diaria, México real; portada 4:5 en escritorio y 1:1 en celular.
 
 ## Accesibilidad
 
-WCAG 2.2 AA: texto 4.5:1 en su fondo, controles de 42 px o más, foco visible de 3 px (`focus`), estados con icono y texto, `prefers-reduced-motion` respetado. La estrella nunca va sola: el número va escrito.
+WCAG 2.2 AA: texto 4.5:1 en su fondo, controles de 42 px o más (objetivo mínimo 24 px), foco visible de 3 px (`focus`), estados con icono y texto, `prefers-reduced-motion` respetado. La estrella nunca va sola: el número va escrito.
 
 ## Pendientes
 

@@ -18,3 +18,11 @@ Decisiones / correcciones:
 - Decisión del usuario: precio y forma de agendar son de cada consultorio. La ficha muestra el consultorio más cercano que cumpla los filtros y «Atiende en N consultorios · ver todos».
 - Decisión del usuario: sin foto, avatar de silueta de médica u hombre (reemplaza la regla de iniciales del manual v2); neutro si el perfil no indica «Dr./Dra.». `avatares.py` → `avatares/`, subidos al grupo «Avatares».
 - Propuesta: un consultorio se publica solo con dirección, precio y una forma de agendar; si falta, el perfil queda «Incompleto».
+
+## Cambio 2026-11-04 · celular primero
+- Dato del usuario: 70 % del uso en celular y tableta, 30 % en escritorio.
+- Ficha con container query (compacta < 560 px, avatar 72 px; amplia ≥ 560 px); máximo 3 horarios + «Más horarios»; acciones a todo el ancho.
+- «Llamar» (`tel:`) es la acción principal de consultorios por teléfono (corrige «Copiar número» como única acción).
+- Buscador: campo único que abre búsqueda a pantalla completa; píldora doble solo ≥ 1024 px.
+- Nuevos: BarraFiltros (hoja inferior) y BarraAccion (barra fija del perfil). Iconos extra (phone, sliders-horizontal, x, arrow-left) en `iconos-extra/`.
+- Tokens: foto-ficha-movil, ficha-amplia, bp-tableta, bp-escritorio, barra-inferior. Fotos en WebP 176 × 234 en ficha de celular.
