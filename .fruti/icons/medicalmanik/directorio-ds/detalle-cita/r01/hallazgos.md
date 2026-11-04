@@ -8,4 +8,5 @@
 | 4 | Cancelar por error | Alta | Diálogo con fecha, hora y médico; foco en «No, conservarla» | Kiwi | Resuelto |
 | 5 | Cambiar sin ver qué se pierde | Media | Resumen «antes → ahora»; la hora anterior se libera al confirmar | Kiwi | Resuelto |
 | 6 | Enlace vencido revela si existe una cita | Media | Mensaje neutro: «si hay una cita con ese celular, te llegará» | Kiwi | Resuelto |
-| 7 | ¿Cuándo vence el enlace? | Media | Sin definir (propuesta: el día después de la cita) | Producto | Decidir |
+| 7 | ¿Cuándo vence el enlace? | Media | Vence al terminar el día siguiente a la cita (usuario, 2026-11-04) | Producto | Resuelto |
+| 8 | Con el enlace vencido ya no se puede opinar | Baja | Propuesta: el mensaje «¿Cómo te fue?» del día siguiente lleva su propio enlace para opinar | Producto | Decidir más adelante |

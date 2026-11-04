@@ -10,6 +10,8 @@
 - Cambiar o cancelar: hasta 24 h antes de la cita (usuario, 2026-11-04).
 - Confirmación inmediata, sin aceptación del médico; no hay cuenta de paciente.
 
+- El enlace vence al terminar el día siguiente a la cita (usuario, 2026-11-04).
+
 ## Inferencias / reglas propuestas
 - A menos de 24 h: «Cambiar» y «Cancelar» no se ofrecen; se explica por qué y se ofrece llamar al consultorio.
 - Las 24 h se cuentan en la zona horaria del consultorio.
