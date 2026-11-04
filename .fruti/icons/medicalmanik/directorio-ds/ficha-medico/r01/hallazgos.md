@@ -1,0 +1,12 @@
+# Hallazgos · FichaMedico · r01
+
+| Sev. | Hallazgo | Decisión | Responsable | Siguiente acción |
+|---|---|---|---|---|
+| Alta | En la ficha actual, «Consulta $900» está en la cabecera del médico: se lee como precio del médico, no del consultorio; «Atiende en 2 consultorios» queda al final, lejos del precio al que afecta. | A y C atan precio y forma de agendar a su consultorio (bloque o fila). | kiwi | Elegir A, B o C |
+| Alta | Incógnita: ¿un precio por consultorio o varios por tipo de consulta? Cambia el bloque de precio en las tres. | Supuesto declarado: un precio por consultorio. | producto | Responder la incógnita 1 del brief |
+| Media | Cada ficha lleva su propia acción principal: hay varias principales por pantalla de resultados. | Cada ficha es un bloque de decisión independiente: una principal por ficha, nunca dos dentro de la misma (verificado en 96 combinaciones). En C, solo la primera fila es principal. | kiwi → coco | Confirmar con la regla del sistema; si no se acepta, «Agendar» pasa a secundario en la lista |
+| Media | B repite el dato: «Hoy 16:30» arriba y «Hoy · 3 horarios» abajo; si el paciente elige 17:00, el encabezado contradice su elección. | Si se elige B, el encabezado debe decir «Próximo lugar: hoy» sin hora. | kiwi | Solo si se elige B |
+| Media | C quita la elección de horario de la ficha: un toque más para elegir hora en los consultorios en línea. | A cambio, muestra las formas mixtas y caben unas 2.5 fichas por pantalla en compact (232–339 px por ficha frente a 339–460 en A). | producto | Probar con pacientes si el toque extra pesa |
+| Media | Incógnita: consultorio en línea sin lugar en 2 semanas. En el wireframe se muestra «Sin lugar en las próximas 2 semanas» + enlace al consultorio que sí tiene lugar; la alternativa es mostrar directamente ese otro consultorio. | Sin decidir. | producto | Responder la incógnita 2 del brief |
+| Baja | Botones de horario de 40 px de alto: cumplen el mínimo de 24 px pero quedan debajo de los 44 px recomendados para controles principales. | El sistema usa 42 px; se mantiene, son secundarios frente a «Agendar» (44+). | coco | Revisar en F3 |
+| Baja | Con nombre y especialidad largos («Dra. María de los Ángeles Hernández-Villaseñor») la ficha crece en alto pero no rompe; en compact el nombre toma 2–3 líneas. | Ajuste por línea (sin truncar el nombre: es identidad). | coco | Verificar en F3 con la letra real |
