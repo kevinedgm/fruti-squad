@@ -1,8 +1,3 @@
 # Anuncio
 
-Franja de anuncio entre los resultados: siempre dice que es pagada.
-
-- Fondo `luz-calida`; la etiqueta «Patrocinado» en `texto-calido` sobre blanco, primero y siempre visible.
-- Una línea con quién anuncia, qué ofrece, precio y vigencia; enlace «Ver promoción» a la derecha.
-- Ocupa el ancho de la lista y nunca imita una ficha de médico: así no se confunde con un resultado.
-- `aside` con `aria-label="Anuncio"`. El consumidor provee: anunciante, oferta, vigencia y destino.
+Promoción patrocinada entre los resultados (viene de Impulsa Manik). Aprobada el 2026-11-04 (promocion/r02).\n\n**Anatomía**\n- Banner con el mismo recorte que Impulsa (357:104, franja central del original 16:9); imagen decorativa (`alt=""`).\n- «Patrocinado» primero (`texto-calido` sobre `luz-calida`, 7.1:1) y también al inicio del nombre accesible.\n- Título como texto real (nunca se lee de la imagen) y anunciante · vigencia en «muted».\n- Toda la tarjeta es un enlace a la página de la promoción.\n\n**Reglas**\n- Nunca en la 1.ª posición: después del 2.º resultado; máximo 1 cada 5; nunca 2 seguidas; solo de la especialidad o zona buscada.\n- Ancho completo de la lista y borde punteado: nunca imita una ficha; no lleva botón «Agendar».\n- No se nombra «Impulsa» ni se usa `app-impulsa`: el paciente no conoce la herramienta.\n- Sin imagen: solo texto, sin hueco. Si la promoción no carga, la lista sale sin ella y sin error.\n- Imagen ligera para la lista (~716 × 208, WebP); el original solo en la página.\n\n**Adaptación:** celular, banner arriba a lo ancho; contenedor de 600 px o más, banner de 357 px a la izquierda.\n\nEl consumidor provee: banner, título, anunciante, vigencia y destino. Datos de ejemplo.

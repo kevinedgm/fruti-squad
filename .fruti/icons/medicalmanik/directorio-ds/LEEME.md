@@ -41,3 +41,4 @@ Decisiones / correcciones:
 - 2026-11-04: FichaMedico y prototipo muestran cédulas con número («Céd. Prof. · Céd. Esp.») en lugar de «Cédula verificada». DS versión 9.
 
 - 2026-11-04: TarjetaCategoria → sello circular en tres tamaños (categorias/r02); tercer color «tinta» en lugar de azul-medicalmanik. DS versión 10.
+- 2026-11-04: Anuncio → promoción patrocinada de Impulsa (promocion/r02). DS versión 11.

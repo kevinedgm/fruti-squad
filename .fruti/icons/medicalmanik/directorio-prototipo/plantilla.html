@@ -80,6 +80,20 @@ a{color:inherit}
 .trust b{font:600 20px/26px var(--display)}.trust p{color:var(--confianza-texto);font-size:15px;line-height:22px}
 .pie{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;padding-block:32px 48px;color:var(--muted);font-size:15px}.pie img{height:22px;width:auto;display:block}
 
+/* Promociones de Impulsa (promocion/r02, aprobado 2026-11-04) */
+.promo{grid-column:1/-1;display:grid;background:var(--blanco);border:1.5px dashed var(--linea-control);border-radius:24px;overflow:hidden;text-decoration:none;color:var(--tinta)}
+.promo:hover{box-shadow:var(--sombra-hover)}.promo:focus-visible{outline:3px solid var(--cian-ui);outline-offset:2px}
+.promo .pimg{width:100%;aspect-ratio:357/104;object-fit:cover;display:block;background:var(--lavado)}
+.promo .ptx{display:grid;gap:4px;padding:12px 16px 14px}.promo .ptx b{font:600 18px/1.25 var(--display)}.promo .ptx small{color:var(--muted);font-size:14px}
+@media (min-width:640px){.promo{grid-template-columns:minmax(0,357px) minmax(0,1fr);align-items:center}}
+.etq{justify-self:start;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--texto-calido);background:var(--luz-calida);border-radius:999px;padding:3px 10px}
+.pp{display:grid;gap:20px;padding-block:8px 56px}@media (min-width:1024px){.pp{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;align-items:start}}
+.pp .ban{width:100%;aspect-ratio:256/143;object-fit:cover;border-radius:24px;display:block;background:var(--lavado)}
+.pp h1{font:600 clamp(26px,6vw,34px)/1.1 var(--display);letter-spacing:-.02em}.pp .info{display:grid;gap:14px;min-width:0}
+.anun{display:grid;grid-template-columns:56px minmax(0,1fr);gap:4px 12px;align-items:center;background:var(--blanco);border:1px solid var(--linea);border-radius:20px;padding:12px;text-decoration:none;color:var(--tinta)}.anun .face{grid-row:1/4;border-radius:12px}.anun b{font:600 17px/1.2 var(--display)}.anun small{color:var(--muted);font-size:14px}
+.legal{font-size:13px;color:var(--muted);border-top:1px solid var(--linea);padding-top:10px}
+.aplicada{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--luz-calida);border-radius:16px;padding:10px 14px;font-size:15px}.aplicada b{font-weight:600}
+
 /* Sellos de categoría (categorias/r02, aprobado 2026-11-04) */
 .sellos{container:sellos/inline-size}.scats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px 10px;--s:88px}
 @container sellos (min-width:560px){.scats{--s:112px;gap:12px}}@container sellos (min-width:900px){.scats{grid-template-columns:repeat(6,minmax(0,1fr));--s:132px}}
@@ -344,6 +358,21 @@ function sello(c, k){ const ley = `${c[1].toUpperCase()} · ${c[2].toUpperCase()
   <circle class="fo" cx="70" cy="70" r="68"/><circle class="tr" cx="70" cy="70" r="63" stroke-width="1.5"/>
   <g class="g-ley"><circle class="bl" cx="70" cy="70" r="37"/><circle class="tr" cx="70" cy="70" r="37" stroke-width="1.5" stroke-dasharray="2 3.2"/><text class="ley" font-size="11" font-weight="600" letter-spacing="1.4"><textPath href="#arc-s${k}" textLength="312" lengthAdjust="spacing">${ley.repeat(rep)}</textPath></text>${icS(c[0], 52, 36)}</g>
   <g class="g-comp"><circle class="bl" cx="70" cy="70" r="50"/><circle class="tr" cx="70" cy="70" r="50" stroke-width="2" stroke-dasharray="2.5 4"/>${icS(c[0], 43, 54)}</g></svg><b>${c[1]}</b><small>${c[2]}</small></button>`; }
+// Promociones de ejemplo (vienen de Impulsa Manik). Banner 16:9 sin texto; la franja central es la que se ve en la lista.
+const banner = (a, b, c) => 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2048 1144"><rect width="2048" height="1144" fill="${a}"/><circle cx="1500" cy="560" r="420" fill="${b}"/><circle cx="560" cy="640" r="300" fill="${c}"/><circle cx="1020" cy="520" r="150" fill="#fff" opacity=".8"/><path d="M0 900 Q1024 640 2048 940 V1144 H0Z" fill="${b}" opacity=".5"/></svg>`);
+const PROMOS = [
+ {id:'dermalia', cat:'Piel', med:'soto', cons:'angelopolis', anun:'Clínica Dermalia', titulo:'Revisión de lunares a $650', pr:650, normal:900, desc:'Revisión completa de lunares con dermatoscopio. Incluye una consulta de seguimiento si hace falta.', hasta:'30 de noviembre', cond:'Primera vez · pago en el consultorio', img:banner('#D3F0F4','#9FDCE5','#FFEFD2')},
+ {id:'hepatitis', cat:'Niñas y niños', med:'diaz', cons:'neodemo', anun:'Hospital NeoDemo Xalapa', titulo:'Consulta y vacuna contra hepatitis A a $1,200', pr:1200, normal:1500, desc:'Consulta pediátrica con aplicación de la vacuna contra hepatitis A, recomendada entre el primer y el segundo año de edad.', hasta:'15 de diciembre', cond:'Niñas y niños de 1 a 2 años · pago en el consultorio', img:banner('#FFEFD2','#F6D49B','#D3F0F4')}];
+const promoDe = (m, c, pid) => { const p = PROMOS.find(x => x.id === pid); return p && p.med === m.id && p.cons === c.id ? p : null; };
+const precioTxt = (m, c, pid) => { const p = promoDe(m, c, pid); return p ? `${peso(p.pr)} con promoción · normal ${peso(p.normal)}` : peso(c.pr); };
+V.promo = (id) => { const p = PROMOS.find(x=>x.id===id); if (!p) return V.resultados();
+  const m = MED.find(x=>x.id===p.med), c = m.cons.find(x=>x.id===p.cons);
+  return `${nav('buscar')}<main class="wrap"><a class="volver" href="#resultados">${ic('arrow-left')}Resultados</a><div class="pp"><img class="ban" src="${p.img}" alt="">
+  <div class="info"><span class="etq">Patrocinado</span><h1 id="h-ok" tabindex="-1">${p.titulo}</h1><p class="spec" style="font-size:17px">${p.desc}</p>
+  <dl class="det"><div><dt>Precio</dt><dd>${peso(p.pr)} · normal ${peso(p.normal)}</dd></div><div><dt>Vigencia</dt><dd>Hasta el ${p.hasta}</dd></div><div><dt>Dónde</dt><dd>${c.lu}</dd></div><div><dt>Condiciones</dt><dd>${p.cond}</dd></div></dl>
+  <a class="anun" href="#medico-${m.id}">${avatar(m)}<b>${p.anun} · ${m.n}</b><small>${m.esp}</small>${ced(m)}</a>
+  <div class="acc"><button class="btn primario" data-promo-agendar="${p.id}">Agendar con esta promoción</button><a class="btn texto" href="#medico-${m.id}">Ver perfil</a></div>
+  <p class="legal">Promoción de ${p.anun}. Manik no recomienda médicos; muestra quién la ofrece y sus cédulas.</p></div></div></main>`; };
 const HOY = () => MED.map(m => { const c = m.cons.find(c => c.manik && c.ag && c.ag[0]); return c ? {m, c} : null; }).filter(Boolean).sort((a,b)=>a.c.km-b.c.km);
 const PREG = [['¿El acné en adultos se quita solo?','soto',2],['Se me cae mucho el cabello, ¿a qué especialista voy?','luna',3]];
 // Portadas de ejemplo (abstractas): en producción, la imagen que sube el médico
@@ -377,7 +406,8 @@ V.resultados = () => {
   const titulo = S.cat === 'Piel' ? `<b>Dermatólogas</b> cerca de ti` : `<b>${S.cat}</b> cerca de ti`;
   const chipsEsc = `<span class="solo-esc"><button class="chip" aria-pressed="${S.f.manik}" data-f="manik">Agenda en Manik</button><button class="chip" aria-pressed="${S.f.hoy}" data-f="hoy">Con lugar hoy</button><button class="chip" aria-pressed="${S.f.precio===800}" data-f="p800">Hasta $800</button></span>`;
   let lista = r.map(ficha);
-  if (n >= 2) lista.splice(2, 0, `<aside class="ad" aria-label="Anuncio"><span class="lbl">Patrocinado</span><span>Clínica Dermalia: revisión de lunares, $650 hasta el 30 de noviembre.</span><a href="#resultados">Ver promoción</a></aside>`);
+  const pr = PROMOS.find(x => x.cat === S.cat);
+  if (pr && n >= 2) lista.splice(2, 0, `<a class="promo" href="#promo-${pr.id}" aria-label="Patrocinado: ${pr.anun}. ${pr.titulo}. Ver promoción"><img class="pimg" src="${pr.img}" alt=""><span class="ptx"><span class="etq">Patrocinado</span><b>${pr.titulo}</b><small>${pr.anun} · hasta el ${pr.hasta}</small></span></a>`);
   if (!n) lista = [S.cat !== 'Piel'
     ? `<div class="vacio"><span class="ic">${ic('search')}</span><h3>Aún no hay especialistas de ${S.cat.toLowerCase()} en este prototipo</h3><p>El ejemplo solo tiene dermatología y pediatría. Prueba con «Piel» o «Niñas y niños».</p><div class="acc"><button class="btn primario" data-cat="Piel">Ver dermatología</button></div></div>`
     : `<div class="vacio"><span class="ic">${ic('sliders-horizontal')}</span><h3>Nadie cumple todos tus filtros</h3><p>Filtros activos: ${[S.f.manik&&'Agenda en Manik', S.f.hoy&&'Con lugar hoy', S.f.precio&&'Hasta '+peso(S.f.precio)].filter(Boolean).join(' · ')}.</p><div class="acc"><button class="btn primario" data-limpiar>Quitar filtros</button></div></div>`];
@@ -410,7 +440,8 @@ V.medico = (id) => {
   } else {
     ag = `<p class="tel">${c.tel}</p><div class="acc"><a class="btn primario solo-esc-btn" href="${tel}" data-llamar="${c.tel}">${ic('phone')}Llamar</a><button class="btn secundario" data-copiar="${c.tel}">${ic('copy')}Copiar número</button><button class="btn texto" data-toast="Aquí se abriría el mapa">Cómo llegar</button></div>`;
   }
-  const agB = `<section class="bloque pf-ag" id="sec-agenda" aria-labelledby="h-ag"><h2 id="h-ag">${c.manik ? 'Agenda tu cita' : 'Consultorio'}</h2>${seg}${co}${ag}</section>`;
+  const pa = promoDe(m, c, S.promo);
+  const agB = `<section class="bloque pf-ag" id="sec-agenda" aria-labelledby="h-ag"><h2 id="h-ag">${c.manik ? 'Agenda tu cita' : 'Consultorio'}</h2>${pa ? `<p class="aplicada"><span class="etq">Promoción</span><b>${pa.titulo}</b><span>se aplica al agendar aquí</span></p>` : ''}${seg}${co}${ag}</section>`;
   // Secciones (sin datos = no aparecen)
   const sec = [];
   if (m.pad && m.pad.length) sec.push(['padecimientos','Padecimientos',`<h2 id="h-pad">Padecimientos que atiende</h2><ul class="tags">${m.pad.map(x=>`<li>${x}</li>`).join('')}</ul>`]);
@@ -435,11 +466,11 @@ V.confirmar = () => {
   const d = S.datos;
   return `${nav('buscar')}<main class="wrap"><a class="volver" href="#medico-${m.id}">${ic('arrow-left')}Cambiar horario</a>
   <form class="paso" data-form="confirmar" novalidate><h1>Confirma tu cita</h1>${S.ocupado ? `<div class="ocupado" role="alert" tabindex="-1" id="ocupado"><b>Ese horario se acaba de ocupar.</b><span>Elige otro; tus datos se quedan como están.</span><div class="horas" role="group" aria-label="Horarios cercanos">${cercanas(c).map(([k,h])=>`<button type="button" data-alt="${k}|${h}">${nombreDia(k)}, ${h}</button>`).join('')}</div></div>` : ''}
-  <dl class="det"><div><dt>Médico</dt><dd>${m.n}</dd></div><div><dt>Cuándo</dt><dd>${S.ocupado ? 'Elige otro horario' : fechaLarga(S.dia) + ', ' + S.hora}</dd></div><div><dt>Dónde</dt><dd>${c.lu} · ${c.dir}</dd></div><div><dt>Consulta</dt><dd>${peso(c.pr)} · pagas en el consultorio</dd></div></dl>
+  <dl class="det"><div><dt>Médico</dt><dd>${m.n}</dd></div><div><dt>Cuándo</dt><dd>${S.ocupado ? 'Elige otro horario' : fechaLarga(S.dia) + ', ' + S.hora}</dd></div><div><dt>Dónde</dt><dd>${c.lu} · ${c.dir}</dd></div><div><dt>Consulta</dt><dd>${precioTxt(m, c, S.promo)} · pagas en el consultorio</dd></div></dl>
   <div class="form"><div class="campo-f" id="cf-nombre"><label for="nombre">Nombre completo</label><input id="nombre" autocomplete="name" value="${d.nombre||''}" required><span class="errm">Escribe tu nombre para que el consultorio te reciba.</span></div>
   <div class="campo-f" id="cf-cel"><label for="cel">Celular</label><input id="cel" inputmode="tel" autocomplete="tel" placeholder="10 dígitos" value="${d.cel||''}" required><small>Te mandamos la confirmación y un recordatorio un día antes.</small><span class="errm">Escribe un celular de 10 dígitos.</span></div>
   <p class="spec" style="font-size:14px">Al confirmar aceptas el <a class="inl" style="padding-block:4px;font-weight:600" href="#confirmar" data-toast="Aviso de privacidad (ejemplo)">aviso de privacidad</a>. Tus datos solo se comparten con el consultorio.</p></div></form></main>
-  <div class="pie-paso"><div class="in"><div><b>${S.ocupado ? 'Elige otro horario' : nombreDia(S.dia, true) + ', ' + S.hora}</b>${c.lu} · ${peso(c.pr)}</div><button class="btn primario" data-confirmar aria-disabled="${!!S.ocupado}">Confirmar cita</button></div></div>`;
+  <div class="pie-paso"><div class="in"><div><b>${S.ocupado ? 'Elige otro horario' : nombreDia(S.dia, true) + ', ' + S.hora}</b>${c.lu} · ${peso((promoDe(m, c, S.promo) || c).pr)}</div><button class="btn primario" data-confirmar aria-disabled="${!!S.ocupado}">Confirmar cita</button></div></div>`;
 };
 
 V.cita = () => {
@@ -452,7 +483,7 @@ V.cita = () => {
   const resumen = (tach) => `<section class="cres a-res" aria-label="Tu cita"><span class="cuando${tach?' tachada':''}">${cuando}</span>
    <span class="fila">${ic('stethoscope')}<span><b>${m.n}</b><small>${m.esp}</small></span></span>
    <span class="fila">${ic('map-pin')}<span><b>${c.lu}</b><small>${c.dir}</small></span></span>
-   <span class="fila"><span></span><span><b>${peso(c.pr)}</b><small>Pagas en el consultorio</small></span></span>
+   <span class="fila"><span></span><span><b>${precioTxt(m, c, ci.promo)}</b><small>Pagas en el consultorio</small></span></span>
    <span class="fila"><span></span><span><b>Paciente: ${ci.nombre}</b><small>Celular ··· ${ci.cel.slice(-4)}</small></span></span>`;
   const telA = c.tel ? `<a class="btn secundario" href="tel:+52${c.tel.replace(/ /g,'')}" data-llamar="${c.tel}">${ic('phone')}Llamar al consultorio · ${c.tel}</a>` : '';
   if ((ci.estado === 'cancelada' && !demo) || demo === 'consultorio') {
@@ -495,7 +526,7 @@ V.confirmada = () => {
   <div class="cc"><section class="cres a-res" aria-label="Detalle de la cita"><span class="cuando">${cuando}</span>
    <span class="fila">${ic('stethoscope')}<span><b>${m.n}</b><small>${m.esp}</small></span></span>
    <span class="fila">${ic('map-pin')}<span><b>${c.lu}</b><small>${c.dir}</small></span></span>
-   <span class="fila"><span></span><span><b>${peso(c.pr)}</b><small>Pagas en el consultorio</small></span></span>
+   <span class="fila"><span></span><span><b>${precioTxt(m, c, S.promo)}</b><small>Pagas en el consultorio</small></span></span>
    <span class="fila"><span></span><span><b>Paciente: ${S.datos.nombre}</b><small>Celular ${S.datos.cel}</small></span></span>
    <div class="acc"><a class="btn primario" href="${gcal(m, c)}" target="_blank" rel="noopener">${ic('calendar-check')}Agregar a mi calendario</a><button class="btn secundario" data-toast="Aquí se abriría el mapa">${ic('map-pin')}Cómo llegar</button></div><button class="btn texto" style="justify-self:start" data-ics>Apple u Outlook (.ics)</button></section>
   <section class="cmsg a-msg" aria-labelledby="h-msg"><h2 id="h-msg">Te enviamos la confirmación</h2><p>Por mensaje al <b class="nw">${S.datos.cel}</b>. Ahí está el enlace para cambiar o cancelar tu cita.</p><p class="burbuja"><small>Vista del mensaje</small>${msg.replace('mnk.example/c/7KQ2','<a href="#cita" style="display:inline-block;padding-block:3px;font-weight:600">mnk.example/c/7KQ2</a>')}</p><button class="btn texto" style="justify-self:start" data-toast="Te lo volvimos a enviar">¿No te llegó? Reenviar</button></section>
@@ -537,10 +568,11 @@ function render(){
   const h = (location.hash || '#inicio').slice(1);
   let html;
   if (h.startsWith('medico-')) html = V.medico(h.slice(7));
+  else if (h.startsWith('promo-')) html = V.promo(h.slice(6));
   else html = (V[h] || V.inicio)();
   if (html) $('#app').innerHTML = html;
 }
-addEventListener('hashchange', () => { render(); const d = (location.hash === '#dudas' && $('#dudas')) || (S.irAgenda && $('#sec-agenda')); S.irAgenda = false;
+addEventListener('hashchange', () => { if (['#inicio','#resultados',''].includes(location.hash)) S.promo = null; render(); const d = (location.hash === '#dudas' && $('#dudas')) || (S.irAgenda && $('#sec-agenda')); S.irAgenda = false;
   if (d) { d.scrollIntoView({behavior:'instant', block:'start'}); d.setAttribute('tabindex','-1'); d.focus({preventScroll:true}); } else { scrollTo(0,0); ($('#h-ok') || $('#app')).focus?.(); } if (location.hash !== '#cita-cambiar') { S.cdia = null; S.chora = null; } });
 document.addEventListener('click', e => {
   const t = e.target;
@@ -565,6 +597,7 @@ document.addEventListener('click', e => {
   if (t.closest('[data-ubi]')) { $('#w1').value = 'Cerca de ti (ejemplo)'; return; }
   const f = t.closest('[data-f]'); if (f) { const k = f.dataset.f; if (k==='p800') S.f.precio = S.f.precio===800?0:800; else S.f[k] = !S.f[k]; render(); return; }
   if (t.closest('[data-limpiar]')) { S.f = {manik:false,hoy:false,precio:0}; render(); return; }
+  const pa = t.closest('[data-promo-agendar]'); if (pa) { const p = PROMOS.find(x=>x.id===pa.dataset.promoAgendar); S.promo = p.id; S.med = p.med; S.cons = p.cons; S.dia = null; S.hora = null; S.verH = false; S.irAgenda = true; location.hash = 'medico-' + p.med; return; }
   const ag = t.closest('[data-agendar]'); if (ag) { const [mid, cid] = ag.dataset.agendar.split('|'); S.med = mid; S.cons = cid; S.dia = null; S.hora = null; S.verH = false; S.irAgenda = true; location.hash = 'medico-' + mid; return; }
   const co = t.closest('[data-cons]'); if (co) { S.cons = co.dataset.cons; S.dia = null; S.hora = null; S.verH = false; render(); $(`[data-cons="${S.cons}"]`)?.focus(); return; }
   const hr = t.closest('[data-hora]'); if (hr) { const [k, h] = hr.dataset.hora.split('|'); S.dia = +k; S.hora = h; S.ocupado = false; location.hash = 'confirmar'; return; }
@@ -603,7 +636,7 @@ function confirmar(){
   const key = `${S.med}|${S.cons}|${S.dia}|${S.hora}`;
   if (OCUPA.has(key)) { OCUPA.delete(key); const c = MED.find(x=>x.id===S.med).cons.find(x=>x.id===S.cons); c.ag[S.dia] = c.ag[S.dia].filter(h=>h!==S.hora); if (!c.ag[S.dia].length) delete c.ag[S.dia]; S.ocupado = true; render(); $('#ocupado')?.focus(); return; }
   S.ocupado = false; reservar(S.med, S.cons, S.dia, S.hora);
-  S.cita = {med:S.med, cons:S.cons, dia:S.dia, hora:S.hora, nombre:S.datos.nombre, cel:S.datos.cel, estado:'activa'}; S.demo = null; location.hash = 'confirmada';
+  S.cita = {med:S.med, cons:S.cons, dia:S.dia, hora:S.hora, nombre:S.datos.nombre, cel:S.datos.cel, estado:'activa', promo:S.promo}; S.demo = null; location.hash = 'confirmada';
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#capa').innerHTML) cerrar(); });
 render();
