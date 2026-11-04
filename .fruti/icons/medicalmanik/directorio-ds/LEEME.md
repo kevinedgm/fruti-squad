@@ -37,3 +37,5 @@ Decisiones / correcciones:
 
 ## Cambio 2026-11-04 · sin «Nuevo en Manik»
 - Pedido del usuario: se retira la etiqueta. Sin opiniones, la ficha muestra solo «Cédula verificada». Aplicado en el sistema, el prototipo y la aprobación de r03.
+
+- 2026-11-04: FichaMedico y prototipo muestran cédulas con número («Céd. Prof. · Céd. Esp.») en lugar de «Cédula verificada». DS versión 9.

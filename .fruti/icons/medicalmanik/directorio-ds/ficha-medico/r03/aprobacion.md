@@ -14,3 +14,10 @@ Decisión del usuario: «apruebo FichaMedico · r03 · F2 opción C». La r04 (C
 4. **Lenguaje:** «Agenda en Manik» (la cita es presencial), nunca «En línea».
 5. **Estados:** sin conexión (Agendar no disponible; «Llamar» pasa a principal en la fila con teléfono), error de horarios, horario ocupado, sin lugar en 2 semanas, contenido largo, sin foto, sin opiniones.
 6. **Adaptación:** compacta < 520–560 px de contenedor (avatar junto al nombre); amplia ≥ 560 px (foto 132 a la izquierda, filas a la derecha).
+
+## Enmienda 2026-11-04 · cédulas con número (pedida por el usuario)
+- La etiqueta «Cédula verificada» se sustituye por las cédulas con número, debajo de la especialidad: «Céd. Prof. 10234567 · Céd. Esp. 11876543».
+- «Céd. Esp.» solo si el médico es especialista. Icono badge-check en `on-exito-suave` = verificadas por Manik (texto oculto para lector de pantalla: «Cédulas verificadas por Manik»).
+- Cada cédula no se corta por dentro; en 390 px ocupan 2 líneas.
+- Aplicado en: design system (FichaMedico, Insignias), prototipo (resultados y perfil), wireframe de inicio r02/r03.
+- Números del prototipo y del DS: de ejemplo (el de la Dra. Soto es el que dio el usuario como ejemplo).

@@ -97,7 +97,8 @@ a{color:inherit}
 .who{display:grid;gap:4px;min-width:0}.fmi h3{font:600 20px/24px var(--display);letter-spacing:-.01em;overflow-wrap:anywhere}.fmi h3 a{text-decoration:none}.fmi h3 a:hover{text-decoration:underline}
 .spec{color:var(--muted);font-size:15px;line-height:22px}
 .meta{display:flex;flex-wrap:wrap;gap:6px}.meta span{display:inline-flex;align-items:center;gap:5px;font-size:14px;line-height:20px;background:var(--bruma);border-radius:999px;padding:4px 10px}.meta .ico{width:15px;height:15px}
-.meta .v{color:var(--on-exito-suave);font-weight:600;background:var(--exito-suave)}.meta .st b{color:var(--estrella);font-weight:400}
+.meta .v{color:var(--on-exito-suave);font-weight:600;background:var(--exito-suave)}
+.ced{margin:0;display:flex;gap:6px;align-items:flex-start;font-size:13px;line-height:18px;color:var(--muted);font-variant-numeric:tabular-nums}.ced .ico{flex:none;width:16px;height:16px;margin-top:1px;color:var(--on-exito-suave)}.ced abbr{text-decoration:none}.meta .st b{color:var(--estrella);font-weight:400}
 .cons{grid-column:1/-1;display:grid;border:1px solid var(--linea);border-radius:18px;min-width:0}
 .co{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center;padding:12px 14px}.co+.co{border-top:1px solid var(--linea)}
 .co .l1{font-size:15px;line-height:22px;font-weight:600}.co .l1 b{font:600 17px/22px var(--display)}
@@ -200,18 +201,18 @@ function nombreDia(off, largo){ if (off===0) return 'Hoy'; if (off===1) return '
 function fechaLarga(off){ const d = dia(off); return `${DIAS[d.getDay()]} ${d.getDate()} de ${['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][d.getMonth()]}`; }
 // Datos de ejemplo: precio y forma de agendar son de cada consultorio
 const MED = [
- {id:'soto', av:'mujer', n:'Dra. Mariana Soto', esp:'Dermatóloga', foco:'acné y lunares', r:4.9, op:312, bio:'Atiende acné, lunares, manchas y revisión preventiva de piel. Explica cada tratamiento y su costo antes de empezar.', cons:[
+ {id:'soto', ced:['10234567','11876543'], av:'mujer', n:'Dra. Mariana Soto', esp:'Dermatóloga', foco:'acné y lunares', r:4.9, op:312, bio:'Atiende acné, lunares, manchas y revisión preventiva de piel. Explica cada tratamiento y su costo antes de empezar.', cons:[
    {id:'angelopolis', lu:'Angelópolis', dir:'Blvd. del Niño Poblano 2510, consultorio 412', km:1.8, pr:900, manik:true, tel:'222 555 0140', ag:{0:['16:30','17:00','18:30'],1:['9:00','9:30','12:00','13:00'],2:['10:00','11:30'],4:['9:00','16:00','17:30']}},
    {id:'centro', lu:'Centro', dir:'Av. Reforma 316, piso 2', km:5.2, pr:700, manik:false, tel:'222 555 0141'}]},
- {id:'quiroz', av:'mujer', n:'Dra. Fernanda Quiroz', esp:'Dermatóloga', foco:'cosmética', r:4.7, op:41, bio:'Dermatología cosmética: cicatrices de acné, manchas y cuidado de la piel madura.', cons:[
+ {id:'quiroz', ced:['09456123','12345098'], av:'mujer', n:'Dra. Fernanda Quiroz', esp:'Dermatóloga', foco:'cosmética', r:4.7, op:41, bio:'Dermatología cosmética: cicatrices de acné, manchas y cuidado de la piel madura.', cons:[
    {id:'centro', lu:'Centro', dir:'Calle 5 de Mayo 1204', km:3.1, pr:750, manik:false, tel:'222 555 0187'}]},
- {id:'hernandez', av:'hombre', n:'Dr. Iván Hernández', esp:'Dermatólogo', foco:'alergias de piel', r:null, op:0, bio:'Dermatitis, urticaria y alergias de piel en adultos.', cons:[
+ {id:'hernandez', ced:['08123456','11098765'], av:'hombre', n:'Dr. Iván Hernández', esp:'Dermatólogo', foco:'alergias de piel', r:null, op:0, bio:'Dermatitis, urticaria y alergias de piel en adultos.', cons:[
    {id:'lapaz', lu:'La Paz', dir:'Av. Juárez 2915, local 8', km:4.0, pr:700, manik:true, ag:{3:['10:00','11:00'],5:['12:00']}}]},
- {id:'ramos', av:'neutro', n:'Alex Ramos Treviño', esp:'Dermatología pediátrica', foco:'', r:4.8, op:57, bio:'Piel de bebés, niñas y niños: dermatitis atópica, lunares y verrugas.', cons:[
+ {id:'ramos', ced:['10987654','12765432'], av:'neutro', n:'Alex Ramos Treviño', esp:'Dermatología pediátrica', foco:'', r:4.8, op:57, bio:'Piel de bebés, niñas y niños: dermatitis atópica, lunares y verrugas.', cons:[
    {id:'sanmanuel', lu:'San Manuel', dir:'Av. San Claudio 401', km:2.6, pr:800, manik:true, ag:{1:['9:00','9:30','12:00'],2:['16:00']}},
    {id:'zavaleta', lu:'Zavaleta', dir:'Calz. Zavaleta 1120', km:6.0, pr:800, manik:true, tel:'222 555 0133', ag:{3:['17:00','17:30']}},
    {id:'cholula', lu:'Cholula', dir:'Calle 2 Norte 8', km:9.4, pr:650, manik:false, tel:'222 555 0122'}]},
- {id:'luna', av:'mujer', n:'Dra. Carla Luna', esp:'Dermatóloga', foco:'cabello y uñas', r:4.6, op:88, bio:'Caída de cabello, alopecia y problemas de uñas.', cons:[
+ {id:'luna', ced:['09654321','12098456'], av:'mujer', n:'Dra. Carla Luna', esp:'Dermatóloga', foco:'cabello y uñas', r:4.6, op:88, bio:'Caída de cabello, alopecia y problemas de uñas.', cons:[
    {id:'angelopolis', lu:'Angelópolis', dir:'Vía Atlixcáyotl 5208, consultorio 9', km:2.2, pr:1100, manik:true, ag:{0:['19:00'],1:['8:00','8:30']}}]},
 ];
 const CATS = [['scan-face','Piel','Dermatología',true],['brain','Salud mental','Psicología y psiquiatría'],['apple','Alimentación','Nutrición'],['flower-2','Salud íntima','Ginecología y urología'],['baby','Niñas y niños','Pediatría'],['stethoscope','Chequeo general','Medicina general']];
@@ -228,7 +229,8 @@ function resultados(){
 const nFiltros = () => (S.f.manik?1:0)+(S.f.hoy?1:0)+(S.f.precio?1:0);
 
 // Piezas
-const meta = m => `${m.r ? `<span class="st"><b aria-hidden="true">★</b> ${m.r} · ${m.op} opiniones</span>` : ''}<span class="v">${ic('badge-check')}Cédula verificada</span>`;
+const meta = m => m.r ? `<div class="meta"><span class="st"><b aria-hidden="true">★</b> ${m.r} · ${m.op} opiniones</span></div>` : '';
+const ced = m => `<p class="ced">${ic('badge-check')}<span class="vh">Cédulas verificadas por Manik: </span><span><span class="nw"><abbr title="Cédula profesional">Céd. Prof.</abbr> ${m.ced[0]}</span>${m.ced[1] ? ` · <span class="nw"><abbr title="Cédula de especialidad">Céd. Esp.</abbr> ${m.ced[1]}</span>` : ''}</span></p>`;
 const avatar = m => `<div class="face"><img src="${IMG[m.av]}" alt="Sin foto: ${m.n}"></div>`;
 function fila(m, c, prim){
   const p = prox(c);
@@ -239,7 +241,7 @@ function fila(m, c, prim){
 }
 function ficha({m, cons}){
   const extra = cons.length > 2 ? `<a class="mas" href="#medico-${m.id}">Ver ${cons.length-2} consultorio${cons.length>3?'s':''} más</a>` : '';
-  return `<article class="fm"><div class="fmi">${avatar(m)}<div class="who"><h3><a href="#medico-${m.id}">${m.n}</a></h3><p class="spec">${m.esp}${m.foco?' · '+m.foco:''}</p><div class="meta">${meta(m)}</div></div>
+  return `<article class="fm"><div class="fmi">${avatar(m)}<div class="who"><h3><a href="#medico-${m.id}">${m.n}</a></h3><p class="spec">${m.esp}${m.foco?' · '+m.foco:''}</p>${ced(m)}${meta(m)}</div>
   <div class="cons" role="list" aria-label="Consultorios de ${m.n}">${cons.slice(0,2).map((c,i)=>fila(m,c,i===0)).join('')}</div>${extra}</div></article>`;
 }
 const nav = (act) => `<header class="wrap nav"><a class="logo" href="#inicio" aria-label="Manik, inicio"><img src="${IMG.logo}" alt=""></a><ul><li><a href="#resultados" ${act==='buscar'?'aria-current="page"':''}>Buscar médico</a></li><li><a href="#inicio">Preguntas</a></li><li><a href="#inicio">Artículos</a></li></ul><a class="me" href="#inicio">Soy médico</a><button class="ib menu" aria-label="Menú">${ic('menu')}</button></header>`;
@@ -289,7 +291,7 @@ V.medico = (id) => {
   }
   const accionBarra = c.manik ? `<button class="btn primario" data-agendar="${m.id}|${c.id}">Agendar</button>` : `<a class="btn primario" href="tel:+52${c.tel.replace(/ /g,'')}" data-llamar="${c.tel}">${ic('phone')}Llamar</a>`;
   return `${nav('buscar')}<main class="wrap"><a class="volver" href="#resultados">${ic('arrow-left')}Resultados</a>
-  <div class="perfil"><div style="display:grid;gap:20px;min-width:0"><div class="ph">${avatar(m)}<div class="who"><h1>${m.n}</h1><p class="spec">${m.esp}${m.foco?' · '+m.foco:''}</p><div class="meta">${meta(m)}</div></div></div>
+  <div class="perfil"><div style="display:grid;gap:20px;min-width:0"><div class="ph">${avatar(m)}<div class="who"><h1>${m.n}</h1><p class="spec">${m.esp}${m.foco?' · '+m.foco:''}</p>${ced(m)}${meta(m)}</div></div>
   <section class="bloque"><h2>Sobre ${m.n.startsWith('Dr')?m.n.split(' ').slice(0,2).join(' '):'la consulta'}</h2><p>${m.bio}</p></section></div>
   <div style="display:grid;gap:14px;min-width:0"><section class="bloque"><h2>${m.cons.length > 1 ? `Atiende en ${m.cons.length} consultorios` : 'Consultorio'}</h2><p>Cada consultorio tiene su precio y su forma de agendar. La consulta es en el consultorio.</p><div class="copc">${ops}</div></section>
   <section class="bloque">${detalle}</section></div></div></main>

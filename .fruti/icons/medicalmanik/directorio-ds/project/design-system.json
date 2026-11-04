@@ -267,10 +267,10 @@
     "Iconos"
   ],
   "lastChange": {
-    "at": "2026-11-04T19:24:14Z",
+    "at": "2026-11-04T19:46:15Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "Se retira «Nuevo en Manik»: sin opiniones, la ficha muestra solo «Cédula verificada»."
+    "note": "FichaMedico muestra las cédulas con número («Céd. Prof. · Céd. Esp.») en lugar de la etiqueta «Cédula verificada» (enmienda a r03 C pedida por el usuario)."
   },
   "layout": "files",
   "libraries": [],
