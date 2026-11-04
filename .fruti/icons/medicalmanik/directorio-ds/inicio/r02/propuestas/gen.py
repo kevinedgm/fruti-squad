@@ -1,0 +1,141 @@
+# Kiwi · Inicio del directorio Manik · r02 · R1 F2. Uso: python3 gen.py → index.html (kit enlazado) y publicar.html (kit en línea + flujo)
+import os
+D = os.path.dirname(os.path.abspath(__file__))
+KIT = open(os.path.join(D, 'vendor', 'wireframe-kit.css')).read()
+FLUJO = open(os.path.join(D, '..', 'flujo.md')).read().split('```mermaid')[1].split('```')[0]
+LOCAL = r'''
+.ini{display:grid;gap:0}
+.nav{display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--wf-g3)}
+.nav .logo{font-weight:800;font-size:18px}.nav .sp{flex:1}.nav .lk{display:none}
+.blk{padding:20px 16px;display:grid;gap:14px;border-bottom:1px dashed var(--wf-g3)}
+.blk h2{margin:0;font-size:20px}.blk>p{margin:0}
+.htxt{display:grid;gap:14px;align-content:center;min-width:0}.hero h1{font-size:30px;line-height:1.1;margin:0;max-width:14ch}
+.campo{display:flex;align-items:center;gap:10px;border:1.5px solid var(--wf-g9);border-radius:999px;min-height:60px;padding:8px 18px;background:var(--wf-g0);width:100%;text-align:left}
+.campo b{display:block}.campo small{display:block;color:var(--wf-g6);font-size:13px}
+.pill{display:none;grid-template-columns:1.2fr 1fr auto;align-items:center;border:1.5px solid var(--wf-g9);border-radius:999px;padding:6px;gap:0}
+.pill .f{padding:4px 14px;display:grid}.pill .f+.f{border-left:1px solid var(--wf-g3)}.pill label{font-size:12px;color:var(--wf-g6);font-weight:600}
+.donde{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:center;font-size:14px}
+.photo{display:none;aspect-ratio:4/5;border-radius:24px;background:repeating-linear-gradient(45deg,var(--wf-g2) 0 10px,var(--wf-g1) 10px 20px);align-items:end;justify-content:start;padding:12px;font-size:12px;color:var(--wf-g6)}
+.cats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.cat{border:1px solid var(--wf-g3);border-radius:18px;padding:14px;min-height:96px;display:grid;align-content:space-between;background:var(--wf-g1);text-align:left}
+.cat i{width:36px;height:36px;border-radius:10px;border:1px solid var(--wf-g4);background:var(--wf-g0);display:block}
+.cat b{font-size:15px}.cat small{display:block;color:var(--wf-g6);font-size:12px}
+.mini{display:grid;gap:10px}
+.mf{border:1px solid var(--wf-g3);border-radius:16px;padding:12px;display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:4px 10px;align-items:center}
+.mf .av{width:44px;aspect-ratio:3/4;border-radius:8px;background:var(--wf-g2);grid-row:1/4;align-self:start}.mf b{font-size:15px}.mf small{color:var(--wf-g6);font-size:13px;grid-column:2}.nw{white-space:nowrap}.mf .ced{grid-column:2;font-size:12px;color:var(--wf-g6);font-variant-numeric:tabular-nums}.mf .wf-btn{grid-row:1/4;grid-column:3;min-height:44px}
+.pasos{display:grid;gap:12px;counter-reset:p;list-style:none;margin:0;padding:0}
+.pasos li{display:grid;grid-template-columns:32px 1fr;gap:10px;align-items:start}.pasos li::before{counter-increment:p;content:counter(p);width:32px;height:32px;border-radius:50%;border:1.5px solid var(--wf-g9);display:grid;place-items:center;font-weight:700}
+.pasos b{display:block}.pasos span{color:var(--wf-g6);font-size:14px}
+.conf{display:grid;gap:12px;background:var(--wf-g8);color:var(--wf-g0);border-radius:20px;padding:18px}.conf b{display:block}.conf span{font-size:14px;color:var(--wf-g3)}
+.med{border:1.5px dashed var(--wf-g6);border-radius:18px;padding:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.full{position:absolute;inset:0;background:var(--wf-g0);z-index:20;display:flex;flex-direction:column;gap:12px;padding:12px 16px}
+.full .fs{border:1.5px solid var(--wf-g6);border-radius:16px;padding:8px 12px;display:grid}.full .fs label{font-size:12px;font-weight:600;color:var(--wf-g6)}
+.full ul{list-style:none;margin:0;padding:0}.full li{min-height:48px;display:flex;align-items:center;border-bottom:1px solid var(--wf-g3);font-size:15px}
+.full .wf-btn--primary{margin-top:auto}
+.dud{display:grid;gap:10px}.dud .q{border:1px solid var(--wf-g3);border-radius:16px;padding:14px;display:grid;gap:6px;text-align:left}.dud .q b{font-size:15px}.dud .q small{color:var(--wf-g6);font-size:13px}
+.dud .q{text-decoration:none}.dud .q b{text-decoration:underline}.dud .art{grid-template-columns:88px minmax(0,1fr);align-items:start}.dud .art .th{grid-row:1/3;aspect-ratio:1;border-radius:10px;background:repeating-linear-gradient(45deg,var(--wf-g2) 0 10px,var(--wf-g1) 10px 20px)}
+.dud h3{margin:4px 0 0;font-size:15px;color:var(--wf-g6);font-weight:600}
+.foot{padding:20px 16px;color:var(--wf-g6);font-size:13px;display:flex;flex-wrap:wrap;gap:8px 18px}
+@container wf (min-width:600px){
+  .dud{grid-template-columns:repeat(2,minmax(0,1fr))}.dud h3,.dud .mas{grid-column:1/-1}
+  .cats{grid-template-columns:repeat(3,minmax(0,1fr))}.mini{grid-template-columns:repeat(2,minmax(0,1fr))}.conf{grid-template-columns:repeat(3,1fr)}
+  .hero{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);align-items:center;gap:32px}.hero .photo{display:flex}
+  .pasos{grid-template-columns:repeat(3,1fr)}.pasos li{grid-template-columns:1fr}.blk,.nav,.foot{padding-left:32px;padding-right:32px}
+}
+@container wf (min-width:1024px){
+  .nav .lk{display:flex;gap:8px}.nav .menu{display:none}.campo{display:none}.pill{display:grid}
+  .cats{grid-template-columns:repeat(6,minmax(0,1fr))}.mini{grid-template-columns:repeat(3,minmax(0,1fr))}.htxt{display:grid;gap:14px;align-content:center;min-width:0}.hero h1{font-size:44px}
+  .blk,.nav,.foot{padding-left:64px;padding-right:64px}
+}
+'''
+BODY = r'''<div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+  <span class="wf-brand"><svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><rect x="4" y="4" width="56" height="56" rx="12" stroke="#ffffff" stroke-width="3.5"/><rect x="13" y="13" width="38" height="38" rx="9" stroke="#ffffff" stroke-width="3.5"/><rect x="21" y="21" width="22" height="22" rx="6" stroke="#ffffff" stroke-width="3.5"/><circle cx="32" cy="32" r="5.5" fill="#34e0a1"/></svg><span>Kiwi<small>Fruti Squad</small></span></span>
+  <strong>Inicio Manik · r02 · F2</strong>
+  <fieldset><legend>Espacio</legend><button data-w="1440" aria-pressed="false">expanded 1440</button><button data-w="834" aria-pressed="false">medium 834</button><button data-w="393" aria-pressed="true">compact 393</button></fieldset>
+  <label>Estado <select id="wf-state" data-wf-states>
+    <option value="default">Primera visita (México)</option><option value="pais">Otro país: Guatemala</option><option value="buscar">Buscador abierto</option>
+    <option value="denegada">Ubicación denegada</option><option value="pocos">Pocos médicos cerca</option><option value="loading">Carga</option><option value="empty">Vacío: nadie con lugar hoy</option><option value="error">Error: falla «Con lugar hoy»</option><option value="offline">Sin conexión</option></select></label>
+  <label><input type="checkbox" id="wf-notes" checked> Notas</label>
+</div>
+<div class="wf-stage"><p class="wf-frame-label" id="wf-label"></p><div class="wf-frame" id="wf-frame"><div id="wf-banner"></div><main id="wf-view" tabindex="-1"></main></div>
+<div style="max-width:1100px;margin:24px auto 0" id="extra"></div></div>'''
+JS = r'''
+let S = {w:393, st:'default'};
+const cats = [['Piel','Dermatología'],['Salud mental','Psicología y psiquiatría'],['Alimentación','Nutrición'],['Salud íntima','Ginecología y urología'],['Niñas y niños','Pediatría'],['Chequeo general','Medicina general']];
+const N = t => `<span class="wf-note">${t}</span>`;
+const nw = t => t.split(' · ').map(x=>`<span class="nw">${x}</span>`).join(' · ');
+function view(){
+  const st = S.st, off = st==='offline', gt = st==='pais';
+  const P = gt ? {cd:'Ciudad de Guatemala', mon:['Q350','Q250','Q300'], reg:'colegiado activo', ced:['Colegiado 12345','Colegiado 20871','Colegiado 31264']} : {cd:'Puebla', mon:['MXN 900','MXN 450','MXN 700'], reg:'cédula profesional', ced:['Céd. Prof. 10234567 · Céd. Esp. 11876543','Céd. Prof. 09812345','Céd. Prof. 08765432']};
+  const nav = `<header class="nav"><span class="logo">manik</span><span class="sp"></span><span class="lk"><a class="wf-btn wf-btn--quiet" href="#">Especialidades</a><a class="wf-btn wf-btn--quiet" href="#">Preguntas</a><a class="wf-btn wf-btn--quiet" href="#">Artículos</a><a class="wf-btn wf-btn--quiet" href="#">Soy médico</a></span><button class="wf-btn menu" aria-label="Menú">Menú</button></header>`;
+  let donde = `<p class="donde"><span>⌖ Cerca de <b>${P.cd}</b> <span class="wf-muted">(aproximado)</span></span><button class="wf-btn wf-btn--quiet">Usar mi ubicación</button></p>`;
+  if (st==='denegada') donde = `<p class="donde" role="status"><span>No pudimos usar tu ubicación. <b>Escribe tu colonia o ciudad</b> en «Dónde».</span></p>`;
+  if (st==='pocos') donde = `<p class="donde"><span>⌖ Cerca de <b>Comitán</b> <span class="wf-muted">(aproximado)</span></span><button class="wf-btn wf-btn--quiet">Usar mi ubicación</button></p>`;
+  const hero = `<section class="blk hero" aria-labelledby="h1"><div class="htxt"><span class="wf-tag" style="justify-self:start">Médicos con registro verificado</span><h1 id="h1">Encuentra a tu médico, ve cuánto cuesta y agenda.</h1><p class="wf-muted">La consulta es en su consultorio. Buscar y agendar es gratis.</p>
+   <button class="campo" aria-haspopup="dialog" ${off?'aria-disabled="true"':''}><span>⌕</span><span><b>¿Qué necesitas?</b><small>Especialidad, síntoma o nombre del médico</small></span></button>
+   <form class="pill" role="search"><div class="f"><label>Qué necesitas</label><span>Especialidad, síntoma o médico</span></div><div class="f"><label>Dónde</label><span>${P.cd}</span></div><button class="wf-btn wf-btn--primary" type="button">Buscar</button></form>
+   ${donde}${N('Acción dominante: buscar. Celular: un campo que abre la búsqueda a pantalla completa. Escritorio: píldora qué + dónde. La ubicación NO se pide al entrar: «Dónde» empieza en la ciudad aproximada (por la conexión, en cualquier país) y el permiso solo se pide al tocar «Usar mi ubicación».')}</div><div class="photo">Foto de marca 4:5 · persona cuidándose (México y Centroamérica reales)</div></section>`;
+  const sient = `<section class="blk" aria-labelledby="h2s"><h2 id="h2s">Busca por lo que sientes</h2><p class="wf-muted wf-small">Si no sabes a qué especialista ir, empieza por aquí.</p><div class="cats">${cats.map(c=>`<a class="cat" href="#"><i></i><span><b>${c[0]}</b><small>${c[1]}</small></span></a>`).join('')}</div><a class="wf-btn wf-btn--quiet" href="#" style="justify-self:start">Ver todas las especialidades</a>${N('Para el prospecto que no sabe cómo se llama la especialidad: nombre en palabras del paciente y la especialidad abajo. «Chequeo general» siempre presente como salida segura.')}</section>`;
+  let hoyB;
+  if (st==='loading') hoyB = `<div class="mini wf-skel" aria-busy="true">${'<div class="mf"><span class="av"></span><div class="wf-line" style="width:70%"></div><div class="wf-line" style="width:50%;grid-column:2"></div></div>'.repeat(3)}</div>`;
+  else if (off) hoyB = `<p class="wf-muted">Sin conexión: no podemos mostrar quién tiene lugar hoy.</p>`;
+  else if (st==='error') hoyB = '';
+  else if (st==='pocos') hoyB = `<p class="wf-small" role="status">Hay pocos médicos cerca de Comitán. Te mostramos también los que están <b>a menos de 40 km</b>.</p><div class="mini">${[['Dr. Andrés Gómez','Médico general · 2.1 km · MXN 400','Hoy 17:30','Céd. Prof. 07654321'],['Dra. Elena Ruiz','Pediatra · 31 km · MXN 650','Mañana 10:00','Céd. Prof. 09345678 · Céd. Esp. 12456789']].map(m=>`<div class="mf"><span class="av"></span><b>${m[0]}</b><small>${nw(m[1]+' · '+m[2])}</small><span class="ced">${nw(m[3])}</span><a class="wf-btn" href="#">Ver</a></div>`).join('')}</div>${N('Baja densidad, no «fuera de cobertura»: se muestra lo que hay y se amplía la distancia en el texto. Si alguien no tiene lugar hoy, se dice su día real.')}`;
+  else if (st==='empty') hoyB = `<div class="wf-state" style="margin:0;max-width:none"><b>Hoy nadie tiene lugar cerca de ti</b><p class="wf-muted">Mañana hay 14 médicos con lugar en ${P.cd}.</p><a class="wf-btn" href="#">Ver lugares de mañana</a></div>`;
+  else hoyB = `<div class="mini">${[['Dra. Mariana Soto','Dermatóloga · 1.8 km · '+P.mon[0],'16:30',P.ced[0]],['Dr. Luis Ortega','Médico general · 0.9 km · '+P.mon[1],'17:00',P.ced[1]],['Psic. Laura Méndez','Psicóloga · 2.4 km · '+P.mon[2],'18:00',P.ced[2]]].map(m=>`<div class="mf"><span class="av"></span><b>${m[0]}</b><small>${nw(m[1]+' · Hoy '+m[2])}</small><span class="ced">${nw(m[3])}</span><a class="wf-btn" href="#">Ver</a></div>`).join('')}</div><a class="wf-btn wf-btn--quiet" href="#" style="justify-self:start">Ver todos con lugar hoy</a>`;
+  const hoy = st==='error' ? (true ? N('Error: si falla la consulta de «Con lugar hoy», la sección no aparece y el resto del inicio sigue igual (no se muestra un error a quien no lo pidió).') : '') : `<section class="blk" aria-labelledby="h2h"><h2 id="h2h">Con lugar hoy cerca de ti</h2>${hoyB}${N('Cédulas con número: «Céd. Prof.» siempre; «Céd. Esp.» solo si el médico es especialista (médico general y psicóloga no la llevan). El número es la prueba: cualquiera puede consultarlo en el registro oficial. En Guatemala el equivalente es «Colegiado» + número.')}${gt?N('Otro país: el precio lleva el símbolo de su moneda (Q). En México se escribe «MXN» porque «$» también es dólar [decisión pendiente de Lima].'):''}${N('Should. Muestra médicos reales para que el prospecto vea el valor antes de buscar. Si falla, la sección se oculta sin romper el resto. Botones de contorno: la única acción principal de la vista es buscar.')}</section>`;
+  const dudas = `<section class="blk" aria-labelledby="h2d"><h2 id="h2d">Resuelve tus dudas</h2><p class="wf-muted wf-small">Respuestas de médicos con registro verificado.</p><div class="dud">
+   <h3>Preguntas</h3><a class="q" href="#"><b>¿Cuándo debo ir al médico por un dolor de cabeza?</b><small>Responde Dr. Luis Ortega · Médico general · 3 respuestas</small></a><a class="q" href="#"><b>¿El acné en adultos se quita solo?</b><small>Responde Dra. Mariana Soto · Dermatóloga · 2 respuestas</small></a>
+   <h3>Artículos</h3><a class="q art" href="#"><span class="th"></span><b>Qué preguntar en tu primera consulta</b><small>4 min de lectura</small></a><a class="q art" href="#"><span class="th"></span><b>Cómo saber si tu médico tiene registro</b><small>3 min de lectura</small></a>
+   <span class="mas" style="display:flex;flex-wrap:wrap;gap:8px"><a class="wf-btn wf-btn--quiet" href="#">Ver más preguntas</a><a class="wf-btn wf-btn--quiet" href="#">Ver artículos</a></span></div>${N('Para quien aún no sabe si necesita consulta. Cada pregunta y artículo lleva a la especialidad del médico que responde: es otra entrada a la búsqueda, no un blog aparte. Preguntar sin cuenta: incógnita 3.')}</section>`;
+  const pasos = `<section class="blk" aria-labelledby="h2p"><h2 id="h2p">Cómo funciona</h2><ol class="pasos"><li><span><b>Busca</b><span>Por especialidad, por lo que sientes o por nombre.</span></span></li><li><span><b>Compara</b><span>Precio, distancia y opiniones de cada consultorio.</span></span></li><li><span><b>Agenda</b><span>En Manik o por teléfono. La consulta es en el consultorio.</span></span></li></ol>${N('Para el prospecto que no conoce Manik. Es una secuencia real: por eso los números.')}</section>`;
+  const conf = `<section class="blk"><div class="conf"><div><b>Médicos verificados</b><span>Revisamos el registro profesional de cada médico (${P.reg}).</span></div><div><b>Opiniones reales</b><span>Solo opina quien tuvo cita en Manik.</span></div><div><b>Gratis para ti</b><span>Pagas la consulta en el consultorio.</span></div></div></section>`;
+  const med = `<section class="blk"><div class="med"><span><b>¿Eres médico?</b><br><span class="wf-muted wf-small">Aparece en Manik y recibe pacientes.</span></span><a class="wf-btn" href="#">Soy médico</a></div>${N('Entrada discreta al final y en el menú: el inicio es para pacientes.')}</section>`;
+  const foot = `<footer class="foot"><b>manik</b><span>de MedicalManik</span><span>Aviso de privacidad</span><span>Términos</span></footer>`;
+  let full = '';
+  if (st==='buscar' && S.w>=1024) full = N('Escritorio: no hay pantalla completa; la píldora qué + dónde despliega sugerencias debajo del campo «Qué necesitas».');
+  else if (st==='buscar') full = `<div class="full" role="dialog" aria-label="Buscar"><div style="display:flex;align-items:center;gap:8px"><button class="wf-btn wf-btn--quiet">← Volver</button><b>Buscar</b></div><div class="fs"><label>Qué necesitas</label><span>dolor de rodi|</span></div><div class="fs"><label>Dónde</label><span>${P.cd} (aproximado)</span><button class="wf-btn wf-btn--quiet" style="justify-self:start">Usar mi ubicación</button></div>
+   <ul aria-label="Sugerencias"><li>Dolor de rodilla → Traumatología y ortopedia</li><li>Dolor de rodilla → Medicina del deporte</li><li>Dr. Rodrigo Rodiles · traumatólogo</li></ul>${N('Sugerencias por síntoma («lo que sientes» → especialidad), por especialidad y por nombre. La primaria va abajo, al alcance del pulgar.')}<button class="wf-btn wf-btn--primary">Buscar</button></div>`;
+  return nav + hero + sient + hoy + dudas + pasos + conf + med + foot + full;
+}
+function render(){
+  const f=document.getElementById('wf-frame'), L=document.getElementById('wf-label');
+  f.style.setProperty('--wf-w', S.w+'px'); L.style.setProperty('--wf-w', S.w+'px');
+  L.textContent=`Marco ${S.w}px · ${S.w<600?'compact':S.w<1024?'medium':'expanded'} (referencia declarada)`;
+  document.querySelectorAll('[data-w]').forEach(b=>b.setAttribute('aria-pressed', String(+b.dataset.w===S.w)));
+  document.getElementById('wf-banner').innerHTML = S.st==='offline' ? '<p class="wf-banner" role="status"><b>Sin conexión.</b> Puedes ver el inicio; para buscar médicos necesitas conexión.</p>' : '';
+  document.getElementById('wf-view').innerHTML = view();
+}
+document.addEventListener('click', e=>{const w=e.target.closest('[data-w]'); if(w){S.w=+w.dataset.w; render();}});
+document.getElementById('wf-state').addEventListener('change', e=>{S.st=e.target.value; render();});
+document.getElementById('wf-notes').addEventListener('change', e=>document.body.classList.toggle('wf-no-notes', !e.target.checked));
+render();
+'''
+FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&display=swap" rel="stylesheet"><!-- solo chrome -->'
+open(os.path.join(D, 'index.html'), 'w').write(f'''<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-fidelidad" content="F2">
+<title>Wireframe · Inicio Manik · r02</title>
+{FONTS}
+<link rel="stylesheet" href="vendor/wireframe-kit.css">
+<style>{LOCAL}</style>
+</head>
+<body class="wf">
+{BODY}
+<script>{JS}</script>
+</body>
+</html>''')
+FLOW = f'<section style="max-width:1100px;margin:0 auto;padding:24px 0 8px"><p class="wf-frame-label" style="width:auto;margin:0 0 8px">Flujo · encontrar médico desde el inicio</p><pre class="mermaid">{FLUJO}</pre></section>'
+open(os.path.join(D, 'publicar.html'), 'w').write(f'''<title>Inicio Manik · wireframe</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+{FONTS}
+<style>{KIT}{LOCAL}
+.wf-ctl,.wf-stage{{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}}</style>
+<script>document.documentElement.lang='es'</script>
+{BODY.replace('<div class="wf-stage">', '<div class="wf-stage">' + FLOW)}
+<script>document.body.classList.add('wf');{JS}</script>
+''')
+print('ok')
