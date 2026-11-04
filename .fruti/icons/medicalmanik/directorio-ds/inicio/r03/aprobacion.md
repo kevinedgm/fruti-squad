@@ -12,7 +12,7 @@
 ## Simulación de foto de marca (2026-11-04, pedido del usuario)
 - El panel 4:5 lleva una ilustración de reemplazo (mamá con su hija, colores del DS) con la etiqueta «Simulación · foto de marca pendiente», y dos tarjetas flotantes de la interfaz: «Dra. Mariana Soto · Hoy, 16:30 · Agenda en Manik» (desde tableta) y «$900 · Consulta · precio a la vista» (solo escritorio, para no tapar caras en tableta).
 - Decorativa (`aria-hidden`); no aparece en celular, como en el diseño aprobado.
-- No es la foto final: la foto de marca sigue pendiente (dueño: marca). Al reemplazarla, conservar las tarjetas flotantes y no taparlas caras.
+- No es la foto final: la foto de marca sigue pendiente (dueño: marca). Al reemplazarla, conservar las tarjetas flotantes y no tapar las caras.
 
 ## Sin resolver (no se infirió)
 - Foto de marca: no hay foto aprobada; panel de reemplazo «pendiente». Dueño: marca/Lima.
