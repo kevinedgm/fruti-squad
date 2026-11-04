@@ -9,3 +9,5 @@ Pedido: «genera un artifact con un prototipo del directorio Manik». Regenerar:
 - Verificación: Playwright a 390 y 1300 px por todo el flujo: 0 errores JS, 0 desborde, controles ≥ 24 px.
 
 - 2026-11-04: inicio reemplazado por el aprobado (inicio/r03): con lugar hoy, resuelve tus dudas, cómo funciona, ¿eres médico?
+
+- 2026-11-04: perfil del médico reemplazado por el aprobado (perfil-medico/r03): agenda con días y horas, secciones que solo aparecen con datos, formación desde cédulas, Dr. Mario Díaz Soto en «Niñas y niños». Confirmación con nombre + celular.
