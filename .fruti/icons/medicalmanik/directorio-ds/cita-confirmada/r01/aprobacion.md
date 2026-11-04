@@ -12,6 +12,9 @@
 - **Horario ocupado (en «Confirma tu cita»):** aviso «Ese horario se acaba de ocupar» con el foco, 3 horas cercanas, datos conservados; «Cuándo» y la barra dicen «Elige otro horario» y «Confirmar» queda deshabilitado (también con Enter) hasta elegir.
 - **Implementado en:** `directorio-prototipo/` (v8). Para ver el aviso: Dra. Soto, hoy 17:00, o Dr. Díaz, hoy 17:30 (simulación).
 
+## Decisión de implementación (prototipo)
+- El visor de artifacts no permite ofrecer archivos .ics (no están en la lista de formatos de descarga). En el prototipo, «Agregar a mi calendario» abre Google Calendar con la cita llena; «Apple u Outlook (.ics)» explica que en el producto se descarga el archivo. En el producto real: .ics + Google Calendar.
+
 ## Sin resolver
 - Canal del mensaje (SMS o WhatsApp); plazo para cambiar o cancelar; pantalla «Detalle de su cita» (enlace del mensaje).
 - El estado «no pudimos enviar el mensaje» está en el wireframe, no simulado en el prototipo.
