@@ -267,10 +267,10 @@
     "Iconos"
   ],
   "lastChange": {
-    "at": "2026-11-04T19:11:44Z",
+    "at": "2026-11-04T19:17:34Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "Lenguaje: «Agenda en Manik» en lugar de «En línea» o «Cita en línea» (la cita es presencial; solo se reserva desde el directorio). Formas de agendar: en Manik, por teléfono o ambas."
+    "note": "FichaMedico con la anatomía aprobada (wireframe r03, opción C): consultorios en filas, cada uno con su precio, su forma de agendar y su acción; un solo botón sólido por ficha."
   },
   "layout": "files",
   "libraries": [],

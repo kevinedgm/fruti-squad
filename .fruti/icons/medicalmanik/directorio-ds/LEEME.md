@@ -30,3 +30,7 @@ Decisiones / correcciones:
 ## Cambio 2026-11-04 · lenguaje
 - Pedido del usuario: «En línea» confunde (se lee como consulta por internet). La cita es presencial; solo se reserva desde el directorio.
 - Ahora: «Agenda en Manik», «Por teléfono» o «Agenda en Manik o por teléfono». Filtro «Agenda en Manik». Regla de voz en el README.
+
+## Cambio 2026-11-04 · FichaMedico aprobada
+- El usuario aprobó el wireframe FichaMedico r03, opción C (`ficha-medico/r03/aprobacion.md`); r04 (C + horarios) descartada.
+- Componente FichaMedico reescrito en F3 con esa anatomía: médico arriba; consultorios en filas (máx. 2 + «Ver n más») con lugar · distancia · precio, forma de agendar + próximo lugar o teléfono, y su acción; «o llama al …» si agenda de las dos formas; un solo sólido por ficha. Sin tokens nuevos.

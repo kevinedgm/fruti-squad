@@ -200,11 +200,65 @@ comps['TarjetaCategoria'] = ('Búsqueda', 400, '<div class="cats">' + ''.join(f'
 .cat .ic{{display:grid;place-items:center;width:48px;height:48px;border-radius:var(--radius-icono-cat,16px);background:var(--blanco,#fff);color:var(--cian-ui,{P['ui']})}}.cat .ico{{width:22px;height:22px}}.cat b{{font:600 19px/22px var(--font-display,"Urbanist",sans-serif);display:block}}.cat small{{color:var(--muted,{P['muted']});font-size:14px;line-height:20px}}
 @media (prefers-reduced-motion:reduce){{.cat{{transition:none}}.cat:hover{{transform:none}}}}''',
  'Tarjeta de categoría de «Busca por lo que sientes»: la entrada para quien no sabe a qué especialista ir.\n\n- Nombre en palabras del paciente (`categoria`, Urbanist 600) y la especialidad debajo en «muted».\n- Fondos que rotan cada tres: `categoria-cian`, `categoria-calida`, `categoria-azul`. Icono Lucide en `cian-ui` dentro de un cuadro blanco de 48 px.\n- Seis por fila en escritorio, tres en tableta y dos en celular. Al pasar el cursor sube 3 px (sin movimiento con `prefers-reduced-motion`).\n- El consumidor provee: icono, nombre, especialidad y destino.')
-f1 = ficha('mujer', 'Dra. Mariana Soto', 'Dermatóloga · acné y lunares', 'Angelópolis', '1.8', '$900', ST('4.9', 312) + VER, '<p class="when">Hoy <span>· toca una hora</span></p>' + TIMES(['16:30', '17:00', '18:30'], '17:00', True) + AGENDAR, 2)
-f2 = ficha('mujer', 'Dra. Fernanda Quiroz', 'Dermatóloga · cosmética', 'Centro', '3.1', '$750', ST('4.7', 41) + VER, '<p class="when">Agenda por teléfono <span>· llama y pide tu cita</span></p>' + LLAMAR)
-f3 = ficha('hombre', 'Dr. Iván Hernández', 'Dermatólogo · alergias de piel', 'La Paz', '4.0', '$700', '<span class="new">Nuevo en Manik</span>' + VER, '<p class="when">Lunes 3 <span>· su primer día libre</span></p>' + TIMES(['10:00', '11:00']) + AGENDAR)
-comps['FichaMedico'] = ('Resultados', 1560, f'<div class="marco cel"><b>Celular · 390 px</b><div class="lista">{f1}{f2}{f3}</div></div><div class="marco" style="margin-top:24px"><b>Tableta y escritorio · contenedor de 560 px o más</b><div class="lista" style="max-width:720px">{f1}</div></div>', DOC_CSS,
- 'La ficha del médico en los resultados. **Celular primero** (70 % del uso): la versión compacta es la principal y la amplia sale del ancho del contenedor (container query a 560 px), no del dispositivo.\n\n- **Lo que cabe sin hacer scroll en celular**, en este orden: nombre y especialidad; consultorio y distancia; «Consulta» + precio; calificación y cédula en una línea; cuándo; hasta 3 horarios + «Más horarios»; acción a todo el ancho. Unas dos fichas por pantalla de 390 × 844.\n- **Compacta** (< 560 px): avatar de 72 px (`foto-ficha-movil`) junto a la cabecera; el resto ocupa todo el ancho; botones a todo el ancho; radio 24.\n- **Amplia** (≥ 560 px): foto de 132 px a la izquierda; precio alineado a la derecha; botones a su ancho; radio `radius-ficha`.\n- **Precio y forma de agendar son de cada consultorio** (decisión 2026-11-04): la ficha muestra el consultorio más cercano que cumpla los filtros y nunca mezcla datos de dos. Con más de uno: «Atiende en N consultorios · ver todos».\n- **Agenda en Manik:** horarios + «Agendar». La cita es presencial; solo se reserva desde Manik. Nunca «En línea»: se lee como consulta por video. **Por teléfono:** el número visible y **«Llamar»** como acción principal (enlace `tel:` con el número en formato internacional) + «Copiar número» secundario. **Nuevo:** «Nuevo en Manik» en lugar de la calificación.\n- Sin foto, avatar de silueta (ver FotoMedico).\n- El consumidor provee: médico, especialidad, tipo de avatar o foto, consultorio mostrado (nombre, distancia, precio, forma de agendar, horarios o teléfono), número de consultorios, calificación y verificación. Datos de ejemplo.')
+FC_CSS = f'''.lista{{container-type:inline-size;display:grid;gap:12px}}
+.fm{{background:var(--blanco,#fff);border:1px solid var(--linea,{P['linea']});border-radius:24px;padding:14px;display:grid;gap:12px;grid-template-columns:var(--foto-ficha-movil,72px) minmax(0,1fr);align-items:start;transition:box-shadow .2s ease}}
+.fm:hover{{box-shadow:var(--shadow-hover,0 12px 30px rgba(20,33,61,.08))}}
+.fm .face{{border-radius:16px;aspect-ratio:3/4;overflow:hidden;background:linear-gradient(160deg,var(--foto-inicio,{P['f0']}),var(--foto-fin,{P['f1']}))}}.fm .face img{{width:100%;height:100%;display:block;object-fit:cover}}
+.who{{display:grid;gap:4px;min-width:0}}.fm h3{{margin:0;font:600 20px/24px var(--font-display,"Urbanist",sans-serif);letter-spacing:-.01em;overflow-wrap:anywhere}}.fm h3 a{{color:inherit;text-decoration:none}}.fm h3 a:hover{{text-decoration:underline}}
+.spec{{color:var(--muted,{P['muted']});font-size:15px;line-height:22px}}
+.cons{{grid-column:1/-1;display:grid;border:1px solid var(--linea,{P['linea']});border-radius:18px;min-width:0}}
+.co{{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center;padding:12px 14px}}.co+.co{{border-top:1px solid var(--linea,{P['linea']})}}
+.co .l1{{font-size:15px;line-height:22px;font-weight:600}}.co .l1 b{{font:600 17px/22px var(--font-display,"Urbanist",sans-serif)}}
+.co .l2{{display:flex;flex-wrap:wrap;align-items:center;gap:0 6px;font-size:14px;line-height:20px;color:var(--muted,{P['muted']})}}.co .l2 .ico{{width:16px;height:16px;color:var(--cian-ui,{P['ui']})}}.nw{{white-space:nowrap}}
+.co .btn{{grid-column:2;grid-row:1/3;min-height:44px;min-width:92px;justify-content:center;padding:0 16px;text-decoration:none}}.co .alt{{white-space:nowrap}}
+.co .alt{{grid-column:1;display:inline-flex;align-items:center;gap:6px;min-height:36px;font-size:14px;font-weight:600;color:var(--tinta,{T});text-decoration:underline;text-underline-offset:3px;justify-self:start}}.co .alt .ico{{width:16px;height:16px}}
+.secundario{{background:var(--blanco,#fff);color:var(--cian-ui,{P['ui']});border:1.5px solid var(--cian-ui,{P['ui']})}}.secundario:hover{{background:var(--luz-cian,{P['sky']})}}
+.mas{{grid-column:1/-1;justify-self:start;font:600 14px var(--font-sans,"Onest",sans-serif);color:var(--tinta,{T});background:none;border:0;padding:0;min-height:36px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}}
+@container (min-width:560px){{.fm{{grid-template-columns:var(--foto-ficha,132px) minmax(0,1fr);gap:12px 18px;padding:16px;border-radius:var(--radius-ficha,28px)}}.fm .face{{grid-row:1/4;border-radius:var(--radius-foto,20px)}}.cons,.mas{{grid-column:2}}.fm h3{{font-size:22px;line-height:26px}}}}
+@media (prefers-reduced-motion:reduce){{.fm{{transition:none}}}}
+.marco{{display:grid;gap:8px}}.marco>b{{font:600 13px/18px var(--font-sans,"Onest",sans-serif);color:var(--muted,{P['muted']});letter-spacing:.04em;text-transform:uppercase}}.cel{{max-width:390px}}'''
+def fila(c, prim):
+    if c[3] == 'tel':
+        l2 = f'{ico("phone")}<span class="nw">Por teléfono</span> <span class="nw">· {c[4]}</span>'
+        btn = f'<a class="btn {"agendar" if prim else "secundario"}" href="tel:+52{c[4].replace(" ", "")}">Llamar</a>'
+    else:
+        l2 = f'{ico("calendar-check")}<span class="nw">Agenda en Manik</span> <span class="nw">· {c[5]}</span>'
+        btn = f'<a class="btn {"agendar" if prim else "secundario"}" href="#horarios">Agendar</a>'
+    alt = f'<a class="alt" href="tel:+52{c[4].replace(" ", "")}">{ico("phone")}o llama al {c[4]}</a>' if c[3] == 'ambos' else ''
+    return f'<div class="co" role="listitem"><span class="l1">{c[0]} · <span class="nw">{c[1]} km · <b>{c[2]}</b></span></span>{btn}<span class="l2">{l2}</span>{alt}</div>'
+def fichaC(av, nombre, spec, conf, cons, mas=0):
+    filas = ''.join(fila(c, i == 0) for i, c in enumerate(cons[:2]))
+    extra = f'<button type="button" class="mas">Ver {mas} consultorio{"s" if mas > 1 else ""} más</button>' if mas else ''
+    return (f'<article class="fm"><div class="face"><img src="{blob("avatar-" + av + ".svg")}" alt="Sin foto: {nombre}"></div>'
+            f'<div class="who"><h3><a href="#perfil">{nombre}</a></h3><p class="spec">{spec}</p><div class="meta">{conf}</div></div>'
+            f'<div class="cons" role="list" aria-label="Consultorios de {nombre}">{filas}</div>{extra}</article>')
+NUEVO = '<span class="new">Nuevo en Manik</span>'
+F_SOTO = fichaC('mujer', 'Dra. Mariana Soto', 'Dermatóloga · acné y lunares', ST('4.9', 312) + VER, [('Angelópolis', '1.8', '$900', 'ambos', '222 555 0140', 'Hoy, 16:30'), ('Centro', '5.2', '$700', 'tel', '222 555 0141', '')])
+F_QUIROZ = fichaC('mujer', 'Dra. Fernanda Quiroz', 'Dermatóloga · cosmética', ST('4.7', 41) + VER, [('Centro', '3.1', '$750', 'tel', '222 555 0187', '')])
+F_HDZ = fichaC('hombre', 'Dr. Iván Hernández', 'Dermatólogo · alergias de piel', NUEVO + VER, [('La Paz', '4.0', '$700', 'manik', '', 'Lunes 3, 10:00')])
+F_RAMOS = fichaC('neutro', 'Alex Ramos Treviño', 'Dermatología pediátrica', ST('4.8', 57) + VER, [('San Manuel', '2.6', '$800', 'manik', '', 'Mañana, 9:00'), ('Zavaleta', '6.0', '$800', 'ambos', '222 555 0133', 'Jueves 6, 17:00')], 1)
+comps['FichaMedico'] = ('Resultados', 1500, f'<div class="marco cel"><b>Celular · 390 px</b><div class="lista">{F_SOTO}{F_QUIROZ}{F_HDZ}{F_RAMOS}</div></div><div class="marco" style="margin-top:24px"><b>Tableta y escritorio · contenedor de 560 px o más</b><div class="lista" style="max-width:720px">{F_SOTO}</div></div>', FC_CSS,
+ 'La ficha del médico en los resultados: quién es y, en filas, **cada consultorio con su precio, su forma de agendar y su propia acción**. Anatomía aprobada el 2026-11-04 (wireframe FichaMedico r03, opción C); no se rediseña al implementar.\\n\\n'
+ '**Anatomía**\\n'
+ '1. **Médico:** foto o avatar de silueta (ver FotoMedico), nombre (`nombre`), especialidad (`body-sm`, «muted»), «Cédula verificada» y calificación con número de opiniones, o «Nuevo en Manik» (ver Insignias).\\n'
+ '2. **Consultorios en filas**, máximo 2 visibles; con más, «Ver n consultorios más». Primero el más cercano que cumpla los filtros.\\n'
+ '   - Línea 1: lugar · distancia · precio de consulta (el precio en Urbanist 600).\\n'
+ '   - Línea 2: icono + forma de agendar + próximo lugar: «Agenda en Manik · Hoy, 16:30» o «Por teléfono · 222 555 0187». Fecha y hora nunca se separan.\\n'
+ '   - Acción a la derecha: «Agendar» (abre la elección de horario de ese consultorio) o «Llamar» (enlace `tel:` con el número completo).\\n'
+ '   - Si el consultorio agenda en Manik **y** por teléfono: «Agendar» y debajo el enlace «o llama al …».\\n\\n'
+ '**Peso y forma**\\n'
+ '- Un solo botón sólido por ficha (`cian-ui`, en la primera fila). Las demás filas, contorno `cian-ui` (`secundario`). Acciones en píldora de 44 px (mín. 92 de ancho); enlaces de texto con área de 36 px.\\n'
+ '- Precio y forma de agendar son **de cada consultorio**: nunca se muestran a nivel del médico.\\n\\n'
+ '**Lenguaje:** «Agenda en Manik» (la cita es presencial; solo se reserva desde el directorio). Nunca «En línea».\\n\\n'
+ '**Estados**\\n'
+ '- Sin conexión: «Agendar» no disponible («requiere conexión»); en la fila con teléfono, «Llamar» pasa a principal.\\n'
+ '- Sin lugar en 2 semanas: la línea 2 lo dice; «Agendar» queda disponible para ver más fechas [incógnita del brief].\\n'
+ '- Contenido largo: el nombre ajusta en líneas, nunca se trunca; el lugar puede pasar a 2 líneas.\\n'
+ '- Carga: esqueleto con la misma huella.\\n\\n'
+ '**Adaptación (container query)**\\n'
+ '- Compacta (< 560 px de contenedor): avatar de 72 px junto al nombre; filas a todo el ancho.\\n'
+ '- Amplia (≥ 560 px): foto de 132 px a la izquierda; nombre, insignias y filas a la derecha.\\n\\n'
+ 'El consumidor provee: médico (nombre, especialidad, foto o tipo de avatar, verificación, calificación y opiniones) y la lista ordenada de consultorios (lugar, distancia, precio, forma de agendar, próximo lugar o teléfono). Datos de ejemplo.')
 comps['Horarios'] = ('Resultados', 120, '<p class="when" style="font-size:15px;font-weight:600;margin-bottom:8px">Hoy <span class="mut" style="font-weight:400">· toca una hora</span></p>' + TIMES(['9:30', '11:30', '12:00'], '11:30', True), '.mash{font:600 15px var(--font-sans,"Onest",sans-serif);color:var(--tinta,#14213D);background:none;border:0;min-height:42px;padding:0 6px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}',
  'Horarios disponibles como botones en píldora: tocar uno lo elige; «Agendar» confirma.\n\n- Contorno y texto `cian-ui`; elegido: fondo `cian-ui`, texto blanco. `aria-pressed` dice cuál está elegido.\n- Cifras tabulares (`horario`) para que las horas se alineen; formato 24 h sin ceros a la izquierda (9:30).\n- Arriba, el día en palabras («Hoy», «Mañana», «Lunes 3») y una ayuda en «muted».\n- 42 px de alto: holgado para el dedo. En la ficha, máximo 3 horarios y «Más horarios» (abre el perfil en la agenda de ese consultorio); en celular nunca una fila que se salga de la pantalla.\n- El consumidor provee: fecha, horarios y el elegido.')
 comps['Insignias'] = ('Resultados', 100, f'<div class="meta">{ST("4.9", 312)}{KM("1.8")}{VER}<span class="new">Nuevo en Manik</span></div>', '',
@@ -265,10 +319,10 @@ Este sistema sigue el manual de marca del directorio (dirección «bienestar», 
 El 70 % del uso será en celular y tableta, el 30 % en escritorio. Se diseña primero a 390 px; tableta y escritorio son ampliaciones.
 
 - **Cortes:** celular < 640 px · tableta 640–1023 px · escritorio ≥ 1024 px (`bp-tableta`, `bp-escritorio`). Los componentes se adaptan al ancho de su contenedor (container queries) cuando pueden; la ficha cambia a 560 px (`ficha-amplia`).
-- **Prioridad en la ficha:** nombre y especialidad → consultorio y distancia → precio → calificación y cédula → cuándo → hasta 3 horarios → acción. Unas dos fichas por pantalla de 390 × 844.
+- **Prioridad en la ficha:** médico (nombre, especialidad, cédula, calificación) → por consultorio: lugar, distancia y precio → forma de agendar y próximo lugar → acción. Unas dos fichas por pantalla de 390 × 844.
 - **Pulgar:** la acción principal va abajo o a todo el ancho: «Buscar» al pie de la búsqueda, «Ver N especialistas» al pie de los filtros, barra de acción fija en el perfil (BarraAccion).
 - **Llamar:** en un consultorio que agenda por teléfono, «Llamar» (`tel:`) es la acción principal y «Copiar número» la secundaria. El número siempre va escrito.
-- **Nada se sale de la pantalla:** filtros en hoja inferior (BarraFiltros), chips que pasan de línea, máximo 3 horarios en la ficha.
+- **Nada se sale de la pantalla:** filtros en hoja inferior (BarraFiltros), chips que pasan de línea, máximo 2 consultorios visibles en la ficha.
 - **Tableta:** dos columnas de fichas; búsqueda y filtros como en celular en vertical. **Escritorio:** buscador en píldora doble, filtros en fila; lista con mapa [propuesta].
 - **Datos móviles:** fotos en WebP de 176 × 234 en la ficha de celular (≤ 20 KB); 480 × 640 solo en perfil y ficha amplia. Fuentes con `display=swap`.
 - **Insets del dispositivo:** barras y hojas fijas al pie suman `env(safe-area-inset-bottom)`.
@@ -340,7 +394,7 @@ De tú, claro y sin tecnicismos, como una persona que conoce buenos médicos y t
 Un médico puede atender en varios consultorios. **Precio, horarios y forma de agendar son de cada consultorio**, no del médico (decisión 2026-11-04).
 
 - **Para publicar**, cada consultorio necesita dirección, precio de consulta y al menos una forma de agendar: **agenda en Manik** (horarios; la cita es presencial), **por teléfono**, o **ambas**. Sin precio o sin forma de agendar, el consultorio no se publica y el perfil queda «Incompleto» [propuesta].
-- **En resultados**, la ficha muestra un consultorio: el más cercano a donde busca el paciente que cumpla los filtros. Si hay más: «Atiende en N consultorios · ver todos».
+- **En resultados**, la ficha muestra los consultorios en filas (máx. 2; con más, «Ver n consultorios más»), el más cercano que cumpla los filtros primero. Cada fila lleva su precio, su forma de agendar y su acción (anatomía aprobada de FichaMedico).
 - **Filtros por consultorio:** «Agenda en Manik», «Hasta $800» y «Con lugar hoy» se evalúan en cada consultorio.
 - **Formas mixtas:** un consultorio puede agendar en Manik y otro solo por teléfono, o uno ofrecer las dos; cada uno muestra la suya. Con ambas, «Agendar» es la principal y «o llama al …» el enlace alternativo.
 - En el perfil público, la lista de consultorios con su dirección, precio y forma de agendar [pendiente de diseñar].
@@ -383,6 +437,6 @@ json.dump({'v': 3, 'layout': 'files', 'createdOnFiles': {'v': 1, 'at': now}, 'ti
                   'Avatares': {'name': 'Avatares', 'tile': 's', 'order': oa, 'files': {n: rec(n, AV[n]) for n in oa}},
                   'Iconos': {'name': 'Iconos', 'tile': 'xs', 'order': oi, 'files': {k + '.svg': rec(k + '.svg', IC[k]) for k in IC}}},
   'blobs': {}, 'docs': {'readme': 'project/README.md', 'sections': []},
-  'lastChange': {'at': now, 'by': 'Kevin', 'via': 'Claude Code', 'note': '«Agenda en Manik» en lugar de «En línea» (la cita es presencial). Antes: Celular primero (70 % del uso): ficha compacta, búsqueda a pantalla completa, filtros en hoja inferior, barra de acción del perfil y «Llamar» para consultorios por teléfono.'}},
+  'lastChange': {'at': now, 'by': 'Kevin', 'via': 'Claude Code', 'note': 'FichaMedico con la anatomía aprobada (r03 opción C): consultorios en filas, cada uno con precio, forma de agendar y acción. Antes: «Agenda en Manik» en lugar de «En línea» (la cita es presencial). Antes: Celular primero (70 % del uso): ficha compacta, búsqueda a pantalla completa, filtros en hoja inferior, barra de acción del perfil y «Llamar» para consultorios por teléfono.'}},
  open('design-system.json', 'w'), indent=2, ensure_ascii=False)
 print('ok', sorted(os.listdir('components')))

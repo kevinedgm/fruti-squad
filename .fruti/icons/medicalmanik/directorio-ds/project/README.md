@@ -16,10 +16,10 @@ Este sistema sigue el manual de marca del directorio (dirección «bienestar», 
 El 70 % del uso será en celular y tableta, el 30 % en escritorio. Se diseña primero a 390 px; tableta y escritorio son ampliaciones.
 
 - **Cortes:** celular < 640 px · tableta 640–1023 px · escritorio ≥ 1024 px (`bp-tableta`, `bp-escritorio`). Los componentes se adaptan al ancho de su contenedor (container queries) cuando pueden; la ficha cambia a 560 px (`ficha-amplia`).
-- **Prioridad en la ficha:** nombre y especialidad → consultorio y distancia → precio → calificación y cédula → cuándo → hasta 3 horarios → acción. Unas dos fichas por pantalla de 390 × 844.
+- **Prioridad en la ficha:** médico (nombre, especialidad, cédula, calificación) → por consultorio: lugar, distancia y precio → forma de agendar y próximo lugar → acción. Unas dos fichas por pantalla de 390 × 844.
 - **Pulgar:** la acción principal va abajo o a todo el ancho: «Buscar» al pie de la búsqueda, «Ver N especialistas» al pie de los filtros, barra de acción fija en el perfil (BarraAccion).
 - **Llamar:** en un consultorio que agenda por teléfono, «Llamar» (`tel:`) es la acción principal y «Copiar número» la secundaria. El número siempre va escrito.
-- **Nada se sale de la pantalla:** filtros en hoja inferior (BarraFiltros), chips que pasan de línea, máximo 3 horarios en la ficha.
+- **Nada se sale de la pantalla:** filtros en hoja inferior (BarraFiltros), chips que pasan de línea, máximo 2 consultorios visibles en la ficha.
 - **Tableta:** dos columnas de fichas; búsqueda y filtros como en celular en vertical. **Escritorio:** buscador en píldora doble, filtros en fila; lista con mapa [propuesta].
 - **Datos móviles:** fotos en WebP de 176 × 234 en la ficha de celular (≤ 20 KB); 480 × 640 solo en perfil y ficha amplia. Fuentes con `display=swap`.
 - **Insets del dispositivo:** barras y hojas fijas al pie suman `env(safe-area-inset-bottom)`.
@@ -91,7 +91,7 @@ De tú, claro y sin tecnicismos, como una persona que conoce buenos médicos y t
 Un médico puede atender en varios consultorios. **Precio, horarios y forma de agendar son de cada consultorio**, no del médico (decisión 2026-11-04).
 
 - **Para publicar**, cada consultorio necesita dirección, precio de consulta y al menos una forma de agendar: **agenda en Manik** (horarios; la cita es presencial), **por teléfono**, o **ambas**. Sin precio o sin forma de agendar, el consultorio no se publica y el perfil queda «Incompleto» [propuesta].
-- **En resultados**, la ficha muestra un consultorio: el más cercano a donde busca el paciente que cumpla los filtros. Si hay más: «Atiende en N consultorios · ver todos».
+- **En resultados**, la ficha muestra los consultorios en filas (máx. 2; con más, «Ver n consultorios más»), el más cercano que cumpla los filtros primero. Cada fila lleva su precio, su forma de agendar y su acción (anatomía aprobada de FichaMedico).
 - **Filtros por consultorio:** «Agenda en Manik», «Hasta $800» y «Con lugar hoy» se evalúan en cada consultorio.
 - **Formas mixtas:** un consultorio puede agendar en Manik y otro solo por teléfono, o uno ofrecer las dos; cada uno muestra la suya. Con ambas, «Agendar» es la principal y «o llama al …» el enlace alternativo.
 - En el perfil público, la lista de consultorios con su dirección, precio y forma de agendar [pendiente de diseñar].
