@@ -26,3 +26,7 @@ Decisiones / correcciones:
 - Buscador: campo único que abre búsqueda a pantalla completa; píldora doble solo ≥ 1024 px.
 - Nuevos: BarraFiltros (hoja inferior) y BarraAccion (barra fija del perfil). Iconos extra (phone, sliders-horizontal, x, arrow-left) en `iconos-extra/`.
 - Tokens: foto-ficha-movil, ficha-amplia, bp-tableta, bp-escritorio, barra-inferior. Fotos en WebP 176 × 234 en ficha de celular.
+
+## Cambio 2026-11-04 · lenguaje
+- Pedido del usuario: «En línea» confunde (se lee como consulta por internet). La cita es presencial; solo se reserva desde el directorio.
+- Ahora: «Agenda en Manik», «Por teléfono» o «Agenda en Manik o por teléfono». Filtro «Agenda en Manik». Regla de voz en el README.

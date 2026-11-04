@@ -267,10 +267,10 @@
     "Iconos"
   ],
   "lastChange": {
-    "at": "2026-11-04T18:58:59Z",
+    "at": "2026-11-04T19:11:44Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "Celular primero (70 % del uso): ficha compacta, búsqueda a pantalla completa, filtros en hoja inferior, barra de acción del perfil y «Llamar» para consultorios por teléfono."
+    "note": "Lenguaje: «Agenda en Manik» en lugar de «En línea» o «Cita en línea» (la cita es presencial; solo se reserva desde el directorio). Formas de agendar: en Manik, por teléfono o ambas."
   },
   "layout": "files",
   "libraries": [],

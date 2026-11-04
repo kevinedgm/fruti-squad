@@ -59,7 +59,7 @@ El 70 % del uso será en celular y tableta, el 30 % en escritorio. Se diseña pr
 ## Tipografía
 
 - **Primaria · Urbanist**: titulares en 300, grandes y con el espaciado cerrado (−0.035 em); la palabra clave en 600 («Cuidarte ya no tiene que ser **difícil**»). Nombres de médicos, precios y categorías en 600.
-- **Secundaria · Onest**: todo lo demás. Base 17 px. Horarios, precios en línea y teléfonos con cifras tabulares.
+- **Secundaria · Onest**: todo lo demás. Base 17 px. Horarios, precios y teléfonos con cifras tabulares.
 - Carga: `family=Urbanist:wght@300..700&family=Onest:wght@400..700`.
 
 ## Forma, espacio y profundidad
@@ -84,15 +84,16 @@ De tú, claro y sin tecnicismos, como una persona que conoce buenos médicos y t
 | «Hoy tiene espacio a las 11:30» | «Disponibilidad en el slot 11:30» |
 | «Te mandamos un recordatorio un día antes» | «Su cita ha sido registrada exitosamente en el sistema» |
 | «124 pacientes opinaron sobre la Dra. Herrera» | «¡Los mejores doctores!» |
+| «Agenda en Manik» (la cita es presencial) | «En línea» o «Cita en línea»: se confunde con consulta por video |
 
 ## Consultorios
 
 Un médico puede atender en varios consultorios. **Precio, horarios y forma de agendar son de cada consultorio**, no del médico (decisión 2026-11-04).
 
-- **Para publicar**, cada consultorio necesita dirección, precio de consulta y al menos una forma de agendar: en línea (horarios) o por teléfono. Sin precio o sin forma de agendar, el consultorio no se publica y el perfil queda «Incompleto» [propuesta].
+- **Para publicar**, cada consultorio necesita dirección, precio de consulta y al menos una forma de agendar: **agenda en Manik** (horarios; la cita es presencial), **por teléfono**, o **ambas**. Sin precio o sin forma de agendar, el consultorio no se publica y el perfil queda «Incompleto» [propuesta].
 - **En resultados**, la ficha muestra un consultorio: el más cercano a donde busca el paciente que cumpla los filtros. Si hay más: «Atiende en N consultorios · ver todos».
-- **Filtros por consultorio:** «Cita en línea», «Hasta $800» y «Con lugar hoy» se evalúan en cada consultorio.
-- **Formas mixtas:** un consultorio puede agendar en línea y otro solo por teléfono; cada uno muestra la suya.
+- **Filtros por consultorio:** «Agenda en Manik», «Hasta $800» y «Con lugar hoy» se evalúan en cada consultorio.
+- **Formas mixtas:** un consultorio puede agendar en Manik y otro solo por teléfono, o uno ofrecer las dos; cada uno muestra la suya. Con ambas, «Agendar» es la principal y «o llama al …» el enlace alternativo.
 - En el perfil público, la lista de consultorios con su dirección, precio y forma de agendar [pendiente de diseñar].
 
 ## Fotografía
