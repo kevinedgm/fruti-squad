@@ -10,8 +10,10 @@
 - La consulta es presencial y se paga en el consultorio.
 - Viene de «Confirma tu cita» (nombre + celular).
 
+## Hechos confirmados después
+- La cita se confirma al instante; el médico no la acepta (usuario, 2026-11-04). Se retira el estado «apartada / pendiente».
+
 ## Supuestos
-- La cita queda confirmada al instante (el horario sale de la agenda del médico).
 - El mensaje sale en segundos.
 
 ## Jerarquía
@@ -26,10 +28,10 @@
 - El enlace del mensaje es la única puerta a la cita: debe funcionar sin iniciar sesión.
 
 ## Estados
-- Confirmada (mensaje enviado) · No pudimos enviar el mensaje · Pendiente de que el médico acepte [incógnita] · Recordatorio del día anterior (mensaje).
+- Confirmada (mensaje enviado) · No pudimos enviar el mensaje · Recordatorio del día anterior (mensaje).
 
 ## Incógnitas
 1. ¿Canal: SMS, WhatsApp o ambos?
-2. ¿Confirmación inmediata o el médico debe aceptar?
+2. ~~¿Confirmación inmediata?~~ → resuelto: inmediata.
 3. ¿Hasta cuándo se puede cancelar o cambiar (por ejemplo, 24 h antes)?
 4. ¿El médico tiene indicaciones previas (llegar 10 min antes, estudios, ayuno)?
