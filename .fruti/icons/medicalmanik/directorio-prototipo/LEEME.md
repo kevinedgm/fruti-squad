@@ -7,3 +7,5 @@ Pedido: «genera un artifact con un prototipo del directorio Manik». Regenerar:
 - **Propuesta sin aprobar:** las tres pantallas de agendar están marcadas «Pantalla propuesta · por aprobar».
 - Datos de ejemplo: médicos, direcciones, precios y teléfonos ficticios (555). Solo «Piel/Dermatología» tiene médicos; otras categorías muestran el estado vacío.
 - Verificación: Playwright a 390 y 1300 px por todo el flujo: 0 errores JS, 0 desborde, controles ≥ 24 px.
+
+- 2026-11-04: inicio reemplazado por el aprobado (inicio/r03): con lugar hoy, resuelve tus dudas, cómo funciona, ¿eres médico?

@@ -80,6 +80,27 @@ a{color:inherit}
 .trust b{font:600 20px/26px var(--display)}.trust p{color:var(--confianza-texto);font-size:15px;line-height:22px}
 .pie{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;padding-block:32px 48px;color:var(--muted);font-size:15px}.pie img{height:22px;width:auto;display:block}
 
+/* Inicio r03 (aprobado 2026-11-04) */
+.hero{grid-template-columns:minmax(0,1fr)}.htxt{display:grid;gap:20px;align-content:center;min-width:0}
+.donde{display:flex;flex-wrap:wrap;align-items:center;gap:2px 12px;font-size:15px;line-height:22px;color:var(--muted)}.donde .ico{width:16px;height:16px;color:var(--cian-ui)}.donde>span{display:inline-flex;align-items:center;gap:6px}.donde b{color:var(--tinta);font-weight:600}
+.foto{display:none;aspect-ratio:4/5;border-radius:32px;background:linear-gradient(160deg,var(--foto-inicio),var(--foto-fin));align-items:end;padding:16px;font-size:13px;color:var(--muted)}
+@media (min-width:640px){.hero{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:32px;align-items:center}.foto{display:flex}}
+.lnk{justify-self:start;font-weight:600;color:var(--tinta);text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:44px;background:none;border:0;padding:0;font-size:16px;font-family:var(--sans);cursor:pointer}
+.hoy{display:grid;gap:12px}@media (min-width:640px){.hoy{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.hoy{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.mf{background:var(--blanco);border:1px solid var(--linea);border-radius:24px;padding:14px;display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:4px 12px;align-items:center}
+.mf .face{grid-row:1/4;align-self:start;border-radius:14px}.mf b{font:600 18px/22px var(--display)}.mf b a{text-decoration:none;display:inline-block;padding-block:3px}.mf b a:hover{text-decoration:underline}.mf small{font-size:14px;line-height:20px;color:var(--muted)}.mf .ced{grid-column:2}.mf .btn{grid-row:1/4;grid-column:3;min-height:44px;padding:0 18px}
+.dud{display:grid;gap:12px}@media (min-width:640px){.dud{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.dud h3{grid-column:1/-1;font:600 15px/20px var(--sans);color:var(--muted);letter-spacing:.02em;margin-top:4px}
+.dud .acc{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.q{display:grid;gap:6px;text-align:left;background:var(--blanco);border:1px solid var(--linea);border-radius:22px;padding:16px;font:inherit;color:var(--tinta);cursor:pointer;width:100%}
+.q:hover{box-shadow:var(--sombra-hover)}.q b{font:600 18px/24px var(--display)}.q small{font-size:14px;line-height:20px;color:var(--muted)}
+.q.art{grid-template-columns:88px minmax(0,1fr);align-items:start;column-gap:14px}.q.art .th{grid-row:1/3;aspect-ratio:1;border-radius:16px;display:grid;place-items:center;background:var(--cat-cian);color:var(--cian-ui)}.q.art:nth-of-type(even) .th{background:var(--cat-calida)}
+.pasos{display:grid;gap:16px;counter-reset:p;list-style:none;margin:0;padding:0}@media (min-width:768px){.pasos{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.pasos li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:12px;align-items:start}.pasos li::before{counter-increment:p;content:counter(p);width:44px;height:44px;border-radius:50%;background:var(--luz-cian);color:var(--cian-ui);display:grid;place-items:center;font:600 18px var(--display)}
+.pasos b{display:block;font:600 19px/24px var(--display)}.pasos span span{color:var(--muted);font-size:15px;line-height:22px}
+.soymed{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center;justify-content:space-between;background:var(--blanco);border:1px solid var(--linea);border-radius:24px;padding:20px}
+.soymed b{font:600 20px/26px var(--display);display:block}.soymed p{color:var(--muted);font-size:15px}
+
 /* Resultados */
 .rh{display:grid;gap:4px;padding-block:8px 12px}
 .rh .h2 small{display:block;font:400 15px/22px var(--sans);color:var(--muted);letter-spacing:0;margin-top:4px}
@@ -244,20 +265,35 @@ function ficha({m, cons}){
   return `<article class="fm"><div class="fmi">${avatar(m)}<div class="who"><h3><a href="#medico-${m.id}">${m.n}</a></h3><p class="spec">${m.esp}${m.foco?' · '+m.foco:''}</p>${ced(m)}${meta(m)}</div>
   <div class="cons" role="list" aria-label="Consultorios de ${m.n}">${cons.slice(0,2).map((c,i)=>fila(m,c,i===0)).join('')}</div>${extra}</div></article>`;
 }
-const nav = (act) => `<header class="wrap nav"><a class="logo" href="#inicio" aria-label="Manik, inicio"><img src="${IMG.logo}" alt=""></a><ul><li><a href="#resultados" ${act==='buscar'?'aria-current="page"':''}>Buscar médico</a></li><li><a href="#inicio">Preguntas</a></li><li><a href="#inicio">Artículos</a></li></ul><a class="me" href="#inicio">Soy médico</a><button class="ib menu" aria-label="Menú">${ic('menu')}</button></header>`;
+const nav = (act) => `<header class="wrap nav"><a class="logo" href="#inicio" aria-label="Manik, inicio"><img src="${IMG.logo}" alt=""></a><ul><li><a href="#resultados" ${act==='buscar'?'aria-current="page"':''}>Especialidades</a></li><li><a href="#dudas">Preguntas</a></li><li><a href="#dudas">Artículos</a></li></ul><a class="me" href="#inicio">Soy médico</a><button class="ib menu" aria-label="Menú">${ic('menu')}</button></header>`;
 
 // Vistas
 const V = {};
-V.inicio = () => `<div class="halo">${nav('')}
-<section class="wrap hero"><span class="pill"><span>${ic('shield-check')}</span>Médicos con cédula verificada</span>
-<h1 class="h1">Cuidarte ya no tiene que ser <b>difícil</b>.</h1><p class="lead">Encuentra a tu especialista, compara precios y agenda tu cita en el consultorio.</p>
-<button class="campo" data-abrir="buscar" aria-haspopup="dialog">${ic('search')}<span><b>¿Qué necesitas?</b><small>Cerca de ${S.donde}</small></span></button>
+const HOY = () => MED.map(m => { const c = m.cons.find(c => c.manik && c.ag && c.ag[0]); return c ? {m, c} : null; }).filter(Boolean).sort((a,b)=>a.c.km-b.c.km);
+const PREG = [['¿El acné en adultos se quita solo?','soto',2],['Se me cae mucho el cabello, ¿a qué especialista voy?','luna',3]];
+const ART = [['Qué es la dermatitis atópica','ramos','scan-face',5],['Urticaria: qué es y cuándo preocuparse','hernandez','flower-2',4]];
+const medDe = id => MED.find(m => m.id === id);
+V.inicio = () => { const hoy = HOY(); return `<div class="halo">${nav('')}
+<section class="wrap hero" aria-labelledby="h-ini"><div class="htxt"><span class="pill"><span>${ic('shield-check')}</span>Médicos con registro verificado</span>
+<h1 class="h1" id="h-ini">Encuentra a tu médico, ve cuánto cuesta y <b>agenda</b>.</h1><p class="lead">La consulta es en su consultorio. Buscar y agendar es gratis.</p>
+<button class="campo" data-abrir="buscar" aria-haspopup="dialog">${ic('search')}<span><b>¿Qué necesitas?</b><small>Especialidad, síntoma o nombre del médico</small></span></button>
 <form class="buscador" role="search" data-form="buscar"><div class="f">${ic('search')}<div><label for="q">Qué necesitas</label><input id="q" value="${S.q}" placeholder="Especialidad, síntoma o médico" autocomplete="off"></div></div><div class="f">${ic('map-pin')}<div><label for="w">Dónde</label><input id="w" value="${S.donde}" placeholder="Colonia o ciudad" autocomplete="off"></div></div><button class="btn oscuro" type="submit">Buscar</button></form>
-<div class="atajos">${CATS.slice(0,4).map(c=>`<button data-cat="${c[1]}">${ic(c[0])}${c[1]}</button>`).join('')}</div></section></div>
+<p class="donde"><span>${ic('map-pin')}Cerca de <b>${S.donde}</b> (aproximado)</span><button class="ubi" data-ubi-ini>${ic('locate-fixed')}Usar mi ubicación</button></p></div>
+<div class="foto" aria-hidden="true">Foto de marca 4:5 (pendiente)</div></section></div>
 <section class="wrap sec" aria-labelledby="h-cat"><div><h2 class="h2" id="h-cat">Busca por <b>lo que sientes</b></h2><p class="sub">Si no sabes a qué especialista ir, empieza por aquí.</p></div>
-<div class="cats">${CATS.map(c=>`<button class="cat" data-cat="${c[1]}"><span class="ic">${ic(c[0])}</span><span><b>${c[1]}</b><small>${c[2]}</small></span></button>`).join('')}</div></section>
-<section class="wrap sec"><div class="trust" aria-label="Por qué Manik"><div><span class="ic">${ic('badge-check')}</span><b>Médicos verificados</b><p>Revisamos la cédula profesional de cada médico antes de publicarlo.</p></div><div><span class="ic">${ic('message-circle-heart')}</span><b>Opiniones reales</b><p>Solo opina quien tuvo una cita agendada en Manik.</p></div><div><span class="ic">${ic('calendar-check')}</span><b>Sin costo para ti</b><p>Buscar y agendar es gratis. Pagas la consulta en el consultorio.</p></div></div></section>
-<footer class="wrap pie"><img src="${IMG.logo}" alt="manik"><span>de MedicalManik</span></footer>`;
+<div class="cats">${CATS.map(c=>`<button class="cat" data-cat="${c[1]}"><span class="ic">${ic(c[0])}</span><span><b>${c[1]}</b><small>${c[2]}</small></span></button>`).join('')}</div><button class="lnk" data-toast="El listado de especialidades aún no está en el prototipo">Ver todas las especialidades</button></section>
+${hoy.length ? `<section class="wrap sec" aria-labelledby="h-hoy"><h2 class="h2" id="h-hoy">Con lugar <b>hoy</b> cerca de ti</h2>
+<div class="hoy">${hoy.map(({m,c})=>`<article class="mf">${avatar(m)}<b><a href="#medico-${m.id}">${m.n}</a></b><small><span class="nw">${m.esp}</span> · <span class="nw">${c.km} km</span> · <span class="nw">${peso(c.pr)}</span> · <span class="nw">Hoy ${c.ag[0][0]}</span></small>${ced(m)}<a class="btn secundario" href="#medico-${m.id}" aria-label="Ver a ${m.n}">Ver</a></article>`).join('')}</div>
+<button class="lnk" data-hoy>Ver todos con lugar hoy</button></section>` : ''}
+<section class="wrap sec" id="dudas" aria-labelledby="h-dud"><div><h2 class="h2" id="h-dud">Resuelve tus <b>dudas</b></h2><p class="sub">Solo responden y escriben médicos que atienden con el expediente Manik.</p></div>
+<div class="dud"><h3>Preguntas de pacientes</h3>${PREG.map(([t,id,n])=>{const m=medDe(id);return `<button class="q" data-toast="La página de la pregunta aún no está en el prototipo"><b>${t}</b><small><span class="nw">Responde ${m.n}</span> · <span class="nw">${m.esp}</span> · <span class="nw">${n} respuestas de médicos</span></small></button>`}).join('')}
+<div class="acc"><button class="btn secundario" data-toast="El formulario de pregunta es la siguiente ronda (pregunta/r01)">Haz tu pregunta</button><button class="lnk" data-toast="El listado de preguntas aún no está en el prototipo">Ver más preguntas</button></div>
+<h3>Artículos de médicos</h3>${ART.map(([t,id,i,min])=>{const m=medDe(id);return `<button class="q art" data-toast="La página del artículo aún no está en el prototipo"><span class="th">${ic(i)}</span><b>${t}</b><small><span class="nw">Por ${m.n}</span> · <span class="nw">${m.esp}</span> · <span class="nw">${min} min</span></small></button>`}).join('')}
+<div class="acc"><button class="lnk" data-toast="El listado de artículos aún no está en el prototipo">Ver artículos</button></div></div></section>
+<section class="wrap sec" aria-labelledby="h-como"><h2 class="h2" id="h-como">Cómo <b>funciona</b></h2><ol class="pasos"><li><span><b>Busca</b><span>Por especialidad, por lo que sientes o por nombre.</span></span></li><li><span><b>Compara</b><span>Precio, distancia y opiniones de cada consultorio.</span></span></li><li><span><b>Agenda</b><span>En Manik o por teléfono. La consulta es en el consultorio.</span></span></li></ol></section>
+<section class="wrap sec"><div class="trust" aria-label="Por qué Manik"><div><span class="ic">${ic('badge-check')}</span><b>Médicos verificados</b><p>Revisamos el registro profesional de cada médico (cédula profesional).</p></div><div><span class="ic">${ic('message-circle-heart')}</span><b>Opiniones reales</b><p>Solo opina quien tuvo cita en Manik.</p></div><div><span class="ic">${ic('calendar-check')}</span><b>Gratis para ti</b><p>Pagas la consulta en el consultorio.</p></div></div></section>
+<section class="wrap sec"><div class="soymed"><div><b>¿Eres médico?</b><p>Aparece en Manik y recibe pacientes.</p></div><button class="btn secundario" data-toast="La página para médicos aún no está en el prototipo">Soy médico</button></div></section>
+<footer class="wrap pie"><img src="${IMG.logo}" alt="manik"><span>de MedicalManik</span><span>Aviso de privacidad</span><span>Términos</span></footer>`; };
 
 V.resultados = () => {
   const r = resultados(); const n = r.length;
@@ -377,13 +413,16 @@ function render(){
   else html = (V[h] || V.inicio)();
   if (html) $('#app').innerHTML = html;
 }
-addEventListener('hashchange', () => { render(); scrollTo(0,0); $('#app').focus?.(); });
+addEventListener('hashchange', () => { render(); const d = location.hash === '#dudas' && $('#dudas'); d ? d.scrollIntoView() : scrollTo(0,0); $('#app').focus?.(); });
 document.addEventListener('click', e => {
   const t = e.target;
   const ab = t.closest('[data-abrir]'); if (ab) { abrir(ab.dataset.abrir, ab); return; }
   const cat = t.closest('[data-cat]'); if (cat) { S.cat = cat.dataset.cat; S.f = {manik:false,hoy:false,precio:0}; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); return; }
   const sug = t.closest('[data-sug]'); if (sug) { cerrar(); if (sug.dataset.sug === 'soto') location.hash = 'medico-soto'; else { S.cat = 'Piel'; location.hash = 'resultados'; } return; }
   if (t.closest('[data-cerrar]')) { cerrar(); return; }
+  const tt = t.closest('[data-toast]'); if (tt) { toast(tt.dataset.toast); return; }
+  if (t.closest('[data-hoy]')) { S.cat = 'Piel'; S.f = {manik:false,hoy:true,precio:0}; location.hash = 'resultados'; return; }
+  if (t.closest('[data-ubi-ini]')) { S.donde = 'tu ubicación (ejemplo)'; render(); toast('Aquí el navegador pediría permiso de ubicación'); return; }
   if (t.closest('[data-ubi]')) { $('#w1').value = 'Cerca de ti (ejemplo)'; return; }
   const f = t.closest('[data-f]'); if (f) { const k = f.dataset.f; if (k==='p800') S.f.precio = S.f.precio===800?0:800; else S.f[k] = !S.f[k]; render(); return; }
   if (t.closest('[data-limpiar]')) { S.f = {manik:false,hoy:false,precio:0}; render(); return; }
