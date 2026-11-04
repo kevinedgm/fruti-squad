@@ -26,7 +26,7 @@
 
 ## Incógnitas
 1. ~~Si el filtro no aprueba~~ → resuelto: correo con motivo y enlace para reescribir. Inferencia: al reescribir no se vuelve a confirmar el correo (el enlace ya lo prueba). Pendiente: ¿hay límite de intentos? ¿Los motivos son una lista fija (p. ej. «incluye datos personales», «es una urgencia», «no es una pregunta de salud»)?
-2. ¿El filtro es una persona, automático o ambos? (cambia el tiempo de espera que prometemos).
+2. ~~Tipo de filtro~~ → aplazado por el usuario. Consecuencia: ninguna pantalla ni correo promete un tiempo de revisión; solo «te avisamos por correo».
 3. ¿Cuánto dura el enlace de confirmación y qué pasa si nunca se confirma?
 4. ¿Llega un correo por cada médico que responde, o solo el primero?
 5. ¿Se puede preguntar desde Centroamérica igual (número de urgencias por país)?
