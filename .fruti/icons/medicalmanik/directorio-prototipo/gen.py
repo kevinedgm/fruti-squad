@@ -1,5 +1,5 @@
 # Directorio Manik · prototipo navegable (2026-11-04). Sistema: directorio-ds (tokens, componentes, avatares).
-# Ficha: anatomía aprobada (ficha-medico/r03 opción C). Inicio: aprobado (inicio/r03). Perfil: aprobado (perfil-medico/r03). Flujo de agendar: propuesta sin aprobar.
+# Ficha: anatomía aprobada (ficha-medico/r03 opción C). Inicio: aprobado (inicio/r03). Perfil: aprobado (perfil-medico/r03). Cita confirmada: aprobada (cita-confirmada/r01). Flujo de agendar: propuesta sin aprobar.
 # Uso: python3 gen.py → prototipo.html (iconos Lucide y SVG de marca en línea; datos de ejemplo)
 import os, re, json, base64
 D = os.path.dirname(os.path.abspath(__file__)); M = os.path.join(D, '..')
