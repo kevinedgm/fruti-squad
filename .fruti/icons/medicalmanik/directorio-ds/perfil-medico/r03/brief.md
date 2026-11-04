@@ -54,4 +54,4 @@
 - **Hecho (DS · EstadoPerfil):** no se publica sin dirección, precio y forma de agendar por consultorio; la foto no bloquea (avatar).
 - **Mínimo publicable:** nombre, especialidad, cédulas, 1 consultorio completo.
 - **Regla propuesta:** sección sin datos = no aparece; sin opiniones = sin calificación ni etiqueta; barra de secciones solo con 4 o más secciones; el aviso de completar vive en el panel del médico.
-- **Propuesta:** formación generada con los datos de las cédulas verificadas [supuesto: la verificación entrega título, institución y año].
+- **Decidido:** formación generada con los datos de las cédulas verificadas. **Hecho (usuario, 2026-11-04):** la verificación guarda título, institución y año. Consecuencia: «Formación» existe en todo perfil publicado.
