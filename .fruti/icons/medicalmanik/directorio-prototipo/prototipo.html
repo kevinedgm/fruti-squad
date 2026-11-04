@@ -189,6 +189,19 @@ a{color:inherit}
 .gal{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;list-style:none;margin:0;padding:0}.gal li{flex:none;width:140px;aspect-ratio:1;border-radius:18px;background:linear-gradient(160deg,var(--foto-inicio),var(--foto-fin))}
 .fuente{font-size:13px;color:var(--muted)}
 
+/* Detalle de su cita r01 (aprobado 2026-11-04) */
+.estado{justify-self:start;display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;border-radius:999px;padding:4px 12px;background:var(--exito-suave);color:var(--on-exito-suave)}.estado .ico{width:16px;height:16px}
+.estado.gris{background:var(--lavado);color:var(--muted)}
+.limite{color:var(--muted);font-size:16px}.limite b{color:var(--tinta)}
+.peligro{justify-self:start;background:none;border:0;padding:0 4px;min-height:44px;font:600 16px var(--sans);color:#B42318;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.tachada{text-decoration:line-through;color:var(--muted)}
+.dlg{position:fixed;inset:0;z-index:20;background:var(--velo);display:grid;place-items:center;padding:16px}
+.dlg .caja{background:var(--blanco);border-radius:24px;padding:20px;max-width:420px;width:100%;display:grid;gap:14px;box-shadow:0 20px 60px rgba(20,33,61,.25)}
+.dlg h2{font:600 22px/28px var(--display)}.dlg .acc{flex-direction:column;align-items:stretch}
+.btn.rojo{background:#B42318;color:var(--blanco)}.btn.rojo:hover{background:#8A1C12}
+.ab{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:16px}.ab dt{color:var(--muted)}.ab dd{margin:0;font-weight:600}
+.demo{border-top:1px dashed var(--linea);padding-top:12px;font-size:14px;color:var(--muted)}.demo summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600}.demo .acc{margin-top:6px}
+
 /* Agendar */
 .paso{display:grid;gap:18px;padding-block:8px 130px;max-width:720px;min-width:0}.paso>*{min-width:0}
 .paso h1{font:600 clamp(26px,6vw,34px)/1.1 var(--display);letter-spacing:-.02em}
@@ -411,6 +424,50 @@ V.confirmar = () => {
   <div class="pie-paso"><div class="in"><div><b>${S.ocupado ? 'Elige otro horario' : nombreDia(S.dia, true) + ', ' + S.hora}</b>${c.lu} · ${peso(c.pr)}</div><button class="btn primario" data-confirmar aria-disabled="${!!S.ocupado}">Confirmar cita</button></div></div>`;
 };
 
+V.cita = () => {
+  const ci = S.cita, demo = S.demo;
+  if (!ci || demo === 'vencido') return `${nav('')}<main class="wrap"><div class="ok"><span class="ic" style="background:var(--lavado);color:var(--muted)">${ic('clock')}</span><h1 id="h-ok" tabindex="-1">Este enlace ya <b>no funciona</b>.</h1><p class="lead">Puede haber vencido o estar incompleto. Te mandamos uno nuevo al celular con el que agendaste.</p>
+    <form class="form" data-form="enlace" style="width:100%;max-width:420px"><div class="campo-f"><label for="cel-e">Celular</label><input id="cel-e" inputmode="tel" autocomplete="tel" placeholder="10 dígitos"></div><button class="btn primario" type="submit">Mandarme un enlace nuevo</button></form>
+    <a class="btn texto" href="#inicio">Ir al inicio</a></div>${demoB()}</main>`;
+  const m = MED.find(x=>x.id===ci.med), c = m.cons.find(x=>x.id===ci.cons);
+  const cuando = fechaLarga(ci.dia).replace(/^./, x=>x.toUpperCase()) + ', ' + ci.hora;
+  const resumen = (tach) => `<section class="cres a-res" aria-label="Tu cita"><span class="cuando${tach?' tachada':''}">${cuando}</span>
+   <span class="fila">${ic('stethoscope')}<span><b>${m.n}</b><small>${m.esp}</small></span></span>
+   <span class="fila">${ic('map-pin')}<span><b>${c.lu}</b><small>${c.dir}</small></span></span>
+   <span class="fila"><span></span><span><b>${peso(c.pr)}</b><small>Pagas en el consultorio</small></span></span>
+   <span class="fila"><span></span><span><b>Paciente: ${ci.nombre}</b><small>Celular ··· ${ci.cel.slice(-4)}</small></span></span>`;
+  const telA = c.tel ? `<a class="btn secundario" href="tel:+52${c.tel.replace(/ /g,'')}" data-llamar="${c.tel}">${ic('phone')}Llamar al consultorio · ${c.tel}</a>` : '';
+  if ((ci.estado === 'cancelada' && !demo) || demo === 'consultorio') {
+    const porC = demo === 'consultorio';
+    return `${nav('')}<main class="wrap"><div class="ok"><span class="estado gris">${porC ? 'Cancelada por el consultorio' : 'Cancelada'}</span><h1 id="h-ok" tabindex="-1">${porC ? 'El consultorio <b>canceló</b> tu cita.' : 'Cancelaste <b>tu cita</b>.'}</h1><p class="lead">${porC ? 'Lo sentimos. Puedes elegir otro horario con el mismo médico.' : 'El horario quedó libre para alguien más. Te mandamos la confirmación por mensaje.'}</p></div>
+    <div class="cc">${resumen(true)}<div class="acc"><button class="btn primario" data-agendar="${m.id}|${c.id}">Agendar otra vez con ${corto(m)}</button><a class="btn texto" href="#resultados">Buscar otro médico</a></div></section></div>${demoB()}</main>`;
+  }
+  const faltan = inicioCita(ci) - Date.now(), pasada = demo === 'pasada' || faltan < 0, menos = demo === 'menos24' || (!pasada && faltan < 864e5);
+  if (pasada) return `${nav('')}<main class="wrap"><div class="ok"><span class="estado gris">Ya pasó</span><h1 id="h-ok" tabindex="-1">¿Cómo te fue con <b>${corto(m)}</b>?</h1><p class="lead">Tu opinión ayuda a otras familias. Solo opina quien tuvo cita en Manik.</p></div>
+    <div class="cc">${resumen(false)}<div class="acc"><button class="btn primario" data-toast="Opinar: siguiente ronda">Opinar sobre la consulta</button><button class="btn secundario" data-agendar="${m.id}|${c.id}">Agendar otra cita</button></div></section></div>${demoB()}</main>`;
+  const lim = new Date(inicioCita(ci) - 864e5), limT = `${DIAS[lim.getDay()]} ${lim.getDate()} de ${['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][lim.getMonth()]} a las ${ci.hora}`;
+  const plan = menos
+    ? `<section class="cmsg a-msg" aria-labelledby="h-plan"><h2 id="h-plan">¿Necesitas cambiarla o cancelarla?</h2><p>Faltan menos de 24 horas, así que ya no se puede desde aquí. Llama al consultorio para avisar.</p>${telA}</section>`
+    : `<section class="cmsg a-msg" aria-labelledby="h-plan"><h2 id="h-plan">¿Cambió tu plan?</h2><a class="btn secundario" href="#cita-cambiar" style="justify-self:start">Cambiar fecha u hora</a><button class="peligro" data-cancelar-cita>Cancelar cita</button></section>`;
+  return `${nav('')}<main class="wrap"><div class="ok"><span class="estado">${ic('circle-check')}Confirmada</span><h1 id="h-ok" tabindex="-1">Tu <b>cita</b></h1><p class="limite">${menos ? 'Faltan menos de 24 horas.' : `Puedes cambiarla o cancelarla hasta el <b>${limT}</b> (24 horas antes).`}</p></div>
+  <div class="cc">${resumen(false)}<div class="acc"><button class="btn primario" data-toast="Aquí se abriría el mapa">${ic('map-pin')}Cómo llegar</button><a class="btn secundario" href="${gcal(m, c, ci)}" target="_blank" rel="noopener">${ic('calendar-check')}Agregar a mi calendario</a></div></section>${plan}</div>${demoB()}</main>`;
+};
+function demoB(){ return `<details class="demo"><summary>Ver otros estados (solo prototipo)</summary><div class="acc">${[['', 'Actual'],['menos24','Faltan menos de 24 h'],['pasada','Ya pasó'],['vencido','Enlace vencido'],['consultorio','El consultorio canceló']].map(([k,t])=>`<button class="btn texto" data-demo="${k}">${t}</button>`).join('')}</div></details>`; }
+V['cita-cambiar'] = () => {
+  const ci = S.cita; if (!ci || ci.estado !== 'activa') { location.hash = 'cita'; return ''; }
+  const m = MED.find(x=>x.id===ci.med), c = m.cons.find(x=>x.id===ci.cons);
+  const ks = Object.keys(c.ag||{}).map(Number).sort((a,b)=>a-b);
+  if (S.cdia == null || !c.ag[S.cdia]) S.cdia = ks[0];
+  const dias = Array.from({length:10},(_,k)=>k).map(k => { const d = dia(k), hay = !!(c.ag && c.ag[k]);
+    return `<button data-cdia="${k}" aria-pressed="${k===S.cdia}" ${hay?'':'disabled'} aria-label="${fechaLarga(k)}${hay?'':', sin lugar'}"><small>${k===0?'Hoy':k===1?'Mañana':DIAS[d.getDay()].slice(0,3).replace(/^./,x=>x.toUpperCase())}</small><b>${d.getDate()}</b><small>${hay?c.ag[k].length+' lugar'+(c.ag[k].length>1?'es':''):'sin lugar'}</small></button>`; }).join('');
+  const horas = (c.ag[S.cdia]||[]).map(h=>`<button data-chora="${h}" aria-pressed="${S.chora===h}">${h}</button>`).join('');
+  const listo = S.chora && S.cdia != null;
+  return `${nav('')}<main class="wrap"><a class="volver" href="#cita">${ic('arrow-left')}Volver a tu cita</a><div class="paso"><h1 id="h-ok" tabindex="-1">Elige la nueva hora</h1><p class="spec">Mismo médico y consultorio. Tu hora actual se libera solo cuando confirmes el cambio.</p>
+  ${S.ocupado ? `<div class="ocupado" role="alert" tabindex="-1" id="ocupado"><b>Esa hora se acaba de ocupar.</b><span>Elige otra; tu cita actual sigue igual.</span></div>` : ''}
+  <div class="dias" role="group" aria-label="Día">${dias}</div><div class="horas pf-ag" role="group" aria-label="Horarios" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px">${horas}</div>
+  <dl class="det ab"><dt>Antes</dt><dd class="tachada">${fechaLarga(ci.dia)}, ${ci.hora}</dd><dt>Ahora</dt><dd>${listo ? fechaLarga(S.cdia) + ', ' + S.chora : 'Elige una hora'}</dd></dl></div></main>
+  <div class="pie-paso"><div class="in"><div><b>${listo ? nombreDia(S.cdia, true) + ', ' + S.chora : 'Elige una hora'}</b>${c.lu}</div><button class="btn primario" data-cambio aria-disabled="${!listo}">Confirmar cambio</button></div></div>`;
+};
 V.confirmada = () => {
   const m = MED.find(x=>x.id===S.med), c = m && m.cons.find(x=>x.id===S.cons);
   if (!c || !S.hora) { location.hash = 'inicio'; return ''; }
@@ -423,8 +480,8 @@ V.confirmada = () => {
    <span class="fila"><span></span><span><b>${peso(c.pr)}</b><small>Pagas en el consultorio</small></span></span>
    <span class="fila"><span></span><span><b>Paciente: ${S.datos.nombre}</b><small>Celular ${S.datos.cel}</small></span></span>
    <div class="acc"><a class="btn primario" href="${gcal(m, c)}" target="_blank" rel="noopener">${ic('calendar-check')}Agregar a mi calendario</a><button class="btn secundario" data-toast="Aquí se abriría el mapa">${ic('map-pin')}Cómo llegar</button></div><button class="btn texto" style="justify-self:start" data-ics>Apple u Outlook (.ics)</button></section>
-  <section class="cmsg a-msg" aria-labelledby="h-msg"><h2 id="h-msg">Te enviamos la confirmación</h2><p>Por mensaje al <b class="nw">${S.datos.cel}</b>. Ahí está el enlace para cambiar o cancelar tu cita.</p><p class="burbuja"><small>Vista del mensaje</small>${msg}</p><button class="btn texto" style="justify-self:start" data-toast="Te lo volvimos a enviar">¿No te llegó? Reenviar</button></section>
-  <section class="cmas a-mas" aria-labelledby="h-mas"><h2 id="h-mas">¿Necesitas algo más?</h2><div class="acc"><button class="btn texto" data-toast="«Detalle de su cita» (cambiar o cancelar): siguiente ronda">Cambiar o cancelar</button>${c.tel ? `<a class="btn texto" href="tel:+52${c.tel.replace(/ /g,'')}" data-llamar="${c.tel}">Llamar al consultorio · ${c.tel}</a>` : ''}<a class="btn texto" href="#inicio">Volver al inicio</a></div></section></div></main>`;
+  <section class="cmsg a-msg" aria-labelledby="h-msg"><h2 id="h-msg">Te enviamos la confirmación</h2><p>Por mensaje al <b class="nw">${S.datos.cel}</b>. Ahí está el enlace para cambiar o cancelar tu cita.</p><p class="burbuja"><small>Vista del mensaje</small>${msg.replace('mnk.example/c/7KQ2','<a href="#cita" style="display:inline-block;padding-block:3px;font-weight:600">mnk.example/c/7KQ2</a>')}</p><button class="btn texto" style="justify-self:start" data-toast="Te lo volvimos a enviar">¿No te llegó? Reenviar</button></section>
+  <section class="cmas a-mas" aria-labelledby="h-mas"><h2 id="h-mas">¿Necesitas algo más?</h2><div class="acc"><a class="btn texto" href="#cita">Cambiar o cancelar</a>${c.tel ? `<a class="btn texto" href="tel:+52${c.tel.replace(/ /g,'')}" data-llamar="${c.tel}">Llamar al consultorio · ${c.tel}</a>` : ''}<a class="btn texto" href="#inicio">Volver al inicio</a></div></section></div></main>`;
 };
 
 // Capas
@@ -466,13 +523,24 @@ function render(){
   if (html) $('#app').innerHTML = html;
 }
 addEventListener('hashchange', () => { render(); const d = (location.hash === '#dudas' && $('#dudas')) || (S.irAgenda && $('#sec-agenda')); S.irAgenda = false;
-  if (d) { d.scrollIntoView({behavior:'instant', block:'start'}); d.setAttribute('tabindex','-1'); d.focus({preventScroll:true}); } else { scrollTo(0,0); ($('#h-ok') || $('#app')).focus?.(); } });
+  if (d) { d.scrollIntoView({behavior:'instant', block:'start'}); d.setAttribute('tabindex','-1'); d.focus({preventScroll:true}); } else { scrollTo(0,0); ($('#h-ok') || $('#app')).focus?.(); } if (location.hash !== '#cita-cambiar') { S.cdia = null; S.chora = null; } });
 document.addEventListener('click', e => {
   const t = e.target;
   const ab = t.closest('[data-abrir]'); if (ab) { abrir(ab.dataset.abrir, ab); return; }
   const cat = t.closest('[data-cat]'); if (cat) { S.cat = cat.dataset.cat; S.f = {manik:false,hoy:false,precio:0}; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); return; }
   const sug = t.closest('[data-sug]'); if (sug) { cerrar(); if (sug.dataset.sug === 'soto') location.hash = 'medico-soto'; else { S.cat = 'Piel'; location.hash = 'resultados'; } return; }
-  if (t.closest('[data-cerrar]')) { cerrar(); return; }
+  if (t.closest('[data-cerrar]') || t.matches('[data-velo-dlg]')) { cerrar(); return; }
+  const dm = t.closest('[data-demo]'); if (dm) { S.demo = dm.dataset.demo || null; if (!S.cita && S.demo !== 'vencido') S.cita = {med:'diaz', cons:'neodemo', dia:3, hora:'10:00', nombre:'Ana Pérez', cel:'222 555 0100', estado:'activa'}; render(); $('#h-ok')?.focus(); return; }
+  if (t.closest('[data-cancelar-cita]')) { const ci = S.cita, m = MED.find(x=>x.id===ci.med); disparador = t.closest('[data-cancelar-cita]'); document.body.style.overflow = 'hidden';
+    $('#capa').innerHTML = `<div class="dlg" data-velo-dlg><div class="caja" role="alertdialog" aria-modal="true" aria-labelledby="dlg-t" aria-describedby="dlg-d"><h2 id="dlg-t">¿Cancelar tu cita?</h2><p id="dlg-d" class="spec">${fechaLarga(ci.dia).replace(/^./,x=>x.toUpperCase())}, ${ci.hora} con ${m.n}. El horario quedará libre para alguien más.</p><div class="acc"><button class="btn rojo" data-cancelar-si>Sí, cancelar cita</button><button class="btn secundario" data-cerrar id="dlg-no">No, conservarla</button></div></div></div>`;
+    $('#dlg-no').focus(); return; }
+  if (t.closest('[data-cancelar-si]')) { const ci = S.cita; liberar(ci.med, ci.cons, ci.dia, ci.hora); ci.estado = 'cancelada'; disparador = null; cerrar(); render(); $('#h-ok')?.focus(); toast('Cancelamos tu cita y te avisamos por mensaje'); return; }
+  const cd = t.closest('[data-cdia]'); if (cd && !cd.disabled) { S.cdia = +cd.dataset.cdia; S.chora = null; S.ocupado = false; render(); $(`[data-cdia="${S.cdia}"]`)?.focus(); return; }
+  const ch = t.closest('[data-chora]'); if (ch) { S.chora = ch.dataset.chora; S.ocupado = false; render(); $(`[data-chora="${S.chora}"]`)?.focus(); return; }
+  const cb = t.closest('[data-cambio]'); if (cb) { if (cb.getAttribute('aria-disabled') === 'true') { toast('Elige una hora primero'); return; }
+    const ci = S.cita, key = `${ci.med}|${ci.cons}|${S.cdia}|${S.chora}`;
+    if (OCUPA.has(key)) { OCUPA.delete(key); reservar(ci.med, ci.cons, S.cdia, S.chora); S.chora = null; S.ocupado = true; render(); $('#ocupado')?.focus(); return; }
+    reservar(ci.med, ci.cons, S.cdia, S.chora); liberar(ci.med, ci.cons, ci.dia, ci.hora); ci.dia = S.cdia; ci.hora = S.chora; S.cdia = null; S.chora = null; S.ocupado = false; location.hash = 'cita'; setTimeout(()=>toast('Cambiamos tu cita. Te mandamos un mensaje con la nueva hora'), 50); return; }
   const tt = t.closest('[data-toast]'); if (tt) { toast(tt.dataset.toast); return; }
   if (t.closest('[data-hoy]')) { S.cat = 'Piel'; S.f = {manik:false,hoy:true,precio:0}; location.hash = 'resultados'; return; }
   if (t.closest('[data-ubi-ini]')) { S.donde = 'tu ubicación (ejemplo)'; render(); toast('Aquí el navegador pediría permiso de ubicación'); return; }
@@ -495,13 +563,18 @@ document.addEventListener('change', e => { if (e.target.id === 'orden') { S.orde
 document.addEventListener('input', e => { if (['nombre','cel','motivo'].includes(e.target.id)) S.datos[e.target.id] = e.target.value; });
 document.addEventListener('submit', e => { e.preventDefault(); const f = e.target.dataset.form;
   if (f === 'buscar' || f === 'buscar-cel') { const q = (f==='buscar' ? $('#q') : $('#q1')).value.trim(); const w = (f==='buscar' ? $('#w') : $('#w1')).value.trim(); S.q = q || S.q; S.donde = w || S.donde; S.cat = /derma|piel|lunar|mancha|acn/i.test(q) || !q ? 'Piel' : q; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); }
-  if (f === 'confirmar') confirmar(); });
+  if (f === 'confirmar') confirmar();
+  if (f === 'enlace') toast('Si hay una cita con ese celular, te llegará un enlace nuevo'); });
 // Simulación: horarios que «otra persona» toma justo antes (para ver el aviso)
 const OCUPA = new Set(['soto|angelopolis|0|17:00','diaz|neodemo|0|17:30']);
 function cercanas(c){ const out = []; Object.keys(c.ag||{}).map(Number).sort((a,b)=>a-b).forEach(k => c.ag[k].forEach(h => { if (out.length < 3 && (k > S.dia || (k === S.dia && h !== S.hora))) out.push([k,h]); })); return out; }
-function gcal(m, c){ const d = dia(S.dia), [hh, mm] = S.hora.split(':').map(Number), f = x=>String(x).padStart(2,'0');
+function gcal(m, c, ci){ const D = ci ? ci.dia : S.dia, Hh = ci ? ci.hora : S.hora; const d = dia(D), [hh, mm] = Hh.split(':').map(Number), f = x=>String(x).padStart(2,'0');
   const fecha = `${d.getFullYear()}${f(d.getMonth()+1)}${f(d.getDate())}`, q = new URLSearchParams({action:'TEMPLATE', text:`Cita con ${m.n}`, dates:`${fecha}T${f(hh)}${f(mm)}00/${fecha}T${f(hh+1)}${f(mm)}00`, ctz:'America/Mexico_City', location:`${c.lu}, ${c.dir}`, details:`Consulta ${peso(c.pr)}, pagas en el consultorio.`});
   return 'https://calendar.google.com/calendar/render?' + q.toString(); }
+function reservar(mid, cid, k, h){ const c = MED.find(x=>x.id===mid).cons.find(x=>x.id===cid); if (!c.ag || !c.ag[k]) return; c.ag[k] = c.ag[k].filter(x=>x!==h); if (!c.ag[k].length) delete c.ag[k]; }
+function liberar(mid, cid, k, h){ const c = MED.find(x=>x.id===mid).cons.find(x=>x.id===cid); c.ag = c.ag || {}; const l = c.ag[k] || []; if (!l.includes(h)) l.push(h); l.sort((a,b)=>{const t=x=>{const [H,M]=x.split(':').map(Number);return H*60+M}; return t(a)-t(b)}); c.ag[k] = l; }
+const corto = m => { const t = m.n.split(' '); return /^Dra?\.$/.test(t[0]) ? t[0] + ' ' + (t[2] || t[1]) : t.slice(0,2).join(' '); };
+const inicioCita = ci => { const d = dia(ci.dia), [H,M] = ci.hora.split(':').map(Number); d.setHours(H, M, 0, 0); return d; };
 function confirmar(){
   if (S.ocupado) { toast('Elige otro horario primero'); $('#ocupado')?.focus(); return; }
   const nombre = $('#nombre').value.trim(), cel = $('#cel').value.replace(/\D/g,'');
@@ -511,7 +584,8 @@ function confirmar(){
   S.datos.cel = cel.replace(/(\d{3})(\d{3})(\d{4})/, '$1 $2 $3');
   const key = `${S.med}|${S.cons}|${S.dia}|${S.hora}`;
   if (OCUPA.has(key)) { OCUPA.delete(key); const c = MED.find(x=>x.id===S.med).cons.find(x=>x.id===S.cons); c.ag[S.dia] = c.ag[S.dia].filter(h=>h!==S.hora); if (!c.ag[S.dia].length) delete c.ag[S.dia]; S.ocupado = true; render(); $('#ocupado')?.focus(); return; }
-  S.ocupado = false; location.hash = 'confirmada';
+  S.ocupado = false; reservar(S.med, S.cons, S.dia, S.hora);
+  S.cita = {med:S.med, cons:S.cons, dia:S.dia, hora:S.hora, nombre:S.datos.nombre, cel:S.datos.cel, estado:'activa'}; S.demo = null; location.hash = 'confirmada';
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#capa').innerHTML) cerrar(); });
 render();
