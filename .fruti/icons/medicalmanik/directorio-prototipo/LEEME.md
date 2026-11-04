@@ -17,3 +17,4 @@ Pedido: «genera un artifact con un prototipo del directorio Manik». Regenerar:
 - 2026-11-04: «Busca por lo que sientes» con sellos circulares en tres tamaños (categorias/r02).
 - 2026-11-04: promociones de Impulsa (promocion/r02): tarjeta en resultados, página #promo-<id>, precio con promoción hasta la cita.
 - 2026-11-04: «con Impulsa Manik» en la tarjeta y sello de Impulsa al pie de la página de la promoción.
+- 2026-11-04: 9 médicos de ejemplo más (salud mental, alimentación, salud íntima, chequeo general, pediatría), completos y con poca información; todas las categorías tienen resultados; «Con lugar hoy» muestra 3; maestrías con su propia cédula; sin número de teléfono repetido en consultorios solo por teléfono.
