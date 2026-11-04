@@ -8,3 +8,11 @@
 - Foto de marca: no hay foto aprobada; panel de reemplazo «pendiente». Dueño: marca/Lima.
 - Formato de precio: el wireframe usaba «MXN 900»; el prototipo sigue el DS («$900»). Dueño: Lima.
 - Destinos aún no diseñados (pregunta, artículo, listados, página para médicos): avisan con un mensaje en el prototipo.
+
+## Enmienda 2026-11-04 · portada en artículos (dato del usuario)
+- Los artículos de médicos suelen tener imagen de portada: la tarjeta la muestra en lugar del icono.
+- Celular y tableta: miniatura lateral cuadrada de 88 px (recorte centrado). Escritorio: miniatura de 160 px en 4:3. No se usa portada completa 16:9 en el inicio: a media columna medía unos 340 px de alto y desplazaba el resto.
+- Sin portada: cuadro de color con el icono de la especialidad (respaldo).
+- Imagen decorativa (`alt=""`): el título ya dice de qué trata.
+- Sin resolver: proporción y tamaño mínimo que se pide al médico al subir la portada (dueño: Lima, junto con la página del artículo). La tarjeta de artículo es candidata a componente del DS.
+- Portadas del prototipo: abstractas, de ejemplo.
