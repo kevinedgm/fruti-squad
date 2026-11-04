@@ -1,0 +1,243 @@
+<title>Detalle de cita · wireframe</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&display=swap" rel="stylesheet"><!-- solo chrome -->
+<style>/* kiwi · wireframe-kit.css — kit F1/F2 con la estética del manual de Fruti Squad
+   Dos capas:
+   · Chrome de la herramienta (.wf-ctl, .wf-stage, .wf-frame-label, .wf-note, .wf-brand): marca Fruti Squad,
+     Bricolage Grotesque y tinta/papel. Está fuera del diseño evaluado.
+   · Contenido del marco (.wf-frame): solo los neutros del manual, una familia de sistema, formas simples.
+     Sin color: el wireframe decide estructura, no apariencia. No usar en F3 (ahí manda el sistema real). */
+:root{
+  /* neutros del manual (tinta #18181b, papel #f5f5f2, línea #e3e3de), todos grises: diferencia entre canales ≤ 6 */
+  --wf-g0:#ffffff; --wf-g1:#f5f5f2; --wf-g2:#ecece8; --wf-g3:#e3e3de; --wf-g4:#b9b9b4;
+  --wf-g6:#55555a; --wf-g8:#2b2b2e; --wf-g9:#18181b; --wf-ink:#0f0f12; --wf-ink-line:#2c2c31;
+  --wf-r:10px; --wf-r-card:14px; --wf-r-pill:999px;
+  --wf-s1:4px; --wf-s2:8px; --wf-s3:12px; --wf-s4:16px; --wf-s5:24px; --wf-s6:32px; --wf-s7:48px;
+  --wf-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wf-mono: ui-monospace, Menlo, Consolas, monospace;
+  /* solo chrome: la letra de marca nunca entra al contenido del marco */
+  --wf-chrome-font: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+*{box-sizing:border-box}
+body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(--wf-g1)}
+.wf :focus-visible{outline:3px solid var(--wf-g9);outline-offset:2px}
+/* :where() keeps these resets at zero specificity so .wf-btn--primary etc. can set their own color */
+.wf :where(button){font:inherit;color:inherit;cursor:pointer}
+.wf :where(a){color:inherit}
+.wf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Chrome (fuera del diseño): marca Fruti Squad */
+.wf-ctl{position:sticky;top:0;z-index:50;background:var(--wf-ink);color:var(--wf-g1);padding:var(--wf-s3) var(--wf-s5);display:flex;flex-wrap:wrap;gap:var(--wf-s3) var(--wf-s5);align-items:center;font:500 13px/1.3 var(--wf-chrome-font)}
+.wf-brand{display:inline-flex;align-items:center;gap:var(--wf-s2);font-weight:700;font-size:14px;margin-right:var(--wf-s2)}
+.wf-brand svg{width:28px;height:28px;flex:0 0 auto}
+.wf-brand small{display:block;font-weight:500;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--wf-g4)}
+.wf-ctl fieldset{border:0;margin:0;padding:0;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.wf-ctl legend{float:left;margin-right:var(--wf-s2);color:var(--wf-g4);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.wf-ctl label{display:flex;gap:6px;align-items:center;color:var(--wf-g4);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.wf-ctl button,.wf-ctl select{background:transparent;border:1px solid var(--wf-ink-line);color:var(--wf-g1);border-radius:var(--wf-r-pill);padding:6px 14px;min-height:36px;font:600 13px var(--wf-chrome-font);letter-spacing:0;text-transform:none}
+.wf-ctl button:hover,.wf-ctl select:hover{border-color:var(--wf-g1)}
+.wf-ctl select option{color:var(--wf-g9)}
+.wf-ctl button[aria-pressed="true"]{background:var(--wf-g1);color:var(--wf-ink);border-color:var(--wf-g1)}
+.wf-ctl :focus-visible{outline:2px solid var(--wf-g0);outline-offset:2px}
+
+/* Escenario: el marco responde con container queries */
+.wf-stage{padding:var(--wf-s6) var(--wf-s4) var(--wf-s7);overflow-x:auto;background:var(--wf-g1)}
+.wf-frame-label{font:600 11px/1.2 var(--wf-chrome-font);letter-spacing:.06em;text-transform:uppercase;color:var(--wf-g6);margin:0 auto var(--wf-s3);width:var(--wf-w,1440px)}
+.wf-frame{width:var(--wf-w,1440px);margin:0 auto;background:var(--wf-g0);border:1px solid var(--wf-g3);border-radius:16px;overflow:hidden;container:wf/inline-size;position:relative;min-height:640px;font-family:var(--wf-font)}
+
+/* Tipografía */
+.wf h1{font-size:28px;line-height:1.15;letter-spacing:-.01em;margin:0 0 var(--wf-s2)}
+.wf h2{font-size:20px;margin:var(--wf-s6) 0 var(--wf-s3)}
+.wf h3{font-size:15px;margin:var(--wf-s4) 0 var(--wf-s2)}
+.wf p{margin:0 0 var(--wf-s3)}
+.wf-muted{color:var(--wf-g6)}
+.wf-small{font-size:13px}
+.wf code{font:13px var(--wf-mono);background:var(--wf-g1);padding:0 4px;border-radius:3px}
+
+/* Regiones */
+.wf-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.wf-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.wf-top{display:flex;align-items:center;gap:var(--wf-s3);padding:var(--wf-s3) var(--wf-s5);border-bottom:1px solid var(--wf-g3)}
+.wf-main{padding:var(--wf-s6) var(--wf-s5);min-width:0}
+.wf-bottom{position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:var(--wf-s3) var(--wf-s4);display:none}
+
+/* Bloques */
+.wf-box{background:var(--wf-g2);border-radius:4px;min-height:16px}
+.wf-img{background:repeating-linear-gradient(45deg,var(--wf-g2) 0 8px,var(--wf-g1) 8px 16px);border-radius:4px;aspect-ratio:4/3}
+.wf-line{height:8px;background:var(--wf-g3);border-radius:2px;margin:6px 0}
+.wf-card{border:1px solid var(--wf-g3);border-radius:var(--wf-r-card);padding:var(--wf-s4);background:var(--wf-g0);min-width:0}
+.wf-grid{display:grid;gap:var(--wf-s3);grid-template-columns:repeat(var(--wf-cols,3),minmax(0,1fr))}
+.wf-list{list-style:none;margin:0;padding:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r-card)}
+.wf-list>li{padding:var(--wf-s3) var(--wf-s4);min-height:48px}
+.wf-list>li+li{border-top:1px solid var(--wf-g3)}
+.wf-table{width:100%;border-collapse:collapse;font-size:14px}
+.wf-table th,.wf-table td{text-align:left;padding:var(--wf-s2) var(--wf-s3);border-bottom:1px solid var(--wf-g3);vertical-align:top}
+.wf-table th{font-size:12px;color:var(--wf-g6);text-transform:uppercase;letter-spacing:.05em}
+
+/* Controles */
+.wf-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 var(--wf-s4);border-radius:var(--wf-r-pill);border:1px solid var(--wf-g9);background:var(--wf-g0);text-decoration:none;font-weight:600;font-size:14px}
+.wf-btn--primary{background:var(--wf-g9);color:var(--wf-g0)}   /* UNA por vista */
+.wf-btn--quiet{border-color:transparent;text-decoration:underline;font-weight:500}
+.wf-btn--danger{border-style:dashed}                             /* destructiva: separada, forma distinta */
+.wf-input{width:100%;min-height:44px;border:1px solid var(--wf-g4);border-radius:var(--wf-r);padding:0 var(--wf-s3);font:inherit;background:var(--wf-g0)}
+.wf-field label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.wf-actions{display:flex;flex-wrap:wrap;gap:var(--wf-s2);align-items:center}
+
+/* Estado: forma + texto, nunca solo tono */
+.wf-status{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;border:1px solid var(--wf-g6);border-radius:999px;padding:1px 8px;background:var(--wf-g0)}
+.wf-status::before{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor}
+.wf-status--on::before{background:currentColor}
+.wf-status--partial::before{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.wf-status--draft{border-style:dashed}
+.wf-status--off{text-decoration:line-through}
+.wf-tag{font-size:11px;border:1px dashed var(--wf-g6);border-radius:3px;padding:0 5px;color:var(--wf-g6)}
+
+/* Estados de datos */
+.wf-skel .wf-line,.wf-skel .wf-img{background:var(--wf-g2)}
+.wf-state{border:1px solid var(--wf-g3);border-radius:var(--wf-r-card);padding:var(--wf-s6);text-align:center;max-width:520px;margin:var(--wf-s6) auto}
+.wf-banner{padding:var(--wf-s2) var(--wf-s5);background:var(--wf-g2);border-bottom:1px solid var(--wf-g3);font-size:14px}
+
+/* Overlays */
+.wf-scrim{position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:20}
+.wf-drawer{position:absolute;top:0;bottom:0;left:0;width:min(320px,86%);background:var(--wf-g1);z-index:21;padding:var(--wf-s3);overflow:auto}
+.wf-sheet{position:absolute;left:0;right:0;bottom:0;max-height:90%;background:var(--wf-g0);border-radius:16px 16px 0 0;z-index:21;padding:var(--wf-s4);overflow:auto}
+
+/* Notas de decisión */
+.wf-note{display:block;border:1px dashed var(--wf-g4);background:var(--wf-g1);border-radius:var(--wf-r);padding:8px 12px;font:400 12.5px/1.45 var(--wf-chrome-font);color:var(--wf-g8);margin:var(--wf-s2) 0}
+.wf-note::before{content:"Nota";display:block;font-weight:700;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--wf-g6);margin-bottom:2px}
+html[lang|="en"] .wf-note::before{content:"Note"}
+body.wf-no-notes .wf-note{display:none}
+
+/* Escenario de laboratorio: solo el fondo donde se renderiza el marco (cuadrícula de libreta).
+   El contenido del marco no cambia. Solo neutros. */
+:root{--wf-grid-minor:#ecece8;--wf-grid-major:#dcdcd6}
+.wf-stage{min-height:calc(100vh - 60px);background-color:var(--wf-g1);
+  background-image:linear-gradient(var(--wf-grid-major) 1px,transparent 1px),linear-gradient(90deg,var(--wf-grid-major) 1px,transparent 1px),
+    linear-gradient(var(--wf-grid-minor) 1px,transparent 1px),linear-gradient(90deg,var(--wf-grid-minor) 1px,transparent 1px);
+  background-size:64px 64px,64px 64px,8px 8px,8px 8px}
+.wf-frame{box-shadow:0 0 0 6px var(--wf-g0),0 0 0 7px var(--wf-g3)}
+.wf-frame-label{font-family:var(--wf-mono);font-weight:500;letter-spacing:.04em}
+.wf-frame-label::before{content:"⌖ ";color:var(--wf-g6)}
+
+/* Modos por espacio */
+@container wf (max-width: 1023px){
+  .wf-shell{grid-template-columns:200px 1fr}
+  .wf-grid{--wf-cols:2}
+}
+@container wf (max-width: 599px){
+  .wf-shell{grid-template-columns:1fr}
+  .wf-shell>.wf-side{display:none}
+  .wf-top{padding:var(--wf-s2) var(--wf-s4)}
+  .wf-main{padding:var(--wf-s5) var(--wf-s4)}
+  .wf-grid{--wf-cols:1}
+  .wf-bottom{display:flex;gap:var(--wf-s2)}
+  .wf-main [data-wf-persist]{display:none}   /* la primaria pasa a .wf-bottom: nunca dos */
+  .wf-actions .wf-btn{flex:1 1 100%}
+  .wf-table--stack thead{display:none}
+  .wf-table--stack tr{display:block;border-bottom:1px solid var(--wf-g3);padding:var(--wf-s2) 0}
+  .wf-table--stack td{display:block;border:0;padding:2px var(--wf-s3)}
+  .wf-table--stack td[data-l]::before{content:attr(data-l) " · ";color:var(--wf-g6);font-size:12px}
+}
+
+.top{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--wf-g3)}.top .sp{flex:1}.top .logo{font-weight:800}
+.cc{display:grid;gap:18px;padding:20px 16px 32px}
+.ok{display:grid;gap:10px;justify-items:start}.ok .ic{width:52px;height:52px;border-radius:50%;border:2px solid var(--wf-g9);display:grid;place-items:center;font-size:24px;font-weight:800}
+.ok h1{margin:0;font-size:28px;line-height:1.1}.ok p{margin:0}
+.res{border:1.5px solid var(--wf-g9);border-radius:18px;padding:16px;display:grid;gap:12px}
+.res .cuando{font-size:20px;font-weight:800;line-height:1.2}.res .fila{display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px;align-items:start}.res .fila i{font-style:normal;text-align:center}
+.res small{display:block;color:var(--wf-g6);font-size:14px}
+.acc{display:flex;flex-wrap:wrap;gap:8px}
+.msg{border:1px solid var(--wf-g3);border-radius:16px;padding:14px;display:grid;gap:8px;background:var(--wf-g1)}
+.burbuja{background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:16px 16px 16px 4px;padding:12px;font-size:14px;line-height:1.45;max-width:340px}
+.burbuja b{display:block;margin-bottom:4px}.cuenta{font-size:12px;color:var(--wf-g6)}
+.mas{display:grid;gap:10px}.mas p{margin:0}
+.cols{display:grid;gap:18px}
+@container wf (min-width:600px){.cc,.top{padding-left:32px;padding-right:32px}}
+@container wf (min-width:1024px){.cc,.top{padding-left:64px;padding-right:64px}.cols{grid-template-columns:minmax(0,1fr) 380px;grid-template-areas:'res msg' 'mas msg';gap:18px 40px;align-items:start}.a-res{grid-area:res}.a-msg{grid-area:msg}.a-mas{grid-area:mas}.ok h1{font-size:36px}}
+
+.estado{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;border:1.5px solid var(--wf-g9);border-radius:999px;padding:3px 10px}
+.limite{font-size:14px;color:var(--wf-g7)}
+.peligro{color:var(--wf-g9);text-decoration:underline;background:none;border:0;font:inherit;font-weight:700;min-height:44px;cursor:pointer;padding:0 4px}
+.dlg{border:2px solid var(--wf-g9);border-radius:20px;padding:18px;display:grid;gap:12px;background:var(--wf-g0);box-shadow:0 20px 50px rgba(0,0,0,.15)}
+.dlg h2{margin:0;font-size:20px}.dlg .acc{flex-direction:column;align-items:stretch}
+.ab{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:15px}.ab span:nth-child(odd){color:var(--wf-g6)}
+.dias{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}.dias button{flex:none;min-width:64px;min-height:56px;border:1.5px solid var(--wf-g4);border-radius:14px;background:var(--wf-g0);font:inherit;font-size:13px;display:grid;justify-items:center;cursor:pointer}.dias button b{font-size:15px}.dias button[aria-pressed="true"]{background:var(--wf-g9);color:var(--wf-g0)}
+.horas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.horas button{min-height:44px;border:1.5px solid var(--wf-g9);border-radius:999px;background:var(--wf-g0);font:inherit;font-weight:700;cursor:pointer}.horas button[aria-pressed="true"]{background:var(--wf-g9);color:var(--wf-g0)}
+.scrim{position:absolute;inset:0;background:rgba(0,0,0,.35);z-index:19}.dlgw{position:absolute;left:16px;right:16px;top:120px;z-index:20;max-width:420px;margin:0 auto}
+
+.wf-ctl,.wf-stage{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}</style>
+<script>document.documentElement.lang='es'</script>
+<div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+  <span class="wf-brand"><svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><rect x="4" y="4" width="56" height="56" rx="12" stroke="#ffffff" stroke-width="3.5"/><rect x="13" y="13" width="38" height="38" rx="9" stroke="#ffffff" stroke-width="3.5"/><rect x="21" y="21" width="22" height="22" rx="6" stroke="#ffffff" stroke-width="3.5"/><circle cx="32" cy="32" r="5.5" fill="#34e0a1"/></svg><span>Kiwi<small>Fruti Squad</small></span></span>
+  <strong>Detalle de su cita · r01 · F2</strong>
+  <fieldset><legend>Espacio</legend><button data-w="1440" aria-pressed="false">expanded 1440</button><button data-w="834" aria-pressed="false">medium 834</button><button data-w="393" aria-pressed="true">compact 393</button></fieldset>
+  <label>Estado <select id="wf-state" data-wf-states>
+    <option value="default">Faltan más de 24 h</option><option value="carga">Carga: abriendo el enlace</option><option value="cambiar">Cambiar: elegir nueva hora</option><option value="cancelar">Cancelar: confirmación</option><option value="cancelada">Cancelada (vacío: ya no hay cita)</option><option value="menos24">Faltan menos de 24 h</option><option value="pasada">La cita ya pasó</option><option value="vencido">Error: enlace vencido o inválido</option><option value="consultorio">El consultorio canceló</option></select></label>
+  <label><input type="checkbox" id="wf-notes" checked> Notas</label>
+</div>
+<div class="wf-stage"><p class="wf-frame-label" id="wf-label"></p><div class="wf-frame" id="wf-frame"><div id="wf-banner"></div><main id="wf-view" tabindex="-1" style="position:relative"></main></div></div>
+<script>document.body.classList.add('wf');
+let S = {w:393, st:'default'};
+const N = t => `<span class="wf-note">${t}</span>`;
+const RES = (tach) => `<section class="res" aria-labelledby="h-res"><h2 id="h-res" class="wf-sr">Tu cita</h2><span class="cuando"${tach?' style="text-decoration:line-through"':''}>Miércoles 4 de noviembre, 17:00</span>
+  <span class="fila"><i aria-hidden="true">◉</i><span><b>Dr. Mario Díaz Soto</b><small>Gastroenterología y Nutrición Pediátrica</small></span></span>
+  <span class="fila"><i aria-hidden="true">⌖</i><span><b>Hospital NeoDemo Xalapa</b><small>Carretera Xalapa-Veracruz #1960, Xalapa, Veracruz</small></span></span>
+  <span class="fila"><i aria-hidden="true">$</i><span><b>$800</b><small>Pagas en el consultorio</small></span></span>
+  <span class="fila"><i aria-hidden="true">☺</i><span><b>Paciente: Ana Pérez</b><small>Celular ··· 0100</small></span></span>`;
+function view(){
+  const st = S.st;
+  const top = `<header class="top"><span class="logo">manik</span><span class="sp"></span></header>`;
+  const tel = `<a class="wf-btn" href="#">Llamar al consultorio · 228 555 0142</a>`;
+  let h, body = '', extra = '';
+  if (st==='carga') return top + `<div class="cc wf-skel" aria-busy="true"><div class="wf-line" style="width:30%"></div><div class="wf-line" style="width:60%;height:28px"></div><div class="res"><div class="wf-line" style="width:70%"></div><div class="wf-line"></div><div class="wf-line" style="width:80%"></div></div>${N('Mientras se busca la cita con el código del enlace: esqueleto con la misma forma. Si tarda más de 10 s o falla, pasa a «Este enlace ya no funciona».')}</div>`;
+  if (st==='vencido') {
+    return top + `<div class="cc"><div class="ok" role="alert"><span class="ic" aria-hidden="true">!</span><h1 id="h1">Este enlace ya no funciona</h1><p>Puede haber vencido o estar incompleto. Te mandamos uno nuevo al celular con el que agendaste.</p></div>
+     <label class="wf-field" style="max-width:420px"><span>Celular</span><input class="wf-input" inputmode="tel" placeholder="10 dígitos"></label><a class="wf-btn wf-btn--primary" href="#" style="justify-self:start">Mandarme un enlace nuevo</a>
+     ${N('Por seguridad no se dice si existe una cita con ese número: siempre «si hay una cita con ese celular, te llegará el enlace». Viene del flujo del inicio (E4).')}<a class="wf-btn wf-btn--quiet" href="#" style="justify-self:start">Ir al inicio</a></div>`;
+  }
+  if (st==='cancelada' || st==='consultorio') {
+    const porC = st==='consultorio';
+    return top + `<div class="cc"><div class="ok" role="status"><span class="estado">${porC?'Cancelada por el consultorio':'Cancelada'}</span><h1 id="h1">${porC?'El consultorio canceló tu cita':'Cancelaste tu cita'}</h1><p>${porC?'Lo sentimos. Puedes elegir otro horario con el mismo médico.':'El horario quedó libre para alguien más. Te mandamos la confirmación por mensaje.'}</p></div>
+     <div class="cols"><div class="a-res">${RES(true)}<div class="acc"><a class="wf-btn wf-btn--primary" href="#">Agendar otra vez con el Dr. Díaz</a><a class="wf-btn wf-btn--quiet" href="#">Buscar otro médico</a></div></section></div></div>
+     ${N(porC?'Si cancela el consultorio, el mensaje lo dice con claridad y la acción principal es reagendar con el mismo médico (no buscar de cero).':'Estado vacío: ya no hay cita activa. La fecha tachada evita confundirla con una cita vigente. Acción principal: volver a agendar con el mismo médico.')}</div>`;
+  }
+  if (st==='pasada') {
+    return top + `<div class="cc"><div class="ok"><span class="estado">Ya pasó</span><h1 id="h1">¿Cómo te fue con el Dr. Díaz?</h1><p>Tu opinión ayuda a otras familias. Solo opina quien tuvo cita en Manik.</p></div>
+     <div class="cols"><div class="a-res">${RES(false)}<div class="acc"><a class="wf-btn wf-btn--primary" href="#">Opinar sobre la consulta</a><a class="wf-btn" href="#">Agendar otra cita</a></div></section></div></div>
+     ${N('Aquí nacen las «opiniones verificadas»: el enlace prueba que hubo cita. Se muestra desde el día de la cita.')}</div>`;
+  }
+  const menos = st==='menos24';
+  const okB = `<div class="ok"><span class="estado">✓ Confirmada</span><h1 id="h1">Tu cita</h1><p class="limite">${menos?'Faltan menos de 24 horas.':'Puedes cambiarla o cancelarla hasta el <b>martes 3 de noviembre a las 17:00</b> (24 horas antes).'}</p></div>`;
+  const acciones = menos
+    ? `<div class="acc"><a class="wf-btn wf-btn--primary" href="#">Cómo llegar</a><a class="wf-btn" href="#">Agregar a mi calendario</a></div></section>
+       <section class="msg" aria-labelledby="h-m24"><h2 id="h-m24" style="margin:0;font-size:16px">¿Necesitas cambiarla o cancelarla?</h2><p style="margin:0">Faltan menos de 24 horas, así que ya no se puede desde aquí. Llama al consultorio para avisar.</p>${tel}${N('Regla de 24 h: «Cambiar» y «Cancelar» desaparecen y se dice por qué (no botones deshabilitados sin explicación). Llamar es la salida. Las 24 h se cuentan en la hora del consultorio.')}</section>`
+    : `<div class="acc"><a class="wf-btn wf-btn--primary" href="#">Cómo llegar</a><a class="wf-btn" href="#">Agregar a mi calendario</a></div></section>
+       <section class="msg" aria-labelledby="h-cc"><h2 id="h-cc" style="margin:0;font-size:16px">¿Cambió tu plan?</h2><a class="wf-btn" href="#" style="justify-self:start">Cambiar fecha u hora</a><button class="peligro" style="justify-self:start">Cancelar cita</button>${N('Primero se ve la fecha límite (arriba). «Cambiar» en contorno; «Cancelar» separado y como texto: es destructivo y no debe estar junto a la acción principal. Quien llega desde el recordatorio casi siempre quiere saber cómo llegar: por eso esa es la principal.')}</section>`;
+  body = `${okB}<div class="cols"><div class="a-res">${RES(false)}${acciones}</div></div>`;
+  if (st==='cambiar') {
+    body = `<div class="ok"><a class="wf-btn wf-btn--quiet" href="#" style="justify-self:start">← Volver a tu cita</a><h1 id="h1">Elige la nueva hora</h1><p class="limite">Mismo médico y consultorio. Tu hora actual se libera solo cuando confirmes el cambio.</p></div>
+     <div class="dias" role="group" aria-label="Día"><button aria-pressed="false"><b>Hoy</b>4 nov</button><button aria-pressed="true"><b>Jue</b>5 nov</button><button aria-pressed="false"><b>Vie</b>6 nov</button><button aria-pressed="false" disabled><b>Sáb</b>sin lugar</button><button aria-pressed="false"><b>Lun</b>9 nov</button></div>
+     <div class="horas" role="group" aria-label="Horarios del jueves"><button>9:00</button><button aria-pressed="true">10:00</button><button>11:30</button><button>12:00</button><button>13:00</button></div>
+     <div class="res" style="gap:6px"><div class="ab"><span>Antes</span><s>Miércoles 4 de noviembre, 17:00</s><span>Ahora</span><b>Jueves 5 de noviembre, 10:00</b></div></div>
+     <a class="wf-btn wf-btn--primary" href="#" style="justify-self:start">Confirmar cambio</a>
+     ${N('A diferencia de agendar, aquí elegir la hora NO confirma: el resumen «antes → ahora» deja ver qué se pierde y qué se gana. Si la nueva hora se ocupa al confirmar, mismo aviso que en «Confirma tu cita». Mensaje nuevo con la nueva hora.')}`;
+  }
+  if (st==='cancelar') {
+    extra = `<div class="scrim"></div><div class="dlgw"><div class="dlg" role="alertdialog" aria-labelledby="dlg-t" aria-describedby="dlg-d"><h2 id="dlg-t">¿Cancelar tu cita?</h2><p id="dlg-d" style="margin:0">Miércoles 4 de noviembre, 17:00 con el Dr. Mario Díaz Soto. El horario quedará libre para alguien más.</p>
+     <div class="acc"><button class="wf-btn wf-btn--danger">Sí, cancelar cita</button><button class="wf-btn">No, conservarla</button></div>${N('Diálogo de confirmación: fecha, hora y médico escritos (no «¿Estás seguro?»). El foco entra en «No, conservarla» (la opción segura); Esc cierra sin cancelar.')}</div></div>`;
+  }
+  return top + `<div class="cc">${body}</div>` + extra;
+}
+
+function render(){
+  const f=document.getElementById('wf-frame'), L=document.getElementById('wf-label');
+  f.style.setProperty('--wf-w', S.w+'px'); L.style.setProperty('--wf-w', S.w+'px');
+  L.textContent=`Marco ${S.w}px · ${S.w<600?'compact':S.w<1024?'medium':'expanded'} (referencia declarada)`;
+  document.querySelectorAll('[data-w]').forEach(b=>b.setAttribute('aria-pressed', String(+b.dataset.w===S.w)));
+  document.getElementById('wf-view').innerHTML = view();
+}
+document.addEventListener('click', e=>{const w=e.target.closest('[data-w]'); if(w){S.w=+w.dataset.w; render();}});
+document.getElementById('wf-state').addEventListener('change', e=>{S.st=e.target.value; render();});
+document.getElementById('wf-notes').addEventListener('change', e=>document.body.classList.toggle('wf-no-notes', !e.target.checked));
+render();
+</script>
