@@ -1,0 +1,222 @@
+{
+  "v": 3,
+  "layout": "files",
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-11-04T18:47:00Z"
+  },
+  "title": "Directorio Manik",
+  "namespace": "DirectorioManik",
+  "libraries": [],
+  "sections": {},
+  "groups": [
+    "Marca",
+    "Logotipos",
+    "Iconos"
+  ],
+  "assetGroups": {
+    "Marca": {
+      "name": "Marca",
+      "tile": "m",
+      "order": [
+        "simbolo.svg",
+        "simbolo-1tinta.svg",
+        "simbolo-blanco.svg",
+        "app-icon.svg",
+        "favicon.svg"
+      ],
+      "files": {
+        "simbolo.svg": {
+          "name": "simbolo.svg",
+          "blob": "2ebaab02bb8b4e269a3f6ab20613a454",
+          "size": 713,
+          "type": "image/svg+xml"
+        },
+        "simbolo-1tinta.svg": {
+          "name": "simbolo-1tinta.svg",
+          "blob": "94e996605f8ca1d79a9cd7b190125616",
+          "size": 782,
+          "type": "image/svg+xml"
+        },
+        "simbolo-blanco.svg": {
+          "name": "simbolo-blanco.svg",
+          "blob": "ec1682c529c070a8b57f92353476fcc5",
+          "size": 777,
+          "type": "image/svg+xml"
+        },
+        "app-icon.svg": {
+          "name": "app-icon.svg",
+          "blob": "649db9aac380d26c37d9608fa0ab7059",
+          "size": 781,
+          "type": "image/svg+xml"
+        },
+        "favicon.svg": {
+          "name": "favicon.svg",
+          "blob": "9c501f10d8c6e8b647898a08f4660f8d",
+          "size": 715,
+          "type": "image/svg+xml"
+        }
+      }
+    },
+    "Logotipos": {
+      "name": "Logotipos",
+      "tile": "l",
+      "order": [
+        "logotipo.svg",
+        "logotipo-vertical.svg",
+        "logotipo-endoso.svg",
+        "logotipo-blanco.svg",
+        "logotipo-1tinta.svg"
+      ],
+      "files": {
+        "logotipo.svg": {
+          "name": "logotipo.svg",
+          "blob": "57085c856be07748a81086e18dacf543",
+          "size": 6012,
+          "type": "image/svg+xml"
+        },
+        "logotipo-vertical.svg": {
+          "name": "logotipo-vertical.svg",
+          "blob": "4a3c158f65047191a411bbd063306a82",
+          "size": 5697,
+          "type": "image/svg+xml"
+        },
+        "logotipo-endoso.svg": {
+          "name": "logotipo-endoso.svg",
+          "blob": "74cd7f9a5841c79cfa0776a46e89518f",
+          "size": 21353,
+          "type": "image/svg+xml"
+        },
+        "logotipo-blanco.svg": {
+          "name": "logotipo-blanco.svg",
+          "blob": "49bf277b95bde2a6b92748b5f6decd97",
+          "size": 6014,
+          "type": "image/svg+xml"
+        },
+        "logotipo-1tinta.svg": {
+          "name": "logotipo-1tinta.svg",
+          "blob": "81db1d82ed0fbba7517a025894771c96",
+          "size": 6088,
+          "type": "image/svg+xml"
+        }
+      }
+    },
+    "Iconos": {
+      "name": "Iconos",
+      "tile": "xs",
+      "order": [
+        "apple.svg",
+        "arrow-right.svg",
+        "baby.svg",
+        "badge-check.svg",
+        "brain.svg",
+        "calendar-check.svg",
+        "clock.svg",
+        "flower-2.svg",
+        "map-pin.svg",
+        "message-circle-heart.svg",
+        "scan-face.svg",
+        "search.svg",
+        "shield-check.svg",
+        "stethoscope.svg"
+      ],
+      "files": {
+        "apple.svg": {
+          "name": "apple.svg",
+          "blob": "59c9026f4361579d6565e002d37aa394",
+          "size": 434,
+          "type": "image/svg+xml"
+        },
+        "arrow-right.svg": {
+          "name": "arrow-right.svg",
+          "blob": "c02f1d3c46f69f3e9ab86d6e149cd24f",
+          "size": 285,
+          "type": "image/svg+xml"
+        },
+        "baby.svg": {
+          "name": "baby.svg",
+          "blob": "bffce7e670b218077617c587ca216e77",
+          "size": 501,
+          "type": "image/svg+xml"
+        },
+        "badge-check.svg": {
+          "name": "badge-check.svg",
+          "blob": "1efcc430f1d8581e1b217e25414e72cf",
+          "size": 441,
+          "type": "image/svg+xml"
+        },
+        "brain.svg": {
+          "name": "brain.svg",
+          "blob": "c7725c8635a7359d0ae861fa9af3b491",
+          "size": 644,
+          "type": "image/svg+xml"
+        },
+        "calendar-check.svg": {
+          "name": "calendar-check.svg",
+          "blob": "78a88b0185e49d97e7630d94b7ae4933",
+          "size": 400,
+          "type": "image/svg+xml"
+        },
+        "clock.svg": {
+          "name": "clock.svg",
+          "blob": "6e298b6e404e6880d3284d52df90d99b",
+          "size": 291,
+          "type": "image/svg+xml"
+        },
+        "flower-2.svg": {
+          "name": "flower-2.svg",
+          "blob": "06649d68a358dfe2e5b5d6143b3ed2fe",
+          "size": 541,
+          "type": "image/svg+xml"
+        },
+        "map-pin.svg": {
+          "name": "map-pin.svg",
+          "blob": "8389860ec5dca7cc8b2708df2f5563d2",
+          "size": 381,
+          "type": "image/svg+xml"
+        },
+        "message-circle-heart.svg": {
+          "name": "message-circle-heart.svg",
+          "blob": "21dc1a574f46993477af211b735ed84a",
+          "size": 503,
+          "type": "image/svg+xml"
+        },
+        "scan-face.svg": {
+          "name": "scan-face.svg",
+          "blob": "5be0694cbd64b077ce08b3219fcd45ef",
+          "size": 501,
+          "type": "image/svg+xml"
+        },
+        "search.svg": {
+          "name": "search.svg",
+          "blob": "0235df5ca74a7d93874a616fc4ebfb4e",
+          "size": 296,
+          "type": "image/svg+xml"
+        },
+        "shield-check.svg": {
+          "name": "shield-check.svg",
+          "blob": "b060ab8579ae54758d78049bac18ec9c",
+          "size": 440,
+          "type": "image/svg+xml"
+        },
+        "stethoscope.svg": {
+          "name": "stethoscope.svg",
+          "blob": "8923094109ea7baf0b0f7d5c7ac2537a",
+          "size": 440,
+          "type": "image/svg+xml"
+        }
+      }
+    }
+  },
+  "blobs": {},
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "lastChange": {
+    "at": "2026-11-04T18:47:00Z",
+    "by": "Kevin",
+    "via": "Claude Code",
+    "note": "Primera versión: tokens, 11 componentes y marca del directorio Manik a partir del manual v2 y del prototipo bienestar."
+  }
+}
