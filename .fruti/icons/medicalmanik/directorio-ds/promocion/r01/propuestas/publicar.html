@@ -1,0 +1,226 @@
+<title>Promociones · wireframe</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&display=swap" rel="stylesheet"><!-- solo chrome -->
+<style>/* kiwi · wireframe-kit.css — kit F1/F2 con la estética del manual de Fruti Squad
+   Dos capas:
+   · Chrome de la herramienta (.wf-ctl, .wf-stage, .wf-frame-label, .wf-note, .wf-brand): marca Fruti Squad,
+     Bricolage Grotesque y tinta/papel. Está fuera del diseño evaluado.
+   · Contenido del marco (.wf-frame): solo los neutros del manual, una familia de sistema, formas simples.
+     Sin color: el wireframe decide estructura, no apariencia. No usar en F3 (ahí manda el sistema real). */
+:root{
+  /* neutros del manual (tinta #18181b, papel #f5f5f2, línea #e3e3de), todos grises: diferencia entre canales ≤ 6 */
+  --wf-g0:#ffffff; --wf-g1:#f5f5f2; --wf-g2:#ecece8; --wf-g3:#e3e3de; --wf-g4:#b9b9b4;
+  --wf-g6:#55555a; --wf-g8:#2b2b2e; --wf-g9:#18181b; --wf-ink:#0f0f12; --wf-ink-line:#2c2c31;
+  --wf-r:10px; --wf-r-card:14px; --wf-r-pill:999px;
+  --wf-s1:4px; --wf-s2:8px; --wf-s3:12px; --wf-s4:16px; --wf-s5:24px; --wf-s6:32px; --wf-s7:48px;
+  --wf-font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --wf-mono: ui-monospace, Menlo, Consolas, monospace;
+  /* solo chrome: la letra de marca nunca entra al contenido del marco */
+  --wf-chrome-font: "Bricolage Grotesque", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+*{box-sizing:border-box}
+body.wf{margin:0;font:15px/1.5 var(--wf-font);color:var(--wf-g9);background:var(--wf-g1)}
+.wf :focus-visible{outline:3px solid var(--wf-g9);outline-offset:2px}
+/* :where() keeps these resets at zero specificity so .wf-btn--primary etc. can set their own color */
+.wf :where(button){font:inherit;color:inherit;cursor:pointer}
+.wf :where(a){color:inherit}
+.wf-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Chrome (fuera del diseño): marca Fruti Squad */
+.wf-ctl{position:sticky;top:0;z-index:50;background:var(--wf-ink);color:var(--wf-g1);padding:var(--wf-s3) var(--wf-s5);display:flex;flex-wrap:wrap;gap:var(--wf-s3) var(--wf-s5);align-items:center;font:500 13px/1.3 var(--wf-chrome-font)}
+.wf-brand{display:inline-flex;align-items:center;gap:var(--wf-s2);font-weight:700;font-size:14px;margin-right:var(--wf-s2)}
+.wf-brand svg{width:28px;height:28px;flex:0 0 auto}
+.wf-brand small{display:block;font-weight:500;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--wf-g4)}
+.wf-ctl fieldset{border:0;margin:0;padding:0;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.wf-ctl legend{float:left;margin-right:var(--wf-s2);color:var(--wf-g4);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.wf-ctl label{display:flex;gap:6px;align-items:center;color:var(--wf-g4);font-size:11px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
+.wf-ctl button,.wf-ctl select{background:transparent;border:1px solid var(--wf-ink-line);color:var(--wf-g1);border-radius:var(--wf-r-pill);padding:6px 14px;min-height:36px;font:600 13px var(--wf-chrome-font);letter-spacing:0;text-transform:none}
+.wf-ctl button:hover,.wf-ctl select:hover{border-color:var(--wf-g1)}
+.wf-ctl select option{color:var(--wf-g9)}
+.wf-ctl button[aria-pressed="true"]{background:var(--wf-g1);color:var(--wf-ink);border-color:var(--wf-g1)}
+.wf-ctl :focus-visible{outline:2px solid var(--wf-g0);outline-offset:2px}
+
+/* Escenario: el marco responde con container queries */
+.wf-stage{padding:var(--wf-s6) var(--wf-s4) var(--wf-s7);overflow-x:auto;background:var(--wf-g1)}
+.wf-frame-label{font:600 11px/1.2 var(--wf-chrome-font);letter-spacing:.06em;text-transform:uppercase;color:var(--wf-g6);margin:0 auto var(--wf-s3);width:var(--wf-w,1440px)}
+.wf-frame{width:var(--wf-w,1440px);margin:0 auto;background:var(--wf-g0);border:1px solid var(--wf-g3);border-radius:16px;overflow:hidden;container:wf/inline-size;position:relative;min-height:640px;font-family:var(--wf-font)}
+
+/* Tipografía */
+.wf h1{font-size:28px;line-height:1.15;letter-spacing:-.01em;margin:0 0 var(--wf-s2)}
+.wf h2{font-size:20px;margin:var(--wf-s6) 0 var(--wf-s3)}
+.wf h3{font-size:15px;margin:var(--wf-s4) 0 var(--wf-s2)}
+.wf p{margin:0 0 var(--wf-s3)}
+.wf-muted{color:var(--wf-g6)}
+.wf-small{font-size:13px}
+.wf code{font:13px var(--wf-mono);background:var(--wf-g1);padding:0 4px;border-radius:3px}
+
+/* Regiones */
+.wf-shell{display:grid;grid-template-columns:240px 1fr;min-height:640px}
+.wf-side{background:var(--wf-g1);border-right:1px solid var(--wf-g3);padding:var(--wf-s4) var(--wf-s3)}
+.wf-top{display:flex;align-items:center;gap:var(--wf-s3);padding:var(--wf-s3) var(--wf-s5);border-bottom:1px solid var(--wf-g3)}
+.wf-main{padding:var(--wf-s6) var(--wf-s5);min-width:0}
+.wf-bottom{position:sticky;bottom:0;background:var(--wf-g0);border-top:1px solid var(--wf-g3);padding:var(--wf-s3) var(--wf-s4);display:none}
+
+/* Bloques */
+.wf-box{background:var(--wf-g2);border-radius:4px;min-height:16px}
+.wf-img{background:repeating-linear-gradient(45deg,var(--wf-g2) 0 8px,var(--wf-g1) 8px 16px);border-radius:4px;aspect-ratio:4/3}
+.wf-line{height:8px;background:var(--wf-g3);border-radius:2px;margin:6px 0}
+.wf-card{border:1px solid var(--wf-g3);border-radius:var(--wf-r-card);padding:var(--wf-s4);background:var(--wf-g0);min-width:0}
+.wf-grid{display:grid;gap:var(--wf-s3);grid-template-columns:repeat(var(--wf-cols,3),minmax(0,1fr))}
+.wf-list{list-style:none;margin:0;padding:0;border:1px solid var(--wf-g3);border-radius:var(--wf-r-card)}
+.wf-list>li{padding:var(--wf-s3) var(--wf-s4);min-height:48px}
+.wf-list>li+li{border-top:1px solid var(--wf-g3)}
+.wf-table{width:100%;border-collapse:collapse;font-size:14px}
+.wf-table th,.wf-table td{text-align:left;padding:var(--wf-s2) var(--wf-s3);border-bottom:1px solid var(--wf-g3);vertical-align:top}
+.wf-table th{font-size:12px;color:var(--wf-g6);text-transform:uppercase;letter-spacing:.05em}
+
+/* Controles */
+.wf-btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;padding:0 var(--wf-s4);border-radius:var(--wf-r-pill);border:1px solid var(--wf-g9);background:var(--wf-g0);text-decoration:none;font-weight:600;font-size:14px}
+.wf-btn--primary{background:var(--wf-g9);color:var(--wf-g0)}   /* UNA por vista */
+.wf-btn--quiet{border-color:transparent;text-decoration:underline;font-weight:500}
+.wf-btn--danger{border-style:dashed}                             /* destructiva: separada, forma distinta */
+.wf-input{width:100%;min-height:44px;border:1px solid var(--wf-g4);border-radius:var(--wf-r);padding:0 var(--wf-s3);font:inherit;background:var(--wf-g0)}
+.wf-field label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.wf-actions{display:flex;flex-wrap:wrap;gap:var(--wf-s2);align-items:center}
+
+/* Estado: forma + texto, nunca solo tono */
+.wf-status{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;border:1px solid var(--wf-g6);border-radius:999px;padding:1px 8px;background:var(--wf-g0)}
+.wf-status::before{content:"";width:8px;height:8px;border-radius:50%;border:1.5px solid currentColor}
+.wf-status--on::before{background:currentColor}
+.wf-status--partial::before{background:linear-gradient(90deg,currentColor 50%,transparent 50%)}
+.wf-status--draft{border-style:dashed}
+.wf-status--off{text-decoration:line-through}
+.wf-tag{font-size:11px;border:1px dashed var(--wf-g6);border-radius:3px;padding:0 5px;color:var(--wf-g6)}
+
+/* Estados de datos */
+.wf-skel .wf-line,.wf-skel .wf-img{background:var(--wf-g2)}
+.wf-state{border:1px solid var(--wf-g3);border-radius:var(--wf-r-card);padding:var(--wf-s6);text-align:center;max-width:520px;margin:var(--wf-s6) auto}
+.wf-banner{padding:var(--wf-s2) var(--wf-s5);background:var(--wf-g2);border-bottom:1px solid var(--wf-g3);font-size:14px}
+
+/* Overlays */
+.wf-scrim{position:absolute;inset:0;background:rgba(0,0,0,.4);z-index:20}
+.wf-drawer{position:absolute;top:0;bottom:0;left:0;width:min(320px,86%);background:var(--wf-g1);z-index:21;padding:var(--wf-s3);overflow:auto}
+.wf-sheet{position:absolute;left:0;right:0;bottom:0;max-height:90%;background:var(--wf-g0);border-radius:16px 16px 0 0;z-index:21;padding:var(--wf-s4);overflow:auto}
+
+/* Notas de decisión */
+.wf-note{display:block;border:1px dashed var(--wf-g4);background:var(--wf-g1);border-radius:var(--wf-r);padding:8px 12px;font:400 12.5px/1.45 var(--wf-chrome-font);color:var(--wf-g8);margin:var(--wf-s2) 0}
+.wf-note::before{content:"Nota";display:block;font-weight:700;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--wf-g6);margin-bottom:2px}
+html[lang|="en"] .wf-note::before{content:"Note"}
+body.wf-no-notes .wf-note{display:none}
+
+/* Escenario de laboratorio: solo el fondo donde se renderiza el marco (cuadrícula de libreta).
+   El contenido del marco no cambia. Solo neutros. */
+:root{--wf-grid-minor:#ecece8;--wf-grid-major:#dcdcd6}
+.wf-stage{min-height:calc(100vh - 60px);background-color:var(--wf-g1);
+  background-image:linear-gradient(var(--wf-grid-major) 1px,transparent 1px),linear-gradient(90deg,var(--wf-grid-major) 1px,transparent 1px),
+    linear-gradient(var(--wf-grid-minor) 1px,transparent 1px),linear-gradient(90deg,var(--wf-grid-minor) 1px,transparent 1px);
+  background-size:64px 64px,64px 64px,8px 8px,8px 8px}
+.wf-frame{box-shadow:0 0 0 6px var(--wf-g0),0 0 0 7px var(--wf-g3)}
+.wf-frame-label{font-family:var(--wf-mono);font-weight:500;letter-spacing:.04em}
+.wf-frame-label::before{content:"⌖ ";color:var(--wf-g6)}
+
+/* Modos por espacio */
+@container wf (max-width: 1023px){
+  .wf-shell{grid-template-columns:200px 1fr}
+  .wf-grid{--wf-cols:2}
+}
+@container wf (max-width: 599px){
+  .wf-shell{grid-template-columns:1fr}
+  .wf-shell>.wf-side{display:none}
+  .wf-top{padding:var(--wf-s2) var(--wf-s4)}
+  .wf-main{padding:var(--wf-s5) var(--wf-s4)}
+  .wf-grid{--wf-cols:1}
+  .wf-bottom{display:flex;gap:var(--wf-s2)}
+  .wf-main [data-wf-persist]{display:none}   /* la primaria pasa a .wf-bottom: nunca dos */
+  .wf-actions .wf-btn{flex:1 1 100%}
+  .wf-table--stack thead{display:none}
+  .wf-table--stack tr{display:block;border-bottom:1px solid var(--wf-g3);padding:var(--wf-s2) 0}
+  .wf-table--stack td{display:block;border:0;padding:2px var(--wf-s3)}
+  .wf-table--stack td[data-l]::before{content:attr(data-l) " · ";color:var(--wf-g6);font-size:12px}
+}
+
+.top{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--wf-g3)}.top .sp{flex:1}.top .logo{font-weight:800}
+.cc{display:grid;gap:18px;padding:20px 16px 32px}
+.ok{display:grid;gap:10px;justify-items:start}.ok .ic{width:52px;height:52px;border-radius:50%;border:2px solid var(--wf-g9);display:grid;place-items:center;font-size:24px;font-weight:800}
+.ok h1{margin:0;font-size:28px;line-height:1.1}.ok p{margin:0}
+.res{border:1.5px solid var(--wf-g9);border-radius:18px;padding:16px;display:grid;gap:12px}
+.res .cuando{font-size:20px;font-weight:800;line-height:1.2}.res .fila{display:grid;grid-template-columns:24px minmax(0,1fr);gap:8px;align-items:start}.res .fila i{font-style:normal;text-align:center}
+.res small{display:block;color:var(--wf-g6);font-size:14px}
+.acc{display:flex;flex-wrap:wrap;gap:8px}
+.msg{border:1px solid var(--wf-g3);border-radius:16px;padding:14px;display:grid;gap:8px;background:var(--wf-g1)}
+.burbuja{background:var(--wf-g0);border:1px solid var(--wf-g4);border-radius:16px 16px 16px 4px;padding:12px;font-size:14px;line-height:1.45;max-width:340px}
+.burbuja b{display:block;margin-bottom:4px}.cuenta{font-size:12px;color:var(--wf-g6)}
+.mas{display:grid;gap:10px}.mas p{margin:0}
+.cols{display:grid;gap:18px}
+@container wf (min-width:600px){.cc,.top{padding-left:32px;padding-right:32px}}
+@container wf (min-width:1024px){.cc,.top{padding-left:64px;padding-right:64px}.cols{grid-template-columns:minmax(0,1fr) 380px;grid-template-areas:'res msg' 'mas msg';gap:18px 40px;align-items:start}.a-res{grid-area:res}.a-msg{grid-area:msg}.a-mas{grid-area:mas}.ok h1{font-size:36px}}
+
+.lista{display:grid;gap:12px}
+.fm{border:1px solid var(--wf-g3);border-radius:18px;padding:12px;display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:4px 12px;align-items:center}
+.fm .av{width:56px;aspect-ratio:3/4;border-radius:10px;background:var(--wf-g2);grid-row:1/4}.fm small{color:var(--wf-g6);font-size:13px}.fm .wf-btn{grid-row:1/4;grid-column:3}
+.promo{border:2px dashed var(--wf-g7);border-radius:18px;overflow:hidden;display:grid;background:var(--wf-g1);text-decoration:none;color:inherit}
+.promo .img{aspect-ratio:2/1;background:repeating-linear-gradient(45deg,var(--wf-g3) 0 10px,var(--wf-g2) 10px 20px);display:grid;place-items:center;font-size:12px;color:var(--wf-g7)}
+.promo .tx{padding:12px 14px;display:grid;gap:4px}.promo .tx b{font-size:17px;line-height:1.25}.promo .tx small{color:var(--wf-g6);font-size:13px}
+.etq{justify-self:start;font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;border:1.5px solid var(--wf-g9);border-radius:999px;padding:2px 10px;background:var(--wf-g0)}
+.promo.sin .img{display:none}
+.pp .ban{aspect-ratio:2/1;border-radius:18px;background:repeating-linear-gradient(45deg,var(--wf-g3) 0 10px,var(--wf-g2) 10px 20px);display:grid;place-items:center;font-size:13px;color:var(--wf-g7)}
+.pp h1{margin:0;font-size:26px;line-height:1.15}.dato{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:15px}.dato dt{color:var(--wf-g6)}.dato dd{margin:0;font-weight:700}
+.anun{border:1.5px solid var(--wf-g9);border-radius:16px;padding:12px;display:grid;grid-template-columns:48px minmax(0,1fr);gap:4px 12px;align-items:center}.anun .av{width:48px;aspect-ratio:3/4;border-radius:8px;background:var(--wf-g2);grid-row:1/3}
+@container wf (min-width:600px){.lista{grid-template-columns:repeat(2,minmax(0,1fr))}.lista .promo{grid-column:1/-1;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.lista .promo .img{aspect-ratio:auto;min-height:150px}.lista .promo.sin{grid-template-columns:1fr}}
+@container wf (min-width:1024px){.ppc{grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;align-items:start}}
+
+.wf-ctl,.wf-stage{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}</style>
+<script>document.documentElement.lang='es'</script>
+<div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+  <span class="wf-brand"><svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><rect x="4" y="4" width="56" height="56" rx="12" stroke="#ffffff" stroke-width="3.5"/><rect x="13" y="13" width="38" height="38" rx="9" stroke="#ffffff" stroke-width="3.5"/><rect x="21" y="21" width="22" height="22" rx="6" stroke="#ffffff" stroke-width="3.5"/><circle cx="32" cy="32" r="5.5" fill="#34e0a1"/></svg><span>Kiwi<small>Fruti Squad</small></span></span>
+  <strong>Promociones de Impulsa · r01 · F2</strong>
+  <fieldset><legend>Espacio</legend><button data-w="1440" aria-pressed="false">expanded 1440</button><button data-w="834" aria-pressed="false">medium 834</button><button data-w="393" aria-pressed="true">compact 393</button></fieldset>
+  <label>Estado <select id="wf-state" data-wf-states>
+    <option value="default">Resultados con una promoción</option><option value="sinimg">Promoción sin imagen</option><option value="carga">Carga de resultados</option><option value="error">Error: no carga la promoción</option><option value="pagina">Página de la promoción</option><option value="fuera">Página: anunciante fuera del directorio</option><option value="vencida">Página: promoción vencida (vacío)</option></select></label>
+  <label><input type="checkbox" id="wf-notes" checked> Notas</label>
+</div>
+<div class="wf-stage"><p class="wf-frame-label" id="wf-label"></p><div class="wf-frame" id="wf-frame"><div id="wf-banner"></div><main id="wf-view" tabindex="-1"></main></div></div>
+<script>document.body.classList.add('wf');
+let S = {w:393, st:'default'};
+const N = t => `<span class="wf-note">${t}</span>`;
+const F = (n, d) => `<div class="fm"><span class="av"></span><b>${n}</b><small>${d}</small><small>Céd. Prof. 0000000</small><a class="wf-btn" href="#">Agendar</a></div>`;
+const PROMO = (sin) => `<a class="promo${sin?' sin':''}" href="#" aria-label="Patrocinado: Clínica Dermalia. Revisión de lunares a $650. Ver promoción"><span class="img">Banner de Impulsa · recorte 2:1</span><span class="tx"><span class="etq">Patrocinado</span><b>Revisión de lunares a $650</b><small>Clínica Dermalia · hasta el 30 de noviembre</small></span></a>`;
+function view(){
+  const st = S.st;
+  const top = `<header class="top"><span class="logo">manik</span><span class="sp"></span><a class="wf-btn wf-btn--quiet" href="#">← Inicio</a></header>`;
+  if (st==='error') return top + `<div class="cc"><h1 style="margin:0;font-size:24px">Dermatólogas cerca de ti</h1><p class="wf-muted" style="margin:0">12 especialistas · Angelópolis, Puebla</p><div class="lista">${F('Dra. Mariana Soto','Dermatóloga · 1.8 km · $900')}${F('Dr. Iván Hernández','Dermatólogo · 4.0 km · $700')}${F('Dra. Carla Luna','Dermatóloga · 2.2 km · $1,100')}</div>${N('Si la promoción no carga, los resultados salen igual, sin hueco y sin mensaje de error: el paciente no pidió la promoción.')}</div>`;
+  if (['default','sinimg','carga'].includes(st)) {
+    const lista = st==='carga' ? `<div class="lista wf-skel" aria-busy="true">${'<div class="fm"><span class="av"></span><div class="wf-line" style="width:70%"></div><div class="wf-line" style="width:50%"></div></div>'.repeat(3)}</div>${N('La promoción se carga junto con los resultados: nunca aparece después y empuja la lista.')}`
+      : `<div class="lista">${F('Dra. Mariana Soto','Dermatóloga · 1.8 km · $900')}${F('Dr. Iván Hernández','Dermatólogo · 4.0 km · $700')}${PROMO(st==='sinimg')}${F('Dra. Carla Luna','Dermatóloga · 2.2 km · $1,100')}${F('Dra. Fernanda Quiroz','Dermatóloga · 3.1 km · $750')}</div>
+      ${N(st==='sinimg' ? 'Sin imagen: la tarjeta queda solo con «Patrocinado», título y anunciante. Nunca un hueco gris.' : 'Posición: después del 2.º resultado, nunca primera; máximo 1 cada 5 resultados; nunca 2 seguidas; solo de la especialidad o zona buscada. «Patrocinado» va primero y como texto (también en el nombre accesible). Borde y ancho completo distintos de la ficha: no se confunde con un médico. Toda la tarjeta es un enlace a la página de la promoción.')}
+      ${N('La imagen se recorta a 2:1 en celular y va a la izquierda en tableta y escritorio; el título es texto real, no se lee de la imagen [incógnita 1: formato del banner de Impulsa]. No dice «Impulsa» ni usa su violeta: el paciente no conoce la herramienta.')}`;
+    return top + `<div class="cc"><h1 style="margin:0;font-size:24px">Dermatólogas cerca de ti</h1><p class="wf-muted" style="margin:0">12 especialistas · Angelópolis, Puebla</p>${lista}</div>`;
+  }
+  if (st==='vencida') return top + `<div class="cc"><div class="ok"><span class="etq">Patrocinado</span><h1 id="h1">Esta promoción ya terminó</h1><p>Terminó el 30 de noviembre. Clínica Dermalia sigue en Manik.</p></div><div class="acc"><a class="wf-btn wf-btn--primary" href="#">Ver Clínica Dermalia</a><a class="wf-btn wf-btn--quiet" href="#">Volver a los resultados</a></div>${N('Vacío: el enlace puede llegar compartido después de la vigencia. No se muestra el precio vencido; se ofrece seguir con el anunciante.')}</div>`;
+  const fuera = st==='fuera';
+  const anun = fuera
+    ? `<div class="anun"><span class="av"></span><b>Laboratorio Ejemplo</b><span class="wf-muted wf-small">No agenda en Manik · Teléfono 222 555 0190</span></div>`
+    : `<div class="anun"><span class="av"></span><b>Clínica Dermalia · Dra. Mariana Soto</b><span class="wf-muted wf-small">Dermatóloga · Céd. Prof. 0000000 · Angelópolis</span></div>`;
+  const cta = fuera ? `<a class="wf-btn wf-btn--primary" href="#">Llamar · 222 555 0190</a>` : `<a class="wf-btn wf-btn--primary" href="#">Agendar con esta promoción</a><a class="wf-btn wf-btn--quiet" href="#">Ver perfil</a>`;
+  return top + `<div class="cc pp"><a class="wf-btn wf-btn--quiet" href="#" style="justify-self:start">← Resultados</a><div class="ppc" style="display:grid;gap:16px">
+   <div style="display:grid;gap:14px"><span class="ban">Banner de Impulsa · completo</span>${N('Aquí el banner se muestra completo (sin recorte): es su página.')}</div>
+   <div style="display:grid;gap:14px"><span class="etq">Patrocinado</span><h1 id="h1">Revisión de lunares a $650</h1>
+   <p style="margin:0">Revisión completa de lunares con dermatoscopio. Incluye una consulta de seguimiento si hace falta.</p>
+   <dl class="dato"><dt>Precio</dt><dd>$650 (normal $900)</dd><dt>Vigencia</dt><dd>Hasta el 30 de noviembre</dd><dt>Dónde</dt><dd>Angelópolis, Puebla</dd><dt>Condiciones</dt><dd>Primera vez · pago en el consultorio</dd></dl>
+   ${anun}<div class="acc">${cta}</div>
+   ${N(fuera ? 'Anunciante que no está en el directorio (laboratorio, farmacia): no hay perfil ni agenda; la acción es llamar [incógnita 4].' : '«Agendar con esta promoción» abre la agenda del anunciante con la promoción aplicada (el consultorio la ve en la cita). Anunciante con nombre y cédula: la confianza no la da Manik, la da el médico.')}
+   ${N('Aviso legal de publicidad en salud (número de permiso o aviso COFEPRIS), si aplica, va al pie de esta página [incógnita 3, no verificada].')}</div></div></div>`;
+}
+
+function render(){
+  const f=document.getElementById('wf-frame'), L=document.getElementById('wf-label');
+  f.style.setProperty('--wf-w', S.w+'px'); L.style.setProperty('--wf-w', S.w+'px');
+  L.textContent=`Marco ${S.w}px · ${S.w<600?'compact':S.w<1024?'medium':'expanded'} (referencia declarada)`;
+  document.querySelectorAll('[data-w]').forEach(b=>b.setAttribute('aria-pressed', String(+b.dataset.w===S.w)));
+  document.getElementById('wf-view').innerHTML = view();
+}
+document.addEventListener('click', e=>{const w=e.target.closest('[data-w]'); if(w){S.w=+w.dataset.w; render();}});
+document.getElementById('wf-state').addEventListener('change', e=>{S.st=e.target.value; render();});
+document.getElementById('wf-notes').addEventListener('change', e=>document.body.classList.toggle('wf-no-notes', !e.target.checked));
+render();
+</script>
