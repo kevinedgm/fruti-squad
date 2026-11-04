@@ -1,0 +1,174 @@
+# Kiwi · Perfil del médico · r02 · R1 F2. Uso: python3 gen.py → index.html (kit enlazado) y publicar.html (kit en línea)
+# Contenido de ejemplo dado por el usuario (Dr. Mario Díaz Soto); teléfono y cédulas ficticios.
+import os
+D = os.path.dirname(os.path.abspath(__file__))
+KIT = open(os.path.join(D, 'vendor', 'wireframe-kit.css')).read()
+LOCAL = r'''
+.pf{display:grid;gap:0;position:relative}
+.top{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--wf-g3)}.top .sp{flex:1}.top .logo{font-weight:800}
+.blk{padding:18px 16px;display:grid;gap:12px;border-bottom:1px dashed var(--wf-g3);scroll-margin-top:56px;min-width:0}
+.blk h2{margin:0;font-size:19px}.blk>p{margin:0}
+.ph{display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;align-items:start}
+.ph .foto{aspect-ratio:3/4;border-radius:14px;background:var(--wf-g2);display:grid;place-items:end center;font-size:11px;color:var(--wf-g6);padding:6px}
+.ph h1{margin:0;font-size:24px;line-height:1.15}.ph .who{display:grid;gap:4px;min-width:0}
+.esp{color:var(--wf-g7);font-size:15px}.ced{font-size:13px;color:var(--wf-g6);display:flex;flex-wrap:wrap;gap:0 6px}.nw{white-space:nowrap}
+.rate{display:inline-flex;align-items:center;gap:6px;font-size:14px;min-height:32px}.rate b{font-size:15px}
+.jump{display:flex;gap:6px;overflow-x:auto;padding:8px 16px;border-bottom:1px solid var(--wf-g3);position:sticky;top:0;background:var(--wf-g0);z-index:5;scrollbar-width:none}
+.jump a{flex:none;border:1px solid var(--wf-g4);border-radius:999px;padding:0 12px;min-height:36px;display:inline-flex;align-items:center;font-size:14px;text-decoration:none;color:var(--wf-g9)}
+.jump a[aria-current]{background:var(--wf-g9);color:var(--wf-g0);border-color:var(--wf-g9)}
+.co{border:1.5px solid var(--wf-g9);border-radius:18px;padding:14px;display:grid;gap:8px}
+.co .r{display:flex;justify-content:space-between;gap:8px;align-items:baseline;flex-wrap:wrap}.co .r b{font-size:17px}
+.co .pr{font-weight:800;font-size:18px}.co .falta{font-size:13px;border:1px dashed var(--wf-g6);border-radius:8px;padding:2px 8px}
+.co .dir{font-size:14px;color:var(--wf-g6)}.co .forma{font-size:14px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.co .acc{display:flex;flex-wrap:wrap;gap:8px}.co .prim{display:none}
+.co+.co{margin-top:0}
+.dias{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -2px;padding:2px}
+.dias button{flex:none;display:grid;justify-items:center;min-width:64px;min-height:56px;border:1.5px solid var(--wf-g4);border-radius:14px;background:var(--wf-g0);font:inherit;font-size:13px;cursor:pointer;color:var(--wf-g9)}
+.dias button b{font-size:15px}.dias button[aria-pressed="true"]{background:var(--wf-g9);color:var(--wf-g0);border-color:var(--wf-g9)}.dias button:disabled{color:var(--wf-g5);border-style:dashed;cursor:not-allowed}
+.horas{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.horas button{min-height:44px;border:1.5px solid var(--wf-g9);border-radius:999px;background:var(--wf-g0);font:inherit;font-weight:700;cursor:pointer;color:var(--wf-g9)}.horas button:disabled{border-style:dashed;color:var(--wf-g5);border-color:var(--wf-g4)}
+.prim-box{display:none!important}.prox{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.prox small{display:block;color:var(--wf-g6);font-size:13px}
+.seg{display:flex;gap:6px;flex-wrap:wrap}.seg button{min-height:40px;border:1.5px solid var(--wf-g4);border-radius:999px;padding:0 14px;background:var(--wf-g0);font:inherit;font-size:14px;cursor:pointer}.seg button[aria-pressed="true"]{border-color:var(--wf-g9);background:var(--wf-g1);font-weight:700}
+.conf{background:var(--wf-g0);display:flex;flex-direction:column;gap:14px;padding:12px 16px 16px;min-height:780px}
+.conf .res{border:1.5px solid var(--wf-g9);border-radius:16px;padding:14px;display:grid;gap:4px}.conf .res .r{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:center}
+.conf .wf-btn--primary{margin-top:auto}
+.tags{display:flex;flex-wrap:wrap;gap:8px}.tags span{border:1px solid var(--wf-g4);border-radius:999px;padding:6px 12px;font-size:14px;background:var(--wf-g1)}
+.op-res{display:flex;align-items:center;gap:14px}.op-res .n{font-size:40px;font-weight:800;line-height:1}.op-res small{display:block;color:var(--wf-g6);font-size:13px}
+.op{border:1px solid var(--wf-g3);border-radius:16px;padding:12px;display:grid;gap:6px}.op .h{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.op .ini{width:32px;height:32px;border-radius:50%;background:var(--wf-g2);display:grid;place-items:center;font-weight:700;font-size:14px}
+.op .h small{color:var(--wf-g6);font-size:13px}.op .ver{font-size:12px;color:var(--wf-g7)}
+.ops{display:grid;gap:10px}
+.form{list-style:none;margin:0;padding:0;display:grid;gap:12px}.form li{display:grid;grid-template-columns:48px minmax(0,1fr);gap:10px}
+.form .y{font-weight:800;font-size:14px;padding-top:2px}.form b{display:block}.form span{color:var(--wf-g6);font-size:14px;display:block}
+details{border:1px solid var(--wf-g3);border-radius:14px}details+details{margin-top:8px}
+summary{min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 14px;font-weight:700;cursor:pointer;list-style:none}summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:20px;font-weight:400}details[open] summary::after{content:"−"}
+details .a{padding:0 14px 14px;display:grid;gap:8px;font-size:15px}
+.gal{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}.gal span{flex:none;width:132px;aspect-ratio:1;border-radius:14px;background:repeating-linear-gradient(45deg,var(--wf-g2) 0 10px,var(--wf-g1) 10px 20px)}
+.act{display:grid;gap:8px}.act a{display:flex;justify-content:space-between;align-items:center;border:1px solid var(--wf-g3);border-radius:14px;padding:0 14px;min-height:52px;text-decoration:none;color:var(--wf-g9)}
+.barra{position:sticky;bottom:0;z-index:6;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;background:var(--wf-g0);border-top:1.5px solid var(--wf-g9)}
+.barra b{display:block}.barra small{color:var(--wf-g6);font-size:13px}
+.foot{padding:20px 16px 28px;color:var(--wf-g6);font-size:13px;display:flex;flex-wrap:wrap;gap:8px 18px}
+.cols{display:grid}.aside{display:contents}
+@container wf (min-width:600px){
+  .blk,.top,.foot,.jump{padding-left:32px;padding-right:32px}.ph{grid-template-columns:140px minmax(0,1fr);gap:20px}.ph h1{font-size:30px}
+  .ops{grid-template-columns:repeat(2,minmax(0,1fr))}.gal span{width:160px}
+}
+@container wf (min-width:1024px){
+  .conf{position:absolute;top:0;right:0;z-index:20;width:440px;min-height:0;height:100%;border-left:1.5px solid var(--wf-g9);box-shadow:-20px 0 40px rgba(0,0,0,.08)}.conf .wf-btn--primary{margin-top:8px}
+  .cols{grid-template-columns:minmax(0,1fr) 360px;gap:0 32px;padding:0 64px;align-items:start}
+  .cols>.main>.blk{padding-left:0;padding-right:0}.top,.foot,.jump{padding-left:64px;padding-right:64px}
+  .aside{display:block;position:sticky;top:64px;padding-top:18px}.aside .blk{border:0;padding:0}.co .prim{display:inline-flex}
+  .barra{display:none}.prim-box{display:flex!important}.ph{grid-template-columns:180px minmax(0,1fr)}.ph h1{font-size:36px}
+}
+'''
+BODY = r'''<div class="wf-ctl" role="region" aria-label="Controles del wireframe">
+  <span class="wf-brand"><svg viewBox="0 0 64 64" fill="none" aria-hidden="true"><rect x="4" y="4" width="56" height="56" rx="12" stroke="#ffffff" stroke-width="3.5"/><rect x="13" y="13" width="38" height="38" rx="9" stroke="#ffffff" stroke-width="3.5"/><rect x="21" y="21" width="22" height="22" rx="6" stroke="#ffffff" stroke-width="3.5"/><circle cx="32" cy="32" r="5.5" fill="#34e0a1"/></svg><span>Kiwi<small>Fruti Squad</small></span></span>
+  <strong>Perfil del médico · r02 · F2</strong>
+  <fieldset><legend>Espacio</legend><button data-w="1440" aria-pressed="false">expanded 1440</button><button data-w="834" aria-pressed="false">medium 834</button><button data-w="393" aria-pressed="true">compact 393</button></fieldset>
+  <label>Estado <select id="wf-state" data-wf-states>
+    <option value="default">Agenda en Manik: hay lugar hoy</option><option value="hora">Tocó una hora → confirmar</option><option value="sinhoy">Hoy ya no hay lugar</option><option value="sin2">Sin lugar en 2 semanas</option><option value="tel">Solo por teléfono (ejemplo r01)</option><option value="varios">Dos consultorios</option>
+    <option value="sinop">Vacío: sin opiniones</option><option value="loading">Carga</option><option value="errorop">Error: no cargan las opiniones</option><option value="offline">Sin conexión</option></select></label>
+  <label><input type="checkbox" id="wf-notes" checked> Notas</label>
+</div>
+<div class="wf-stage"><p class="wf-frame-label" id="wf-label"></p><div class="wf-frame" id="wf-frame"><div id="wf-banner"></div><main id="wf-view" tabindex="-1"></main></div></div>'''
+JS = r'''
+let S = {w:393, st:'default'};
+const N = t => `<span class="wf-note">${t}</span>`;
+const nw = t => t.split(' · ').map(x=>`<span class="nw">${x}</span>`).join(' · ');
+const FAQ = [
+ ['¿Qué es el reflujo infantil?', ['Cuando un bebé escupe, ocurre cuando la comida retrocede del estómago del bebé. El reflujo en bebés sanos ocurre varias veces por día. Si tu bebé está sano, contento, y crece bien, el reflujo no es causa de preocupación.','En raras ocasiones, el reflujo infantil puede ir acompañado de síntomas preocupantes, como el retraso en el desarrollo o la pérdida de peso. Estos pueden indicar un problema de salud, como alergia, obstrucción en el aparato digestivo, o la enfermedad por reflujo gastroesofágico.']],
+ ['¿Qué es la hepatitis A?', ['Es una infección del hígado sumamente contagiosa y se presenta normalmente en niños. Es uno de varios tipos de virus de hepatitis que causa inflamación y afecta al funcionamiento del hígado.','Para evitar que los niños contraigan hepatitis A, es necesario mantener unos buenos hábitos de higiene y evitar condiciones de insalubridad, pero la mejor manera de protegerlos es la vacuna contra esta enfermedad.','Se recomienda aplicarla para todos los niños entre su primer y segundo año de edad. ¡Vacunar es cuidar!']],
+ ['¿Qué hacer si mi hijo no quiere comer?', ['Esto es completamente normal, a la mayoría de las mamás les pasa. Habrá ocasiones en las que tu bebé no querrá comer y las causas pueden ser porque se siente mal, está por enfermarse, no le gusta la comida, está muy entretenido jugando o simplemente no tiene hambre.']]];
+const PAD = ['Estreñimiento','Reflujo','Cólico infantil','Obesidad infantil','Desnutrición','Dolor abdominal','Enfermedades del hígado en niños','Crecimiento y desarrollo'];
+const OPS = [['P','Pedro','30 oct 2026','Excelente','Excelente gastropediatra.'],['A','Ana Victoria','27 oct 2026','Excelente','Excelente el Dr. Díaz. Aclara todas las dudas y tiene un trato maravilloso con los pacientes. Me da mucha tranquilidad.']];
+const H = ['Hospital NeoDemo Xalapa','Carretera Xalapa-Veracruz #1960, Xalapa, Veracruz'];
+const DIAS = [['Hoy','4 nov',5],['Mañana','5 nov',8],['Vie','6 nov',3],['Sáb','7 nov',0],['Lun','9 nov',6],['Mar','10 nov',4]];
+const HORAS = ['16:30','17:00','17:30','18:30','19:00'];
+function agenda(st, prim){
+  if (st==='loading') return `<div class="wf-skel" aria-busy="true" style="display:grid;gap:8px"><div class="wf-line" style="width:60%"></div><div class="wf-line"></div><div class="wf-line"></div></div>`;
+  if (st==='sin2') return `<p class="wf-muted wf-small" role="status">No hay lugar en las próximas 2 semanas.</p><div class="acc"><a class="wf-btn wf-btn--primary prim" href="#">Llamar</a><a class="wf-btn" href="#">Ver más fechas</a><a class="wf-btn wf-btn--quiet" href="#">Cómo llegar</a></div>`;
+  const hoy = st!=='sinhoy'; const off = st==='offline';
+  const dias = DIAS.map((d,i)=>{const n = (i===0&&!hoy)?0:d[2]; const sel = hoy ? i===0 : i===1; return `<button type="button" aria-pressed="${sel}" ${n?'':'disabled'} aria-label="${d[0]} ${d[1]}, ${n?n+' horarios':'sin lugar'}"><b>${d[0]}</b>${d[1]}</button>`}).join('');
+  const horas = (hoy ? HORAS : ['9:00','9:30','10:00','11:30','12:00','13:00']).map(h=>`<button type="button" ${off?'disabled':''}>${h}</button>`).join('');
+  const prox = hoy ? 'Hoy, 16:30' : 'Mañana, 9:00';
+  return `${prim?`<div class="prox prim-box"><span><small>Próximo lugar</small><b>${prox}</b></span><a class="wf-btn wf-btn--primary" href="#">Agendar ${prox.split(', ')[1]}</a></div>`:''}
+   <div class="dias" role="group" aria-label="Día">${dias}</div>${hoy?'':'<p class="wf-small wf-muted" role="status">Hoy ya no hay lugar; te mostramos mañana.</p>'}
+   <div class="horas" role="group" aria-label="Horarios de ${hoy?'hoy':'mañana'}">${horas}</div>${off?'<p class="wf-small" role="status">Para agendar necesitas conexión. Puedes llamar al 228 555 0142.</p>':''}
+   <div class="acc"><a class="wf-btn wf-btn--quiet" href="#">Ver más horarios</a><a class="wf-btn wf-btn--quiet" href="#">o llama al 228 555 0142</a><a class="wf-btn wf-btn--quiet" href="#">Cómo llegar</a></div>`;
+}
+function cons(st){
+  const telB = (lu, dir, t) => `<div class="co"><div class="r"><b>${lu}</b><span><span class="pr">$—</span> <span class="falta">precio: falta dato</span></span></div><span class="dir">${dir}</span><span class="forma">☏ ${nw('Por teléfono · '+t)}</span><div class="acc"><a class="wf-btn wf-btn--primary prim" href="#">Llamar</a><a class="wf-btn" href="#">Copiar número</a><a class="wf-btn wf-btn--quiet" href="#">Cómo llegar</a></div></div>`;
+  if (st==='tel') return telB(H[0], H[1], '228 555 0142');
+  const seg = st==='varios' ? `<div class="seg" role="group" aria-label="Consultorio"><button type="button" aria-pressed="true">NeoDemo · $800</button><button type="button" aria-pressed="false">Ánimas · $700</button></div>` : '';
+  return `${seg}<div class="co"><div class="r"><b>${H[0]}</b><span class="pr">$800</span></div><span class="dir">${H[1]}</span><span class="forma">▣ Agenda en Manik · la consulta es en el consultorio</span>${agenda(st, st!=='hora')}</div>`;
+}
+function view(){
+  const st = S.st, off = st==='offline';
+  const top = `<header class="top"><a class="wf-btn wf-btn--quiet" href="#">← Resultados</a><span class="sp"></span><a class="wf-btn wf-btn--quiet" href="#">Compartir</a></header>`;
+  const rate = st==='sinop' ? '' : `<a class="rate" href="#opiniones">★ <b>5.0</b> · 1,037 opiniones</a>`;
+  const head = `<section class="blk" aria-labelledby="h1"><div class="ph"><span class="foto">Foto 3:4</span><div class="who"><h1 id="h1">Dr. Mario Díaz Soto</h1><span class="esp">Gastroenterología y Nutrición Pediátrica</span><span class="ced">✓ ${nw('Céd. Prof. 0000000 · Céd. Esp. 0000000')}</span>${rate}</div></div>${N('Cabecera = ficha aprobada (r03 C) en grande. Especialidad en mayúsculas y minúsculas, no todo en mayúsculas (se lee mejor). Cédulas: profesional + especialidad principal; todas las cédulas van en Formación [incógnita 2].')}</section>`;
+  const jump = `<nav class="jump" aria-label="Secciones del perfil"><a href="#consultorio" aria-current="true">Consultorio</a><a href="#padecimientos">Padecimientos</a><a href="#opiniones">Opiniones</a><a href="#sobre">Sobre mí</a><a href="#formacion">Formación</a><a href="#dudas">Dudas frecuentes</a><a href="#galeria">Galería</a></nav>`;
+  const consB = `<section class="blk" id="consultorio" aria-labelledby="h-co"><h2 id="h-co">${st==='tel'?'Consultorio':'Agenda tu cita'}</h2>${cons(st)}${N(st==='tel'?'Consultorio solo por teléfono: no hay horarios que mostrar; la acción es «Llamar».':st==='varios'?'Con dos consultorios, primero se elige el consultorio (cada uno con su precio); los días y horas cambian con él.':'Pocos clics: tocar una hora lleva directo a confirmar (1 toque + datos + Confirmar). La barra de abajo agenda el próximo lugar en un toque. Días como tarjetas deslizables; días sin lugar, deshabilitados con texto («sin lugar»), no ocultos. Máximo 6 horas visibles; el resto en «Ver más horarios».')}</section>`;
+  const pad = `<section class="blk" id="padecimientos" aria-labelledby="h-pad"><h2 id="h-pad">Padecimientos que atiende</h2><div class="tags">${PAD.map(p=>`<span>${p}</span>`).join('')}</div>${N('N2, arriba de opiniones: es la primera pregunta de la mamá («¿atiende lo de mi hijo?»). Informativos, no enlaces [incógnita 4].')}</section>`;
+  let opB;
+  if (st==='loading') opB = `<div class="ops wf-skel" aria-busy="true">${'<div class="op"><div class="wf-line" style="width:40%"></div><div class="wf-line"></div><div class="wf-line" style="width:70%"></div></div>'.repeat(2)}</div>`;
+  else if (st==='errorop') opB = `<div class="wf-state" style="margin:0;max-width:none" role="alert"><b>No pudimos cargar las opiniones</b><p class="wf-muted">El resto del perfil sí está disponible.</p><button class="wf-btn">Reintentar</button></div>`;
+  else if (st==='sinop') opB = `<p class="wf-muted">Aún no tiene opiniones. Solo pueden opinar pacientes que agendaron con él en Manik.</p>`;
+  else opB = `<div class="op-res"><span class="n">5.0</span><span><b>★★★★★</b><small>1,037 opiniones verificadas</small></span></div><div class="ops">${OPS.map(o=>`<article class="op"><div class="h"><span class="ini" aria-hidden="true">${o[0]}</span><b>${o[1]}</b><small>${o[2]}</small></div><span><b>5/5</b> · ${o[3]}</span><p style="margin:0">${o[4]}</p><span class="ver">✓ Opinión verificada</span></article>`).join('')}</div><a class="wf-btn wf-btn--quiet" href="#" style="justify-self:start">Ver las 1,037 opiniones</a>`;
+  const ops = `<section class="blk" id="opiniones" aria-labelledby="h-op"><h2 id="h-op">Opiniones</h2>${opB}${N('Resumen + 2 recientes; el resto bajo demanda. Nombre de pila del paciente, nunca apellido. «Verificada» = tuvo cita agendada en Manik.')}</section>`;
+  const sobre = `<section class="blk" id="sobre" aria-labelledby="h-so"><h2 id="h-so">Sobre mí</h2><p>Me gradué como Médico Cirujano de la Universidad Autónoma de Guadalajara (UAG). Posteriormente, cursé la Especialidad en Pediatría en la Universidad Nacional Autónoma de México (UNAM), donde también estudié la Especialidad en Gastroenterología y Nutrición Pediátrica.</p>${N('Si el texto pasa de 5 líneas en celular, se corta con «Leer más».')}</section>`;
+  const form = `<section class="blk" id="formacion" aria-labelledby="h-fo"><h2 id="h-fo">Formación académica</h2><ol class="form"><li><span class="y">2010</span><span><b>Especialidad · Gastroenterología y Nutrición Pediátrica</b><span>UNAM · Ciudad de México</span><span>✓ Céd. Esp. 0000000</span></span></li><li><span class="y">2010</span><span><b>Especialidad · Pediatría</b><span>UNAM · Ciudad de México</span><span>✓ Céd. Esp. 0000000</span></span></li><li><span class="y">2001</span><span><b>Licenciatura · Médico Cirujano</b><span>Universidad Autónoma de Guadalajara (UAG) · Jalisco</span><span>✓ Céd. Prof. 0000000</span></span></li></ol>${N('Del más reciente al más antiguo. Cada título lleva su cédula: aquí caben todas sin saturar la cabecera. Ambas especialidades dicen 2010 en el ejemplo [incógnita 3].')}</section>`;
+  const dudas = `<section class="blk" id="dudas" aria-labelledby="h-du"><h2 id="h-du">Dudas frecuentes</h2><p class="wf-muted wf-small">Respuestas del Dr. Díaz a lo que más le preguntan sus pacientes.</p><div>${FAQ.map((f,i)=>`<details${i===0?' open':''}><summary>${f[0]}</summary><div class="a">${f[1].map(p=>`<p style="margin:0">${p}</p>`).join('')}</div></details>`).join('')}</div>${N('Acordeón: la pregunta se ve, la respuesta bajo demanda. Las escribe el médico (no son las preguntas de pacientes de «Resuelve tus dudas»). Debajo de cada respuesta irá «Esta información orienta, no sustituye una consulta» [propuesta].')}</section>`;
+  const gal = `<section class="blk" id="galeria" aria-labelledby="h-ga"><h2 id="h-ga">Galería</h2><div class="gal" role="list" aria-label="Fotos del consultorio">${'<span role="listitem"></span>'.repeat(6)}</div><a class="wf-btn wf-btn--quiet" href="#" style="justify-self:start">Ver las 12 fotos</a>${N('Desliza en horizontal; al tocar, visor a pantalla completa. Sin fotos, la sección no aparece [incógnita 5].')}</section>`;
+  const act = `<section class="blk" aria-labelledby="h-ac"><h2 id="h-ac">En Manik</h2><div class="act"><a href="#">Respondió 14 preguntas de pacientes <span>→</span></a><a href="#">Escribió 3 artículos <span>→</span></a></div>${N('Propuesta (Could): conecta el perfil con «Resuelve tus dudas». Cifras de ejemplo.')}</section>`;
+  const foot = `<footer class="foot"><b>manik</b><span>de MedicalManik</span><span>Aviso de privacidad</span><span>Términos</span></footer>`;
+  const tel = st==='tel', px = st==='sinhoy' ? 'Mañana, 9:00' : 'Hoy, 16:30';
+  const barra = `<div class="barra"><span><b>${tel?'$—':'$800 · '+px}</b><small>${tel?'Consulta · Hospital NeoDemo Xalapa':'Próximo lugar · Hospital NeoDemo Xalapa'}</small></span>${tel?'<a class="wf-btn wf-btn--primary" href="#">Llamar</a>':(off||st==='sin2')?'<a class="wf-btn wf-btn--primary" href="#">Llamar</a>':'<a class="wf-btn wf-btn--primary" href="#">Agendar</a>'}</div>`;
+  const conf = st==='hora' ? `<div class="conf" role="dialog" aria-label="Confirmar cita"><div style="display:flex;align-items:center;gap:8px"><button class="wf-btn wf-btn--quiet">← Cambiar horario</button></div><h2 style="margin:0;font-size:20px">Confirma tu cita</h2>
+   <div class="res"><div class="r"><b>Hoy, 17:00</b><span class="pr">$800</span></div><span>Dr. Mario Díaz Soto</span><span class="wf-muted wf-small">Hospital NeoDemo Xalapa · la consulta es presencial</span></div>
+   <label class="wf-field"><span>Nombre del paciente</span><input class="wf-input" value="" placeholder="Nombre y apellido"></label><label class="wf-field"><span>Celular</span><input class="wf-input" inputmode="tel" placeholder="10 dígitos"></label>
+   ${N('Sin cuenta: nombre + celular. La confirmación y el recordatorio llegan por mensaje con un enlace para cambiar o cancelar. Recorrido total: tocar la hora → escribir 2 datos → Confirmar.')}<button class="wf-btn wf-btn--primary">Confirmar cita</button></div>` : '';
+  if (st==='hora' && S.w<1024) return conf;
+  return top + head + jump + `<div class="cols"><div class="main">${S.w>=1024?'':consB}${pad}${ops}${sobre}${form}${dudas}${gal}${act}</div><aside class="aside" aria-label="Consultorio">${S.w>=1024?consB:''}</aside></div>` + foot + (st==='hora' ? '' : barra) + conf;
+}
+function render(){
+  const f=document.getElementById('wf-frame'), L=document.getElementById('wf-label');
+  f.style.setProperty('--wf-w', S.w+'px'); L.style.setProperty('--wf-w', S.w+'px');
+  L.textContent=`Marco ${S.w}px · ${S.w<600?'compact':S.w<1024?'medium':'expanded'} (referencia declarada)`;
+  document.querySelectorAll('[data-w]').forEach(b=>b.setAttribute('aria-pressed', String(+b.dataset.w===S.w)));
+  document.getElementById('wf-banner').innerHTML = S.st==='offline' ? '<p class="wf-banner" role="status"><b>Sin conexión.</b> Puedes leer este perfil y llamar; para agendar necesitas conexión.</p>' : '';
+  document.getElementById('wf-view').innerHTML = view();
+}
+document.addEventListener('click', e=>{const w=e.target.closest('[data-w]'); if(w){S.w=+w.dataset.w; render();}});
+document.getElementById('wf-state').addEventListener('change', e=>{S.st=e.target.value; render();});
+document.getElementById('wf-notes').addEventListener('change', e=>document.body.classList.toggle('wf-no-notes', !e.target.checked));
+render();
+'''
+FONTS = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&display=swap" rel="stylesheet"><!-- solo chrome -->'
+open(os.path.join(D, 'index.html'), 'w').write(f'''<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="wf-fidelidad" content="F2">
+<title>Wireframe · Perfil del médico · r02</title>
+{FONTS}
+<link rel="stylesheet" href="vendor/wireframe-kit.css">
+<style>{LOCAL}</style>
+</head>
+<body class="wf">
+{BODY}
+<script>{JS}</script>
+</body>
+</html>''')
+open(os.path.join(D, 'publicar.html'), 'w').write(f'''<title>Perfil del médico · wireframe</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+{FONTS}
+<style>{KIT}{LOCAL}
+.wf-ctl,.wf-stage{{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}}</style>
+<script>document.documentElement.lang='es'</script>
+{BODY}
+<script>document.body.classList.add('wf');{JS}</script>
+''')
+print('ok')
