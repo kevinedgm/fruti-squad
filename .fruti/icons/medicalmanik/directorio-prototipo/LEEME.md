@@ -16,3 +16,4 @@ Pedido: «genera un artifact con un prototipo del directorio Manik». Regenerar:
 - 2026-11-04: «Detalle de su cita» aprobado (detalle-cita/r01): #cita y #cita-cambiar; cancelar con diálogo; regla de 24 h; la hora se reserva al confirmar y se libera al cambiar o cancelar.
 - 2026-11-04: «Busca por lo que sientes» con sellos circulares en tres tamaños (categorias/r02).
 - 2026-11-04: promociones de Impulsa (promocion/r02): tarjeta en resultados, página #promo-<id>, precio con promoción hasta la cita.
+- 2026-11-04: «con Impulsa Manik» en la tarjeta y sello de Impulsa al pie de la página de la promoción.
