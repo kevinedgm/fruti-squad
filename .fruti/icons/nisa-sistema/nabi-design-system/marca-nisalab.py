@@ -104,7 +104,7 @@ ul{{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat
 li{{display:flex;align-items:center;gap:var(--space-3,12px);background:var(--surface,#fff);border:1px solid var(--border,#DFE3EC);border-radius:var(--radius-md,8px);box-shadow:var(--shadow-1,none);padding:10px 12px;color:var(--text-muted,#535B70)}}
 li b{{color:var(--text,#141B33);font-weight:600}} li small{{display:block;font:500 11px/16px var(--font-datos,"IBM Plex Mono",monospace);color:var(--text-muted,#535B70)}}
 .row{{display:flex;flex-wrap:wrap;gap:var(--space-2,8px);align-items:center;background:var(--surface,#fff);border:1px solid var(--border,#DFE3EC);border-radius:var(--radius-md,8px);padding:12px}}
-.dv{{display:inline-flex;align-items:center;gap:6px;font:500 13px/18px var(--font-sans,"Poppins",sans-serif);padding:3px 10px 3px 4px;border-radius:999px;background:var(--surface-sunken,#EEF1F6)}}
+.dv{{display:inline-flex;align-items:center;gap:6px;font:500 13px/18px var(--font-sans,"Poppins",sans-serif);padding:3px 10px 3px 4px;border-radius:999px;background:var(--bg,#F2F4F8)}}
 .note{{color:var(--text-muted,#535B70);font-size:13px;margin:var(--space-2,8px) 0 0}}
 </style></head><body><div class="top">{sv(os.path.join(FINAL, 'svg', 'logotipo-respaldo.svg'), 48)}<span class="note" style="margin:0">Cada área: la célula que creció toma su color y su ícono.</span></div>
 <h2>Áreas</h2><ul>{filas}</ul><h2>En la interfaz</h2><div class="row">{chips}</div>

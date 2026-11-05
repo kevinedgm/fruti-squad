@@ -221,10 +221,10 @@
     "Áreas"
   ],
   "lastChange": {
-    "at": "2026-11-05T04:17:22Z",
+    "at": "2026-11-05T04:24:10Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "Bitácoras r02: se retiran los 14 colores agregados en r01 (surface-2, primary-ink, primary-line, *-line, fuera-hover, log-*). Bitácoras usa 17 colores existentes. Solo lectura pasa a bg (borde 3.0:1)."
+    "note": "Color reducido de 53 a 25 (6 básicos, 4 de marca, 7 de estado, 8 áreas). Proceso y pago usan los colores de estado; pendiente pasa a gris. Componentes y documentación migrados; los retirados quedan listados en el README."
   },
   "layout": "files",
   "libraries": [],

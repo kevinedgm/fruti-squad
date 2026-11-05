@@ -14,14 +14,14 @@ Cómo se arma una pantalla de módulo en NisaLab (Usuarios, Clientes, Métodos, 
 |---|---|---|---|
 | Página | `bg` | — | — |
 | Encabezado | (sobre `bg`) | título `text`; ruta, entradilla y conteo `text-muted` | — |
-| Acción primaria | `primary` | `on-primary` | `shadow-primary`; hover `primary-hover` + `shadow-primary-hover` |
+| Acción primaria | `primary` | `surface` | `shadow-primary`; hover `primary-hover` + `shadow-primary-hover` |
 | Acción secundaria | `surface` | `primary` | `border-control` + `shadow-1` |
 | Tarjeta de trabajo | `surface` | `text` | `border` + `shadow-1` |
-| Encabezado de tabla | `surface-sunken` | `text-muted` | `border` abajo |
-| Fila en hover | `surface-hover` | `text` | — |
+| Encabezado de tabla | `bg` | `text-muted` | `border` abajo |
+| Fila en hover | `bg` | `text` | — |
 | Fila seleccionada | `primary-soft` | `text` | casilla marcada |
 | Registro en curso | — | — | un punto `pera` junto al nombre (uno por pantalla) |
-| Campos | `surface` | `text`; placeholder `text-subtle` | `border-control` + `shadow-inset`; foco `primary` + anillo `primary-soft` |
+| Campos | `surface` | `text`; placeholder `text-muted` | `border-control` + `shadow-inset`; foco `primary` + anillo `primary-soft` |
 | Filtro activo | `primary-soft` | `primary` | — |
 | Estados | `*-soft` | `on-*-soft` + icono | — |
 | Barra de lote, aviso | `text` (tinta) | blanco | `shadow-overlay` |
@@ -65,10 +65,10 @@ El color sigue al significado y es el mismo en todos los módulos:
 | Significado | Tokens | Ejemplos |
 |---|---|---|
 | Está bien | `conforme-soft` / `on-conforme-soft` | Activo · Conforme |
-| Pendiente | `pendiente-soft` / `on-pendiente-soft` | Invitación enviada |
-| Requiere atención | `alerta-soft` / `on-alerta-soft` | Suspendido |
-| Impedido | `fuera-soft` / `on-fuera-soft` | Bloqueado · Fuera de límite |
-| Fuera de uso o neutro | contorno `border-strong` sobre `surface` / `text-muted` | Dado de baja |
+| Pendiente | `bg` / `text-muted` | Invitación enviada |
+| Requiere atención | `alerta-soft` / `alerta` | Suspendido |
+| Impedido | `fuera-soft` / `fuera` | Bloqueado · Fuera de límite |
+| Fuera de uso o neutro | contorno `border` sobre `surface` / `text-muted` | Dado de baja |
 
 Los estados de la muestra (proceso, pago, urgente) tienen sus propios tokens y viven en «EstadoMuestra».
 
@@ -80,7 +80,7 @@ La columna **Divisiones** muestra el ícono de área a una tinta (16 px, `text-m
 
 | Interacción | Respuesta |
 |---|---|
-| Pasar sobre una fila | `surface-hover` en 150 ms (`quick`); aparecen sus acciones |
+| Pasar sobre una fila | `bg` en 150 ms (`quick`); aparecen sus acciones |
 | Seleccionar | `primary-soft`; aparece la barra de lote con el conteo |
 | Filtrar | El chip pasa a `primary-soft`; el conteo y el pie se actualizan; si no hay resultados, estado vacío con «Limpiar filtros» |
 | Ordenar | Flecha en la columna activa y `aria-sort` |

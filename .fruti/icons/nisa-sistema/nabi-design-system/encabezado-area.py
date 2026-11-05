@@ -12,7 +12,7 @@ printer = ('<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="fal
 plus = '<svg class="i" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14"/><path d="M12 5v14"/></svg>'
 css = '''
 /* variante por área: marca del área + línea de su color */
-.lbl{font:600 11px/14px var(--font-sans);letter-spacing:.06em;text-transform:uppercase;color:var(--text-subtle);margin:0 0 var(--space-3)}
+.lbl{font:600 11px/14px var(--font-sans);letter-spacing:.06em;text-transform:uppercase;color:var(--text-muted);margin:0 0 var(--space-3)}
 .lbl+.mh{margin-bottom:var(--space-8)}
 .mh.area{grid-template-columns:auto minmax(0,1fr) auto;column-gap:var(--space-4);border-bottom:3px solid var(--ac);padding-bottom:var(--space-4)}
 .mh.area .crumb{grid-column:2/-1}

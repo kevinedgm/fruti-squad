@@ -5,9 +5,15 @@ import os, re, json, glob, html
 D = os.path.dirname(os.path.abspath(__file__)); DS = os.path.join(D, '..', 'nabi-design-system')
 T = json.load(open(os.path.join(DS, 'tokens.json')))['color']['tokens']
 V = {t['name']: t['value'] for t in T}; V['focus'] = V['primary']
-H = {f.split(os.sep)[-2]: open(f).read() for f in glob.glob(os.path.join(DS, 'components', '*', 'preview.html'))}
+import subprocess  # usos medidos en los componentes ANTES de aplicar la reducción (commit 60673b6)
+TOP = subprocess.run(['git', 'rev-parse', '--show-toplevel'], capture_output=True, text=True, cwd=D).stdout.strip()
+REF = '60673b6'; BASE = '.fruti/icons/nisa-sistema/nabi-design-system'
+_ls = subprocess.run(['git', 'ls-tree', '-r', '--name-only', REF, BASE + '/components'], capture_output=True, text=True, cwd=TOP).stdout.split()
+H = {f.split('/')[-2]: subprocess.run(['git', 'show', f'{REF}:{f}'], capture_output=True, text=True, cwd=TOP).stdout for f in _ls if f.endswith('preview.html')}
+T = json.loads(subprocess.run(['git', 'show', f'{REF}:{BASE}/tokens.json'], capture_output=True, text=True, cwd=TOP).stdout)['color']['tokens']
+V = {t['name']: t['value'] for t in T}; V['focus'] = V['primary']
 def usos(n):
-    p = re.compile(r'var\(--(?:nn-)?' + re.escape(n) + r'\)')
+    p = re.compile(r'var\(--(?:nn-)?' + re.escape(n) + r'\s*[,)]')
     return sum(len(p.findall(s)) for s in H.values())
 def lum(h):
     h = h.lstrip('#'); c = [int(h[i:i+2], 16) / 255 for i in (0, 2, 4)]
@@ -157,12 +163,12 @@ out = f'''<title>NisaLab · revisión de color</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
 <style>{CSS}</style><script>document.documentElement.lang='es'</script>
-<header><div class="wrap"><h1>Color de NisaLab: <span>revisión completa</span></h1><p>Los 53 colores del design system, uno por uno: cuál queda, cuál se une a otro que ya dice lo mismo y cuál sobra. Propuesta; el sistema no cambia hasta que la apruebes.</p>
+<header><div class="wrap"><h1>Color de NisaLab: <span>revisión completa</span></h1><p>Los 53 colores del design system, uno por uno: cuál queda, cuál se une a otro que ya dice lo mismo y cuál sobra. Aprobada y aplicada el 5 de noviembre de 2026 (design system, versión 19).</p>
 <div class="big"><span><b>53</b>hoy</span><span><b>{len(QUEDAN)}</b>propuesta</span><span><b>{len(NUCLEO)}</b>sin contar áreas</span><span class="p"><b>0</b>colores nuevos</span></div></div></header>
 <main class="wrap">
 <section aria-labelledby="s1"><span class="ey">Panorama</span><h2 id="s1">Qué encontré</h2>
 <div class="tres"><div class="card"><span class="kk">Hecho</span><h3>Cuatro valores repetidos</h3><p>#052A76 se llama primary, on-pera y pago-cortesia; #FFFFFF es surface y on-primary; #B42318 es fuera y pago-no-pagada; #166534 es on-muestra-terminada y pago-pagada.</p></div>
-<div class="card"><span class="kk">Hecho</span><h3>{53 - n_usados} de 53 sin uso con var()</h3><p>Los componentes usan {n_usados} colores como variable. Los estados de muestra y pago están escritos con su valor fijo en EstadoMuestra, y las áreas en sus archivos de marca.</p></div>
+<div class="card"><span class="kk">Hecho</span><h3>{53 - n_usados} de 53 sin uso con var()</h3><p>Los componentes usaban {n_usados} colores. Sin uso: alerta, alerta-fill, pendiente y 7 de las 8 áreas (estas viven en sus archivos de marca).</p></div>
 <div class="card"><span class="kk">Hecho</span><h3>Dos juegos de estados</h3><p>Resultado (conforme, alerta, fuera, pendiente) y proceso (5 pasteles: ámbar, azul, violeta, verde, rojo). Cuatro de los cinco repiten la familia de un estado de resultado.</p></div></div>
 <p class="intro">Criterio: un color se queda si nombra algo que ningún otro nombra, o si sin él algo no cumple contraste. Las áreas se quedan aunque no sean estados: son la identidad de cada división y ya viven en sus logotipos.</p></section>
 <section aria-labelledby="s2"><span class="ey">Resultado</span><h2 id="s2">{len(QUEDAN)} colores, <span>{len(NUCLEO)} sin contar áreas</span></h2>
@@ -175,16 +181,16 @@ out = f'''<title>NisaLab · revisión de color</title>
 <li><b>Pago:</b> las etiquetas con contorno usan los mismos colores de estado; todas superan 4.5:1 sobre blanco.</li>
 <li><b>Tabla:</b> encabezado, hover, solo lectura y pendiente usan el gris del lienzo. El registro en curso conserva su filete pera sobre el fondo de selección.</li></ul></section>
 <section aria-labelledby="s4"><span class="ey">Detalle</span><h2 id="s4">Los 53, <span>uno por uno</span></h2>
-<p class="intro">«Usos» cuenta las veces que los componentes llaman al color con var(); 0 no significa que nadie lo vea, solo que está escrito como valor fijo o no se usa.</p>
+<p class="intro">«Usos» cuenta las veces que los componentes llamaban al color con var() antes de la reducción, incluidas las llamadas con valor de respaldo.</p>
 <div class="tw"><table><thead><tr><th>Color</th><th>Valor</th><th class="num">Usos</th><th>Decisión</th><th>Por qué</th></tr></thead><tbody>{TAB}</tbody></table></div></section>
 <section aria-labelledby="s5"><span class="ey">Decisiones</span><h2 id="s5">Lo que tienes <span>que elegir</span></h2>
 <div class="dec"><div class="card"><span class="rec">Recomendado: unir</span><h3>1. Proceso y pago</h3><p>Los aprobaste porque el personal ya los asocia. La propuesta conserva esas familias de tono y quita 14 valores; el único cambio visible es el violeta. Alternativa: dejarlos como están (39 colores en vez de 25).</p></div>
 <div class="card"><span class="rec">Recomendado: conservar</span><h3>2. Las ocho áreas</h3><p>No son estados ni básicos, pero son la identidad de cada división y están en sus logotipos e íconos. Quitarlas obligaría a rehacer esos archivos.</p></div>
 <div class="card"><span class="rec">Recomendado: unir</span><h3>3. Pendiente en gris del texto</h3><p>Su gris es casi el de text-muted. Pendiente se seguiría leyendo por reloj y texto; deja de tener color propio, como corresponde a algo que no es urgente.</p></div></div></section>
-<section aria-labelledby="s6"><span class="ey">Si apruebas</span><h2 id="s6">Qué cambia</h2><ul class="lista">
-<li>tokens.json baja a {len(QUEDAN)} colores; cada color unido queda anotado con su destino para migrar sin adivinar.</li>
-<li>Los componentes que usan colores unidos (surface-sunken, surface-hover, text-subtle, border-strong, on-primary, pera-soft, focus, on-fuera-soft, on-alerta-soft, pendiente-*) pasan a su destino.</li>
-<li>EstadoMuestra deja sus valores fijos y usa los colores de estado. El README y el manual de marca de NisaLab se actualizan.</li></ul></section>
+<section aria-labelledby="s6"><span class="ey">Aplicado</span><h2 id="s6">Qué cambió</h2><ul class="lista">
+<li>tokens.json bajó a {len(QUEDAN)} colores; el README lista cada color retirado con su destino.</li>
+<li>Los 14 componentes: los que usaban colores unidos (surface-sunken, surface-hover, text-subtle, border-strong, on-primary, pera-soft, focus, on-fuera-soft, on-alerta-soft, pendiente-*) pasaron a su destino (174 reemplazos, script nabi-design-system/color-reduccion.py).</li>
+<li>EstadoMuestra usa los colores de estado. README, módulos, documentación de componentes y manual de marca actualizados.</li></ul></section>
 </main><footer class="wrap">Fuente: tokens.json del design system NisaLab v3 y los 14 componentes. Contrastes calculados por el generador.</footer>'''
 open(os.path.join(D, 'revision.html'), 'w').write(out)
 print('ok', len(QUEDAN), len(NUCLEO), n_usados)

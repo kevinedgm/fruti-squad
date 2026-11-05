@@ -8,6 +8,12 @@ C = {t['name']: t['value'] for t in TOK['color']['tokens']}
 USO = {t['name']: t.get('usage', '') for t in TOK['color']['tokens']}
 for _ in range(4):
     C = {k: (C[v[1:-1]] if isinstance(v, str) and v.startswith('{') else v) for k, v in C.items()}
+RET = {'surface-sunken':'bg','border-strong':'border','pera-soft':'primary-soft','on-pera':'primary','on-alerta-soft':'alerta','pendiente-soft':'bg','on-pendiente-soft':'text-muted','pendiente':'text-muted',
+ 'muestra-no-ingresada':'alerta-soft','on-muestra-no-ingresada':'alerta','muestra-en-proceso':'primary-soft','on-muestra-en-proceso':'primary','muestra-generando-informe':'primary-soft','on-muestra-generando-informe':'primary',
+ 'muestra-terminada':'conforme-soft','on-muestra-terminada':'on-conforme-soft','muestra-cancelada':'fuera-soft','on-muestra-cancelada':'fuera','pago-no-pagada':'fuera','pago-parcial':'alerta','pago-pagada':'conforme','pago-cortesia':'primary','on-fuera-soft':'fuera'}
+C.update({k: C[v] for k, v in RET.items() if k not in C})
+CUANDO = {'no-ingresada': 'Recibida en ventanilla, sin folio interno.', 'en-proceso': 'Con folio interno; se capturan parámetros.', 'generando-informe': 'Parámetros capturados; falta el informe.',
+          'terminada': 'Informe generado y enviado.', 'cancelada': 'Se canceló la muestra o toda su orden.'}
 AREAS = json.load(open(os.path.join(N, 'nisalab-areas-final/tema.json')))['paleta']['areas']
 PARAM = json.load(open(os.path.join(N, 'nisalab-parametros-final/tema.json')))['tipos']
 uri = lambda p: 'data:image/svg+xml;base64,' + base64.b64encode(open(os.path.join(N, p), 'rb').read()).decode()
@@ -32,11 +38,11 @@ W = '#FFFFFF'
 # ---------- Color
 GRUPOS = [
  ('Marca', 'Los dos colores del laboratorio. El azul ordena; el pera es una sola cosa: lo que creció, lo que está en curso.',
-  [('primary', 'surface'), ('primary-hover', 'surface'), ('pera', None), ('pera-soft', None), ('primary-soft', None)]),
+  [('primary', 'surface'), ('primary-hover', 'surface'), ('primary-soft', None), ('pera', None)]),
  ('Lienzo y lectura', 'Tema claro: lienzo gris de laboratorio y superficies blancas, nunca blanco sobre blanco.',
-  [('bg', None), ('surface', None), ('surface-sunken', None), ('text', 'bg'), ('text-muted', 'surface'), ('text-subtle', 'surface'), ('border', None), ('border-control', 'surface')]),
- ('Resultado del análisis', 'Siempre con icono y texto. Cada estado tiene su fondo suave y su texto.',
-  [('conforme', 'surface'), ('fuera', 'surface'), ('alerta', 'surface'), ('alerta-fill', None), ('pendiente', 'surface')]),
+  [('bg', None), ('surface', None), ('text', 'bg'), ('text-muted', 'bg'), ('border', None), ('border-control', 'surface')]),
+ ('Estados', 'Tres colores de estado, siempre con ícono y texto. Sirven al resultado, al proceso de la muestra y al pago. Pendiente va en gris.',
+  [('conforme', 'surface'), ('conforme-soft', None), ('on-conforme-soft', 'conforme-soft'), ('alerta', 'alerta-soft'), ('alerta-soft', None), ('fuera', 'fuera-soft'), ('fuera-soft', None)]),
 ]
 def swatch(n, sobre):
     v = C[n]; oscuro = lum(v) < .3
@@ -61,7 +67,7 @@ AREA_LOGOS = ''.join(f'<div class="lienzo claro"><img src="{uri(f"nisalab-areas-
 FICHA = lambda c: uri('nisalab-parametros-final/svg/' + c + '/ficha.svg')
 PARAM_H = ''.join('<div class="pm"><img src="' + FICHA(p['clave']) + '" alt="" width="40" height="40"><span><b>' + p['nombre'] + '</b><small>' + p['ejemplos'] + '</small></span></div>' for p in PARAM)
 
-# ---------- Estados de la muestra (tokens muestra-* y pago-*)
+# ---------- Estados de la muestra y pago: usan los colores de estado (RET)
 B16 = '<svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">'
 def etapa(n):
     if n == 0: return B16 + '<circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.75" stroke-dasharray="2.6 2.1"/></svg>'
@@ -72,7 +78,7 @@ PROC = [('no-ingresada', 'No ingresada', etapa(0)), ('en-proceso', 'En proceso',
         ('terminada', 'Terminada', etapa(3)), ('cancelada', 'Cancelada', ico('ban', 14, sw=2.25))]
 PAGO = [('no-pagada', 'No pagada', 'circle'), ('parcial', 'Pago parcial', 'circle-dashed'), ('pagada', 'Pagada', 'circle-check'), ('cortesia', 'Cortesía', 'gift')]
 PILLS = ''.join(f'<span class="ps" style="background:{C["muestra-" + k]};color:{C["on-muestra-" + k]}">{i}{t}</span>' for k, t, i in PROC)
-PILLS_R = ''.join(f'<tr><td><span class="ps" style="background:{C["muestra-" + k]};color:{C["on-muestra-" + k]}">{i}{t}</span></td><td class="num">{cr(C["on-muestra-" + k], C["muestra-" + k])}:1</td><td>{e(frase(USO["muestra-" + k], 1))}</td></tr>' for k, t, i in PROC)
+PILLS_R = ''.join(f'<tr><td><span class="ps" style="background:{C["muestra-" + k]};color:{C["on-muestra-" + k]}">{i}{t}</span></td><td class="num">{cr(C["on-muestra-" + k], C["muestra-" + k])}:1</td><td>{CUANDO[k]}</td></tr>' for k, t, i in PROC)
 ETQ = ''.join(f'<span class="et2" style="color:{C["pago-" + k]};border-color:{C["pago-" + k]}">{ico(i, 14, sw=2.25)}{t}</span>' for k, t, i in PAGO)
 URG = f'<span class="ur">{ico("zap", 14, sw=2.25)}Urgente</span>'
 RES = [('conforme', 'circle-check', 'Conforme'), ('fuera', 'circle-x', 'Fuera de especificación'), ('alerta', 'triangle-alert', 'Cerca del límite'), ('pendiente', 'clock', 'Pendiente')]
@@ -224,11 +230,11 @@ S('marca', '02 · Marca', 'Símbolo y <span>logotipo</span>', 'Se usan siempre l
   <figure><span style="display:flex;gap:4px"><img src="{F['simbolo']}" alt="" style="filter:hue-rotate(60deg)"></span><span class="x">NO</span>Cambiar colores o poner dos peras</figure>
   <figure><span style="font:600 22px Poppins,sans-serif;color:{C['pera']};background:#fff">NisaLab</span><span class="x">NO</span>Texto en pera ({cr(C['pera'], W)}:1)</figure>
   <figure><img src="{F['logotipo']}" alt="" style="transform:scaleX(1.4);height:32px"><span class="x">NO</span>Estirar, o juntarlo con el logo de Nisa Nabani en una pieza</figure></div>'''),
-S('color', '03 · Color', 'Azul real y <span>una célula pera</span>', 'Los primarios de Nisa Nabani ordenan la interfaz; el lienzo es gris de laboratorio; los estados tienen colores propios. Contrastes calculados con los valores de <code>tokens.json</code>.',
+S('color', '03 · Color', 'Azul real y <span>una célula pera</span>', '25 colores en total: 6 básicos, 4 de marca, 7 de estado y las 8 áreas. Un módulo no crea colores propios. Contrastes calculados con los valores de <code>tokens.json</code>.',
   f'''{COLOR}<div><h3>Proporción</h3><div class="prop" aria-hidden="true"><span style="flex:46;background:var(--bg)">lienzo</span><span style="flex:30;background:#fff">superficie</span><span style="flex:14;background:var(--text);color:#fff">texto</span><span style="flex:8;background:var(--primary);color:#fff">azul</span><span style="flex:2;background:var(--pera)"></span></div>
   <p class="pie">Aproximada: el pera ocupa un punto, nunca un área.</p></div>
   <ul class="lista"><li><b>Tema claro único.</b> Los campos van sobre <code>surface</code>: sobre <code>bg</code> su borde baja a {cr(C['border-control'], C['bg'])}:1.</li><li><b>Foco:</b> anillo de 2 px en azul, desplazado 2 px; sobre azul, el anillo va en pera.</li>
-  <li><b>Ámbar:</b> <code>alerta</code> para texto; <code>alerta-fill</code> solo para marcadores.</li></ul>'''),
+  <li><b>Solo lectura y deshabilitado:</b> sobre <code>bg</code> con candado (borde {cr(C['border-control'], C['bg'])}:1).</li><li><b>Pendiente:</b> gris de texto sobre el lienzo, con reloj: no es urgente.</li></ul>'''),
 S('areas', '04 · Áreas', '«Área <span>NisaLab</span>»', 'Cada división es «Área NisaLab» y la célula que creció toma su color y su ícono. Los ocho colores tienen la misma luminosidad e intensidad (OKLCH 0.54 · 0.12): solo cambia el tono, fuera del rango del pera.',
   f'''<div class="tw"><table><thead><tr><th>Área</th><th>Ícono</th><th>Color</th><th>Token</th><th>Blanco encima</th></tr></thead><tbody>{AREA_T}</tbody></table></div>
   <div class="grid3">{AREA_LOGOS}</div>
@@ -249,9 +255,9 @@ S('iconos', '07 · Iconos y parámetros', 'Tres canales, <span>tres significados
   <div class="pms">{PARAM_H}</div>
   <div class="canales"><div class="card"><h3>Área = color</h3><p>Círculo del color del área, con su ícono. Dice de qué división es.</p></div><div class="card"><h3>Parámetro = ficha</h3><p>Siempre azul ({cr(W, C['primary'])}:1 con blanco). Nunca toma tono. Va con su nombre al lado, salvo en columnas angostas con encabezado «Tipo».</p></div>
   <div class="card"><h3>Estado = semántico</h3><p>Color del estado, con icono y texto. Ver «Estados».</p></div></div>'''),
-S('estados', '08 · Estados', 'Cada color, <span>un dueño</span>', 'Las áreas ya ocupan ocho tonos y el resultado ocupa verde, rojo, ámbar y pizarra. Proceso y pago usan los colores con los que ya trabaja el laboratorio; urgente es pera, el único color libre.',
+S('estados', '08 · Estados', 'Cada color, <span>un dueño</span>', 'Verde, ámbar y rojo dicen lo mismo en todo el sistema: el resultado, el proceso de la muestra y el pago usan esos tres colores. Pendiente va en gris; urgente es pera.',
   f'''<div><h3>Resultado del análisis</h3><div class="fila">{RES_H}</div></div>
-  <div><h3>Proceso de la muestra</h3><p class="pie">Pastilla con fondo de color. El ícono avanza como la etapa: vacío, un cuarto, tres cuartos, lleno.</p><div class="tw" style="margin-top:10px"><table><thead><tr><th>Pastilla</th><th>Contraste</th><th>Cuándo</th></tr></thead><tbody>{PILLS_R}</tbody></table></div></div>
+  <div><h3>Proceso de la muestra</h3><p class="pie">Pastilla con fondo de color de estado. «En proceso» y «Generando informe» comparten el azul de selección; los separa el ícono, que avanza como la etapa: vacío, un cuarto, tres cuartos, lleno.</p><div class="tw" style="margin-top:10px"><table><thead><tr><th>Pastilla</th><th>Contraste</th><th>Cuándo</th></tr></thead><tbody>{PILLS_R}</tbody></table></div></div>
   <div class="grid2"><div><h3>Pago</h3><p class="pie">Etiqueta con contorno, para no competir con la pastilla de proceso.</p><div class="fila" style="margin-top:10px">{ETQ}</div></div>
   <div><h3>Prioridad</h3><p class="pie">Marca aparte; texto azul sobre pera ({cr(C['on-pera'], C['pera'])}:1).</p><div class="fila" style="margin-top:10px">{URG}</div></div></div>'''),
 S('movimiento', '09 · Movimiento', 'La carga <span>es el símbolo</span>', 'Las células de Colonia aparecen una tras otra, 200 ms por paso, y la pera crece al final. Con «reducir movimiento», el símbolo queda quieto. Todo lo demás dura 150 ms.',
@@ -265,9 +271,9 @@ S('componentes', '11 · Componentes', 'Las piezas <span>clave</span>', 'Muestras
   <div class="muestra"><span class="et">Folio y estado</span><p style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><code style="font-size:14px">AG-2610-0147</code>{PILLS.split('</span>')[1]}</span>{URG}</p><p class="pie">El folio siempre en Plex Mono; la fila en curso, en pera suave.</p></div></div>
   <div class="muestra"><span class="et">Tabla de resultados</span>{TABLA_RES}<p class="pie">Valores alineados a la derecha; estado con punto de 10 px y texto; la fila que se edita, con filete pera.</p></div>'''),
 S('accesibilidad', '12 · Accesibilidad', 'WCAG 2.2 <span>AA</span>', None,
-  f'<ul class="lista"><li>Texto 4.5:1 sobre su fondo (<code>text-muted</code> {cr(C["text-muted"], C["bg"])}:1 sobre <code>bg</code>); bordes de control 3:1.</li><li>Controles de 40 px en escritorio y 44 px en táctil; nada interactivo bajo 24 px.</li><li>Foco visible de 2 px; sobre azul, en pera.</li><li>Estados con icono y texto, nunca solo color; el área en tablas va con nombre.</li><li>El pera nunca es texto ({cr(C["pera"], W)}:1 sobre blanco).</li><li>Se respeta «reducir movimiento».</li></ul>'),
+  f'<ul class="lista"><li>Texto 4.5:1 sobre su fondo (<code>text-muted</code> {cr(C["text-muted"], C["bg"])}:1 sobre <code>bg</code>); bordes de control 3:1.</li><li>Controles de 40 px en escritorio y 44 px en táctil; nada interactivo bajo 24 px.</li><li>Foco visible de 2 px; sobre azul, en pera.</li><li>Estados con icono y texto, nunca solo color; el área en tablas va con nombre.</li><li>Sobre su fondo suave, el verde necesita texto oscuro (<code>on-conforme-soft</code>); ámbar y rojo se leen con su propio color.</li><li>El pera nunca es texto ({cr(C["pera"], W)}:1 sobre blanco).</li><li>Se respeta «reducir movimiento».</li></ul>'),
 S('pendientes', '13 · Pendientes', 'Por <span>decidir</span>', None,
-  '<ul class="lista"><li>Registro de «NisaLab» en el IMPI y disponibilidad del dominio.</li><li>Productos «Producto NisaLab» (por ejemplo, «Recepción NisaLab») y su sello.</li><li>Convivencia con Verdant WebKit: si el azul y pera sustituyen al acento esmeralda de la interfaz actual o conviven con él.</li><li>Íconos de estatus dentro del informe (rondas A/B/C/D): sin elegir.</li><li>Color de «Cortesía» en pago: propuesta.</li><li>Confirmar nombres de estado con el flujo real del laboratorio.</li></ul>'),
+  '<ul class="lista"><li>Registro de «NisaLab» en el IMPI y disponibilidad del dominio.</li><li>Productos «Producto NisaLab» (por ejemplo, «Recepción NisaLab») y su sello.</li><li>Convivencia con Verdant WebKit: si el azul y pera sustituyen al acento esmeralda de la interfaz actual o conviven con él.</li><li>Íconos de estatus dentro del informe (rondas A/B/C/D): sin elegir.</li><li>Confirmar nombres de estado con el flujo real del laboratorio.</li></ul>'),
 ]
 
 html_out = f'''<title>Manual de marca NisaLab</title>

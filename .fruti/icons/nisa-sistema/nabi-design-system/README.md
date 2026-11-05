@@ -22,15 +22,12 @@ Preciso, breve, sin adornos. Los botones dicen la acción y el objeto: Registrar
 
 Los primarios de Nisa Nabani ordenan la interfaz; los secundarios del laboratorio dan los estados.
 
-- Lienzo y superficies: `bg` (#F2F4F8) es el fondo de la app; `surface` (blanco) para tarjetas, tablas y paneles; `surface-sunken` (#EEF1F6) para cabeceras de tabla y zonas hundidas; `surface-hover` (#F5F7FB) para filas al pasar. Bordes en dos pesos: `border` (#DFE3EC) separa, `border-strong` (#CDD3DF) delimita.
-- `primary` (azul real #052A76) es la acción primaria, los enlaces y el encabezado. `primary-soft` para la fila seleccionada.
-- `pera` (#C2D225) es lo que está en curso: la célula que creció del símbolo y la muestra activa. Nunca texto sobre blanco (1.7:1). `pera-soft` para el registro en curso.
-- Estados: `conforme` (#2E7D32), `fuera` (#B42318), `alerta` (texto #8A6100, relleno #E9B10A) y `pendiente` (pizarra #475467). Cada uno con su fondo `*-soft` y su texto `on-*-soft`. Ninguno es color de área.
-- Áreas (`area-*`): ocho colores propios de NisaLab con la misma luminosidad e intensidad (OKLCH 0.54 · 0.12), uno por área: Aguas #007CA3, Agrícolas #946400, Ambiental #2F8247, Alimentos #A6552D, Bebidas #7A5DA9, Bebidas de agave #008478, Farmacia #A14E78, Consultoría #4C6BB4. Solo en la marca del área, el encabezado de su página y los filtros; nunca en tablas. Blanco encima de 4.6 a 5.4:1. Ver el componente «Areas».
-- «Completo» y «firmado» son `conforme`, nunca pera ni un olivo derivado de él: el pera dice «en curso» o «urgente».
-- Solo lectura y deshabilitado van sobre `bg` con `border-control` (3.0:1); los distingue el candado, no un color propio. `surface-sunken` no sirve para campos: su borde baja a 2.9:1.
-- Sin colores por pantalla: un módulo (por ejemplo, bitácoras) usa solo básicos, marca y estados de este sistema. La consola de importación es clara y sus niveles usan los colores de estado.
-- Contrastes verificados: todo texto ≥ 4.5:1 sobre su fondo (`text-muted` 6.2:1 sobre `bg`, `text-subtle` 4.7:1 sobre `surface-sunken`); `border-control` 3.3:1 sobre `surface`. Por eso los campos viven sobre `surface`, no sobre `bg` (3.0:1).
+- **Básicos (6):** `bg` (#F2F4F8) lienzo, encabezado de tabla, hover, solo lectura y deshabilitado; `surface` (blanco) tarjetas, tablas, campos y texto sobre azul; `text` (#141B33); `text-muted` (#535B70) metadatos, placeholders y «Pendiente»; `border` (#DFE3EC) separa; `border-control` (#858DA3) contorno de campos, 3.3:1 sobre `surface` y 3.0:1 sobre `bg`.
+- **Marca (4):** `primary` (azul real #052A76) acción, enlace, foco, encabezado y texto sobre pera; `primary-hover` (#021C52); `primary-soft` (#E8EDF7) selección, registro en curso, «En proceso» y «Generando informe»; `pera` (#C2D225) una sola cosa por pantalla: la célula que creció, lo que está en curso (filete o punto) y «Urgente». Nunca texto sobre blanco (1.7:1).
+- **Estados (7):** `conforme` (#2E7D32), `conforme-soft` y `on-conforme-soft` (el verde sobre su fondo mide 4.4:1, por eso lleva texto propio); `alerta` (#8A6100) y `alerta-soft`; `fuera` (#B42318) y `fuera-soft`. Alerta y fuera se leen sobre su fondo (4.9 y 5.5:1). Proceso y pago usan estos mismos colores: No ingresada y Pago parcial en alerta, Terminada y Pagada en conforme, Cancelada y No pagada en fuera, Cortesía en primary. «Pendiente» va en gris (`text-muted` sobre `bg`), con reloj y texto: no es urgente.
+- **Áreas (8, `area-*`):** identidad de cada división (OKLCH 0.54 · 0.12): Aguas #007CA3, Agrícolas #946400, Ambiental #2F8247, Alimentos #A6552D, Bebidas #7A5DA9, Bebidas de agave #008478, Farmacia #A14E78, Consultoría #4C6BB4. Solo en la marca del área, su encabezado y los filtros; nunca estado, nunca en tablas.
+- **Regla:** 25 colores en total. Un módulo no crea colores propios; si algo parece necesitar uno, primero se busca cuál de estos ya nombra lo mismo.
+- **Retirados el 2026-11-05** (se unieron a uno existente): `surface-sunken`, `surface-hover`, `pendiente-soft` → `bg`; `text-subtle`, `pendiente`, `on-pendiente-soft` → `text-muted`; `border-strong` → `border`; `on-primary` → `surface`; `on-pera`, `focus`, `pago-cortesia` → `primary`; `pera-soft` → `primary-soft`; `on-fuera-soft`, `pago-no-pagada` → `fuera`; `on-alerta-soft`, `alerta-fill`, `pago-parcial` → `alerta`; `muestra-*` y `on-muestra-*` → el estado de su familia; `pago-pagada` → `conforme`.
 
 ## Tipografía
 
@@ -56,4 +53,3 @@ La carga es el símbolo: las células de Colonia aparecen una tras otra, 200 ms 
 ## Pendiente
 
 - La interfaz actual del producto usa Verdant WebKit con acento esmeralda. Este sistema propone el azul y pera de Nisa Nabani; falta decidir si sustituye el acento de Verdant o si convive con él.
-- Estados de muestra (componente «EstadoMuestra»): proceso No ingresada, En proceso, Generando informe, Terminada y Cancelada (tokens `muestra-*`); pago No pagada, Pago parcial, Pagada y Cortesía (tokens `pago-*`); y la marca Urgente en `pera`. Son los colores con los que ya trabaja el laboratorio.
