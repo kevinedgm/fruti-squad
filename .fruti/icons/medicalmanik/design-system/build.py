@@ -7,7 +7,10 @@ B = {'medicalmanik.svg': '9a83c2989b836271f7d2401934ad4cee', 'expediente.svg': '
      'grupos.svg': 'fa0768c7b3dcbda5a898f7f744c6e747', 'ecosistema.svg': '6089128d21a27e473058eb6a0c000245', 'ecosistema-1tinta.svg': '3d5b89799a2b4a082727102d35a3720b',
      'medicalmanik-1tinta.svg': 'a27dd2e48efc13a89fe3a551b46fe7e0'}
 SRC = '/home/user/fruti-squad/.fruti/icons/medicalmanik/final/svg/'
-blob = lambda n: f'/_blob/{B[n]}'
+# Las muestras llevan los sellos dentro (data URI) y no dependen de /_blob/: así nunca salen como imagen rota
+# aunque el visor no alcance el almacén de archivos (2026-11-05). Los assets siguen subidos para el panel de assets.
+import base64 as _b64
+blob = lambda n: 'data:image/svg+xml;base64,' + _b64.b64encode(open(SRC + n, 'rb').read()).decode()
 
 def lum(h):
     h = h.lstrip('#'); c = [int(h[i:i+2], 16) / 255 for i in (0, 2, 4)]; c = [v / 12.92 if v <= .03928 else ((v + .055) / 1.055) ** 2.4 for v in c]
