@@ -259,18 +259,20 @@ Lucide, trazo 2, retícula 24 (el mismo set de Impulsa). Un concepto, un icono; 
 
 Directa y clínica: el verbo dice lo que pasa («Guardar receta», «Surtir»). Los errores dicen el límite («Fuera de rango: máximo 100 mg al día»). Trato de usted o por título profesional en saludos («Buenos días, Dra. Ramírez»).
 
-## Relación con Manik Impulsa (decisiones abiertas)
+## Relación con Impulsa Manik (alineación aprobada 2026-11-05)
 
-Manik Impulsa ya tiene su propio sistema en producción. Este sistema lo respeta en espacio, radios, sombras, estados e iconos, y difiere en tres puntos que hay que decidir:
+Impulsa Manik ya tenía su propio sistema en producción; compartía espacio, radios, sombras, estados e iconos. Se alinea en los tres puntos que faltaban:
 
-1. **Tipografía:** Impulsa usa solo Ubuntu; aquí, Urbanist + Atkinson.
-2. **Acción:** Impulsa usa su violeta (#504CA1) para botones; aquí la acción es azul Manik en todas las apps.
-3. **Lienzo:** Impulsa usa grises neutros (#F4F4F4); aquí los neutros tienen un sesgo al azul.
+1. **Tipografía:** de Ubuntu a Urbanist (títulos) + Atkinson Hyperlegible Next (interfaz y datos).
+2. **Acción:** de su violeta (#504CA1) a azul Manik en botones, enlaces, selección y foco. El violeta se queda como identidad: sello, tarjeta y «con Impulsa Manik».
+3. **Lienzo:** de #F4F4F4 a `canvas` #F5F7FB (diferencia 1.03: no se ve).
+
+Guía de migración para su equipo: `../../impulsa-migracion/` (valores, búsquedas, orden y comprobaciones). Medido: el texto corrido no cambia de ancho; botones +12–18 % y títulos +5–16 %.
 
 ## Pendientes
 
 - Confirmar la regla de una sola app (¿se salta el inicio?) y los textos de «sin acceso».
-- Decidir los tres puntos de Impulsa.
+- Migrar Impulsa con su guía (lienzo → acción → tipografía → shell de app pequeña).
 - Componentes por app (tablas, formularios largos, agenda) cuando se diseñe cada producto.
 '''
 ADMIN = "## Administración Manik (interna, aprobada 2026-10-31)\n\n- App del equipo MedicalManik: usuarios activos y configuración del sistema y de cada app. Sello: engrane separado en la esquina superior derecha; color grafito `app-administracion` #3A4558.\n- **Solo la ven las cuentas de la empresa.** A diferencia de las apps sin acceso (apagadas con candado), para una clínica Administración no existe: no se muestra.\n- En el inicio va en su propia fila, «Herramientas internas», con el chip «Solo equipo MedicalManik». El mosaico del ecosistema sigue de seis cuadros.\n- El sello nunca sustituye al ícono de ajustes dentro de las apps (engrane de Lucide sin cuadro): el sello siempre lleva el cuadro con la línea de pulso.\n- Prototipo: `../../administracion-r1/`.\n\n"

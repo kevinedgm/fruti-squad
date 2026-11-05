@@ -1,0 +1,103 @@
+<title>Migración de Impulsa</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300..700&family=Atkinson+Hyperlegible+Next:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* Guía técnica de una sola luz (tema claro único de la marca): columna de lectura, tablas de mapeo y bloque de código. */
+:root{--azul:#234899;--violeta:#504CA1;--violeta-s:#F1F1F7;--papel:#F5F7FB;--blanco:#FFFFFF;--tinta:#14213D;--muted:#4A5674;--linea:#E1E6F0;--suave:#EEF1F7;--codigo:#0F1C3F;
+ --display:"Urbanist", "Segoe UI", system-ui, sans-serif;--sans:"Atkinson Hyperlegible Next", "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;color-scheme:light}
+*{box-sizing:border-box}body{background:var(--papel);color:var(--tinta);font:400 16px/1.6 var(--sans);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}h1{font-size:clamp(30px,4.6vw,44px);line-height:1.1;font-weight:300}h1 b{font-weight:600}h2{font-size:24px;line-height:1.25;font-weight:600}h3{font-size:19px;font-weight:600}p{margin:0}a{color:var(--azul)}:focus-visible{outline:2px solid var(--azul);outline-offset:2px}
+.hoja{max-width:1000px;margin:0 auto;padding-block:36px 96px;display:grid;gap:44px;grid-template-columns:minmax(0,1fr)}
+.eti{font:700 12px/16px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--violeta)}.nota{font-size:15px;line-height:22px;color:var(--muted)}.texto{max-width:66ch;display:grid;gap:12px}p.texto{display:block}
+section{display:grid;gap:16px}
+.cab{display:grid;gap:12px;background:var(--blanco);border:1px solid var(--linea);border-radius:24px;padding:28px}
+.tres{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.tres div{background:var(--suave);border-radius:16px;padding:14px;display:grid;gap:4px}.tres b{font:600 16px var(--display)}.tres span{font-size:14px;line-height:20px;color:var(--muted)}
+.tw{overflow-x:auto;background:var(--blanco);border:1px solid var(--linea);border-radius:18px}table{border-collapse:collapse;width:100%;min-width:640px}th,td{text-align:left;vertical-align:top;padding:11px 14px;border-bottom:1px solid var(--linea);font-size:15px;line-height:22px}thead th{font:700 12px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--suave)}tbody tr:last-child>*{border-bottom:0}tbody th{font-weight:600}td.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.sw{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:6px;vertical-align:-2px;border:1px solid rgba(20,33,61,.12)}
+code{font:13px/1.5 ui-monospace,Menlo,Consolas,monospace;background:var(--suave);border-radius:6px;padding:1px 6px}
+pre{margin:0;background:var(--codigo);color:#E6ECF7;border-radius:18px;padding:18px 20px;overflow-x:auto;font:13px/1.6 ui-monospace,Menlo,Consolas,monospace}
+.pasos{margin:0;padding-left:26px;display:grid;gap:16px}.pasos li{background:var(--blanco);border:1px solid var(--linea);border-radius:18px;padding:16px 18px;display:grid;gap:6px}
+.copiar{justify-self:start;min-height:40px;padding:0 16px;border-radius:12px;border:1px solid var(--linea);background:var(--blanco);font:600 14px var(--sans);color:var(--azul);cursor:pointer}
+ul{margin:0;padding-left:22px;display:grid;gap:6px}
+@media(max-width:700px){.tres{grid-template-columns:1fr}}
+</style>
+<main class="hoja">
+<header class="cab"><span class="eti">Impulsa Manik · guía de migración · aprobada el 5 de noviembre de 2026</span>
+<h1>Impulsa entra al <b>sistema común</b></h1>
+<p class="texto">Impulsa ya comparte con las otras apps el espaciado, los radios, las sombras, los estados y los iconos. Le faltan tres cosas, aprobadas para alinearse. El violeta no desaparece: deja los botones y se queda donde dice «esto es Impulsa», en su sello y en su tarjeta.</p>
+<div class="tres"><div><b>Lienzo</b><span>#F4F4F4 → #F5F7FB</span></div><div><b>Acción</b><span>violeta #504CA1 → azul Manik #234899</span></div><div><b>Tipografía</b><span>Ubuntu → Urbanist + Atkinson Hyperlegible Next</span></div></div>
+<p class="nota">Esta guía se escribió sin ver el código de Impulsa: dice qué valores cambian y cómo comprobarlo, no en qué archivos están.</p></header>
+
+<section aria-labelledby="h1"><h2 id="h1">Por qué</h2><div class="texto"><p><b>Una sola familia de controles.</b> En las siete apps, todo lo que se toca usa el azul Manik, el mismo alto y el mismo foco; así nadie reaprende al pasar de Agenda a Impulsa.</p><p><b>Identidad e interfaz no se mezclan.</b> El color de cada producto vive en su sello y su tarjeta; si fuera color de botón, cada app tendría un «Guardar» de otro color.</p><p><b>Legibilidad.</b> Atkinson Hyperlegible Next distingue 1, l e I y 0 y O: en cifras de campañas, fechas y públicos no hay confusión.</p></div></section>
+
+<section aria-labelledby="h2"><h2 id="h2">Qué cambia, valor por valor</h2><div class="tw" tabindex="0" role="region" aria-label="Mapeo de colores"><table><thead><tr><th scope="col">Qué es</th><th scope="col">Hoy en Impulsa</th><th scope="col">Pasa a</th><th scope="col">Token</th></tr></thead><tbody><tr><th scope="row">Fondo de página</th><td><span class="sw" style="background:#F4F4F4"></span>#F4F4F4</td><td><span class="sw" style="background:#F5F7FB"></span>#F5F7FB</td><td><code>canvas</code></td></tr><tr><th scope="row">Botón principal: fondo</th><td><span class="sw" style="background:#504CA1"></span>#504CA1</td><td><span class="sw" style="background:#234899"></span>#234899</td><td><code>manik</code></td></tr><tr><th scope="row">Botón principal: hover y presionado</th><td><span class="sw" style="background:transparent"></span>violeta más oscuro</td><td><span class="sw" style="background:#1E3C7D"></span>#1E3C7D</td><td><code>manik-hover</code></td></tr><tr><th scope="row">Botón secundario: texto y borde</th><td><span class="sw" style="background:transparent"></span>violeta</td><td><span class="sw" style="background:#234899"></span>#234899 · borde #858EA5</td><td><code>manik · line-control</code></td></tr><tr><th scope="row">Enlaces</th><td><span class="sw" style="background:transparent"></span>violeta</td><td><span class="sw" style="background:#234899"></span>#234899</td><td><code>manik</code></td></tr><tr><th scope="row">Selección, pestaña o filtro activo (fondo suave)</th><td><span class="sw" style="background:transparent"></span>violeta claro</td><td><span class="sw" style="background:#E9EDF5"></span>#E9EDF5</td><td><code>manik-soft</code></td></tr><tr><th scope="row">Anillo de foco</th><td><span class="sw" style="background:transparent"></span>el que tenga</td><td><span class="sw" style="background:#234899,"></span>#234899, 2 px, separación 2 px</td><td><code>focus</code></td></tr><tr><th scope="row">Sello, tarjeta en el inicio y en el selector</th><td><span class="sw" style="background:#504CA1"></span>#504CA1</td><td><span class="sw" style="background:#504CA1"></span>#504CA1 (sin cambio)</td><td><code>app-impulsa</code></td></tr><tr><th scope="row">Fondo de la tarjeta de Impulsa</th><td><span class="sw" style="background:transparent"></span>—</td><td><span class="sw" style="background:#F1F1F7"></span>#F1F1F7</td><td><code>app-impulsa-soft</code></td></tr><tr><th scope="row">Grises de texto, bordes y superficies</th><td><span class="sw" style="background:transparent"></span>grises neutros</td><td><span class="sw" style="background:transparent"></span>ink #14213D · muted #4A5674 · line #E1E6F0 · surface-soft #EEF1F7</td><td><code>por rol</code></td></tr></tbody></table></div>
+<p class="nota">Contrastes: blanco sobre azul Manik 8.54:1 (antes, sobre violeta, 7.27:1). La distancia de color entre #F4F4F4 y #F5F7FB es 1.03: el lienzo cambia de valor sin cambiar a la vista.</p></section>
+
+<section aria-labelledby="h3"><h2 id="h3">Tipografía</h2><div class="tw" tabindex="0" role="region" aria-label="Escala tipográfica"><table><thead><tr><th scope="col">Uso</th><th scope="col">Familia</th><th scope="col">Tamaño / interlineado · peso</th><th scope="col">Estilo</th></tr></thead><tbody><tr><th scope="row">Título de página</th><td>Urbanist</td><td class="num">24px / 32px · 600</td><td><code>title-1</code></td></tr><tr><th scope="row">Título de tarjeta, panel o diálogo</th><td>Urbanist</td><td class="num">18px / 26px · 600</td><td><code>title-2</code></td></tr><tr><th scope="row">Texto</th><td>Atkinson Hyperlegible Next</td><td class="num">16px / 24px · 400</td><td><code>body</code></td></tr><tr><th scope="row">Texto en tablas</th><td>Atkinson Hyperlegible Next</td><td class="num">14px / 20px · 400</td><td><code>body-sm</code></td></tr><tr><th scope="row">Etiqueta de campo</th><td>Atkinson Hyperlegible Next</td><td class="num">14px / 20px · 600</td><td><code>label</code></td></tr><tr><th scope="row">Botón</th><td>Atkinson Hyperlegible Next</td><td class="num">15px / 20px · 600</td><td><code>button</code></td></tr><tr><th scope="row">Dato clínico o cifra</th><td>Atkinson Hyperlegible Next</td><td class="num">16px / 24px · 500</td><td><code>dato</code></td></tr></tbody></table></div>
+<h3>Qué tanto cambian los anchos</h3><p class="nota">Medido en el navegador con las fuentes de Google Fonts. Se supuso que Impulsa usa Ubuntu 400 en texto y 500 en botones y títulos; si usa otros pesos, los números cambian.</p>
+<div class="tw" tabindex="0" role="region" aria-label="Cambio de ancho"><table><thead><tr><th scope="col">Texto</th><th scope="col">Texto 16 px (Atkinson 400)</th><th scope="col">Botón 15 px (Atkinson 600)</th><th scope="col">Título 24 px (Urbanist 600)</th></tr></thead><tbody><tr><th scope="row">«Revisión de presión arterial»</th><td class="num">-2 %</td><td class="num">+15 %</td><td class="num">+8 %</td></tr><tr><th scope="row">«Campañas activas este mes»</th><td class="num">0 %</td><td class="num">+18 %</td><td class="num">+16 %</td></tr><tr><th scope="row">«1 240 pacientes · 30/11/2026»</th><td class="num">-1 %</td><td class="num">+17 %</td><td class="num">+5 %</td></tr><tr><th scope="row">«Nueva campaña»</th><td class="num">-2 %</td><td class="num">+14 %</td><td class="num">+15 %</td></tr><tr><th scope="row">«Guardar y enviar»</th><td class="num">-2 %</td><td class="num">+12 %</td><td class="num">+13 %</td></tr><tr><th scope="row">«Resultados por segmento de edad»</th><td class="num">-3 %</td><td class="num">+18 %</td><td class="num">+14 %</td></tr></tbody></table></div>
+<p class="texto">El texto corrido queda igual (2 a 3 % más angosto). <b>Los botones crecen del 12 al 18 %</b> y los títulos del 5 al 16 %: ahí hay que revisar barras de acciones, celdas de tabla con botones y títulos largos.</p></section>
+
+<section aria-labelledby="h4"><h2 id="h4">Valores listos para copiar</h2><p class="nota">Variables del sistema común, leídas de los tokens publicados. Si Impulsa ya usa variables CSS, basta con apuntarlas a estas.</p>
+<pre id="codigo">&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Urbanist:wght@300..700&amp;family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+
+:root {
+  --canvas: #F5F7FB;
+  --surface: #FFFFFF;
+  --surface-soft: #EEF1F7;
+  --surface-pressed: #E4E9F2;
+  --ink: #14213D;
+  --muted: #4A5674;
+  --line: #E1E6F0;
+  --line-control: #858EA5;
+  --manik: #234899;
+  --manik-hover: #1E3C7D;
+  --manik-soft: #E9EDF5;
+  --on-manik: #FFFFFF;
+  --focus: #234899;
+  --app-impulsa: #504CA1;
+  --app-impulsa-soft: #F1F1F7;
+  --app-impulsa-ink: #504CA1;
+  --exito: #15814B;
+  --exito-soft: #E8F2ED;
+  --on-exito-soft: #157C4A;
+  --aviso: #A75F00;
+  --aviso-soft: #F6EFE6;
+  --on-aviso-soft: #A05C03;
+  --error: #C33F4E;
+  --error-soft: #F9ECED;
+  --on-error-soft: #BA3D4D;
+  --info: #3F7695;
+  --info-soft: #ECF1F4;
+  --on-info-soft: #3D7291;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-2xl: 24px;
+  --control-height: 44px;
+  --control-height-compact: 36px;
+  --header-height: 64px;
+  --font-display: &quot;Urbanist&quot;, &quot;Segoe UI&quot;, system-ui, sans-serif;
+  --font-sans: &quot;Atkinson Hyperlegible Next&quot;, &quot;Atkinson Hyperlegible&quot;, system-ui, -apple-system, &quot;Segoe UI&quot;, sans-serif;
+}
+body { background: var(--canvas); color: var(--ink); font: 400 16px/24px var(--font-sans); }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; }
+.btn-primario { background: var(--manik); color: var(--on-manik); }
+.btn-primario:hover { background: var(--manik-hover); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+table, .num { font-variant-numeric: tabular-nums; }</pre><button type="button" class="copiar" id="copiar">Copiar código</button><p class="nota" id="estado" role="status"></p></section>
+
+<section aria-labelledby="h5"><h2 id="h5">En qué orden</h2><ol class="pasos"><li><h3>Fondo de página</h3><p>Cambiar #F4F4F4 por canvas.</p><p class="nota"><b>Por qué en este orden:</b> Una variable o un reemplazo. La diferencia mide 1.03 (no se ve): sirve para comprobar que el cambio de valores funciona sin tocar la experiencia.</p><p class="nota"><b>Cómo se comprueba:</b> Ninguna pantalla cambia de forma visible; las tarjetas blancas siguen separándose del fondo.</p></li><li><h3>Color de acción</h3><p>Botones, enlaces, selección y foco a azul Manik. El violeta se queda solo en el sello y en la tarjeta de Impulsa.</p><p class="nota"><b>Por qué en este orden:</b> Es el cambio de identidad de la interfaz: Impulsa se ve parte de la familia.</p><p class="nota"><b>Cómo se comprueba:</b> Buscar #504CA1 en el código: solo debe quedar en el sello y en la tarjeta. Contraste del botón: blanco sobre azul 8.54:1.</p></li><li><h3>Tipografía</h3><p>Ubuntu → Urbanist en títulos y Atkinson Hyperlegible Next en todo lo demás, con la escala de la tabla.</p><p class="nota"><b>Por qué en este orden:</b> Es el cambio más visible y el único que mueve anchos: botones y títulos crecen.</p><p class="nota"><b>Cómo se comprueba:</b> Revisar botones en barras y tablas, títulos largos y celdas con cifras en 390 px y 1440 px; nada recortado ni en dos líneas sin querer.</p></li><li><h3>Shell de app pequeña</h3><p>Barra superior común y pestañas Campañas y Resultados (componente AppPequena). «Nueva campaña» es botón del encabezado, no pestaña.</p><p class="nota"><b>Por qué en este orden:</b> Termina de alinear la navegación con las otras seis apps.</p><p class="nota"><b>Cómo se comprueba:</b> Las pestañas son enlaces con aria-current; el contenido va centrado a 1120 px.</p></li></ol></section>
+
+<section aria-labelledby="h6"><h2 id="h6">Cómo encontrar los valores en el código</h2><p class="nota">Buscar en todo el proyecto (estilos, plantillas y componentes):</p><ul><li><code>504CA1</code></li><li><code>504ca1</code></li><li><code>rgb(80, 76, 161)</code></li><li><code>rgb(80,76,161)</code></li><li><code>F4F4F4</code></li><li><code>f4f4f4</code></li><li><code>Ubuntu</code></li><li><code>font-family</code></li></ul>
+<p class="nota">Al terminar, <code>504CA1</code> solo debe aparecer en el sello y en la tarjeta de Impulsa, y <code>Ubuntu</code> en ningún lado.</p></section>
+
+<section aria-labelledby="h7"><h2 id="h7">Qué no cambia</h2><ul><li>Espaciado, radios, sombras, colores de estado e iconos: ya son los del sistema común.</li><li>El violeta como identidad: sello, tarjeta en el inicio y en el selector, «con Impulsa Manik» en las promociones del directorio.</li><li>El contenido y los flujos de Impulsa.</li></ul>
+<p class="nota">Referencia completa: <a href="https://claude.ai/artifact/28z6yfie6L8btocL8QBZi9" target="_blank" rel="noopener">sistema de diseño del Ecosistema ↗</a> (Boton, Campo, AppPequena y tokens).</p></section>
+</main>
+<script>document.getElementById('copiar').addEventListener('click',()=>{const t=document.getElementById('codigo').textContent,e=document.getElementById('estado');
+const sel=()=>{const r=document.createRange();r.selectNodeContents(document.getElementById('codigo'));const s=getSelection();s.removeAllRanges();s.addRange(r);e.textContent='Código seleccionado: cópialo con Ctrl+C o ⌘C.'};
+try{navigator.clipboard.writeText(t).then(()=>e.textContent='Copiado.',sel)}catch(_){sel()}});</script>

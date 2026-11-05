@@ -118,17 +118,19 @@ La IA es una **función «IA»**, no un personaje ni un producto: los botones di
 
 Directa y clínica: el verbo dice lo que pasa («Guardar receta», «Surtir»). Los errores dicen el límite («Fuera de rango: máximo 100 mg al día»). Trato de usted o por título profesional en saludos («Buenos días, Dra. Ramírez»).
 
-## Relación con Manik Impulsa (decisiones abiertas)
+## Relación con Impulsa Manik (alineación aprobada 2026-11-05)
 
-Manik Impulsa ya tiene su propio sistema en producción. Este sistema lo respeta en espacio, radios, sombras, estados e iconos, y difiere en tres puntos que hay que decidir:
+Impulsa Manik ya tenía su propio sistema en producción; compartía espacio, radios, sombras, estados e iconos. Se alinea en los tres puntos que faltaban:
 
-1. **Tipografía:** Impulsa usa solo Ubuntu; aquí, Urbanist + Atkinson.
-2. **Acción:** Impulsa usa su violeta (#504CA1) para botones; aquí la acción es azul Manik en todas las apps.
-3. **Lienzo:** Impulsa usa grises neutros (#F4F4F4); aquí los neutros tienen un sesgo al azul.
+1. **Tipografía:** de Ubuntu a Urbanist (títulos) + Atkinson Hyperlegible Next (interfaz y datos).
+2. **Acción:** de su violeta (#504CA1) a azul Manik en botones, enlaces, selección y foco. El violeta se queda como identidad: sello, tarjeta y «con Impulsa Manik».
+3. **Lienzo:** de #F4F4F4 a `canvas` #F5F7FB (diferencia 1.03: no se ve).
+
+Guía de migración para su equipo: `../../impulsa-migracion/` (valores, búsquedas, orden y comprobaciones). Medido: el texto corrido no cambia de ancho; botones +12–18 % y títulos +5–16 %.
 
 ## Pendientes
 
 - Confirmar la regla de una sola app (¿se salta el inicio?) y los textos de «sin acceso».
-- Decidir los tres puntos de Impulsa.
+- Migrar Impulsa con su guía (lienzo → acción → tipografía → shell de app pequeña).
 - Componentes por app (tablas, agenda) cuando se diseñe cada producto.
 - Panel lateral (formularios de 7 a 12 campos con contexto visible).

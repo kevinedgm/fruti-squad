@@ -158,7 +158,7 @@ table{{border-collapse:collapse;width:100%;min-width:760px}}th,td{{text-align:le
 <section aria-labelledby="h-casos"><header><span class="eti">Casos especiales</span><h2 id="h-casos">Las excepciones también tienen regla</h2></header>
  <div class="dos">
   <div class="lam"><img src="{S["administracion"]}" alt="" width="48" height="48"><h3>Administración Manik es invisible para las clínicas</h3><p>Es la herramienta del equipo de MedicalManik. A diferencia de una app que la clínica no contrató (que se ve apagada, con candado), Administración no aparece en absoluto: mostrarla revelaría una superficie interna y generaría solicitudes imposibles. Por eso queda fuera del mosaico de seis.</p></div>
-  <div class="lam"><img src="{S["impulsa"]}" alt="" width="48" height="48"><h3>Impulsa ya existía</h3><p>Se llamaba «Manik Impulsa» y tiene sistema propio en producción. Pasa a «Impulsa Manik» por el patrón, y su violeta se conserva como color de identidad. Quedan abiertas tres diferencias con el sistema común: su tipografía, el color de sus botones y sus grises.</p></div>
+  <div class="lam"><img src="{S["impulsa"]}" alt="" width="48" height="48"><h3>Impulsa ya existía</h3><p>Se llamaba «Manik Impulsa» y tiene sistema propio en producción. Pasa a «Impulsa Manik» por el patrón, y su violeta se conserva como color de identidad. El 5 de noviembre se aprobó alinearla en lo que le faltaba: tipografía (Urbanist y Atkinson), botones en azul Manik y el lienzo común. Su equipo migra con una guía.</p></div>
  </div>
 </section>
 
@@ -168,7 +168,7 @@ table{{border-collapse:collapse;width:100%;min-width:760px}}th,td{{text-align:le
 
 <section aria-labelledby="h-abi"><header><span class="eti">Lo que sigue abierto</span><h2 id="h-abi">Decisiones pendientes</h2></header>
  <ol class="abiertos"><li><b>Nombre del directorio para pacientes.</b> «Manik» solo no se puede registrar. Hay propuestas con el molde de Doctoralia (MediManik, DocManik, DoctorManik) y la tipografía del logotipo será Sora. Falta saber por qué se rechazó «Manik» y hacer la búsqueda en el registro de marcas.</li>
- <li><b>Impulsa y el sistema común:</b> tipografía, color de acción y grises.</li>
+ <li><b>Migración de Impulsa</b> al sistema común (aprobada; la hace su equipo con la guía).</li>
  <li><b>Registro y dominios</b> de los nombres de producto en México y Centroamérica: no se han verificado.</li></ol>
 </section>
 
