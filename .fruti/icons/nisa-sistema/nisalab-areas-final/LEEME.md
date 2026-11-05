@@ -5,16 +5,16 @@ Cada división de Nisa Nabani tiene su identidad dentro de NisaLab: «Área Nisa
 ## Áreas
 | Área | Token | Color | Blanco encima |
 |---|---|---|---|
-| Aguas | `area-aguas` | #007CA3 | 4.8:1 |
-| Agrícolas | `area-agricolas` | #946400 | 5.1:1 |
-| Ambiental | `area-ambiental` | #2F8247 | 4.8:1 |
-| Alimentos | `area-alimentos` | #A6552D | 5.3:1 |
-| Bebidas | `area-bebidas` | #7A5DA9 | 5.3:1 |
-| Bebidas de agave | `area-agave` | #008478 | 4.6:1 |
-| Farmacia | `area-farmacia` | #A14E78 | 5.4:1 |
-| Consultoría | `area-consultoria` | #4C6BB4 | 5.2:1 |
+| Aguas | `area-aguas` | #0C8CB7 | 3.9:1 |
+| Agrícolas | `area-agricolas` | #AA7408 | 4.0:1 |
+| Ambiental | `area-ambiental` | #0E9A47 | 3.7:1 |
+| Alimentos | `area-alimentos` | #CE5708 | 4.2:1 |
+| Bebidas | `area-bebidas` | #9163D4 | 4.3:1 |
+| Bebidas de agave | `area-agave` | #0F9487 | 3.7:1 |
+| Farmacia | `area-farmacia` | #C64D8E | 4.3:1 |
+| Consultoría | `area-consultoria` | #4E79E3 | 4.1:1 |
 
-Paleta en OKLCH con la misma luminosidad (0.54) e intensidad (0.12); solo cambia el tono, fuera del rango del pera.
+Paleta en OKLCH con la misma luminosidad (0.60) para las ocho y la intensidad máxima que admite cada tono en pantalla (tope 0.17); solo cambia el tono, fuera del rango del pera. El blanco del ícono queda entre 3.7 y 4.3:1: basta para un gráfico (mínimo 3:1) porque el color de área nunca lleva texto. Versión 2026-11-05 (antes L 0.54, intensidad 0.10–0.12): más vivos y separados de los colores de estado; propuesta en `../nisalab-areas-color-r01/`.
 
 ## Archivos por área (`svg/<área>/`)
 - `marca.svg`, `marca-blanco.svg` (sobre azul), `marca-1tinta.svg` (`currentColor`, ícono calado).

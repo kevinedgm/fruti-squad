@@ -68,9 +68,9 @@ fonts = '' if FL else '<link rel="stylesheet" href="https://fonts.googleapis.com
 tarj = ''.join(f'<div class="tj"><div class="tm">{"".join(inl(k, "ficha", px, next(u)) for px in (64, 32, 24, 16))}</div><b>{n}</b><code>{l} · parametro-{k}</code><p>{ej}</p></div>' for k, n, l, ej in TIPOS)
 vers = ''.join(f'<div class="vr {c}"><div class="tm">{"".join(inl(k, v, 40, next(u)) for k, *_ in TIPOS)}</div><span>{t}</span></div>'
                for v, c, t in (('ficha', '', 'ficha.svg · sobre fondos claros'), ('ficha-blanco', 'oscuro', 'ficha-blanco.svg · sobre azul real o fotos oscuras'), ('ficha-1tinta', 'tinta', 'ficha-1tinta.svg · una tinta (currentColor), letras caladas')))
-filas = [('microbiologicos', 'Coliformes totales', 'Aguas', '#007CA3', '&lt;1.1 NMP/100 mL', 'Conforme', 'ok'), ('fisicoquimicos', 'pH', 'Aguas', '#007CA3', '7.42', 'Conforme', 'ok'),
-         ('metales', 'Plomo', 'Alimentos', '#A6552D', '0.031 mg/kg', 'Fuera de límite', 'er'), ('organicos', 'Clorpirifos', 'Agrícolas', '#946400', 'En proceso', 'Pendiente', 'av'),
-         ('nutrimentales', 'Proteína', 'Alimentos', '#A6552D', '12.4 g/100 g', 'Conforme', 'ok')]
+filas = [('microbiologicos', 'Coliformes totales', 'Aguas', '#0C8CB7', '&lt;1.1 NMP/100 mL', 'Conforme', 'ok'), ('fisicoquimicos', 'pH', 'Aguas', '#0C8CB7', '7.42', 'Conforme', 'ok'),
+         ('metales', 'Plomo', 'Alimentos', '#CE5708', '0.031 mg/kg', 'Fuera de límite', 'er'), ('organicos', 'Clorpirifos', 'Agrícolas', '#AA7408', 'En proceso', 'Pendiente', 'av'),
+         ('nutrimentales', 'Proteína', 'Alimentos', '#CE5708', '12.4 g/100 g', 'Conforme', 'ok')]
 NOM = {k: n for k, n, *_ in TIPOS}
 def tabla():
     return ('<div class="tw"><table><thead><tr><th>Parámetro</th><th>Tipo</th><th>Área</th><th>Resultado</th><th>Estado</th></tr></thead><tbody>'

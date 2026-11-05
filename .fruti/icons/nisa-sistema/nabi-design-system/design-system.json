@@ -89,99 +89,99 @@
     "Áreas": {
       "files": {
         "aguas-marca.svg": {
-          "blob": "c161f80533fd08be3854fd58f9b14be0",
+          "blob": "4c74483fd59e109ce83ebcf91ea43b42",
           "name": "aguas-marca.svg",
-          "size": 794,
+          "size": 843,
           "type": "image/svg+xml"
         },
         "agricolas-marca.svg": {
-          "blob": "0e56f75275e0d03592aa77f488af2d14",
+          "blob": "cd433e99ec51d2b73fe905055bfc2387",
           "name": "agricolas-marca.svg",
-          "size": 1104,
+          "size": 1204,
           "type": "image/svg+xml"
         },
         "ambiental-marca.svg": {
-          "blob": "2c7ed8ff58b2167287864a13fa953fa0",
+          "blob": "b9b5e0a42aafd49e583d9589d7d47978",
           "name": "ambiental-marca.svg",
-          "size": 570,
-          "type": "image/svg+xml"
-        },
-        "alimentos-marca.svg": {
-          "blob": "3bffda4ca48d2242c10d0f78b33b1b15",
-          "name": "alimentos-marca.svg",
-          "size": 673,
-          "type": "image/svg+xml"
-        },
-        "bebidas-marca.svg": {
-          "blob": "afadbc855c76eb0d1136f3c344fc9ece",
-          "name": "bebidas-marca.svg",
-          "size": 595,
-          "type": "image/svg+xml"
-        },
-        "agave-marca.svg": {
-          "blob": "9815e62b68849287c3deae77cbecfde8",
-          "name": "agave-marca.svg",
-          "size": 920,
-          "type": "image/svg+xml"
-        },
-        "farmacia-marca.svg": {
-          "blob": "2ad6c7abdcc9916822d5ad43bc6155a7",
-          "name": "farmacia-marca.svg",
           "size": 613,
           "type": "image/svg+xml"
         },
+        "alimentos-marca.svg": {
+          "blob": "b70d5cea577bb97fe78da0128a791197",
+          "name": "alimentos-marca.svg",
+          "size": 735,
+          "type": "image/svg+xml"
+        },
+        "bebidas-marca.svg": {
+          "blob": "45cee7715d4c7c148ba6552121569f00",
+          "name": "bebidas-marca.svg",
+          "size": 638,
+          "type": "image/svg+xml"
+        },
+        "agave-marca.svg": {
+          "blob": "1c9cb02302d4352ad07cebde06064d06",
+          "name": "agave-marca.svg",
+          "size": 987,
+          "type": "image/svg+xml"
+        },
+        "farmacia-marca.svg": {
+          "blob": "9e3f70d343c5b7c90acf2d6be78c40d3",
+          "name": "farmacia-marca.svg",
+          "size": 656,
+          "type": "image/svg+xml"
+        },
         "consultoria-marca.svg": {
-          "blob": "025258e8e6ccf6e842a755b8ae33b941",
+          "blob": "89ebd224f400886fbd7dcb6f446f9a6b",
           "name": "consultoria-marca.svg",
-          "size": 702,
+          "size": 763,
           "type": "image/svg+xml"
         },
         "aguas-icono.svg": {
-          "blob": "1dccb369a174271b0f6ee8bbea2c62c3",
+          "blob": "652d85bba8380e207ba9a273fcf00af9",
           "name": "aguas-icono.svg",
-          "size": 594,
+          "size": 619,
           "type": "image/svg+xml"
         },
         "agricolas-icono.svg": {
-          "blob": "68806942cf03d2d62ec9415c3d9058eb",
+          "blob": "8e71bbfea16ef188e7871c25fa312aef",
           "name": "agricolas-icono.svg",
-          "size": 904,
+          "size": 980,
           "type": "image/svg+xml"
         },
         "ambiental-icono.svg": {
-          "blob": "b72df357a05d752bda0976372400fba3",
+          "blob": "7c35fbc5a9e39ccb843d6de70f0378e6",
           "name": "ambiental-icono.svg",
-          "size": 370,
+          "size": 389,
           "type": "image/svg+xml"
         },
         "alimentos-icono.svg": {
-          "blob": "817b9466943a80f09807561d3bb1abd1",
+          "blob": "cb8e9ba5f9dda699098ae65c5a3c76ae",
           "name": "alimentos-icono.svg",
-          "size": 473,
+          "size": 511,
           "type": "image/svg+xml"
         },
         "bebidas-icono.svg": {
-          "blob": "db94d4a07743d54a20ae602fa3e93b70",
+          "blob": "3c9822229e8bb899387428dbefaee780",
           "name": "bebidas-icono.svg",
-          "size": 395,
+          "size": 414,
           "type": "image/svg+xml"
         },
         "agave-icono.svg": {
-          "blob": "69a43f77eb35d3980afecf3477d2a0e4",
+          "blob": "52154012ce78b54e233630aba05a0c28",
           "name": "agave-icono.svg",
-          "size": 720,
+          "size": 763,
           "type": "image/svg+xml"
         },
         "farmacia-icono.svg": {
-          "blob": "adf052f9267d6cc5208446f9851b15b2",
+          "blob": "55005e273f1e1dec9aeefcbd50a194ea",
           "name": "farmacia-icono.svg",
-          "size": 413,
+          "size": 432,
           "type": "image/svg+xml"
         },
         "consultoria-icono.svg": {
-          "blob": "a7bbeb85c77062fc1b47ea39bd6b9f62",
+          "blob": "26d0778d0ee243e1808409e70fbb5aa7",
           "name": "consultoria-icono.svg",
-          "size": 502,
+          "size": 539,
           "type": "image/svg+xml"
         }
       },
@@ -221,10 +221,10 @@
     "Áreas"
   ],
   "lastChange": {
-    "at": "2026-11-05T04:42:15Z",
+    "at": "2026-11-05T04:51:49Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "Fuente de datos: Google Sans Code sustituye a IBM Plex Mono (la que ya usa bitácoras). Cifras de ancho fijo y cero con barra de fábrica, comprobados. Tokens, README, valores, módulos y los 14 componentes actualizados."
+    "note": "Áreas más vivas (opción B): luz 0.60 e intensidad máxima por tono. Separa Agrícolas de alerta y Ambiental de conforme (distancia > 8). Tokens area-*, textos, Areas, EncabezadoModulo y los 16 íconos del grupo «Áreas» actualizados."
   },
   "layout": "files",
   "libraries": [],

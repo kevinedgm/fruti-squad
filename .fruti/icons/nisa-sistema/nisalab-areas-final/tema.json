@@ -2,55 +2,55 @@
   "sistema": "NisaLab",
   "patron_nombre": "«Área NisaLab» (por ejemplo, «Aguas NisaLab»)",
   "paleta": {
-    "metodo": "OKLCH con luminosidad 0.54 e intensidad 0.12 iguales; solo cambia el tono, fuera del rango del pera (100–125°)",
+    "metodo": "OKLCH con luminosidad 0.60 igual para las ocho y la intensidad máxima que admite cada tono en pantalla (tope 0.17); solo cambia el tono, fuera del rango del pera (100–125°). Versión 2026-11-05: más vivos y separados de los colores de estado (distancia > 8).",
     "areas": {
       "aguas": {
         "nombre": "Aguas",
-        "hex": "#007CA3",
+        "hex": "#0C8CB7",
         "token": "area-aguas",
-        "blanco_encima": 4.8
+        "blanco_encima": 3.9
       },
       "agricolas": {
         "nombre": "Agrícolas",
-        "hex": "#946400",
+        "hex": "#AA7408",
         "token": "area-agricolas",
-        "blanco_encima": 5.1
+        "blanco_encima": 4.0
       },
       "ambiental": {
         "nombre": "Ambiental",
-        "hex": "#2F8247",
+        "hex": "#0E9A47",
         "token": "area-ambiental",
-        "blanco_encima": 4.8
+        "blanco_encima": 3.7
       },
       "alimentos": {
         "nombre": "Alimentos",
-        "hex": "#A6552D",
+        "hex": "#CE5708",
         "token": "area-alimentos",
-        "blanco_encima": 5.3
+        "blanco_encima": 4.2
       },
       "bebidas": {
         "nombre": "Bebidas",
-        "hex": "#7A5DA9",
+        "hex": "#9163D4",
         "token": "area-bebidas",
-        "blanco_encima": 5.3
+        "blanco_encima": 4.3
       },
       "agave": {
         "nombre": "Bebidas de agave",
-        "hex": "#008478",
+        "hex": "#0F9487",
         "token": "area-agave",
-        "blanco_encima": 4.6
+        "blanco_encima": 3.7
       },
       "farmacia": {
         "nombre": "Farmacia",
-        "hex": "#A14E78",
+        "hex": "#C64D8E",
         "token": "area-farmacia",
-        "blanco_encima": 5.4
+        "blanco_encima": 4.3
       },
       "consultoria": {
         "nombre": "Consultoría",
-        "hex": "#4C6BB4",
+        "hex": "#4E79E3",
         "token": "area-consultoria",
-        "blanco_encima": 5.2
+        "blanco_encima": 4.1
       }
     }
   },

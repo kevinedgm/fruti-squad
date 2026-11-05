@@ -17,6 +17,10 @@ spec = importlib.util.spec_from_file_location('areas2', os.path.join(H, '..', 'n
 A = importlib.util.module_from_spec(spec); spec.loader.exec_module(A)
 sys.argv = _argv
 AZ, PE, W, TINTA, MUTED = A.AZ, A.PE, A.W, A.TINTA, '#535B70'
+# Paleta vigente (2026-11-05, opción B de ../nisalab-areas-color-r01): sustituye la de la ronda 2.
+# L 0.60 igual para las ocho; intensidad máxima que admite cada tono en pantalla (tope 0.17).
+VIGENTE = {"aguas": "#0C8CB7", "agricolas": "#AA7408", "ambiental": "#0E9A47", "alimentos": "#CE5708", "bebidas": "#9163D4", "agave": "#0F9487", "farmacia": "#C64D8E", "consultoria": "#4E79E3"}
+A.AREAS = [(k, n, VIGENTE[k]) for k, n, c in A.AREAS]
 
 # — texto a trazos —
 _f = {}
@@ -98,7 +102,7 @@ for k, n, c in A.AREAS:
     out[k] = piezas
 
 json.dump({'sistema': 'NisaLab', 'patron_nombre': '«Área NisaLab» (por ejemplo, «Aguas NisaLab»)',
-           'paleta': {'metodo': f'OKLCH con luminosidad {A.L_} e intensidad {A.C_} iguales; solo cambia el tono, fuera del rango del pera (100–125°)',
+           'paleta': {'metodo': 'OKLCH con luminosidad 0.60 igual para las ocho y la intensidad máxima que admite cada tono en pantalla (tope 0.17); solo cambia el tono, fuera del rango del pera (100–125°). Versión 2026-11-05: más vivos y separados de los colores de estado (distancia > 8).',
                       'areas': {k: {'nombre': n, 'hex': c, 'token': f'area-{k}', 'blanco_encima': A.cr(W, c)} for k, n, c in A.AREAS}},
            'iconos': 'Dibujados en retícula de 40, formas redondas y blancas, grosor de trazo 3–4', 'tamano_minimo_px': 16},
           open(os.path.join(H, 'tema.json'), 'w'), ensure_ascii=False, indent=2)

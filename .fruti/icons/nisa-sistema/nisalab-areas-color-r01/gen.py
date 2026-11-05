@@ -46,7 +46,7 @@ out = f'''<title>Áreas NisaLab · color</title>
 <style>{CSS}</style><script>document.documentElement.lang='es'</script>
 <main class="wrap"><h1>Color de las áreas: <span>más vivos</span></h1>
 <p class="intro">Mismos ocho tonos de hoy. Lo que cambia es cuánta intensidad lleva cada uno. Hoy comparten una intensidad baja, porque el verde azulado de Agave no admite más, y eso los acerca al gris. «Distancia» es la diferencia de color en OKLab ×100: por debajo de 5 dos colores se confunden.</p>
-<div class="rec"><h2>Recomendación: B</h2><p>Es la única que separa Agrícolas del ámbar de alerta y Ambiental del verde de conforme. Costo: el blanco del ícono baja a 3.7–4.3:1; cumple porque el color de área nunca lleva texto (el nombre va en azul).</p></div>
+<div class="rec"><h2>Aprobada y aplicada: B (5 de noviembre de 2026)</h2><p>Es la única que separa Agrícolas del ámbar de alerta y Ambiental del verde de conforme. Costo: el blanco del ícono baja a 3.7–4.3:1; cumple porque el color de área nunca lleva texto (el nombre va en azul).</p></div>
 {"".join(bloque(*o) for o in OPC)}
 </main>'''
 open(os.path.join(D, 'comparacion.html'), 'w').write(out)
