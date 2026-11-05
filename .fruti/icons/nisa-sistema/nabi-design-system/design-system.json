@@ -221,10 +221,10 @@
     "Áreas"
   ],
   "lastChange": {
-    "at": "2026-11-05T04:09:02Z",
+    "at": "2026-11-05T04:17:22Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "Color de bitácoras aprobado: «completo» en conforme (sin olivo), lienzo bg, solo lectura en surface-sunken con candado. Nuevos: surface-2, primary-ink, primary-line, conforme-line, alerta-line, fuera-hover, fuera-line y la consola log-*."
+    "note": "Bitácoras r02: se retiran los 14 colores agregados en r01 (surface-2, primary-ink, primary-line, *-line, fuera-hover, log-*). Bitácoras usa 17 colores existentes. Solo lectura pasa a bg (borde 3.0:1)."
   },
   "layout": "files",
   "libraries": [],

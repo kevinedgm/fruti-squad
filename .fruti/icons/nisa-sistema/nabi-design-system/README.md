@@ -27,10 +27,9 @@ Los primarios de Nisa Nabani ordenan la interfaz; los secundarios del laboratori
 - `pera` (#C2D225) es lo que está en curso: la célula que creció del símbolo y la muestra activa. Nunca texto sobre blanco (1.7:1). `pera-soft` para el registro en curso.
 - Estados: `conforme` (#2E7D32), `fuera` (#B42318), `alerta` (texto #8A6100, relleno #E9B10A) y `pendiente` (pizarra #475467). Cada uno con su fondo `*-soft` y su texto `on-*-soft`. Ninguno es color de área.
 - Áreas (`area-*`): ocho colores propios de NisaLab con la misma luminosidad e intensidad (OKLCH 0.54 · 0.12), uno por área: Aguas #007CA3, Agrícolas #946400, Ambiental #2F8247, Alimentos #A6552D, Bebidas #7A5DA9, Bebidas de agave #008478, Farmacia #A14E78, Consultoría #4C6BB4. Solo en la marca del área, el encabezado de su página y los filtros; nunca en tablas. Blanco encima de 4.6 a 5.4:1. Ver el componente «Areas».
-- Bordes de estado y azul: `conforme-line`, `alerta-line`, `fuera-line` y `primary-line` contornean píldoras, avisos y chips; son decorativos, el texto lleva el contraste. `fuera-hover` para el botón destructivo; `primary-ink` cierra el degradado del encabezado.
-- «Completo» y «firmado» son `conforme`, nunca pera ni un olivo derivado de él: el pera dice «en curso» o «urgente», y la misma familia de tono diría «listo» y «atiéndeme».
-- Solo lectura y deshabilitado usan `surface-sunken` con `border-strong`; los distingue el candado, no un color propio.
-- Consola de importación (`log-*`): el único bloque oscuro, teñido de azul real; los niveles se leen por texto y borde.
+- «Completo» y «firmado» son `conforme`, nunca pera ni un olivo derivado de él: el pera dice «en curso» o «urgente».
+- Solo lectura y deshabilitado van sobre `bg` con `border-control` (3.0:1); los distingue el candado, no un color propio. `surface-sunken` no sirve para campos: su borde baja a 2.9:1.
+- Sin colores por pantalla: un módulo (por ejemplo, bitácoras) usa solo básicos, marca y estados de este sistema. La consola de importación es clara y sus niveles usan los colores de estado.
 - Contrastes verificados: todo texto ≥ 4.5:1 sobre su fondo (`text-muted` 6.2:1 sobre `bg`, `text-subtle` 4.7:1 sobre `surface-sunken`); `border-control` 3.3:1 sobre `surface`. Por eso los campos viven sobre `surface`, no sobre `bg` (3.0:1).
 
 ## Tipografía

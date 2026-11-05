@@ -1,0 +1,310 @@
+/* NisaLab · bitácoras · capa de color única (r02: solo tokens de NisaLab v3). Pegar AL FINAL del archivo. */
+.bitacoras-page-wrap,
+.bit-history-layer,
+.bit-history-control {
+  --nn-bg: #F2F4F8;
+  --nn-surface: #FFFFFF;
+  --nn-text: #141B33;
+  --nn-text-muted: #535B70;
+  --nn-border: #DFE3EC;
+  --nn-border-control: #858DA3;
+  --nn-primary: #052A76;
+  --nn-primary-hover: #021C52;
+  --nn-primary-soft: #E8EDF7;
+  --nn-pera: #C2D225;
+  --nn-conforme: #2E7D32;
+  --nn-conforme-soft: #E3F1E4;
+  --nn-on-conforme-soft: #1E5A22;
+  --nn-alerta: #8A6100;
+  --nn-alerta-soft: #FBF0CC;
+  --nn-fuera: #B42318;
+  --nn-fuera-soft: #FDE7E5;
+  /* Compatibilidad: los nombres viejos apuntan a la capa nueva */
+  --navy: var(--nn-primary);
+  --navy-deep: var(--nn-primary);
+  --navy-mid: var(--nn-primary-hover);
+  --navy-lt: var(--nn-primary-soft);
+  --lime: var(--nn-pera);
+  --lime-soft: var(--nn-primary-soft);
+  --lime-ink: var(--nn-text);
+  --surf: var(--nn-surface);
+  --surf-2: var(--nn-bg);
+  --surf-3: var(--nn-bg);
+  --surf-4: var(--nn-border);
+  --page-bg: var(--nn-bg);
+  --bdr: var(--nn-border);
+  --bdr-2: var(--nn-border-control);
+  --bdr-3: var(--nn-text-muted);
+  --tx: var(--nn-text);
+  --tx-2: var(--nn-text);
+  --tx-3: var(--nn-text-muted);
+  --tx-4: var(--nn-text-muted);
+  --placeholder: var(--nn-text-muted);
+  --ok: var(--nn-on-conforme-soft);
+  --ok-bg: var(--nn-conforme-soft);
+  --ok-bdr: var(--nn-conforme-soft);
+  --warn: var(--nn-alerta);
+  --warn-bg: var(--nn-alerta-soft);
+  --warn-bdr: var(--nn-alerta-soft);
+  --err: var(--nn-fuera);
+  --err-bg: var(--nn-fuera-soft);
+  --err-bdr: var(--nn-fuera-soft);
+  --dis-bg: var(--nn-bg);
+  --dis-bdr: var(--nn-border-control);
+  --dis-tx: var(--nn-text-muted);
+  --nn-bit-navy: var(--nn-primary);
+  --nn-bit-navy-lt: var(--nn-primary-soft);
+  --nn-bit-navy-mid: var(--nn-primary-hover);
+  --nn-bit-bg: var(--nn-bg);
+  --nn-bit-surf: var(--nn-surface);
+  --nn-bit-surf-2: var(--nn-bg);
+  --nn-bit-surf-3: var(--nn-bg);
+  --nn-bit-surf-4: var(--nn-border);
+  --nn-bit-bdr: var(--nn-border);
+  --nn-bit-bdr-2: var(--nn-border-control);
+  --nn-bit-bdr-3: var(--nn-text-muted);
+  --nn-bit-tx: var(--nn-text);
+  --nn-bit-tx-2: var(--nn-text);
+  --nn-bit-tx-3: var(--nn-text-muted);
+  --nn-bit-tx-4: var(--nn-text-muted);
+  --nn-bit-ok: var(--nn-on-conforme-soft);
+  --nn-bit-ok-bg: var(--nn-conforme-soft);
+  --nn-bit-ok-bdr: var(--nn-conforme-soft);
+  --nn-bit-warn: var(--nn-alerta);
+  --nn-bit-warn-bg: var(--nn-alerta-soft);
+  --nn-bit-warn-bdr: var(--nn-alerta-soft);
+  --nn-bit-err: var(--nn-fuera);
+  --nn-bit-err-bg: var(--nn-fuera-soft);
+  --nn-bit-err-bdr: var(--nn-fuera-soft);
+  --nn-bit-dis-bg: var(--nn-bg);
+  --nn-bit-dis-bdr: var(--nn-border-control);
+  --nn-bit-dis-tx: var(--nn-text-muted);
+  --v3-ink: var(--nn-text);
+  --v3-muted: var(--nn-text-muted);
+  --v3-border: var(--nn-border);
+  --v3-navy: var(--nn-primary);
+  --nn-primary-light: var(--nn-primary-hover);
+  --nn-primary-dark: var(--nn-primary-hover);
+  --nn-primary-darker: var(--nn-primary);
+  --nn-secondary: var(--nn-pera);
+  --nn-text-light: var(--nn-text-muted);
+  --nn-bg-alt: var(--nn-bg);
+  --nn-color-text-muted: var(--nn-text-muted);
+  --nn-color-success-dark: var(--nn-on-conforme-soft);
+  --nn-color-warning-dark: var(--nn-alerta);
+  --nn-color-error-dark: var(--nn-fuera);
+  --nn-color-info-dark: var(--nn-primary);
+  --info: var(--nn-primary);
+  --info-bg: var(--nn-primary-soft);
+  --info-bdr: var(--nn-border);
+  --nn-color-success-soft: var(--nn-conforme-soft);
+  --nn-color-warning-soft: var(--nn-alerta-soft);
+  --nn-color-error-soft: var(--nn-fuera-soft);
+  --nn-color-info-soft: var(--nn-primary-soft);
+  --focus-ring: 0 0 0 3px rgba(5, 42, 118, 0.18);
+  --nn-bit-focus: var(--focus-ring);
+}
+.bitacoras-page-wrap ::selection { background: var(--nn-pera); color: var(--nn-primary); }
+
+/* ── Segundo paso: colores escritos a mano en las reglas ───────────────
+   Mismos selectores que el original; ganan por ir después.
+   Donde el original usa !important, aquí también. */
+
+/* Decisión 1 · «Completo» en verde conforme (el pera deja de significar éxito) */
+.bitacoras-page-wrap .folio-badge--complete {
+  background: var(--nn-conforme-soft);
+  border-color: var(--nn-conforme-soft);
+  color: var(--nn-on-conforme-soft);
+}
+.bitacoras-page-wrap .folio-badge--complete:hover {
+  background: var(--nn-conforme);
+  border-color: var(--nn-conforme);
+  color: #fff;
+}
+.bitacoras-page-wrap .sample-info__folio,
+.bitacoras-page-wrap .results-count-badge,
+.bitacoras-page-wrap .results-panel__badge,
+.bitacoras-page-wrap .results-panel__section-tag,
+.bitacoras-page-wrap .results-badge {
+  border-color: var(--nn-border);
+  background: var(--nn-primary-soft);
+  color: var(--nn-primary);
+}
+.bitacoras-page-wrap .nn-gc-ok { background: var(--nn-conforme-soft); color: var(--nn-on-conforme-soft); border-color: var(--nn-conforme-soft); }
+.bitacoras-page-wrap .nn-gc-err { background: var(--nn-fuera-soft); color: var(--nn-fuera); border-color: var(--nn-fuera-soft); }
+.bitacoras-page-wrap .nn-gc-warn { background: var(--nn-alerta-soft); color: var(--nn-alerta); border-color: var(--nn-alerta-soft); }
+.bitacoras-page-wrap .nn-gl-table td.is-ok { color: var(--nn-on-conforme-soft); }
+.bitacoras-page-wrap .nn-gl-table td.is-err { color: var(--nn-fuera); }
+.bit-snapshot-table__new { color: var(--nn-on-conforme-soft); }
+
+/* Botones: una sola primaria en azul; el estado lo dicen icono y texto */
+.bitacoras-page-wrap .btn-success,
+.bitacoras-page-wrap .btn-nn-success,
+.bitacoras-page-wrap .nnd-btn-ok,
+.bitacoras-page-wrap .iub-btn.success,
+.bitacoras-page-wrap .nn-gl-btn-ok {
+  background: var(--nn-primary);
+  border-color: var(--nn-primary);
+  color: #fff;
+}
+.bitacoras-page-wrap .btn-success:hover,
+.bitacoras-page-wrap .btn-nn-success:hover,
+.bitacoras-page-wrap .iub-btn.success:hover:not(:disabled),
+.bitacoras-page-wrap .nnd-btn-confirm:hover,
+.bitacoras-page-wrap .iub-btn.navy:hover:not(:disabled),
+.bitacoras-page-wrap .nn-gl-btn-ok:hover {
+  background: var(--nn-primary-hover);
+  border-color: var(--nn-primary-hover);
+  filter: none;
+}
+.bitacoras-page-wrap .btn-nn-danger,
+.bitacoras-page-wrap .nnd-btn-danger,
+.bitacoras-page-wrap .iub-btn.danger {
+  background: var(--nn-fuera);
+  border-color: var(--nn-fuera);
+  color: #fff;
+}
+.bitacoras-page-wrap .btn-nn-danger:hover,
+.bitacoras-page-wrap .nnd-btn-danger:hover,
+.bitacoras-page-wrap .iub-btn.danger:hover:not(:disabled) {
+  background: var(--nn-fuera);
+  box-shadow: 0 0 0 3px var(--nn-fuera-soft);
+}
+.bitacoras-page-wrap .btn-validate {
+  background: var(--nn-primary);
+  box-shadow: 0 1px 2px rgba(5, 42, 118, 0.30), 0 6px 14px -6px rgba(5, 42, 118, 0.45);
+}
+.bitacoras-page-wrap .btn-validate:hover { background: var(--nn-primary-hover); }
+.bitacoras-page-wrap .btn-validate.is-valid { background: var(--nn-conforme); box-shadow: none; }
+.bitacoras-page-wrap .btn-validate.has-errors { background: var(--nn-fuera); box-shadow: none; }
+.bitacoras-page-wrap .attachment-remove {
+  border-color: var(--nn-fuera-soft);
+  background: var(--nn-fuera-soft);
+  color: var(--nn-fuera);
+}
+.bitacoras-page-wrap .attachment-remove:hover {
+  border-color: var(--nn-fuera);
+  background: var(--nn-fuera-soft);
+  color: var(--nn-fuera);
+}
+.bitacoras-page-wrap .btn-nn-reopen:hover,
+.bitacoras-page-wrap .bitacora-btn--pending:hover,
+.bitacoras-page-wrap .bitacora-btn--pending:focus-visible {
+  border-color: var(--nn-alerta);
+  background: var(--nn-alerta-soft);
+  color: var(--nn-alerta);
+}
+.bitacoras-page-wrap .bitacora-btn--rejected:hover,
+.bitacoras-page-wrap .bitacora-btn--rejected:focus-visible {
+  border-color: var(--nn-fuera);
+  background: var(--nn-fuera-soft);
+  color: var(--nn-fuera);
+}
+.bitacoras-page-wrap .bitacora-btn,
+.bitacoras-page-wrap .btn-nn-primary { box-shadow: 0 1px 2px rgba(5, 42, 118, 0.30), 0 6px 14px -6px rgba(5, 42, 118, 0.45); }
+.bitacoras-page-wrap .bitacora-btn:hover,
+.bitacoras-page-wrap .bitacora-btn:focus-visible,
+.bitacoras-page-wrap .btn-nn-primary:hover,
+.bitacoras-page-wrap .btn-nn-primary:focus-visible {
+  border-color: var(--nn-primary-hover);
+  background: var(--nn-primary-hover);
+}
+
+/* Decisión 3 · Solo lectura = deshabilitado en color; lo distingue el candado */
+.bitacoras-page-wrap .field-input[readonly],
+.bitacoras-page-wrap .field-input.is-readonly,
+.bitacoras-page-wrap .field-textarea[readonly],
+.bitacoras-page-wrap .input-lock-wrap.is-readonly .field-input,
+.bitacoras-page-wrap .input-lock-wrap.is-readonly .input-unit-btn-wrap .field-input {
+  background: var(--nn-bg);
+  border-color: var(--nn-border-control);
+  color: var(--nn-text-muted);
+}
+.bitacoras-page-wrap .input-suffix-wrap:has(.field-input[readonly]) {
+  background: var(--nn-bg);
+  border-color: var(--nn-border-control);
+}
+.bitacoras-page-wrap .input-lock-wrap.is-readonly { border-color: var(--nn-border-control) !important; }
+.bitacoras-page-wrap .input-lock-wrap.is-readonly .lock-prefix {
+  background: var(--nn-bg) !important;
+  border-color: var(--nn-border-control) !important;
+}
+.bitacoras-page-wrap .input-lock-wrap.is-readonly .lock-prefix svg { stroke: var(--nn-text-muted) !important; }
+.bitacoras-page-wrap .lock-prefix svg { stroke: var(--nn-text-muted); }
+
+/* Campos: estado de advertencia con el ámbar del sistema */
+.bitacoras-page-wrap .field-input.is-warning,
+.bitacoras-page-wrap .input-suffix-wrap:has(.field-input.is-warning) { border-color: var(--nn-alerta); }
+.bitacoras-page-wrap .nn-field-state-reference { color: var(--nn-text-muted); }
+.bitacoras-page-wrap .nn-field-state-reference--error { color: var(--nn-fuera); }
+.bitacoras-page-wrap .nn-field-state-reference--warning,
+.bitacoras-page-wrap .nn-field-state-reference--outlier { color: var(--nn-alerta); }
+
+/* Chips y avisos azules: un solo borde */
+.bitacoras-page-wrap .nn-section-label--navy,
+.bitacoras-page-wrap .nn-panel-count,
+.bitacoras-page-wrap .attachment-item:hover,
+.bitacoras-page-wrap .attachment-icon,
+.bitacoras-page-wrap .criteria-box,
+.bitacoras-page-wrap .nnd-icon--confirm,
+.bitacoras-page-wrap .folio-badges__refresh:hover,
+.bitacoras-page-wrap .nn-alert--apertura,
+.bitacoras-page-wrap .nn-gl-icon-idle,
+.bitacoras-page-wrap .tooltip-trigger,
+.bitacoras-page-wrap .iub-loading,
+.bitacoras-page-wrap #modalAlcVol .bituno-alert-detail--info { border-color: var(--nn-border); }
+.bitacoras-page-wrap .nn-section-label--navy .section-label-line { background: var(--nn-border); }
+.bitacoras-page-wrap .input-suffix,
+.bitacoras-page-wrap .iub-unit { border-left-color: var(--nn-border); color: var(--nn-primary); }
+.bitacoras-page-wrap .nn-gl-spinner { border-color: var(--nn-border); border-top-color: var(--nn-primary); }
+.bitacoras-page-wrap .nn-panel-count { color: var(--nn-primary) !important; }
+
+/* Tablas: encabezados en hundido y texto atenuado */
+.bitacoras-page-wrap .table thead th { background: var(--nn-bg); }
+.bitacoras-page-wrap .measures-table thead th,
+.bitacoras-page-wrap .calc-table th {
+  background: var(--nn-bg);
+  border-color: var(--nn-border);
+  color: var(--nn-text-muted);
+}
+.bitacoras-page-wrap .measures-table tbody td,
+.bitacoras-page-wrap .calc-table td { border-color: var(--nn-border); }
+.bitacoras-page-wrap .results-head-cell { color: var(--nn-text-muted); }
+
+/* Avisos de rechazo y vista previa */
+.bitacoras-page-wrap .reject-reason-box { border-color: var(--nn-fuera-soft); background: var(--nn-fuera-soft); }
+.bitacoras-page-wrap .reject-reason-title { color: var(--nn-fuera); }
+.bitacoras-page-wrap .reject-reason-text { color: var(--nn-fuera); }
+.bitacoras-page-wrap .nn-doc-preview__empty-icon { background: var(--nn-primary-soft); color: var(--nn-primary); }
+.bitacoras-page-wrap .nn-doc-preview__empty-title { color: var(--nn-text); }
+.bitacoras-page-wrap .nn-doc-preview__empty-text { color: var(--nn-text-muted); }
+
+/* Zona de carga del PDF */
+.bitacoras-page-wrap .pdf-dropzone { border-color: var(--nn-border-control); background: var(--nn-bg); }
+.bitacoras-page-wrap .pdf-dropzone:hover,
+.bitacoras-page-wrap .pdf-dropzone--over { border-color: var(--nn-primary); background: var(--nn-primary-soft); }
+.bitacoras-page-wrap .pdf-dropzone--done { border-color: var(--nn-conforme); background: var(--nn-conforme-soft); }
+.bitacoras-page-wrap .pdf-dropzone--error { border-color: var(--nn-fuera); background: var(--nn-fuera-soft); }
+
+/* Consola de importación: clara, como el resto del sistema; el nivel lo dicen texto y color de estado */
+.bitacoras-page-wrap .pdf-log-panel { border-color: var(--nn-border); background: var(--nn-bg); color: var(--nn-text); }
+.bitacoras-page-wrap .pdf-log-table { color: var(--nn-text); }
+.bitacoras-page-wrap .pdf-log-table tr:hover td { background: var(--nn-surface); }
+.bitacoras-page-wrap .pdf-log-scroll { scrollbar-color: var(--nn-border-control) transparent; }
+.bitacoras-page-wrap .pdf-log-scroll::-webkit-scrollbar-thumb { background: var(--nn-border-control); }
+.bitacoras-page-wrap .log-row-error td { color: var(--nn-fuera); }
+.bitacoras-page-wrap .log-row-warn td { color: var(--nn-alerta); }
+.bitacoras-page-wrap .log-row-debug td { color: var(--nn-text-muted); }
+.bitacoras-page-wrap .log-badge--info { background: var(--nn-primary-soft); color: var(--nn-primary); }
+.bitacoras-page-wrap .log-badge--warn { background: var(--nn-alerta-soft); color: var(--nn-alerta); }
+.bitacoras-page-wrap .log-badge--error { background: var(--nn-fuera-soft); color: var(--nn-fuera); }
+.bitacoras-page-wrap .log-badge--debug { background: var(--nn-surface); color: var(--nn-text-muted); }
+.bitacoras-page-wrap .log-etapa { color: var(--nn-text-muted); }
+.bitacoras-page-wrap .log-detalle { background: var(--nn-surface); color: var(--nn-text); border: 1px solid var(--nn-border); }
+.bitacoras-page-wrap .pdf-log-panel .btn-outline-secondary { color: var(--nn-text); border-color: var(--nn-border-control); }
+.bitacoras-page-wrap .pdf-log-panel .btn-outline-secondary:hover,
+.bitacoras-page-wrap .pdf-log-panel .btn-outline-secondary.active { background: var(--nn-primary-soft); color: var(--nn-primary); border-color: var(--nn-primary); }
+
+/* Encabezado de página y modales: azul sólido, sin tonos intermedios */
+.bitacoras-page-wrap .page-hero,
+.bitacoras-page-wrap .modal-header { background: var(--nn-primary); }
