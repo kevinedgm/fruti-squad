@@ -221,10 +221,10 @@
     "Áreas"
   ],
   "lastChange": {
-    "at": "2026-11-05T04:51:49Z",
+    "at": "2026-11-05T05:01:43Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "Áreas más vivas (opción B): luz 0.60 e intensidad máxima por tono. Separa Agrícolas de alerta y Ambiental de conforme (distancia > 8). Tokens area-*, textos, Areas, EncabezadoModulo y los 16 íconos del grupo «Áreas» actualizados."
+    "note": "Componente nuevo «Dialogo» (ronda dialogos-r02 aprobada): avatar de tono, contexto, título y subtítulo; superficies blancas; tipografía en 10 papeles; tonos neutro, aviso, destructivo y éxito."
   },
   "layout": "files",
   "libraries": [],

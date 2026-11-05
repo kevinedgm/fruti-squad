@@ -40,6 +40,10 @@ Los primarios de Nisa Nabani ordenan la interfaz; los secundarios del laboratori
 
 Escala de 4 px. Filas de tabla de 40 px (`row-h`), controles de 40 px en escritorio y 44 px en táctil. Radios contenidos: 6, 8 y 12 px; la píldora solo para puntos de estado, etiquetas de área y avatares. Elevación en una escala corta: `shadow-1` separa tarjetas y tablas del lienzo, `shadow-2` para lo que se levanta al pasar, `shadow-overlay` para lo que flota (menús, paneles, avisos), `shadow-inset` hunde los campos y `shadow-primary` / `shadow-primary-hover` dan cuerpo al botón primario. Las sombras son azuladas y cortas: insinúan, no decoran.
 
+## Diálogos
+
+Una sola estructura para trabajar un registro (720 px) o decidir (440 px): encabezado, cuerpo y pie sobre `surface`. El encabezado da la identidad: avatar de 48 con el fondo suave y el ícono del tono, contexto en `overline` azul, título `title-1` y subtítulo `body` gris. El tono (neutro, aviso, destructivo, éxito) solo cambia el avatar y, si es destructivo, el botón principal. Ver el componente «Dialogo».
+
 ## Movimiento
 
 La carga es el símbolo: las células de Colonia aparecen una tras otra, 200 ms por paso (`paso-carga`), y la pera crece al final. Con `prefers-reduced-motion` el símbolo queda quieto. Todo lo demás es `quick` (150 ms).
