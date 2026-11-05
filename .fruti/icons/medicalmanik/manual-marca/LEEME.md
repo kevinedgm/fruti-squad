@@ -23,3 +23,12 @@ Dominios · fotografía e ilustración propias · probar correos en Gmail, Outlo
 
 ## Verificación
 Playwright 1300 y 390 px con Urbanist y Atkinson locales: sin desbordes de página ni errores; todas las imágenes cargan. Corregido en prueba: párrafos con negritas que se partían en renglones.
+
+## Puesta al día (2026-11-05)
+Pedido: «ponlo al día y resume las secciones de producto con enlace».
+- Nueva tabla «Dónde vive cada regla» en Arquitectura: este manual manda en lo compartido; cada producto en su documento (Ecosistema DS 28z6yfie6L8btocL8QBZi9, manual del directorio PNtPN4fEMSdEyVKTKwxAM7, DS del directorio MTg2EAZVsJKZJRFCWGvAuj, Manik IA LYq9oKz49WMM2ihwALM1WL).
+- Ecosistema y directorio resumidos con enlace; se retiran del manual los detalles que ya viven en su documento (panel de usuario, ids de máscara).
+- Del manual del directorio (4 nov): «Manik» con mayúscula en textos y «manik» en el logotipo; leyenda «Encuentra a tu médico cerca de ti.»; «luz, no color»; estrella #E3A21C (antes #F2B33D).
+- Tipografía: excepción vigente Urbanist + Onest en el directorio [por confirmar como permanente]; contradice la regla de pareja única del 31 oct, se declara en vez de ocultarla.
+- No incorporadas: Administración r1, pantalla principal de Administración y documentos de Expediente siguen como propuesta sin aprobación.
+- Verificación: Playwright 1300 y 390 px, sin desbordes, sin errores, todas las imágenes cargan; 8 enlaces a los documentos.
