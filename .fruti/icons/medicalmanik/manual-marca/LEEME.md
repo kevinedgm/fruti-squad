@@ -39,3 +39,7 @@ Pedido: «el diseño de superficies para todo el ecosistema (colores de superfic
 - Muestras vivas (botones primario, secundario, terciario y destructivo; campo en reposo, foco, error y solo lectura; estados), 6 reglas, tabla de roles por familia con contrastes calculados.
 - Huecos declarados: el directorio no define aviso, error ni información (propuesta: heredar de las apps), no tiene campo fuera del buscador; nadie define deshabilitado (pendiente, no se inventa).
 - Diferencias con el mismo rol: borde de control #858EA5 vs #6B7590, foco 2 vs 3 px, éxito suave, borde decorativo. Por decidir: unificar o dejar por familia.
+
+## Controles, formularios y diálogos (2026-11-05, aprobado)
+- `superficies.py` suma a la tabla: deshabilitado (surface-soft + line + muted), fondo del diálogo (`scrim`) y compactos (`control-height-compact`); el hueco «deshabilitado» queda solo para el directorio.
+- Subsección «Controles, formularios y diálogos» con 6 reglas y enlace al sistema de diseño; las medidas viven allá.

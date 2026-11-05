@@ -1,4 +1,4 @@
-# Ecosistema Manik · botones, campos y controles · r01 (propuesta)
+# Ecosistema Manik · botones, campos y controles · r01 (aprobada 2026-11-05)
 
 Pedido (2026-11-05): «la familia de botones, inputs y de control para todas las aplicaciones del ecosistema Manik para que se homogenicen todas».
 `python3 gen.py` → `controles.html`. Valores leídos de `../design-system/project/tokens.json`; ningún color nuevo.
@@ -20,3 +20,6 @@ Playwright 1300 y 390 px: sin desbordes ni errores JS; sin IDs duplicados; todo 
 
 ## Pendiente tras aprobación
 Llevar al sistema de diseño (Boton, Campo y componentes nuevos), al manual (Superficies e interfaz) y decidir si el directorio adopta deshabilitado y semánticos.
+
+## Aprobación (2026-11-05)
+Aprobada por el usuario («sí, apruébalas y llévalas al design system y al manual»). Integrada al sistema de diseño del Ecosistema (versión 8) con `../design-system/controles_formularios.py` y resumida en el manual (`../manual-marca/`, sección Superficies e interfaz).

@@ -45,6 +45,8 @@ tabla = ''.join([
     fila('Superficie<br><span class="nota">tarjetas, tablas, barras, diálogos</span>', c(E, 'surface'), c(R, 'blanco'), HER),
     fila('Agrupación<br><span class="nota">encabezado de tabla, zona agrupada, solo lectura</span>', c(E, 'surface-soft'), c(R, 'lavado'), HER),
     fila('Presionado neutro', c(E, 'surface-pressed'), NO, HER),
+    fila('Deshabilitado<br><span class="nota">botón, campo, control</span>', c(E, 'surface-soft') + '<br>' + c(E, 'line') + '<br>' + c(E, 'muted', f'{f(E["muted"], E["surface-soft"])}:1 · sin color de acción'), NO, HER),
+    fila('Fondo detrás de un diálogo', f'<span class="dot" style="background:{E["scrim"]}"></span><span class="mono">tinta 40 %</span> <span class="sf-tok">scrim</span>', NO, HER),
     fila('Luz de marca<br><span class="nota">halos de fondo, círculo de icono</span>', c(E, 'luz-cian') + '<br>' + c(E, 'luz-calida'), c(R, 'luz-cian') + '<br>' + c(R, 'luz-calida'), '—'),
     grupo('Texto'),
     fila('Principal', c(E, 'ink', f'{f(E["ink"], E["surface"])}:1 sobre superficie'), c(R, 'tinta', f'{f(R["tinta"], R["blanco"])}:1'), HER),
@@ -69,6 +71,7 @@ for k, n in (('exito', 'Éxito'), ('aviso', 'Aviso'), ('error', 'Error'), ('info
         dirc = NO
     tabla += fila(n, apps, dirc, HER)
 tabla += grupo('Forma')
+tabla += fila('Botón y campo compactos', f'Alto {E["control-height-compact"]}, solo tablas y filtros', '—', '—')
 tabla += fila('Botón y campo', f'Radio {E["radius-md"]} · alto {E["control-height"]}', f'Píldora · alto {R["boton-height"]} (Agendar), {R["control-height"]} (chips)', 'Píldora · alto 44px')
 tabla += fila('Tarjeta', f'Radio {E["radius-2xl"]}; sin sombra o <span class="mono">shadow-card</span>', f'Radio {R["radius-ficha"]} (24px en celular)', HER)
 tabla += fila('Lo que flota', '<span class="mono">shadow-pop</span>: menús, selector, diálogos', '<span class="mono">shadow-buscador</span>, <span class="mono">shadow-flotante</span>', HER)
@@ -122,8 +125,17 @@ HTML = f'''<section id="superficies" aria-labelledby="h4s"><div class="cab"><spa
  <h3>Huecos y diferencias</h3>
  <ol class="reglas">
   <li><b>Hueco:</b> el directorio no define aviso, error ni información (solo éxito). Propuesta: hereda los de las apps, que ya cumplen 4.5:1.</li>
-  <li><b>Hueco:</b> el directorio no tiene campo de texto fuera del buscador, y ninguna familia define el estado <b>deshabilitado</b>. Pendiente de diseño; no se inventa aquí.</li>
+  <li><b>Hueco:</b> el directorio no tiene campo de texto fuera del buscador, ni el estado <b>deshabilitado</b> (las apps sí, desde el 5 de noviembre). Pendiente de diseño; no se inventa aquí.</li>
   <li><b>Mismo rol, valores distintos:</b> borde de control <span class="mono">{E["line-control"]}</span> ({f(E["line-control"], E["surface"])}:1) contra <span class="mono">{R["linea-control"]}</span> ({f(R["linea-control"], R["blanco"])}:1); foco de 2 px contra 3 px; éxito suave <span class="mono">{E["exito-soft"]}</span> contra <span class="mono">{R["exito-suave"]}</span>; borde decorativo <span class="mono">{E["line"]}</span> contra <span class="mono">{R["linea"]}</span>. Todos cumplen; la diferencia no se ve, pero son dos valores que mantener. Por decidir: unificar o dejarlos por familia.</li></ol>
+ <h3>Controles, formularios y diálogos</h3>
+ <p class="texto">Aprobados el 5 de noviembre para las siete apps: lo único que cambia de una app a otra es el sello y el nombre. Las medidas, estados y ejemplos viven en el <a href="https://claude.ai/artifact/28z6yfie6L8btocL8QBZi9" target="_blank" rel="noopener">sistema de diseño del Ecosistema ↗</a> (Boton, Campo, Casilla, OpcionUnica, Interruptor, ControlSegmentado, ChipFiltro, Dialogo y Formulario).</p>
+ <ol class="reglas">
+  <li><b>Un formulario es una columna</b> en el orden de la tarea; dos columnas solo para pares cortos. Grupos con título, ancho por dato, máximo {E['form-max']}.</li>
+  <li><b>Etiqueta arriba, siempre visible;</b> «(opcional)» en lo opcional; el error dice qué hacer, con icono.</li>
+  <li><b>El botón principal nunca se deshabilita:</b> se pulsa y el formulario dice qué falta, con un resumen arriba.</li>
+  <li><b>El contenedor depende del tamaño:</b> confirmación sin campos, diálogo hasta 6 campos, panel lateral de 7 a 12, página con más.</li>
+  <li><b>El diálogo protege lo escrito:</b> Esc con cambios pregunta antes de descartar, un clic fuera no cierra un formulario y, si falla el guardado, los datos se quedan. En celular sube como hoja desde abajo.</li>
+  <li><b>Lo destructivo empieza en contorno</b> y solo se pinta de rojo sólido en el diálogo que confirma, con la pregunta y el objeto en el título.</li></ol>
 </section>'''
 
 CSS = '''

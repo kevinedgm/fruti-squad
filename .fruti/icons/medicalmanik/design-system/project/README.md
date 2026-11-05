@@ -75,7 +75,18 @@ Por qué: tres colores de producto coinciden con estados (Farmacia ≈ éxito, C
 
 - Espaciado 4 · 8 · 12 · 16 · 24 · 32 · 48 · 64. Radios 10 · 14 · 18 · 24 · píldora: la misma escala que Manik Impulsa en producción.
 - Profundidad por borde y espacio; sombra solo para tarjetas al pasar el cursor (`shadow-hover`) y planos flotantes (`shadow-pop`).
-- Controles de 44 px; barra superior de 64 px.
+- Controles de 44 px (36 px compactos solo en tablas y filtros); barra superior de 64 px.
+
+## Controles, formularios y diálogos (aprobado 2026-11-05)
+
+Una sola familia para las siete apps: lo que cambia por app es el sello y el nombre; todo lo que se toca usa el azul Manik, 44 px, `radius-md` y el mismo foco. Rondas: `../../controles-r01/` y `../../formularios-r01/`.
+
+- **Componentes:** Boton, Campo, Casilla, OpcionUnica, Interruptor, ControlSegmentado, ChipFiltro, Dialogo y el patrón Formulario.
+- **Deshabilitado** (todas las piezas): «surface-soft», borde «line», texto «muted»; sin color de acción. Se dice por qué cerca del control.
+- **Compacto** (`control-height-compact`, 36 px) solo en filas de tabla y barras de filtros.
+- **Formularios:** una columna, orden de la tarea, grupos con título, ancho por dato, `form-max` 640 px, «(opcional)» en lo opcional, el botón principal nunca se deshabilita.
+- **Contenedor por tamaño:** confirmación · diálogo hasta 6 campos · panel lateral 7 a 12 (pendiente) · página.
+- **Diálogos:** `dialog-sm/md/lg` 400/560/720, `scrim` detrás, hoja inferior en celular, foco atrapado y de regreso, Esc con cambios pide descartar, clic fuera no cierra formularios.
 
 ## Iconografía
 
@@ -108,4 +119,5 @@ Manik Impulsa ya tiene su propio sistema en producción. Este sistema lo respeta
 
 - Confirmar la regla de una sola app (¿se salta el inicio?) y los textos de «sin acceso».
 - Decidir los tres puntos de Impulsa.
-- Componentes por app (tablas, formularios largos, agenda) cuando se diseñe cada producto.
+- Componentes por app (tablas, agenda) cuando se diseñe cada producto.
+- Panel lateral (formularios de 7 a 12 campos con contexto visible).

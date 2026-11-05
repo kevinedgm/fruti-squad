@@ -102,10 +102,10 @@
     "Ecosistema"
   ],
   "lastChange": {
-    "at": "2026-10-29T23:40:23Z",
+    "at": "2026-11-05T15:59:12Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "Nuevo componente CitaCalendario: cómo aparece una cita en los espacios del calendario según su duración, seis estados con icono Lucide y la alerta clínica «Signos fuera de rango»."
+    "note": "Familia de controles y reglas de formularios y diálogos aprobadas: Boton y Campo con todos sus estados; Casilla, OpcionUnica, Interruptor, ControlSegmentado, ChipFiltro, Dialogo y el patrón Formulario; tokens scrim, control-height-compact, form-max y dialog-sm/md/lg."
   },
   "layout": "files",
   "libraries": [],

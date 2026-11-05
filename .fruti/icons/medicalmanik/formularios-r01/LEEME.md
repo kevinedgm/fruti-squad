@@ -1,4 +1,4 @@
-# Ecosistema Manik · formularios y diálogos · r01 (propuesta)
+# Ecosistema Manik · formularios y diálogos · r01 (aprobada 2026-11-05)
 
 Pedido (2026-11-05): «las reglas para el diseño de formularios, composición de formularios en dialogs».
 `python3 gen.py` → `formularios.html`. Reutiliza CSS, iconos y piezas de `../controles-r01/gen.py` (importado, no copiado); valores de `../design-system/project/tokens.json`.
@@ -18,3 +18,6 @@ El panel lateral no existe en el sistema (otra ronda). El fondo del diálogo no 
 
 ## Verificación
 Playwright 1300 y 390 px: sin desbordes ni errores JS; sin IDs duplicados; todo campo con etiqueta; referencias aria válidas. Diálogo: foco al primer campo, Esc con cambios abre «¿Descartar?», error de servidor, cierre con aviso y foco de regreso al botón; confirmación con foco en «Cancelar». Único enlace < 24 px: en línea dentro de un párrafo (excepción de 2.5.8). El campo de fecha se ve en formato del navegador (en la prueba, inglés). No ejecutado: lector de pantalla real, zoom 200 %.
+
+## Aprobación (2026-11-05)
+Aprobada por el usuario («sí, apruébalas y llévalas al design system y al manual»). Integrada al sistema de diseño del Ecosistema (versión 8) con `../design-system/controles_formularios.py` y resumida en el manual (`../manual-marca/`, sección Superficies e interfaz).
