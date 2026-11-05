@@ -1,7 +1,7 @@
 # Ecosistema Manik · integra al sistema de diseño las rondas aprobadas el 2026-11-05:
 #   controles-r01 (botones, campos y controles de selección) y formularios-r01 (formularios y diálogos).
-# Paso idempotente sobre project/ (no usa build.py: project/ ya tiene cambios posteriores, como Administración e IA,
-# que build.py no reproduce). Uso: python3 controles_formularios.py
+# Paso idempotente sobre project/. build.py lo llama al final (desde 2026-11-05); también se puede correr solo:
+# python3 controles_formularios.py
 import json, os, re, importlib.util, datetime
 D = os.path.dirname(os.path.abspath(__file__)); P = os.path.join(D, 'project'); M = os.path.join(D, '..')
 
@@ -169,7 +169,8 @@ Una sola familia para las siete apps: lo que cambia por app es el sello y el nom
 
 '''
 R = re.sub(r'## Controles, formularios y diálogos.*?(?=\n## )\n', '', R, flags=re.S)
-R = R.replace('## Iconografía', SEC + '## Iconografía', 1)
+_ancla = '## App shell' if '## App shell' in R else '## Iconografía'  # el shell va después de los controles
+R = R.replace(_ancla, SEC + _ancla, 1)
 R = R.replace('- Componentes por app (tablas, formularios largos, agenda) cuando se diseñe cada producto.',
               '- Componentes por app (tablas, agenda) cuando se diseñe cada producto.\n- Panel lateral (formularios de 7 a 12 campos con contexto visible).')
 R = R.replace('- Controles de 44 px; barra superior de 64 px.', '- Controles de 44 px (36 px compactos solo en tablas y filtros); barra superior de 64 px.')

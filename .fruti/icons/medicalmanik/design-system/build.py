@@ -1,4 +1,6 @@
 # Ecosistema Manik · sistema de diseño (artifact Design System). Uso: python3 build.py → project/
+# Reproduce TODO lo publicado (verificado 2026-11-05: sin diferencias salvo la nota de último cambio): identidad, sellos con la M
+# original, Grupos en orquídea, Administración, IA y, al final, controles_formularios.py y shell_integracion.py.
 import json, os, datetime
 B = {'medicalmanik.svg': '9a83c2989b836271f7d2401934ad4cee', 'expediente.svg': 'ded6ea4d0368c015ddd9e8e86d9e11d4', 'agenda.svg': '0cc8920d150bde3f8e9fb4f9fad79ecf',
      'compras.svg': '73385910ea70c90c1b4be9ca45ec7ed9', 'farmacia.svg': 'e93a4372cc66a32c2281beb1d539e598', 'impulsa.svg': 'ab0f79128c88196f4962b59cf9d3d3b5',
@@ -89,6 +91,14 @@ tokens = {'name': 'Ecosistema Manik', 'version': 2,
    t('shadow-hover', '0 2px 4px rgba(20, 33, 61, 0.06), 0 8px 20px rgba(20, 33, 61, 0.08)', 'Tarjeta de app al pasar el cursor.'),
    t('shadow-pop', '0 2px 8px rgba(20, 33, 61, 0.08), 0 18px 44px rgba(20, 33, 61, 0.16)', 'Selector del ecosistema, menús y diálogos.')]},
  'layout': {'tokens': [t('control-height', '44px', 'Alto de botones y campos (también objetivo táctil).'), t('header-height', '64px', 'Barra superior de cada app.'), t('content-wide', '1440px', 'Ancho máximo de vistas de trabajo.'), t('content-reading', '72ch', 'Ancho de notas clínicas.')]}}
+# Decisiones posteriores a la primera versión (2026-10-31 … 2026-11-05): valores aprobados que no se recalculan
+FIJOS = [{"name": "app-grupos", "value": "#9D469E", "usage": "Identidad de Grupos Manik (Administradores de grupo): su sello, su tarjeta en el inicio y en el selector, la marca de app activa. No es color de botones ni de estados. Orquídea desde 2026-11-05 (el rojo anterior, #C73A55, quedaba a ΔE 1.6 de error). Blanco encima 5.52:1."}, {"name": "app-grupos-soft", "value": "#F6EEF6", "usage": "Fondo de la tarjeta de Grupos Manik en el inicio y en el selector."}, {"name": "app-grupos-ink", "value": "#9D469E", "usage": "Texto con el color de Grupos sobre app-grupos-soft: 4.86:1."}, {"name": "app-administracion", "value": "#3A4558", "usage": "Identidad de Administración Manik (uso interno, equipo MedicalManik): su sello y su tarjeta en «Herramientas internas» del inicio. No es color de botones ni de estados. Blanco encima 9.67:1."}, {"name": "app-administracion-soft", "value": "#EEF0F3", "usage": "Fondo de la tarjeta de Administración Manik al pasar el cursor y del chip «Solo equipo MedicalManik»."}, {"name": "app-administracion-ink", "value": "#3A4558", "usage": "Texto con el color de Administración sobre app-administracion-soft: 8.47:1."}]
+_por_nombre = {x['name']: x for x in tokens['color']['tokens']}
+for f in FIJOS:
+    if f['name'] in _por_nombre: _por_nombre[f['name']].update(f)
+    else:
+        _i = max(i for i, x in enumerate(tokens['color']['tokens']) if x['name'].startswith('app-'))
+        tokens['color']['tokens'].insert(_i + 1, dict(f))
 json.dump(tokens, open('tokens.json', 'w'), ensure_ascii=False, indent=1)
 V = {x['name']: x['value'] for x in col}
 
@@ -162,6 +172,7 @@ cita_calendario.build('.', page)
 for name, (grp, h, body, css, md) in comps.items():
     os.makedirs(f'components/{name}', exist_ok=True)
     open(f'components/{name}/preview.html', 'w').write(page(grp, h, body, css))
+    if name == 'InicioEcosistema': md += "\n\n## Panel de usuario (r1, 2026-10-31, propuesta)\n\nEl inicio pasa a llamarse **panel de usuario** y suma, junto a las apps, «Tu perfil en Manik · directorio» (estado de visibilidad: visible, oculto, incompleto, en revisión; ver perfil público; editar) y «Tu cuenta». Ocultar el perfil pide confirmación. Prototipo: `../../../../panel-usuario-r1/`."
     open(f'components/{name}/README.md', 'w').write(f'# {name}\n\n{md}\n')
 
 # Portada
@@ -262,6 +273,13 @@ Manik Impulsa ya tiene su propio sistema en producción. Este sistema lo respeta
 - Decidir los tres puntos de Impulsa.
 - Componentes por app (tablas, formularios largos, agenda) cuando se diseñe cada producto.
 '''
+ADMIN = "## Administración Manik (interna, aprobada 2026-10-31)\n\n- App del equipo MedicalManik: usuarios activos y configuración del sistema y de cada app. Sello: engrane separado en la esquina superior derecha; color grafito `app-administracion` #3A4558.\n- **Solo la ven las cuentas de la empresa.** A diferencia de las apps sin acceso (apagadas con candado), para una clínica Administración no existe: no se muestra.\n- En el inicio va en su propia fila, «Herramientas internas», con el chip «Solo equipo MedicalManik». El mosaico del ecosistema sigue de seis cuadros.\n- El sello nunca sustituye al ícono de ajustes dentro de las apps (engrane de Lucide sin cuadro): el sello siempre lleva el cuadro con la línea de pulso.\n- Prototipo: `../../administracion-r1/`.\n\n"
+IA = "## IA (aprobado 2026-10-31)\n\nManual propio: **Manik IA** (`../../manik-ia/`), aislado de este manual; aquí solo el resumen.\n\nLa IA es una **función «IA»**, no un personaje ni un producto: los botones dicen verbo + «con IA». Prototipos: `../../ia-ronda-1/` a `../../ia-ronda-3/`.\n\n- **Forma:** píldora azul noche (`ia` #0F1C3F, `ia-hover` #1B2B57) con el destello doble en cian claro (`ia-destello` #5FD3E2). La píldora la separa del botón primario (azul Manik, radio 14): la IA nunca es la acción principal de la vista. [tokens propuestos, aún no en `tokens.json`]\n- **Todo lo que produce es borrador:** marca «Sugerido por IA», borde punteado; no entra al expediente sin confirmación del médico, completa o dato por dato; al aceptarse pierde la marca.\n- **Cada dato muestra su origen** (frase del dictado o registro).\n- **Movimiento con significado:** respira (halo, 1 vez) = invitación al pasar el cursor o con foco; orbita (bucle) = analizando datos («Analizando…»); traza (bucle) = redactando («Redactando…»); el destello del sello se traza una vez al llegar un resultado. Quieta en reposo; `prefers-reduced-motion` la apaga.\n\n"
+README = README.replace('## Los sellos', ADMIN + '## Los sellos', 1)
+README = README.replace('| Grupos | segunda tarjeta detrás | silueta |', '| Grupos | segunda tarjeta detrás | silueta |\n| Administración (interna) | engrane en la esquina superior derecha | pieza separada |', 1)
+README = README.replace('| Grupos | #9D469E | 5.52:1 |', '| Grupos | #9D469E (orquídea) | 5.52:1 |\n| Administración (interna) | #3A4558 | 9.67:1 |', 1)
+README = README.replace('Por qué: tres colores de producto coinciden con estados (Farmacia ≈ éxito, Compras ≈ aviso, Grupos ≈ error).', 'Por qué: dos colores de producto se parecen a estados (Farmacia ≈ éxito, Compras ≈ aviso); Grupos era rojo, casi igual a error, y pasó a orquídea el 2026-11-05.', 1)
+README = README.replace('## Voz', IA + '## Voz', 1)
 open('README.md', 'w').write(README)
 
 files = {}
@@ -270,7 +288,8 @@ order_e = ['ecosistema.svg', 'ecosistema-1tinta.svg']
 for n in order_s + order_e:
     files[n] = {'name': n, 'blob': B[n], 'size': os.path.getsize(SRC + n), 'type': 'image/svg+xml'}
 now = datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')
-json.dump({'v': 3, 'layout': 'files', 'createdOnFiles': {'v': 1, 'at': now}, 'title': 'Ecosistema Manik', 'namespace': 'EcosistemaManik', 'libraries': [], 'sections': {},
+_creado = json.load(open('design-system.json')).get('createdOnFiles', {'v': 1, 'at': now}) if os.path.exists('design-system.json') else {'v': 1, 'at': now}
+json.dump({'v': 3, 'layout': 'files', 'createdOnFiles': _creado, 'title': 'Ecosistema Manik', 'namespace': 'EcosistemaManik', 'libraries': [], 'sections': {},
   'groups': ['Sellos', 'Ecosistema'],
   'assetGroups': {'Sellos': {'name': 'Sellos', 'tile': 'm', 'order': order_s, 'files': {n: files[n] for n in order_s}},
                   'Ecosistema': {'name': 'Ecosistema', 'tile': 's', 'order': order_e, 'files': {n: files[n] for n in order_e}}},
@@ -281,3 +300,12 @@ os.makedirs('assets/Sellos', exist_ok=True); os.makedirs('assets/Ecosistema', ex
 open('assets/Sellos/README.md', 'w').write('# Sellos\n\nSello madre MedicalManik y los seis productos, en color con fondo transparente (los cortes son máscaras), más el sello madre a una tinta (`currentColor`). Mínimo 24 px en interfaz.\n')
 open('assets/Ecosistema/README.md', 'w').write('# Ecosistema\n\nMosaico del Ecosistema Manik, retícula 24: botón que abre el selector de apps. En color (los seis colores de producto) y a una tinta (`currentColor`). Siempre seis cuadros.\n')
 print('ok', sorted(os.listdir('components')))
+# Pasos aprobados después (controles, formularios, diálogos y app shell, 2026-11-05): se corren aquí para que
+# «python3 build.py» reproduzca todo el sistema publicado. Cada paso es idempotente y escribe sobre project/.
+import runpy
+os.chdir(os.path.dirname(os.path.abspath(__file__)))
+for _paso in ('controles_formularios.py', 'shell_integracion.py', 'controles_formularios.py'):  # el último repite controles con los tokens del shell ya presentes
+    runpy.run_path(_paso, run_name='__main__')
+_j = json.load(open('project/design-system.json'))
+_j['lastChange'] = {'at': now, 'by': 'Kevin', 'via': 'Claude Code', 'note': 'Regenerado con build.py: identidad, sellos con la M original, Grupos en orquídea, Administración, IA, controles, formularios, diálogos y app shell.'}
+json.dump(_j, open('project/design-system.json', 'w'), indent=2, ensure_ascii=False)

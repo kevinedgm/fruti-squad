@@ -1,5 +1,6 @@
 # Ecosistema Manik · integra al sistema de diseño el app shell r02 aprobado el 2026-11-05 (../shell-r02/).
-# Paso idempotente sobre project/ (como controles_formularios.py; no usa build.py). Uso: python3 shell_integracion.py
+# Paso idempotente sobre project/. build.py lo llama al final (desde 2026-11-05); también se puede correr solo:
+# python3 shell_integracion.py
 import json, os, re, importlib.util, datetime
 D = os.path.dirname(os.path.abspath(__file__)); P = os.path.join(D, 'project'); M = os.path.join(D, '..')
 
