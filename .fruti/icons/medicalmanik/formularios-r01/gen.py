@@ -194,4 +194,5 @@ fc.addEventListener('submit',e=>{{e.preventDefault();const b=$('dc-ok');if(b.get
   if(intentos===1){{$('dc-err').hidden=false;$('dc-err').scrollIntoView({{block:'nearest'}})}}else{{$('dc-err').hidden=true;sucio=false;dc.close();const t=$('toast');t.hidden=false;setTimeout(()=>t.hidden=true,2600)}}}},900)}});
 document.querySelectorAll('.sw:not([disabled])').forEach(s=>s.addEventListener('click',()=>{{const on=s.getAttribute('aria-checked')!=='true';s.setAttribute('aria-checked',on);sucio=true;const t=s.parentElement.querySelector('.sw-t');if(t)t.textContent=on?'Activado':'Desactivado'}}));
 </script></body></html>'''
-open(os.path.join(D, 'formularios.html'), 'w').write(HTML); print('ok', len(HTML) // 1024, 'KB')
+if __name__ == '__main__':  # importable sin reescribir la ronda evaluada
+    open(os.path.join(D, 'formularios.html'), 'w').write(HTML); print('ok', len(HTML) // 1024, 'KB')

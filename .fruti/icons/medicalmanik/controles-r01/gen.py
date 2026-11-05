@@ -286,4 +286,5 @@ document.querySelector('.demo form').addEventListener('submit',e=>{{e.preventDef
  b.setAttribute('aria-busy','true');b.classList.add('l');b.innerHTML={json.dumps(ic("load", "ico gira"))}+'<span>Guardar receta</span>';
  setTimeout(()=>{{b.removeAttribute('aria-busy');b.classList.remove('l');b.innerHTML={json.dumps(ic("check"))}+'<span>Guardada</span>'}},1200)}});
 </script></body></html>'''
-open(os.path.join(D, 'controles.html'), 'w').write(HTML); print('ok', len(HTML) // 1024, 'KB')
+if __name__ == '__main__':  # importable sin reescribir la ronda evaluada
+    open(os.path.join(D, 'controles.html'), 'w').write(HTML); print('ok', len(HTML) // 1024, 'KB')
