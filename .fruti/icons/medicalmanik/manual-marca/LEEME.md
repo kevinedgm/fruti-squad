@@ -32,3 +32,10 @@ Pedido: «ponlo al día y resume las secciones de producto con enlace».
 - Tipografía: excepción vigente Urbanist + Onest en el directorio [por confirmar como permanente]; contradice la regla de pareja única del 31 oct, se declara en vez de ocultarla.
 - No incorporadas: Administración r1, pantalla principal de Administración y documentos de Expediente siguen como propuesta sin aprobación.
 - Verificación: Playwright 1300 y 390 px, sin desbordes, sin errores, todas las imágenes cargan; 8 enlaces a los documentos.
+
+## Superficies e interfaz (2026-11-05)
+Pedido: «el diseño de superficies para todo el ecosistema (colores de superficies, acentos, semánticos, bordes de botones, inputs) en este manual».
+- Sección nueva `#superficies` después de Paleta, generada por `superficies.py` desde `design-system/project/tokens.json` (apps), `directorio-ds/project/tokens.json` y el `:root` de `manik-ia/manual.html`. El manual no guarda valores propios: si cambia un token, se regenera.
+- Muestras vivas (botones primario, secundario, terciario y destructivo; campo en reposo, foco, error y solo lectura; estados), 6 reglas, tabla de roles por familia con contrastes calculados.
+- Huecos declarados: el directorio no define aviso, error ni información (propuesta: heredar de las apps), no tiene campo fuera del buscador; nadie define deshabilitado (pendiente, no se inventa).
+- Diferencias con el mismo rol: borde de control #858EA5 vs #6B7590, foco 2 vs 3 px, éxito suave, borde decorativo. Por decidir: unificar o dejar por familia.

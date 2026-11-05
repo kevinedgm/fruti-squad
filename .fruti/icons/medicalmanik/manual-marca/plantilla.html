@@ -104,7 +104,7 @@ th{text-align:left;font-weight:600;color:var(--muted);border-bottom:1px solid va
 .pie{border-top:1px solid var(--line);padding-top:18px;font-size:14px;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
 @media (max-width:900px){.dos,.indice,.tipo,.voz,.dir,.manix{grid-template-columns:1fr}.arq{grid-template-columns:1fr}.mal,.redes{grid-template-columns:repeat(2,minmax(0,1fr))}.ramas{grid-template-columns:1fr}.valores{grid-template-columns:1fr}}
 @media (max-width:520px){body::after{width:6px}.portada{border-radius:20px}.indice h2{font-size:44px}}
-</style>
+{{SFCSS}}</style>
 
 <main class="hoja">
 <header class="portada"><img src="{{LOGOB}}" alt="MedicalManik"><p>Manual de identidad</p><small>Versión 2026 · actualizada el 5 de noviembre · reemplaza al manual anterior · incluye el Ecosistema Manik, el directorio Manik y Manik IA</small></header>
@@ -113,7 +113,7 @@ th{text-align:left;font-weight:600;color:var(--muted);border-bottom:1px solid va
  <svg class="pulso" viewBox="0 0 420 260" aria-hidden="true"><path d="M-20 170 H40 L95 30 L165 235 L235 75 L275 170 H440" fill="none" stroke="#3ECEDD" stroke-width="56" stroke-linejoin="round" stroke-linecap="round"/></svg>
  <div><h2 id="hi">Índice</h2><ol>
   <li><a href="#intro">Introducción<span></span></a></li><li><a href="#arquitectura">Arquitectura de marca<span></span></a></li><li><a href="#logotipo">Logotipo<span></span></a></li>
-  <li><a href="#color">Paleta de color<span></span></a></li><li><a href="#tipografia">Tipografía<span></span></a></li><li><a href="#personalidad">Personalidad y tono<span></span></a></li>
+  <li><a href="#color">Paleta de color<span></span></a></li><li><a href="#superficies">Superficies e interfaz<span></span></a></li><li><a href="#tipografia">Tipografía<span></span></a></li><li><a href="#personalidad">Personalidad y tono<span></span></a></li>
   <li><a href="#ecosistema">Ecosistema Manik<span></span></a></li><li><a href="#directorio">Manik, el directorio<span></span></a></li><li><a href="#ia">Manik IA<span></span></a></li>
   <li><a href="#iconografia">Iconografía<span></span></a></li><li><a href="#contenido">Generación de contenido<span></span></a></li><li><a href="#gimmick">Gimmick<span></span></a></li>
   <li><a href="#aplicaciones">Aplicaciones y correos<span></span></a></li><li><a href="#cambios">Cambios y pendientes<span></span></a></li></ol></div>
@@ -138,7 +138,7 @@ th{text-align:left;font-weight:600;color:var(--muted);border-bottom:1px solid va
  <h3>Dónde vive cada regla</h3>
  <p class="texto">Este manual manda en lo que comparte toda la marca: sello, color de comunicación, tipografía, voz, contenido y correos. Cada producto tiene su propio documento para sus pantallas y componentes; aquí solo se resume. Si un resumen y su documento no coinciden, manda el documento del producto y este manual se corrige.</p>
  <div class="lam tabla"><table><thead><tr><th>Marca</th><th>Documento</th><th>Qué decide</th></tr></thead><tbody>
-  <tr><td>MedicalManik</td><td>Este manual</td><td>Sello, paleta de comunicación, tipografía, voz, contenido, Manix, correos.</td></tr>
+  <tr><td>MedicalManik</td><td>Este manual</td><td>Sello, paleta de comunicación, superficies e interfaz (capas y reglas comunes), tipografía, voz, contenido, Manix, correos.</td></tr>
   <tr><td>Ecosistema Manik</td><td><a href="https://claude.ai/artifact/28z6yfie6L8btocL8QBZi9" target="_blank" rel="noopener">Sistema de diseño ↗</a></td><td>Sellos de producto, inicio y selector del ecosistema, componentes de las apps.</td></tr>
   <tr><td>Manik · directorio</td><td><a href="https://claude.ai/artifact/PNtPN4fEMSdEyVKTKwxAM7" target="_blank" rel="noopener">Manual de marca ↗</a> · <a href="https://claude.ai/artifact/MTg2EAZVsJKZJRFCWGvAuj" target="_blank" rel="noopener">Sistema de diseño ↗</a></td><td>Color de luz, tipografía, sellos de categoría, voz con pacientes, reglas del producto.</td></tr>
   <tr><td>Manik IA</td><td><a href="https://claude.ai/artifact/LYq9oKz49WMM2ihwALM1WL" target="_blank" rel="noopener">Manual de marca ↗</a></td><td>Botón, resultado sugerido, diálogo, velo y movimiento de la IA.</td></tr></tbody></table></div>
@@ -192,7 +192,7 @@ th{text-align:left;font-weight:600;color:var(--muted);border-bottom:1px solid va
  <div class="combo">
   <div class="no" style="background:#3ECEDD;color:#fff">Texto<small>1.90 · no</small></div><div class="no" style="background:#9191E9;color:#fff">Texto<small>2.83 · no</small></div><div class="no" style="background:#B6EEA6;color:#fff">Texto<small>1.33 · no</small></div><div class="no" style="background:#fff;color:#3ECEDD;box-shadow:inset 0 0 0 2px var(--error)">Texto<small>1.79 · no</small></div></div>
  <h3>Interfaz y productos</h3>
- <p class="texto">Dentro de las apps la acción principal es siempre azul MedicalManik y los estados (éxito, aviso, error, información) son iguales en todas. Cada producto tiene un color de identidad que solo vive en su sello y su tarjeta; nunca es color de botón.</p>
+ <p class="texto">Dentro de las apps la acción principal es siempre azul MedicalManik y los estados (éxito, aviso, error, información) son iguales en todas. Cada producto tiene un color de identidad que solo vive en su sello y su tarjeta; nunca es color de botón. Fondos, bordes, campos y estados: <a href="#superficies">Superficies e interfaz</a>.</p>
  <div class="lam tabla"><table><thead><tr><th>Uso</th><th>Color</th><th>Contraste con blanco</th><th>Nota</th></tr></thead><tbody>
   <tr><td>Acción principal y Expediente</td><td><span class="dot" style="background:#234899"></span>#234899</td><td class="num">8.54</td><td>Botón principal en todas las apps.</td></tr>
   <tr><td>Agenda</td><td><span class="dot" style="background:#007C8C"></span>#007C8C</td><td class="num">4.93</td><td></td></tr>
@@ -203,8 +203,10 @@ th{text-align:left;font-weight:600;color:var(--muted);border-bottom:1px solid va
   <tr><td>Administración (interna)</td><td><span class="dot" style="background:#3A4558"></span>#3A4558</td><td class="num">9.67</td><td>Grafito: herramienta del equipo.</td></tr>
   <tr><td>Manik · directorio</td><td><span class="dot" style="background:#009BB0"></span>#009BB0 · <span class="dot" style="background:#00788A"></span>#00788A</td><td class="num">3.33 · 5.18</td><td>Pin y áreas grandes · botones y texto.</td></tr>
   <tr><td>Manik IA</td><td><span class="dot" style="background:#0F1C3F"></span>#0F1C3F · <span class="dot" style="background:#5FD3E2"></span>#5FD3E2</td><td class="num">16.69</td><td>Píldora azul noche con destello cian.</td></tr>
-  <tr><td>Neutros de interfaz</td><td><span class="dot" style="background:#F5F7FB"></span>#F5F7FB · <span class="dot" style="background:#14213D"></span>#14213D · <span class="dot" style="background:#4A5674"></span>#4A5674</td><td class="num">— · 15.97 · 7.31</td><td>Lienzo, texto, texto secundario.</td></tr></tbody></table></div>
+  </tbody></table></div>
 </section>
+
+{{SUPERFICIES}}
 
 <section id="tipografia" aria-labelledby="h5"><div class="cab"><span class="eti">Tipografía</span><h2 id="h5">Tipografía</h2></div>
  <p class="texto">Una sola pareja tipográfica para toda la marca: comunicación, presentaciones, correos y apps. Un post, un correo y la pantalla de Expediente se ven de la misma familia.</p>

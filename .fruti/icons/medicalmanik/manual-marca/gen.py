@@ -11,6 +11,8 @@ A = {
  'IMP': 'final/svg/impulsa.svg', 'GRU': 'final/svg/grupos.svg', 'ADM': 'final/svg/administracion.svg',
  'PIN': 'manik-final/svg/simbolo.svg', 'C1': 'manual-marca/img/correo-bienvenida.png', 'C2': 'manual-marca/img/correo-cita-confirmada.png', 'C3': 'manual-marca/img/correo-factura.png', 'MANIK': 'manik-final/svg/logotipo.svg', 'MANIKEND': 'manik-final/svg/logotipo-endoso.svg'}
 html = open(os.path.join(D, 'plantilla.html')).read()
+import superficies  # sección generada desde los tokens de cada sistema de diseño
+html = html.replace('{{SFCSS}}', superficies.CSS).replace('{{SUPERFICIES}}', superficies.HTML)
 for k, p in A.items(): html = html.replace('{{' + k + '}}', uri(p))
 assert '{{' not in html, html[html.index('{{'):html.index('{{') + 30]
 OUT = sys.argv[1] if len(sys.argv) > 1 else D
