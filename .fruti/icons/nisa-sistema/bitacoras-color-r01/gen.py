@@ -41,7 +41,7 @@ FALLAS_T = ''.join(f'<tr><td>{n}</td><td><span class="pair" style="background:{b
 P = {
  'primary': '#052A76', 'primary-hover': '#021C52', 'primary-ink': '#041D55', 'primary-soft': '#E8EDF7', 'primary-line': '#C3CFE6',
  'pera': '#C2D225', 'pera-soft': '#F2F6CF',
- 'bg': '#F2F4F8', 'surface': '#FFFFFF', 'surface-2': '#F7F9FC', 'sunken': '#EEF1F6',
+ 'bg': '#F2F4F8', 'surface': '#FFFFFF', 'surface-2': '#F7F9FC', 'surface-sunken': '#EEF1F6',
  'text': '#141B33', 'text-muted': '#535B70', 'text-subtle': '#646B80',
  'border': '#DFE3EC', 'border-strong': '#CDD3DF', 'border-control': '#858DA3',
  'conforme': '#2E7D32', 'conforme-soft': '#E3F1E4', 'on-conforme-soft': '#1E5A22', 'conforme-line': '#A8D1AB',
@@ -63,7 +63,7 @@ G = [
   ('bg', None, 'Fondo de la página.', '#dde3ec, #f2f4f7, #f4f8fb'),
   ('surface', None, 'Tarjetas, tablas, campos.', '#ffffff'),
   ('surface-2', None, 'Encabezado de panel y filas alternas.', '#f8fafd, #f8fafc, #fafbfe, #fafbfd, #fbfcfe, #f6f8fb'),
-  ('sunken', None, 'Encabezado de tabla, deshabilitado y solo lectura.', '#f2f5fa, #eef2f6, #eef4fa, #f1f3f7, #f6f6fc'),
+  ('surface-sunken', None, 'Encabezado de tabla, deshabilitado y solo lectura.', '#f2f5fa, #eef2f6, #eef4fa, #f1f3f7, #f6f6fc'),
   ('text', 'surface', 'Texto principal y valores.', '#0d1526, #111827, #18181a, #0f1f2e, #122845, #2b3346'),
   ('text-muted', 'surface-2', 'Etiquetas, encabezados de columna, ayudas.', '#5b6478, #52606d, #587083, #69758b, #516174'),
   ('text-subtle', 'surface', 'Placeholders, hora, metadatos.', '#59647a, #697386, #667085, #6b7280'),
@@ -108,8 +108,8 @@ A = dict(primary='#052a76', hover='#0a3aa0', soft='#eef2fb', line='#c0d0e8', ink
          loginfo='#bfdbfe', loginfobg='#1e40af', logwarn='#fde68a', logwarnbg='#92400e', logerr='#fca5a5', logerrbg='#7f1d1d',
          val1='#052a76', val2='#0a3aa0', valok1='#1a7a4a', valok2='#25a868')
 B = dict(primary=P['primary'], hover=P['primary-hover'], soft=P['primary-soft'], line=P['primary-line'], ink=P['primary-ink'], pera=P['pera'], perasoft=P['pera-soft'], peraink=P['primary'],
-         bg=P['bg'], surf=P['surface'], surf2=P['surface-2'], sunk=P['sunken'], text=P['text'], muted=P['text-muted'], subtle=P['text-subtle'], head=P['text-muted'],
-         border=P['border'], ctrl=P['border-control'], ro=P['sunken'], roline=P['border-strong'], ok=P['on-conforme-soft'], okbg=P['conforme-soft'], okline=P['conforme-line'], okbtn=P['primary'],
+         bg=P['bg'], surf=P['surface'], surf2=P['surface-2'], sunk=P['surface-sunken'], text=P['text'], muted=P['text-muted'], subtle=P['text-subtle'], head=P['text-muted'],
+         border=P['border'], ctrl=P['border-control'], ro=P['surface-sunken'], roline=P['border-strong'], ok=P['on-conforme-soft'], okbg=P['conforme-soft'], okline=P['conforme-line'], okbtn=P['primary'],
          warn=P['on-alerta-soft'], warnbg=P['alerta-soft'], warnline=P['alerta-line'], err=P['on-fuera-soft'], errbg=P['fuera-soft'], errline=P['fuera-line'], danger=P['fuera'],
          countbg=P['primary-soft'], counttx=P['primary'], countline=P['primary-line'], logbg=P['log-bg'], logpanel=P['log-panel'], logtx=P['log-text'], logmuted=P['log-muted'],
          loginfo=P['log-info'], loginfobg=P['log-panel'], logwarn=P['log-warn'], logwarnbg=P['log-panel'], logerr=P['log-err'], logerrbg=P['log-panel'],
@@ -153,28 +153,29 @@ MUESTRAS = muestra('a') + muestra('b')
 ALIAS = [
  ('--navy', 'primary'), ('--navy-deep', 'primary-ink'), ('--navy-mid', 'primary-hover'), ('--navy-lt', 'primary-soft'),
  ('--lime', 'pera'), ('--lime-soft', 'pera-soft'), ('--lime-ink', 'text'),
- ('--surf', 'surface'), ('--surf-2', 'surface-2'), ('--surf-3', 'sunken'), ('--surf-4', 'border'), ('--page-bg', 'bg'),
+ ('--surf', 'surface'), ('--surf-2', 'surface-2'), ('--surf-3', 'surface-sunken'), ('--surf-4', 'border'), ('--page-bg', 'bg'),
  ('--bdr', 'border'), ('--bdr-2', 'border-control'), ('--bdr-3', 'text-subtle'),
  ('--tx', 'text'), ('--tx-2', 'text'), ('--tx-3', 'text-muted'), ('--tx-4', 'text-subtle'), ('--placeholder', 'text-subtle'),
  ('--ok', 'on-conforme-soft'), ('--ok-bg', 'conforme-soft'), ('--ok-bdr', 'conforme-line'),
  ('--warn', 'on-alerta-soft'), ('--warn-bg', 'alerta-soft'), ('--warn-bdr', 'alerta-line'),
  ('--err', 'fuera'), ('--err-bg', 'fuera-soft'), ('--err-bdr', 'fuera-line'),
- ('--dis-bg', 'sunken'), ('--dis-bdr', 'border-strong'), ('--dis-tx', 'text-subtle'),
+ ('--dis-bg', 'surface-sunken'), ('--dis-bdr', 'border-strong'), ('--dis-tx', 'text-subtle'),
  ('--nn-bit-navy', 'primary'), ('--nn-bit-navy-lt', 'primary-soft'), ('--nn-bit-navy-mid', 'primary-hover'),
- ('--nn-bit-bg', 'bg'), ('--nn-bit-surf', 'surface'), ('--nn-bit-surf-2', 'surface-2'), ('--nn-bit-surf-3', 'sunken'), ('--nn-bit-surf-4', 'border'),
+ ('--nn-bit-bg', 'bg'), ('--nn-bit-surf', 'surface'), ('--nn-bit-surf-2', 'surface-2'), ('--nn-bit-surf-3', 'surface-sunken'), ('--nn-bit-surf-4', 'border'),
  ('--nn-bit-bdr', 'border'), ('--nn-bit-bdr-2', 'border-control'), ('--nn-bit-bdr-3', 'text-subtle'),
  ('--nn-bit-tx', 'text'), ('--nn-bit-tx-2', 'text'), ('--nn-bit-tx-3', 'text-muted'), ('--nn-bit-tx-4', 'text-subtle'),
  ('--nn-bit-ok', 'on-conforme-soft'), ('--nn-bit-ok-bg', 'conforme-soft'), ('--nn-bit-ok-bdr', 'conforme-line'),
  ('--nn-bit-warn', 'on-alerta-soft'), ('--nn-bit-warn-bg', 'alerta-soft'), ('--nn-bit-warn-bdr', 'alerta-line'),
  ('--nn-bit-err', 'fuera'), ('--nn-bit-err-bg', 'fuera-soft'), ('--nn-bit-err-bdr', 'fuera-line'),
- ('--nn-bit-dis-bg', 'sunken'), ('--nn-bit-dis-bdr', 'border-strong'), ('--nn-bit-dis-tx', 'text-subtle'),
+ ('--nn-bit-dis-bg', 'surface-sunken'), ('--nn-bit-dis-bdr', 'border-strong'), ('--nn-bit-dis-tx', 'text-subtle'),
  ('--v3-ink', 'text'), ('--v3-muted', 'text-muted'), ('--v3-border', 'border'), ('--v3-navy', 'primary'),
  ('--nn-primary-light', 'primary-hover'), ('--nn-primary-dark', 'primary-hover'), ('--nn-primary-darker', 'primary-ink'), ('--nn-secondary', 'pera'),
  ('--nn-text-light', 'text-muted'), ('--nn-bg-alt', 'surface-2'),
  ('--nn-color-text-muted', 'text-muted'), ('--nn-color-success-dark', 'on-conforme-soft'), ('--nn-color-warning-dark', 'on-alerta-soft'), ('--nn-color-error-dark', 'fuera'), ('--nn-color-info-dark', 'primary'),
+ ('--info', 'primary'), ('--info-bg', 'primary-soft'), ('--info-bdr', 'primary-line'),
  ('--nn-color-success-soft', 'conforme-soft'), ('--nn-color-warning-soft', 'alerta-soft'), ('--nn-color-error-soft', 'fuera-soft'), ('--nn-color-info-soft', 'primary-soft'),
 ]
-CSS_PROP = ('/* NisaLab · bitácoras · capa de color única (propuesta r01). Pegar AL FINAL del archivo. */\n.bitacoras-page-wrap {\n'
+CSS_PROP = ('/* NisaLab · bitácoras · capa de color única (aprobada 2026-11-05). Pegar AL FINAL del archivo. */\n.bitacoras-page-wrap,\n.bit-history-layer,\n.bit-history-control {\n'
             + ''.join(f'  --nn-{k}: {v};\n' for k, v in P.items())
             + '  /* Compatibilidad: los nombres viejos apuntan a la capa nueva */\n'
             + ''.join(f'  {a}: var(--nn-{b});\n' for a, b in ALIAS)
@@ -287,7 +288,7 @@ out = f'''<title>Bitácoras · propuesta de color</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Google+Sans+Code:wght@400;500;600;700&display=swap">
 <style>{CSS}</style><script>document.documentElement.lang='es'</script>
 <header><div class="wrap"><h1>Bitácoras NisaLab: <span>propuesta de color</span></h1><p>Revisión del CSS de producción de bitácoras contra el design system NisaLab v3, y una capa de color única para reemplazar las cinco que conviven hoy.</p>
-<div class="tags"><span>Ronda 1 · propuesta, sin aprobar</span><span>WCAG 2.2 AA</span><span class="p">Una sola cosa pera</span></div></div></header>
+<div class="tags"><span>Ronda 1 · aprobada el 5 de noviembre</span><span>WCAG 2.2 AA</span><span class="p">Una sola cosa pera</span></div></div></header>
 <main class="wrap">{"".join(SEC)}</main><footer class="wrap">Fuente: CSS de bitácoras (producción) y tokens del design system NisaLab v3. Contrastes calculados por el generador.</footer>
 <script>
 document.getElementById('copiar').addEventListener('click',function(){{var b=this,t=document.getElementById('css').textContent;
@@ -295,4 +296,6 @@ function sel(){{var r=document.createRange();r.selectNodeContents(document.getEl
 try{{navigator.clipboard.writeText(t).then(function(){{b.textContent='Copiado'}},sel)}}catch(x){{sel()}}}});
 </script>'''
 open(os.path.join(D, 'propuesta.html'), 'w').write(out)
+OVERRIDES = open(os.path.join(D, 'overrides.css')).read()
+open(os.path.join(D, 'bitacoras-color.css'), 'w').write(CSS_PROP + '\n' + OVERRIDES)
 print('ok', len(out) // 1024, 'KB')

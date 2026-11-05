@@ -1,0 +1,206 @@
+/* ── Segundo paso: colores escritos a mano en las reglas ───────────────
+   Mismos selectores que el original; ganan por ir después.
+   Donde el original usa !important, aquí también. */
+
+/* Decisión 1 · «Completo» en verde conforme (el pera deja de significar éxito) */
+.bitacoras-page-wrap .folio-badge--complete {
+  background: var(--nn-conforme-soft);
+  border-color: var(--nn-conforme-line);
+  color: var(--nn-on-conforme-soft);
+}
+.bitacoras-page-wrap .folio-badge--complete:hover {
+  background: var(--nn-conforme);
+  border-color: var(--nn-conforme);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.18);
+}
+.bitacoras-page-wrap .sample-info__folio,
+.bitacoras-page-wrap .results-count-badge,
+.bitacoras-page-wrap .results-panel__badge,
+.bitacoras-page-wrap .results-panel__section-tag,
+.bitacoras-page-wrap .results-badge {
+  border-color: var(--nn-primary-line);
+  background: var(--nn-primary-soft);
+  color: var(--nn-primary);
+}
+.bitacoras-page-wrap .nn-gc-ok { background: var(--nn-conforme-soft); color: var(--nn-on-conforme-soft); border-color: var(--nn-conforme-line); }
+.bitacoras-page-wrap .nn-gc-err { background: var(--nn-fuera-soft); color: var(--nn-on-fuera-soft); border-color: var(--nn-fuera-line); }
+.bitacoras-page-wrap .nn-gc-warn { background: var(--nn-alerta-soft); color: var(--nn-on-alerta-soft); border-color: var(--nn-alerta-line); }
+.bitacoras-page-wrap .nn-gl-table td.is-ok { color: var(--nn-on-conforme-soft); }
+.bitacoras-page-wrap .nn-gl-table td.is-err { color: var(--nn-fuera); }
+.bit-snapshot-table__new { color: var(--nn-on-conforme-soft); }
+
+/* Botones: una sola primaria en azul; el estado lo dicen icono y texto */
+.bitacoras-page-wrap .btn-success,
+.bitacoras-page-wrap .btn-nn-success,
+.bitacoras-page-wrap .nnd-btn-ok,
+.bitacoras-page-wrap .iub-btn.success,
+.bitacoras-page-wrap .nn-gl-btn-ok {
+  background: var(--nn-primary);
+  border-color: var(--nn-primary);
+  color: #fff;
+}
+.bitacoras-page-wrap .btn-success:hover,
+.bitacoras-page-wrap .btn-nn-success:hover,
+.bitacoras-page-wrap .iub-btn.success:hover:not(:disabled),
+.bitacoras-page-wrap .nnd-btn-confirm:hover,
+.bitacoras-page-wrap .iub-btn.navy:hover:not(:disabled),
+.bitacoras-page-wrap .nn-gl-btn-ok:hover {
+  background: var(--nn-primary-hover);
+  border-color: var(--nn-primary-hover);
+  filter: none;
+}
+.bitacoras-page-wrap .btn-nn-danger,
+.bitacoras-page-wrap .nnd-btn-danger,
+.bitacoras-page-wrap .iub-btn.danger {
+  background: var(--nn-fuera);
+  border-color: var(--nn-fuera);
+  color: #fff;
+}
+.bitacoras-page-wrap .btn-nn-danger:hover,
+.bitacoras-page-wrap .nnd-btn-danger:hover,
+.bitacoras-page-wrap .iub-btn.danger:hover:not(:disabled) {
+  background: var(--nn-fuera-hover);
+  border-color: var(--nn-fuera-hover);
+}
+.bitacoras-page-wrap .btn-validate {
+  background: var(--nn-primary);
+  box-shadow: 0 1px 2px rgba(5, 42, 118, 0.30), 0 6px 14px -6px rgba(5, 42, 118, 0.45);
+}
+.bitacoras-page-wrap .btn-validate:hover { background: var(--nn-primary-hover); }
+.bitacoras-page-wrap .btn-validate.is-valid { background: var(--nn-conforme); box-shadow: none; }
+.bitacoras-page-wrap .btn-validate.has-errors { background: var(--nn-fuera); box-shadow: none; }
+.bitacoras-page-wrap .attachment-remove {
+  border-color: var(--nn-fuera-line);
+  background: var(--nn-fuera-soft);
+  color: var(--nn-fuera);
+}
+.bitacoras-page-wrap .attachment-remove:hover {
+  border-color: var(--nn-fuera);
+  background: var(--nn-fuera-soft);
+  color: var(--nn-fuera-hover);
+}
+.bitacoras-page-wrap .btn-nn-reopen:hover,
+.bitacoras-page-wrap .bitacora-btn--pending:hover,
+.bitacoras-page-wrap .bitacora-btn--pending:focus-visible {
+  border-color: var(--nn-alerta);
+  background: var(--nn-alerta-soft);
+  color: var(--nn-on-alerta-soft);
+}
+.bitacoras-page-wrap .bitacora-btn--rejected:hover,
+.bitacoras-page-wrap .bitacora-btn--rejected:focus-visible {
+  border-color: var(--nn-fuera);
+  background: var(--nn-fuera-soft);
+  color: var(--nn-on-fuera-soft);
+}
+.bitacoras-page-wrap .bitacora-btn,
+.bitacoras-page-wrap .btn-nn-primary { box-shadow: 0 1px 2px rgba(5, 42, 118, 0.30), 0 6px 14px -6px rgba(5, 42, 118, 0.45); }
+.bitacoras-page-wrap .bitacora-btn:hover,
+.bitacoras-page-wrap .bitacora-btn:focus-visible,
+.bitacoras-page-wrap .btn-nn-primary:hover,
+.bitacoras-page-wrap .btn-nn-primary:focus-visible {
+  border-color: var(--nn-primary-hover);
+  background: var(--nn-primary-hover);
+}
+
+/* Decisión 3 · Solo lectura = deshabilitado en color; lo distingue el candado */
+.bitacoras-page-wrap .field-input[readonly],
+.bitacoras-page-wrap .field-input.is-readonly,
+.bitacoras-page-wrap .field-textarea[readonly],
+.bitacoras-page-wrap .input-lock-wrap.is-readonly .field-input,
+.bitacoras-page-wrap .input-lock-wrap.is-readonly .input-unit-btn-wrap .field-input {
+  background: var(--nn-surface-sunken);
+  border-color: var(--nn-border-strong);
+  color: var(--nn-text-muted);
+}
+.bitacoras-page-wrap .input-suffix-wrap:has(.field-input[readonly]) {
+  background: var(--nn-surface-sunken);
+  border-color: var(--nn-border-strong);
+}
+.bitacoras-page-wrap .input-lock-wrap.is-readonly { border-color: var(--nn-border-strong) !important; }
+.bitacoras-page-wrap .input-lock-wrap.is-readonly .lock-prefix {
+  background: var(--nn-surface-sunken) !important;
+  border-color: var(--nn-border-strong) !important;
+}
+.bitacoras-page-wrap .input-lock-wrap.is-readonly .lock-prefix svg { stroke: var(--nn-text-muted) !important; }
+.bitacoras-page-wrap .lock-prefix svg { stroke: var(--nn-text-muted); }
+
+/* Campos: estado de advertencia con el ámbar del sistema */
+.bitacoras-page-wrap .field-input.is-warning,
+.bitacoras-page-wrap .input-suffix-wrap:has(.field-input.is-warning) { border-color: var(--nn-alerta); }
+.bitacoras-page-wrap .nn-field-state-reference { color: var(--nn-text-muted); }
+.bitacoras-page-wrap .nn-field-state-reference--error { color: var(--nn-fuera); }
+.bitacoras-page-wrap .nn-field-state-reference--warning,
+.bitacoras-page-wrap .nn-field-state-reference--outlier { color: var(--nn-alerta); }
+
+/* Chips y avisos azules: un solo borde */
+.bitacoras-page-wrap .nn-section-label--navy,
+.bitacoras-page-wrap .nn-panel-count,
+.bitacoras-page-wrap .attachment-item:hover,
+.bitacoras-page-wrap .attachment-icon,
+.bitacoras-page-wrap .criteria-box,
+.bitacoras-page-wrap .nnd-icon--confirm,
+.bitacoras-page-wrap .folio-badges__refresh:hover,
+.bitacoras-page-wrap .nn-alert--apertura,
+.bitacoras-page-wrap .nn-gl-icon-idle,
+.bitacoras-page-wrap .tooltip-trigger,
+.bitacoras-page-wrap .iub-loading,
+.bitacoras-page-wrap #modalAlcVol .bituno-alert-detail--info { border-color: var(--nn-primary-line); }
+.bitacoras-page-wrap .nn-section-label--navy .section-label-line { background: var(--nn-primary-line); }
+.bitacoras-page-wrap .input-suffix,
+.bitacoras-page-wrap .iub-unit { border-left-color: var(--nn-primary-line); color: var(--nn-primary); }
+.bitacoras-page-wrap .nn-gl-spinner { border-color: var(--nn-primary-line); border-top-color: var(--nn-primary); }
+.bitacoras-page-wrap .nn-panel-count { color: var(--nn-primary) !important; }
+
+/* Tablas: encabezados en hundido y texto atenuado */
+.bitacoras-page-wrap .table thead th { background: var(--nn-surface-2); }
+.bitacoras-page-wrap .measures-table thead th,
+.bitacoras-page-wrap .calc-table th {
+  background: var(--nn-surface-sunken);
+  border-color: var(--nn-border);
+  color: var(--nn-text-muted);
+}
+.bitacoras-page-wrap .measures-table tbody td,
+.bitacoras-page-wrap .calc-table td { border-color: var(--nn-border); }
+.bitacoras-page-wrap .results-head-cell { color: var(--nn-text-muted); }
+
+/* Avisos de rechazo y vista previa */
+.bitacoras-page-wrap .reject-reason-box { border-color: var(--nn-fuera-line); background: var(--nn-fuera-soft); }
+.bitacoras-page-wrap .reject-reason-title { color: var(--nn-fuera); }
+.bitacoras-page-wrap .reject-reason-text { color: var(--nn-on-fuera-soft); }
+.bitacoras-page-wrap .nn-doc-preview__empty-icon { background: var(--nn-primary-soft); color: var(--nn-primary); }
+.bitacoras-page-wrap .nn-doc-preview__empty-title { color: var(--nn-text); }
+.bitacoras-page-wrap .nn-doc-preview__empty-text { color: var(--nn-text-muted); }
+
+/* Zona de carga del PDF */
+.bitacoras-page-wrap .pdf-dropzone { border-color: var(--nn-border-control); background: var(--nn-surface-2); }
+.bitacoras-page-wrap .pdf-dropzone:hover,
+.bitacoras-page-wrap .pdf-dropzone--over { border-color: var(--nn-primary); background: var(--nn-primary-soft); }
+.bitacoras-page-wrap .pdf-dropzone--done { border-color: var(--nn-conforme); background: var(--nn-conforme-soft); }
+.bitacoras-page-wrap .pdf-dropzone--error { border-color: var(--nn-fuera); background: var(--nn-fuera-soft); }
+
+/* Consola de importación */
+.bitacoras-page-wrap .pdf-log-panel { border-color: var(--nn-log-panel); background: var(--nn-log-bg); color: var(--nn-log-text); }
+.bitacoras-page-wrap .pdf-log-table { color: var(--nn-log-text); }
+.bitacoras-page-wrap .pdf-log-scroll { scrollbar-color: var(--nn-log-panel) transparent; }
+.bitacoras-page-wrap .pdf-log-scroll::-webkit-scrollbar-thumb { background: var(--nn-log-panel); }
+.bitacoras-page-wrap .log-row-error td { color: var(--nn-log-err); }
+.bitacoras-page-wrap .log-row-warn td { color: var(--nn-log-warn); }
+.bitacoras-page-wrap .log-row-debug td { color: var(--nn-log-muted); }
+.bitacoras-page-wrap .log-badge { border: 1px solid currentColor; background: var(--nn-log-panel); }
+.bitacoras-page-wrap .log-badge--info { color: var(--nn-log-info); background: var(--nn-log-panel); }
+.bitacoras-page-wrap .log-badge--warn { color: var(--nn-log-warn); background: var(--nn-log-panel); }
+.bitacoras-page-wrap .log-badge--error { color: var(--nn-log-err); background: var(--nn-log-panel); }
+.bitacoras-page-wrap .log-badge--debug { color: var(--nn-log-muted); background: var(--nn-log-panel); }
+.bitacoras-page-wrap .log-etapa { color: var(--nn-log-muted); }
+.bitacoras-page-wrap .log-detalle { background: var(--nn-log-panel); color: var(--nn-log-info); }
+.bitacoras-page-wrap .pdf-log-panel .btn-outline-secondary { color: var(--nn-log-muted); border-color: var(--nn-log-panel); }
+.bitacoras-page-wrap .pdf-log-panel .btn-outline-secondary:hover,
+.bitacoras-page-wrap .pdf-log-panel .btn-outline-secondary.active { background: var(--nn-log-panel); color: var(--nn-log-text); border-color: var(--nn-log-muted); }
+
+/* Encabezado de página y modales: el degradado cierra en primary-ink */
+.bitacoras-page-wrap .page-hero {
+  background:
+    radial-gradient(700px 310px at 88% -75%, rgba(10, 58, 160, 0.9) 0%, rgba(10, 58, 160, 0.6) 32%, transparent 68%),
+    linear-gradient(135deg, var(--nn-primary) 0%, var(--nn-primary-ink) 100%);
+}
