@@ -102,10 +102,10 @@
     "Ecosistema"
   ],
   "lastChange": {
-    "at": "2026-11-05T15:59:12Z",
+    "at": "2026-11-05T16:11:35Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "Familia de controles y reglas de formularios y diálogos aprobadas: Boton y Campo con todos sus estados; Casilla, OpcionUnica, Interruptor, ControlSegmentado, ChipFiltro, Dialogo y el patrón Formulario; tokens scrim, control-height-compact, form-max y dialog-sm/md/lg."
+    "note": "App shell aprobado: AppShell, BarraLateral (módulos y submódulos, riel) y AppPequena (pestañas para apps de 2 o 3 secciones); EncabezadoApp por ancho; tokens sidebar-width, rail-width, content-narrow, footer-height, bp-cajon y bp-celular."
   },
   "layout": "files",
   "libraries": [],

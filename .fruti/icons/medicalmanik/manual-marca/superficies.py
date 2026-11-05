@@ -136,6 +136,13 @@ HTML = f'''<section id="superficies" aria-labelledby="h4s"><div class="cab"><spa
   <li><b>El contenedor depende del tamaño:</b> confirmación sin campos, diálogo hasta 6 campos, panel lateral de 7 a 12, página con más.</li>
   <li><b>El diálogo protege lo escrito:</b> Esc con cambios pregunta antes de descartar, un clic fuera no cierra un formulario y, si falla el guardado, los datos se quedan. En celular sube como hoja desde abajo.</li>
   <li><b>Lo destructivo empieza en contorno</b> y solo se pinta de rojo sólido en el diálogo que confirma, con la pregunta y el objeto en el título.</li></ol>
+ <h3>App shell</h3>
+ <p class="texto">Aprobado el 5 de noviembre: un mismo esqueleto en las siete apps (barra superior, barra lateral o pestañas, contenido y pie). Detalle en el sistema de diseño: EncabezadoApp, AppShell, BarraLateral y AppPequena.</p>
+ <ol class="reglas">
+  <li><b>La navegación depende del número de destinos, no de acciones:</b> 2 o 3 secciones, pestañas bajo la barra superior; 4 a 7, barra lateral plana; módulos con submódulos, barra lateral por módulos. Nunca tres niveles.</li>
+  <li><b>Barra lateral de {E['sidebar-width']}</b> (riel de {E['rail-width']}): la página actual en azul suave con su módulo padre en negritas; los submódulos cuelgan de una línea guía, sin icono.</li>
+  <li><b>Las apps pequeñas no llevan barra lateral:</b> sus pestañas son destinos y el contenido va centrado a {E['content-narrow']}. Las acciones, como «Nueva campaña», son botones en la página.</li>
+  <li><b>El color de producto solo vive en el sello de la barra superior;</b> la navegación usa el azul Manik en todas las apps.</li></ol>
 </section>'''
 
 CSS = '''

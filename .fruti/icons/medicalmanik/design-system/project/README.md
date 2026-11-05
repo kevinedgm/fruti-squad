@@ -88,6 +88,17 @@ Una sola familia para las siete apps: lo que cambia por app es el sello y el nom
 - **Contenedor por tamaño:** confirmación · diálogo hasta 6 campos · panel lateral 7 a 12 (pendiente) · página.
 - **Diálogos:** `dialog-sm/md/lg` 400/560/720, `scrim` detrás, hoja inferior en celular, foco atrapado y de regreso, Esc con cambios pide descartar, clic fuera no cierra formularios.
 
+## App shell (aprobado 2026-11-05)
+
+Un mismo esqueleto en las siete apps y dos formas de navegar según su tamaño. Ronda: `../../shell-r02/`.
+
+- **Componentes:** EncabezadoApp, AppShell, BarraLateral y AppPequena.
+- **¿Qué navegación?** Se cuentan destinos, no acciones: 2 o 3 → pestañas (AppPequena); 4 a 7 → barra lateral plana; módulos con submódulos → barra lateral por módulos. Dos niveles como máximo.
+- **Barra lateral** de 264 px (riel de 72), submódulos desplegables sin icono colgando de una línea guía, la página actual en «manik-soft» con `aria-current`.
+- **Pie** de 44 px dentro de la columna de contenido.
+- **Tableta:** cajón con velo. **Celular:** búsqueda como icono, tablas en filas.
+- **Apps pequeñas:** pestañas bajo la barra superior y contenido centrado a 1120 px.
+
 ## Iconografía
 
 Lucide, trazo 2, retícula 24 (el mismo set de Impulsa). Un concepto, un icono; con texto al lado llevan `aria-hidden`. Estados: circle-check, triangle-alert, circle-x, info.
