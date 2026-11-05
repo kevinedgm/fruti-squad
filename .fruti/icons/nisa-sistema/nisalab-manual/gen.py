@@ -212,7 +212,7 @@ S('esencia', '01 · Esencia', 'Calidad que se <span>puede comprobar</span>', 'Ni
   <div class="card"><b>«Área NisaLab»</b><p>Aguas, Alimentos, Farmacia… La célula que creció toma el color del área.</p></div></div>
   <h3>Fundamentos</h3><ul class="lista"><li><b>El dato manda.</b> Cada pantalla tiene un valor o estado protagonista; la marca vive en el encabezado, la carga y los documentos, no en las tablas.</li>
   <li><b>Una sola cosa pera.</b> Si hay dos cosas en pera, una sobra.</li><li><b>Área no es estado.</b> El color del área identifica la división; el estado tiene colores propios.</li>
-  <li><b>Nada depende solo del color.</b> Todo estado lleva icono y texto.</li><li><b>Pocos colores, cada uno con un dueño.</b> 25 en total; el verde, el ámbar y el rojo dicen lo mismo en todo el sistema.</li><li><b>Dos voces.</b> Poppins habla; IBM Plex Mono mide.</li></ul>
+  <li><b>Nada depende solo del color.</b> Todo estado lleva icono y texto.</li><li><b>Pocos colores, cada uno con un dueño.</b> 25 en total; el verde, el ámbar y el rojo dicen lo mismo en todo el sistema.</li><li><b>Dos voces.</b> Poppins habla; Google Sans Code mide.</li></ul>
   <h3>Productos hermanos</h3><div class="fam"><div class="card"><img src="{HER['nisadata']}" alt=""><b>NisaData</b><p>Analítica. Lee los datos de NisaLab.</p></div>
   <div class="card"><img src="{HER['nisaresults']}" alt=""><b>NisaResults</b><p>Portal de clientes: resultados e informes.</p></div><div class="card"><img src="{HER['nisastudio']}" alt=""><b>NisaStudio</b><p>Piezas de redes y avisos.</p></div></div>
   <p class="pie">Mismo patrón «Nisa» + palabra, mismo respaldo y células como átomo gráfico; cada uno con su símbolo y su color. Tienen manual propio.</p>'''),
@@ -240,11 +240,11 @@ S('areas', '04 · Áreas', '«Área <span>NisaLab</span>»', 'Cada división es 
   <div class="grid3">{AREA_LOGOS}</div>
   <ul class="lista"><li>El color del área va en su marca, el encabezado de su página y los filtros. <b>Nunca en tablas</b>: ahí el área va con su ícono a una tinta y su nombre.</li>
   <li>Íconos dibujados en retícula de 40, formas redondas y blancas, trazo 3–4. Mínimo 16 px.</li><li>Un color de área nunca indica un estado.</li></ul>'''),
-S('tipografia', '05 · Tipografía', 'Poppins habla, <span>Plex Mono mide</span>', 'Poppins es la tipografía de Nisa Nabani para títulos y textos. IBM Plex Mono lleva lo que se mide, se compara o se copia: resultados, límites, unidades y folios.',
+S('tipografia', '05 · Tipografía', 'Poppins habla, <span>Google Sans Code mide</span>', 'Poppins es la tipografía de Nisa Nabani para títulos y textos. Google Sans Code lleva lo que se mide, se compara o se copia: resultados, límites, unidades y folios.',
   f'''<div class="grid2"><div class="card"><span class="ey">Poppins 400 · 500 · 600 · 700</span><p class="esp-d" style="color:var(--text)">Resultados <span>del análisis</span></p><p class="pie">700 solo en display; 600 en títulos y botones; 400 en texto. Cuerpo de 14 px.</p></div>
-  <div class="card"><span class="ey">IBM Plex Mono 400 · 500 · 600</span><p class="esp-m" style="color:var(--text)">0.012 mg/L</p><p class="pie">Cifras de ancho fijo para alinear columnas; cero con barra (<code>font-feature-settings:"zero"</code>) para no confundir 0 con O; tiene µ, ±, ≤, ≥ y °.</p></div></div>
+  <div class="card"><span class="ey">Google Sans Code 400 · 500 · 600</span><p class="esp-m" style="color:var(--text)">0.012 mg/L</p><p class="pie">Cifras de ancho fijo para alinear columnas; cero con barra de fábrica para no confundir 0 con O; tiene µ, ±, ≤, ≥ y °.</p></div></div>
   <div class="escala">{ESCALA}</div>
-  <p class="pie">Carga: <code>Poppins:wght@400;500;600;700</code> e <code>IBM+Plex+Mono:wght@400;500;600</code> de Google Fonts.</p>'''),
+  <p class="pie">Carga: <code>Poppins:wght@400;500;600;700</code> e <code>Google+Sans+Code:wght@400;500;600</code> de Google Fonts.</p>'''),
 S('forma', '06 · Forma y elevación', 'Contenido, <span>no plano</span>', 'Escala de 4 px; radios contenidos; sombras teñidas de azul, no negras. Las superficies blancas se separan del lienzo con borde y una sombra mínima.',
   '<div class="radios">' + ''.join(f'<figure><span style="border-radius:{t["value"]}"></span>{t["name"].replace("radius-", "")} · {t["value"]}</figure>' for t in TOK['radius']['tokens']) + '</div>'
   + '<div class="esp">' + ''.join(f'<div><code>{t["name"]}</code><span><i style="width:{int(t["value"][:-2]) * 3}px"></i></span><small>{t["value"]} · {e(t["usage"])}</small></div>' for t in TOK['spacing']['tokens']) + '</div>'
@@ -268,20 +268,20 @@ S('voz', '10 · Voz', 'Precisa, breve, <span>sin adornos</span>', 'Los botones d
 S('componentes', '11 · Componentes', 'Las piezas <span>clave</span>', 'Muestras estáticas. El design system NisaLab tiene las versiones vivas, sus estados y sus reglas. Folios y valores: de ejemplo.',
   f'''<div class="muestra"><span class="et">Botones</span><div class="btnrow"><span class="btn pri">Registrar muestra</span><span class="btn sec">Exportar</span><span class="btn txt">Ver historial</span><span class="btn des">Cancelar orden</span></div><p class="pie">Una sola acción primaria por vista; la destructiva va separada y pide confirmación.</p></div>
   <div class="grid2"><div class="muestra"><span class="et">Campo con valor</span><div class="campo"><label>Resultado (mg/L)</label><span>0.012</span><small>Intervalo del método: 0.005–10 mg/L</small></div></div>
-  <div class="muestra"><span class="et">Folio y estado</span><p style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><code style="font-size:14px">AG-2610-0147</code>{PILLS.split('</span>')[1]}</span>{URG}</p><p class="pie">El folio siempre en Plex Mono; el estado, con ícono y texto.</p></div></div>
+  <div class="muestra"><span class="et">Folio y estado</span><p style="display:flex;flex-wrap:wrap;gap:10px;align-items:center"><code style="font-size:14px">AG-2610-0147</code>{PILLS.split('</span>')[1]}</span>{URG}</p><p class="pie">El folio siempre en Google Sans Code; el estado, con ícono y texto.</p></div></div>
   <div class="grid2"><div class="muestra"><span class="et">Campo de solo lectura</span><div class="campo ro"><label>Temperatura (°C)</label><span><i aria-hidden="true">{ico('lock', 14)}</i>20.0</span><small>Lo fija el equipo; no se edita aquí.</small></div></div>
   <div class="muestra"><span class="et">Pago</span><p style="display:flex;flex-wrap:wrap;gap:8px">{ETQ}</p><p class="pie">Etiqueta con contorno en los mismos colores de estado.</p></div></div>
   <div class="muestra"><span class="et">Tabla de resultados</span>{TABLA_RES}<p class="pie">Valores alineados a la derecha; estado con punto de 10 px y texto; la fila que se edita, con filete pera.</p></div>'''),
 S('accesibilidad', '12 · Accesibilidad', 'WCAG 2.2 <span>AA</span>', None,
   f'<ul class="lista"><li>Texto 4.5:1 sobre su fondo (<code>text-muted</code> {cr(C["text-muted"], C["bg"])}:1 sobre <code>bg</code>); bordes de control 3:1.</li><li>Controles de 40 px en escritorio y 44 px en táctil; nada interactivo bajo 24 px.</li><li>Foco visible de 2 px; sobre azul, en pera.</li><li>Estados con icono y texto, nunca solo color; el área en tablas va con nombre.</li><li>Campos editables con borde {cr(C["border-control"], C["surface"])}:1; de solo lectura, {cr(C["border-control"], C["bg"])}:1 sobre <code>bg</code>.</li><li>Sobre su fondo suave, el verde necesita texto oscuro (<code>on-conforme-soft</code>); ámbar y rojo se leen con su propio color.</li><li>El pera nunca es texto ({cr(C["pera"], W)}:1 sobre blanco).</li><li>Se respeta «reducir movimiento».</li></ul>'),
 S('pendientes', '13 · Pendientes', 'Por <span>decidir</span>', None,
-  '<ul class="lista"><li>Registro de «NisaLab» en el IMPI y disponibilidad del dominio.</li><li>Productos «Producto NisaLab» (por ejemplo, «Recepción NisaLab») y su sello.</li><li>Convivencia con Verdant WebKit: bitácoras ya usa azul y pera en producción; falta decidir el resto de la interfaz (acento esmeralda).</li><li>Tipografía de datos: el sistema dice IBM Plex Mono y bitácoras usa Google Sans Code.</li><li>Íconos de estatus dentro del informe (rondas A/B/C/D): sin elegir.</li><li>Confirmar nombres de estado con el flujo real del laboratorio.</li></ul>'),
+  '<ul class="lista"><li>Registro de «NisaLab» en el IMPI y disponibilidad del dominio.</li><li>Productos «Producto NisaLab» (por ejemplo, «Recepción NisaLab») y su sello.</li><li>Convivencia con Verdant WebKit: bitácoras ya usa azul y pera en producción; falta decidir el resto de la interfaz (acento esmeralda).</li><li>Íconos de estatus dentro del informe (rondas A/B/C/D): sin elegir.</li><li>Confirmar nombres de estado con el flujo real del laboratorio.</li></ul>'),
 ]
 
 html_out = f'''<title>Manual de marca NisaLab</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Google+Sans+Code:wght@400;500;600&display=swap">
 <style>{CSS}</style>
 <script>document.documentElement.lang='es'</script>
 <header class="portada"><img class="fondo" src="{F['simbolo-blanco']}" alt=""><div class="wrap"><img class="logo" src="{F['logotipo-blanco']}" alt="NisaLab"><h1>Manual de marca <span>de NisaLab</span></h1>

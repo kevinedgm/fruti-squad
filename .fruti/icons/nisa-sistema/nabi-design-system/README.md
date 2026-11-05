@@ -7,7 +7,7 @@ NisaLab es el sistema de laboratorio de Nisa Nabani: recepción de muestras, lot
 ## Principios
 
 - **El dato manda.** Cada pantalla tiene un valor o un estado protagonista; todo lo demás se subordina. La marca vive en el encabezado, la carga y los documentos, no en las tablas.
-- **Dos voces tipográficas.** Poppins habla (títulos, etiquetas, texto), como en el manual de Nisa Nabani; IBM Plex Mono mide (resultados, límites, unidades, folios). Si un número se mide, se compara o se copia, va en Plex Mono. Ver la sección «Valores y resultados».
+- **Dos voces tipográficas.** Poppins habla (títulos, etiquetas, texto), como en el manual de Nisa Nabani; Google Sans Code mide (resultados, límites, unidades, folios). Si un número se mide, se compara o se copia, va en Google Sans Code. Ver la sección «Valores y resultados».
 - **Una sola cosa pera.** El pera marca lo que está en curso: la muestra activa, el registro que se edita, la célula que creció del símbolo. Si hay dos cosas en pera, una sobra.
 - **Área no es estado.** Los colores de área identifican cada división dentro de NisaLab; los estados tienen colores propios.
 - **Nada depende solo del color.** Conforme, fuera de especificación, alerta y pendiente llevan icono y texto, además de color.
@@ -32,9 +32,9 @@ Los primarios de Nisa Nabani ordenan la interfaz; los secundarios del laboratori
 ## Tipografía
 
 - **Poppins** (`display`, `sans`). La tipografía del manual de Nisa Nabani para títulos, subtítulos y textos. 700 solo en `display`; 600 en títulos y botones; 400 en texto. 14 px de cuerpo: su x-height alta lee como 15 px de otras familias.
-- **IBM Plex Mono** (`datos`). Para valores y resultados de análisis. Cifras de ancho fijo, para que las columnas se alineen solas; cero con barra (`font-feature-settings: "zero"`) para no confundir 0 con O; tiene µ, ±, ×, ≤, ≥, ° y superíndices.
-- **IBM Plex Mono** se conserva aunque el manual no la incluye: el manual no cubre datos tabulares y Poppins no alinea cifras en columna.
-- Se cargan de Google Fonts: `Poppins:wght@400;500;600;700` e `IBM Plex Mono:wght@400;500;600`.
+- **Google Sans Code** (`datos`). Para valores y resultados de análisis. Cifras de ancho fijo, para que las columnas se alineen solas; cero con barra de fábrica para no confundir 0 con O; tiene µ, ±, ×, ≤, ≥ y °. Es la que ya usa bitácoras en producción.
+- **Google Sans Code** se usa aunque el manual de Nisa Nabani no la incluye: el manual no cubre datos tabulares y Poppins no alinea cifras en columna.
+- Se cargan de Google Fonts: `Poppins:wght@400;500;600;700` e `Google Sans Code:wght@400;500;600`.
 
 ## Espacio, forma y elevación
 

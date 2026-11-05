@@ -1,8 +1,8 @@
 # Valores y resultados
 
-La segunda fuente existe para una sola cosa: que un resultado se lea, se compare y se copie sin error. Todo valor analítico va en **IBM Plex Mono** con cero con barra.
+La segunda fuente existe para una sola cosa: que un resultado se lea, se compare y se copie sin error. Todo valor analítico va en **Google Sans Code** con cero con barra.
 
-## Qué va en Plex Mono
+## Qué va en Google Sans Code
 
 - Resultados y lecturas: `7.42`, `0.012`, `1.2 × 10³`.
 - Unidades junto al valor: `mg/L`, `UFC/100 mL`, `°Bx`, `% v/v`, `µS/cm`.

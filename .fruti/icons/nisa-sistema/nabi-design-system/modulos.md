@@ -37,7 +37,7 @@ Proporción: casi todo es `bg`, `surface` y tinta; el azul aparece en la acción
 | Ruta | `label` (Poppins 500 13/18) |
 | Título del módulo | Poppins 600 24/32 (`title-1` ampliado) |
 | Entradilla | `body` ampliado (Poppins 400 15/22, `text-muted`) |
-| Conteo, último acceso, correos, folios | Plex Mono (`valor-sm`, `folio`) con cero con barra |
+| Conteo, último acceso, correos, folios | Google Sans Code (`valor-sm`, `folio`) con cero con barra |
 | Encabezados de columna | `label` |
 | Nombre en tabla | Poppins 600 14/20 |
 | Botones | `button` |
@@ -49,13 +49,13 @@ Proporción: casi todo es `bg`, `surface` y tinta; el azul aparece en la acción
 - **Título sin icono.** El icono del módulo vive en el menú lateral; junto al título repite información y compite con la acción primaria.
 - **Una sola acción primaria**, arriba a la derecha, con verbo + objeto: «Agregar usuario», «Registrar cliente». Las demás, secundarias o en «Más».
 - **Entradilla** solo en módulos de configuración o poco frecuentes; nunca en pantallas de captura diaria.
-- **Conteos** que ayudan a decidir («3 invitaciones pendientes»), en Plex Mono.
+- **Conteos** que ayudan a decidir («3 invitaciones pendientes»), en Google Sans Code.
 
 ## Tabla de personas
 
 - Columnas en este orden: casilla · Usuario (iniciales o foto, nombre, correo) · Rol · Divisiones · Último acceso · Estado · acciones.
 - Filas de 56 px (dos líneas); 40 px si solo hay una.
-- Lo que se compara o copia (fechas, correos, folios) en Plex Mono; lo que se lee, en Poppins.
+- Lo que se compara o copia (fechas, correos, folios) en Google Sans Code; lo que se lee, en Poppins.
 - Acciones por fila: «Editar» y «Más», visibles al pasar o enfocar la fila y siempre en táctil. Nunca más de dos iconos por fila.
 
 ## Estados
