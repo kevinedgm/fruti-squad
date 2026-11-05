@@ -10,7 +10,7 @@
           "type": "image/svg+xml"
         },
         "ecosistema.svg": {
-          "blob": "15d37dbf5372ca4e4ff1216403ec6e0a",
+          "blob": "6089128d21a27e473058eb6a0c000245",
           "name": "ecosistema.svg",
           "size": 536,
           "type": "image/svg+xml"
@@ -50,7 +50,7 @@
           "type": "image/svg+xml"
         },
         "grupos.svg": {
-          "blob": "9e21b5030d0c50bbaa8ec56bca3b0bdd",
+          "blob": "fa0768c7b3dcbda5a898f7f744c6e747",
           "name": "grupos.svg",
           "size": 2044,
           "type": "image/svg+xml"
@@ -102,10 +102,10 @@
     "Ecosistema"
   ],
   "lastChange": {
-    "at": "2026-11-05T16:44:43Z",
+    "at": "2026-11-05T16:56:14Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "App shell aprobado: AppShell, BarraLateral (módulos y submódulos, riel) y AppPequena (pestañas para apps de 2 o 3 secciones); EncabezadoApp por ancho; tokens sidebar-width, rail-width, content-narrow, footer-height, bp-cajon y bp-celular."
+    "note": "Grupos pasa a orquídea #9D469E (el rojo anterior quedaba a ΔE 1.6 del color de error); sellos con la M original."
   },
   "layout": "files",
   "libraries": [],

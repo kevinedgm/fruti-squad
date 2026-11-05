@@ -47,10 +47,10 @@
       "contraste_noche": 2.3
     },
     "Grupos": {
-      "hex": "#C73A55",
+      "hex": "#9D469E",
       "para": "administradores de clínicas y hospitales",
-      "contraste_blanco": 5.04,
-      "contraste_noche": 3.31
+      "contraste_blanco": 5.52,
+      "contraste_noche": 3.02
     },
     "Administración": {
       "hex": "#3A4558",

@@ -16,7 +16,7 @@ PROD = {
  'Compras': (f'M{r} 0 H{100-r} A{r} {r} 0 0 1 100 {r} V100 L87.5 90 L75 100 L62.5 90 L50 100 L37.5 90 L25 100 L12.5 90 L0 100 V{r} A{r} {r} 0 0 1 {r} 0 Z', '', '#A15C07', 'compras y facturación'),
  'Farmacia': (CUADRO, 'M96 -7 V15 M85 4 H107', '#1B7F52', 'farmacia'),
  'Impulsa': (CUADRO, 'M88 12 L104 -4 M92 -4 H104 V8', '#504CA1', 'campañas de prevención y marketing'),
- 'Grupos': (CUADRO, '', '#C73A55', 'administradores de clínicas y hospitales'),
+ 'Grupos': (CUADRO, '', '#9D469E', 'administradores de clínicas y hospitales'),
 }
 def simbolo(p, mono=False):
     d, pieza, col, _ = PROD[p]; c = 'currentColor' if mono else col; k = p.lower()
@@ -60,6 +60,8 @@ tema = {'ecosistema': 'Ecosistema Manik', 'empresa': 'MedicalManik', 'patron_nom
         'linea': PAPEL, 'acento_marca': {'hex': CI, 'uso': 'acento gráfico; no como fondo de texto ni de producto (2.29:1 con blanco)'},
         'tinta': TINTA, 'noche': NOCHE,
         'productos': {p: {'hex': PROD[p][2], 'para': PROD[p][3], 'contraste_blanco': cr(PROD[p][2], '#FFFFFF'), 'contraste_noche': cr(PROD[p][2], NOCHE)} for p in PROD}}
+if os.path.exists('tema.json'):  # conserva productos que agregan otros generadores (Administración, de ../administracion-r1)
+    for k, v in json.load(open('tema.json'))['productos'].items(): tema['productos'].setdefault(k, v)
 json.dump(tema, open('tema.json', 'w'), ensure_ascii=False, indent=2)
 
 def img(f, z): return f'<img src="svg/{f}.svg" width="{z}" height="{z}">'

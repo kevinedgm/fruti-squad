@@ -45,7 +45,7 @@ La línea de pulso es idéntica en los siete. Cada producto cambia solo el borde
 1. **Identidad (`app-<producto>`)**: dice en qué app estás. Va en el sello, en la tarjeta del inicio y del selector, y en el fondo suave de la tarjeta al pasar el cursor (`app-<producto>-soft`).
 2. **Interfaz (`manik` y estados)**: la acción principal es azul Manik en todas las apps; los estados (`exito`, `aviso`, `error`, `info`) son los mismos en todas.
 
-Por qué: tres colores de producto coinciden con estados (Farmacia ≈ éxito, Compras ≈ aviso, Grupos ≈ error). Si fueran color de botón, un «Guardar» rojo en Grupos se leería como peligro. Y el mismo botón en todas las apps evita reaprender al cambiar de app. Los estados llevan siempre icono y texto.
+Por qué: dos colores de producto se parecen a estados (Farmacia ≈ éxito, Compras ≈ aviso); Grupos era rojo, casi igual a error, y pasó a orquídea el 2026-11-05. Si fueran color de botón, un «Guardar» rojo en Grupos se leería como peligro. Y el mismo botón en todas las apps evita reaprender al cambiar de app. Los estados llevan siempre icono y texto.
 
 | Producto | `app-*` | Blanco encima |
 | --- | --- | --- |
@@ -54,7 +54,7 @@ Por qué: tres colores de producto coinciden con estados (Farmacia ≈ éxito, C
 | Compras | #A15C07 | 5.19:1 |
 | Farmacia | #1B7F52 | 5.0:1 |
 | Impulsa | #504CA1 | 7.27:1 |
-| Grupos | #C73A55 | 5.04:1 |
+| Grupos | #9D469E (orquídea) | 5.52:1 |
 | Administración (interna) | #3A4558 | 9.67:1 |
 
 - Neutros con un sesgo al azul: `canvas` #F5F7FB, `surface` blanco, `ink` #14213D (15.97:1), `muted` #4A5674 (7.31:1). `subtle` es solo gráfico.

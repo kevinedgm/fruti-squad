@@ -2,7 +2,7 @@
 import json, os, datetime
 B = {'medicalmanik.svg': '9a83c2989b836271f7d2401934ad4cee', 'expediente.svg': 'ded6ea4d0368c015ddd9e8e86d9e11d4', 'agenda.svg': '0cc8920d150bde3f8e9fb4f9fad79ecf',
      'compras.svg': '73385910ea70c90c1b4be9ca45ec7ed9', 'farmacia.svg': 'e93a4372cc66a32c2281beb1d539e598', 'impulsa.svg': 'ab0f79128c88196f4962b59cf9d3d3b5',
-     'grupos.svg': '9e21b5030d0c50bbaa8ec56bca3b0bdd', 'ecosistema.svg': '15d37dbf5372ca4e4ff1216403ec6e0a', 'ecosistema-1tinta.svg': '3d5b89799a2b4a082727102d35a3720b',
+     'grupos.svg': 'fa0768c7b3dcbda5a898f7f744c6e747', 'ecosistema.svg': '6089128d21a27e473058eb6a0c000245', 'ecosistema-1tinta.svg': '3d5b89799a2b4a082727102d35a3720b',
      'medicalmanik-1tinta.svg': 'a27dd2e48efc13a89fe3a551b46fe7e0'}
 SRC = '/home/user/fruti-squad/.fruti/icons/medicalmanik/final/svg/'
 blob = lambda n: f'/_blob/{B[n]}'
@@ -27,7 +27,7 @@ PROD = [('expediente', 'Expediente', '#234899', 'Médicos', 'Historia clínica, 
         ('compras', 'Compras', '#A15C07', 'Administración', 'Órdenes de compra, proveedores y facturación.'),
         ('farmacia', 'Farmacia', '#1B7F52', 'Farmacia', 'Inventario, recetas surtidas y existencias por sucursal.'),
         ('impulsa', 'Impulsa', '#504CA1', 'Marketing clínico', 'Campañas de prevención y sus resultados.'),
-        ('grupos', 'Grupos', '#C73A55', 'Administradores de grupo', 'Clínicas, hospitales, usuarios y permisos del grupo.')]
+        ('grupos', 'Grupos', '#9D469E', 'Administradores de grupo', 'Clínicas, hospitales, usuarios y permisos del grupo.')]
 EST = [('exito', '#15814B', 'Guardado, completado, surtido. Siempre con icono y texto.'), ('aviso', '#A75F00', 'Requiere atención: vence pronto, existencias bajas. Siempre con icono y texto.'),
        ('error', '#C33F4E', 'Falló o no se permite: dosis fuera de rango, alergia, pago rechazado. Siempre con icono y texto.'), ('info', '#3F7695', 'Información neutral o en proceso. Siempre con icono y texto.')]
 
