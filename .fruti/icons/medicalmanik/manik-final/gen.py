@@ -58,7 +58,8 @@ out['logotipo-vertical'] = svg(f'{-max(0,(vw-100*k)/2)-4:.1f} -4 {max(vw,100*k)+
 # ícono de app: sello sobre blanco con aire
 out['app-icon'] = svg('0 0 1024 1024', f'<rect width="1024" height="1024" rx="0" fill="#FFFFFF"/>' + sello(uid='ai', x=232, y=178, k=5.6), 'Manik')
 out['favicon'] = svg('-2 -2 104 123', sello(uid='fv'), 'Manik')
-for k_, v in out.items(): open(f'svg/{k_}.svg', 'w').write(v)
+import sys as _s, os; _s.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'final')); from m_original import convertir  # M original (2026-11-05)
+for k_, v in out.items(): open(f'svg/{k_}.svg', 'w').write(convertir(v)[0])
 def lum(h):
     c = [int(h[i:i+2], 16) / 255 for i in (1, 3, 5)]; c = [x / 12.92 if x <= .03928 else ((x + .055) / 1.055) ** 2.4 for x in c]; return .2126 * c[0] + .7152 * c[1] + .0722 * c[2]
 cr = lambda a, b: round((max(lum(a), lum(b)) + .05) / (min(lum(a), lum(b)) + .05), 2)

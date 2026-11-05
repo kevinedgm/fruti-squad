@@ -26,51 +26,51 @@
     "Sellos": {
       "files": {
         "agenda.svg": {
-          "blob": "529d392899981fb38c2f1b46bfd8b30b",
+          "blob": "0cc8920d150bde3f8e9fb4f9fad79ecf",
           "name": "agenda.svg",
-          "size": 1012,
+          "size": 1802,
           "type": "image/svg+xml"
         },
         "compras.svg": {
-          "blob": "512f89f0825ba83a074cf5f1ccd8bf6d",
+          "blob": "73385910ea70c90c1b4be9ca45ec7ed9",
           "name": "compras.svg",
-          "size": 819,
+          "size": 1609,
           "type": "image/svg+xml"
         },
         "expediente.svg": {
-          "blob": "26b606b673244009be944a9421937b3e",
+          "blob": "ded6ea4d0368c015ddd9e8e86d9e11d4",
           "name": "expediente.svg",
-          "size": 877,
+          "size": 1667,
           "type": "image/svg+xml"
         },
         "farmacia.svg": {
-          "blob": "e38ede352a1a2363095cd3e0c9fb9e7d",
+          "blob": "e93a4372cc66a32c2281beb1d539e598",
           "name": "farmacia.svg",
-          "size": 1024,
+          "size": 1814,
           "type": "image/svg+xml"
         },
         "grupos.svg": {
-          "blob": "e26c3ae0f4bf9928c5d4a88e716fca12",
+          "blob": "9e21b5030d0c50bbaa8ec56bca3b0bdd",
           "name": "grupos.svg",
-          "size": 1254,
+          "size": 2044,
           "type": "image/svg+xml"
         },
         "impulsa.svg": {
-          "blob": "07c6485f4953617c0f53277d02d95fb9",
+          "blob": "ab0f79128c88196f4962b59cf9d3d3b5",
           "name": "impulsa.svg",
-          "size": 1034,
+          "size": 1824,
           "type": "image/svg+xml"
         },
         "medicalmanik-1tinta.svg": {
-          "blob": "b67c4621ed3f312229c92a046e94b9bc",
+          "blob": "a27dd2e48efc13a89fe3a551b46fe7e0",
           "name": "medicalmanik-1tinta.svg",
-          "size": 754,
+          "size": 1544,
           "type": "image/svg+xml"
         },
         "medicalmanik.svg": {
-          "blob": "b960064adc8e2ea3bc0ad52ba4c1645a",
+          "blob": "9a83c2989b836271f7d2401934ad4cee",
           "name": "medicalmanik.svg",
-          "size": 785,
+          "size": 1575,
           "type": "image/svg+xml"
         }
       },
@@ -102,7 +102,7 @@
     "Ecosistema"
   ],
   "lastChange": {
-    "at": "2026-11-05T16:11:35Z",
+    "at": "2026-11-05T16:44:43Z",
     "by": "Kevin",
     "via": "Claude Code",
     "note": "App shell aprobado: AppShell, BarraLateral (módulos y submódulos, riel) y AppPequena (pestañas para apps de 2 o 3 secciones); EncabezadoApp por ancho; tokens sidebar-width, rail-width, content-narrow, footer-height, bp-cajon y bp-celular."

@@ -2,6 +2,7 @@
 # Uso: python3 gen.py <scratchpad>  → svg/ (color y una tinta, fondo transparente), tema.json, lamina.html
 # Los cortes (separación de piezas, tarjeta de Grupos, línea a una tinta) son máscaras: el SVG sirve sobre cualquier fondo.
 import sys, os, json, math
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__))); from m_original import convertir  # M original (2026-11-05)
 S = sys.argv[1]; F = f'file://{S}/fuentes'
 AZ, CI, PAPEL, TINTA, NOCHE = '#234899', '#00BDD0', '#F6F8FC', '#14213D', '#0F1C3F'
 LINEA = 'M-6 63 L13 63 L27 12 L49 86 L71 25 L84 64 L106 64'
@@ -34,7 +35,7 @@ def simbolo(p, mono=False):
     cuerpo += '</g>'
     if pieza: cuerpo += f'<path d="{pieza}" fill="none" stroke="{c}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>'
     titulo = 'MedicalManik' if p == 'MedicalManik' else f'{p} Manik'
-    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{VB}" role="img" aria-label="{titulo}"><title>{titulo}</title>{defs}{cuerpo}</svg>'
+    return convertir(f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="{VB}" role="img" aria-label="{titulo}"><title>{titulo}</title>{defs}{cuerpo}</svg>')[0]
 
 ORDEN = [p for p in PROD if p != 'MedicalManik']
 def ecosistema(mono=False):  # A · mosaico: emblema fijo de la familia (siempre seis cuadros, aunque haya más apps)

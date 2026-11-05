@@ -4,9 +4,9 @@
 # Uso: python3 build.py <carpeta> → <carpeta>/project/
 import json, os, re, sys, datetime
 OUT = sys.argv[1]; H = os.path.dirname(os.path.abspath(__file__)); M = os.path.join(H, '..')
-B = {'simbolo.svg': ('2ebaab02bb8b4e269a3f6ab20613a454', 713), 'simbolo-1tinta.svg': ('94e996605f8ca1d79a9cd7b190125616', 782), 'simbolo-blanco.svg': ('ec1682c529c070a8b57f92353476fcc5', 777),
-     'logotipo.svg': ('57085c856be07748a81086e18dacf543', 6012), 'logotipo-blanco.svg': ('49bf277b95bde2a6b92748b5f6decd97', 6014), 'logotipo-1tinta.svg': ('81db1d82ed0fbba7517a025894771c96', 6088),
-     'logotipo-endoso.svg': ('74cd7f9a5841c79cfa0776a46e89518f', 21353), 'logotipo-vertical.svg': ('4a3c158f65047191a411bbd063306a82', 5697), 'app-icon.svg': ('649db9aac380d26c37d9608fa0ab7059', 781), 'favicon.svg': ('9c501f10d8c6e8b647898a08f4660f8d', 715)}
+B = {'simbolo.svg': ('996d33b2eb35fdea5a2f8c5d5befd69c', 713), 'simbolo-1tinta.svg': ('e9780b311d2304d7109e1134c9adab61', 782), 'simbolo-blanco.svg': ('cc6aa791ce1dcdf23cd1e4447fea1073', 777),
+     'logotipo.svg': ('fd1e64f5dd7fd0db129d4f22f4eb678f', 6012), 'logotipo-blanco.svg': ('66e13fe69e94bffefd158d0f517341ba', 6014), 'logotipo-1tinta.svg': ('acaa55f0195fd90284957353bae62bab', 6088),
+     'logotipo-endoso.svg': ('c05cf076ef1e762c626790d8627a2c0b', 21353), 'logotipo-vertical.svg': ('03f1ac22dc40f833546c65a17254a69d', 5697), 'app-icon.svg': ('ad5378dd627827bfc8d6d3d663700d74', 781), 'favicon.svg': ('9dcf3fa84a9faf850627be7a0b9cf489', 715)}
 IC = {'apple': ('59c9026f4361579d6565e002d37aa394', 434), 'arrow-right': ('c02f1d3c46f69f3e9ab86d6e149cd24f', 285), 'baby': ('bffce7e670b218077617c587ca216e77', 501), 'badge-check': ('1efcc430f1d8581e1b217e25414e72cf', 441),
       'brain': ('c7725c8635a7359d0ae861fa9af3b491', 644), 'calendar-check': ('78a88b0185e49d97e7630d94b7ae4933', 400), 'clock': ('6e298b6e404e6880d3284d52df90d99b', 291), 'flower-2': ('06649d68a358dfe2e5b5d6143b3ed2fe', 541),
       'map-pin': ('8389860ec5dca7cc8b2708df2f5563d2', 381), 'message-circle-heart': ('21dc1a574f46993477af211b735ed84a', 503), 'scan-face': ('5be0694cbd64b077ce08b3219fcd45ef', 501), 'search': ('0235df5ca74a7d93874a616fc4ebfb4e', 296),

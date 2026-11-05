@@ -1,9 +1,9 @@
 # Ecosistema Manik · sistema de diseño (artifact Design System). Uso: python3 build.py → project/
 import json, os, datetime
-B = {'medicalmanik.svg': 'b960064adc8e2ea3bc0ad52ba4c1645a', 'expediente.svg': '26b606b673244009be944a9421937b3e', 'agenda.svg': '529d392899981fb38c2f1b46bfd8b30b',
-     'compras.svg': '512f89f0825ba83a074cf5f1ccd8bf6d', 'farmacia.svg': 'e38ede352a1a2363095cd3e0c9fb9e7d', 'impulsa.svg': '07c6485f4953617c0f53277d02d95fb9',
-     'grupos.svg': 'e26c3ae0f4bf9928c5d4a88e716fca12', 'ecosistema.svg': '15d37dbf5372ca4e4ff1216403ec6e0a', 'ecosistema-1tinta.svg': '3d5b89799a2b4a082727102d35a3720b',
-     'medicalmanik-1tinta.svg': 'b67c4621ed3f312229c92a046e94b9bc'}
+B = {'medicalmanik.svg': '9a83c2989b836271f7d2401934ad4cee', 'expediente.svg': 'ded6ea4d0368c015ddd9e8e86d9e11d4', 'agenda.svg': '0cc8920d150bde3f8e9fb4f9fad79ecf',
+     'compras.svg': '73385910ea70c90c1b4be9ca45ec7ed9', 'farmacia.svg': 'e93a4372cc66a32c2281beb1d539e598', 'impulsa.svg': 'ab0f79128c88196f4962b59cf9d3d3b5',
+     'grupos.svg': '9e21b5030d0c50bbaa8ec56bca3b0bdd', 'ecosistema.svg': '15d37dbf5372ca4e4ff1216403ec6e0a', 'ecosistema-1tinta.svg': '3d5b89799a2b4a082727102d35a3720b',
+     'medicalmanik-1tinta.svg': 'a27dd2e48efc13a89fe3a551b46fe7e0'}
 SRC = '/home/user/fruti-squad/.fruti/icons/medicalmanik/final/svg/'
 blob = lambda n: f'/_blob/{B[n]}'
 

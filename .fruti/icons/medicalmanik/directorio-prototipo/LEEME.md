@@ -20,3 +20,5 @@ Pedido: «genera un artifact con un prototipo del directorio Manik». Regenerar:
 - 2026-11-04: 9 médicos de ejemplo más (salud mental, alimentación, salud íntima, chequeo general, pediatría), completos y con poca información; todas las categorías tienen resultados; «Con lugar hoy» muestra 3; maestrías con su propia cédula; sin número de teléfono repetido en consultorios solo por teléfono.
 - 2026-11-04: leyenda del inicio, opción B («Encuentra a tu médico cerca de ti.»).
 - 2026-11-04: simulación de la foto de marca 4:5 en el inicio (ilustración + tarjetas flotantes; etiqueta «Simulación»).
+
+Publicado: https://claude.ai/artifact/EfXbngHaw3pqZ8EbN8egFM

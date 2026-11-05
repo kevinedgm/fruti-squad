@@ -28,6 +28,7 @@ PROPS = [
 COLORES = [('grafito', '#3A4558', 'Grafito', 'Neutro azulado: herramienta interna, «detrás de escena». No compite con ningún producto ni estado. 9.67:1 con blanco.'),
            ('ciruela', '#7A3B6B', 'Ciruela', 'Más carácter, pero cae entre el violeta de Impulsa y el rojo de Grupos. 7.88:1.'),
            ('tinta', '#14213D', 'Tinta', 'El color del texto del sistema: «la casa». Riesgo: es casi el azul noche de Manik IA. 15.97:1.')]
+import sys as _s; _s.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'final')); from m_original import convertir
 def sello(k, d, trazo, relleno, color='currentColor', uid=''):
     i = f'{k}{uid}'
     m = f'<mask id="m{i}" maskUnits="userSpaceOnUse" x="-8" y="-18" width="126" height="126"><rect x="-8" y="-18" width="126" height="126" fill="#fff"/>'
@@ -37,7 +38,7 @@ def sello(k, d, trazo, relleno, color='currentColor', uid=''):
     s = f'<defs><clipPath id="c{i}"><path d="{d}"/></clipPath>{m}</defs><g mask="url(#m{i})"><path d="{d}" fill="{color}"/><path clip-path="url(#c{i})" d="{LINEA}" fill="none" stroke="{PAPEL}" stroke-width="13" stroke-linejoin="round"/></g>'
     if trazo: s += f'<path d="{trazo}" fill="none" stroke="{color}" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>'
     if relleno: s += f'<path d="{relleno}" fill="{color}" fill-rule="evenodd"/>'
-    return f'<svg viewBox="-8 -18 126 126" aria-hidden="true">{s}</svg>'
+    return convertir(f'<svg viewBox="-8 -18 126 126" aria-hidden="true">{s}</svg>')[0]  # M original (2026-11-05)
 APPS = [('expediente', 'Expediente', 'Médicos', 'Consultas, recetas y expediente clínico'), ('agenda', 'Agenda', 'Asistentes', 'Citas, confirmaciones y sala de espera'),
         ('compras', 'Compras', 'Administración de la clínica', 'Compras, proveedores y facturación'), ('farmacia', 'Farmacia', 'Farmacia', 'Surtido, existencias y caducidades'),
         ('impulsa', 'Impulsa', 'Marketing clínico', 'Campañas de prevención y pacientes'), ('grupos', 'Grupos', 'Administradores de grupo', 'Clínicas, sedes y permisos del grupo')]

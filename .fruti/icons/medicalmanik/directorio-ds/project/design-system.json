@@ -138,33 +138,33 @@
     "Logotipos": {
       "files": {
         "logotipo-1tinta.svg": {
-          "blob": "81db1d82ed0fbba7517a025894771c96",
+          "blob": "acaa55f0195fd90284957353bae62bab",
           "name": "logotipo-1tinta.svg",
-          "size": 6088,
+          "size": 6855,
           "type": "image/svg+xml"
         },
         "logotipo-blanco.svg": {
-          "blob": "49bf277b95bde2a6b92748b5f6decd97",
+          "blob": "66e13fe69e94bffefd158d0f517341ba",
           "name": "logotipo-blanco.svg",
-          "size": 6014,
+          "size": 6781,
           "type": "image/svg+xml"
         },
         "logotipo-endoso.svg": {
-          "blob": "74cd7f9a5841c79cfa0776a46e89518f",
+          "blob": "c05cf076ef1e762c626790d8627a2c0b",
           "name": "logotipo-endoso.svg",
-          "size": 21353,
+          "size": 22108,
           "type": "image/svg+xml"
         },
         "logotipo-vertical.svg": {
-          "blob": "4a3c158f65047191a411bbd063306a82",
+          "blob": "03f1ac22dc40f833546c65a17254a69d",
           "name": "logotipo-vertical.svg",
-          "size": 5697,
+          "size": 6464,
           "type": "image/svg+xml"
         },
         "logotipo.svg": {
-          "blob": "57085c856be07748a81086e18dacf543",
+          "blob": "fd1e64f5dd7fd0db129d4f22f4eb678f",
           "name": "logotipo.svg",
-          "size": 6012,
+          "size": 6779,
           "type": "image/svg+xml"
         }
       },
@@ -181,33 +181,33 @@
     "Marca": {
       "files": {
         "app-icon.svg": {
-          "blob": "649db9aac380d26c37d9608fa0ab7059",
+          "blob": "ad5378dd627827bfc8d6d3d663700d74",
           "name": "app-icon.svg",
-          "size": 781,
+          "size": 1548,
           "type": "image/svg+xml"
         },
         "favicon.svg": {
-          "blob": "9c501f10d8c6e8b647898a08f4660f8d",
+          "blob": "9dcf3fa84a9faf850627be7a0b9cf489",
           "name": "favicon.svg",
-          "size": 715,
+          "size": 1488,
           "type": "image/svg+xml"
         },
         "simbolo-1tinta.svg": {
-          "blob": "94e996605f8ca1d79a9cd7b190125616",
+          "blob": "e9780b311d2304d7109e1134c9adab61",
           "name": "simbolo-1tinta.svg",
-          "size": 782,
+          "size": 1555,
           "type": "image/svg+xml"
         },
         "simbolo-blanco.svg": {
-          "blob": "ec1682c529c070a8b57f92353476fcc5",
+          "blob": "cc6aa791ce1dcdf23cd1e4447fea1073",
           "name": "simbolo-blanco.svg",
-          "size": 777,
+          "size": 1550,
           "type": "image/svg+xml"
         },
         "simbolo.svg": {
-          "blob": "2ebaab02bb8b4e269a3f6ab20613a454",
+          "blob": "996d33b2eb35fdea5a2f8c5d5befd69c",
           "name": "simbolo.svg",
-          "size": 713,
+          "size": 1486,
           "type": "image/svg+xml"
         }
       },
