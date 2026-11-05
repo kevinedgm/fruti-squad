@@ -1,3 +1,12 @@
+# ── HISTÓRICO (2026-11-05) ──────────────────────────────────────────────
+# Este script ya corrió y produjo una versión anterior del design system.
+# Hoy escribiría colores retirados o archivos viejos sobre el estado actual.
+# Fuente de verdad actual: tokens.json, README.md y components/ (versión 19).
+import os as _os, sys as _sys
+if _os.environ.get('NISALAB_HISTORICO') != '1':
+    _sys.exit('Script histórico: no se corre sobre el design system actual. Ver historico/LEEME.md. '
+              'Para ejecutarlo a propósito (por ejemplo, para reproducir el pasado en una copia): NISALAB_HISTORICO=1 python3 ' + _sys.argv[0])
+# ─────────────────────────────────────────────────────────────────────────
 import json,os,sys,datetime
 S=sys.argv[1]; F='/home/user/fruti-squad/.fruti/icons/nisa-sistema/nabi-final/'
 ids={'simbolo.svg':'18a1e1a03e437685b3bf82bda6037aa1','simbolo-tinta.svg':'1eb1f4383665a117487d34a24468c339','simbolo-blanco.svg':'5bc4939f9aa0f943ed74a3cd87e923f7','wordmark.svg':'ebe63b37f78d79fa05e9bac3247e4e2a','wordmark-blanco.svg':'6b1d53d371f0719468c0b6e23e8034f2','lockup-h.svg':'7a1dbf9ca2424cafb0c2164b6b1182cf','lockup-h-blanco.svg':'800f980fbd3cd25994500a3bb7fbc154','lockup-familia.svg':'3534ef111e16fe05c60c372a3d61e030','lockup-v.svg':'0f6d988fd2e293d334cf7415f10cec81','favicon.svg':'89cacadb924feccc38c722f27cd59acb','app-icon.svg':'33764acad863aca77506517a2459fa3f','app-icon-maskable.svg':'276c10cf51876d764f20ef3c8e66cfce','carga.svg':'53e142ecc52182e4225c1419d007b881','icon-512.png':'a2ea7d4a10b50b57e6df7e98cb5071c4','carga.gif':'6358d06d47e59e7d479475ad1ab7587b'}

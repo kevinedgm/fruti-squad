@@ -1,3 +1,12 @@
+# ── HISTÓRICO (2026-11-05) ──────────────────────────────────────────────
+# Este script ya corrió y produjo una versión anterior del design system.
+# Hoy escribiría colores retirados o archivos viejos sobre el estado actual.
+# Fuente de verdad actual: tokens.json, README.md y components/ (versión 19).
+import os as _os, sys as _sys
+if _os.environ.get('NISALAB_HISTORICO') != '1':
+    _sys.exit('Script histórico: no se corre sobre el design system actual. Ver historico/LEEME.md. '
+              'Para ejecutarlo a propósito (por ejemplo, para reproducir el pasado en una copia): NISALAB_HISTORICO=1 python3 ' + _sys.argv[0])
+# ─────────────────────────────────────────────────────────────────────────
 """Aplica el manual de Nisa Nabani (2026) al design system de Nabi.
 
 Uso: python3 marca-nisa.py <carpeta-project> <carpeta-marca-nisa>

@@ -1,3 +1,12 @@
+# ── HISTÓRICO (2026-11-05) ──────────────────────────────────────────────
+# Este script ya corrió y produjo una versión anterior del design system.
+# Hoy escribiría colores retirados o archivos viejos sobre el estado actual.
+# Fuente de verdad actual: tokens.json, README.md y components/ (versión 19).
+import os as _os, sys as _sys
+if _os.environ.get('NISALAB_HISTORICO') != '1':
+    _sys.exit('Script histórico: no se corre sobre el design system actual. Ver historico/LEEME.md. '
+              'Para ejecutarlo a propósito (por ejemplo, para reproducir el pasado en una copia): NISALAB_HISTORICO=1 python3 ' + _sys.argv[0])
+# ─────────────────────────────────────────────────────────────────────────
 # NisaLab · regla del usuario: los colores de área nunca aparecen en tablas (en una tabla, todo color es estatus).
 # En tablas el área va con su ícono a una tinta en «text-muted» + nombre. El color del área queda para su marca y el encabezado de su página.
 # Uso: python3 areas-sin-color.py <project>   (después de encabezado-area.py)

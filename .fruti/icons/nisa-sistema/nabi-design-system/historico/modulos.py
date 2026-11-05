@@ -1,3 +1,12 @@
+# ── HISTÓRICO (2026-11-05) ──────────────────────────────────────────────
+# Este script ya corrió y produjo una versión anterior del design system.
+# Hoy escribiría colores retirados o archivos viejos sobre el estado actual.
+# Fuente de verdad actual: tokens.json, README.md y components/ (versión 19).
+import os as _os, sys as _sys
+if _os.environ.get('NISALAB_HISTORICO') != '1':
+    _sys.exit('Script histórico: no se corre sobre el design system actual. Ver historico/LEEME.md. '
+              'Para ejecutarlo a propósito (por ejemplo, para reproducir el pasado en una copia): NISALAB_HISTORICO=1 python3 ' + _sys.argv[0])
+# ─────────────────────────────────────────────────────────────────────────
 # Nabi DS · identidad v2 + manual de módulos (ejemplo: Usuarios).
 # Uso: python3 modulos.py <carpeta-project> <iconos.json>
 #   Aplica la identidad v2 aprobada (28/10/2026) a tokens.json y escribe la sección modulos.md y los
