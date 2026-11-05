@@ -9,7 +9,7 @@ A = {
  'SELLO1': 'final/svg/medicalmanik-1tinta.svg', 'ECO': 'final/svg/ecosistema.svg',
  'EXP': 'final/svg/expediente.svg', 'AGE': 'final/svg/agenda.svg', 'COM': 'final/svg/compras.svg', 'FAR': 'final/svg/farmacia.svg',
  'IMP': 'final/svg/impulsa.svg', 'GRU': 'final/svg/grupos.svg', 'ADM': 'final/svg/administracion.svg',
- 'PIN': 'manik-final/svg/simbolo.svg', 'C1': 'manual-marca/img/correo-bienvenida.png', 'C2': 'manual-marca/img/correo-cita-confirmada.png', 'C3': 'manual-marca/img/correo-factura.png', 'MANIK': 'manik-final/svg/logotipo.svg', 'MANIKEND': 'manik-final/svg/logotipo-endoso.svg'}
+ 'PIN': 'manik-final/svg/simbolo.svg', 'C1': 'manual-marca/img/correo-bienvenida.png', 'C2': 'manual-marca/img/correo-cita-confirmada.png', 'C3': 'manual-marca/img/correo-factura.png', 'MANIK': 'manik-final/svg/logotipo.svg', 'MANIKEND': 'manik-final/svg/logotipo-endoso.svg', 'B_EXP': 'sellos-b-r01/svg/expediente.svg', 'B_AGE': 'sellos-b-r01/svg/agenda.svg', 'B_COM': 'sellos-b-r01/svg/compras.svg', 'B_FAR': 'sellos-b-r01/svg/farmacia.svg', 'B_IMP': 'sellos-b-r01/svg/impulsa.svg', 'B_GRU': 'sellos-b-r01/svg/grupos.svg', 'B_ADM': 'sellos-b-r01/svg/administracion.svg'}
 html = open(os.path.join(D, 'plantilla.html')).read()
 import superficies  # sección generada desde los tokens de cada sistema de diseño
 html = html.replace('{{SFCSS}}', superficies.CSS).replace('{{SUPERFICIES}}', superficies.HTML)
