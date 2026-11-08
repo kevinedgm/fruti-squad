@@ -8,7 +8,7 @@ Fruti ya sigue el patrón que el artículo recomienda:
 
 | El artículo recomienda | Fruti |
 |---|---|
-| Un solo bucle; el plan y la ejecución en el mismo modelo | Kiwi, Lima, Coco y Mora corren como skills en la misma conversación; no hay subagentes |
+| Un solo bucle; el plan y la ejecución en el mismo modelo | Kiwi, Lima, Coco, Bruno y Mora corren como skills en la misma conversación; no hay subagentes |
 | Divulgación progresiva: descripciones cortas, detalle solo cuando hace falta | "Route first, read second": `.fruti/runtime/<agente>.yaml` dice qué leer en cada operación |
 | Los límites duros en herramientas, no en el prompt | `fruti fidelity` (FID-GEOMETRY-001) y los chequeos deterministas del `audit-manifest.yaml` corren en scripts antes del juicio del modelo |
 | Pasar estado compacto, no copiar documentos | `handoffs/current.json` es un índice a artefactos, con `round` |

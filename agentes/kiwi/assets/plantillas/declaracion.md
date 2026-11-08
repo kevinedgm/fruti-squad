@@ -36,4 +36,4 @@
 - **→ mora:**
 
 ## Siguiente paso del usuario
-Aprobar A/B/C · aprobar estructura → coco F3/R3 · nada
+Aprobar A/B/C · aprobar estructura → coco F3 → bruno R3 · nada

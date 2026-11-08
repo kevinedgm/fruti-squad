@@ -44,7 +44,9 @@ In the Fruti Squad every member owns one activity, and work moves in one directi
 ```text
 🥝 kiwi  → STRUCTURE     brief, user flow, wireframes F0–F2 (neutral kit)
 🟢 lima  → GOVERNANCE    classify, reuse, register, fix the contract, decide status   ← this skill
-🥥 coco  → CONSTRUCTION  high fidelity with the real system (F3), implementation (R3), audit (R0)
+🥥 coco  → VISUAL LAYER  high fidelity with the real system (F3) and its CSS
+🔵 bruno → IMPLEMENTATION functional behavior (R3): API, events, state, keyboard, focus, ARIA
+🥥 coco  → AUDIT         canonical audit (R0) of what bruno implemented
 🫐 mora  → DOCUMENTATION publish only what is implemented and verified
 ```
 
@@ -62,7 +64,7 @@ In the Fruti Squad every member owns one activity, and work moves in one directi
 
 **What lima does not do in the squad:** it does not author structure (kiwi), does not produce visual designs or code (coco), does not run a parallel audit (coco), and does not write Hub pages (mora). The impeccable passes (critique, distill, adapt, polish, harden) run in **review mode**: lima runs them against coco's output, records findings, and coco applies the changes.
 
-**Returns:** structural or flow defects → kiwi (new round). Visual, code, or QA defects → coco. Documentation drift → mora.
+**Returns:** structural or flow defects → kiwi (new round). Visual or QA defects → coco. Behavior defects (API, events, state, keyboard, focus) → bruno. Documentation drift → mora.
 
 **Standalone fallback:** if kiwi or coco are not installed in the project, lima runs the full pipeline below by itself and says so in one line.
 
