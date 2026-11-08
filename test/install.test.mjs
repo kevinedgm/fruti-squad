@@ -1,7 +1,7 @@
 // Installer smoke tests: each target installs into a clean project, writes what its runtime
 // needs, and reinstalling never overwrites live project state. Zero dependencies: `npm test`.
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -90,6 +90,14 @@ test('fruti foundations with short inputs: no questions, origin and contrast rec
   assert.equal(p.origin['color.secondary'], 'default');
   assert.equal(p.checks.find(c => c.id === 'text-on-primary').status, 'warn');
   assert.match(readFileSync(join(d, '.fruti', 'foundations', 'proposal.yaml'), 'utf8'), /^  primary: "#F5C400"$/m);
+});
+
+test('every reference cited by a runtime contract exists in the package', () => {
+  const dir = join(ROOT, '.fruti', 'runtime');
+  for (const f of readdirSync(dir).filter((x) => x.endsWith('.yaml'))) {
+    const text = readFileSync(join(dir, f), 'utf8');
+    for (const [p] of text.matchAll(/(?:agentes|skills)\/[A-Za-z0-9_./-]+\.md/g)) assert.ok(existsSync(join(ROOT, p)), `${f} cites missing ${p}`);
+  }
 });
 
 console.log(`\n${passed} tests passed`);

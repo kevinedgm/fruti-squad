@@ -68,6 +68,24 @@ checks:
     kind: judgment
     check: composition-adapts-not-merely-scales
     severity: warning
+  - id: UX-DECEPTIVE-001
+    category: ux
+    kind: judgment
+    applies_to: [actions, forms, consent, pricing, subscription, destructive_flows]
+    check: no-deceptive-patterns
+    # Source: ux-heuristics/dark-patterns (wondelai/skills, MIT, (c) 2025 Wondel.ai), after Brignull's catalogue.
+    criteria:
+      - decline_option_is_neutral_no_confirmshaming
+      - opt_out_as_visible_and_reachable_as_opt_in
+      - consent_and_extras_not_preselected
+      - every_action_label_matches_its_effect
+      - total_cost_or_consequence_visible_before_final_step
+      - urgency_or_scarcity_only_when_real_and_sourced
+      - undoing_or_cancelling_is_as_easy_as_doing
+      - no_double_negatives_or_trick_questions
+    evidence: quote_the_label_or_screenshot_region_that_fails
+    owner_on_fail: kiwi_for_flow_or_hierarchy_lima_for_contract_copy
+    severity: error
 report:
   output: .fruti/reports/compliance-current.json
   fields: [rule_id, status, evidence, severity, owner, remediation]

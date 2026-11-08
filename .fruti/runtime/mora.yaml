@@ -20,11 +20,13 @@ operations:
   document_page:
     mode: M2
     contract: .fruti/contracts/documentation.yaml
+    references: [agentes/mora/redaccion.md]
     strategy: compile_from_evidence
   sync:
     mode: M3
     inputs: [registry_delta, code_delta, compliance_delta]
     contract: .fruti/contracts/documentation.yaml
+    references: [agentes/mora/redaccion.md]
   initialize:
     references: [agentes/mora/first-run.md, agentes/mora/intake.md, agentes/mora/profile-additions.md]
   test_document:
@@ -39,7 +41,7 @@ operations:
     rules:
       - preview_renders_real_verified_component_or_verified_preview
       - show_anatomy_geometry_behavior_api_accessibility_responsive_verification
-      - result_reports_pass_partial_fail_for_kiwi_lima_coco_mora
+      - result_reports_pass_partial_fail_for_kiwi_lima_coco_bruno_mora
 
 output:
   state: .fruti/state/current.json
@@ -57,5 +59,6 @@ rules:
   - do_not_rerun_coco_audit_to_understand_the_report
   - design_hub_documents_approved_truth_and_never_derives_new_design_rules_from_implementation
   - code_and_types_own_public_api
+  - prose_follows_redaccion_md_and_the_documentation_contract_wins_on_conflict
   - registry_owns_lifecycle
   - full_agent_manual_only_if_runtime_contract_is_insufficient

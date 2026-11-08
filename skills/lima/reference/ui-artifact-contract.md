@@ -24,6 +24,8 @@ A token needs no `loading` state; a template inherits states from its components
 
 When applicable: default, hover, focus, pressed, selected, open, loading, success, disabled, empty, error.
 
+For every interactive piece, also write how it moves between those states (trigger, rules, feedback and modes per transition) following `interaction-contract.md`. Bruno implements that table and does not invent missing transitions.
+
 ## Do variants earn their place?
 
 Each variant must solve a distinct real need. Cut any variant a size/state/token change already covers.

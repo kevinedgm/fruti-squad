@@ -465,7 +465,7 @@ No rehace el brief ni la gobernanza cuando Kiwi/Lima ya entregaron evidencia vig
 
 Construye la capa visual con el sistema real (F3 y CSS) y es el auditor canónico: después de Bruno audita lo implementado.
 
-Para auditoría empieza por `audit-manifest.yaml` y evidencia automática. Abre estándares extensos únicamente para reglas ambiguas, fallidas o no deterministas.
+Para auditoría empieza por `audit-manifest.yaml` y evidencia automática. Además de jerarquía, densidad y affordance, revisa que no haya patrones engañosos (`UX-DECEPTIVE-001`): rechazos que avergüenzan, consentimientos premarcados o costos que aparecen al final. Abre estándares extensos únicamente para reglas ambiguas, fallidas o no deterministas.
 
 Produce `compliance-current.json`.
 
@@ -475,13 +475,15 @@ Parte del handoff, el contrato aprobado, el F3 y el CSS de Coco, y solo los arch
 
 Implementa la API pública (props, eventos, slots, estado controlado), la semántica nativa, el teclado, el foco y el ARIA funcional. Conserva las clases que usa el CSS de Coco y no escribe valores visuales.
 
+Implementa cada transición tal como la define la tabla del contrato de Lima (qué la dispara, qué regla sigue y qué feedback ve el usuario); no inventa un debounce, un timeout ni un mensaje de error. Si el componente ya existe, antes de cambiarlo fija su comportamiento actual con pruebas de caracterización.
+
 Corre el build y las pruebas disponibles. Lo que no pudo correr lo marca como no verificado. Si falta una entrega o dos fuentes se contradicen, lo devuelve a su dueño en lugar de inventarlo.
 
 ## Mora
 
 Parte de registry + compliance report + código/API real + diff afectado.
 
-Documenta el delta implementado y verificado. No reconstruye todo el historial de diseño para escribir una ficha.
+Documenta el delta implementado y verificado, con las reglas de redacción de `agentes/mora/redaccion.md`. No reconstruye todo el historial de diseño para escribir una ficha.
 
 ---
 

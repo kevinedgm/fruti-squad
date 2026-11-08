@@ -12,7 +12,7 @@ operations:
   reuse_or_truth:
     references: [skills/lima/reference/source-of-truth.md, skills/lima/reference/registry.md]
   contract:
-    references: [skills/lima/reference/ui-artifact-contract.md, skills/lima/reference/component-api.md]
+    references: [skills/lima/reference/ui-artifact-contract.md, skills/lima/reference/component-api.md, skills/lima/reference/interaction-contract.md]
     implementation_target: inherit_from_active_profile
     target_contract: .fruti/contracts/implementation-target.yaml
   adapt_contract:
@@ -86,6 +86,7 @@ rules:
   - never_preload_phase_map_targets
   - load_only_current_governance_operation
   - component_contract_is_framework_agnostic
+  - interactive_pieces_include_a_transition_table_per_interaction_contract
   - never_reask_implementation_target_when_profile_has_it
   - inherit_implementation_target_into_handoff
   - changing_target_does_not_redesign_contract
