@@ -237,6 +237,69 @@ function writeKiroSteering(base, dryRun) {
   log(`  ${ok('ok')}    ${rel} ${C.dim}(policy pointer)${C.reset}`);
 }
 
+// Kiro custom agents: one definition per installed member, with tools, shared resources and
+// shell permissions (destructive commands denied, writes ask). Ported from fruti-squad-kiro.
+const KIRO_AGENTS = {
+  kiwi: { description: 'Fruti Squad structure and UX agent (F0-F2).', welcome: 'Kiwi · Structure — structure, flow and adaptation come first (F0-F2).' },
+  lima: { description: 'Fruti Squad governance agent: classification, contracts, tokens, registry, gates and lifecycle.', welcome: 'Lima · Governance — I classify and set contracts, tokens, registry and gates.', extraSkills: ['impeccable'] },
+  coco: { description: 'Fruti Squad construction (F3), implementation and canonical audit agent.', welcome: 'Coco · Build — I build F3 with the real system, implement it and audit it.' },
+  mora: { description: 'Fruti Squad documentation agent; publishes implemented, verified truth.', welcome: 'Mora · Docs — I document only what is implemented and verified.' },
+};
+const KIRO_SHELL_ALLOW = ['git status', 'git diff*', 'npm test*', 'npm run *', 'node *', 'npx fruti*', 'python3 *', 'bash *', 'ls *', 'cat *', 'grep *', 'rg *', 'find *'];
+const KIRO_SHELL_DENY = ['rm -rf *', 'sudo *', 'git push*', 'git reset --hard*', 'git clean*'];
+
+function kiroAgentDefinition(name, base, members, target = 'kiro') {
+  const spec = KIRO_AGENTS[name];
+  const rel = (p) => (p.startsWith(base) ? p.slice(base.length + 1) : p).replace(/\\/g, '/');
+  const m = MEMBERS[name];
+  const own = join(resolveRoot(target, m.kind, base), installedMemberName(name, target), m.kind === 'agent' ? 'AGENT.md' : 'SKILL.md');
+  const resources = ['file://.kiro/steering/fruti-squad.md', 'file://.fruti/policy.md', 'file://.fruti/state/current.json', 'file://.fruti/handoffs/current.json',
+    (m.kind === 'agent' ? 'file://' : 'skill://') + rel(own)];
+  for (const extra of spec.extraSkills || []) if (members.includes(extra)) resources.push('skill://' + rel(join(resolveRoot(target, 'skill', base), extra, 'SKILL.md')));
+  const q = (s) => JSON.stringify(s);
+  return [
+    '---',
+    `name: ${name}`,
+    `description: ${q(spec.description)}`,
+    `welcomeMessage: ${q(spec.welcome)}`,
+    'tools: ["read", "write", "shell", "web"]',
+    'resources:',
+    ...resources.map((r) => `  - ${r}`),
+    'permissions:',
+    '  rules:',
+    '    - capability: fs_read',
+    '      match: ["**"]',
+    '      effect: allow',
+    '    - capability: fs_write',
+    '      match: ["**"]',
+    '      effect: ask',
+    '    - capability: shell',
+    `      match: [${KIRO_SHELL_ALLOW.map(q).join(', ')}]`,
+    '      effect: allow',
+    '    - capability: shell',
+    `      match: [${KIRO_SHELL_DENY.map(q).join(', ')}]`,
+    '      effect: deny',
+    '---',
+    '',
+    `# ${name}`,
+    '',
+    `Use \`${rel(own)}\` as the normative procedure and \`.fruti/runtime/${name}.yaml\` as the compact router. Read only the references needed for the active operation. Respect the current handoff and do not take on responsibilities that belong to another squad member.`,
+    '',
+  ].join('\n');
+}
+
+function writeKiroAgents(base, members, args) {
+  for (const name of members.filter((n) => KIRO_AGENTS[n])) {
+    const file = join(base, '.kiro', 'agents', `${name}.md`);
+    const relFile = join('.kiro', 'agents', `${name}.md`);
+    if (existsSync(file) && !args.force) { log(`  ${warn('skip')}  ${relFile} — already exists (use --force)`); continue; }
+    if (args.dryRun) { log(`  ${C.cyan}would write${C.reset} ${relFile}`); continue; }
+    mkdirSync(dirname(file), { recursive: true });
+    writeFileSync(file, kiroAgentDefinition(name, base, members));
+    log(`  ${ok('ok')}    ${relFile} ${C.dim}(Kiro agent: tools + permissions)${C.reset}`);
+  }
+}
+
 function writeClaudeMd(base, members, skillsRootRel, dryRun, global = false) {
   // Global installs have no project .fruti/, so user-level memory gets only the squad list.
   if (global) { writeInstructionBlock(base, join('.claude', 'CLAUDE.md'), squadLines(members, 'claude', skillsRootRel), dryRun); return; }
@@ -365,7 +428,7 @@ function doInstall(args) {
     writePathsMap(base, members, target, false);
   }
 
-  if (target === 'kiro' && !args.global) writeKiroSteering(base, args.dryRun);
+  if (target === 'kiro' && !args.global) { writeKiroSteering(base, args.dryRun); writeKiroAgents(base, members, args); }
 
   if (target === 'codex' || target === 'claude') {
     const rel = (skillsRoot.startsWith(base) ? '.' + skillsRoot.slice(base.length) : skillsRoot).replace(/\\/g, '/');

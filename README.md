@@ -79,6 +79,16 @@ npx github:kevinedgm/fruti-squad install --target codex
 
 Cambia `codex` por `claude` o `kiro` según corresponda.
 
+Para probar el instalador después de un cambio: `npm test` (instala en proyectos temporales para los tres destinos y comprueba que el estado del proyecto no se sobrescribe).
+
+### Kiro
+
+Con `--target kiro` el instalador deja:
+
+- `.agents/skills/lima/` y `.kiro/agents/{kiwi,coco,mora}/` — los miembros.
+- `.kiro/agents/{kiwi,lima,coco,mora}.md` — un agente de Kiro por miembro, con sus herramientas, los recursos compartidos (`.fruti/policy.md`, estado y handoff) y permisos: lee todo, pregunta antes de escribir y tiene prohibidos `rm -rf`, `sudo`, `git push`, `git reset --hard` y `git clean`.
+- `.kiro/steering/fruti-squad.md` — apunta a la política.
+
 ### Claude Code
 
 Con `--target claude` el instalador deja:

@@ -188,6 +188,10 @@ Structural fidelity is deterministic, not a judgment Coco grades for itself. The
 The user should be able to say things like `rediseña este formulario`, `ahora haz el de registro`, `audítalo`, `promuévelo`, `cambia la fuente principal`, or `cambia el color de acción` without internal flags. Infer routing from current state and the request. Ask only for product decisions that materially change the experience.
 
 
+## Language
+
+Reply and write every deliverable (briefs, flows, findings, handoff notes, Design Hub pages) in the user's language: `output_language` in the active profile when it is a language code, otherwise the language of the current request. Templates are written in English; translate their headings and prose. Never translate identifiers: file names, paths, JSON/YAML keys, phase codes (F0–F3, R0, R3), status values, CSS classes or token names.
+
 ## Path resolution
 
 Runtime contracts cite package-relative paths (`skills/lima/...`, `agentes/kiwi/...`). In an installed project, resolve them through `.fruti/paths.yaml` (written by the installer); when absent (this repo itself), the paths are literal.
