@@ -31,6 +31,8 @@ La idea es sencilla: tú describes el trabajo, no el protocolo interno.
 
 El Squad resuelve internamente quién debe actuar, qué contexto necesita y qué debe entregar al siguiente agente.
 
+> **Si el proyecto también tiene Nexa Squad** (existe `.nexa-squad/`), Fruti diseña solo piezas: componentes, variantes, patrones, tokens y el Design Hub. Las pantallas del producto, las que usa un rol con datos y reglas reales, son de Nexa. Ver [Con Nexa Squad](#con-nexa-squad).
+
 ## El equipo
 
 Cinco especialistas. Cada uno es dueño de una sola clase de decisión y entrega evidencia al siguiente; si encuentra algo que no le toca, lo devuelve a su dueño.
@@ -498,12 +500,13 @@ Ejemplo con la misma palabra:
 
 Cuando los dos están en el mismo proyecto:
 
+- **Las pantallas del producto son de Nexa.** Si existe `.nexa-squad/`, Kiwi no wireframea una pantalla o un módulo del producto: responde en una línea con la frase para Nexa (`/orka …`). Si la petición también nombra un patrón reutilizable ("el formulario de alta estándar"), Fruti diseña solo ese patrón. En un rediseño, Fruti planea fundamentos, primitivas, patrones y componentes; las vistas quedan con `owner: nexa`.
+- Sin Nexa en el proyecto, Fruti sigue diseñando pantallas como siempre.
 - Nexa lee el registro, los contratos y los tokens de Fruti, y nunca los modifica.
 - Si a Nexa le falta una pieza, su curador (Kura) escribe un pedido en `docs/componentes/pedidos/<id>.md`. Pídele a Fruti "diseña el componente de `docs/componentes/pedidos/<id>.md`": Kiwi arma su brief desde ese pedido y su tabla de estados alimenta la tabla de transiciones de Lima.
 - Cuando el componente queda en el registro, Nexa lo toma con `/orka continúa <módulo>`.
-- Para que una frase como "rediseña este formulario" la tome Nexa, empieza con `/orka`. Sin `/orka`, la toma Fruti.
 
-La guía completa, con qué pedirle a cada uno, los cuatro casos en que trabajan juntos y quién manda cuando no coinciden, está en [docs/nexa-y-fruti.md](docs/nexa-y-fruti.md). El instalador la copia a `.fruti/nexa-y-fruti.md`.
+La guía completa, con qué pedirle a cada uno, los cinco casos en que trabajan juntos y quién manda cuando no coinciden, está en [docs/nexa-y-fruti.md](docs/nexa-y-fruti.md). El instalador la copia a `.fruti/nexa-y-fruti.md`.
 
 ---
 
