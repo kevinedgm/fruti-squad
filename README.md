@@ -8,9 +8,9 @@
 
 Cada agente hace una sola clase de trabajo y entrega evidencia al siguiente. Para Codex, Kiro y Claude Code.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/kiwi-oscuro.svg"><img src="assets/marca/kiwi.svg" alt="Kiwi" width="40"></picture>&nbsp;&nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/lima-oscuro.svg"><img src="assets/marca/lima.svg" alt="Lima" width="40"></picture>&nbsp;&nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/coco-oscuro.svg"><img src="assets/marca/coco.svg" alt="Coco" width="40"></picture>&nbsp;&nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/mora-oscuro.svg"><img src="assets/marca/mora.svg" alt="Mora" width="40"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/kiwi-oscuro.svg"><img src="assets/marca/kiwi.svg" alt="Kiwi" width="40"></picture>&nbsp;&nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/lima-oscuro.svg"><img src="assets/marca/lima.svg" alt="Lima" width="40"></picture>&nbsp;&nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/coco-oscuro.svg"><img src="assets/marca/coco.svg" alt="Coco" width="40"></picture>&nbsp;&nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/bruno-oscuro.svg"><img src="assets/marca/bruno.svg" alt="Bruno" width="40"></picture>&nbsp;&nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/mora-oscuro.svg"><img src="assets/marca/mora.svg" alt="Mora" width="40"></picture>
 
-**Kiwi** → **Lima** → **Coco** → **Mora**
+**Kiwi** → **Lima** → **Coco** → **Bruno** → **Mora**
 
 </div>
 
@@ -31,24 +31,33 @@ La idea es sencilla: tú describes el trabajo, no el protocolo interno.
 
 El Squad resuelve internamente quién debe actuar, qué contexto necesita y qué debe entregar al siguiente agente.
 
-## Responsabilidades
+## El equipo
 
-| Orden | | Agente | Qué hace |
-|---|---|---|---|
-| 1 | <picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/kiwi-oscuro.svg"><img src="assets/marca/kiwi.svg" alt="Kiwi" width="32"></picture> | **Kiwi** · UX Architect | Define la estructura antes que la apariencia: brief, user flow y wireframes F0–F2 en compact, medium y expanded |
-| 2 | <picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/lima-oscuro.svg"><img src="assets/marca/lima.svg" alt="Lima" width="32"></picture> | **Lima** · Design System Governance | Gobierna el design system: clasificación, reutilización, contratos, tokens, registry y lifecycle |
-| 3 | <picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/coco-oscuro.svg"><img src="assets/marca/coco.svg" alt="Coco" width="32"></picture> | **Coco** · UI Audit | Construye la capa visual (F3) y la audita contra el contrato, con evidencia |
-| 4 | <picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/mora-oscuro.svg"><img src="assets/marca/mora.svg" alt="Mora" width="32"></picture> | **Mora** · Documentation & Knowledge Engineer | Documenta solo lo que existe y fue verificado |
+Cinco especialistas. Cada uno es dueño de una sola clase de decisión y entrega evidencia al siguiente; si encuentra algo que no le toca, lo devuelve a su dueño.
 
-**Bruno** · Frontend Implementation Engineer ya tiene símbolo en la marca, pero todavía no es parte del squad: hoy Coco cubre la implementación. Su guía de marca se adelanta a su llegada.
+| | Agente | Lema | Qué decide | Qué entrega |
+|---|---|---|---|---|
+| <picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/kiwi-oscuro.svg"><img src="assets/marca/kiwi.svg" alt="Kiwi" width="32"></picture> | **Kiwi** · UX Architect | Define la estructura antes que la apariencia. | Brief funcional, user flow, jerarquía, estados y comportamiento en compact, medium y expanded | Wireframes F0–F2 neutrales y contrato geométrico |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/lima-oscuro.svg"><img src="assets/marca/lima.svg" alt="Lima" width="32"></picture> | **Lima** · Design System Governance | Una fuente, muchas piezas coherentes. | Si una pieza se reutiliza, extiende, es nueva o local; contrato, tokens, registry y lifecycle | Contrato de la pieza, registro y compuertas de promoción |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/coco-oscuro.svg"><img src="assets/marca/coco.svg" alt="Coco" width="32"></picture> | **Coco** · UI Audit | Construye la capa visual y la audita contra el contrato. | Cómo se ve la pieza con el sistema real (F3) y si lo implementado cumple (R0) | F3 con su CSS, y el reporte de cumplimiento con evidencia |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/bruno-oscuro.svg"><img src="assets/marca/bruno.svg" alt="Bruno" width="32"></picture> | **Bruno** · Frontend Implementation Engineer | Convierte la pieza aprobada en comportamiento frontend real. | Cómo funciona la pieza (R3): props, eventos, slots, estado, teclado, foco y ARIA | Componente funcional, build en verde y lo verificado y no verificado |
+| <picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/mora-oscuro.svg"><img src="assets/marca/mora.svg" alt="Mora" width="32"></picture> | **Mora** · Documentation & Knowledge Engineer | Documenta solo lo que existe y fue verificado. | Qué se publica en el Design Hub y cómo se conecta | Páginas del Design Hub, navegación y cobertura |
+
+Lo que ninguno hace:
+
+- Kiwi no decide color, tipografía ni implementación.
+- Lima no audita: consume la auditoría de Coco.
+- Coco no programa comportamiento ni cambia la estructura aprobada.
+- Bruno no escribe valores visuales ni cambia CSS, tokens, contratos o el registry.
+- Mora no documenta nada que no esté implementado y verificado.
 
 Regla principal:
 
 ```text
-Kiwi estructura → Lima gobierna → Coco construye/verifica → Mora documenta
+Kiwi estructura → Lima gobierna → Coco construye la capa visual → Bruno implementa el comportamiento → Coco audita → Lima decide el estado → Mora documenta
 ```
 
-No hay dos auditores ni dos propietarios del lifecycle.
+No hay dos auditores ni dos propietarios del lifecycle. Si una pieza no tiene comportamiento más allá del HTML nativo, el paso de Bruno se salta y queda anotado.
 
 ---
 
@@ -91,20 +100,20 @@ Para probar el instalador después de un cambio: `npm test` (instala en proyecto
 
 Con `--target kiro` el instalador deja:
 
-- `.agents/skills/lima/` y `.kiro/agents/{kiwi,coco,mora}/` — los miembros.
-- `.kiro/agents/{kiwi,lima,coco,mora}.md` — un agente de Kiro por miembro, con sus herramientas, los recursos compartidos (`.fruti/policy.md`, estado y handoff) y permisos: lee todo, pregunta antes de escribir y tiene prohibidos `rm -rf`, `sudo`, `git push`, `git reset --hard` y `git clean`.
+- `.agents/skills/lima/` y `.kiro/agents/{kiwi,coco,bruno,mora}/` — los miembros.
+- `.kiro/agents/{kiwi,lima,coco,bruno,mora}.md` — un agente de Kiro por miembro, con sus herramientas, los recursos compartidos (`.fruti/policy.md`, estado y handoff) y permisos: lee todo, pregunta antes de escribir y tiene prohibidos `rm -rf`, `sudo`, `git push`, `git reset --hard` y `git clean`.
 - `.kiro/steering/fruti-squad.md` — apunta a la política.
 
 ### Claude Code
 
 Con `--target claude` el instalador deja:
 
-- `.claude/skills/{kiwi,lima,coco,mora-docs}/` — cada miembro como Skill.
+- `.claude/skills/{kiwi,lima,coco,bruno,mora-docs}/` — cada miembro como Skill.
 - `CLAUDE.md` — bloque del Squad que importa `.fruti/policy.md` (la política de ruteo, la misma que usa Codex vía `AGENTS.md`).
 - `.fruti/paths.yaml` — mapa de rutas para resolver las referencias de `.fruti/runtime/*.yaml`.
   Para resolver una ruta desde scripts o desde el agente: `fruti path skills/lima/reference/quality-gates.md` imprime la ruta real en el proyecto.
 
-Después basta con pedir en lenguaje natural ("rediseña este formulario") o invocar `kiwi`, `lima`, `coco` o `mora-docs`.
+Después basta con pedir en lenguaje natural ("rediseña este formulario") o invocar `kiwi`, `lima`, `coco`, `bruno` o `mora-docs`.
 
 ---
 
@@ -156,7 +165,15 @@ reuse/extend/new/local · contrato · registry
       │
       ▼ handoff compacto
 COCO
-F3 · implementación · auditoría
+F3 · capa visual con el sistema real · CSS
+      │
+      ▼ handoff compacto
+BRUNO
+R3 · API · eventos · estado · teclado · foco · ARIA
+      │
+      ▼ handoff compacto
+COCO
+R0 · auditoría de lo implementado
       │
       ▼ compliance report
 LIMA
@@ -197,7 +214,7 @@ DESIGN DIRECTION
   ↓
 REDESIGN PLAN
   ↓
-Kiwi → Lima → Coco → Mora
+Kiwi → Lima → Coco → Bruno → Coco (R0) → Lima → Mora
 ```
 
 ## Understanding
@@ -249,7 +266,7 @@ La aplicación existente sirve para entender funcionalidad y restricciones. No s
 
 # Probar el Squad de punta a punta
 
-El comando `test` prepara una prueba reproducible del flujo completo sin obligarte a escribir flags internos de Kiwi/Lima/Coco/Mora.
+El comando `test` prepara una prueba reproducible del flujo completo sin obligarte a escribir flags internos de Kiwi/Lima/Coco/Bruno/Mora.
 
 ```bash
 fruti test --prompt "Diseña un card que muestre tina, día, horas desde la última medición, temperatura y Brix"
@@ -270,7 +287,7 @@ npx github:kevinedgm/fruti-squad test \
 
 ### Casos fijos para medir cambios al squad
 
-Para saber si un cambio a Kiwi, Lima, Coco o Mora mejora o empeora el resultado, corre los mismos casos antes y después:
+Para saber si un cambio a Kiwi, Lima, Coco, Bruno o Mora mejora o empeora el resultado, corre los mismos casos antes y después:
 
 ```bash
 fruti test --case evals/casos/03-tabla-de-cuentas.md
@@ -299,9 +316,15 @@ LIMA
   validación contra contratos y estándares realmente configurados
         ↓
 COCO
-  F3 + implementación real
+  F3 + CSS con el sistema real
   fidelidad F2 → F3 (FID-GEOMETRY-001)
-  auditoría + compliance report
+        ↓
+BRUNO
+  comportamiento R3 sobre el F3, sin cambiarlo
+  SKIPPED si la pieza no tiene comportamiento propio
+        ↓
+COCO
+  auditoría R0 + compliance report
         ↓
 LIMA
   gate usando la evidencia de Coco
@@ -368,6 +391,7 @@ La capa runtime se organiza así:
 │   ├── kiwi.yaml
 │   ├── lima.yaml
 │   ├── coco.yaml
+│   ├── bruno.yaml
 │   └── mora.yaml
 ├── state/
 │   └── current.json
@@ -439,11 +463,19 @@ Carga referencias de lifecycle, gates, adaptación o promoción únicamente cuan
 
 No rehace el brief ni la gobernanza cuando Kiwi/Lima ya entregaron evidencia vigente.
 
-Construye con el sistema real y es el auditor canónico.
+Construye la capa visual con el sistema real (F3 y CSS) y es el auditor canónico: después de Bruno audita lo implementado.
 
 Para auditoría empieza por `audit-manifest.yaml` y evidencia automática. Abre estándares extensos únicamente para reglas ambiguas, fallidas o no deterministas.
 
 Produce `compliance-current.json`.
+
+## Bruno
+
+Parte del handoff, el contrato aprobado, el F3 y el CSS de Coco, y solo los archivos que va a modificar con sus imports directos.
+
+Implementa la API pública (props, eventos, slots, estado controlado), la semántica nativa, el teclado, el foco y el ARIA funcional. Conserva las clases que usa el CSS de Coco y no escribe valores visuales.
+
+Corre el build y las pruebas disponibles. Lo que no pudo correr lo marca como no verificado. Si falta una entrega o dos fuentes se contradicen, lo devuelve a su dueño en lugar de inventarlo.
 
 ## Mora
 
@@ -486,6 +518,12 @@ Kiwi comienza por estructura cuando existe incertidumbre estructural y el flujo 
 Se reutiliza el artefacto activo y se carga únicamente el contexto de adaptación necesario.
 
 ```text
+"Haz que el selector se pueda usar con teclado y avise cuando cambie"
+```
+
+Bruno implementa el comportamiento sobre el F3 aprobado, sin tocar su CSS, y después Coco audita el resultado.
+
+```text
 "Audítalo"
 ```
 
@@ -523,7 +561,7 @@ cd fruti-squad
 Antes de integrar cambios, compara contra `main` y prueba al menos estos escenarios:
 
 ```text
-1. Nueva pantalla → Kiwi → Lima → Coco → Mora
+1. Nueva pantalla → Kiwi → Lima → Coco → Bruno → Coco (R0) → Lima → Mora
 2. Segunda pantalla del mismo proyecto → verificar reutilización de estado
 3. Auditoría → comprobar que Coco usa manifest antes de referencias profundas
 4. Cambio pequeño → comprobar que Mora documenta solo el delta

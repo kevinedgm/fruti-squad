@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Fruti Squad installer/setup — kiwi → lima → coco → mora, for Kiro, Claude Code, Codex.
+// Fruti Squad installer/setup — kiwi → lima → coco → bruno → mora, for Kiro, Claude Code, Codex.
 // Zero dependencies.
 //   npx github:kevinedgm/fruti-squad setup   --target kiro --intake my-intake.yaml
 //   npx github:kevinedgm/fruti-squad install --target kiro
@@ -22,7 +22,7 @@
 //   --qa <runner>   (setup) passed to lima init, e.g. playwright | none
 //   --global        install user-wide (~ instead of the project root)
 //   --dest <dir>    target project root (default: current working directory)
-//   --only <names>  comma list (default: kiwi,lima,coco,mora). Extra: impeccable,
+//   --only <names>  comma list (default: kiwi,lima,coco,bruno,mora). Extra: impeccable,
 //                   improve-animations, skill-architect
 //   --force         overwrite existing destinations
 //   --dry-run       print actions, change nothing
@@ -43,10 +43,11 @@ const MEMBERS = {
   'improve-animations': { from: 'skills/improve-animations', kind: 'skill', blurb: 'micro-interacciones y animación' },
   'skill-architect':    { from: 'skills/skill-architect',    kind: 'skill', blurb: 'creación de nuevas skills' },
   kiwi:                 { from: 'agentes/kiwi',              kind: 'agent', blurb: 'estructura: brief, user flow y wireframes F0–F2 adaptativos con traspaso a lima' },
-  coco:                 { from: 'agentes/coco',              kind: 'agent', blurb: 'construye: alta fidelidad con el sistema real, implementación y auditoría' },
+  coco:                 { from: 'agentes/coco',              kind: 'agent', blurb: 'capa visual: alta fidelidad (F3) con el sistema real y su CSS; auditoría canónica (R0)' },
+  bruno:                { from: 'agentes/bruno',             kind: 'agent', blurb: 'implementa el comportamiento (R3): API, eventos, estado, teclado, foco y ARIA' },
   mora:                 { from: 'agentes/mora',              kind: 'agent', blurb: 'documenta lo implementado y sincroniza el Design Hub (último paso del flujo)' },
 };
-const DEFAULT = ['kiwi', 'lima', 'coco', 'mora'];
+const DEFAULT = ['kiwi', 'lima', 'coco', 'bruno', 'mora'];
 const TARGETS = ['kiro', 'claude', 'codex'];
 
 const C = {
@@ -89,7 +90,7 @@ function parseArgs(argv) {
 
 function helpText() {
   return `
-${C.bold}🍓 Fruti Squad${C.reset} — kiwi → lima → coco → mora  (Kiro · Claude Code · Codex)
+${C.bold}🍓 Fruti Squad${C.reset} — kiwi → lima → coco → bruno → mora  (Kiro · Claude Code · Codex)
 
 ${C.bold}Commands${C.reset}
   ${C.bold}setup${C.reset}          One shot: install + init (lima) + append coco:/mora: to the profile
@@ -105,7 +106,7 @@ ${C.bold}Options${C.reset}
   --qa <runner>    (setup) playwright | none   (default: playwright)
   --global         Install user-wide (home dir instead of project root)
   --dest <dir>     Target project root (default: current directory)
-  --only <names>   Comma list (default: kiwi,lima,coco,mora). Extra: impeccable,
+  --only <names>   Comma list (default: kiwi,lima,coco,bruno,mora). Extra: impeccable,
                    improve-animations, skill-architect
   --force          Overwrite existing destinations
   --dry-run        Show actions without changing anything
@@ -199,7 +200,7 @@ function writeInstructionBlock(base, fileName, lines, dryRun) {
 
 function squadLines(members, target, skillsRootRel) {
   return [
-    '## 🍓 Fruti Squad (kiwi → lima → coco → mora)',
+    '## Fruti Squad (kiwi → lima → coco → bruno → mora)',
     '',
     'Este proyecto incluye el Fruti Squad en `' + skillsRootRel + '`. Cada carpeta tiene su `SKILL.md`/`AGENT.md`; léelos cuando la tarea lo pida:',
     '',
@@ -208,7 +209,7 @@ function squadLines(members, target, skillsRootRel) {
       return `- **${installed}** — ${MEMBERS[n].blurb} → \`${skillsRootRel}/${installed}/\``;
     }),
     '',
-    'Flujo: **kiwi estructura → lima gobierna → coco construye → mora documenta.** Cada uno se dedica a una actividad y todos usan el perfil de proyecto de lima (`' + skillsRootRel + '/lima/profiles/<proyecto>.md`).',
+    'Flujo: **kiwi estructura → lima gobierna → coco construye la capa visual → bruno implementa el comportamiento → coco audita → mora documenta.** Cada uno se dedica a una actividad y todos usan el perfil de proyecto de lima (`' + skillsRootRel + '/lima/profiles/<proyecto>.md`).',
     // Claude imports the policy with @; Codex has no import syntax, so it gets an explicit read instruction.
     ...(target === 'codex' ? ['', 'Antes de la primera tarea de diseño/UI lee `.fruti/policy.md` (política de ruteo: rutea primero, lee después; fuentes aprobadas; handoffs compactos). Rutas reales de skills/agentes: `.fruti/paths.yaml`.'] : []),
   ];
@@ -229,7 +230,7 @@ function writeKiroSteering(base, dryRun) {
     'inclusion: always',
     '---',
     '',
-    '# Fruti Squad (kiwi → lima → coco → mora)',
+    '# Fruti Squad (kiwi → lima → coco → bruno → mora)',
     '',
     'Antes de la primera tarea de diseño/UI lee `.fruti/policy.md` (política de ruteo: rutea primero, lee después; fuentes aprobadas; handoffs compactos). Rutas reales de skills/agentes: `.fruti/paths.yaml`.',
     '',
@@ -242,7 +243,8 @@ function writeKiroSteering(base, dryRun) {
 const KIRO_AGENTS = {
   kiwi: { description: 'Fruti Squad structure and UX agent (F0-F2).', welcome: 'Kiwi · Structure — structure, flow and adaptation come first (F0-F2).' },
   lima: { description: 'Fruti Squad governance agent: classification, contracts, tokens, registry, gates and lifecycle.', welcome: 'Lima · Governance — I classify and set contracts, tokens, registry and gates.', extraSkills: ['impeccable'] },
-  coco: { description: 'Fruti Squad construction (F3), implementation and canonical audit agent.', welcome: 'Coco · Build — I build F3 with the real system, implement it and audit it.' },
+  coco: { description: 'Fruti Squad visual layer (F3/CSS) and canonical audit (R0) agent.', welcome: 'Coco · UI Audit — I build the visual layer and audit it against the contract.' },
+  bruno: { description: 'Fruti Squad frontend implementation agent (R3): API, events, state, keyboard, focus and functional ARIA.', welcome: 'Bruno · Implementation — I turn the approved piece into real frontend behavior.' },
   mora: { description: 'Fruti Squad documentation agent; publishes implemented, verified truth.', welcome: 'Mora · Docs — I document only what is implemented and verified.' },
 };
 const KIRO_SHELL_ALLOW = ['git status', 'git diff*', 'npm test*', 'npm run *', 'node *', 'npx fruti*', 'python3 *', 'bash *', 'ls *', 'cat *', 'grep *', 'rg *', 'find *'];
@@ -310,7 +312,7 @@ function writeClaudeMd(base, members, skillsRootRel, dryRun, global = false) {
     '',
     '@.fruti/policy.md',
     '',
-    'Rutas reales de skills/agentes: `.fruti/paths.yaml`. Los contratos `.fruti/runtime/*.yaml` citan rutas relativas al paquete (`skills/...`, `agentes/...`); resuélvelas con ese mapa o con `fruti path <ruta>` (imprime la ruta real). Invoca cada miembro con la herramienta Skill (`kiwi`, `lima`, `coco`, `mora-docs`) y haz las preguntas de producto con AskUserQuestion.',
+    'Rutas reales de skills/agentes: `.fruti/paths.yaml`. Los contratos `.fruti/runtime/*.yaml` citan rutas relativas al paquete (`skills/...`, `agentes/...`); resuélvelas con ese mapa o con `fruti path <ruta>` (imprime la ruta real). Invoca cada miembro con la herramienta Skill (`kiwi`, `lima`, `coco`, `bruno`, `mora-docs`) y haz las preguntas de producto con AskUserQuestion.',
   ], dryRun);
 }
 
@@ -634,9 +636,9 @@ async function doSetup(args) {
 
 function printUse(target) {
   log(`\n${C.bold}Usar:${C.reset}`);
-  if (target === 'kiro')   log(`  Invoca ${C.bold}/kiwi${C.reset}, la skill ${C.bold}lima${C.reset}, ${C.bold}/coco${C.reset} o ${C.bold}/mora${C.reset} desde Kiro (en ese orden de flujo).`);
-  if (target === 'claude') log(`  En Claude Code aparecen como skills en ${C.bold}.claude/skills/${C.reset} y la política se carga vía ${C.bold}CLAUDE.md${C.reset}; pídele "usa kiwi/lima/coco/mora-docs" o rediseña en lenguaje natural.`);
-  if (target === 'codex')  log(`  Codex las conoce por el bloque en ${C.bold}AGENTS.md${C.reset}; pídele "usa kiwi/lima/coco/mora-docs".`);
+  if (target === 'kiro')   log(`  Invoca ${C.bold}/kiwi${C.reset}, la skill ${C.bold}lima${C.reset}, ${C.bold}/coco${C.reset}, ${C.bold}/bruno${C.reset} o ${C.bold}/mora${C.reset} desde Kiro (en ese orden de flujo).`);
+  if (target === 'claude') log(`  En Claude Code aparecen como skills en ${C.bold}.claude/skills/${C.reset} y la política se carga vía ${C.bold}CLAUDE.md${C.reset}; pídele "usa kiwi/lima/coco/bruno/mora-docs" o rediseña en lenguaje natural.`);
+  if (target === 'codex')  log(`  Codex las conoce por el bloque en ${C.bold}AGENTS.md${C.reset}; pídele "usa kiwi/lima/coco/bruno/mora-docs".`);
 }
 
 function doList() {

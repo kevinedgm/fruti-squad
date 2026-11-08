@@ -16,7 +16,7 @@ La ronda queda marcada con `case: 03-tabla-de-cuentas` en su `request.md`, y as�
 
 ## Cómo se corre
 
-1. En un proyecto de prueba con Fruti Squad instalado, lanza el caso con `fruti test --case …` y pide al agente que ejecute la ronda completa (Kiwi → Lima → Coco → Lima → Mora).
+1. En un proyecto de prueba con Fruti Squad instalado, lanza el caso con `fruti test --case …` y pide al agente que ejecute la ronda completa (Kiwi → Lima → Coco → Bruno → Coco → Lima → Mora).
 2. **Corre cada caso dos veces** (dos rondas). Solo cuenta como pasa lo que pasa en las dos.
 3. Califica con una conversación nueva: "Califica `.fruti/tests/rNN/` con `evals/casos/NN-….md`; para cada casilla di cumple / no cumple con evidencia (archivo y regla)". Además de las casillas, vale el `result.md` de la ronda.
 4. Anota en `evals/resultados.md`: fecha, versión, qué cambió, caso, ronda 1, ronda 2.

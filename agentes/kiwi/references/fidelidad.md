@@ -8,7 +8,7 @@
 | ¿Qué va primero? ¿Dónde vive cada cosa? ¿Cómo navego? | F1 lo-fi | kiwi |
 | ¿Cabe el contenido real? ¿Qué pasa en vacío/error? ¿Cómo cambia por espacio? | F2 mid-fi | kiwi |
 | ¿Cómo se percibe? ¿Qué microinteracción? ¿Listo para handoff visual? | F3 hi-fi | coco |
-| Construirlo en producción | R3 | coco |
+| Construirlo en producción | R3 | bruno (sobre el F3 de coco) |
 
 ## Reglas
 

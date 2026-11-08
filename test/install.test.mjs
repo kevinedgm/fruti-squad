@@ -21,15 +21,15 @@ const test = (name, fn) => { fn(); passed++; console.log(`✓ ${name}`); };
 test('claude: skills, SKILL.md bridges, CLAUDE.md block, runtime', () => {
   const d = fresh();
   run('install', '--target', 'claude', '--dest', d);
-  for (const n of ['kiwi', 'lima', 'coco', 'mora-docs']) has(d, '.claude', 'skills', n, 'SKILL.md');
-  has(d, '.fruti', 'policy.md'); has(d, '.fruti', 'paths.yaml'); has(d, '.fruti', 'runtime', 'coco.yaml');
+  for (const n of ['kiwi', 'lima', 'coco', 'bruno', 'mora-docs']) has(d, '.claude', 'skills', n, 'SKILL.md');
+  has(d, '.fruti', 'policy.md'); has(d, '.fruti', 'paths.yaml'); has(d, '.fruti', 'runtime', 'coco.yaml'); has(d, '.fruti', 'runtime', 'bruno.yaml');
   assert.match(readFileSync(join(d, 'CLAUDE.md'), 'utf8'), /\.fruti\/policy\.md/);
 });
 
 test('codex: skills and AGENTS.md block', () => {
   const d = fresh();
   run('install', '--target', 'codex', '--dest', d);
-  for (const n of ['kiwi', 'lima', 'coco', 'mora-docs']) has(d, '.codex', 'skills', n, 'SKILL.md');
+  for (const n of ['kiwi', 'lima', 'coco', 'bruno', 'mora-docs']) has(d, '.codex', 'skills', n, 'SKILL.md');
   has(d, 'AGENTS.md');
 });
 
@@ -38,7 +38,7 @@ test('kiro: steering and one custom agent per member, with permissions', () => {
   run('install', '--target', 'kiro', '--dest', d);
   has(d, '.kiro', 'steering', 'fruti-squad.md');
   has(d, '.agents', 'skills', 'lima', 'SKILL.md');
-  for (const n of ['kiwi', 'lima', 'coco', 'mora']) {
+  for (const n of ['kiwi', 'lima', 'coco', 'bruno', 'mora']) {
     has(d, '.kiro', 'agents', `${n}.md`);
     const def = readFileSync(join(d, '.kiro', 'agents', `${n}.md`), 'utf8');
     assert.match(def, new RegExp(`^---\\nname: ${n}\\n`), `${n}: frontmatter name`);

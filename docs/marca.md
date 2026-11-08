@@ -13,7 +13,7 @@ Resumen: todo el sistema se arma con dos piezas, el **marco redondeado** (la pie
 | Bruno | Frontend Implementation Engineer | Convierte la pieza aprobada en comportamiento frontend real. | Cierre: la barra de `</>` parte el marco; de plano punteado a pieza sólida | `#3a54d6` | `#4361ee` |
 | Mora | Documentation & Knowledge Engineer | Documenta solo lo que existe y fue verificado. | Red de conocimiento: piezas documentadas conectadas | `#d0156e` | `#f72585` |
 
-Bruno tiene marca, pero todavía no es parte del squad: hoy Coco cubre la implementación.
+Bruno se integró al squad en v2: Coco construye la capa visual (F3) y audita (R0), y Bruno implementa el comportamiento (R3) entre ambos pasos.
 
 Cada símbolo tiene dos archivos: `<agente>.svg` para fondo claro (trazo `#18181b`, punto oscurecido) y `<agente>-oscuro.svg` para fondo oscuro (trazo blanco, punto vivo). En GitHub se usan juntos con `<picture>` para que cambien solos con el tema.
 
