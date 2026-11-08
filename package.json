@@ -13,6 +13,7 @@
   "files": [
     "bin/",
     ".fruti/",
+    "docs/nexa-y-fruti.md",
     "AGENTS.md",
     "skills/",
     "agentes/",

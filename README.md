@@ -487,6 +487,26 @@ Documenta el delta implementado y verificado, con las reglas de redacción de `a
 
 ---
 
+# Con Nexa Squad
+
+**Fruti Squad fabrica las piezas; Nexa Squad arma los módulos con ellas.** Usa Fruti cuando el resultado es algo que se reutiliza en muchas pantallas (un componente, una variante, un patrón, un token) y vive en el Design Hub. Usa Nexa cuando el resultado es una funcionalidad del producto que usa un rol, con sus datos, reglas de negocio y servidor.
+
+Ejemplo con la misma palabra:
+
+- "Necesito un autocomplete que busque mientras escribo y se pueda usar con teclado" → **Fruti**: es una pieza.
+- "En Cuentas, la recepcionista busca la muestra pendiente y la paga" → **Nexa**: es un módulo que usa esa pieza.
+
+Cuando los dos están en el mismo proyecto:
+
+- Nexa lee el registro, los contratos y los tokens de Fruti, y nunca los modifica.
+- Si a Nexa le falta una pieza, su curador (Kura) escribe un pedido en `docs/componentes/pedidos/<id>.md`. Pídele a Fruti "diseña el componente de `docs/componentes/pedidos/<id>.md`": Kiwi arma su brief desde ese pedido y su tabla de estados alimenta la tabla de transiciones de Lima.
+- Cuando el componente queda en el registro, Nexa lo toma con `/orka continúa <módulo>`.
+- Para que una frase como "rediseña este formulario" la tome Nexa, empieza con `/orka`. Sin `/orka`, la toma Fruti.
+
+La guía completa, con qué pedirle a cada uno, los cuatro casos en que trabajan juntos y quién manda cuando no coinciden, está en [docs/nexa-y-fruti.md](docs/nexa-y-fruti.md). El instalador la copia a `.fruti/nexa-y-fruti.md`.
+
+---
+
 # Fuentes de verdad
 
 La carpeta `.fruti` no pretende convertirse en otra religión documental. Cada dato conserva un propietario:
