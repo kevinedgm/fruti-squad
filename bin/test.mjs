@@ -1,20 +1,35 @@
 #!/usr/bin/env node
 import { existsSync, mkdirSync, writeFileSync, cpSync, readdirSync, readFileSync } from 'node:fs';
-import { resolve, join, extname } from 'node:path';
+import { resolve, join, extname, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+const PKG_ROOT=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 
 const argv=process.argv.slice(2);
-let prompt='', file=null, dest=process.cwd();
+let prompt='', file=null, dest=process.cwd(), caseFile=null;
 for(let i=0;i<argv.length;i++){
   const a=argv[i];
   if(a==='--prompt') prompt=argv[++i]||'';
   else if(a==='--file') file=argv[++i]||null;
   else if(a==='--dest') dest=argv[++i]||dest;
+  else if(a==='--case') caseFile=argv[++i]||null;
   else if(!a.startsWith('--')) prompt+=(prompt?' ':'')+a;
 }
 dest=resolve(dest);
+// --case evals/casos/NN-x.md: same request every run, so rounds of one case can be compared.
+let caseId=null;
+if(caseFile){
+  let cp=resolve(dest,caseFile);
+  if(!existsSync(cp)) cp=resolve(PKG_ROOT,caseFile);
+  if(!existsSync(cp)){ console.error('No encuentro --case: '+cp); process.exit(2); }
+  const txt=readFileSync(cp,'utf8');
+  caseId=cp.split(/[\\/]/).pop().replace(/\.md$/,'');
+  const sec=(h)=>{ const m=txt.match(new RegExp('## '+h+'\\n+([\\s\\S]*?)(?:\\n## |$)')); return m?m[1].trim():''; };
+  if(!prompt){ const p=sec('Petición'); prompt=(p.match(/`([^`]+)`/)||[null,p])[1]; }
+  if(!file){ const f=sec('Archivo'); if(f){ file=f.split('\n')[0].trim(); if(!existsSync(resolve(dest,file))) file=resolve(PKG_ROOT,file); } }
+}
 const source=file?resolve(dest,file):null;
 if(!prompt && !source){
-  console.error('Uso: fruti test --prompt "Diseña un card..." [--file ./actual.html]');
+  console.error('Uso: fruti test --prompt "Diseña un card..." [--file ./actual.html]  ·  fruti test --case evals/casos/01-….md');
   process.exit(2);
 }
 if(source && !existsSync(source)){
@@ -34,7 +49,7 @@ const current=join(testsRoot,'current');
 mkdirSync(current,{recursive:true});
 const request=[
 '# Fruti Squad Design Test · '+round,'',
-'status: ready','mode: full-squad-test','round: '+round,'',
+'status: ready','mode: full-squad-test','round: '+round,...(caseId?['case: '+caseId]:[]),'',
 '## User request',prompt||'(redesign the supplied source artifact)','',
 '## Source artifact',source||'none','',
 '## Required pipeline',
@@ -76,6 +91,7 @@ writeFileSync(join(dir,'request.md'),request);
   let st={version:1};
   try{ st=JSON.parse(readFileSync(stateFile,'utf8')); }catch{}
   st.round=round;
+  if(caseId) st.case=caseId; else delete st.case;
   mkdirSync(join(dest,'.fruti','state'),{recursive:true});
   writeFileSync(stateFile,JSON.stringify(st,null,2)+'\n');
 }
@@ -86,7 +102,7 @@ if(source){
   cpSync(source,join(current,'input'+ext));
 }
 console.log('🍓 Fruti Squad test preparado');
-console.log('round: '+round);
+console.log('round: '+round+(caseId?'  ·  case: '+caseId:''));
 console.log('request: '+join(dir,'request.md'));
 console.log('');
 console.log('Ahora pide a tu agente:');

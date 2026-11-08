@@ -237,6 +237,16 @@ npx github:kevinedgm/fruti-squad test \
   --prompt "Diseña un card de tina con prioridad de medición"
 ```
 
+### Casos fijos para medir cambios al squad
+
+Para saber si un cambio a Kiwi, Lima, Coco o Mora mejora o empeora el resultado, corre los mismos casos antes y después:
+
+```bash
+fruti test --case evals/casos/03-tabla-de-cuentas.md
+```
+
+La ronda queda marcada con su caso. Corre cada caso dos veces y compara caso por caso; ver [evals/README.md](evals/README.md) y el análisis en [docs/arquitectura-agentes.md](docs/arquitectura-agentes.md).
+
 El comando crea `.fruti/tests/<round>/request.md`. Después pide al agente del entorno:
 
 ```text
