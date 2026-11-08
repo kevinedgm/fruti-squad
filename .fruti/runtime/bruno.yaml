@@ -15,7 +15,14 @@ operations:
     references: [agentes/bruno/references/handoffs.md, agentes/bruno/references/component-contract.md]
     implementation_target: inherit_from_active_profile
     target_contract: .fruti/contracts/implementation-target.yaml
-    verify: [project_build, no_visual_literals_in_logic, functional_tests_when_available, browser_when_available, compare_with_coco_f3]
+    contract_parts: [public_api, states, transitions]
+    verify: [project_build, no_visual_literals_in_logic, functional_tests_when_available, browser_when_available, compare_with_coco_f3, every_transition_row_implemented]
+  r3_change_existing:
+    when: redesign_mode_or_component_already_in_production
+    before_editing: characterize_current_behavior
+    references: [agentes/bruno/references/caracterizacion.md]
+    preserve_source: .fruti/redesign/scope.yaml
+    then: r3_build
 output:
   handoff: .fruti/handoffs/current.json
   state: .fruti/state/current.json
@@ -25,6 +32,8 @@ output:
 rules:
   - never_edit_css_tokens_contracts_registry_hub
   - never_invent_missing_deliveries
+  - never_invent_a_transition_missing_from_the_interaction_contract
+  - characterize_before_changing_existing_components
   - never_add_dependencies_without_user_approval
   - never_commit_or_push
   - respect_redesign_scope_exclusions

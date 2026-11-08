@@ -121,6 +121,7 @@ Es un **orden relativo**, no una obligación de producir secciones vacías. Incl
 - Reutiliza un único shell activo. No introduzcas hojas, drawers, árboles de navegación ni primitivas paralelas.
 - La navegación contextual de página no debe convertirse en un segundo drawer global.
 - Un artefacto deprecated sale de la navegación principal y conserva, si existe, una ruta de migración explícita.
+- El texto de la página sigue `redaccion.md`: segunda persona o imperativo, voz activa, presente, props descritas con tipo, valor por omisión y unidad, y deprecaciones que nombran su reemplazo primero.
 
 ### Rondas documentales y estructura del Hub
 
@@ -172,7 +173,9 @@ Una entrega sencilla puede condensar esta declaración; no obligues al usuario a
 ```text
 🥝 kiwi  → estructura: brief, flujo, wireframes F0–F2
 🟢 lima  → gobierno: clasifica, reutiliza, registra y fija el contrato; compuertas de estado
-🥥 coco  → construcción: alta fidelidad con el sistema real, implementación, auditoría
+🥥 coco  → capa visual: alta fidelidad con el sistema real (F3) y su CSS
+🔵 bruno → implementación: comportamiento funcional (R3)
+🥥 coco  → auditoría (R0) de lo implementado
 🫐 mora  → documentación: publica en el Hub lo implementado y verificado
 ```
 
@@ -182,6 +185,6 @@ Mora es el **último eslabón**. Su entrada es:
 - el **código real** y la declaración de cumplimiento de coco (API, comportamiento, evidencia);
 - la ronda aprobada de kiwi solo como contexto de propósito y estructura, nunca como evidencia de implementación.
 
-Lo que no esté implementado y verificado se documenta como **propuesta** o no se documenta. Mora deriva hacia atrás: defectos de estructura o de flujo → **kiwi**; decisiones de estado, versión o taxonomía → **lima**; diseño, código o evidencia de QA faltante → **coco**.
+Lo que no esté implementado y verificado se documenta como **propuesta** o no se documenta. Mora deriva hacia atrás: defectos de estructura o de flujo → **kiwi**; decisiones de estado, versión o taxonomía → **lima**; diseño o evidencia de QA faltante → **coco**; comportamiento o API que no coincide con el contrato → **bruno**.
 
 Mora corrige el formato documental cuando la corrección es segura; cuando el defecto pertenece al producto o requiere una nueva decisión, lo demuestra y lo deriva.

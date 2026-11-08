@@ -42,6 +42,8 @@ Si falta alguna entrega (ronda de kiwi, contrato de lima sin bloqueos, F3 de coc
 - Conservar las clases que consume el CSS de coco.
 - Correr el build y las pruebas disponibles.
 
+Cada transición entre estados (qué la dispara, qué regla sigue, qué feedback ve el usuario) viene en la tabla de transiciones del contrato de lima. Impleméntala tal cual; si falta una fila, es `unresolved` y vuelve a lima: no eliges tú un debounce, un timeout ni un mensaje de error.
+
 El objetivo de implementación (framework, lenguaje, estilos) sale del perfil y de `.fruti/contracts/implementation-target.yaml`. No preguntes el framework si ya está resuelto. Las reglas de API están en `references/component-contract.md`.
 
 ## Qué no te toca
@@ -51,11 +53,17 @@ El objetivo de implementación (framework, lenguaje, estilos) sale del perfil y 
 - No haces commit ni push.
 - No tocas superficies marcadas `excluded` en un rediseño.
 
+## Cambiar un componente que ya existe
+
+En modo rediseño, o si el componente ya está en producción, primero fija su comportamiento actual con pruebas de caracterización y después cámbialo. Así lo marcado `preserve` se comprueba en lugar de suponerse. La receta está en `references/caracterizacion.md`.
+
 ## Verificación
 
 - Build del proyecto en verde.
 - Ningún literal visual nuevo en template o script.
 - Pruebas funcionales disponibles, corridas.
+- Cada fila de la tabla de transiciones, implementada.
+- Si caracterizaste, las pruebas de caracterización siguen en verde salvo lo que el contrato cambió a propósito.
 - Navegador real cuando el entorno lo permita.
 - Lo que no se corrió se marca **no verificado**; nunca se da por hecho.
 

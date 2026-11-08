@@ -5,7 +5,7 @@ Bruno consume evidencia, no nombres fijos de proyecto.
 | Dueño | Debe entregar |
 | --- | --- |
 | kiwi | estructura F0–F2 aprobada y matriz adaptativa |
-| lima | contrato sin bloqueos, clasificación, estados y API |
+| lima | contrato sin bloqueos, clasificación, estados, tabla de transiciones y API |
 | coco | F3 aprobado, marcado y clases esperados, y CSS disponible |
 | bruno | implementación funcional y evidencia de verificación |
 | coco | auditoría R0 de lo implementado |
