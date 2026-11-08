@@ -7,6 +7,9 @@
     "fruti": "bin/fruti.mjs"
   },
   "type": "module",
+  "scripts": {
+    "test": "node test/install.test.mjs"
+  },
   "files": [
     "bin/",
     ".fruti/",
