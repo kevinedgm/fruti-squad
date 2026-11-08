@@ -185,6 +185,14 @@ Structural fidelity is deterministic, not a judgment Coco grades for itself. The
 
 `.fruti/contracts/documentation.yaml` is the single normative source for Design Hub page anatomy, section order and the neutral documentation shell. `skills/lima/reference/component-documentation.md` and `design-hub.md` contribute only guidance that does not conflict with it (golden rule, lifecycle-gated API, isolated previews); on any conflict the contract wins. Mora's read scope is in `.fruti/runtime/mora.yaml`.
 
+## Product screens when Nexa Squad is installed
+
+Check once per request whether `.nexa-squad/` exists at the project root.
+
+- **Nexa installed:** Fruti designs pieces, not product screens. Its scope is components, variants, reusable patterns and templates, tokens and the Design Hub. A product screen or module (something a role uses, with real data, business rules or server work, such as "el alta de muestra de la recepcionista") belongs to Nexa Squad. When such a request arrives, Kiwi does not wireframe it: reply in one line that the screen belongs to Nexa and give the phrase to use (`/orka …`). If the request also names a reusable pattern (for example, "the standard create form"), design only that pattern.
+- **Nexa not installed:** Fruti keeps designing screens as before.
+- **Redesign with Nexa installed:** Kiwi still runs understand, inventory and scope. In the plan, `foundations`, `primitives`, `patterns` and `domain-components` stay with Fruti; `views` are listed with `owner: nexa` and are not executed by Fruti.
+
 ## Requests from Nexa Squad
 
 Nexa Squad builds product modules with the pieces Fruti owns; its curator (Kura) is its only bridge to Fruti. When a request points at a Nexa component request (`docs/componentes/pedidos/<id>.md`), treat that file as the user's request for one piece:
