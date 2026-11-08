@@ -71,4 +71,25 @@ test('fruti test --case marks the round with its case', () => {
   assert.match(readFileSync(join(d, '.fruti', 'tests', 'r01', 'request.md'), 'utf8'), /^case: 01-tarjeta-de-resumen$/m);
 });
 
+test('fruti foundations with short inputs: no questions, origin and contrast recorded', () => {
+  const d = fresh();
+  run('install', '--target', 'claude', '--dest', d);
+  writeFileSync(join(d, '.claude', 'skills', 'lima', 'profiles', 'demo.md'), '---\ndesign_system: NEW\n---\n');
+  const f = (...a) => spawnSync(process.execPath, [join(ROOT, 'bin', 'fruti.mjs'), 'foundations', '--dest', d, ...a], { encoding: 'utf8', input: '' });
+  assert.equal(f().status, 2, 'without a terminal and without inputs it must refuse');
+  assert.equal(f('--marca', 'azul').status, 2, 'a non-hex brand must be rejected');
+  const r = f('--marca', '#F5C400', '--radio', '4', '--densidad', 'compacta');
+  assert.equal(r.status, 0, r.stderr);
+  const p = JSON.parse(readFileSync(join(d, '.fruti', 'foundations', 'proposal.json'), 'utf8'));
+  assert.equal(p.status, 'proposed');
+  assert.equal(p.color.primary, '#F5C400');
+  assert.equal(p.geometry.surface_radius_px, 10);
+  assert.equal(p.geometry.control_height_px, 44);
+  assert.equal(p.origin['color.primary'], 'input');
+  assert.equal(p.origin['geometry.surface_radius_px'], 'derived');
+  assert.equal(p.origin['color.secondary'], 'default');
+  assert.equal(p.checks.find(c => c.id === 'text-on-primary').status, 'warn');
+  assert.match(readFileSync(join(d, '.fruti', 'foundations', 'proposal.yaml'), 'utf8'), /^  primary: "#F5C400"$/m);
+});
+
 console.log(`\n${passed} tests passed`);

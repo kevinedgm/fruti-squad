@@ -1,12 +1,16 @@
 <div align="center">
 
-<img src="assets/theFrutiSquad.png" alt="The Fruti Squad" width="100%">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/fruti-squad-oscuro.svg"><img src="assets/marca/fruti-squad.svg" alt="Fruti Squad" width="112"></picture>
 
-# 🍓 Fruti Squad
+# Fruti Squad
 
-**Un squad de agentes para estructurar, gobernar, construir, auditar y documentar interfaces sin reconstruir todo el contexto en cada petición.**
+**Agentes especialistas que diseñan, gobiernan, implementan, auditan y documentan interfaces.**
 
-🥝 **Kiwi** → 🟢 **Lima** → 🥥 **Coco** → 🫐 **Mora**
+Cada agente hace una sola clase de trabajo y entrega evidencia al siguiente. Para Codex, Kiro y Claude Code.
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/kiwi-oscuro.svg"><img src="assets/marca/kiwi.svg" alt="Kiwi" width="40"></picture>&nbsp;&nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/lima-oscuro.svg"><img src="assets/marca/lima.svg" alt="Lima" width="40"></picture>&nbsp;&nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/coco-oscuro.svg"><img src="assets/marca/coco.svg" alt="Coco" width="40"></picture>&nbsp;&nbsp;<picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/mora-oscuro.svg"><img src="assets/marca/mora.svg" alt="Mora" width="40"></picture>
+
+**Kiwi** → **Lima** → **Coco** → **Mora**
 
 </div>
 
@@ -29,12 +33,14 @@ El Squad resuelve internamente quién debe actuar, qué contexto necesita y qué
 
 ## Responsabilidades
 
-| Orden | Agente | Responsabilidad |
-|---|---|---|
-| 1 | 🥝 Kiwi | Estructura: brief, user flow y wireframes F0–F2 |
-| 2 | 🟢 Lima | Gobernanza: clasificación, reutilización, contratos, registry y lifecycle |
-| 3 | 🥥 Coco | Construcción: F3, implementación y auditoría canónica |
-| 4 | 🫐 Mora | Documentación: publica únicamente lo implementado y verificado |
+| Orden | | Agente | Qué hace |
+|---|---|---|---|
+| 1 | <picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/kiwi-oscuro.svg"><img src="assets/marca/kiwi.svg" alt="Kiwi" width="32"></picture> | **Kiwi** · UX Architect | Define la estructura antes que la apariencia: brief, user flow y wireframes F0–F2 en compact, medium y expanded |
+| 2 | <picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/lima-oscuro.svg"><img src="assets/marca/lima.svg" alt="Lima" width="32"></picture> | **Lima** · Design System Governance | Gobierna el design system: clasificación, reutilización, contratos, tokens, registry y lifecycle |
+| 3 | <picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/coco-oscuro.svg"><img src="assets/marca/coco.svg" alt="Coco" width="32"></picture> | **Coco** · UI Audit | Construye la capa visual (F3) y la audita contra el contrato, con evidencia |
+| 4 | <picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/mora-oscuro.svg"><img src="assets/marca/mora.svg" alt="Mora" width="32"></picture> | **Mora** · Documentation & Knowledge Engineer | Documenta solo lo que existe y fue verificado |
+
+**Bruno** · Frontend Implementation Engineer ya tiene símbolo en la marca, pero todavía no es parte del squad: hoy Coco cubre la implementación. Su guía de marca se adelanta a su llegada.
 
 Regla principal:
 
@@ -110,6 +116,21 @@ Lima gobierna el perfil. Coco puede mantener su contrato de datos y campos espec
 
 El perfil es persistente: si cambias un dato del sistema en lenguaje natural, debe actualizarse ahí en lugar de depender de la memoria de la conversación.
 
+## Fundamentos de un sistema nuevo
+
+Si el perfil dice `design_system: NEW`, antes de aprobar visualmente cualquier componente hace falta una propuesta de fundamentos (color, tipografía, geometría, movimiento…). Hay dos formas de crearla:
+
+```bash
+fruti foundations                                             # asistente de 8 pasos, en terminal
+fruti foundations --marca '#0B6E4F' --fuente Inter --radio 6  # entradas cortas, sin preguntas
+```
+
+Entradas cortas disponibles: `--marca`, `--acento`, `--fuente`, `--fuente-display`, `--radio` (0–24 px), `--densidad` (`compacta`, `equilibrada`, `amplia`), `--sentir` y `--evitar`. Con `--preguntar` el asistente arranca con esos valores ya puestos.
+
+Lo que no das se calcula o se toma por omisión, y la propuesta lo dice campo por campo en `origin`: `input` (lo dijiste tú), `derived` (por ejemplo, el radio de paneles es tu radio + 6 y la altura de controles sale de la densidad) o `default`. También mide el contraste del color de marca y avisa si el texto blanco sobre él no llega a 4.5:1.
+
+En ambos casos el resultado es solo una **propuesta** en `.fruti/foundations/proposal.yaml`. `.fruti/tokens.json` sigue siendo la única fuente de los tokens: Lima lo genera cuando apruebas la propuesta y antes te muestra qué valores quedaron por omisión.
+
 ---
 
 # Cómo funciona una petición
@@ -126,23 +147,23 @@ El recorrido conceptual es:
 PETICIÓN NATURAL
       │
       ▼
-🥝 KIWI
+KIWI
 brief · flujo · estructura · adaptación
       │
       ▼ handoff compacto
-🟢 LIMA
+LIMA
 reuse/extend/new/local · contrato · registry
       │
       ▼ handoff compacto
-🥥 COCO
+COCO
 F3 · implementación · auditoría
       │
       ▼ compliance report
-🟢 LIMA
+LIMA
 gates · lifecycle · registry
       │
       ▼
-🫐 MORA
+MORA
 documentación del delta verificado
 ```
 
@@ -398,7 +419,7 @@ Es la salida estructurada de Coco. Lima puede usarla para gates y Mora para docu
 
 # Qué carga cada agente
 
-## 🥝 Kiwi
+## Kiwi
 
 Empieza desde estado/perfil y carga únicamente las referencias estructurales necesarias para la fidelidad actual.
 
@@ -406,7 +427,7 @@ Produce brief, flujo/wireframe, evidencia y handoff hacia Lima.
 
 No hace F3, implementación ni auditoría final.
 
-## 🟢 Lima
+## Lima
 
 Consume el handoff de Kiwi, perfil y entrada relevante del registry.
 
@@ -414,7 +435,7 @@ Clasifica cada pieza como `reuse`, `extend`, `new` o `local`, fija contratos y g
 
 Carga referencias de lifecycle, gates, adaptación o promoción únicamente cuando la operación actual las necesita.
 
-## 🥥 Coco
+## Coco
 
 No rehace el brief ni la gobernanza cuando Kiwi/Lima ya entregaron evidencia vigente.
 
@@ -424,7 +445,7 @@ Para auditoría empieza por `audit-manifest.yaml` y evidencia automática. Abre 
 
 Produce `compliance-current.json`.
 
-## 🫐 Mora
+## Mora
 
 Parte de registry + compliance report + código/API real + diff afectado.
 
@@ -510,6 +531,8 @@ Antes de integrar cambios, compara contra `main` y prueba al menos estos escenar
 ```
 
 La métrica útil no es solo si el resultado final funciona. También importa observar cuántos archivos y referencias se leen para producirlo.
+
+La identidad visual (símbolos, colores, tipografía y reglas de uso) está en [docs/marca.md](docs/marca.md); los archivos, en `assets/marca/`.
 
 ---
 
