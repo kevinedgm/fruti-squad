@@ -185,6 +185,16 @@ Structural fidelity is deterministic, not a judgment Coco grades for itself. The
 
 `.fruti/contracts/documentation.yaml` is the single normative source for Design Hub page anatomy, section order and the neutral documentation shell. `skills/lima/reference/component-documentation.md` and `design-hub.md` contribute only guidance that does not conflict with it (golden rule, lifecycle-gated API, isolated previews); on any conflict the contract wins. Mora's read scope is in `.fruti/runtime/mora.yaml`.
 
+## Requests from Nexa Squad
+
+Nexa Squad builds product modules with the pieces Fruti owns; its curator (Kura) is its only bridge to Fruti. When a request points at a Nexa component request (`docs/componentes/pedidos/<id>.md`), treat that file as the user's request for one piece:
+- Kiwi starts its brief from it: purpose, where it is used, parts, variants, constraints, small screens, accessibility and acceptance criteria. Facts, assumptions and questions keep their marks.
+- Its states table (trigger, rules, feedback) seeds Lima's transition table (`skills/lima/reference/interaction-contract.md`).
+- It describes need, not appearance; visual decisions still come from tokens and contracts.
+- Fruti never edits Nexa's module documents or code. The piece is delivered through the registry and the Design Hub, where Kura picks it up.
+
+When to use each squad and how they collaborate: `docs/nexa-y-fruti.md` in this repository (installed as `.fruti/nexa-y-fruti.md`).
+
 ## User experience
 
 The user should be able to say things like `rediseña este formulario`, `ahora haz el de registro`, `audítalo`, `promuévelo`, `cambia la fuente principal`, or `cambia el color de acción` without internal flags. Infer routing from current state and the request. Ask only for product decisions that materially change the experience.

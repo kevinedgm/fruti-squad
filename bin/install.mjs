@@ -427,6 +427,9 @@ function doInstall(args) {
       mkdirSync(join(base, '.fruti'), { recursive: true });
       cpSync(policySrc, join(base, '.fruti', 'policy.md'), { force: true });
     }
+    // Guide shared with Nexa Squad: when to use each squad and how they collaborate.
+    const guideSrc = join(PKG_ROOT, 'docs', 'nexa-y-fruti.md');
+    if (existsSync(guideSrc)) cpSync(guideSrc, join(base, '.fruti', 'nexa-y-fruti.md'), { force: true });
     writePathsMap(base, members, target, false);
   }
 
