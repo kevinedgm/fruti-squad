@@ -1,0 +1,28 @@
+# Textos de marketplace (ES/EN). Fuente: squad.json («decides») y README de kevinedgm/nexa-squad.
+T = {
+ 'squad': {'es': ('Ocho agentes que diseñan y construyen módulos completos acomodando bien los componentes que ya tienes.',
+   'Nexa Squad cubre un módulo de punta a punta: requisitos, servidor, flujo, composición, componentes, construcción y revisión. Cada decisión tiene un solo dueño y cita su fuente (WCAG, GOV.UK, Material, Nielsen, Baymard). Empiezas con /orka y lo pides con tus palabras. Funciona en Claude Code, Codex y Kiro, y convive con Fruti Squad.'),
+  'en': ('Eight agents that design and build complete modules by arranging the components you already have.',
+   'Nexa Squad covers a module end to end: requirements, server, flow, composition, components, build and review. Every decision has a single owner and cites its source (WCAG, GOV.UK, Material, Nielsen, Baymard). Start with /orka and ask in your own words. Works with Claude Code, Codex and Kiro, alongside Fruti Squad.')},
+ 'orka': {'es': ('Dirige el squad: quién trabaja ahora y qué se aprueba solo.', 'Reconoce el escenario, lanza un rol a la vez, resuelve lo que se puede inferir, aprueba documentos intermedios y solo te interrumpe por reglas de negocio o por algo que no se puede deshacer.'),
+  'en': ('Runs the squad: who works now and what gets approved on its own.', 'Recognizes the scenario, runs one role at a time, resolves what can be inferred, approves intermediate documents and only interrupts you for business rules or anything irreversible.')},
+ 'inqa': {'es': ('Qué debe hacer la funcionalidad, para quién y cómo se comprueba.', 'Separa hechos, supuestos y preguntas antes de diseñar o programar, y entrega requisitos con criterios Dado/Cuando/Entonces.'),
+  'en': ('What the feature must do, for whom, and how to verify it.', 'Separates facts, assumptions and questions before any design or code, and delivers requirements with Given/When/Then criteria.')},
+ 'arko': {'es': ('Cómo se construye por detrás: datos, API y permisos.', 'Lee el stack real y decide datos, contratos de API y permisos validados en el servidor; para cada decisión importante, dos opciones con costo y riesgo.'),
+  'en': ('How it is built underneath: data, APIs and permissions.', 'Reads the real stack and decides data, API contracts and server-side permissions; for each key decision, two options with cost and risk.')},
+ 'fluxa': {'es': ('Qué pantallas hay, qué contienen y en qué orden.', 'Hace el inventario de vistas en el orden real de la tarea y da a cada vista de gestión su estructura: cabecera, herramientas, datos y pie.'),
+  'en': ('Which screens exist, what they contain and in what order.', 'Inventories the views in the real order of the task and gives each management view its structure: header, toolbar, data and footer.')},
+ 'kompa': {'es': ('Cómo se acomoda cada sección: qué crece, qué cede y qué nunca se mueve.', 'Decide jerarquía, agrupación y espaciados con los tokens que ya existen, y revisa cada vista en escritorio, tableta y teléfono.'),
+  'en': ('How each section is laid out: what grows, what yields and what never moves.', 'Decides hierarchy, grouping and spacing with existing tokens, and checks every view on desktop, tablet and phone.')},
+ 'kura': {'es': ('Reutilizar antes que crear.', 'Para cada hueco busca primero lo que existe y cuenta cuántas veces aparece: reutilizar, variante, componente nuevo o local. Lo que falta se lo pide a Fruti Squad.'),
+  'en': ('Reuse before you create.', 'For every gap it first searches what exists and counts how often it appears: reuse, variant, new component or local. Whatever is missing is requested from Fruti Squad.')},
+ 'forja': {'es': ('Escribe el código que cumple lo aprobado, fase por fase.', 'Construye primero datos, API y permisos, luego las vistas con los componentes y tokens del catálogo, y prueba cada criterio que pueda probar.'),
+  'en': ('Writes the code that meets what was approved, phase by phase.', 'Builds data, API and permissions first, then the views with catalog components and tokens, and tests every criterion it can.')},
+ 'vera': {'es': ('Si pasa, o a quién regresa cada hallazgo.', 'Audita lo construido contra los documentos aprobados, dice cómo verificó cada punto y regresa cada hallazgo al rol dueño de la decisión que falló.'),
+  'en': ('Pass, or who each finding goes back to.', 'Audits the build against the approved documents, states how each point was verified and returns every finding to the role that owns the failed decision.')},
+}
+SIMB = {'squad': 'Dos canales que parten el bloque en cuatro y se cruzan en un nexo redondo: cada decisión tiene un dueño y todas se encuentran en el módulo.',
+ 'orka': 'Una cadena de tres huecos: hecho, actual y pendiente. Un rol a la vez.', 'inqa': 'Un renglón entero (hecho), uno partido (supuesto) y un punto (pregunta).',
+ 'arko': 'Una cerradura: solo pasa lo que el servidor permite.', 'fluxa': 'Una pantalla tallada: cabecera, ranura de herramientas, datos y pie.',
+ 'kompa': 'La misma fila en tres anchos: el tramo final nunca cede.', 'kura': 'El mismo hueco en tres lugares: ya toca un componente.',
+ 'forja': 'La base completa y la capa de arriba a medias: se construye de abajo hacia arriba.', 'vera': 'Un hallazgo que sube por su canal hasta su dueño.'}
