@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><title>Registro de pago</title>
+<style>body{font-family:Arial;margin:20px}label{display:block;margin-top:8px;color:#555}input,select{width:100%;padding:6px;border:1px solid #999}.row{display:flex;gap:10px}.row>div{flex:1}button{margin-top:16px;background:#e33;color:#fff;border:0;padding:10px 30px}a{margin-left:10px}</style></head>
+<body>
+<h3>REGISTRO DE PAGO</h3>
+<form>
+<div class="row"><div><label>Folio muestra</label><input placeholder="Folio"></div><div><label>Cliente</label><input placeholder="Cliente"></div><div><label>Fecha</label><input type="date"></div></div>
+<label>Monto</label><input placeholder="$">
+<label>Forma de pago</label><select><option>Efectivo</option><option>Transferencia</option><option>Tarjeta</option></select>
+<label>Referencia (si es transferencia)</label><input>
+<label>Voucher</label><input type="file">
+<label>Observaciones</label><input>
+<button type="submit">GUARDAR</button><a href="#">Cancelar</a>
+</form>
+</body></html>
