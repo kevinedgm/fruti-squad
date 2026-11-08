@@ -42,6 +42,8 @@ operations:
       - materialize_foundation_pages_color_type_geometry_icons_motion_adaptive_accessibility
       - persist_truth_sources_color_law_type_law_icon_geometry_motion
       - proposal_text_fields_must_be_preserved_verbatim_as_intent_not_parsed_as_tokens
+      - short_input_proposals_show_origin_default_values_to_the_user_before_approval_and_never_present_them_as_user_choices
+      - proposal_checks_with_status_warn_are_resolved_or_explicitly_accepted_before_materializing
       - change_design_system_from_NEW_to_project_system_name
       - do_not_design_product_components_during_foundations_init
   redesign_governance:

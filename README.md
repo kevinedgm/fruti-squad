@@ -110,6 +110,21 @@ Lima gobierna el perfil. Coco puede mantener su contrato de datos y campos espec
 
 El perfil es persistente: si cambias un dato del sistema en lenguaje natural, debe actualizarse ahí en lugar de depender de la memoria de la conversación.
 
+## Fundamentos de un sistema nuevo
+
+Si el perfil dice `design_system: NEW`, antes de aprobar visualmente cualquier componente hace falta una propuesta de fundamentos (color, tipografía, geometría, movimiento…). Hay dos formas de crearla:
+
+```bash
+fruti foundations                                             # asistente de 8 pasos, en terminal
+fruti foundations --marca '#0B6E4F' --fuente Inter --radio 6  # entradas cortas, sin preguntas
+```
+
+Entradas cortas disponibles: `--marca`, `--acento`, `--fuente`, `--fuente-display`, `--radio` (0–24 px), `--densidad` (`compacta`, `equilibrada`, `amplia`), `--sentir` y `--evitar`. Con `--preguntar` el asistente arranca con esos valores ya puestos.
+
+Lo que no das se calcula o se toma por omisión, y la propuesta lo dice campo por campo en `origin`: `input` (lo dijiste tú), `derived` (por ejemplo, el radio de paneles es tu radio + 6 y la altura de controles sale de la densidad) o `default`. También mide el contraste del color de marca y avisa si el texto blanco sobre él no llega a 4.5:1.
+
+En ambos casos el resultado es solo una **propuesta** en `.fruti/foundations/proposal.yaml`. `.fruti/tokens.json` sigue siendo la única fuente de los tokens: Lima lo genera cuando apruebas la propuesta y antes te muestra qué valores quedaron por omisión.
+
 ---
 
 # Cómo funciona una petición
