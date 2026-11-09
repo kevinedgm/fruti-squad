@@ -89,3 +89,5 @@ Fraunces (actual) · Newsreader · Gloock · Young Serif · Familjen Grotesk. Te
 
 ### Ronda 8 (`rediseno-r8/banco.html`) · usuario: «2 fuentes, primaria y secundaria, haz las propuestas»
 Editorial (Newsreader + Instrument Sans) · Artesanal (Young Serif + Hanken Grotesk) · Revista (Gloock + IBM Plex Sans) · Clara (Fraunces + Atkinson Hyperlegible Next; ceros con punto) · Moderna (Familjen Grotesk + Instrument Sans). Probados en portada, gráfica completa y tabla con cifras tabulares.
+
+**Letra elegida (usuario, 2026-11-09): Familjen Grotesk + Instrument Sans.** Paquete 2.0 en `rediseno-final/` (centro del emblema en añil claro; el favicon lleva un anillo para separar el punto de la X).

@@ -1,0 +1,5 @@
+const {chromium}=require('playwright');const fs=require('fs');(async()=>{const b=await chromium.launch();const p=await b.newPage();
+const J=[['simbolo-grande',512,512,'simbolo-512'],['simbolo-grande-claro',512,512,'simbolo-claro-512'],['simbolo-favicon',16,16,'favicon-16'],['simbolo-chico',32,32,'favicon-32'],['simbolo-mediano',48,48,'favicon-48'],['app-icon',512,512,'icon-512'],['app-icon',192,192,'icon-192'],['app-icon-redondeado',512,512,'icon-redondeado-512'],['tarjeta-redes',1200,630,'tarjeta-redes'],['lockup',1200,0,'lockup'],['lockup-oscuro',1200,0,'lockup-oscuro']];
+for(const [n,w,h,out] of J){const s=fs.readFileSync(`${__dirname}/svg/${n}.svg`,'utf8');const vb=s.match(/viewBox="[-\d.]+ [-\d.]+ ([\d.]+) ([\d.]+)"/);const H=h||Math.round(w*vb[2]/vb[1]);
+await p.setViewportSize({width:w,height:H});await p.setContent(`<style>*{margin:0}svg{width:${w}px;height:${H}px;display:block}</style>${s}`);await p.screenshot({path:`${__dirname}/png/${out}.png`,omitBackground:true});}
+await b.close();console.log('ok')})();
