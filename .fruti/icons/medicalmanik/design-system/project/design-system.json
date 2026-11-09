@@ -1,80 +1,22 @@
 {
   "v": 3,
+  "layout": "files",
+  "createdOnFiles": {
+    "at": "2026-10-24T16:58:30Z",
+    "v": 1
+  },
+  "title": "Ecosistema Manik",
+  "namespace": "EcosistemaManik",
+  "libraries": [],
+  "sections": {},
+  "groups": [
+    "Sellos",
+    "Ecosistema"
+  ],
   "assetGroups": {
-    "Ecosistema": {
-      "files": {
-        "ecosistema-1tinta.svg": {
-          "blob": "3d5b89799a2b4a082727102d35a3720b",
-          "name": "ecosistema-1tinta.svg",
-          "size": 566,
-          "type": "image/svg+xml"
-        },
-        "ecosistema.svg": {
-          "blob": "6089128d21a27e473058eb6a0c000245",
-          "name": "ecosistema.svg",
-          "size": 536,
-          "type": "image/svg+xml"
-        }
-      },
-      "name": "Ecosistema",
-      "order": [
-        "ecosistema.svg",
-        "ecosistema-1tinta.svg"
-      ],
-      "tile": "s"
-    },
     "Sellos": {
-      "files": {
-        "agenda.svg": {
-          "blob": "0cc8920d150bde3f8e9fb4f9fad79ecf",
-          "name": "agenda.svg",
-          "size": 1802,
-          "type": "image/svg+xml"
-        },
-        "compras.svg": {
-          "blob": "73385910ea70c90c1b4be9ca45ec7ed9",
-          "name": "compras.svg",
-          "size": 1609,
-          "type": "image/svg+xml"
-        },
-        "expediente.svg": {
-          "blob": "ded6ea4d0368c015ddd9e8e86d9e11d4",
-          "name": "expediente.svg",
-          "size": 1667,
-          "type": "image/svg+xml"
-        },
-        "farmacia.svg": {
-          "blob": "e93a4372cc66a32c2281beb1d539e598",
-          "name": "farmacia.svg",
-          "size": 1814,
-          "type": "image/svg+xml"
-        },
-        "grupos.svg": {
-          "blob": "fa0768c7b3dcbda5a898f7f744c6e747",
-          "name": "grupos.svg",
-          "size": 2044,
-          "type": "image/svg+xml"
-        },
-        "impulsa.svg": {
-          "blob": "ab0f79128c88196f4962b59cf9d3d3b5",
-          "name": "impulsa.svg",
-          "size": 1824,
-          "type": "image/svg+xml"
-        },
-        "medicalmanik-1tinta.svg": {
-          "blob": "a27dd2e48efc13a89fe3a551b46fe7e0",
-          "name": "medicalmanik-1tinta.svg",
-          "size": 1544,
-          "type": "image/svg+xml"
-        },
-        "medicalmanik.svg": {
-          "blob": "9a83c2989b836271f7d2401934ad4cee",
-          "name": "medicalmanik.svg",
-          "size": 1575,
-          "type": "image/svg+xml"
-        }
-      },
       "name": "Sellos",
+      "tile": "m",
       "order": [
         "medicalmanik.svg",
         "expediente.svg",
@@ -85,31 +27,89 @@
         "grupos.svg",
         "medicalmanik-1tinta.svg"
       ],
-      "tile": "m"
+      "files": {
+        "medicalmanik.svg": {
+          "name": "medicalmanik.svg",
+          "blob": "9a83c2989b836271f7d2401934ad4cee",
+          "size": 1575,
+          "type": "image/svg+xml"
+        },
+        "expediente.svg": {
+          "name": "expediente.svg",
+          "blob": "ded6ea4d0368c015ddd9e8e86d9e11d4",
+          "size": 1667,
+          "type": "image/svg+xml"
+        },
+        "agenda.svg": {
+          "name": "agenda.svg",
+          "blob": "0cc8920d150bde3f8e9fb4f9fad79ecf",
+          "size": 1802,
+          "type": "image/svg+xml"
+        },
+        "compras.svg": {
+          "name": "compras.svg",
+          "blob": "73385910ea70c90c1b4be9ca45ec7ed9",
+          "size": 1609,
+          "type": "image/svg+xml"
+        },
+        "farmacia.svg": {
+          "name": "farmacia.svg",
+          "blob": "e93a4372cc66a32c2281beb1d539e598",
+          "size": 1814,
+          "type": "image/svg+xml"
+        },
+        "impulsa.svg": {
+          "name": "impulsa.svg",
+          "blob": "ab0f79128c88196f4962b59cf9d3d3b5",
+          "size": 1824,
+          "type": "image/svg+xml"
+        },
+        "grupos.svg": {
+          "name": "grupos.svg",
+          "blob": "fa0768c7b3dcbda5a898f7f744c6e747",
+          "size": 2044,
+          "type": "image/svg+xml"
+        },
+        "medicalmanik-1tinta.svg": {
+          "name": "medicalmanik-1tinta.svg",
+          "blob": "a27dd2e48efc13a89fe3a551b46fe7e0",
+          "size": 1544,
+          "type": "image/svg+xml"
+        }
+      }
+    },
+    "Ecosistema": {
+      "name": "Ecosistema",
+      "tile": "s",
+      "order": [
+        "ecosistema.svg",
+        "ecosistema-1tinta.svg"
+      ],
+      "files": {
+        "ecosistema.svg": {
+          "name": "ecosistema.svg",
+          "blob": "6089128d21a27e473058eb6a0c000245",
+          "size": 536,
+          "type": "image/svg+xml"
+        },
+        "ecosistema-1tinta.svg": {
+          "name": "ecosistema-1tinta.svg",
+          "blob": "3d5b89799a2b4a082727102d35a3720b",
+          "size": 566,
+          "type": "image/svg+xml"
+        }
+      }
     }
   },
   "blobs": {},
-  "createdOnFiles": {
-    "at": "2026-10-24T16:58:30Z",
-    "v": 1
-  },
   "docs": {
     "readme": "project/README.md",
     "sections": []
   },
-  "groups": [
-    "Sellos",
-    "Ecosistema"
-  ],
   "lastChange": {
-    "at": "2026-11-05T17:10:39Z",
+    "at": "2026-11-09T20:36:56Z",
     "by": "Kevin",
     "via": "Claude Code",
-    "note": "Impulsa Manik se alinea al sistema común (tipografía, acción en azul Manik, lienzo); guía de migración para su equipo."
-  },
-  "layout": "files",
-  "libraries": [],
-  "namespace": "EcosistemaManik",
-  "sections": {},
-  "title": "Ecosistema Manik"
+    "note": "Tipografía: Outfit (títulos, subtítulos y botones) y Lexend (texto y datos), sustitutos libres de Filson Pro y Scandia con la misma «a» de un piso."
+  }
 }

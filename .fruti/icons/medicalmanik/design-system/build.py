@@ -309,8 +309,8 @@ print('ok', sorted(os.listdir('components')))
 # «python3 build.py» reproduzca todo el sistema publicado. Cada paso es idempotente y escribe sobre project/.
 import runpy
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
-for _paso in ('controles_formularios.py', 'shell_integracion.py', 'controles_formularios.py'):  # el último repite controles con los tokens del shell ya presentes
+for _paso in ('controles_formularios.py', 'shell_integracion.py', 'controles_formularios.py', 'tipografia_integracion.py'):  # el último repite controles con los tokens del shell ya presentes
     runpy.run_path(_paso, run_name='__main__')
 _j = json.load(open('project/design-system.json'))
-_j['lastChange'] = {'at': now, 'by': 'Kevin', 'via': 'Claude Code', 'note': 'Regenerado con build.py: identidad, sellos con la M original, Grupos en orquídea, Administración, IA, controles, formularios, diálogos y app shell.'}
+_j['lastChange'] = {'at': now, 'by': 'Kevin', 'via': 'Claude Code', 'note': 'Regenerado con build.py: identidad, sellos con la M original, Grupos en orquídea, Administración, IA, controles, formularios, diálogos, app shell y tipografía Outfit + Lexend.'}
 json.dump(_j, open('project/design-system.json', 'w'), indent=2, ensure_ascii=False)

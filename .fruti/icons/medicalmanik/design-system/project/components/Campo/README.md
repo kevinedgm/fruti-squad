@@ -1,6 +1,6 @@
 # Campo
 
-Campo de captura. Atkinson en todo el texto: distingue 1, l e I, y 0 y O. Aprobado 2026-11-05 (`../../controles-r01/`).
+Campo de captura. Lexend en todo el texto: su I con remates la distingue de l y 1. Aprobado 2026-11-05 (`../../controles-r01/`).
 
 - **Tipos:** texto, número con unidad, lista, fecha, buscador (icono a la izquierda y botón para borrar) y área de texto (mínimo 96 px).
 - **Anatomía:** etiqueta `label` arriba, siempre visible, en sustantivo y sin dos puntos; ayuda abajo en «muted»; el texto de ejemplo dentro del campo no sustituye a la etiqueta.

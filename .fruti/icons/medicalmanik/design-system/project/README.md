@@ -2,7 +2,7 @@
 
 El sistema compartido de las apps clínicas de MedicalManik: un sello, seis productos «Producto + Manik», un inicio común y un selector para pasar de una app a otra. Una clínica u hospital entra una sola vez y elige a dónde ir.
 
-Comparte la identidad del directorio Manik (Urbanist, cian del pin y fondos de luz) en la marca, la portada, el inicio de sesión, el inicio del ecosistema y los títulos. Dentro de cada app manda la legibilidad clínica: Atkinson en interfaz y datos, y el botón en azul Manik.
+Comparte con el directorio Manik el cian del pin y los fondos de luz en la marca, la portada, el inicio de sesión y el inicio del ecosistema. La letra es Outfit en marca, títulos y botones, y Lexend en interfaz y datos: sustitutos libres de Filson Pro y Scandia. Dentro de cada app manda la legibilidad clínica y el botón va en azul Manik.
 
 ## Arquitectura
 
@@ -65,11 +65,14 @@ Por qué: dos colores de producto se parecen a estados (Farmacia ≈ éxito, Com
 
 ## Tipografía
 
-- **Primaria · Urbanist** (Google Fonts): la letra del directorio Manik, así pacientes y clínicas ven la misma familia. Marca, saludos y títulos: 300 grande en portada e inicio; 600 en títulos y nombres de app. Nunca en párrafos, tablas ni datos clínicos.
-- **Secundaria · Atkinson Hyperlegible Next** (Google Fonts): toda la interfaz y todo dato. La diseñó el Braille Institute para que cada letra se distinga: 1, l e I; 0 y O; rn y m. En un expediente eso evita leer mal una dosis o una clave.
+Aprobada el 2026-11-09: sustitutos libres de la tipografía de marca (Filson Pro y Scandia son de licencia comercial). Las dos tienen la «a» de un piso, como Filson Pro en el logotipo.
+
+- **Primaria · Outfit** (Google Fonts), en lugar de Filson Pro: marca, saludos, títulos, subtítulos y botones. 300 grande en portada e inicio; 600 en títulos, nombres de app y botones. Nunca en párrafos, tablas ni datos clínicos.
+- **Secundaria · Lexend** (Google Fonts), en lugar de Scandia: párrafos, interfaz y todo dato. Su I lleva remates y se distingue de l y 1; en un expediente eso evita leer mal una dosis o una clave.
 - Cifras tabulares (`font-variant-numeric: tabular-nums`) en tablas, dosis y signos.
 - Piso de 13 px: nada clínico por debajo.
-- Carga: `family=Urbanist:wght@300..700&family=Atkinson+Hyperlegible+Next:wght@400;500;600;700`.
+- Carga: `family=Outfit:wght@300..700&family=Lexend:wght@300..700`.
+- El logotipo sigue siendo el vector original en Filson Pro; no se escribe «MedicalManik» con Outfit.
 
 ## Espacio, forma y profundidad
 
@@ -123,6 +126,7 @@ Directa y clínica: el verbo dice lo que pasa («Guardar receta», «Surtir»). 
 Impulsa Manik ya tenía su propio sistema en producción; compartía espacio, radios, sombras, estados e iconos. Se alinea en los tres puntos que faltaban:
 
 1. **Tipografía:** de Ubuntu a Urbanist (títulos) + Atkinson Hyperlegible Next (interfaz y datos).
+   **Tipografía (2026-11-09):** Outfit (títulos y botones) + Lexend (interfaz y datos), sustitutos de Filson Pro y Scandia.
 2. **Acción:** de su violeta (#504CA1) a azul Manik en botones, enlaces, selección y foco. El violeta se queda como identidad: sello, tarjeta y «con Impulsa Manik».
 3. **Lienzo:** de #F4F4F4 a `canvas` #F5F7FB (diferencia 1.03: no se ve).
 

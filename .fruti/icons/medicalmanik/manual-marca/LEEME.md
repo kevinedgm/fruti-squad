@@ -43,3 +43,5 @@ Pedido: «el diseño de superficies para todo el ecosistema (colores de superfic
 ## Controles, formularios y diálogos (2026-11-05, aprobado)
 - `superficies.py` suma a la tabla: deshabilitado (surface-soft + line + muted), fondo del diálogo (`scrim`) y compactos (`control-height-compact`); el hueco «deshabilitado» queda solo para el directorio.
 - Subsección «Controles, formularios y diálogos» con 6 reglas y enlace al sistema de diseño; las medidas viven allá.
+
+- **2026-11-09 · Tipografía:** Outfit (en lugar de Filson Pro: títulos, subtítulos, botones) + Lexend (en lugar de Scandia: texto y datos), misma «a» de un piso. Reemplaza la decisión del 5 de noviembre (Urbanist + Atkinson), que queda como historial en el manual. Directorio pendiente de alinear.
