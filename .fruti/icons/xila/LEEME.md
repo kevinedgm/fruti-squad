@@ -78,3 +78,6 @@ Un dibujo por tamaño sobre el emblema A (x en el rombo): grande 9 × 9 (≥ 64 
 
 ### Ronda 5 (`rediseno-r5/banco.html`) · color y letra de apoyo
 Color: Noche e hilo (tinta + manta + naranja #ff8a3d, 7.6:1) · Cobalto (cobalto + manta + durazno #ffb070, 3.8:1; el naranja fuerte da 1.6:1 sobre azul) · Manta (manta + tinta + naranja #d14e0a 3.9:1 + centro cobalto 6.1:1). Letra: Fraunces (actual) · Newsreader · Instrument Serif. Nombre siempre bordado; texto en Instrument Sans.
+
+### Ronda 6 (`rediseno-r6/banco.html`) · usuario: «los colores no me gustaron; primero colores y luego la fuente»
+Cinco paletas de textiles y artesanías de Oaxaca: Terciopelo del Istmo (negro, rosa mexicano, amarillo, verde) · Barro negro (grafito, plata, turquesa) · Tapete de Teotitlán (lana, añil, musgo, cempasúchil oscurecido #9C5E12 para 4.2:1) · Huipil mazateco (manta, rosa, verde loro) · Añil (monocromo).
