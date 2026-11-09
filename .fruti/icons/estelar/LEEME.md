@@ -20,3 +20,8 @@ Encargo del usuario (2026-11-09): «ayúdame a construir una nueva identidad de 
 ## Ronda 2 (`ronda-2/banco.html`) · desarrollo de C (usuario: «me gustó la C», 2026-11-09)
 Regla: Xila borda con X; Estelar teje con flotes (tramos de trama sobre la urdimbre).
 - C1 Urdimbre de 7 (r1 depurada; a 16 px, asterisco) · C2 Flotes sin urdimbre (tramos de 1 = puntos; se lee sol/chispa) · C3 Estrella de 5 para 16–32 px (puede leerse dado/cara) · C4 Hilo suelto (lema; necesita versión chica sin el hilo).
+
+**Decisión (usuario, 2026-11-09): C1 para la marca + C3 para 16–24 px.**
+
+## Ronda 3 (`ronda-3/color.html`) · color
+Base de Xila (manta #F6F1E8, tinta #15171F). Tres tintes de Oaxaca, cada uno «estrella en color» o «solo el centro en color»: Caracol #7B2D8E/#C98BDB (7.2 · 7.0), Pericón #8A5E00/#F4BE4C (5.1 · 10.5), Nogal #6E4426/#C99872 (7.4 · 7.0).
