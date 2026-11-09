@@ -58,3 +58,9 @@ Cambio de técnica: del brocado (telar) al bordado. Hecho clave: el punto de cru
 - Paquete en `final/` (ver `final/LEEME.md`, `final/tema.json`).
 - La categórica de la ronda 5 **no pasaba** la simulación de daltonismo (hilo–ocre ΔE 2 en protanopia; jade–piedra 5). Se rehízo con búsqueda en Lab bajo las tres simulaciones de Machado 2009, con cobalto e hilo fijos y los tonos oscuros en la misma familia de tono que los claros: mínimo ΔE 24.3 (claro) y 21.2 (oscuro).
 - Pendiente: llevar `tema.json` al repo de la librería.
+
+## Rediseño (usuario, 2026-11-09: «vamos a rediseñar la identidad de Xila»)
+Brief: doc «Xila · Brief de concepto y mensaje» (claude.ai/artifact/4vWeAd8pRvVM2C63K728c8): primero la pregunta, después la gráfica; el dato que importa en color y el resto en gris; «más allá de la línea y la barra»; familia textil: Grana tiñe, Estelar teje, Xila borda. Nota: el brief daba la marca por resuelta.
+
+### Ronda 1 (`rediseno-r1/banco.html`)
+Actual (referencia; se lee escalera) · B El que se sale (retícula gris + una X cobalto torcida) · C El hilo que se sale (puntadas → línea con último valor) · D Bastidor (aro con barras de puntadas; riesgo «buscar») · E La X de dos hilos (cobalto por encima; riesgo «cerrar»).
