@@ -16,3 +16,7 @@ Encargo del usuario (2026-11-09): «ayúdame a construir una nueva identidad de 
 | B · Hilo suelto | un hilo dibuja la estrella de cuatro puntas y su extremo queda suelto: el lema | cuenta la historia; la estrella de 4 puntas se asocia a «IA» |
 | C · Telar | estrella de ocho puntas de telar de cintura en urdimbre 7 × 7 | la más familia con Grana y Xila; textura a 16 px |
 | D · Esquema estrella | hecho al centro + cinco dimensiones con hilos de dos cabos | literal; se parece a icono de red o molécula |
+
+## Ronda 2 (`ronda-2/banco.html`) · desarrollo de C (usuario: «me gustó la C», 2026-11-09)
+Regla: Xila borda con X; Estelar teje con flotes (tramos de trama sobre la urdimbre).
+- C1 Urdimbre de 7 (r1 depurada; a 16 px, asterisco) · C2 Flotes sin urdimbre (tramos de 1 = puntos; se lee sol/chispa) · C3 Estrella de 5 para 16–32 px (puede leerse dado/cara) · C4 Hilo suelto (lema; necesita versión chica sin el hilo).
