@@ -67,3 +67,6 @@ Actual (referencia; se lee escalera) · B El que se sale (retícula gris + una X
 
 ### Ronda 2 (`rediseno-r2/banco.html`) · usuario: «no me gustó ninguna, quiero propuestas con más identidad»
 Sistemas con portada (símbolo + nombre + lema): 1 Flor del Istmo (pétalos = gráfica radial, 4 colores) · 2 Huipil (emblema 9 × 9: X cobalto + rombo naranja) · 3 Aguja (el hilo se vuelve gráfica; último valor naranja) · 4 Letra bordada (xila en punto de cruz; símbolo = x blanca sobre cobalto).
+
+### Ronda 3 (`rediseno-r3/banco.html`) · usuario: «me gusta el concepto de 2 Huipil y 4 Letra bordada»
+Nombre siempre en letra bordada (punto de la i naranja) + franja de rombos como textura. Emblemas: A La x en el rombo (x blanca + rombo naranja) · B Huipil de 7 (más fuerte a 16 px) · C Cuello de huipil (marco cobalto/naranja + x en tinta sobre manta).
