@@ -81,3 +81,8 @@ Color: Noche e hilo (tinta + manta + naranja #ff8a3d, 7.6:1) · Cobalto (cobalto
 
 ### Ronda 6 (`rediseno-r6/banco.html`) · usuario: «los colores no me gustaron; primero colores y luego la fuente»
 Cinco paletas de textiles y artesanías de Oaxaca: Terciopelo del Istmo (negro, rosa mexicano, amarillo, verde) · Barro negro (grafito, plata, turquesa) · Tapete de Teotitlán (lana, añil, musgo, cempasúchil oscurecido #9C5E12 para 4.2:1) · Huipil mazateco (manta, rosa, verde loro) · Añil (monocromo).
+
+**Color elegido (usuario, 2026-11-09): Añil** (fondo #16255C, x #F4F1EA 12.8:1, rombo #7FA0E0 5.5:1; dato en gráficas #16255C).
+
+### Ronda 7 (`rediseno-r7/banco.html`) · letra de apoyo con Añil
+Fraunces (actual) · Newsreader · Gloock · Young Serif · Familjen Grotesk. Texto en Instrument Sans; nombre bordado.
