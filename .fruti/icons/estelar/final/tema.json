@@ -1,0 +1,60 @@
+{
+  "nombre": "Estelar",
+  "fuente": ".fruti/icons/estelar/LEEME.md (decidido 2026-11-09)",
+  "concepto": "Estrella + telar: la estrella de ocho puntas del telar de cintura, tejida con flotes (tramos de trama sobre la urdimbre). Grana es el tinte, Estelar el telar, Xila el bordado.",
+  "color": {
+    "manta": {
+      "claro": "#F6F1E8",
+      "oscuro": "#15171F",
+      "uso": "fondo (compartido con Xila)"
+    },
+    "superficie": {
+      "claro": "#FFFDF9",
+      "oscuro": "#1E2130"
+    },
+    "tinta": {
+      "claro": "#15171F",
+      "oscuro": "#F6F1E8",
+      "uso": "texto, urdimbre y centro del símbolo; 15.9:1"
+    },
+    "tinta2": {
+      "claro": "#5B5F6E",
+      "oscuro": "#A9ADBD",
+      "uso": "texto secundario; 5.6:1 · 8.0:1"
+    },
+    "caracol": {
+      "claro": "#7B2D8E",
+      "oscuro": "#C98BDB",
+      "uso": "la estrella (flotes), acento y etiquetas; 7.2:1 · 7.0:1"
+    }
+  },
+  "tipografia": {
+    "nombre": {
+      "familia": "Big Shoulders Display",
+      "peso": 800,
+      "uso": "el nombre Estelar y etiquetas cortas en mayúsculas"
+    },
+    "lema": {
+      "familia": "Instrument Serif",
+      "estilo": "italic",
+      "uso": "lema y titulares de portada"
+    },
+    "texto": {
+      "familia": "Instrument Sans",
+      "peso": 400,
+      "uso": "texto corrido e interfaz (la de Xila)"
+    }
+  },
+  "simbolo": {
+    "marca": "C1: estrella de 7 × 7 con urdimbre; desde 32 px",
+    "chico": "C3: estrella de 5 × 5 sin urdimbre; 16 a 24 px",
+    "centro": "el hecho del modelo; siempre en tinta"
+  },
+  "reglas": [
+    "La estrella va en caracol; la urdimbre y el centro, en tinta.",
+    "Por debajo de 32 px se usa la estrella de 5 (simbolo-16).",
+    "Caracol claro sobre manta; caracol oscuro (#C98BDB) sobre fondo oscuro. Nunca al revés.",
+    "La metáfora del telar va en lo que se lee una vez (nombre, portada, README); nunca en botones ni mensajes de error.",
+    "Nunca «IA», «mágico» ni «inteligente» junto a la marca."
+  ]
+}

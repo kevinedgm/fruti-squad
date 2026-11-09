@@ -38,3 +38,6 @@ Usuario: «no me gustaron las fuentes, explora fuentes con más personalidad». 
 
 ## Ronda 6 (`ronda-6/tipografia.html`) · combinaciones
 1 serif sola · 2 industrial sola · 3 nombre industrial + lema serif cursiva · 4 nombre serif + etiquetas industriales. Texto en Instrument Sans.
+
+**Tipografía elegida (usuario, 2026-11-09): combinación 3** (nombre y etiquetas Big Shoulders Display 800; lema y titulares Instrument Serif cursiva; texto Instrument Sans).
+Paquete en `final/`, guía en `guia/`. Pendiente: confirmar la aplicación del color (asumida: la estrella en color) y llevar los assets al repo de Estelar.
