@@ -70,3 +70,6 @@ Sistemas con portada (símbolo + nombre + lema): 1 Flor del Istmo (pétalos = gr
 
 ### Ronda 3 (`rediseno-r3/banco.html`) · usuario: «me gusta el concepto de 2 Huipil y 4 Letra bordada»
 Nombre siempre en letra bordada (punto de la i naranja) + franja de rombos como textura. Emblemas: A La x en el rombo (x blanca + rombo naranja) · B Huipil de 7 (más fuerte a 16 px) · C Cuello de huipil (marco cobalto/naranja + x en tinta sobre manta).
+
+### Ronda 4 (`rediseno-r4/banco.html`) · usuario: «debe funcionar para logo e iconos de diferentes tamaños»
+Un dibujo por tamaño sobre el emblema A (x en el rombo): grande 9 × 9 (≥ 64 px), mediano 5 × 5 (32–48), chico 3 × 3 (20–28), favicon X + punto naranja (16). Prueba con PNG a píxeles reales y ampliación × 6. Riesgo: el favicon solo, X + punto, se acerca a «cerrar».
