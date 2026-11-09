@@ -33,3 +33,8 @@ A Instrument Sans 700 (la de Xila) · B Fraunces 600 (serif de títulos de Xila)
 
 ## Ronda 5 (`ronda-5/tipografia.html`) · tipografía con más personalidad
 Usuario: «no me gustaron las fuentes, explora fuentes con más personalidad». Seis display de Google Fonts (nombre, portada, títulos); texto en Instrument Sans: A Young Serif · B Gloock · C Syne 800 · D Instrument Serif · E Caprasimo · F Big Shoulders Display 800.
+
+**Elegidas (usuario, 2026-11-09): D Instrument Serif y F Big Shoulders Display.**
+
+## Ronda 6 (`ronda-6/tipografia.html`) · combinaciones
+1 serif sola · 2 industrial sola · 3 nombre industrial + lema serif cursiva · 4 nombre serif + etiquetas industriales. Texto en Instrument Sans.
