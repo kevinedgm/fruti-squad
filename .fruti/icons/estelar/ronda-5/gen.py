@@ -22,7 +22,7 @@ def op(k, nom, g, fam, peso, txt):
 <div class="banner" style="{st}"><div><p class="eb">Estelar</p><b style="font-weight:{peso}">Diseña en copo de nieve. Publica en estrella.</b><span>Conecta tu base y mira su mapa.</span></div>{svg(C1(NOCHEFG,CAR_O,NOCHEFG),130,'Estelar')}</div>
 <div class="fam"><span class="tab">{svg(C3(TINTA,CAR,TINTA),16,'Estelar')}<b style="{st};font-weight:{peso}">Estelar</b> · mapa</span><img src="{XILA_WM}" alt="xila" height="30"></div>
 <p class="cuerpo" style="font-family:'Instrument Sans',ui-sans-serif,system-ui,sans-serif">Cada vez que quieres entender un negocio desde su base de datos, repites lo mismo. Estelar te muestra el mapa, te guía para tejer un modelo estrella y guarda todo en una receta.</p></section>'''
-HTML = f'''<title>Estelar · Tipografía r4</title>
+HTML = f'''<title>Estelar · Tipografía r5</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?{fuentes}&display=swap">
 <style>
