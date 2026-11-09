@@ -86,3 +86,6 @@ Cinco paletas de textiles y artesanías de Oaxaca: Terciopelo del Istmo (negro, 
 
 ### Ronda 7 (`rediseno-r7/banco.html`) · letra de apoyo con Añil
 Fraunces (actual) · Newsreader · Gloock · Young Serif · Familjen Grotesk. Texto en Instrument Sans; nombre bordado.
+
+### Ronda 8 (`rediseno-r8/banco.html`) · usuario: «2 fuentes, primaria y secundaria, haz las propuestas»
+Editorial (Newsreader + Instrument Sans) · Artesanal (Young Serif + Hanken Grotesk) · Revista (Gloock + IBM Plex Sans) · Clara (Fraunces + Atkinson Hyperlegible Next; ceros con punto) · Moderna (Familjen Grotesk + Instrument Sans). Probados en portada, gráfica completa y tabla con cifras tabulares.
