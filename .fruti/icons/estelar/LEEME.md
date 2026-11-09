@@ -25,3 +25,8 @@ Regla: Xila borda con X; Estelar teje con flotes (tramos de trama sobre la urdim
 
 ## Ronda 3 (`ronda-3/color.html`) · color
 Base de Xila (manta #F6F1E8, tinta #15171F). Tres tintes de Oaxaca, cada uno «estrella en color» o «solo el centro en color»: Caracol #7B2D8E/#C98BDB (7.2 · 7.0), Pericón #8A5E00/#F4BE4C (5.1 · 10.5), Nogal #6E4426/#C99872 (7.4 · 7.0).
+
+**Color elegido (usuario, 2026-11-09): Caracol.** Aplicación asumida por Claude: la estrella en color (solo el centro casi no se ve a 16 px); pendiente de confirmar.
+
+## Ronda 4 (`ronda-4/tipografia.html`) · tipografía
+A Instrument Sans 700 (la de Xila) · B Fraunces 600 (serif de títulos de Xila) · C Schibsted Grotesk 700 (propia).
