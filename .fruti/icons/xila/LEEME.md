@@ -73,3 +73,8 @@ Nombre siempre en letra bordada (punto de la i naranja) + franja de rombos como 
 
 ### Ronda 4 (`rediseno-r4/banco.html`) · usuario: «debe funcionar para logo e iconos de diferentes tamaños»
 Un dibujo por tamaño sobre el emblema A (x en el rombo): grande 9 × 9 (≥ 64 px), mediano 5 × 5 (32–48), chico 3 × 3 (20–28), favicon X + punto naranja (16). Prueba con PNG a píxeles reales y ampliación × 6. Riesgo: el favicon solo, X + punto, se acerca a «cerrar».
+
+**Aprobado (usuario, 2026-11-09): sistema de cuatro dibujos por tamaño.**
+
+### Ronda 5 (`rediseno-r5/banco.html`) · color y letra de apoyo
+Color: Noche e hilo (tinta + manta + naranja #ff8a3d, 7.6:1) · Cobalto (cobalto + manta + durazno #ffb070, 3.8:1; el naranja fuerte da 1.6:1 sobre azul) · Manta (manta + tinta + naranja #d14e0a 3.9:1 + centro cobalto 6.1:1). Letra: Fraunces (actual) · Newsreader · Instrument Serif. Nombre siempre bordado; texto en Instrument Sans.
