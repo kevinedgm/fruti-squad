@@ -30,3 +30,6 @@ Base de Xila (manta #F6F1E8, tinta #15171F). Tres tintes de Oaxaca, cada uno «e
 
 ## Ronda 4 (`ronda-4/tipografia.html`) · tipografía
 A Instrument Sans 700 (la de Xila) · B Fraunces 600 (serif de títulos de Xila) · C Schibsted Grotesk 700 (propia).
+
+## Ronda 5 (`ronda-5/tipografia.html`) · tipografía con más personalidad
+Usuario: «no me gustaron las fuentes, explora fuentes con más personalidad». Seis display de Google Fonts (nombre, portada, títulos); texto en Instrument Sans: A Young Serif · B Gloock · C Syne 800 · D Instrument Serif · E Caprasimo · F Big Shoulders Display 800.
