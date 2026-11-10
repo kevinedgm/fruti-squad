@@ -15,7 +15,11 @@ def avatar(p):
     sil = re.sub(r' fill="#(93AAB9|7F97A7)"', '', s[a:b])
     s = s[:a] + '<g fill="#14213D" opacity=".28">' + sil + '</g>' + s[b:]
     return 'data:image/svg+xml;base64,' + base64.b64encode(s.encode()).decode()
-IMG = {'logo': uri('manik-final/svg/logotipo.svg'), 'logoB': uri('manik-final/svg/logotipo-blanco.svg'),
+# Logo «Mi Médico Manik» (2026-11-10): PNG tomado de https://claude.ai/artifact/Dr8bDjHnA7Yn1MKZ4SG3kM (img/logo.png).
+# Material externo: vive en externo/ (fuera del repo). Sin él, se usa el logotipo Manik anterior.
+EXT = os.path.join(D, 'externo', 'logo-mi-medico-manik.png')
+LOGO = ('data:image/png;base64,' + base64.b64encode(open(EXT, 'rb').read()).decode()) if os.path.exists(EXT) else uri('manik-final/svg/logotipo.svg')
+IMG = {'logo': LOGO, 'logoB': uri('manik-final/svg/logotipo-blanco.svg'),
        'mujer': avatar('directorio-ds/avatares/avatar-mujer.svg'), 'hombre': avatar('directorio-ds/avatares/avatar-hombre.svg'), 'neutro': avatar('directorio-ds/avatares/avatar-neutro.svg')}
 html = open(os.path.join(D, 'plantilla.html')).read().replace('/*DATA*/', 'const ICONS=' + json.dumps(ICONS) + ';const IMG=' + json.dumps(IMG) + ';')
 open(os.path.join(D, 'prototipo.html'), 'w').write(html); print('ok', len(html) // 1024, 'KB')
