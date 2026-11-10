@@ -236,7 +236,17 @@ a{color:inherit}
 .tachada{text-decoration:line-through;color:var(--muted)}
 .dlg{position:fixed;inset:0;z-index:20;background:var(--velo);display:grid;place-items:center;padding:16px}
 .dlg .caja{background:var(--blanco);border-radius:24px;padding:20px;max-width:420px;width:100%;display:grid;gap:14px;box-shadow:0 20px 60px rgba(20,33,61,.25)}
-.dlg h2{font:600 22px/28px var(--display)}.dlg .acc{flex-direction:column;align-items:stretch}
+.dlg h2{font:600 22px/28px var(--display)}
+.esp-dlg{align-items:end;padding:0}@media (min-width:640px){.esp-dlg{align-items:center;padding:16px}}
+.esp-dlg .caja{max-width:520px;max-height:min(88dvh,720px);grid-template-rows:auto auto minmax(0,1fr);border-radius:24px 24px 0 0;padding:16px max(16px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+@media (min-width:640px){.esp-dlg .caja{border-radius:24px;padding:20px}}
+.esp-tb{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.esp-l{overflow:auto;overscroll-behavior:contain;margin-inline:-4px;padding-inline:4px}
+.esp-g h3{position:sticky;top:0;background:var(--blanco);font:600 15px/20px var(--display);color:var(--muted);padding:10px 0 4px;border-bottom:1px solid var(--linea)}
+.esp-g ul{list-style:none;margin:0;padding:0}
+.esp-g button{display:grid;grid-template-columns:minmax(0,1fr) auto 20px;align-items:center;gap:10px;width:100%;min-height:52px;padding:6px 4px;background:none;border:0;border-bottom:1px solid var(--linea);font:500 16px var(--sans);color:var(--tinta);text-align:left;cursor:pointer}
+.esp-g button:hover{background:var(--bruma)}.esp-g small{font-size:13px;color:var(--muted)}.esp-g .ico{width:18px;height:18px;color:var(--muted)}
+.esp-vacio{color:var(--muted);padding:16px 0}.dlg .acc{flex-direction:column;align-items:stretch}
 .btn.rojo{background:var(--error);color:var(--blanco)}.btn.rojo:hover{background:var(--error-presionado)}
 .ab{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:16px}.ab dt{color:var(--muted)}.ab dd{margin:0;font-weight:600}
 .demo{border-top:1px dashed var(--linea);padding-top:12px;font-size:14px;color:var(--muted)}.demo summary{min-height:44px;display:flex;align-items:center;cursor:pointer;font-weight:600}.demo .acc{margin-top:6px}
@@ -378,13 +388,20 @@ const MED = [
    {id:'angelopolis', lu:'Angelópolis', dir:'Blvd. del Niño Poblano 2915', km:2.7, pr:750, manik:true, tel:'222 555 0191', ag:{0:['18:30'],2:['9:00','10:00','11:00']}}]},
 ];
 const CATS = [['scan-face','Piel','Dermatología',true],['brain','Salud mental','Psicología y psiquiatría'],['apple','Alimentación','Nutrición'],['flower-2','Salud íntima','Ginecología y urología'],['baby','Niñas y niños','Pediatría'],['stethoscope','Chequeo general','Medicina general']];
-const S = {q:'Dermatóloga', donde:'Angelópolis, Puebla', cat:'Piel', f:{manik:false, hoy:false, precio:0}, orden:'km', med:null, cons:null, dia:null, hora:null, datos:{}};
+// Especialidades de la A a la Z (2026-11-10). Lista acotada; [nombre, prueba sobre m.esp o null si no hay médicos de ejemplo, categoría para promociones]
+const ESPS = [['Alergología'],['Angiología'],['Cardiología'],['Cirugía general'],['Cirugía plástica'],['Dermatología',/^Dermatólog/,'Piel'],['Dermatología pediátrica',/^Dermatología pediátrica/],
+ ['Endocrinología'],['Gastroenterología'],['Gastroenterología pediátrica',/Gastroenterología y Nutrición Pediátrica/],['Geriatría'],['Ginecología y obstetricia',/^Ginecólog/],['Hematología'],['Infectología'],
+ ['Medicina general',/^Médic[oa] general/],['Medicina interna'],['Nefrología'],['Neumología'],['Neurología'],['Nutrición',/^Nutriólog/],['Oftalmología'],['Oncología'],['Ortopedia y traumatología'],
+ ['Otorrinolaringología'],['Pediatría',/^Pediatra/],['Psicología',/^Psicólog/],['Psiquiatría',/^Psiquiatra/],['Reumatología'],['Urología',/^Urólog/]];
+const espDe = n => ESPS.find(e => e[0] === n);
+const medsEsp = n => { const e = espDe(n); return e && e[1] ? MED.filter(m => e[1].test(m.esp)) : []; };
+const S = {esp:null, q:'Dermatóloga', donde:'Angelópolis, Puebla', cat:'Piel', f:{manik:false, hoy:false, precio:0}, orden:'km', med:null, cons:null, dia:null, hora:null, datos:{}};
 
 // Consultorios: el próximo lugar y si cumplen filtros
 const prox = c => { if (!c.manik) return null; const ks = Object.keys(c.ag||{}).map(Number).sort((a,b)=>a-b); return ks.length ? {off:ks[0], h:c.ag[ks[0]][0]} : null; };
 const cumple = c => (!S.f.manik || c.manik) && (!S.f.hoy || (c.manik && c.ag && c.ag[0])) && (!S.f.precio || c.pr <= S.f.precio);
 function resultados(){
-  return MED.filter(m => (m.cats||['Piel']).includes(S.cat)).map(m => { const ok = m.cons.filter(cumple).sort((a,b)=>a.km-b.km); if (!ok.length) return null; const resto = m.cons.filter(c=>!ok.includes(c)).sort((a,b)=>a.km-b.km); return {m, cons:[...ok, ...resto]}; })
+  return (S.esp ? medsEsp(S.esp) : MED.filter(m => (m.cats||['Piel']).includes(S.cat))).map(m => { const ok = m.cons.filter(cumple).sort((a,b)=>a.km-b.km); if (!ok.length) return null; const resto = m.cons.filter(c=>!ok.includes(c)).sort((a,b)=>a.km-b.km); return {m, cons:[...ok, ...resto]}; })
    .filter(Boolean).sort((a,b) => S.orden==='precio' ? a.cons[0].pr-b.cons[0].pr : S.orden==='op' ? b.m.op-a.m.op : a.cons[0].km-b.cons[0].km);
 }
 const nFiltros = () => (S.f.manik?1:0)+(S.f.hoy?1:0)+(S.f.precio?1:0);
@@ -454,7 +471,7 @@ V.inicio = () => { const hoy = HOY(); return `<div class="halo">${nav('')}
 <path d="M272 366 q6 5 12 0 M294 366 q6 5 12 0" fill="none" stroke="#14213D" stroke-width="3" stroke-linecap="round"/><path d="M280 384 q8 7 16 0" fill="none" stroke="#B0563F" stroke-width="3" stroke-linecap="round"/>
 <path d="M236 420 C258 392 292 398 312 430" fill="none" stroke="#0A7F8F" stroke-width="30" stroke-linecap="round"/><circle cx="314" cy="434" r="15" fill="#F3D9C4"/></svg><span class="sim">Simulación · foto de marca pendiente</span><span class="flota f1"><span class="face"><img src="${IMG.mujer}" alt=""></span><span><b>Dra. Mariana Soto</b><small>Hoy, 16:30 · Agenda en línea</small></span></span><span class="flota f2">${ic('badge-check')}<span><b>$900</b><small>Consulta · precio a la vista</small></span></span></div></section></div>
 <section class="wrap sec" aria-labelledby="h-cat"><div><h2 class="h2" id="h-cat">Busca por <b>lo que sientes</b></h2><p class="sub">Elige lo que te pasa y te llevamos con el especialista indicado. Estos son los motivos más buscados.</p></div>
-<div class="sellos"><div class="scats">${CATS.map((c,k)=>sello(c,k)).join('')}</div></div><p class="otra">¿Ya sabes qué especialista buscas? <button class="lnk" data-toast="La lista de especialidades de la A a la Z aún no está en el prototipo">Ver especialidades de la A a la Z</button></p></section>
+<div class="sellos"><div class="scats">${CATS.map((c,k)=>sello(c,k)).join('')}</div></div><p class="otra">¿Ya sabes qué especialista buscas? <button class="lnk" data-abrir="esp" aria-haspopup="dialog">Ver especialidades de la A a la Z</button></p></section>
 ${hoy.length ? `<section class="wrap sec" aria-labelledby="h-hoy"><h2 class="h2" id="h-hoy">Con lugar <b>hoy</b></h2>
 <div class="hoy">${hoy.map(({m,c})=>`<article class="mf">${avatar(m)}<b><a href="#medico-${m.id}">${m.n}</a></b><small><span class="nw">${m.esp}</span> · <span class="nw">${c.km} km</span> · <span class="nw">${peso(c.pr)}</span> · <span class="nw">Hoy ${c.ag[0][0]}</span></small>${ced(m)}<a class="btn secundario" href="#medico-${m.id}" aria-label="Ver a ${m.n}">Ver</a></article>`).join('')}</div>
 <button class="lnk" data-hoy>Ver todos con lugar hoy</button></section>` : ''}
@@ -470,13 +487,13 @@ ${hoy.length ? `<section class="wrap sec" aria-labelledby="h-hoy"><h2 class="h2"
 
 V.resultados = () => {
   const r = resultados(); const n = r.length;
-  const titulo = `<b>${S.cat}</b>`;
+  const titulo = `<b>${S.esp || S.cat}</b>`;
   const chipsEsc = `<span class="solo-esc"><button class="chip" aria-pressed="${S.f.manik}" data-f="manik">Con agenda en línea</button><button class="chip" aria-pressed="${S.f.hoy}" data-f="hoy">Con lugar hoy</button><button class="chip" aria-pressed="${S.f.precio===800}" data-f="p800">Hasta $800</button></span>`;
   let lista = r.map(ficha);
-  const pr = PROMOS.find(x => x.cat === S.cat);
+  const pr = PROMOS.find(x => x.cat === (S.esp ? (espDe(S.esp)||[])[2] : S.cat));
   if (pr && n >= 2) lista.splice(2, 0, `<a class="promo" href="#promo-${pr.id}" aria-label="Patrocinado: ${pr.anun}. ${pr.titulo}. Con Impulsa Manik. Ver promoción"><img class="pimg" src="${pr.img}" alt=""><span class="ptx"><span class="etq">Patrocinado</span><b>${pr.titulo}</b><small>${pr.anun} · hasta el ${pr.hasta} · <span class="nw imp">con Impulsa Manik</span></small></span></a>`);
-  if (!n) lista = [S.cat !== 'Piel'
-    ? `<div class="vacio"><span class="ic">${ic('search')}</span><h3>Aún no hay especialistas de ${S.cat.toLowerCase()} en este prototipo</h3><p>El ejemplo solo tiene dermatología y pediatría. Prueba con «Piel» o «Niñas y niños».</p><div class="acc"><button class="btn primario" data-cat="Piel">Ver dermatología</button></div></div>`
+  if (!n) lista = [!nFiltros()
+    ? `<div class="vacio"><span class="ic">${ic('search')}</span><h3>Aún no hay especialistas de ${(S.esp || S.cat).toLowerCase()} en este prototipo</h3><p>El ejemplo tiene médicos en dermatología, pediatría, nutrición, psicología, ginecología y algunas más.</p><div class="acc"><button class="btn primario" data-abrir="esp" aria-haspopup="dialog">Ver especialidades</button></div></div>`
     : `<div class="vacio"><span class="ic">${ic('sliders-horizontal')}</span><h3>Nadie cumple todos tus filtros</h3><p>Filtros activos: ${[S.f.manik&&'Con agenda en línea', S.f.hoy&&'Con lugar hoy', S.f.precio&&'Hasta '+peso(S.f.precio)].filter(Boolean).join(' · ')}.</p><div class="acc"><button class="btn primario" data-limpiar>Quitar filtros</button></div></div>`];
   return `${nav('buscar')}<main class="wrap"><div class="rh"><a class="volver" href="#inicio">${ic('arrow-left')}Inicio</a><h1 class="h2">${titulo}<small>${n} especialista${n===1?'':'s'}</small></h1></div>
   <div class="barra"><span class="solo-cel"><button class="chip" data-abrir="filtros" aria-haspopup="dialog">${ic('sliders-horizontal')}Filtros${nFiltros()?` <span class="n">${nFiltros()}</span>`:''}</button></span>${chipsEsc}
@@ -625,8 +642,22 @@ function capaFiltros(){
   };
   $('[data-t="manik"]').focus();
 }
+function capaEsp(){
+  const fila = e => { const n = medsEsp(e[0]).length; return `<li><button type="button" data-esp="${e[0]}"><span>${e[0]}</span><small>${n ? n + ' médico' + (n===1?'':'s') : 'Sin médicos aún'}</small>${ic('chevron-right')}</button></li>`; };
+  const lista = q => { const nq = x => x.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(); const v = ESPS.filter(e => nq(e[0]).includes(nq(q)));
+    if (!v.length) return `<p class="esp-vacio">No encontramos «${q.replace(/[<>&"]/g,'')}». Prueba con otra palabra o busca por lo que sientes.</p>`;
+    const g = {}; v.forEach(e => (g[e[0][0]] ||= []).push(e));
+    return Object.keys(g).map(l => `<section class="esp-g" aria-labelledby="esp-${l}"><h3 id="esp-${l}">${l}</h3><ul>${g[l].map(fila).join('')}</ul></section>`).join(''); };
+  $('#capa').innerHTML = `<div class="dlg esp-dlg" data-velo-dlg><div class="caja" role="dialog" aria-modal="true" aria-labelledby="esp-t">
+  <div class="esp-tb"><h2 id="esp-t">Especialidades de la A a la Z</h2><button class="ib" data-cerrar aria-label="Cerrar">${ic('x')}</button></div>
+  <div class="fs"><label for="esp-q">Filtra la lista</label><input id="esp-q" autocomplete="off" placeholder="Por ejemplo, cardiología"></div>
+  <p class="vh" id="esp-n" aria-live="polite"></p><div class="esp-l" id="esp-l">${lista('')}</div></div></div>`;
+  const q = $('#esp-q');
+  q.oninput = () => { $('#esp-l').innerHTML = lista(q.value.trim()); const k = $('#esp-l').querySelectorAll('[data-esp]').length; $('#esp-n').textContent = k + (k===1 ? ' especialidad' : ' especialidades'); };
+  q.focus();
+}
 let disparador = null;
-function abrir(cual, desde){ disparador = desde; document.body.style.overflow = 'hidden'; cual === 'buscar' ? capaBuscar() : capaFiltros(); }
+function abrir(cual, desde){ disparador = desde; document.body.style.overflow = 'hidden'; cual === 'buscar' ? capaBuscar() : cual === 'esp' ? capaEsp() : capaFiltros(); }
 function cerrar(){ $('#capa').innerHTML = ''; $('#capa').onclick = null; document.body.style.overflow = ''; disparador?.focus?.(); }
 function toast(t){ const el = $('#toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(()=>el.hidden = true, 2400); }
 
@@ -644,8 +675,9 @@ addEventListener('hashchange', () => { if (['#inicio','#resultados',''].includes
 document.addEventListener('click', e => {
   const t = e.target;
   const ab = t.closest('[data-abrir]'); if (ab) { abrir(ab.dataset.abrir, ab); return; }
-  const cat = t.closest('[data-cat]'); if (cat) { S.cat = cat.dataset.cat; S.f = {manik:false,hoy:false,precio:0}; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); return; }
-  const sug = t.closest('[data-sug]'); if (sug) { cerrar(); if (sug.dataset.sug === 'soto') location.hash = 'medico-soto'; else { S.cat = 'Piel'; location.hash = 'resultados'; } return; }
+  const es = t.closest('[data-esp]'); if (es) { S.esp = es.dataset.esp; S.cat = (espDe(S.esp)||[])[2] || S.esp; S.f = {manik:false,hoy:false,precio:0}; disparador = null; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); return; }
+  const cat = t.closest('[data-cat]'); if (cat) { S.esp = null; S.cat = cat.dataset.cat; S.f = {manik:false,hoy:false,precio:0}; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); return; }
+  const sug = t.closest('[data-sug]'); if (sug) { cerrar(); if (sug.dataset.sug === 'soto') location.hash = 'medico-soto'; else { S.esp = null; S.cat = 'Piel'; location.hash = 'resultados'; } return; }
   if (t.closest('[data-cerrar]') || t.matches('[data-velo-dlg]')) { cerrar(); return; }
   const dm = t.closest('[data-demo]'); if (dm) { S.demo = dm.dataset.demo || null; if (!S.cita && S.demo !== 'vencido') S.cita = {med:'diaz', cons:'neodemo', dia:3, hora:'10:00', nombre:'Ana Pérez', cel:'222 555 0100', estado:'activa'}; render(); $('#h-ok')?.focus(); return; }
   if (t.closest('[data-cancelar-cita]')) { const ci = S.cita, m = MED.find(x=>x.id===ci.med); disparador = t.closest('[data-cancelar-cita]'); document.body.style.overflow = 'hidden';
@@ -659,7 +691,7 @@ document.addEventListener('click', e => {
     if (OCUPA.has(key)) { OCUPA.delete(key); reservar(ci.med, ci.cons, S.cdia, S.chora); S.chora = null; S.ocupado = true; render(); $('#ocupado')?.focus(); return; }
     reservar(ci.med, ci.cons, S.cdia, S.chora); liberar(ci.med, ci.cons, ci.dia, ci.hora); ci.dia = S.cdia; ci.hora = S.chora; S.cdia = null; S.chora = null; S.ocupado = false; location.hash = 'cita'; setTimeout(()=>toast('Cambiamos tu cita. Te mandamos un mensaje con la nueva hora'), 50); return; }
   const tt = t.closest('[data-toast]'); if (tt) { toast(tt.dataset.toast); return; }
-  if (t.closest('[data-hoy]')) { S.cat = 'Piel'; S.f = {manik:false,hoy:true,precio:0}; location.hash = 'resultados'; return; }
+  if (t.closest('[data-hoy]')) { S.esp = null; S.cat = 'Piel'; S.f = {manik:false,hoy:true,precio:0}; location.hash = 'resultados'; return; }
   if (t.closest('[data-ubi-ini]')) { S.donde = 'tu ubicación (ejemplo)'; render(); toast('Aquí el navegador pediría permiso de ubicación'); return; }
   if (t.closest('[data-ubi]')) { $('#w1').value = 'Cerca de ti (ejemplo)'; return; }
   const f = t.closest('[data-f]'); if (f) { const k = f.dataset.f; if (k==='p800') S.f.precio = S.f.precio===800?0:800; else S.f[k] = !S.f[k]; render(); return; }
@@ -680,7 +712,7 @@ document.addEventListener('click', e => {
 document.addEventListener('change', e => { if (e.target.id === 'orden') { S.orden = e.target.value; render(); $('#orden')?.focus(); } });
 document.addEventListener('input', e => { if (['nombre','cel','motivo'].includes(e.target.id)) S.datos[e.target.id] = e.target.value; });
 document.addEventListener('submit', e => { e.preventDefault(); const f = e.target.dataset.form;
-  if (f === 'buscar' || f === 'buscar-cel') { const q = (f==='buscar' ? $('#q') : $('#q1')).value.trim(); const w = (f==='buscar' ? $('#w') : $('#w1')).value.trim(); S.q = q || S.q; S.donde = w || S.donde; S.cat = /derma|piel|lunar|mancha|acn/i.test(q) || !q ? 'Piel' : q; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); }
+  if (f === 'buscar' || f === 'buscar-cel') { const q = (f==='buscar' ? $('#q') : $('#q1')).value.trim(); const w = (f==='buscar' ? $('#w') : $('#w1')).value.trim(); S.q = q || S.q; S.donde = w || S.donde; S.esp = null; S.cat = /derma|piel|lunar|mancha|acn/i.test(q) || !q ? 'Piel' : q; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); }
   if (f === 'confirmar') confirmar();
   if (f === 'enlace') toast('Si hay una cita con ese celular, te llegará un enlace nuevo'); });
 // Simulación: horarios que «otra persona» toma justo antes (para ver el aviso)
