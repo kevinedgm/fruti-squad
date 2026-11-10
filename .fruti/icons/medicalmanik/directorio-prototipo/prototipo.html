@@ -244,8 +244,8 @@ a{color:inherit}
 .esp-l{overflow:auto;overscroll-behavior:contain;margin-inline:-4px;padding-inline:4px}
 .esp-g h3{position:sticky;top:0;background:var(--blanco);font:600 15px/20px var(--display);color:var(--muted);padding:10px 0 4px;border-bottom:1px solid var(--linea)}
 .esp-g ul{list-style:none;margin:0;padding:0}
-.esp-g button{display:grid;grid-template-columns:minmax(0,1fr) auto 20px;align-items:center;gap:10px;width:100%;min-height:52px;padding:6px 4px;background:none;border:0;border-bottom:1px solid var(--linea);font:500 16px var(--sans);color:var(--tinta);text-align:left;cursor:pointer}
-.esp-g button:hover{background:var(--bruma)}.esp-g small{font-size:13px;color:var(--muted)}.esp-g .ico{width:18px;height:18px;color:var(--muted)}
+.esp-g button{display:grid;grid-template-columns:minmax(0,1fr) 20px;align-items:center;gap:10px;width:100%;min-height:52px;padding:6px 4px;background:none;border:0;border-bottom:1px solid var(--linea);font:500 16px var(--sans);color:var(--tinta);text-align:left;cursor:pointer}
+.esp-g button:hover{background:var(--bruma)}.esp-g .ico{width:18px;height:18px;color:var(--muted)}
 .esp-vacio{color:var(--muted);padding:16px 0}.dlg .acc{flex-direction:column;align-items:stretch}
 .btn.rojo{background:var(--error);color:var(--blanco)}.btn.rojo:hover{background:var(--error-presionado)}
 .ab{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:16px}.ab dt{color:var(--muted)}.ab dd{margin:0;font-weight:600}
@@ -643,7 +643,7 @@ function capaFiltros(){
   $('[data-t="manik"]').focus();
 }
 function capaEsp(){
-  const fila = e => { const n = medsEsp(e[0]).length; return `<li><button type="button" data-esp="${e[0]}"><span>${e[0]}</span><small>${n ? n + ' médico' + (n===1?'':'s') : 'Sin médicos aún'}</small>${ic('chevron-right')}</button></li>`; };
+  const fila = e => `<li><button type="button" data-esp="${e[0]}"><span>${e[0]}</span>${ic('chevron-right')}</button></li>`;
   const lista = q => { const nq = x => x.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase(); const v = ESPS.filter(e => nq(e[0]).includes(nq(q)));
     if (!v.length) return `<p class="esp-vacio">No encontramos «${q.replace(/[<>&"]/g,'')}». Prueba con otra palabra o busca por lo que sientes.</p>`;
     const g = {}; v.forEach(e => (g[e[0][0]] ||= []).push(e));
