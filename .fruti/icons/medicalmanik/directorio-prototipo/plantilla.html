@@ -493,9 +493,9 @@ V.resultados = () => {
   const pr = PROMOS.find(x => x.cat === (S.esp ? (espDe(S.esp)||[])[2] : S.cat));
   if (pr && n >= 2) lista.splice(2, 0, `<a class="promo" href="#promo-${pr.id}" aria-label="Patrocinado: ${pr.anun}. ${pr.titulo}. Con Impulsa Manik. Ver promoción"><img class="pimg" src="${pr.img}" alt=""><span class="ptx"><span class="etq">Patrocinado</span><b>${pr.titulo}</b><small>${pr.anun} · hasta el ${pr.hasta} · <span class="nw imp">con Impulsa Manik</span></small></span></a>`);
   if (!n) lista = [!nFiltros()
-    ? `<div class="vacio"><span class="ic">${ic('search')}</span><h3>Aún no hay especialistas de ${(S.esp || S.cat).toLowerCase()} en este prototipo</h3><p>El ejemplo tiene médicos en dermatología, pediatría, nutrición, psicología, ginecología y algunas más.</p><div class="acc"><button class="btn primario" data-abrir="esp" aria-haspopup="dialog">Ver especialidades</button></div></div>`
+    ? `<div class="vacio"><span class="ic">${ic('search')}</span><h3>Pronto tendremos especialistas de ${(S.esp || S.cat).toLowerCase()} cerca de ti</h3><p>Mientras tanto, revisa otra especialidad o busca por lo que sientes.</p><div class="acc"><button class="btn primario" data-abrir="esp" aria-haspopup="dialog">Ver especialidades</button><a class="btn texto" href="#inicio">Busca por lo que sientes</a></div></div>`
     : `<div class="vacio"><span class="ic">${ic('sliders-horizontal')}</span><h3>Nadie cumple todos tus filtros</h3><p>Filtros activos: ${[S.f.manik&&'Con agenda en línea', S.f.hoy&&'Con lugar hoy', S.f.precio&&'Hasta '+peso(S.f.precio)].filter(Boolean).join(' · ')}.</p><div class="acc"><button class="btn primario" data-limpiar>Quitar filtros</button></div></div>`];
-  return `${nav('buscar')}<main class="wrap"><div class="rh"><a class="volver" href="#inicio">${ic('arrow-left')}Inicio</a><h1 class="h2">${titulo}<small>${n} especialista${n===1?'':'s'}</small></h1></div>
+  return `${nav('buscar')}<main class="wrap"><div class="rh"><a class="volver" href="#inicio">${ic('arrow-left')}Inicio</a><h1 class="h2">${titulo}</h1></div>
   <div class="barra"><span class="solo-cel"><button class="chip" data-abrir="filtros" aria-haspopup="dialog">${ic('sliders-horizontal')}Filtros${nFiltros()?` <span class="n">${nFiltros()}</span>`:''}</button></span>${chipsEsc}
   <span class="sel"><label for="orden">Ordenar</label><select id="orden"><option value="km" ${S.orden==='km'?'selected':''}>Más cerca</option><option value="precio" ${S.orden==='precio'?'selected':''}>Menor precio</option><option value="op" ${S.orden==='op'?'selected':''}>Más opiniones</option></select></span></div>
   <div class="lista" aria-live="polite">${lista.join('')}</div></main>`;
@@ -627,12 +627,11 @@ function capaBuscar(){
 }
 function capaFiltros(){
   const temp = {...S.f};
-  const cuenta = () => { const g = S.f; S.f = temp; const n = resultados().length; S.f = g; return n; };
   const pintar = () => {
     $('#capa').innerHTML = `<div class="velo" data-velo><div class="hoja" role="dialog" aria-modal="true" aria-label="Filtros"><span class="asa" aria-hidden="true"></span><div class="t"><b>Filtros</b><button class="ib" data-cerrar aria-label="Cerrar">${ic('x')}</button></div>
     <fieldset><legend>Cómo agendar</legend><div class="row"><button type="button" class="chip" aria-pressed="${temp.manik}" data-t="manik">Con agenda en línea</button><button type="button" class="chip" aria-pressed="${temp.hoy}" data-t="hoy">Con lugar hoy</button></div></fieldset>
     <fieldset><legend>Precio de consulta</legend><div class="row">${[500,800,1200].map(p=>`<button type="button" class="chip" aria-pressed="${temp.precio===p}" data-t="p${p}">Hasta ${peso(p)}</button>`).join('')}</div></fieldset>
-    <div class="pieh"><button type="button" class="btn texto" data-t="limpiar">Limpiar</button><button type="button" class="btn primario" data-aplicar>Ver ${cuenta()} especialista${cuenta()===1?'':'s'}</button></div></div></div>`;
+    <div class="pieh"><button type="button" class="btn texto" data-t="limpiar">Limpiar</button><button type="button" class="btn primario" data-aplicar>Ver resultados</button></div></div></div>`;
   };
   pintar();
   $('#capa').onclick = e => {
