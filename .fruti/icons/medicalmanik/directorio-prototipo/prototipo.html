@@ -123,6 +123,7 @@ a{color:inherit}
 .foto .f1{left:6%;top:12%}.foto .f1 .face{width:36px;border-radius:10px}.foto .f2{left:6%;bottom:6%;display:none}@media (min-width:1024px){.foto .f2{display:flex}}.foto .f2 .ico{color:var(--teal-hover)}
 .foto .f2 b{font-size:20px}
 @media (min-width:640px){.hero{grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:32px;align-items:center}.foto{display:flex}}
+.otra{display:flex;flex-wrap:wrap;align-items:center;gap:0 8px;color:var(--muted);font-size:16px}
 .lnk{justify-self:start;font-weight:600;color:var(--tinta);text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:44px;background:none;border:0;padding:0;font-size:16px;font-family:var(--sans);cursor:pointer}
 .hoy{display:grid;gap:12px}@media (min-width:640px){.hoy{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.hoy{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .mf{background:var(--blanco);border:1px solid var(--linea);border-radius:24px;padding:14px;display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:4px 12px;align-items:center}
@@ -452,8 +453,8 @@ V.inicio = () => { const hoy = HOY(); return `<div class="halo">${nav('')}
 <circle cx="288" cy="362" r="40" fill="#F3D9C4"/><path d="M248 356 C250 314 326 312 328 356 C318 334 258 334 248 356Z" fill="#8A5A00"/><circle cx="252" cy="340" r="9" fill="#8A5A00"/>
 <path d="M272 366 q6 5 12 0 M294 366 q6 5 12 0" fill="none" stroke="#14213D" stroke-width="3" stroke-linecap="round"/><path d="M280 384 q8 7 16 0" fill="none" stroke="#B0563F" stroke-width="3" stroke-linecap="round"/>
 <path d="M236 420 C258 392 292 398 312 430" fill="none" stroke="#0A7F8F" stroke-width="30" stroke-linecap="round"/><circle cx="314" cy="434" r="15" fill="#F3D9C4"/></svg><span class="sim">Simulación · foto de marca pendiente</span><span class="flota f1"><span class="face"><img src="${IMG.mujer}" alt=""></span><span><b>Dra. Mariana Soto</b><small>Hoy, 16:30 · Agenda en línea</small></span></span><span class="flota f2">${ic('badge-check')}<span><b>$900</b><small>Consulta · precio a la vista</small></span></span></div></section></div>
-<section class="wrap sec" aria-labelledby="h-cat"><div><h2 class="h2" id="h-cat">Busca por <b>lo que sientes</b></h2><p class="sub">Si no sabes a qué especialista ir, empieza por aquí.</p></div>
-<div class="sellos"><div class="scats">${CATS.map((c,k)=>sello(c,k)).join('')}</div></div><button class="lnk" data-toast="El listado de especialidades aún no está en el prototipo">Ver todas las especialidades</button></section>
+<section class="wrap sec" aria-labelledby="h-cat"><div><h2 class="h2" id="h-cat">Busca por <b>lo que sientes</b></h2><p class="sub">Elige lo que te pasa y te llevamos con el especialista indicado. Estos son los motivos más buscados.</p></div>
+<div class="sellos"><div class="scats">${CATS.map((c,k)=>sello(c,k)).join('')}</div></div><p class="otra">¿Ya sabes qué especialista buscas? <button class="lnk" data-toast="La lista de especialidades de la A a la Z aún no está en el prototipo">Ver especialidades de la A a la Z</button></p></section>
 ${hoy.length ? `<section class="wrap sec" aria-labelledby="h-hoy"><h2 class="h2" id="h-hoy">Con lugar <b>hoy</b></h2>
 <div class="hoy">${hoy.map(({m,c})=>`<article class="mf">${avatar(m)}<b><a href="#medico-${m.id}">${m.n}</a></b><small><span class="nw">${m.esp}</span> · <span class="nw">${c.km} km</span> · <span class="nw">${peso(c.pr)}</span> · <span class="nw">Hoy ${c.ag[0][0]}</span></small>${ced(m)}<a class="btn secundario" href="#medico-${m.id}" aria-label="Ver a ${m.n}">Ver</a></article>`).join('')}</div>
 <button class="lnk" data-hoy>Ver todos con lugar hoy</button></section>` : ''}
