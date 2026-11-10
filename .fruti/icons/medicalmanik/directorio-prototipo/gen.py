@@ -19,7 +19,10 @@ def avatar(p):
 # Material externo: vive en externo/ (fuera del repo). Sin él, se usa el logotipo Manik anterior.
 EXT = os.path.join(D, 'externo', 'logo-mi-medico-manik.png')
 LOGO = ('data:image/png;base64,' + base64.b64encode(open(EXT, 'rb').read()).decode()) if os.path.exists(EXT) else uri('manik-final/svg/logotipo.svg')
-IMG = {'logo': LOGO, 'logoB': uri('manik-final/svg/logotipo-blanco.svg'),
+# Fotos de médicos de ejemplo (2026-11-10): material externo en externo/fotos/<id>.jpg (fuera del repo), 360 × 480.
+FD = os.path.join(D, 'externo', 'fotos')
+FOTOS = {'f_' + f[:-4]: 'data:image/jpeg;base64,' + base64.b64encode(open(os.path.join(FD, f), 'rb').read()).decode() for f in sorted(os.listdir(FD)) if f.endswith('.jpg')} if os.path.isdir(FD) else {}
+IMG = {**FOTOS, 'logo': LOGO, 'logoB': uri('manik-final/svg/logotipo-blanco.svg'),
        'mujer': avatar('directorio-ds/avatares/avatar-mujer.svg'), 'hombre': avatar('directorio-ds/avatares/avatar-hombre.svg'), 'neutro': avatar('directorio-ds/avatares/avatar-neutro.svg')}
 html = open(os.path.join(D, 'plantilla.html')).read().replace('/*DATA*/', 'const ICONS=' + json.dumps(ICONS) + ';const IMG=' + json.dumps(IMG) + ';')
 open(os.path.join(D, 'prototipo.html'), 'w').write(html); print('ok', len(html) // 1024, 'KB')
