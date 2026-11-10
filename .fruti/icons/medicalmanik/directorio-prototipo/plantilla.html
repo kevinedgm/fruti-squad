@@ -1,4 +1,4 @@
-<title>Directorio Manik</title>
+<title>Mi Médico Manik</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300..700&family=Onest:wght@400..700&display=swap">
@@ -49,7 +49,7 @@ a{color:inherit}
 .nav .logo img{height:40px;width:auto;display:block}
 .nav ul{display:none;gap:6px;list-style:none;margin:0;padding:0}
 .nav ul a{display:block;text-decoration:none;font-weight:500;padding:8px 14px;border-radius:10px}.nav ul a:hover{background:rgba(255,255,255,.7)}.nav ul a[aria-current]{background:var(--blanco)}
-.nav .me{display:none;margin-left:auto;text-decoration:none;font-weight:600;padding:10px 18px;border-radius:12px;background:var(--blanco)}
+.nav .me{display:none;margin-left:auto;text-decoration:none;font:600 17px var(--sans);color:var(--tinta);border:0;cursor:pointer;min-height:44px;align-items:center;padding:10px 18px;border-radius:12px;background:var(--blanco)}
 .nav .menu{margin-left:auto}
 @media (min-width:1024px){.nav ul,.nav .me{display:flex}.nav .menu{display:none}}
 
@@ -390,7 +390,7 @@ const nFiltros = () => (S.f.manik?1:0)+(S.f.hoy?1:0)+(S.f.precio?1:0);
 
 // Piezas
 const meta = m => m.r ? `<div class="meta"><span class="st"><b aria-hidden="true">★</b> ${m.r} · ${m.op} opiniones</span></div>` : '';
-const ced = m => `<p class="ced">${ic('badge-check')}<span class="vh">Cédulas verificadas por Manik: </span><span><span class="nw"><abbr title="Cédula profesional">Céd. Prof.</abbr> ${m.ced[0]}</span>${m.ced[1] ? ` · <span class="nw"><abbr title="Cédula de especialidad">Céd. Esp.</abbr> ${m.ced[1]}</span>` : ''}</span></p>`;
+const ced = m => `<p class="ced">${ic('badge-check')}<span class="vh">Cédulas verificadas por Mi Médico Manik: </span><span><span class="nw"><abbr title="Cédula profesional">Céd. Prof.</abbr> ${m.ced[0]}</span>${m.ced[1] ? ` · <span class="nw"><abbr title="Cédula de especialidad">Céd. Esp.</abbr> ${m.ced[1]}</span>` : ''}</span></p>`;
 const avatar = m => `<div class="face"><img src="${IMG[m.av]}" alt="Sin foto: ${m.n}"></div>`;
 function fila(m, c, prim){
   const p = prox(c);
@@ -404,7 +404,7 @@ function ficha({m, cons}){
   return `<article class="fm"><div class="fmi">${avatar(m)}<div class="who"><h3><a href="#medico-${m.id}">${m.n}</a></h3><p class="spec">${m.esp}${m.foco?' · '+m.foco:''}</p>${ced(m)}${meta(m)}</div>
   <div class="cons" role="list" aria-label="Consultorios de ${m.n}">${cons.slice(0,2).map((c,i)=>fila(m,c,i===0)).join('')}</div>${extra}</div></article>`;
 }
-const nav = (act) => `<header class="wrap nav"><a class="logo" href="#inicio" aria-label="Mi Médico Manik, inicio"><img src="${IMG.logo}" alt="" width="153" height="40"></a><ul><li><a href="#resultados" ${act==='buscar'?'aria-current="page"':''}>Especialidades</a></li><li><a href="#dudas">Preguntas</a></li><li><a href="#dudas">Artículos</a></li></ul><a class="me" href="#inicio">Soy médico</a><button class="ib menu" aria-label="Menú">${ic('menu')}</button></header>`;
+const nav = (act) => `<header class="wrap nav"><a class="logo" href="#inicio" aria-label="Mi Médico Manik, inicio"><img src="${IMG.logo}" alt="" width="153" height="40"></a><ul><li><a href="#resultados" ${act==='buscar'?'aria-current="page"':''}>Especialidades</a></li><li><a href="#dudas">Preguntas</a></li><li><a href="#dudas">Artículos</a></li></ul><button class="me" data-toast="El registro para médicos aún no está en el prototipo">Registra tu consultorio</button><button class="ib menu" aria-label="Menú">${ic('menu')}</button></header>`;
 
 // Vistas
 const V = {};
@@ -429,7 +429,7 @@ V.promo = (id) => { const p = PROMOS.find(x=>x.id===id); if (!p) return V.result
   <dl class="det"><div><dt>Precio</dt><dd>${peso(p.pr)} · normal ${peso(p.normal)}</dd></div><div><dt>Vigencia</dt><dd>Hasta el ${p.hasta}</dd></div><div><dt>Dónde</dt><dd>${c.lu}</dd></div><div><dt>Condiciones</dt><dd>${p.cond}</dd></div></dl>
   <a class="anun" href="#medico-${m.id}">${avatar(m)}<b>${p.anun} · ${m.n}</b><small>${m.esp}</small>${ced(m)}</a>
   <div class="acc"><button class="btn primario" data-promo-agendar="${p.id}">Agendar con esta promoción</button><a class="btn texto" href="#medico-${m.id}">Ver perfil</a></div>
-  <p class="legal">Promoción de ${p.anun}. Manik no recomienda médicos; muestra quién la ofrece y sus cédulas.</p>
+  <p class="legal">Promoción de ${p.anun}. Mi Médico Manik no recomienda médicos; muestra quién la ofrece y sus cédulas.</p>
   <div class="impulsa"><img src="${SELLO_IMPULSA}" width="32" height="32" alt=""><span><b>Promoción publicada con Impulsa Manik</b>, la herramienta de campañas del ecosistema Manik.</span><button class="btn texto" data-toast="Página de Impulsa Manik para médicos (siguiente ronda)">¿Eres médico? Conoce Impulsa</button></div></div></div></main>`; };
 const HOY = () => MED.map(m => { const c = m.cons.find(c => c.manik && c.ag && c.ag[0]); return c ? {m, c} : null; }).filter(Boolean).sort((a,b)=>a.c.km-b.c.km).slice(0, 3);
 const PREG = [['¿El acné en adultos se quita solo?','soto',2],['Se me cae mucho el cabello, ¿a qué especialista voy?','luna',3]];
@@ -463,8 +463,8 @@ ${hoy.length ? `<section class="wrap sec" aria-labelledby="h-hoy"><h2 class="h2"
 <h3>Artículos de médicos</h3>${ART.map(([t,id,i,min,img])=>{const m=medDe(id);return `<button class="q art" data-toast="La página del artículo aún no está en el prototipo">${img ? `<img class="th" src="${img}" alt="">` : `<span class="th">${ic(i)}</span>`}<b>${t}</b><small><span class="nw">Por ${m.n}</span> · <span class="nw">${m.esp}</span> · <span class="nw">${min} min</span></small></button>`}).join('')}
 <div class="acc"><button class="lnk" data-toast="El listado de artículos aún no está en el prototipo">Ver artículos</button></div></div></section>
 <section class="wrap sec" aria-labelledby="h-como"><h2 class="h2" id="h-como">Cómo <b>funciona</b></h2><ol class="pasos"><li><span><b>Busca</b><span>Por especialidad, por lo que sientes o por nombre.</span></span></li><li><span><b>Compara</b><span>Precio, distancia y opiniones de cada consultorio.</span></span></li><li><span><b>Agenda</b><span>En línea o por teléfono. La consulta es en el consultorio.</span></span></li></ol></section>
-<section class="wrap sec"><div class="trust" aria-label="Por qué Manik"><div><span class="ic">${ic('badge-check')}</span><b>Médicos verificados</b><p>Revisamos el registro profesional de cada médico (cédula profesional).</p></div><div><span class="ic">${ic('message-circle-heart')}</span><b>Opiniones reales</b><p>Solo opina quien tuvo cita en Manik.</p></div><div><span class="ic">${ic('calendar-check')}</span><b>Gratis para ti</b><p>Pagas la consulta en el consultorio.</p></div></div></section>
-<section class="wrap sec"><div class="soymed"><div><b>¿Eres médico?</b><p>Aparece en Manik y recibe pacientes.</p></div><button class="btn secundario" data-toast="La página para médicos aún no está en el prototipo">Soy médico</button></div></section>
+<section class="wrap sec"><div class="trust" aria-label="Por qué Mi Médico Manik"><div><span class="ic">${ic('badge-check')}</span><b>Médicos verificados</b><p>Revisamos el registro profesional de cada médico (cédula profesional).</p></div><div><span class="ic">${ic('message-circle-heart')}</span><b>Opiniones reales</b><p>Solo opina quien tuvo cita en Mi Médico Manik.</p></div><div><span class="ic">${ic('calendar-check')}</span><b>Gratis para ti</b><p>Pagas la consulta en el consultorio.</p></div></div></section>
+<section class="wrap sec"><div class="soymed"><div><b>¿Eres médico?</b><p>Aparece en Mi Médico Manik y recibe pacientes.</p></div><button class="btn secundario" data-toast="El registro para médicos aún no está en el prototipo">Registra tu consultorio</button></div></section>
 <footer class="wrap pie"><img src="${IMG.logo}" alt="Mi Médico Manik" width="123" height="32"><span>de MedicalManik</span><span>Aviso de privacidad</span><span>Términos</span></footer>`; };
 
 V.resultados = () => {
@@ -558,7 +558,7 @@ V.cita = () => {
     <div class="cc">${resumen(true)}<div class="acc"><button class="btn primario" data-agendar="${m.id}|${c.id}">Agendar otra vez con ${corto(m)}</button><a class="btn texto" href="#resultados">Buscar otro médico</a></div></section></div>${demoB()}</main>`;
   }
   const faltan = inicioCita(ci) - Date.now(), pasada = demo === 'pasada' || faltan < 0, menos = demo === 'menos24' || (!pasada && faltan < 864e5);
-  if (pasada) return `${nav('')}<main class="wrap"><div class="ok"><span class="estado gris">Ya pasó</span><h1 id="h-ok" tabindex="-1">¿Cómo te fue con <b>${corto(m)}</b>?</h1><p class="lead">Tu opinión ayuda a otras familias. Solo opina quien tuvo cita en Manik.</p></div>
+  if (pasada) return `${nav('')}<main class="wrap"><div class="ok"><span class="estado gris">Ya pasó</span><h1 id="h-ok" tabindex="-1">¿Cómo te fue con <b>${corto(m)}</b>?</h1><p class="lead">Tu opinión ayuda a otras familias. Solo opina quien tuvo cita en Mi Médico Manik.</p></div>
     <div class="cc">${resumen(false)}<div class="acc"><button class="btn primario" data-toast="Opinar: siguiente ronda">Opinar sobre la consulta</button><button class="btn secundario" data-agendar="${m.id}|${c.id}">Agendar otra cita</button></div></section></div>${demoB()}</main>`;
   const lim = new Date(inicioCita(ci) - 864e5), limT = `${DIAS[lim.getDay()]} ${lim.getDate()} de ${['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][lim.getMonth()]} a las ${ci.hora}`;
   const plan = menos
@@ -587,7 +587,7 @@ V.confirmada = () => {
   const m = MED.find(x=>x.id===S.med), c = m && m.cons.find(x=>x.id===S.cons);
   if (!c || !S.hora) { location.hash = 'inicio'; return ''; }
   const pila = (S.datos.nombre||'').split(' ')[0], cuando = fechaLarga(S.dia).replace(/^./, x=>x.toUpperCase()) + ', ' + S.hora;
-  const msg = `Manik: Cita confirmada con ${m.n}, ${DIAS[dia(S.dia).getDay()].slice(0,3)} ${dia(S.dia).getDate()} ${MES[dia(S.dia).getMonth()]} ${S.hora}, ${c.lu}. Cambiar o cancelar: mnk.example/c/7KQ2`;
+  const msg = `Mi Médico Manik: Cita confirmada con ${m.n}, ${DIAS[dia(S.dia).getDay()].slice(0,3)} ${dia(S.dia).getDate()} ${MES[dia(S.dia).getMonth()]} ${S.hora}, ${c.lu}. Cambiar o cancelar: mnk.example/c/7KQ2`;
   return `${nav('')}<main class="wrap"><div class="ok"><span class="ic">${ic('circle-check')}</span><h1 id="h-ok" tabindex="-1">Tu cita está <b>confirmada</b>.</h1><p class="lead">${pila ? pila + ', te' : 'Te'} esperan el ${DIAS[dia(S.dia).getDay()]} a las ${S.hora}.</p></div>
   <div class="cc"><section class="cres a-res" aria-label="Detalle de la cita"><span class="cuando">${cuando}</span>
    <span class="fila">${ic('stethoscope')}<span><b>${m.n}</b><small>${m.esp}</small></span></span>
