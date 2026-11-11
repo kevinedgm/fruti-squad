@@ -27,6 +27,19 @@ operations:
     inputs: [registry_delta, code_delta, compliance_delta]
     contract: .fruti/contracts/documentation.yaml
     references: [agentes/mora/redaccion.md]
+  catalog:
+    purpose: compact component guide for fruti and nexa, so nobody walks the Design Hub to choose a piece
+    writes: .fruti/catalog.json
+    generates: .fruti/catalog.md
+    command: fruti catalog --registry <registry_path>
+    check: fruti catalog --check
+    when: [after_document_page, after_sync, first_run, catalog_audit_request]
+    per_entry_reads: [hub_page_of_that_piece, public_api_or_code_of_that_piece]
+    rules:
+      - same_key_as_registry
+      - status_and_version_come_from_registry_never_written_in_catalog
+      - missing_evidence_goes_to_missing_never_invented
+      - unregistered_project_pieces_use_origin_proyecto
   initialize:
     references: [agentes/mora/first-run.md, agentes/mora/intake.md, agentes/mora/profile-additions.md]
   test_document:
@@ -61,4 +74,5 @@ rules:
   - code_and_types_own_public_api
   - prose_follows_redaccion_md_and_the_documentation_contract_wins_on_conflict
   - registry_owns_lifecycle
+  - update_catalog_entry_whenever_a_page_changes
   - full_agent_manual_only_if_runtime_contract_is_insufficient

@@ -134,6 +134,16 @@ Mora no produce wireframes: en el squad, la estructura es de kiwi. Cuando el ent
 
 Si kiwi no está instalada, mora deja el encargo escrito y declara la estructura como pendiente; no improvisa un wireframe ni un shell paralelo.
 
+### Catálogo de componentes (guía rápida para Fruti y Nexa)
+
+El catálogo es la vista corta del Hub. Sirve para que nadie tenga que recorrer el Hub para saber qué piezas existen, cómo se usan y si están disponibles.
+
+- **Qué escribes:** `.fruti/catalog.json`, con una entrada por pieza (`component`, `pattern`, `navigation`, `template`) y la misma clave que en el registro. Cada entrada lleva `purpose` y `entry` (import o marcado), y además `use_when`, `avoid_when`, `api` (`props`, `slots`, `events`), `variants`, `sizes`, `width` (`fill`, `content` o `fixed`), `states`, `docs` y `missing`.
+- **De dónde sale:** de las mismas fuentes verificadas que la página del Hub: el código y los tipos públicos para la API, y el contrato aprobado para las variantes, los tamaños y los estados. Lo que no tenga evidencia va en `missing`; nunca se inventa.
+- **Qué no escribes:** ni estado ni versión. Esos datos son de Lima y `fruti catalog` los toma del registro.
+- **Cuándo:** cada vez que documentas o sincronizas una pieza (M2 o M3), actualiza su entrada y corre `fruti catalog`, que regenera `.fruti/catalog.md`. Cuando te pidan auditar el catálogo, o la primera vez, carga las entradas que falten: una por pieza del registro y, con `origin: "proyecto"`, las piezas del proyecto que todavía no están registradas (por ejemplo, componentes de la librería visual que ya usan los módulos). Lee solo la página del Hub y la API pública de cada una.
+- **Comprobación:** `fruti catalog --check` falla si una pieza del registro no tiene entrada, si una entrada no tiene `purpose` o `entry`, o si `catalog.md` no está al día.
+
 ## 7. Verificación
 
 Ejecuta solo checks pertinentes y declara los no disponibles:

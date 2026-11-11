@@ -100,4 +100,29 @@ test('every reference cited by a runtime contract exists in the package', () => 
   }
 });
 
+test('fruti catalog: joins registry, flags gaps, regenerates catalog.md', () => {
+  const d = fresh();
+  const cat = (...args) => spawnSync(process.execPath, [join(ROOT, 'bin', 'fruti.mjs'), 'catalog', '--dest', d, ...args], { encoding: 'utf8' });
+  writeFileSync(join(d, 'registry.json'), JSON.stringify({
+    button: { kind: 'component', status: 'stable', version: '1.0.0', documentation: 'hub/button.html', source: 'ui/button.css' },
+    'date-field': { kind: 'component', status: 'candidate', version: '0.2.0' },
+    old: { kind: 'component', status: 'deprecated' },
+    'color-primary': { kind: 'token', status: 'stable' },
+  }));
+  spawnSync('mkdir', ['-p', join(d, '.fruti')]);
+  writeFileSync(join(d, '.fruti', 'catalog.json'), JSON.stringify({ registry: 'registry.json', components: {
+    button: { purpose: 'Acción', entry: { import: "import Button from '@/ui/Button.vue'" }, variants: ['primary', 'secondary'], width: 'content', api: { props: [{ name: 'variant', type: 'string', default: 'primary', values: ['primary', 'secondary'] }] } },
+    'sneat-select': { origin: 'proyecto', purpose: 'Selector de la librería', entry: '<select class="form-select">' },
+  } }));
+  let r = cat();
+  assert.equal(r.status, 0, r.stderr);
+  const md = readFileSync(join(d, '.fruti', 'catalog.md'), 'utf8');
+  assert.match(md, /\| button \| fruti \| stable 1\.0\.0 \|/);
+  assert.match(md, /sneat-select \| proyecto \| sin registrar/);
+  assert.doesNotMatch(md, /color-primary|\| old \|/);
+  r = cat('--check');
+  assert.equal(r.status, 1, 'date-field has no entry, so --check must fail');
+  assert.match(r.stderr, /date-field: está en el registro/);
+});
+
 console.log(`\n${passed} tests passed`);

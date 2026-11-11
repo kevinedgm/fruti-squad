@@ -10,6 +10,7 @@ operations:
   classify:
     references: [skills/lima/reference/request-router.md]
   reuse_or_truth:
+    first_read: .fruti/catalog.md  # when present: find candidates there before opening Hub pages; status still from registry
     references: [skills/lima/reference/source-of-truth.md, skills/lima/reference/registry.md]
   contract:
     references: [skills/lima/reference/ui-artifact-contract.md, skills/lima/reference/component-api.md, skills/lima/reference/interaction-contract.md]

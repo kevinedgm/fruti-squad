@@ -219,6 +219,16 @@ REDESIGN PLAN
 Kiwi → Lima → Coco → Bruno → Coco (R0) → Lima → Mora
 ```
 
+
+## Catálogo de componentes
+
+Mora mantiene `.fruti/catalog.json`, con una entrada por pieza: para qué sirve, cómo se importa, su API, variantes, tamaños, ancho y estados. El estado y la versión los toma del registro. `fruti catalog` genera `.fruti/catalog.md`, que es lo primero que leen Lima (al decidir si algo se reutiliza) y los roles de Nexa (Kura y Kompa) para elegir una pieza sin recorrer el Design Hub.
+
+```bash
+fruti catalog --registry design-hub/system/registry.json   # la primera vez; después basta `fruti catalog`
+fruti catalog --check                                      # falla si el catálogo no cubre el registro o está desfasado
+```
+
 ## Understanding
 
 Puedes describir la intención en lenguaje natural:
