@@ -44,7 +44,7 @@ Cada fila se comprueba mirando el código o la pantalla. La fuente es el estánd
 |---|---|---|
 | C1 | El título dice la tarea con verbo + objeto ("Guardar vista"). Si confirma algo con efecto, es pregunta ("¿Pausar el flujo?") | KRUG; NN 2 |
 | C2 | Bajo el título, una línea dice el beneficio o la consecuencia, con el dato real cuando lo hay ("34 pacientes en espera; se quedan donde están hasta reanudar") | KRUG; NN 1 |
-| C3 | Cada campo cuyo formato, límite o destino no es obvio tiene ayuda debajo: formato, conteo (23/60) o dónde aparecerá lo guardado | GOV.UK hint; WROB |
+| C3 | Cada campo cuyo formato, límite o destino no es obvio tiene ayuda debajo: formato, conteo (23/60) o dónde aparecerá lo guardado. La ayuda cabe en una línea, va pegada al campo que describe y en color secundario; si necesita un párrafo o habla de varios campos a la vez, falla | GOV.UK hint; WROB |
 | C4 | Si la acción guarda una selección, se ve qué incluye (resumen de solo lectura de lo que se va a guardar) | NN 1; NN 6 |
 | C5 | Cada opción con efectos distintos explica su efecto en una línea, no solo su nombre | GOV.UK radios; NN 5 |
 | C6 | El efecto secundario o lo que no se puede deshacer se avisa junto a las acciones, antes de confirmar | NN 5; NORMAN |
@@ -69,7 +69,7 @@ Cada fila se comprueba mirando el código o la pantalla. La fuente es el estánd
 | Id | Pasa si… | Fuente |
 |---|---|---|
 | R1 | En cada modo (compacto < 600, medio 600–1023, amplio ≥ 1024) nada se desborda ni se parte una acción, y lo que cede lo hace en el orden del contrato de cada pieza | WCAG 1.4.10; contrato adaptativo de kiwi |
-| E1 | Se distingue qué se edita y qué solo se lee: un campo editable se ve como control; un dato de solo lectura no lleva icono de acción (flecha, calendario, desplegable); un dato calculado (p. ej. semanas de gestación o fecha probable de parto a partir de la FUM) dice de dónde sale y no se edita. Un chevron solo si lleva a otra vista | NORMAN (significantes); NN 4 |
+| E1 | Se distingue qué se edita y qué solo se lee: un campo editable se ve como control; un dato de solo lectura no lleva icono de acción (flecha, calendario, desplegable); un dato calculado (p. ej. SDG o FPP a partir de la FUM) marca su origen en el propio dato, con dos o tres palabras en texto secundario ("según FUM"), nunca con una nota aparte que explique el cálculo; si se puede ajustar, solo ese dato lleva el control de edición. El dato de entrada va antes que lo que se calcula de él (FUM antes de SDG y FPP). Un chevron solo si lleva a otra vista | NORMAN (significantes); NN 4 |
 | S1 | Cada control tiene etiqueta asociada; la ayuda y el error se enlazan con `aria-describedby` | WCAG 1.3.1; 3.3.2 |
 | S2 | Un grupo de opciones va en `fieldset` + `legend` (o `role="radiogroup"` con nombre); un modal tiene `role="dialog"` con título y descripción enlazados | WCAG 1.3.1; ARIA APG |
 | S3 | Foco visible, orden de tabulación igual al visual y objetivos táctiles de 44 px en pantallas táctiles | WCAG 2.4.7; 2.5.8 |

@@ -35,4 +35,5 @@ rules:
   - never_commit_or_push
   - reply_max_12_lines
   - log_each_step_to .fruti/logs/mango.log with date-stamped lines (inicio, leer, diagnostico, editar, verificar, pedido, pregunta, fin); fin carries total minutes
-  - editable_vs_readonly_vs_derived_must_be_distinguishable (row E1)
+  - editable_vs_readonly_vs_derived_must_be_distinguishable (row E1): derived origin is a 2-3 word secondary mark on the value itself, never a separate explanatory note; input before derived
+  - helper_text_is_one_line_attached_to_its_field (row C3)
