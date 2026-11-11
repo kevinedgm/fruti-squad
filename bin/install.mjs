@@ -518,7 +518,6 @@ function doInstall(args) {
       if (existsSync(fr(...rel)) && !existsSync(to(...rel))) trackedCopy(fr(...rel), to(...rel), args, rel.join('/'));
     }
     if (existsSync(join(PKG_ROOT, 'AGENTS.md'))) trackedCopy(join(PKG_ROOT, 'AGENTS.md'), to('policy.md'), args, 'policy', own);
-    if (existsSync(join(PKG_ROOT, 'docs', 'nexa-y-fruti.md'))) trackedCopy(join(PKG_ROOT, 'docs', 'nexa-y-fruti.md'), to('nexa-y-fruti.md'), args, 'guía Nexa y Fruti', own);
     trackedWrite(to('paths.yaml'), pathsMap(base, members, target), args, 'path map', own);
   }
 

@@ -28,7 +28,7 @@ operations:
     contract: .fruti/contracts/documentation.yaml
     references: [agentes/mora/redaccion.md]
   catalog:
-    purpose: compact component guide for fruti and nexa, so nobody walks the Design Hub to choose a piece
+    purpose: compact component guide for fruti and mango, so nobody walks the Design Hub to choose a piece
     writes: .fruti/catalog.json
     generates: .fruti/catalog.md
     command: fruti catalog --registry <registry_path>

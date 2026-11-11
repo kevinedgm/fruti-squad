@@ -31,8 +31,6 @@ La idea es sencilla: tú describes el trabajo, no el protocolo interno.
 
 El Squad resuelve internamente quién debe actuar, qué contexto necesita y qué debe entregar al siguiente agente.
 
-> **Si el proyecto también tiene Nexa Squad** (existe `.nexa-squad/`), Fruti diseña solo piezas: componentes, variantes, patrones, tokens y el Design Hub. Las pantallas del producto, las que usa un rol con datos y reglas reales, son de Nexa. Ver [Con Nexa Squad](#con-nexa-squad).
-
 ## El equipo
 
 Cinco especialistas. Cada uno es dueño de una sola clase de decisión y entrega evidencia al siguiente; si encuentra algo que no le toca, lo devuelve a su dueño.
@@ -236,7 +234,7 @@ Kiwi → Lima → Coco → Bruno → Coco (R0) → Lima → Mora
 
 ## Catálogo de componentes
 
-Mora mantiene `.fruti/catalog.json`, con una entrada por pieza: para qué sirve, cómo se importa, su API, variantes, tamaños, ancho y estados. El estado y la versión los toma del registro. `fruti catalog` genera `.fruti/catalog.md`, que es lo primero que leen Lima (al decidir si algo se reutiliza) y los roles de Nexa (Kura y Kompa) para elegir una pieza sin recorrer el Design Hub.
+Mora mantiene `.fruti/catalog.json`, con una entrada por pieza: para qué sirve, cómo se importa, su API, variantes, tamaños, ancho y estados. El estado y la versión los toma del registro. `fruti catalog` genera `.fruti/catalog.md`, que es lo primero que leen Lima (al decidir si algo se reutiliza) y Mango para elegir una pieza sin recorrer el Design Hub.
 
 ```bash
 fruti catalog --registry design-hub/system/registry.json   # la primera vez; después basta `fruti catalog`
@@ -516,27 +514,6 @@ Documenta el delta implementado y verificado, con las reglas de redacción de `a
 No es una etapa de la ronda: trabaja directo en tu conversación sobre el código de una pantalla. "Usa mango: agrega separadores al formulario de alta" se hace sin diagnóstico ni preguntas. "Usa mango: corrige el diseño de la barra de búsqueda" se califica con 24 filas comprobables (contenido, apariencia, adaptación, edición y semántica, integración), cada una con su estándar, y entrega la calificación antes y después. Cada corrida deja en `.fruti/logs/mango.log` una línea por paso con su hora, y la línea final dice cuánto duró.
 
 Para cada pieza de Fruti que toca, lee su entrada en `.fruti/catalog.md` y la usa con las props de su contrato, sin sobrescribirla con CSS. Si el problema es de la pieza (no cumple su contrato, le falta una variante, no existe, o una sección hecha a mano debería ser pieza), escribe `.fruti/requests/<id>.md` y te da la frase para kiwi, coco o bruno.
-
----
-
-# Con Nexa Squad
-
-**Fruti Squad fabrica las piezas; Nexa Squad arma los módulos con ellas.** Usa Fruti cuando el resultado es algo que se reutiliza en muchas pantallas (un componente, una variante, un patrón, un token) y vive en el Design Hub. Usa Nexa cuando el resultado es una funcionalidad del producto que usa un rol, con sus datos, reglas de negocio y servidor.
-
-Ejemplo con la misma palabra:
-
-- "Necesito un autocomplete que busque mientras escribo y se pueda usar con teclado" → **Fruti**: es una pieza.
-- "En Cuentas, la recepcionista busca la muestra pendiente y la paga" → **Nexa**: es un módulo que usa esa pieza.
-
-Cuando los dos están en el mismo proyecto:
-
-- **Las pantallas del producto son de Nexa.** Si existe `.nexa-squad/`, Kiwi no wireframea una pantalla o un módulo del producto: responde en una línea con la frase para Nexa (`/orka …`). Si la petición también nombra un patrón reutilizable ("el formulario de alta estándar"), Fruti diseña solo ese patrón. En un rediseño, Fruti planea fundamentos, primitivas, patrones y componentes; las vistas quedan con `owner: nexa`.
-- Sin Nexa en el proyecto, Fruti sigue diseñando pantallas como siempre.
-- Nexa lee el registro, los contratos y los tokens de Fruti, y nunca los modifica.
-- Si a Nexa le falta una pieza, su curador (Kura) escribe un pedido en `docs/componentes/pedidos/<id>.md`. Pídele a Fruti "diseña el componente de `docs/componentes/pedidos/<id>.md`": Kiwi arma su brief desde ese pedido y su tabla de estados alimenta la tabla de transiciones de Lima.
-- Cuando el componente queda en el registro, Nexa lo toma con `/orka continúa <módulo>`.
-
-La guía completa, con qué pedirle a cada uno, los cinco casos en que trabajan juntos y quién manda cuando no coinciden, está en [docs/nexa-y-fruti.md](docs/nexa-y-fruti.md). El instalador la copia a `.fruti/nexa-y-fruti.md`.
 
 ---
 
