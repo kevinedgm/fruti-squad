@@ -37,3 +37,6 @@ rules:
   - log_each_step_to .fruti/logs/mango.log with date-stamped lines (inicio, leer, diagnostico, editar, verificar, pedido, pregunta, fin); fin carries total minutes
   - editable_vs_readonly_vs_derived_must_be_distinguishable (row E1): derived origin is a 2-3 word secondary mark on the value itself, never a separate explanatory note; input before derived
   - helper_text_is_one_line_attached_to_its_field (row C3)
+  - order_follows_task_and_data_flow; derived next to its source; disclosure at end of group (row C9)
+  - rows_in_a_list_share_one_shape_and_alignment (row A9)
+  - with_a_screenshot_judge_flow_and_layout_rows_on_it; a_previous_structural_decision_never_makes_C9_or_A9_pass

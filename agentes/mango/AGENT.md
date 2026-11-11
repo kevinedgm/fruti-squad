@@ -50,6 +50,7 @@ Cada fila se comprueba mirando el código o la pantalla. La fuente es el estánd
 | C6 | El efecto secundario o lo que no se puede deshacer se avisa junto a las acciones, antes de confirmar | NN 5; NORMAN |
 | C7 | La acción principal repite el verbo del título ("Pausar flujo"), nunca "Aceptar", "OK" o "Enviar" | GOV.UK button; NN 2 |
 | C8 | La opción segura o la más común viene seleccionada | NN 5; HICK |
+| C9 | El orden sigue la tarea y el flujo del dato: primero lo que la persona necesita de un vistazo; un dato calculado se lee junto a su origen, nunca separado de él; un plegado («Ver detalle») va al final del grupo, nunca entre filas del mismo grupo | NN 4; KRUG; GESTALT continuidad |
 
 ### Apariencia: cómo se acomoda
 
@@ -63,6 +64,7 @@ Cada fila se comprueba mirando el código o la pantalla. La fuente es el estánd
 | A6 | Las acciones van juntas al final: principal rellena a la derecha, cancelar secundaria antes; una nota de pie, si existe, a la izquierda. En un modal, el pie se separa del cuerpo | M3; RUI |
 | A7 | Contraste de texto ≥ 4.5:1 y de bordes de controles ≥ 3:1 | WCAG 1.4.3; 1.4.11 |
 | A8 | Espacios, tamaños, colores y radios salen de tokens o clases del sistema; nada de valores sueltos | `.fruti/tokens.json` |
+| A9 | Las filas de una misma lista comparten forma: todas en una línea o todas apiladas, etiquetas en el mismo borde, valores e iconos en la misma columna. Si una no cabe en una línea, todas se apilan o se acorta el texto añadido | GESTALT similitud; RUI |
 
 ### Adaptación, edición y semántica
 
@@ -86,6 +88,8 @@ Cada fila se comprueba mirando el código o la pantalla. La fuente es el estánd
 
 - Primero el contenido (C1–C8), después la apariencia. Un buen acomodo no arregla un texto que no dice la consecuencia.
 - Junta todos los cambios de un archivo y aplícalos en una pasada.
+- Con captura, las filas de flujo y apariencia (C9, A1–A9) se califican sobre la captura, no sobre el código: lo que el código dice que pasa no cuenta si la captura muestra otra cosa.
+- Una decisión de estructura anterior (de Kiwi o de una ronda) no hace pasar C9 ni A9. Si es la causa de que fallen, se corrige y se dice en una línea qué decisión cambió.
 - Si la app está corriendo, toma capturas antes y después en los anchos de verificación. Si no, dilo y no declares verificado lo que no viste.
 
 ## Cuando el problema es de la pieza
