@@ -127,7 +127,7 @@ a{color:inherit}
 .lnk{justify-self:start;font-weight:600;color:var(--tinta);text-decoration:underline;text-underline-offset:3px;display:inline-flex;align-items:center;min-height:44px;background:none;border:0;padding:0;font-size:16px;font-family:var(--sans);cursor:pointer}
 .hoy{display:grid;gap:12px}@media (min-width:640px){.hoy{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (min-width:1024px){.hoy{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .mf{background:var(--blanco);border:1px solid var(--linea);border-radius:24px;padding:14px;display:grid;grid-template-columns:56px minmax(0,1fr) auto;gap:4px 12px;align-items:center}
-.mf .face{grid-row:1/4;align-self:start;border-radius:14px}.mf b{font:600 18px/22px var(--display)}.mf b a{text-decoration:none;display:inline-block;padding-block:3px}.mf b a:hover{text-decoration:underline}.mf small{font-size:14px;line-height:20px;color:var(--muted)}.mf .ced{grid-column:2}.mf .btn{grid-row:1/4;grid-column:3;min-height:44px;padding:0 18px}
+.mf .face{grid-row:1/4;align-self:start;border-radius:14px}.mf b{font:600 18px/22px var(--display)}.mf b a{text-decoration:none;display:inline-block;padding-block:3px}.mf b a:hover{text-decoration:underline}.mf small{font-size:14px;line-height:20px;color:var(--muted)}.mf small .est{font:400 14px/20px var(--sans);color:var(--estrella)}@media (min-width:1024px){.hoy.dest{grid-template-columns:repeat(2,minmax(0,1fr))}}.mf .ced{grid-column:2}.mf .btn{grid-row:1/4;grid-column:3;min-height:44px;padding:0 18px}
 .dud{display:grid;gap:12px}@media (min-width:640px){.dud{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .dud h3{grid-column:1/-1;font:600 15px/20px var(--sans);color:var(--muted);letter-spacing:.02em;margin-top:4px}
 .dud .acc{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
@@ -165,6 +165,7 @@ a{color:inherit}
 .co .l1{font-size:15px;line-height:22px;font-weight:600}.co .l1 b{font:600 17px/22px var(--display)}
 .co .l2{display:flex;flex-wrap:wrap;align-items:center;gap:0 6px;font-size:14px;line-height:20px;color:var(--muted)}.co .l2 .ico{width:16px;height:16px;color:var(--teal-hover)}
 .co .btn{grid-column:2;grid-row:1/3;min-height:44px;min-width:92px;padding:0 16px}
+.co .l3{grid-column:1;font-size:14px;line-height:20px;color:var(--muted)}
 .co .alt{grid-column:1;display:inline-flex;align-items:center;gap:6px;min-height:36px;font-size:14px;font-weight:600;color:var(--tinta);text-decoration:underline;text-underline-offset:3px;justify-self:start;white-space:nowrap;background:none;border:0;padding:0;cursor:pointer;font-family:var(--sans)}.co .alt .ico{width:16px;height:16px}
 .mas{grid-column:1/-1;justify-self:start;font:600 14px var(--sans);color:var(--tinta);background:none;border:0;padding:0;min-height:36px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 @container (min-width:560px){.fmi{grid-template-columns:132px minmax(0,1fr);gap:12px 18px;padding:16px;border-radius:28px}.fmi .face{grid-row:1/4;border-radius:20px}.cons,.mas{grid-column:2}.fmi h3{font-size:22px;line-height:26px}}
@@ -312,7 +313,7 @@ a{color:inherit}
 /*DATA*/
 const ic = (n, cls='ico') => `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]||''}</svg>`;
 const $ = s => document.querySelector(s);
-const peso = n => '$' + n.toLocaleString('es-MX');
+const peso = n => n == null ? 'Precio en consulta' : '$' + n.toLocaleString('es-MX');
 // Días: 0 = hoy
 const DIAS = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
 const MES = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
@@ -395,16 +396,25 @@ const ESPS = [['Alergología'],['Angiología'],['Cardiología'],['Cirugía gener
  ['Otorrinolaringología'],['Pediatría',/^Pediatra/],['Psicología',/^Psicólog/],['Psiquiatría',/^Psiquiatra/],['Reumatología'],['Urología',/^Urólog/]];
 const espDe = n => ESPS.find(e => e[0] === n);
 const medsEsp = n => { const e = espDe(n); return e && e[1] ? MED.filter(m => e[1].test(m.esp)) : []; };
-const S = {esp:null, q:'Dermatóloga', donde:'Angelópolis, Puebla', cat:'Piel', f:{manik:false, hoy:false, precio:0}, orden:'km', med:null, cons:null, dia:null, hora:null, datos:{}};
+// Modelo por consultorio (2026-11-11): seg = acepta seguro, virtual = también da teleconsulta, pr:null = no publica precio, ciudad para la publicidad.
+const EXTRA = {'soto|angelopolis':{seg:true}, 'quiroz|centro':{pr:null}, 'hernandez|lapaz':{virtual:true}, 'ramos|sanmanuel':{seg:true}, 'luna|angelopolis':{virtual:true},
+ 'mendez|lapaz':{virtual:true}, 'pena|centro':{virtual:true, pr:null}, 'vazquez|angelopolis':{virtual:true, seg:true}, 'salinas|sanmanuel':{pr:null}, 'ortiz|angelopolis':{seg:true},
+ 'ruiz|centro':{seg:true, pr:null}, 'ortega|lapaz':{seg:true}, 'castro|sanmanuel':{virtual:true}, 'eruiz|angelopolis':{seg:true}, 'diaz|neodemo':{seg:true}};
+const CIUDAD = {neodemo:'Xalapa', cholula:'Cholula'};
+MED.forEach(m => m.cons.forEach(c => Object.assign(c, EXTRA[m.id + '|' + c.id] || {}, {ciudad: CIUDAD[c.id] || 'Puebla'})));
+const ciudadBusq = () => /xalapa/i.test(S.donde) ? 'Xalapa' : 'Puebla';
+const S = {esp:null, q:'Dermatóloga', donde:'Angelópolis, Puebla', cat:'Piel', f:{agenda:false,precio:false,seguro:false,tele:false,hoy:false}, orden:'km', med:null, cons:null, dia:null, hora:null, datos:{}};
 
 // Consultorios: el próximo lugar y si cumplen filtros
 const prox = c => { if (!c.manik) return null; const ks = Object.keys(c.ag||{}).map(Number).sort((a,b)=>a-b); return ks.length ? {off:ks[0], h:c.ag[ks[0]][0]} : null; };
-const cumple = c => (!S.f.manik || c.manik) && (!S.f.hoy || (c.manik && c.ag && c.ag[0])) && (!S.f.precio || c.pr <= S.f.precio);
+const cumple = c => (!S.f.agenda || c.manik) && (!S.f.precio || c.pr != null) && (!S.f.seguro || c.seg) && (!S.f.tele || c.virtual) && (!S.f.hoy || (c.manik && c.ag && c.ag[0]));
 function resultados(){
   return (S.esp ? medsEsp(S.esp) : MED.filter(m => (m.cats||['Piel']).includes(S.cat))).map(m => { const ok = m.cons.filter(cumple).sort((a,b)=>a.km-b.km); if (!ok.length) return null; const resto = m.cons.filter(c=>!ok.includes(c)).sort((a,b)=>a.km-b.km); return {m, cons:[...ok, ...resto]}; })
-   .filter(Boolean).sort((a,b) => S.orden==='precio' ? a.cons[0].pr-b.cons[0].pr : S.orden==='op' ? b.m.op-a.m.op : a.cons[0].km-b.cons[0].km);
+   .filter(Boolean).sort((a,b) => S.orden==='conprecio' ? ((a.cons[0].pr==null)-(b.cons[0].pr==null)) || a.cons[0].km-b.cons[0].km : S.orden==='op' ? b.m.op-a.m.op : a.cons[0].km-b.cons[0].km);
 }
-const nFiltros = () => (S.f.manik?1:0)+(S.f.hoy?1:0)+(S.f.precio?1:0);
+const FILT = [['agenda','Con agenda en línea'],['precio','Con precio'],['seguro','Acepta seguro'],['tele','Teleconsulta']];
+const nFiltros = () => FILT.filter(([k]) => S.f[k]).length + (S.f.hoy ? 1 : 0);
+const chipsF = (f, attr) => FILT.map(([k,t]) => `<button type="button" class="chip" aria-pressed="${!!f[k]}" ${attr}="${k}">${t}</button>`).join('') + (f.hoy ? `<button type="button" class="chip" aria-pressed="true" ${attr}="hoy">Con lugar hoy</button>` : '');
 
 // Piezas
 const meta = m => m.r ? `<div class="meta"><span class="st"><b aria-hidden="true">★</b> ${m.r} · ${m.op.toLocaleString('es-MX')} opiniones</span></div>` : '';
@@ -416,14 +426,14 @@ function fila(m, c, prim){
   const l2 = c.manik ? `${ic('calendar-check')}<span class="nw">Agenda en línea</span> <span class="nw">· ${p ? nombreDia(p.off) + ', ' + p.h : 'sin lugar en 2 semanas'}</span>` : `${ic('phone')}<span class="nw">Agenda por teléfono</span> <span class="nw">· ${c.tel}</span>`;
   const btn = c.manik ? `<button class="btn ${prim?'primario':'secundario'}" data-agendar="${m.id}|${c.id}">Agendar</button>` : `<a class="btn ${prim?'primario':'secundario'}" href="tel:+52${c.tel.replace(/ /g,'')}" data-llamar="${c.tel}">Llamar</a>`;
   const alt = c.manik && c.tel ? `<a class="alt" href="tel:+52${c.tel.replace(/ /g,'')}" data-llamar="${c.tel}">${ic('phone')}o llama al ${c.tel}</a>` : '';
-  return `<div class="co" role="listitem"><span class="l1">${c.lu} · <span class="nw">${c.km} km · <b>${peso(c.pr)}</b></span></span>${btn}<span class="l2">${l2}</span>${alt}</div>`;
+  return `<div class="co" role="listitem"><span class="l1">${c.lu} · <span class="nw">${c.km} km · <b>${peso(c.pr)}</b></span></span>${btn}<span class="l2">${l2}</span>${c.virtual || c.seg ? `<span class="l3">${[c.virtual && 'También teleconsulta', c.seg && 'Acepta seguro'].filter(Boolean).join(' · ')}</span>` : ''}${alt}</div>`;
 }
 function ficha({m, cons}){
   const extra = cons.length > 2 ? `<a class="mas" href="#medico-${m.id}">Ver ${cons.length-2} consultorio${cons.length>3?'s':''} más</a>` : '';
   return `<article class="fm"><div class="fmi">${avatar(m)}<div class="who"><h3><a href="#medico-${m.id}">${m.n}</a></h3><p class="spec">${m.esp}${m.foco?' · '+m.foco:''}</p>${ced(m)}${meta(m)}</div>
   <div class="cons" role="list" aria-label="Consultorios de ${m.n}">${cons.slice(0,2).map((c,i)=>fila(m,c,i===0)).join('')}</div>${extra}</div></article>`;
 }
-const nav = (act) => `<header class="wrap nav"><a class="logo" href="#inicio" aria-label="Mi Médico Manik, inicio"><img src="${IMG.logo}" alt="" width="153" height="40"></a><ul><li><a href="#resultados" ${act==='buscar'?'aria-current="page"':''}>Especialidades</a></li><li><a href="#dudas">Preguntas</a></li><li><a href="#dudas">Artículos</a></li></ul><button class="me" data-toast="El registro para médicos aún no está en el prototipo">Registra tu consultorio</button><button class="ib menu" aria-label="Menú">${ic('menu')}</button></header>`;
+const nav = (act) => `<header class="wrap nav"><a class="logo" href="#inicio" aria-label="Mi Médico Manik, inicio"><img src="${IMG.logo}" alt="" width="153" height="40"></a><ul><li><a href="#resultados" ${act==='buscar'?'aria-current="page"':''}>Especialidades</a></li><li><a href="#dudas">Preguntas</a></li><li><a href="#dudas">Artículos</a></li></ul><button class="me" data-toast="El registro para médicos aún no está en el prototipo">Únete como médico</button><button class="ib menu" aria-label="Menú">${ic('menu')}</button></header>`;
 
 // Vistas
 const V = {};
@@ -450,13 +460,15 @@ V.promo = (id) => { const p = PROMOS.find(x=>x.id===id); if (!p) return V.result
   <div class="acc"><button class="btn primario" data-promo-agendar="${p.id}">Agendar con esta promoción</button><a class="btn texto" href="#medico-${m.id}">Ver perfil</a></div>
   <p class="legal">Promoción de ${p.anun}. Mi Médico Manik no recomienda médicos; muestra quién la ofrece y sus cédulas.</p>
   <div class="impulsa"><img src="${SELLO_IMPULSA}" width="32" height="32" alt=""><span><b>Promoción publicada con Impulsa Manik</b>, la herramienta de campañas del ecosistema Manik.</span><button class="btn texto" data-toast="La página de Impulsa Manik para médicos aún no está en el prototipo">¿Eres médico? Conoce Impulsa</button></div></div></div></main>`; };
+// Destacados por calificación (2026-11-11): 4.8 o más, al menos 50 opiniones, con consultorio en la ciudad de la búsqueda.
+const DEST = () => MED.filter(m => +m.r >= 4.8 && m.op >= 50 && m.cons.some(c => c.ciudad === ciudadBusq())).sort((a,b) => b.r - a.r || b.op - a.op).slice(0, 4);
 const HOY = () => MED.map(m => { const c = m.cons.find(c => c.manik && c.ag && c.ag[0]); return c ? {m, c} : null; }).filter(Boolean).sort((a,b)=>a.c.km-b.c.km).slice(0, 3);
 const PREG = [['¿El acné en adultos se quita solo?','soto',2],['Se me cae mucho el cabello, ¿a qué especialista voy?','luna',3]];
 // Portadas de ejemplo (abstractas): en producción, la imagen que sube el médico
 const PORTADA = (a, b, c) => 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 180"><rect width="320" height="180" fill="${a}"/><circle cx="250" cy="40" r="90" fill="${b}"/><circle cx="70" cy="170" r="70" fill="${c}"/><path d="M0 120 Q160 60 320 130 V180 H0Z" fill="${b}" opacity=".55"/></svg>`);
 const ART = [['Qué es la dermatitis atópica','ramos','scan-face',5,PORTADA('#D8F0F4','#9FE3EC','#F5C9A6')],['Urticaria: qué es y cuándo preocuparse','hernandez','flower-2',4,PORTADA('#F5C9A6','#F6D49B','#D8F0F4')]];
 const medDe = id => MED.find(m => m.id === id);
-V.inicio = () => { const hoy = HOY(); return `<div class="halo">${nav('')}
+V.inicio = () => { const hoy = HOY(), dest = DEST(); return `<div class="halo">${nav('')}
 <section class="wrap hero" aria-labelledby="h-ini"><div class="htxt"><span class="pill"><span>${ic('shield-check')}</span>Médicos con cédula verificada</span>
 <h1 class="h1" id="h-ini">Vamos a encontrar a <b>tu médico</b>.</h1><p class="lead">Agenda tu cita y resuelve tus dudas con especialistas.</p>
 <button class="campo" data-abrir="buscar" aria-haspopup="dialog">${ic('search')}<span><b>¿Qué necesitas?</b><small>Especialidad, síntoma o nombre del médico</small></span></button>
@@ -473,6 +485,8 @@ V.inicio = () => { const hoy = HOY(); return `<div class="halo">${nav('')}
 <path d="M236 420 C258 392 292 398 312 430" fill="none" stroke="#0A7F8F" stroke-width="30" stroke-linecap="round"/><circle cx="314" cy="434" r="15" fill="#F3D9C4"/></svg><span class="sim">Simulación · foto de marca pendiente</span><span class="flota f1"><span class="face"><img src="${IMG.f_soto || IMG.mujer}" alt=""></span><span><b>Dra. Mariana Soto</b><small>Hoy, 16:30 · Agenda en línea</small></span></span><span class="flota f2">${ic('badge-check')}<span><b>$900</b><small>Consulta · precio a la vista</small></span></span></div></section></div>
 <section class="wrap sec" aria-labelledby="h-cat"><div><h2 class="h2" id="h-cat">Busca por <b>lo que sientes</b></h2><p class="sub">Elige lo que te pasa y te llevamos con el especialista indicado. Estos son los motivos más buscados.</p></div>
 <div class="sellos"><div class="scats">${CATS.map((c,k)=>sello(c,k)).join('')}</div></div><p class="otra">¿Ya sabes qué especialista buscas? <button class="lnk" data-abrir="esp" aria-haspopup="dialog">Ver especialidades de la A a la Z</button></p></section>
+${dest.length ? `<section class="wrap sec" aria-labelledby="h-dest"><div><h2 class="h2" id="h-dest">Médicos <b>destacados</b></h2><p class="sub">Los mejor calificados por sus pacientes en ${ciudadBusq()}: 4.8 o más, con al menos 50 opiniones verificadas.</p></div>
+<div class="hoy dest">${dest.map(m=>`<article class="mf">${avatar(m)}<b><a href="#medico-${m.id}">${m.n}</a></b><small><span class="nw">${m.esp}</span> · <span class="nw"><b class="est" aria-hidden="true">★</b> ${m.r} · ${m.op.toLocaleString('es-MX')} opiniones</span></small>${ced(m)}<a class="btn secundario" href="#medico-${m.id}" aria-label="Ver a ${m.n}">Ver</a></article>`).join('')}</div></section>` : ''}
 ${hoy.length ? `<section class="wrap sec" aria-labelledby="h-hoy"><h2 class="h2" id="h-hoy">Con lugar <b>hoy</b></h2>
 <div class="hoy">${hoy.map(({m,c})=>`<article class="mf">${avatar(m)}<b><a href="#medico-${m.id}">${m.n}</a></b><small><span class="nw">${m.esp}</span> · <span class="nw">${c.km} km</span> · <span class="nw">${peso(c.pr)}</span> · <span class="nw">Hoy, ${c.ag[0][0]}</span></small>${ced(m)}<a class="btn secundario" href="#medico-${m.id}" aria-label="Ver a ${m.n}">Ver</a></article>`).join('')}</div>
 <button class="lnk" data-hoy>Ver todos con lugar hoy</button></section>` : ''}
@@ -483,22 +497,23 @@ ${hoy.length ? `<section class="wrap sec" aria-labelledby="h-hoy"><h2 class="h2"
 <div class="acc"><button class="lnk" data-toast="El listado de artículos aún no está en el prototipo">Ver artículos</button></div></div></section>
 <section class="wrap sec" aria-labelledby="h-como"><h2 class="h2" id="h-como">Cómo <b>funciona</b></h2><ol class="pasos"><li><span><b>Busca</b><span>Por especialidad, por lo que sientes o por nombre.</span></span></li><li><span><b>Compara</b><span>Precio, distancia y opiniones de cada consultorio.</span></span></li><li><span><b>Agenda</b><span>En línea o por teléfono. La consulta es en el consultorio.</span></span></li></ol></section>
 <section class="wrap sec"><div class="trust" aria-label="Por qué Mi Médico Manik"><div><span class="ic">${ic('badge-check')}</span><b>Médicos verificados</b><p>Revisamos la cédula profesional de cada médico.</p></div><div><span class="ic">${ic('message-circle-heart')}</span><b>Opiniones reales</b><p>Solo opina quien tuvo cita en Mi Médico Manik.</p></div><div><span class="ic">${ic('calendar-check')}</span><b>Gratis para ti</b><p>Pagas la consulta en el consultorio.</p></div></div></section>
-<section class="wrap sec"><div class="soymed"><div><b>¿Eres médico?</b><p>Aparece en Mi Médico Manik y recibe pacientes.</p></div><button class="btn secundario" data-toast="El registro para médicos aún no está en el prototipo">Registra tu consultorio</button></div></section>
+<section class="wrap sec"><div class="soymed"><div><b>¿Eres médico?</b><p>Aparece en Mi Médico Manik y recibe pacientes.</p></div><button class="btn secundario" data-toast="El registro para médicos aún no está en el prototipo">Únete como médico</button></div></section>
 <footer class="wrap pie"><img src="${IMG.logo}" alt="Mi Médico Manik" width="123" height="32"><span>de MedicalManik</span><span>Aviso de privacidad</span><span>Términos</span></footer>`; };
 
 V.resultados = () => {
   const r = resultados(); const n = r.length;
   const titulo = `<b>${S.esp || S.cat}</b>`;
-  const chipsEsc = `<span class="solo-esc"><button class="chip" aria-pressed="${S.f.manik}" data-f="manik">Con agenda en línea</button><button class="chip" aria-pressed="${S.f.hoy}" data-f="hoy">Con lugar hoy</button><button class="chip" aria-pressed="${S.f.precio===800}" data-f="p800">Hasta $800</button></span>`;
+  const chipsEsc = `<span class="solo-esc" role="group" aria-label="Filtrar médicos">${chipsF(S.f, 'data-f')}</span>`;
   let lista = r.map(ficha);
-  const pr = PROMOS.find(x => x.cat === (S.esp ? (espDe(S.esp)||[])[2] : S.cat));
+  // Publicidad segmentada por ubicación (2026-11-11): solo promociones de consultorios en la ciudad de la búsqueda.
+  const pr = PROMOS.find(x => x.cat === (S.esp ? (espDe(S.esp)||[])[2] : S.cat) && (medDe(x.med).cons.find(c => c.id === x.cons) || {}).ciudad === ciudadBusq());
   if (pr && n >= 2) lista.splice(2, 0, `<a class="promo" href="#promo-${pr.id}" aria-label="Patrocinado: ${pr.anun}. ${pr.titulo}. Con Impulsa Manik. Ver promoción"><img class="pimg" src="${pr.img}" alt=""><span class="ptx"><span class="etq">Patrocinado</span><b>${pr.titulo}</b><small>${pr.anun} · hasta el ${pr.hasta} · <span class="nw imp">con Impulsa Manik</span></small></span></a>`);
   if (!n) lista = [!nFiltros()
     ? `<div class="vacio"><span class="ic">${ic('search')}</span><h3>Pronto tendremos especialistas de ${(S.esp || S.cat).toLowerCase()} cerca de ti</h3><p>Mientras tanto, revisa otra especialidad o busca por lo que sientes.</p><div class="acc"><button class="btn primario" data-abrir="esp" aria-haspopup="dialog">Ver especialidades</button><a class="btn texto" href="#inicio">Busca por lo que sientes</a></div></div>`
-    : `<div class="vacio"><span class="ic">${ic('sliders-horizontal')}</span><h3>Nadie cumple todos tus filtros</h3><p>Filtros activos: ${[S.f.manik&&'Con agenda en línea', S.f.hoy&&'Con lugar hoy', S.f.precio&&'Hasta '+peso(S.f.precio)].filter(Boolean).join(' · ')}.</p><div class="acc"><button class="btn primario" data-limpiar>Quitar filtros</button></div></div>`];
+    : `<div class="vacio"><span class="ic">${ic('sliders-horizontal')}</span><h3>Nadie cumple todos tus filtros</h3><p>Filtros activos: ${[...FILT.filter(([k]) => S.f[k]).map(x => x[1]), S.f.hoy && 'Con lugar hoy'].filter(Boolean).join(' · ')}.</p><div class="acc"><button class="btn primario" data-limpiar>Quitar filtros</button></div></div>`];
   return `${nav('buscar')}<main class="wrap"><div class="rh"><a class="volver" href="#inicio">${ic('arrow-left')}Inicio</a><h1 class="h2">${titulo}</h1></div>
   <div class="barra"><span class="solo-cel"><button class="chip" data-abrir="filtros" aria-haspopup="dialog">${ic('sliders-horizontal')}Filtros${nFiltros()?` <span class="n">${nFiltros()}</span>`:''}</button></span>${chipsEsc}
-  <span class="sel"><label for="orden">Ordenar</label><select id="orden"><option value="km" ${S.orden==='km'?'selected':''}>Más cerca</option><option value="precio" ${S.orden==='precio'?'selected':''}>Menor precio</option><option value="op" ${S.orden==='op'?'selected':''}>Más opiniones</option></select></span></div>
+  <span class="sel"><label for="orden">Ordenar</label><select id="orden"><option value="km" ${S.orden==='km'?'selected':''}>Más cerca</option><option value="conprecio" ${S.orden==='conprecio'?'selected':''}>Con precio</option><option value="op" ${S.orden==='op'?'selected':''}>Más opiniones</option></select></span></div>
   <div class="lista" aria-live="polite">${lista.join('')}</div></main>`;
 };
 
@@ -630,17 +645,16 @@ function capaFiltros(){
   const temp = {...S.f};
   const pintar = () => {
     $('#capa').innerHTML = `<div class="velo" data-velo><div class="hoja" role="dialog" aria-modal="true" aria-label="Filtros"><span class="asa" aria-hidden="true"></span><div class="t"><b>Filtros</b><button class="ib" data-cerrar aria-label="Cerrar">${ic('x')}</button></div>
-    <fieldset><legend>Cómo agendar</legend><div class="row"><button type="button" class="chip" aria-pressed="${temp.manik}" data-t="manik">Con agenda en línea</button><button type="button" class="chip" aria-pressed="${temp.hoy}" data-t="hoy">Con lugar hoy</button></div></fieldset>
-    <fieldset><legend>Precio de consulta</legend><div class="row">${[500,800,1200].map(p=>`<button type="button" class="chip" aria-pressed="${temp.precio===p}" data-t="p${p}">Hasta ${peso(p)}</button>`).join('')}</div></fieldset>
+    <fieldset><legend>Muéstrame solo</legend><div class="row">${chipsF(temp, 'data-t')}</div></fieldset>
     <div class="pieh"><button type="button" class="btn texto" data-t="limpiar">Limpiar</button><button type="button" class="btn primario" data-aplicar>Ver resultados</button></div></div></div>`;
   };
   pintar();
   $('#capa').onclick = e => {
-    const t = e.target.closest('[data-t]'); if (t) { const k = t.dataset.t; if (k==='manik'||k==='hoy') temp[k] = !temp[k]; else if (k==='limpiar') { temp.manik=false; temp.hoy=false; temp.precio=0; } else { const p = +k.slice(1); temp.precio = temp.precio===p ? 0 : p; } pintar(); $(`[data-t="${k}"]`)?.focus(); return; }
+    const t = e.target.closest('[data-t]'); if (t) { const k = t.dataset.t; if (k==='limpiar') Object.assign(temp, {agenda:false,precio:false,seguro:false,tele:false,hoy:false}); else temp[k] = !temp[k]; pintar(); $(`[data-t="${k}"]`)?.focus(); return; }
     if (e.target.closest('[data-aplicar]')) { S.f = temp; cerrar(); render(); return; }
     if (e.target.closest('[data-cerrar]') || e.target.matches('[data-velo]')) cerrar();
   };
-  $('[data-t="manik"]').focus();
+  $('[data-t="agenda"]').focus();
 }
 function capaEsp(){
   const fila = e => `<li><button type="button" data-esp="${e[0]}"><span>${e[0]}</span>${ic('chevron-right')}</button></li>`;
@@ -675,8 +689,8 @@ addEventListener('hashchange', () => { if (['#inicio','#resultados',''].includes
 document.addEventListener('click', e => {
   const t = e.target;
   const ab = t.closest('[data-abrir]'); if (ab) { abrir(ab.dataset.abrir, ab); return; }
-  const es = t.closest('[data-esp]'); if (es) { S.esp = es.dataset.esp; S.cat = (espDe(S.esp)||[])[2] || S.esp; S.f = {manik:false,hoy:false,precio:0}; disparador = null; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); return; }
-  const cat = t.closest('[data-cat]'); if (cat) { S.esp = null; S.cat = cat.dataset.cat; S.f = {manik:false,hoy:false,precio:0}; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); return; }
+  const es = t.closest('[data-esp]'); if (es) { S.esp = es.dataset.esp; S.cat = (espDe(S.esp)||[])[2] || S.esp; S.f = {agenda:false,precio:false,seguro:false,tele:false,hoy:false}; disparador = null; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); return; }
+  const cat = t.closest('[data-cat]'); if (cat) { S.esp = null; S.cat = cat.dataset.cat; S.f = {agenda:false,precio:false,seguro:false,tele:false,hoy:false}; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); return; }
   const sug = t.closest('[data-sug]'); if (sug) { cerrar(); if (sug.dataset.sug === 'soto') location.hash = 'medico-soto'; else { S.esp = null; S.cat = 'Piel'; location.hash = 'resultados'; } return; }
   if (t.closest('[data-cerrar]') || t.matches('[data-velo-dlg]')) { cerrar(); return; }
   const dm = t.closest('[data-demo]'); if (dm) { S.demo = dm.dataset.demo || null; if (!S.cita && S.demo !== 'vencido') S.cita = {med:'diaz', cons:'neodemo', dia:3, hora:'10:00', nombre:'Ana Pérez', cel:'222 555 0100', estado:'activa'}; render(); $('#h-ok')?.focus(); return; }
@@ -691,11 +705,11 @@ document.addEventListener('click', e => {
     if (OCUPA.has(key)) { OCUPA.delete(key); reservar(ci.med, ci.cons, S.cdia, S.chora); S.chora = null; S.ocupado = true; render(); $('#ocupado')?.focus(); return; }
     reservar(ci.med, ci.cons, S.cdia, S.chora); liberar(ci.med, ci.cons, ci.dia, ci.hora); ci.dia = S.cdia; ci.hora = S.chora; S.cdia = null; S.chora = null; S.ocupado = false; location.hash = 'cita'; setTimeout(()=>toast('Cambiamos tu cita. Te mandamos un mensaje con la nueva hora'), 50); return; }
   const tt = t.closest('[data-toast]'); if (tt) { toast(tt.dataset.toast); return; }
-  if (t.closest('[data-hoy]')) { S.esp = null; S.cat = 'Piel'; S.f = {manik:false,hoy:true,precio:0}; location.hash = 'resultados'; return; }
+  if (t.closest('[data-hoy]')) { S.esp = null; S.cat = 'Piel'; S.f = {...({agenda:false,precio:false,seguro:false,tele:false,hoy:false}), hoy:true}; location.hash = 'resultados'; return; }
   if (t.closest('[data-ubi-ini]')) { S.donde = 'tu ubicación (ejemplo)'; render(); toast('Aquí el navegador pediría permiso de ubicación'); return; }
   if (t.closest('[data-ubi]')) { $('#w1').value = 'Cerca de ti (ejemplo)'; return; }
-  const f = t.closest('[data-f]'); if (f) { const k = f.dataset.f; if (k==='p800') S.f.precio = S.f.precio===800?0:800; else S.f[k] = !S.f[k]; render(); return; }
-  if (t.closest('[data-limpiar]')) { S.f = {manik:false,hoy:false,precio:0}; render(); return; }
+  const f = t.closest('[data-f]'); if (f) { const k = f.dataset.f; S.f[k] = !S.f[k]; render(); return; }
+  if (t.closest('[data-limpiar]')) { S.f = {agenda:false,precio:false,seguro:false,tele:false,hoy:false}; render(); return; }
   const pa = t.closest('[data-promo-agendar]'); if (pa) { const p = PROMOS.find(x=>x.id===pa.dataset.promoAgendar); S.promo = p.id; S.med = p.med; S.cons = p.cons; S.dia = null; S.hora = null; S.verH = false; S.irAgenda = true; location.hash = 'medico-' + p.med; return; }
   const ag = t.closest('[data-agendar]'); if (ag) { const [mid, cid] = ag.dataset.agendar.split('|'); S.med = mid; S.cons = cid; S.dia = null; S.hora = null; S.verH = false; S.irAgenda = true; location.hash = 'medico-' + mid; return; }
   const co = t.closest('[data-cons]'); if (co) { S.cons = co.dataset.cons; S.dia = null; S.hora = null; S.verH = false; render(); $(`[data-cons="${S.cons}"]`)?.focus(); return; }
