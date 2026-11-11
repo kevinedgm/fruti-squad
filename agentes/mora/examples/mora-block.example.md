@@ -6,7 +6,7 @@ Estos ejemplos son neutrales. No contienen rutas, clases, breakpoints ni estilos
 
 ```yaml
 mora:
-  doc_standard: AUTO   # o la ruta INSTALADA, p. ej. .agents/skills/lima/reference/component-documentation.md (Kiro)
+  doc_standard: AUTO   # o la ruta INSTALADA, p. ej. .kiro/skills/lima/reference/component-documentation.md (Kiro)
                        #   .claude/skills/lima/reference/… (Claude) · .codex/skills/lima/reference/… (Codex)
   doc_shell:
     - design-hub/assets/hub-shell.css
