@@ -21,7 +21,8 @@ const test = (name, fn) => { fn(); passed++; console.log(`✓ ${name}`); };
 test('claude: skills, SKILL.md bridges, CLAUDE.md block, runtime', () => {
   const d = fresh();
   run('install', '--target', 'claude', '--dest', d);
-  for (const n of ['kiwi', 'lima', 'coco', 'bruno', 'mora-docs']) has(d, '.claude', 'skills', n, 'SKILL.md');
+  for (const n of ['kiwi', 'lima', 'coco', 'bruno', 'mora-docs', 'mango']) has(d, '.claude', 'skills', n, 'SKILL.md');
+  has(d, '.fruti', 'runtime', 'mango.yaml');
   has(d, '.fruti', 'policy.md'); has(d, '.fruti', 'nexa-y-fruti.md'); has(d, '.fruti', 'paths.yaml'); has(d, '.fruti', 'runtime', 'coco.yaml'); has(d, '.fruti', 'runtime', 'bruno.yaml');
   assert.match(readFileSync(join(d, 'CLAUDE.md'), 'utf8'), /\.fruti\/policy\.md/);
 });
@@ -37,7 +38,7 @@ test('kiro: members as skills, one least-privilege agent per member, orchestrato
   const d = fresh();
   run('install', '--target', 'kiro', '--dest', d);
   has(d, '.kiro', 'steering', 'fruti-squad.md');
-  for (const n of ['kiwi', 'lima', 'coco', 'bruno', 'mora']) {
+  for (const n of ['kiwi', 'lima', 'coco', 'bruno', 'mora', 'mango']) {
     has(d, '.kiro', 'skills', n, 'SKILL.md');
     assert.ok(!existsSync(join(d, '.kiro', 'agents', n)), `${n}: no procedure folder inside .kiro/agents`);
     const def = readFileSync(join(d, '.kiro', 'agents', `${n}.md`), 'utf8');
@@ -51,7 +52,8 @@ test('kiro: members as skills, one least-privilege agent per member, orchestrato
   const orq = readFileSync(join(d, '.kiro', 'agents', 'fruti.md'), 'utf8');
   assert.match(orq, /"subagent"/);
   assert.match(orq, /availableAgents: \["kiwi", "lima", "coco", "bruno", "mora"\]/);
-  assert.doesNotMatch(orq.match(/trustedAgents: .*/)[0], /coco|bruno/, 'agents that write product code are not trusted');
+  assert.doesNotMatch(orq.match(/trustedAgents: .*/)[0], /coco|bruno|mango/, 'agents that write product code are not trusted');
+  assert.doesNotMatch(orq, /"mango"/, 'mango works outside the round');
   assert.match(readFileSync(join(d, '.fruti', 'paths.yaml'), 'utf8'), /agentes\/kiwi: \.kiro\/skills\/kiwi/);
 });
 

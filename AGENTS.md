@@ -128,6 +128,7 @@ A missing configured normative reference (including a project-specific interface
 - `.fruti/runtime/coco.yaml`: route F3/CSS, post-Bruno R0 and audit-manifest execution.
 - `.fruti/runtime/bruno.yaml`: route functional R3 implementation from approved Kiwi/Lima/Coco handoffs.
 - `.fruti/runtime/mora.yaml`: route documentation work from verified deltas.
+- `.fruti/runtime/mango.yaml`: route screen composition and integration (outside the round).
 
 Read one runtime contract for the active owner. Do not read all five just because a full squad pipeline may eventually run; each stage reads its own contract when control reaches it.
 
@@ -137,6 +138,7 @@ Read one runtime contract for the active owner. Do not read all five just becaus
 - Lima: governance, classification, reuse, registry, contracts, token ownership and lifecycle. Read only the reference for the current governance operation/gate.
 - Coco: F3 visual construction/CSS and canonical R0 audit. Consume approved locks/contracts/tokens. Hand functional R3 to Bruno, then audit the implemented result. For audits, use `.fruti/audit-manifest.yaml` plus automated evidence first; open prose standards only for failed/ambiguous/non-deterministic checks.
 - Bruno: functional R3 implementation. Consume approved structure, contract/API and Coco F3/CSS; own script/template behavior, props/events/slots, state, keyboard/focus and functional accessibility. Do not redefine layout, tokens or CSS.
+- Mango: composition of real product screens, outside the round. Works directly in the conversation on the screen's code: content (titles, consequences, helper text, option effects), layout (alignment, hierarchy, separators), adaptation at the verification viewports, semantics, and integration of Fruti pieces with existing code (Vuetify, hand-built HTML/CSS). Reads each Fruti piece's entry in `.fruti/catalog.md` and never overrides its internals with screen CSS. A concrete request ("agrega separadores") is done without a full diagnosis or questions. When the problem belongs to a piece (breaks its contract, lacks a variant, does not exist, or a hand-built section should become one), it writes `.fruti/requests/<id>.md` and hands it to Kiwi (or to Coco/Bruno for a correction). Writes no handoff or round files.
 - Mora: documentation of implemented/verified truth. Work from registry + approved contracts/tokens + Coco compliance report + targeted code/diff; document the delta. Do not reconstruct the whole design history or infer rules from the implementation.
 
 ## Handoff contract
@@ -190,8 +192,18 @@ Structural fidelity is deterministic, not a judgment Coco grades for itself. The
 Check once per request whether `.nexa-squad/` exists at the project root.
 
 - **Nexa installed:** Fruti designs pieces, not product screens. Its scope is components, variants, reusable patterns and templates, tokens and the Design Hub. A product screen or module (something a role uses, with real data, business rules or server work, such as "el alta de muestra de la recepcionista") belongs to Nexa Squad. When such a request arrives, Kiwi does not wireframe it: reply in one line that the screen belongs to Nexa and give the phrase to use (`/orka …`). If the request also names a reusable pattern (for example, "the standard create form"), design only that pattern.
-- **Nexa not installed:** Fruti keeps designing screens as before.
+- **Nexa not installed:** Fruti keeps designing screens as before; Mango composes and corrects existing product screens.
+- **Mango with Nexa installed:** composing product screens belongs to Nexa. Say so in one line; if the user no longer uses Nexa, the fix is to remove `.nexa-squad/` from the project.
 - **Redesign with Nexa installed:** Kiwi still runs understand, inventory and scope. In the plan, `foundations`, `primitives`, `patterns` and `domain-components` stay with Fruti; `views` are listed with `owner: nexa` and are not executed by Fruti.
+
+## Requests from Mango
+
+Mango writes `.fruti/requests/<id>.md` when a screen problem belongs to a piece. Treat it as the user's request for that piece and route it by its `Tipo de pedido`:
+- `nuevo`: a new piece; the normal round from Kiwi.
+- `variante`: Lima checks the variant keeps the piece's purpose; then the round on the existing piece, without changing its default behavior for other uses.
+- `correccion`: the piece breaks its own contract. Its `Código actual` section (file:line, viewport, observed vs. contract) is defect evidence. If the contract is right, the implementation owner fixes it (Coco for layout/CSS, Bruno for behavior) and Coco re-audits (R0); if the contract lacks the case, Kiwi/Lima revise it first.
+- `desde-codigo`: turn a hand-built section into a piece. The cited files are current-state evidence of behavior, like `--file`; never target visual authority.
+When the piece is registered, Mango replaces its `PENDIENTE` mark in the screen.
 
 ## Requests from Nexa Squad
 
