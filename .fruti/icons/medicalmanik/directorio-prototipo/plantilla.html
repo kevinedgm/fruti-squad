@@ -209,6 +209,18 @@ a{color:inherit}
 .pf-cuerpo>section{scroll-margin-top:64px;min-width:0}
 @media (min-width:1024px){.pf-cuerpo{grid-template-columns:minmax(0,1fr) 400px;column-gap:40px;padding-bottom:56px}.pf-cuerpo>section{grid-column:1}.pf-cuerpo>.pf-ag{grid-column:2;grid-row:1 / span 12;position:sticky;top:72px}}
 .pf-ag h2{font:600 20px/26px var(--display)}
+.ag-co .r .pr.np{font:500 15px/22px var(--sans);color:var(--muted)}
+.modo-nota{font-size:15px;color:var(--muted)}
+.cal-tb{display:flex;align-items:center;justify-content:space-between;gap:8px}.cal-tb b{font:600 17px/22px var(--display)}.cal-tb span{display:flex;gap:4px}
+.cal{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 24px) / 4);gap:8px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:2px 2px 6px}
+.cal .col{scroll-snap-align:start;display:grid;align-content:start;gap:6px;min-width:0}
+.cal .cab{display:grid;justify-items:center;padding-bottom:4px;border-bottom:1px solid var(--linea)}.cal .cab b{font:600 15px/20px var(--sans)}.cal .cab small{font-size:13px;color:var(--muted)}
+.cal .hr{min-height:44px;border:1.5px solid var(--teal);border-radius:999px;background:var(--blanco);color:var(--teal);font:600 15px var(--sans);font-variant-numeric:tabular-nums;cursor:pointer;padding:0 4px}.cal .hr:hover{background:var(--menta-hielo)}
+.cal .nada{font-size:13px;color:var(--muted);text-align:center;padding-top:10px}
+.sub-h{font:600 16px/22px var(--display);margin-top:6px}
+.pf-arts{display:grid;gap:2px;justify-items:start}.pf-arts small{font-size:13px;color:var(--muted)}.pf-arts .lnk{min-height:36px;font-size:15px;text-align:left}
+.dnd-l{display:grid;gap:12px}@media (min-width:640px){.dnd-l{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.dnd{display:grid;gap:4px;border:1px solid var(--linea);border-radius:18px;padding:14px;align-content:start}.dnd b{font:600 17px/22px var(--display)}.dnd>span{font-size:15px;color:var(--muted)}.dnd .tags{margin-top:6px}.dnd .btn{justify-self:start;min-height:40px}
 .seg{display:flex;flex-wrap:wrap;gap:8px}.seg button{font:500 15px var(--sans);color:var(--tinta);background:var(--blanco);border:1.5px solid var(--linea);border-radius:10px;min-height:42px;padding:0 14px;cursor:pointer}.seg button[aria-pressed="true"]{border-color:var(--teal-hover);box-shadow:0 0 0 1px var(--teal);font-weight:600}
 .ag-co{display:grid;gap:4px}.ag-co .r{display:flex;justify-content:space-between;gap:10px;align-items:baseline;flex-wrap:wrap}.ag-co .r b{font:600 18px/24px var(--display)}.ag-co .r .pr{font:600 22px/26px var(--display)}
 .ag-co .dir{font-size:14px;line-height:20px;color:var(--muted)}.ag-co .forma{display:flex;align-items:center;gap:6px;font-size:14px;line-height:20px;color:var(--muted)}.ag-co .forma .ico{width:16px;height:16px;color:var(--teal-hover)}
@@ -522,41 +534,52 @@ V.medico = (id) => {
   if (!S.med || S.med !== m.id || !m.cons.find(c=>c.id===S.cons)) { S.med = m.id; S.cons = [...m.cons].sort((a,b)=>a.km-b.km)[0].id; S.dia = null; S.verH = false; }
   const c = m.cons.find(x=>x.id===S.cons), tel = c.tel ? `tel:+52${c.tel.replace(/ /g,'')}` : '';
   const p = prox(c);
-  if (c.manik && (S.dia === null || !c.ag[S.dia])) S.dia = p ? p.off : null;
   // Agenda tu cita
   const seg = m.cons.length > 1 ? `<div class="seg" role="group" aria-label="Consultorio">${[...m.cons].sort((a,b)=>a.km-b.km).map(x=>`<button data-cons="${x.id}" aria-pressed="${x.id===c.id}">${x.lu} · ${peso(x.pr)}</button>`).join('')}</div>` : '';
-  const co = `<div class="ag-co"><div class="r"><b>${c.lu}</b><span class="pr">${peso(c.pr)}</span></div><span class="dir">${c.dir} · ${c.km} km</span><span class="forma">${c.manik ? ic('calendar-check') + 'Agenda en línea · la consulta es en el consultorio' : ic('phone') + 'Agenda por teléfono · ' + c.tel}</span></div>`;
+  // Variantes de cita (ronda 2, 2026-11-11): agenda en línea sí/no × teleconsulta sí/no
+  if (!c.virtual || !c.manik) S.modo = 'presencial';
+  const telTxt = c.tel ? ' · ' + c.tel : '';
+  const forma = c.manik && c.virtual ? ic('calendar-check') + 'Agenda en línea · en consultorio o por teleconsulta'
+    : c.manik ? ic('calendar-check') + 'Agenda en línea · la consulta es en el consultorio'
+    : c.virtual ? ic('phone') + 'Agenda por teléfono · en consultorio o por teleconsulta' + telTxt
+    : ic('phone') + 'Agenda por teléfono' + telTxt;
+  const co = `<div class="ag-co"><div class="r"><b>${c.lu}</b><span class="pr${c.pr == null ? ' np' : ''}">${peso(c.pr)}</span></div><span class="dir">${c.dir} · ${c.km} km</span><span class="forma">${forma}</span></div>`;
+  const modoSel = c.manik && c.virtual ? `<div class="seg" role="group" aria-label="Tipo de consulta"><button data-modo="presencial" aria-pressed="${S.modo!=='virtual'}">En consultorio</button><button data-modo="virtual" aria-pressed="${S.modo==='virtual'}">Teleconsulta</button></div>${S.modo==='virtual' ? `<p class="modo-nota">Es por videollamada. Te mandamos el enlace por mensaje al confirmar.</p>` : ''}` : '';
   let ag;
   if (c.manik && p) {
-    const dias = Array.from({length:10},(_,k)=>k).map(k => { const d = dia(k), hay = !!c.ag[k];
-      return `<button data-dia="${k}" aria-pressed="${k===S.dia}" ${hay?'':'disabled'} aria-label="${fechaLarga(k)}${hay?', '+c.ag[k].length+' horarios':', sin lugar'}"><small>${k===0?'Hoy':k===1?'Mañana':DIAS[d.getDay()].slice(0,3).replace(/^./,x=>x.toUpperCase())}</small><b>${d.getDate()}</b><small>${hay?c.ag[k].length+' lugar'+(c.ag[k].length>1?'es':''):'sin lugar'}</small></button>`; }).join('');
-    const hs = c.ag[S.dia] || [], vis = S.verH ? hs : hs.slice(0,6);
-    ag = `<div class="prim-box"><span><small>Próximo lugar</small><b>${nombreDia(p.off)}, ${p.h}</b></span><button class="btn primario" data-hora="${p.off}|${p.h}">Agendar ${p.h}</button></div>
-    <div class="dias" role="group" aria-label="Día">${dias}</div>${S.dia !== 0 && p.off !== 0 ? '' : ''}
-    <div class="horas" role="group" aria-label="Horarios de ${fechaLarga(S.dia)}">${vis.map(h=>`<button data-hora="${S.dia}|${h}">${h}</button>`).join('')}</div>
-    <div class="acc">${hs.length > 6 && !S.verH ? `<button class="btn texto" data-verh>Ver más horarios</button>` : ''}${c.tel ? `<a class="btn texto" href="${tel}" data-llamar="${c.tel}">o llama al ${c.tel}</a>` : ''}<button class="btn texto" data-toast="Aquí se abriría el mapa">Cómo llegar</button></div>`;
+    const MAX = 4, cols = Array.from({length:10},(_,k)=>k).map(k => { const d = dia(k), hs = c.ag[k] || [], vis = S.verH ? hs : hs.slice(0, MAX);
+      const tit = k===0 ? 'Hoy' : k===1 ? 'Mañana' : DIAS[d.getDay()].slice(0,3).replace(/^./,x=>x.toUpperCase());
+      return `<div class="col" role="group" aria-label="${fechaLarga(k)}"><span class="cab"><b>${tit}</b><small>${d.getDate()} ${MES[d.getMonth()]}</small></span>${hs.length ? vis.map(h=>`<button class="hr" data-hora="${k}|${h}" aria-label="${fechaLarga(k)}, ${h}">${h}</button>`).join('') : '<span class="nada">Sin lugar</span>'}</div>`; }).join('');
+    const mas = !S.verH && Object.values(c.ag).some(h => h.length > MAX);
+    ag = `${modoSel}<div class="prim-box"><span><small>Próximo lugar</small><b>${nombreDia(p.off)}, ${p.h}</b></span><button class="btn primario" data-hora="${p.off}|${p.h}">Agendar ${p.h}</button></div>
+    <div class="cal-tb"><b>Elige día y horario</b><span><button class="ib" data-calmov="-1" aria-label="Días anteriores">${ic('arrow-left')}</button><button class="ib" data-calmov="1" aria-label="Días siguientes">${ic('arrow-right')}</button></span></div>
+    <div class="cal" tabindex="0" aria-label="Horarios disponibles">${cols}</div>
+    <div class="acc">${mas ? `<button class="btn texto" data-verh>Ver más horarios</button>` : ''}${c.tel ? `<a class="btn texto" href="${tel}" data-llamar="${c.tel}">o llama al ${c.tel}</a>` : ''}${S.modo==='virtual' ? '' : `<button class="btn texto" data-toast="Aquí se abriría el mapa">Cómo llegar</button>`}</div>`;
   } else if (c.manik) {
-    ag = `<p class="spec" role="status">No hay lugar en las próximas 2 semanas.</p><div class="acc">${c.tel ? `<a class="btn primario solo-esc-btn" href="${tel}" data-llamar="${c.tel}">${ic('phone')}Llamar</a>` : ''}<button class="btn texto" data-toast="Las fechas siguientes aún no están en el prototipo">Ver más fechas</button></div>`;
+    ag = `${modoSel}<p class="spec" role="status">No hay lugar en las próximas 2 semanas.</p><div class="acc">${c.tel ? `<a class="btn primario solo-esc-btn" href="${tel}" data-llamar="${c.tel}">${ic('phone')}Llamar</a>` : ''}<button class="btn texto" data-toast="Las fechas siguientes aún no están en el prototipo">Ver más fechas</button></div>`;
   } else {
-    ag = `<div class="acc"><a class="btn primario solo-esc-btn" href="${tel}" data-llamar="${c.tel}">${ic('phone')}Llamar</a><button class="btn secundario" data-copiar="${c.tel}">${ic('copy')}Copiar número</button><button class="btn texto" data-toast="Aquí se abriría el mapa">Cómo llegar</button></div>`;
+    ag = `${c.virtual ? `<p class="modo-nota">Este consultorio da teleconsulta. Pídela cuando llames.</p>` : ''}<div class="acc"><a class="btn primario solo-esc-btn" href="${tel}" data-llamar="${c.tel}">${ic('phone')}Llamar</a><button class="btn secundario" data-copiar="${c.tel}">${ic('copy')}Copiar número</button><button class="btn texto" data-toast="Aquí se abriría el mapa">Cómo llegar</button></div>`;
   }
   const pa = promoDe(m, c, S.promo);
   const agB = `<section class="bloque pf-ag" id="sec-agenda" aria-labelledby="h-ag"><h2 id="h-ag">Agenda tu cita</h2>${pa ? `<p class="aplicada"><span class="etq">Promoción</span><b>${pa.titulo}</b><span>se aplica al agendar aquí</span></p>` : ''}${seg}${co}${ag}</section>`;
-  // Secciones (sin datos = no aparecen)
+  // Secciones (ronda 2): Sobre mí → Formación → En dónde me encuentras → Galería → Dudas → Opiniones al final. Sin datos = no aparecen.
   const sec = [];
-  if (m.pad && m.pad.length) sec.push(['padecimientos','Padecimientos',`<h2 id="h-pad">Padecimientos que atiende</h2><ul class="tags">${m.pad.map(x=>`<li>${x}</li>`).join('')}</ul>`]);
-  if (m.r && m.ops && m.ops.length) sec.push(['opiniones','Opiniones',`<h2 id="h-opiniones">Opiniones</h2><div class="op-res"><span class="n">${m.r}</span><span><span class="st" aria-hidden="true">★★★★★</span><small>${m.op.toLocaleString('es-MX')} opiniones verificadas</small></span></div><div class="ops">${m.ops.map(o=>`<article class="op"><div class="h"><span class="ini" aria-hidden="true">${o[0]}</span><b>${o[1]}</b><small>${o[2]}</small></div><p>${o[3]}</p><span class="ver">${ic('badge-check')}Opinión verificada</span></article>`).join('')}</div><button class="btn texto" style="justify-self:start" data-toast="La lista completa de opiniones aún no está en el prototipo">Ver las ${m.op.toLocaleString('es-MX')} opiniones</button>`]);
-  if (m.bio) sec.push(['sobre','Sobre mí',`<h2 id="h-sobre">Sobre mí</h2><p>${m.bio}</p>`]);
+  if (m.bio || (m.pad && m.pad.length)) sec.push(['sobre','Sobre mí',`<h2 id="h-sobre">Sobre mí</h2>${m.bio ? `<p>${m.bio}</p>` : ''}${m.pad && m.pad.length ? `<h3 class="sub-h">Padecimientos que atiende</h3><ul class="tags">${m.pad.map(x=>`<li>${x}</li>`).join('')}</ul>` : ''}`]);
   sec.push(['formacion','Formación',`<h2 id="h-formacion">Formación académica</h2><ol class="forml">${m.tit.map(t=>`<li><span class="y">${t[0]}</span><span><b>${t[1]}</b><span>${t[2]}</span><span class="ced">${ic('badge-check')}<span>${t[3]==='p'?'Céd. Prof. '+m.ced[0]:t[3]==='m'?'Céd. Maestría '+t[4]:'Céd. Esp. '+m.ced[1]}</span></span></span></li>`).join('')}</ol><p class="fuente">Datos tomados de sus cédulas verificadas.</p>`]);
-  if (m.faq && m.faq.length) sec.push(['dudas','Dudas frecuentes',`<h2 id="h-dudas">Dudas frecuentes</h2><p>Respuestas ${deArt(m)}${m.n.split(' ').slice(0,3).join(' ')} a lo que más le preguntan sus pacientes.</p><div class="faq">${m.faq.map((f,i)=>`<details${i===0?' open':''}><summary>${f[0]}</summary><div class="a">${f[1].map(x=>`<p>${x}</p>`).join('')}<p class="nota">Estas respuestas orientan; no sustituyen una consulta.</p></div></details>`).join('')}</div>`]);
+  sec.push(['donde','Dónde',`<h2 id="h-donde">En dónde me encuentras</h2><div class="dnd-l">${[...m.cons].sort((a,b)=>a.km-b.km).map(x=>`<div class="dnd"><b>${x.lu}</b><span>${x.dir} · ${x.km} km</span>${x.tel ? `<span>Tel. ${x.tel}</span>` : ''}<ul class="tags">${[x.manik ? 'Agenda en línea' : 'Agenda por teléfono', x.virtual && 'Teleconsulta', x.seg && 'Acepta seguro'].filter(Boolean).map(t=>`<li>${t}</li>`).join('')}</ul><button class="btn texto" data-toast="Aquí se abriría el mapa">Cómo llegar</button></div>`).join('')}</div>`]);
   if (m.gal) sec.push(['galeria','Galería',`<h2 id="h-galeria">Galería</h2><ul class="gal" aria-label="Fotos del consultorio (de ejemplo)">${'<li></li>'.repeat(m.gal)}</ul>`]);
+  if (m.faq && m.faq.length) sec.push(['dudas','Dudas frecuentes',`<h2 id="h-dudas">Dudas frecuentes</h2><p>Respuestas ${deArt(m)}${m.n.split(' ').slice(0,3).join(' ')} a lo que más le preguntan sus pacientes.</p><div class="faq">${m.faq.map((f,i)=>`<details${i===0?' open':''}><summary>${f[0]}</summary><div class="a">${f[1].map(x=>`<p>${x}</p>`).join('')}<p class="nota">Estas respuestas orientan; no sustituyen una consulta.</p></div></details>`).join('')}</div>`]);
+  if (m.r && m.ops && m.ops.length) sec.push(['opiniones','Opiniones',`<h2 id="h-opiniones">Opiniones</h2><div class="op-res"><span class="n">${m.r}</span><span><span class="st" aria-hidden="true">★★★★★</span><small>${m.op.toLocaleString('es-MX')} opiniones verificadas</small></span></div><div class="ops">${m.ops.map(o=>`<article class="op"><div class="h"><span class="ini" aria-hidden="true">${o[0]}</span><b>${o[1]}</b><small>${o[2]}</small></div><p>${o[3]}</p><span class="ver">${ic('badge-check')}Opinión verificada</span></article>`).join('')}</div><button class="btn texto" style="justify-self:start" data-toast="La lista completa de opiniones aún no está en el prototipo">Ver las ${m.op.toLocaleString('es-MX')} opiniones</button>`]);
+  // Artículos en la tarjeta inicial
+  const arts = ART.filter(a => a[1] === m.id);
+  const artsH = arts.length ? `<div class="pf-arts"><small>${arts.length === 1 ? 'Su artículo' : 'Sus artículos'}</small>${arts.map(a=>`<button class="lnk" data-toast="La página del artículo aún no está en el prototipo">${a[0]} · ${a[3]} min</button>`).join('')}</div>` : '';
   const jumpL = [['sec-agenda', c.manik ? 'Agenda' : 'Consultorio'], ...sec.map(x=>['sec-'+x[0], x[1]])];
   const jump = jumpL.length >= 4 ? `<nav class="jump" aria-label="Secciones del perfil">${jumpL.map(x=>`<button data-sec="${x[0]}">${x[1]}</button>`).join('')}</nav>` : '';
   const rate = m.r ? `<button class="rate" data-sec="sec-opiniones"><b aria-hidden="true">★</b> ${m.r} · ${m.op.toLocaleString('es-MX')} opiniones</button>` : '';
-  const barra = c.manik && p ? `<div class="barra-acc"><div><b>${peso(c.pr)} · ${nombreDia(p.off)}, ${p.h}</b><span>Próximo lugar · ${c.lu}</span></div><button class="btn primario" data-hora="${p.off}|${p.h}">Agendar</button></div>`
+  const barra = c.manik && p ? `<div class="barra-acc"><div><b>${peso(c.pr)} · ${nombreDia(p.off)}, ${p.h}</b><span>Próximo lugar · ${S.modo==='virtual' ? 'Teleconsulta' : c.lu}</span></div><button class="btn primario" data-hora="${p.off}|${p.h}">Agendar</button></div>`
     : c.tel ? `<div class="barra-acc"><div><b>${peso(c.pr)}</b><span>Consulta · ${c.lu}</span></div><a class="btn primario" href="${tel}" data-llamar="${c.tel}">${ic('phone')}Llamar</a></div>` : '';
   return `${nav('buscar')}<main class="wrap"><a class="volver" href="#resultados">${ic('arrow-left')}Resultados</a>
-  <div class="pf-head"><div class="ph">${avatar(m)}<div class="who"><h1>${m.n}</h1><p class="spec">${m.esp}${m.foco?' · '+m.foco:''}</p>${ced(m)}${rate}</div></div></div>
+  <div class="pf-head"><div class="ph">${avatar(m)}<div class="who"><h1>${m.n}</h1><p class="spec">${m.esp}${m.foco?' · '+m.foco:''}</p>${ced(m)}${rate}${artsH}</div></div></div>
   ${jump}<div class="pf-cuerpo">${agB}${sec.map(x=>`<section class="bloque" id="sec-${x[0]}" aria-labelledby="h-${x[0]}">${x[2]}</section>`).join('')}</div></main>${barra}`;
 };
 
@@ -566,11 +589,11 @@ V.confirmar = () => {
   const d = S.datos;
   return `${nav('buscar')}<main class="wrap"><a class="volver" href="#medico-${m.id}">${ic('arrow-left')}Cambiar horario</a>
   <form class="paso" data-form="confirmar" novalidate><h1>Confirma tu cita</h1>${S.ocupado ? `<div class="ocupado" role="alert" tabindex="-1" id="ocupado"><b>Ese horario se acaba de ocupar.</b><span>Elige otro; tus datos se quedan como están.</span><div class="horas" role="group" aria-label="Horarios cercanos">${cercanas(c).map(([k,h])=>`<button type="button" data-alt="${k}|${h}">${nombreDia(k)}, ${h}</button>`).join('')}</div></div>` : ''}
-  <dl class="det"><div><dt>Médico</dt><dd>${m.n}</dd></div><div><dt>Cuándo</dt><dd>${S.ocupado ? 'Elige otro horario' : fechaLarga(S.dia) + ', ' + S.hora}</dd></div><div><dt>Dónde</dt><dd>${c.lu} · ${c.dir}</dd></div><div><dt>Consulta</dt><dd>${precioTxt(m, c, S.promo)} · pagas en el consultorio</dd></div></dl>
+  <dl class="det"><div><dt>Médico</dt><dd>${m.n}</dd></div><div><dt>Cuándo</dt><dd>${S.ocupado ? 'Elige otro horario' : fechaLarga(S.dia) + ', ' + S.hora}</dd></div><div><dt>Dónde</dt><dd>${S.modo==='virtual' ? 'Teleconsulta por videollamada · te mandamos el enlace por mensaje' : c.lu + ' · ' + c.dir}</dd></div><div><dt>Consulta</dt><dd>${precioTxt(m, c, S.promo)} · ${S.modo==='virtual' ? 'el consultorio te indica cómo pagar' : 'pagas en el consultorio'}</dd></div></dl>
   <div class="form"><div class="campo-f" id="cf-nombre"><label for="nombre">Nombre completo</label><input id="nombre" autocomplete="name" value="${d.nombre||''}" required><span class="errm">Escribe tu nombre para que el consultorio te reciba.</span></div>
   <div class="campo-f" id="cf-cel"><label for="cel">Celular</label><input id="cel" inputmode="tel" autocomplete="tel" placeholder="10 dígitos" value="${d.cel||''}" required><small>Te mandamos la confirmación y un recordatorio un día antes.</small><span class="errm">Escribe un celular de 10 dígitos.</span></div>
   <p class="spec" style="font-size:14px">Al confirmar aceptas el <a class="inl" style="padding-block:4px;font-weight:600" href="#confirmar" data-toast="Aviso de privacidad (ejemplo)">aviso de privacidad</a>. Tus datos solo se comparten con el consultorio.</p></div></form></main>
-  <div class="pie-paso"><div class="in"><div><b>${S.ocupado ? 'Elige otro horario' : nombreDia(S.dia, true) + ', ' + S.hora}</b>${c.lu} · ${peso((promoDe(m, c, S.promo) || c).pr)}</div><button class="btn primario" data-confirmar aria-disabled="${!!S.ocupado}">Confirmar cita</button></div></div>`;
+  <div class="pie-paso"><div class="in"><div><b>${S.ocupado ? 'Elige otro horario' : nombreDia(S.dia, true) + ', ' + S.hora}</b>${S.modo==='virtual' ? 'Teleconsulta' : c.lu} · ${peso((promoDe(m, c, S.promo) || c).pr)}</div><button class="btn primario" data-confirmar aria-disabled="${!!S.ocupado}">Confirmar cita</button></div></div>`;
 };
 
 V.cita = () => {
@@ -582,8 +605,8 @@ V.cita = () => {
   const cuando = fechaLarga(ci.dia).replace(/^./, x=>x.toUpperCase()) + ', ' + ci.hora;
   const resumen = (tach) => `<section class="cres a-res" aria-label="Tu cita"><span class="cuando${tach?' tachada':''}">${cuando}</span>
    <span class="fila">${ic('stethoscope')}<span><b>${m.n}</b><small>${m.esp}</small></span></span>
-   <span class="fila">${ic('map-pin')}<span><b>${c.lu}</b><small>${c.dir}</small></span></span>
-   <span class="fila"><span></span><span><b>${precioTxt(m, c, ci.promo)}</b><small>Pagas en el consultorio</small></span></span>
+   ${filaLugar(c, ci.modo)}
+   <span class="fila"><span></span><span><b>${precioTxt(m, c, ci.promo)}</b><small>${ci.modo==='virtual' ? 'El consultorio te indica cómo pagar' : 'Pagas en el consultorio'}</small></span></span>
    <span class="fila"><span></span><span><b>Paciente: ${ci.nombre}</b><small>Celular ··· ${ci.cel.slice(-4)}</small></span></span>`;
   const telA = c.tel ? `<a class="btn secundario" href="tel:+52${c.tel.replace(/ /g,'')}" data-llamar="${c.tel}">${ic('phone')}Llamar al consultorio · ${c.tel}</a>` : '';
   if ((ci.estado === 'cancelada' && !demo) || demo === 'consultorio') {
@@ -625,8 +648,8 @@ V.confirmada = () => {
   return `${nav('')}<main class="wrap"><div class="ok"><span class="ic">${ic('circle-check')}</span><h1 id="h-ok" tabindex="-1">Tu cita está <b>confirmada</b>.</h1><p class="lead">${pila ? pila + ', te' : 'Te'} esperan el ${DIAS[dia(S.dia).getDay()]} a las ${S.hora}.</p></div>
   <div class="cc"><section class="cres a-res" aria-label="Detalle de la cita"><span class="cuando">${cuando}</span>
    <span class="fila">${ic('stethoscope')}<span><b>${m.n}</b><small>${m.esp}</small></span></span>
-   <span class="fila">${ic('map-pin')}<span><b>${c.lu}</b><small>${c.dir}</small></span></span>
-   <span class="fila"><span></span><span><b>${precioTxt(m, c, S.promo)}</b><small>Pagas en el consultorio</small></span></span>
+   ${filaLugar(c, S.modo)}
+   <span class="fila"><span></span><span><b>${precioTxt(m, c, S.promo)}</b><small>${S.modo==='virtual' ? 'El consultorio te indica cómo pagar' : 'Pagas en el consultorio'}</small></span></span>
    <span class="fila"><span></span><span><b>Paciente: ${S.datos.nombre}</b><small>Celular ${S.datos.cel}</small></span></span>
    <div class="acc"><a class="btn primario" href="${gcal(m, c)}" target="_blank" rel="noopener">${ic('calendar-check')}Agregar a mi calendario</a><button class="btn secundario" data-toast="Aquí se abriría el mapa">${ic('map-pin')}Cómo llegar</button></div><button class="btn texto" style="justify-self:start" data-ics>Apple u Outlook (.ics)</button></section>
   <section class="cmsg a-msg" aria-labelledby="h-msg"><h2 id="h-msg">Te enviamos la confirmación</h2><p>Por mensaje al <b class="nw">${S.datos.cel}</b>. Ahí está el enlace para cambiar o cancelar tu cita.</p><p class="burbuja"><small>Vista del mensaje</small>${msg.replace('mnk.example/c/7KQ2','<a href="#cita" style="display:inline-block;padding-block:3px;font-weight:600">mnk.example/c/7KQ2</a>')}</p><button class="btn texto" style="justify-self:start" data-toast="Te lo volvimos a enviar">¿No te llegó? Reenviar</button></section>
@@ -711,10 +734,12 @@ document.addEventListener('click', e => {
   const f = t.closest('[data-f]'); if (f) { const k = f.dataset.f; S.f[k] = !S.f[k]; render(); return; }
   if (t.closest('[data-limpiar]')) { S.f = {agenda:false,precio:false,seguro:false,tele:false,hoy:false}; render(); return; }
   const pa = t.closest('[data-promo-agendar]'); if (pa) { const p = PROMOS.find(x=>x.id===pa.dataset.promoAgendar); S.promo = p.id; S.med = p.med; S.cons = p.cons; S.dia = null; S.hora = null; S.verH = false; S.irAgenda = true; location.hash = 'medico-' + p.med; return; }
-  const ag = t.closest('[data-agendar]'); if (ag) { const [mid, cid] = ag.dataset.agendar.split('|'); S.med = mid; S.cons = cid; S.dia = null; S.hora = null; S.verH = false; S.irAgenda = true; location.hash = 'medico-' + mid; return; }
-  const co = t.closest('[data-cons]'); if (co) { S.cons = co.dataset.cons; S.dia = null; S.hora = null; S.verH = false; render(); $(`[data-cons="${S.cons}"]`)?.focus(); return; }
+  const ag = t.closest('[data-agendar]'); if (ag) { const [mid, cid] = ag.dataset.agendar.split('|'); S.med = mid; S.cons = cid; S.modo = 'presencial'; S.dia = null; S.hora = null; S.verH = false; S.irAgenda = true; location.hash = 'medico-' + mid; return; }
+  const co = t.closest('[data-cons]'); if (co) { S.cons = co.dataset.cons; S.modo = 'presencial'; S.dia = null; S.hora = null; S.verH = false; render(); $(`[data-cons="${S.cons}"]`)?.focus(); return; }
   const hr = t.closest('[data-hora]'); if (hr) { const [k, h] = hr.dataset.hora.split('|'); S.dia = +k; S.hora = h; S.ocupado = false; location.hash = 'confirmar'; return; }
   const sc = t.closest('[data-sec]'); if (sc) { const el = document.getElementById(sc.dataset.sec); if (el) { el.scrollIntoView({block:'start'}); el.setAttribute('tabindex','-1'); el.focus({preventScroll:true}); } return; }
+  const md = t.closest('[data-modo]'); if (md) { S.modo = md.dataset.modo; render(); $(`[data-modo="${S.modo}"]`)?.focus(); return; }
+  const cm = t.closest('[data-calmov]'); if (cm) { const cal = $('.cal'); cal?.scrollBy({left: +cm.dataset.calmov * cal.clientWidth, behavior:'smooth'}); return; }
   if (t.closest('[data-verh]')) { S.verH = true; render(); return; }
   const di = t.closest('[data-dia]'); if (di && !di.disabled) { S.dia = +di.dataset.dia; S.hora = null; render(); $(`[data-dia="${S.dia}"]`)?.focus(); return; }
   const ir = t.closest('[data-ir]'); if (ir) { if (ir.getAttribute('aria-disabled') === 'true') { toast('Elige un horario primero'); return; } location.hash = ir.dataset.ir; return; }
@@ -739,6 +764,7 @@ function reservar(mid, cid, k, h){ const c = MED.find(x=>x.id===mid).cons.find(x
 function liberar(mid, cid, k, h){ const c = MED.find(x=>x.id===mid).cons.find(x=>x.id===cid); c.ag = c.ag || {}; const l = c.ag[k] || []; if (!l.includes(h)) l.push(h); l.sort((a,b)=>{const t=x=>{const [H,M]=x.split(':').map(Number);return H*60+M}; return t(a)-t(b)}); c.ag[k] = l; }
 const art = m => /^(Dra?|Psic|Nut)\./.test(m.n) ? (m.av === 'hombre' ? 'el ' : 'la ') : '';
 const deArt = m => art(m) === 'el ' ? 'del ' : 'de ' + art(m);
+const filaLugar = (c, modo) => modo === 'virtual' ? `<span class="fila">${ic('calendar-check')}<span><b>Teleconsulta</b><small>Por videollamada; te mandamos el enlace por mensaje.</small></span></span>` : `<span class="fila">${ic('map-pin')}<span><b>${c.lu}</b><small>${c.dir}</small></span></span>`;
 const corto = m => { const t = m.n.split(' '); return /^(Dra?|Psic|Nut)\.$/.test(t[0]) ? t[0] + ' ' + (t[2] || t[1]) : t.slice(0,2).join(' '); };
 const inicioCita = ci => { const d = dia(ci.dia), [H,M] = ci.hora.split(':').map(Number); d.setHours(H, M, 0, 0); return d; };
 function confirmar(){
@@ -751,7 +777,7 @@ function confirmar(){
   const key = `${S.med}|${S.cons}|${S.dia}|${S.hora}`;
   if (OCUPA.has(key)) { OCUPA.delete(key); const c = MED.find(x=>x.id===S.med).cons.find(x=>x.id===S.cons); c.ag[S.dia] = c.ag[S.dia].filter(h=>h!==S.hora); if (!c.ag[S.dia].length) delete c.ag[S.dia]; S.ocupado = true; render(); $('#ocupado')?.focus(); return; }
   S.ocupado = false; reservar(S.med, S.cons, S.dia, S.hora);
-  S.cita = {med:S.med, cons:S.cons, dia:S.dia, hora:S.hora, nombre:S.datos.nombre, cel:S.datos.cel, estado:'activa', promo:S.promo}; S.demo = null; location.hash = 'confirmada';
+  S.cita = {med:S.med, cons:S.cons, dia:S.dia, hora:S.hora, nombre:S.datos.nombre, cel:S.datos.cel, estado:'activa', promo:S.promo, modo:S.modo}; S.demo = null; location.hash = 'confirmada';
 }
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#capa').innerHTML) cerrar(); });
 render();
