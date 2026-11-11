@@ -44,6 +44,7 @@ Cinco especialistas. Cada uno es dueño de una sola clase de decisión y entrega
 | <picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/coco-oscuro.svg"><img src="assets/marca/coco.svg" alt="Coco" width="32"></picture> | **Coco** · UI Audit | Construye la capa visual y la audita contra el contrato. | Cómo se ve la pieza con el sistema real (F3) y si lo implementado cumple (R0) | F3 con su CSS, y el reporte de cumplimiento con evidencia |
 | <picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/bruno-oscuro.svg"><img src="assets/marca/bruno.svg" alt="Bruno" width="32"></picture> | **Bruno** · Frontend Implementation Engineer | Convierte la pieza aprobada en comportamiento frontend real. | Cómo funciona la pieza (R3): props, eventos, slots, estado, teclado, foco y ARIA | Componente funcional, build en verde y lo verificado y no verificado |
 | <picture><source media="(prefers-color-scheme: dark)" srcset="assets/marca/mora-oscuro.svg"><img src="assets/marca/mora.svg" alt="Mora" width="32"></picture> | **Mora** · Documentation & Knowledge Engineer | Documenta solo lo que existe y fue verificado. | Qué se publica en el Design Hub y cómo se conecta | Páginas del Design Hub, navegación y cobertura |
+| 🥭 | **Mango** · Screen Composer | Compone la pantalla real con las piezas que ya existen. | Cómo se compone una pantalla del producto: textos que guían, alineación, separadores, adaptación e integración con lo que ya había (Vuetify, HTML propio). Trabaja fuera de la ronda | La pantalla corregida en el código y su calificación antes y después |
 
 Lo que ninguno hace:
 
@@ -102,8 +103,8 @@ Para probar el instalador después de un cambio: `npm test` (instala en proyecto
 
 Con `--target kiro` el instalador deja:
 
-- `.kiro/skills/{kiwi,lima,coco,bruno,mora}/` — los miembros, cada uno con su `SKILL.md` y sus referencias.
-- `.kiro/agents/{kiwi,lima,coco,bruno,mora}.md` — un agente de Kiro por miembro, con su skill, la política, el estado y el handoff, y solo los permisos de su trabajo:
+- `.kiro/skills/{kiwi,lima,coco,bruno,mora,mango}/` — los miembros, cada uno con su `SKILL.md` y sus referencias.
+- `.kiro/agents/{kiwi,lima,coco,bruno,mora,mango}.md` — un agente de Kiro por miembro, con su skill, la política, el estado y el handoff, y solo los permisos de su trabajo:
   - kiwi, lima y mora escriben libremente en `.fruti/` (lima también en sus perfiles y el registro; mora en el Design Hub) y piden permiso para lo demás;
   - coco y bruno escriben el CSS y los componentes del producto y corren las pruebas;
   - nadie puede usar `rm -rf`, `sudo`, `git push`, `git reset --hard` ni `git clean`, ni escribir en `.env` o `.git/`.
@@ -123,12 +124,12 @@ npx github:kevinedgm/fruti-squad update --target kiro
 
 Con `--target claude` el instalador deja:
 
-- `.claude/skills/{kiwi,lima,coco,bruno,mora-docs}/` — cada miembro como Skill.
+- `.claude/skills/{kiwi,lima,coco,bruno,mora-docs,mango}/` — cada miembro como Skill.
 - `CLAUDE.md` — bloque del Squad que importa `.fruti/policy.md` (la política de ruteo, la misma que usa Codex vía `AGENTS.md`).
 - `.fruti/paths.yaml` — mapa de rutas para resolver las referencias de `.fruti/runtime/*.yaml`.
   Para resolver una ruta desde scripts o desde el agente: `fruti path skills/lima/reference/quality-gates.md` imprime la ruta real en el proyecto.
 
-Después basta con pedir en lenguaje natural ("rediseña este formulario") o invocar `kiwi`, `lima`, `coco`, `bruno` o `mora-docs`.
+Después basta con pedir en lenguaje natural ("rediseña este formulario") o invocar `kiwi`, `lima`, `coco`, `bruno`, `mora-docs` o `mango`.
 
 ---
 
@@ -509,6 +510,12 @@ Corre el build y las pruebas disponibles. Lo que no pudo correr lo marca como no
 Parte de registry + compliance report + código/API real + diff afectado.
 
 Documenta el delta implementado y verificado, con las reglas de redacción de `agentes/mora/redaccion.md`. No reconstruye todo el historial de diseño para escribir una ficha.
+
+## Mango
+
+No es una etapa de la ronda: trabaja directo en tu conversación sobre el código de una pantalla. "Usa mango: agrega separadores al formulario de alta" se hace sin diagnóstico ni preguntas. "Usa mango: corrige el diseño de la barra de búsqueda" se califica con 22 filas comprobables (contenido, apariencia, adaptación y semántica, integración), cada una con su estándar, y entrega la calificación antes y después.
+
+Para cada pieza de Fruti que toca, lee su entrada en `.fruti/catalog.md` y la usa con las props de su contrato, sin sobrescribirla con CSS. Si el problema es de la pieza (no cumple su contrato, le falta una variante, no existe, o una sección hecha a mano debería ser pieza), escribe `.fruti/requests/<id>.md` y te da la frase para kiwi, coco o bruno.
 
 ---
 

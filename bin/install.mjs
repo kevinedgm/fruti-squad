@@ -50,8 +50,11 @@ const MEMBERS = {
   coco:                 { from: 'agentes/coco',              kind: 'agent', blurb: 'capa visual: alta fidelidad (F3) con el sistema real y su CSS; auditoría canónica (R0)' },
   bruno:                { from: 'agentes/bruno',             kind: 'agent', blurb: 'implementa el comportamiento (R3): API, eventos, estado, teclado, foco y ARIA' },
   mora:                 { from: 'agentes/mora',              kind: 'agent', blurb: 'documenta lo implementado y sincroniza el Design Hub (último paso del flujo)' },
+  mango:                { from: 'agentes/mango',             kind: 'agent', blurb: 'compone y corrige pantallas reales: alineación, ayudas, separadores, adaptación e integración de las piezas con lo que ya había (fuera de la ronda)' },
 };
-const DEFAULT = ['kiwi', 'lima', 'coco', 'bruno', 'mora'];
+const DEFAULT = ['kiwi', 'lima', 'coco', 'bruno', 'mora', 'mango'];
+// Members that work directly in the conversation and are not stages of a design round.
+const OUTSIDE_ROUND = ['mango'];
 const TARGETS = ['kiro', 'claude', 'codex'];
 
 const C = {
@@ -260,6 +263,7 @@ function squadLines(members, target, skillsRootRel) {
     }),
     '',
     'Flujo: **kiwi estructura → lima gobierna → coco construye la capa visual → bruno implementa el comportamiento → coco audita → mora documenta.** Cada uno se dedica a una actividad y todos usan el perfil de proyecto de lima (`' + skillsRootRel + '/lima/profiles/<proyecto>.md`).',
+    ...(members.includes('mango') ? ['Fuera de la ronda: **mango** compone y corrige pantallas reales del producto directamente en la conversación ("usa mango: agrega separadores al formulario de alta").'] : []),
     // Claude imports the policy with @; Codex has no import syntax, so it gets an explicit read instruction.
     ...(target === 'codex' ? ['', 'Antes de la primera tarea de diseño/UI lee `.fruti/policy.md` (política de ruteo: rutea primero, lee después; fuentes aprobadas; handoffs compactos). Rutas reales de skills/agentes: `.fruti/paths.yaml`.'] : []),
   ];
@@ -281,6 +285,7 @@ function kiroSteering() {
     '',
     'Antes de la primera tarea de diseño/UI lee `.fruti/policy.md` (política de ruteo: rutea primero, lee después; fuentes aprobadas; handoffs compactos). Rutas reales de skills/agentes: `.fruti/paths.yaml`.',
     'Para una ronda completa usa el agente `fruti`, que lanza a cada miembro como subagente; para un solo paso, el agente del miembro.',
+    'Para corregir o integrar una pantalla real del producto, usa el agente `mango` directamente (no es parte de la ronda).',
     '',
   ].join('\n');
 }
@@ -296,6 +301,7 @@ const KIRO_AGENTS = {
   lima: { description: 'Fruti Squad governance agent: classification, contracts, tokens, registry, gates and lifecycle.', welcome: 'Lima · Governance — I classify and set contracts, tokens, registry and gates.', extraSkills: ['impeccable'], tools: ['read', 'write', 'shell'], writes: ['.fruti/**', '.kiro/skills/lima/profiles/**', '**/registry.json', 'design-hub/**'], shell: [...KIRO_READ, 'npx fruti*', 'node *', 'bash *'] },
   coco: { description: 'Fruti Squad visual layer (F3/CSS) and canonical audit (R0) agent.', welcome: 'Coco · UI Audit — I build the visual layer and audit it against the contract.', tools: ['read', 'write', 'shell', 'web'], writes: ['**'], shell: [...KIRO_READ, ...KIRO_RUN] },
   bruno: { description: 'Fruti Squad frontend implementation agent (R3): API, events, state, keyboard, focus and functional ARIA.', welcome: 'Bruno · Implementation — I turn the approved piece into real frontend behavior.', tools: ['read', 'write', 'shell'], writes: ['**'], shell: [...KIRO_READ, ...KIRO_RUN] },
+  mango: { description: 'Fruti Squad screen composer: integrates and corrects real product screens (alignment, helper text, separators, adaptation, integration with existing code). Works directly, outside the design round.', welcome: 'Mango · Composer — tell me the screen and what is wrong; I fix it in the code.', tools: ['read', 'write', 'shell', 'web'], writes: ['**'], shell: [...KIRO_READ, ...KIRO_RUN] },
   mora: { description: 'Fruti Squad documentation agent; publishes implemented, verified truth.', welcome: 'Mora · Docs — I document only what is implemented and verified.', tools: ['read', 'write', 'shell'], writes: ['.fruti/**', 'design-hub/**', 'docs/**'], shell: [...KIRO_READ, 'npx fruti*', 'node *'] },
 };
 // Members that only write design-system files run as subagents without an approval prompt; coco and
@@ -353,7 +359,7 @@ function kiroAgentDefinition(name, base, members, target = 'kiro') {
 
 // Orchestrator: runs a full round by delegating each stage to the member's agent with the subagent tool.
 function kiroOrchestrator(members) {
-  const agents = members.filter((n) => KIRO_AGENTS[n]);
+  const agents = members.filter((n) => KIRO_AGENTS[n] && !OUTSIDE_ROUND.includes(n));
   const list = (xs) => `[${xs.map((x) => JSON.stringify(x)).join(', ')}]`;
   return [
     '---',
@@ -433,7 +439,7 @@ function writeClaudeMd(base, members, skillsRootRel, dryRun, global = false) {
     '',
     '@.fruti/policy.md',
     '',
-    'Rutas reales de skills/agentes: `.fruti/paths.yaml`. Los contratos `.fruti/runtime/*.yaml` citan rutas relativas al paquete (`skills/...`, `agentes/...`); resuélvelas con ese mapa o con `fruti path <ruta>` (imprime la ruta real). Invoca cada miembro con la herramienta Skill (`kiwi`, `lima`, `coco`, `bruno`, `mora-docs`) y haz las preguntas de producto con AskUserQuestion.',
+    'Rutas reales de skills/agentes: `.fruti/paths.yaml`. Los contratos `.fruti/runtime/*.yaml` citan rutas relativas al paquete (`skills/...`, `agentes/...`); resuélvelas con ese mapa o con `fruti path <ruta>` (imprime la ruta real). Invoca cada miembro con la herramienta Skill (`kiwi`, `lima`, `coco`, `bruno`, `mora-docs`, `mango`) y haz las preguntas de producto con AskUserQuestion.',
   ], dryRun);
 }
 
@@ -730,8 +736,8 @@ async function doSetup(args) {
 function printUse(target) {
   log(`\n${C.bold}Usar:${C.reset}`);
   if (target === 'kiro')   log(`  En Kiro elige el agente ${C.bold}fruti${C.reset} para una ronda completa, o ${C.bold}kiwi${C.reset}, ${C.bold}lima${C.reset}, ${C.bold}coco${C.reset}, ${C.bold}bruno${C.reset} o ${C.bold}mora${C.reset} para un solo paso.`);
-  if (target === 'claude') log(`  En Claude Code aparecen como skills en ${C.bold}.claude/skills/${C.reset} y la política se carga vía ${C.bold}CLAUDE.md${C.reset}; pídele "usa kiwi/lima/coco/bruno/mora-docs" o rediseña en lenguaje natural.`);
-  if (target === 'codex')  log(`  Codex las conoce por el bloque en ${C.bold}AGENTS.md${C.reset}; pídele "usa kiwi/lima/coco/bruno/mora-docs".`);
+  if (target === 'claude') log(`  En Claude Code aparecen como skills en ${C.bold}.claude/skills/${C.reset} y la política se carga vía ${C.bold}CLAUDE.md${C.reset}; pídele "usa kiwi/lima/coco/bruno/mora-docs/mango" o rediseña en lenguaje natural.`);
+  if (target === 'codex')  log(`  Codex las conoce por el bloque en ${C.bold}AGENTS.md${C.reset}; pídele "usa kiwi/lima/coco/bruno/mora-docs/mango".`);
 }
 
 function doList() {
