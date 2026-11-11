@@ -511,7 +511,7 @@ Documenta el delta implementado y verificado, con las reglas de redacción de `a
 
 ## Mango
 
-No es una etapa de la ronda: trabaja directo en tu conversación sobre el código de una pantalla. "Usa mango: agrega separadores al formulario de alta" se hace sin diagnóstico ni preguntas. "Usa mango: corrige el diseño de la barra de búsqueda" se califica con 26 filas comprobables (contenido, apariencia, adaptación, edición y semántica, integración), cada una con su estándar, y entrega la calificación antes y después. Cada corrida deja en `.fruti/logs/mango.log` una línea por paso con su hora, y la línea final dice cuánto duró.
+No es una etapa de la ronda: trabaja directo en tu conversación sobre el código de una pantalla. "Usa mango: agrega separadores al formulario de alta" se hace sin diagnóstico ni preguntas. "Usa mango: corrige el diseño de la barra de búsqueda" se califica con 28 filas comprobables (contenido, apariencia, adaptación, edición y semántica, integración), cada una con su estándar, y entrega la calificación antes y después. "Usa mango: valida UI/UX de la tarjeta de embarazo" revisa en orden el flujo, el acomodo, el contraste y la semántica, sin editar; "corrige" hace esa misma validación antes de tocar nada. Cada corrida deja en `.fruti/logs/mango.log` una línea por paso con su hora, y la línea final dice cuánto duró.
 
 Para cada pieza de Fruti que toca, lee su entrada en `.fruti/catalog.md` y la usa con las props de su contrato, sin sobrescribirla con CSS. Si el problema es de la pieza (no cumple su contrato, le falta una variante, no existe, o una sección hecha a mano debería ser pieza), escribe `.fruti/requests/<id>.md` y te da la frase para kiwi, coco o bruno.
 

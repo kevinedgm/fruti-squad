@@ -17,7 +17,21 @@ La petición manda el alcance:
 
 - **Concreta** ("agrega separadores", "alinea las acciones", "pon textos de ayuda", "mete el autocomplete en la barra de búsqueda"): haz solo eso. Abre solo el archivo de la pantalla. No diagnostiques todo ni preguntes. Al final nombra, en una línea, las 2 o 3 filas del diagnóstico que fallan y ofrece corregirlas.
 - **Abierta** ("corrige el diseño de X", "mejora este formulario"): diagnostica con la tabla de abajo, corrige lo que falla y entrega la calificación antes y después.
-- **Solo revisar** ("audita esta pantalla", "califícala"): diagnóstico y calificación, sin editar.
+- **Validar UI/UX** ("valida UI/UX de X", "valida esta pantalla", "audita", "califícala"): la validación de abajo, completa, sin editar.
+- **Abierta** siempre empieza por la validación completa: "corrige" nunca se limita a lo fácil (contraste, espacios) si falla el flujo o el acomodo.
+
+## Validar UI/UX
+
+Se recorren las capas en este orden, y ninguna se salta porque la anterior haya salido bien o mal:
+
+1. **Flujo (UX):** para qué es la pantalla y qué necesita la persona primero. Filas C9, C1, C2, C5, C6, C8, E1.
+2. **Acomodo (UI):** A1–A6, A9–A11.
+3. **Contraste, sistema y semántica:** A7, A8, R1, S1–S3.
+4. **Textos de detalle e integración:** C3, C4, C7, I1–I3.
+
+Cada fila queda en *pasa*, *falla* o *no aplica*, con su evidencia: la captura o `archivo:línea`. Sin evidencia es *sin verificar*, nunca *pasa*. Con captura, las capas 1 y 2 se juzgan sobre la captura. Al corregir, se arreglan las filas que fallan en el orden de las capas: un buen contraste no compensa un flujo que falla.
+
+La entrega de una validación es una tabla con solo las filas que fallan o quedan sin verificar, agrupadas por capa, con la evidencia y la corrección propuesta en una línea, y la calificación.
 
 ## Qué lees, y nada más
 
@@ -62,9 +76,11 @@ Cada fila se comprueba mirando el código o la pantalla. La fuente es el estánd
 | A4 | El espacio entre grupos es mayor que dentro de un grupo. Un divisor solo cuando cambia el tipo de decisión (p. ej. un interruptor opcional después de los campos) o el espacio no basta | GESTALT proximidad; RUI |
 | A5 | Las opciones con descripción son áreas completas clicables; la seleccionada se distingue por borde o fondo además del color | FITTS; WCAG 1.4.1 |
 | A6 | Las acciones van juntas al final: principal rellena a la derecha, cancelar secundaria antes; una nota de pie, si existe, a la izquierda. En un modal, el pie se separa del cuerpo | M3; RUI |
-| A7 | Contraste de texto ≥ 4.5:1 y de bordes de controles ≥ 3:1 | WCAG 1.4.3; 1.4.11 |
+| A7 | Contraste de texto ≥ 4.5:1 y de bordes de controles ≥ 3:1. Si falla, se corrige con otro paso de claridad del mismo tono (el token vecino de la escala), sin cambiar el color de marca | WCAG 1.4.3; 1.4.11 |
 | A8 | Espacios, tamaños, colores y radios salen de tokens o clases del sistema; nada de valores sueltos | `.fruti/tokens.json` |
 | A9 | Las filas de una misma lista comparten forma: todas en una línea o todas apiladas, etiquetas en el mismo borde, valores e iconos en la misma columna. Si una no cabe en una línea, todas se apilan o se acorta el texto añadido | GESTALT similitud; RUI |
+| A10 | Se resta énfasis a lo secundario (color o peso menor) en vez de sumar énfasis a lo principal; en cada grupo, un solo elemento manda | RUI |
+| A11 | La etiqueta acompaña al valor solo cuando hace falta para entenderlo; si el formato ya lo dice, la etiqueta pasa a segundo plano. Se queda visible cuando dos valores tienen el mismo formato (FUM y FPP, ambas fechas) | RUI |
 
 ### Adaptación, edición y semántica
 
