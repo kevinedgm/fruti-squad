@@ -25,7 +25,9 @@ FOTOS = {'f_' + f[:-4]: 'data:image/jpeg;base64,' + base64.b64encode(open(os.pat
 # Galería de la Dra. Lucía (2026-11-11): imágenes de la V6 en externo/galeria/ (fuera del repo).
 GD = os.path.join(D, 'externo', 'galeria')
 GAL = {'g_' + f[:-4]: 'data:image/jpeg;base64,' + base64.b64encode(open(os.path.join(GD, f), 'rb').read()).decode() for f in sorted(os.listdir(GD)) if f.endswith('.jpg')} if os.path.isdir(GD) else {}
-IMG = {**FOTOS, **GAL, 'logo': LOGO, 'logoB': uri('manik-final/svg/logotipo-blanco.svg'),
+# Logo del grupo (2026-11-11): SVG de la V6 en externo/ (fuera del repo).
+LG = os.path.join(D, 'externo', 'logo-grupo.svg')
+IMG = {**FOTOS, **GAL, **({'logoGrupo': 'data:image/svg+xml;base64,' + base64.b64encode(open(LG, 'rb').read()).decode()} if os.path.exists(LG) else {}), 'logo': LOGO, 'logoB': uri('manik-final/svg/logotipo-blanco.svg'),
        'mujer': avatar('directorio-ds/avatares/avatar-mujer.svg'), 'hombre': avatar('directorio-ds/avatares/avatar-hombre.svg'), 'neutro': avatar('directorio-ds/avatares/avatar-neutro.svg')}
 html = open(os.path.join(D, 'plantilla.html')).read().replace('/*DATA*/', 'const ICONS=' + json.dumps(ICONS) + ';const IMG=' + json.dumps(IMG) + ';')
 open(os.path.join(D, 'prototipo.html'), 'w').write(html); print('ok', len(html) // 1024, 'KB')
