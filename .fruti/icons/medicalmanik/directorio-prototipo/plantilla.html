@@ -83,6 +83,14 @@ a{color:inherit}
 @media (min-width:768px){.trust{grid-template-columns:repeat(3,minmax(0,1fr))}}
 .trust div{display:grid;gap:8px;align-content:start}.trust .ic{display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:rgba(255,255,255,.1);color:var(--turquesa)}
 .trust b{font:600 20px/26px var(--display)}.trust p{color:var(--confianza-texto);font-size:15px;line-height:22px}
+.pie2{margin-top:24px;background:var(--blanco);border-top:1px solid var(--linea)}
+.pie2-a{display:grid;gap:24px;padding-block:32px}@media (min-width:640px){.pie2-a{grid-template-columns:repeat(3,minmax(0,1fr))}.pie2-m{grid-column:1/-1}}@media (min-width:1024px){.pie2-a{grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr))}.pie2-m{grid-column:auto}}
+.pie2-m{display:grid;gap:10px;align-content:start}.pie2-m img{height:40px;width:auto}.pie2-m p{color:var(--muted);font-size:15px;max-width:36ch}.pie2-m small{color:var(--muted);font-size:13px}
+.pie2-c h2{font:600 16px/22px var(--display);margin-bottom:6px}.pie2-c ul{list-style:none;margin:0;padding:0}
+.pl{display:inline-flex;align-items:center;min-height:40px;background:none;border:0;padding:0;font:15px var(--sans);color:var(--tinta);text-align:left;cursor:pointer;text-decoration:none}.pl:hover{text-decoration:underline;text-underline-offset:3px}
+.pie2-b{background:var(--teal);color:var(--blanco);padding-block:14px calc(14px + env(safe-area-inset-bottom,0px))}.pie2-b .pl{color:var(--blanco);font-size:14px;min-height:36px;text-decoration:underline;text-underline-offset:3px}
+.pie2-aviso{font-size:14px;line-height:20px;padding-bottom:6px}.pie2-l{display:flex;flex-wrap:wrap;gap:0 18px;align-items:center;font-size:14px}.pie2-r{display:flex;gap:0 14px;flex-wrap:wrap}@media (min-width:1024px){.pie2-r{margin-left:auto}}
+@media (max-width:1023px){.pie2:has(+ .barra-acc) .pie2-b{padding-bottom:calc(96px + env(safe-area-inset-bottom,0px))}}
 .pie{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;padding-block:32px 48px;color:var(--muted);font-size:15px}.pie img{height:32px;width:auto;display:block}
 
 /* Promociones de Impulsa (promocion/r02, aprobado 2026-11-04) */
@@ -145,6 +153,7 @@ a{color:inherit}
 .rh{display:grid;gap:4px;padding-block:8px 12px}
 .rh .h2 small{display:block;font:400 15px/22px var(--sans);color:var(--muted);letter-spacing:0;margin-top:4px}
 .barra{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bruma);display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding-block:8px 12px;border-bottom:1px solid var(--linea)}
+.gesp{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:10px 2px 2px}.gesp .chip{flex:none}
 .barra .sel{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:15px;color:var(--muted)}
 .barra select{font:500 15px var(--sans);color:var(--tinta);border:1.5px solid var(--linea);border-radius:10px;min-height:42px;padding:0 14px;background:var(--blanco)}
 .barra .solo-esc{display:none}@media (min-width:1024px){.barra .solo-esc{display:contents}.barra .solo-cel{display:none}}
@@ -406,6 +415,10 @@ const ESPS = [['Alergología'],['Angiología'],['Cardiología'],['Cirugía gener
  ['Endocrinología'],['Gastroenterología'],['Gastroenterología pediátrica',/^Gastroenterólogo pediatra/],['Geriatría'],['Ginecología y obstetricia',/^Ginecólog/],['Hematología'],['Infectología'],
  ['Medicina general',/^Médic[oa] general/],['Medicina interna'],['Nefrología'],['Neumología'],['Neurología'],['Nutrición',/^Nutriólog/],['Oftalmología'],['Oncología'],['Ortopedia y traumatología'],
  ['Otorrinolaringología'],['Pediatría',/^Pediatra/],['Psicología',/^Psicólog/],['Psiquiatría',/^Psiquiatra/],['Reumatología'],['Urología',/^Urólog/]];
+// Grupos de especialidades (ronda 3, 2026-11-11): qué especialidades viven dentro de cada sello. El resto solo está en la lista A-Z.
+const GRUPOS = {'Piel':['Dermatología','Dermatología pediátrica'], 'Salud mental':['Psicología','Psiquiatría'], 'Alimentación':['Nutrición','Endocrinología'],
+ 'Salud íntima':['Ginecología y obstetricia','Urología'], 'Niñas y niños':['Pediatría','Dermatología pediátrica','Gastroenterología pediátrica'], 'Chequeo general':['Medicina general','Medicina interna','Geriatría']};
+const grupoDe = n => Object.keys(GRUPOS).find(g => GRUPOS[g].includes(n)) || null;
 const espDe = n => ESPS.find(e => e[0] === n);
 const medsEsp = n => { const e = espDe(n); return e && e[1] ? MED.filter(m => e[1].test(m.esp)) : []; };
 // Modelo por consultorio (2026-11-11): seg = acepta seguro, virtual = también da teleconsulta, pr:null = no publica precio, ciudad para la publicidad.
@@ -415,7 +428,7 @@ const EXTRA = {'soto|angelopolis':{seg:true}, 'quiroz|centro':{pr:null}, 'hernan
 const CIUDAD = {neodemo:'Xalapa', cholula:'Cholula'};
 MED.forEach(m => m.cons.forEach(c => Object.assign(c, EXTRA[m.id + '|' + c.id] || {}, {ciudad: CIUDAD[c.id] || 'Puebla'})));
 const ciudadBusq = () => /xalapa/i.test(S.donde) ? 'Xalapa' : 'Puebla';
-const S = {esp:null, q:'Dermatóloga', donde:'Angelópolis, Puebla', cat:'Piel', f:{agenda:false,precio:false,seguro:false,tele:false,hoy:false}, orden:'km', med:null, cons:null, dia:null, hora:null, datos:{}};
+const S = {grupo:'Piel', esp:null, q:'Dermatóloga', donde:'Angelópolis, Puebla', cat:'Piel', f:{agenda:false,precio:false,seguro:false,tele:false,hoy:false}, orden:'km', med:null, cons:null, dia:null, hora:null, datos:{}};
 
 // Consultorios: el próximo lugar y si cumplen filtros
 const prox = c => { if (!c.manik) return null; const ks = Object.keys(c.ag||{}).map(Number).sort((a,b)=>a-b); return ks.length ? {off:ks[0], h:c.ag[ks[0]][0]} : null; };
@@ -471,7 +484,7 @@ V.promo = (id) => { const p = PROMOS.find(x=>x.id===id); if (!p) return V.result
   <a class="anun" href="#medico-${m.id}">${avatar(m)}<b>${p.anun} · ${m.n}</b><small>${m.esp}</small>${ced(m)}</a>
   <div class="acc"><button class="btn primario" data-promo-agendar="${p.id}">Agendar con esta promoción</button><a class="btn texto" href="#medico-${m.id}">Ver perfil</a></div>
   <p class="legal">Promoción de ${p.anun}. Mi Médico Manik no recomienda médicos; muestra quién la ofrece y sus cédulas.</p>
-  <div class="impulsa"><img src="${SELLO_IMPULSA}" width="32" height="32" alt=""><span><b>Promoción publicada con Impulsa Manik</b>, la herramienta de campañas del ecosistema Manik.</span><button class="btn texto" data-toast="La página de Impulsa Manik para médicos aún no está en el prototipo">¿Eres médico? Conoce Impulsa</button></div></div></div></main>`; };
+  <div class="impulsa"><img src="${SELLO_IMPULSA}" width="32" height="32" alt=""><span><b>Promoción publicada con Impulsa Manik</b>, la herramienta de campañas del ecosistema Manik.</span><button class="btn texto" data-toast="La página de Impulsa Manik para médicos aún no está en el prototipo">¿Eres médico? Conoce Impulsa</button></div></div></div></main>${pie()}`; };
 // Destacados por calificación (2026-11-11): 4.8 o más, al menos 50 opiniones, con consultorio en la ciudad de la búsqueda.
 const DEST = () => MED.filter(m => +m.r >= 4.8 && m.op >= 50 && m.cons.some(c => c.ciudad === ciudadBusq())).sort((a,b) => b.r - a.r || b.op - a.op).slice(0, 4);
 const HOY = () => MED.map(m => { const c = m.cons.find(c => c.manik && c.ag && c.ag[0]); return c ? {m, c} : null; }).filter(Boolean).sort((a,b)=>a.c.km-b.c.km).slice(0, 3);
@@ -510,7 +523,7 @@ ${hoy.length ? `<section class="wrap sec" aria-labelledby="h-hoy"><h2 class="h2"
 <section class="wrap sec" aria-labelledby="h-como"><h2 class="h2" id="h-como">Cómo <b>funciona</b></h2><ol class="pasos"><li><span><b>Busca</b><span>Por especialidad, por lo que sientes o por nombre.</span></span></li><li><span><b>Compara</b><span>Precio, distancia y opiniones de cada consultorio.</span></span></li><li><span><b>Agenda</b><span>En línea o por teléfono. La consulta es en el consultorio.</span></span></li></ol></section>
 <section class="wrap sec"><div class="trust" aria-label="Por qué Mi Médico Manik"><div><span class="ic">${ic('badge-check')}</span><b>Médicos verificados</b><p>Revisamos la cédula profesional de cada médico.</p></div><div><span class="ic">${ic('message-circle-heart')}</span><b>Opiniones reales</b><p>Solo opina quien tuvo cita en Mi Médico Manik.</p></div><div><span class="ic">${ic('calendar-check')}</span><b>Gratis para ti</b><p>Pagas la consulta en el consultorio.</p></div></div></section>
 <section class="wrap sec"><div class="soymed"><div><b>¿Eres médico?</b><p>Aparece en Mi Médico Manik y recibe pacientes.</p></div><button class="btn secundario" data-toast="El registro para médicos aún no está en el prototipo">Únete como médico</button></div></section>
-<footer class="wrap pie"><img src="${IMG.logo}" alt="Mi Médico Manik" width="123" height="32"><span>de MedicalManik</span><span>Aviso de privacidad</span><span>Términos</span></footer>`; };
+${pie()}`; };
 
 V.resultados = () => {
   const r = resultados(); const n = r.length;
@@ -523,10 +536,10 @@ V.resultados = () => {
   if (!n) lista = [!nFiltros()
     ? `<div class="vacio"><span class="ic">${ic('search')}</span><h3>Pronto tendremos especialistas de ${(S.esp || S.cat).toLowerCase()} cerca de ti</h3><p>Mientras tanto, revisa otra especialidad o busca por lo que sientes.</p><div class="acc"><button class="btn primario" data-abrir="esp" aria-haspopup="dialog">Ver especialidades</button><a class="btn texto" href="#inicio">Busca por lo que sientes</a></div></div>`
     : `<div class="vacio"><span class="ic">${ic('sliders-horizontal')}</span><h3>Nadie cumple todos tus filtros</h3><p>Filtros activos: ${[...FILT.filter(([k]) => S.f[k]).map(x => x[1]), S.f.hoy && 'Con lugar hoy'].filter(Boolean).join(' · ')}.</p><div class="acc"><button class="btn primario" data-limpiar>Quitar filtros</button></div></div>`];
-  return `${nav('buscar')}<main class="wrap"><div class="rh"><a class="volver" href="#inicio">${ic('arrow-left')}Inicio</a><h1 class="h2">${titulo}</h1></div>
+  return `${nav('buscar')}<main class="wrap"><div class="rh"><a class="volver" href="#inicio">${ic('arrow-left')}Inicio</a><h1 class="h2">${titulo}</h1>${S.grupo && GRUPOS[S.grupo] ? `<div class="gesp" role="group" aria-label="Especialidades de ${S.grupo.toLowerCase()}"><button class="chip" data-gesp="" aria-pressed="${!S.esp}">Todo ${S.grupo.toLowerCase()}</button>${GRUPOS[S.grupo].map(e=>`<button class="chip" data-gesp="${e}" aria-pressed="${S.esp===e}">${e}</button>`).join('')}</div>` : ''}</div>
   <div class="barra"><span class="solo-cel"><button class="chip" data-abrir="filtros" aria-haspopup="dialog">${ic('sliders-horizontal')}Filtros${nFiltros()?` <span class="n">${nFiltros()}</span>`:''}</button></span>${chipsEsc}
   <span class="sel"><label for="orden">Ordenar</label><select id="orden"><option value="km" ${S.orden==='km'?'selected':''}>Más cerca</option><option value="conprecio" ${S.orden==='conprecio'?'selected':''}>Con precio</option><option value="op" ${S.orden==='op'?'selected':''}>Más opiniones</option></select></span></div>
-  <div class="lista" aria-live="polite">${lista.join('')}</div></main>`;
+  <div class="lista" aria-live="polite">${lista.join('')}</div></main>${pie()}`;
 };
 
 V.medico = (id) => {
@@ -580,7 +593,7 @@ V.medico = (id) => {
     : c.tel ? `<div class="barra-acc"><div><b>${peso(c.pr)}</b><span>Consulta · ${c.lu}</span></div><a class="btn primario" href="${tel}" data-llamar="${c.tel}">${ic('phone')}Llamar</a></div>` : '';
   return `${nav('buscar')}<main class="wrap"><a class="volver" href="#resultados">${ic('arrow-left')}Resultados</a>
   <div class="pf-head"><div class="ph">${avatar(m)}<div class="who"><h1>${m.n}</h1><p class="spec">${m.esp}${m.foco?' · '+m.foco:''}</p>${ced(m)}${rate}${artsH}</div></div></div>
-  ${jump}<div class="pf-cuerpo">${agB}${sec.map(x=>`<section class="bloque" id="sec-${x[0]}" aria-labelledby="h-${x[0]}">${x[2]}</section>`).join('')}</div></main>${barra}`;
+  ${jump}<div class="pf-cuerpo">${agB}${sec.map(x=>`<section class="bloque" id="sec-${x[0]}" aria-labelledby="h-${x[0]}">${x[2]}</section>`).join('')}</div></main>${pie()}${barra}`;
 };
 
 V.confirmar = () => {
@@ -712,8 +725,8 @@ addEventListener('hashchange', () => { if (['#inicio','#resultados',''].includes
 document.addEventListener('click', e => {
   const t = e.target;
   const ab = t.closest('[data-abrir]'); if (ab) { abrir(ab.dataset.abrir, ab); return; }
-  const es = t.closest('[data-esp]'); if (es) { S.esp = es.dataset.esp; S.cat = (espDe(S.esp)||[])[2] || S.esp; S.f = {agenda:false,precio:false,seguro:false,tele:false,hoy:false}; disparador = null; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); return; }
-  const cat = t.closest('[data-cat]'); if (cat) { S.esp = null; S.cat = cat.dataset.cat; S.f = {agenda:false,precio:false,seguro:false,tele:false,hoy:false}; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); return; }
+  const es = t.closest('[data-esp]'); if (es) { S.esp = es.dataset.esp; S.grupo = grupoDe(S.esp); S.cat = (espDe(S.esp)||[])[2] || S.esp; S.f = {agenda:false,precio:false,seguro:false,tele:false,hoy:false}; disparador = null; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); return; }
+  const cat = t.closest('[data-cat]'); if (cat) { S.esp = null; S.cat = cat.dataset.cat; S.grupo = GRUPOS[S.cat] ? S.cat : null; S.f = {agenda:false,precio:false,seguro:false,tele:false,hoy:false}; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); return; }
   const sug = t.closest('[data-sug]'); if (sug) { cerrar(); if (sug.dataset.sug === 'soto') location.hash = 'medico-soto'; else { S.esp = null; S.cat = 'Piel'; location.hash = 'resultados'; } return; }
   if (t.closest('[data-cerrar]') || t.matches('[data-velo-dlg]')) { cerrar(); return; }
   const dm = t.closest('[data-demo]'); if (dm) { S.demo = dm.dataset.demo || null; if (!S.cita && S.demo !== 'vencido') S.cita = {med:'diaz', cons:'neodemo', dia:3, hora:'10:00', nombre:'Ana Pérez', cel:'222 555 0100', estado:'activa'}; render(); $('#h-ok')?.focus(); return; }
@@ -728,7 +741,7 @@ document.addEventListener('click', e => {
     if (OCUPA.has(key)) { OCUPA.delete(key); reservar(ci.med, ci.cons, S.cdia, S.chora); S.chora = null; S.ocupado = true; render(); $('#ocupado')?.focus(); return; }
     reservar(ci.med, ci.cons, S.cdia, S.chora); liberar(ci.med, ci.cons, ci.dia, ci.hora); ci.dia = S.cdia; ci.hora = S.chora; S.cdia = null; S.chora = null; S.ocupado = false; location.hash = 'cita'; setTimeout(()=>toast('Cambiamos tu cita. Te mandamos un mensaje con la nueva hora'), 50); return; }
   const tt = t.closest('[data-toast]'); if (tt) { toast(tt.dataset.toast); return; }
-  if (t.closest('[data-hoy]')) { S.esp = null; S.cat = 'Piel'; S.f = {...({agenda:false,precio:false,seguro:false,tele:false,hoy:false}), hoy:true}; location.hash = 'resultados'; return; }
+  if (t.closest('[data-hoy]')) { S.grupo = null; S.esp = null; S.cat = 'Piel'; S.f = {...({agenda:false,precio:false,seguro:false,tele:false,hoy:false}), hoy:true}; location.hash = 'resultados'; return; }
   if (t.closest('[data-ubi-ini]')) { S.donde = 'tu ubicación (ejemplo)'; render(); toast('Aquí el navegador pediría permiso de ubicación'); return; }
   if (t.closest('[data-ubi]')) { $('#w1').value = 'Cerca de ti (ejemplo)'; return; }
   const f = t.closest('[data-f]'); if (f) { const k = f.dataset.f; S.f[k] = !S.f[k]; render(); return; }
@@ -738,6 +751,7 @@ document.addEventListener('click', e => {
   const co = t.closest('[data-cons]'); if (co) { S.cons = co.dataset.cons; S.modo = 'presencial'; S.dia = null; S.hora = null; S.verH = false; render(); $(`[data-cons="${S.cons}"]`)?.focus(); return; }
   const hr = t.closest('[data-hora]'); if (hr) { const [k, h] = hr.dataset.hora.split('|'); S.dia = +k; S.hora = h; S.ocupado = false; location.hash = 'confirmar'; return; }
   const sc = t.closest('[data-sec]'); if (sc) { const el = document.getElementById(sc.dataset.sec); if (el) { el.scrollIntoView({block:'start'}); el.setAttribute('tabindex','-1'); el.focus({preventScroll:true}); } return; }
+  const ge = t.closest('[data-gesp]'); if (ge) { S.esp = ge.dataset.gesp || null; if (!S.esp) S.cat = S.grupo; render(); $(`[data-gesp="${ge.dataset.gesp}"]`)?.focus(); return; }
   const md = t.closest('[data-modo]'); if (md) { S.modo = md.dataset.modo; render(); $(`[data-modo="${S.modo}"]`)?.focus(); return; }
   const cm = t.closest('[data-calmov]'); if (cm) { const cal = $('.cal'); cal?.scrollBy({left: +cm.dataset.calmov * cal.clientWidth, behavior:'smooth'}); return; }
   if (t.closest('[data-verh]')) { S.verH = true; render(); return; }
@@ -751,7 +765,7 @@ document.addEventListener('click', e => {
 document.addEventListener('change', e => { if (e.target.id === 'orden') { S.orden = e.target.value; render(); $('#orden')?.focus(); } });
 document.addEventListener('input', e => { if (['nombre','cel','motivo'].includes(e.target.id)) S.datos[e.target.id] = e.target.value; });
 document.addEventListener('submit', e => { e.preventDefault(); const f = e.target.dataset.form;
-  if (f === 'buscar' || f === 'buscar-cel') { const q = (f==='buscar' ? $('#q') : $('#q1')).value.trim(); const w = (f==='buscar' ? $('#w') : $('#w1')).value.trim(); S.q = q || S.q; S.donde = w || S.donde; S.esp = null; S.cat = /derma|piel|lunar|mancha|acn/i.test(q) || !q ? 'Piel' : q; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); }
+  if (f === 'buscar' || f === 'buscar-cel') { const q = (f==='buscar' ? $('#q') : $('#q1')).value.trim(); const w = (f==='buscar' ? $('#w') : $('#w1')).value.trim(); S.q = q || S.q; S.donde = w || S.donde; S.esp = null; S.cat = /derma|piel|lunar|mancha|acn/i.test(q) || !q ? 'Piel' : q; S.grupo = GRUPOS[S.cat] ? S.cat : null; cerrar(); location.hash === '#resultados' ? render() : (location.hash = 'resultados'); }
   if (f === 'confirmar') confirmar();
   if (f === 'enlace') toast('Si hay una cita con ese celular, te llegará un enlace nuevo'); });
 // Simulación: horarios que «otra persona» toma justo antes (para ver el aviso)
@@ -765,6 +779,13 @@ function liberar(mid, cid, k, h){ const c = MED.find(x=>x.id===mid).cons.find(x=
 const art = m => /^(Dra?|Psic|Nut)\./.test(m.n) ? (m.av === 'hombre' ? 'el ' : 'la ') : '';
 const deArt = m => art(m) === 'el ' ? 'del ' : 'de ' + art(m);
 const filaLugar = (c, modo) => modo === 'virtual' ? `<span class="fila">${ic('calendar-check')}<span><b>Teleconsulta</b><small>Por videollamada; te mandamos el enlace por mensaje.</small></span></span>` : `<span class="fila">${ic('map-pin')}<span><b>${c.lu}</b><small>${c.dir}</small></span></span>`;
+// Footer (ronda 3, 2026-11-11): propuesta. Parte clara con logo y enlaces; franja teal con lo legal.
+const pie = () => { const L = (t, k) => `<li><button class="pl" data-toast="${k || t + ' aún no está en el prototipo'}">${t}</button></li>`;
+  return `<footer class="pie2"><div class="wrap pie2-a"><div class="pie2-m"><img src="${IMG.logo}" alt="Mi Médico Manik" width="153" height="40"><p>Encuentra médico, compara precios y agenda sin pagar nada. Médicos con cédula verificada.</p><small>Parte del ecosistema Manik, de MedicalManik.</small></div>
+  <nav class="pie2-c" aria-label="Pacientes"><h2>Pacientes</h2><ul><li><a class="pl" href="#resultados">Buscar médico</a></li><li><button class="pl" data-abrir="esp" aria-haspopup="dialog">Especialidades de la A a la Z</button></li><li><a class="pl" href="#dudas">Preguntas a médicos</a></li>${L('Artículos de salud')}${L('Cómo verificamos las cédulas')}</ul></nav>
+  <nav class="pie2-c" aria-label="Médicos"><h2>Médicos</h2><ul>${L('Únete como médico','El registro para médicos aún no está en el prototipo')}${L('Impulsa Manik','La página de Impulsa Manik para médicos aún no está en el prototipo')}${L('Entrar a mi cuenta')}</ul></nav>
+  <nav class="pie2-c" aria-label="Ayuda"><h2>Ayuda</h2><ul>${L('Preguntas frecuentes')}${L('Contacto')}${L('Reportar un perfil')}</ul></nav></div>
+  <div class="pie2-b"><div class="wrap"><p class="pie2-aviso">La información de este sitio orienta; no sustituye una consulta. En una emergencia llama al 911.</p><div class="pie2-l"><span>© 2026 MedicalManik</span><button class="pl" data-toast="Aviso de privacidad (ejemplo)">Aviso de privacidad</button><button class="pl" data-toast="Términos y condiciones (ejemplo)">Términos y condiciones</button><span class="pie2-r" aria-label="Redes sociales">${['Instagram','Facebook','TikTok'].map(n=>`<button class="pl" data-toast="Enlace a ${n} (ejemplo)">${n}</button>`).join('')}</span></div></div></div></footer>`; };
 const corto = m => { const t = m.n.split(' '); return /^(Dra?|Psic|Nut)\.$/.test(t[0]) ? t[0] + ' ' + (t[2] || t[1]) : t.slice(0,2).join(' '); };
 const inicioCita = ci => { const d = dia(ci.dia), [H,M] = ci.hora.split(':').map(Number); d.setHours(H, M, 0, 0); return d; };
 function confirmar(){
