@@ -334,6 +334,7 @@ a{color:inherit}
 .asa{justify-self:center;width:40px;height:4px;border-radius:2px;background:var(--linea)}
 .hoja .t{display:flex;justify-content:space-between;align-items:center}.hoja .t b{font:600 20px/26px var(--display)}
 .hoja fieldset{border:0;margin:0;padding:0;display:grid;gap:8px}.hoja legend{font:600 15px/22px var(--sans);padding:0;margin-bottom:8px}.hoja .row{display:flex;flex-wrap:wrap;gap:8px}
+.menu-l{list-style:none;margin:0;padding:0}.menu-l a{display:flex;align-items:center;justify-content:space-between;min-height:52px;border-bottom:1px solid var(--linea);font:600 17px var(--sans);color:var(--tinta);text-decoration:none}.menu-l a[aria-current]{color:var(--teal-hover)}.menu-l .ico{color:var(--muted);width:18px;height:18px}
 .hoja .pieh{display:flex;gap:12px;align-items:center;justify-content:space-between;border-top:1px solid var(--linea);padding-top:12px}.hoja .pieh .primario{flex:1}
 .full{position:fixed;inset:0;z-index:20;background:var(--blanco);display:flex;flex-direction:column;padding:calc(8px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));gap:12px;overflow:auto}
 .full .tb{display:flex;align-items:center;gap:6px}.full .tb b{font:600 18px var(--display)}
@@ -553,7 +554,7 @@ function ficha({m, cons}){
   return `<article class="fm"><div class="fmi">${avatar(m)}<div class="who"><h3><a href="#medico-${m.id}">${m.n}</a></h3><p class="spec">${m.esp}${m.foco?' · '+m.foco:''}</p>${ced(m)}${meta(m)}</div>
   <div class="cons" role="list" aria-label="Consultorios de ${m.n}">${cons.slice(0,2).map((c,i)=>fila(m,c,i===0)).join('')}</div>${extra}</div></article>`;
 }
-const nav = (act) => `<header class="wrap nav"><a class="logo" href="#inicio" aria-label="Mi Médico Manik, inicio"><img src="${IMG.logo}" alt="" width="153" height="40"></a><ul><li><a href="#resultados" ${act==='buscar'?'aria-current="page"':''}>Especialidades</a></li><li><a href="#dudas">Preguntas</a></li><li><a href="#dudas">Artículos</a></li></ul><button class="me" data-toast="El registro para médicos aún no está en el prototipo">Únete como médico</button><button class="ib menu" aria-label="Menú">${ic('menu')}</button></header>`;
+const nav = (act) => `<header class="wrap nav"><a class="logo" href="#inicio" aria-label="Mi Médico Manik, inicio"><img src="${IMG.logo}" alt="" width="153" height="40"></a><ul><li><a href="#resultados" ${act==='buscar'?'aria-current="page"':''}>Especialidades</a></li><li><a href="#dudas">Preguntas</a></li><li><a href="#dudas">Artículos</a></li></ul><button class="me" data-toast="El registro para médicos aún no está en el prototipo">Únete como médico</button><button class="ib menu" data-abrir="menu" aria-haspopup="dialog" aria-label="Menú">${ic('menu')}</button></header>`;
 
 // Vistas
 const V = {};
@@ -812,8 +813,17 @@ function capaEsp(){
   q.oninput = () => { $('#esp-l').innerHTML = lista(q.value.trim()); const k = $('#esp-l').querySelectorAll('[data-esp]').length; $('#esp-n').textContent = k + (k===1 ? ' especialidad' : ' especialidades'); };
   q.focus();
 }
+// Menú en celular (2026-11-11): mismos destinos que el menú de escritorio + «Únete como médico».
+function capaMenu(){
+  const h = location.hash || '#inicio', it = (href, t) => `<li><a href="${href}" data-cerrar${h === href ? ' aria-current="page"' : ''}>${t}${ic('chevron-right')}</a></li>`;
+  $('#capa').innerHTML = `<div class="velo" data-velo><div class="hoja" role="dialog" aria-modal="true" aria-label="Menú"><span class="asa" aria-hidden="true"></span><div class="t"><b>Menú</b><button class="ib" data-cerrar aria-label="Cerrar">${ic('x')}</button></div>
+  <nav aria-label="Principal"><ul class="menu-l">${it('#inicio','Inicio')}${it('#resultados','Especialidades')}${it('#dudas','Preguntas')}${it('#dudas','Artículos')}</ul></nav>
+  <div class="pieh"><button class="btn primario" data-toast="El registro para médicos aún no está en el prototipo">Únete como médico</button></div></div></div>`;
+  $('#capa').onclick = e => { if (e.target.matches('[data-velo]')) cerrar(); };
+  $('.menu-l a').focus();
+}
 let disparador = null;
-function abrir(cual, desde){ disparador = desde; document.body.style.overflow = 'hidden'; cual === 'buscar' ? capaBuscar() : cual === 'esp' ? capaEsp() : capaFiltros(); }
+function abrir(cual, desde){ disparador = desde; document.body.style.overflow = 'hidden'; cual === 'buscar' ? capaBuscar() : cual === 'esp' ? capaEsp() : cual === 'menu' ? capaMenu() : capaFiltros(); }
 function cerrar(){ $('#capa').innerHTML = ''; $('#capa').onclick = null; document.body.style.overflow = ''; disparador?.focus?.(); }
 function toast(t){ const el = $('#toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(()=>el.hidden = true, 2400); }
 
