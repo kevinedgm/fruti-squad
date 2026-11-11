@@ -189,17 +189,22 @@ Structural fidelity is deterministic, not a judgment Coco grades for itself. The
 
 Check once per request whether `.nexa-squad/` exists at the project root.
 
-- **Nexa installed:** Fruti designs pieces, not product screens. Its scope is components, variants, reusable patterns and templates, tokens and the Design Hub. A product screen or module (something a role uses, with real data, business rules or server work, such as "el alta de muestra de la recepcionista") belongs to Nexa Squad. When such a request arrives, Kiwi does not wireframe it: reply in one line that the screen belongs to Nexa and give the phrase to use (`/orka …`). If the request also names a reusable pattern (for example, "the standard create form"), design only that pattern.
+- **Nexa installed:** Fruti designs pieces, not product screens. Its scope is components, variants, reusable patterns and templates, tokens and the Design Hub. A product screen or module (something a role uses, with real data, business rules or server work, such as "el alta de muestra de la recepcionista") belongs to Nexa Squad. When such a request arrives, Kiwi does not wireframe it: reply in one line that the screen belongs to Nexa and give the phrase to use (`usa kompa: …` to compose or correct the screen, `usa forja: …` for behavior). If the request also names a reusable pattern (for example, "the standard create form"), design only that pattern.
 - **Nexa not installed:** Fruti keeps designing screens as before.
 - **Redesign with Nexa installed:** Kiwi still runs understand, inventory and scope. In the plan, `foundations`, `primitives`, `patterns` and `domain-components` stay with Fruti; `views` are listed with `owner: nexa` and are not executed by Fruti.
 
 ## Requests from Nexa Squad
 
-Nexa Squad builds product modules with the pieces Fruti owns; its curator (Kura) is its only bridge to Fruti. When a request points at a Nexa component request (`docs/componentes/pedidos/<id>.md`), treat that file as the user's request for one piece:
+Nexa Squad builds product screens with the pieces Fruti owns; its composer (Kompa) is its only bridge to Fruti. Kompa corrects how a piece fits its surroundings itself; it sends Fruti only what belongs to the piece. When a request points at a Nexa component request (`docs/componentes/pedidos/<id>.md`), treat that file as the user's request for one piece. Its `Tipo de pedido` routes it:
+- `nuevo`: a new piece; normal Kiwi → Lima → Coco → Bruno → Coco → Lima gate → Mora.
+- `variante`: Lima checks the variant keeps the piece's purpose; then the same pipeline on the existing piece, without changing its default behavior for other uses.
+- `correccion`: the piece does not meet its own contract. Its `Código actual` section (file:line, viewport, observed vs. contract) is defect evidence. If the contract is right and the implementation is wrong, it goes to the implementation owner (Coco for layout/CSS, Bruno for behavior) and then the R0 audit; if the contract itself lacks the case, Kiwi/Lima revise the contract first.
+- `desde-codigo`: turn a hand-built section into a piece. The cited files are current-state evidence of behavior (what it does, its states and data), like `--file`; never target visual authority.
+For all types:
 - Kiwi starts its brief from it: purpose, where it is used, parts, variants, constraints, small screens, accessibility and acceptance criteria. Facts, assumptions and questions keep their marks.
 - Its states table (trigger, rules, feedback) seeds Lima's transition table (`skills/lima/reference/interaction-contract.md`).
 - It describes need, not appearance; visual decisions still come from tokens and contracts.
-- Fruti never edits Nexa's module documents or code. The piece is delivered through the registry and the Design Hub, where Kura picks it up.
+- Fruti never edits Nexa's module documents or code. The piece is delivered through the registry, `.fruti/catalog.md` and the Design Hub, where Kompa picks it up and replaces its `PENDIENTE` mark.
 
 When to use each squad and how they collaborate: `docs/nexa-y-fruti.md` in this repository (installed as `.fruti/nexa-y-fruti.md`).
 

@@ -57,7 +57,7 @@ Responde en el idioma del usuario. Todas las rutas (`hub_root`, `breakpoints`, `
 | Patrón reutilizable → registro y estado | 🟢 lima | Ciclo de vida |
 | Documentar lo implementado | 🫐 mora | Solo lo que existe |
 | Estructura nueva del Design Hub | 🥝 kiwi con el **encargo documental** de mora | mora es dueña del contenido y del estándar |
-| Pantalla o módulo del producto (lo usa un rol, con datos y reglas) **y existe `.nexa-squad/`** | Nexa Squad (`/orka …`) | Fruti diseña piezas y patrones; las pantallas del producto son de Nexa. Respondo en una línea con la frase para Nexa y no la wireframeo. Si la petición también nombra un patrón reutilizable, diseño solo ese patrón |
+| Pantalla o módulo del producto (lo usa un rol, con datos y reglas) **y existe `.nexa-squad/`** | Nexa Squad (`usa kompa: …`) | Fruti diseña piezas y patrones; las pantallas del producto son de Nexa. Respondo en una línea con la frase para Nexa y no la wireframeo. Si la petición también nombra un patrón reutilizable, diseño solo ese patrón |
 
 Si una petición cae fuera de mi frontera, lo digo en una línea y dejo el traspaso preparado (§6). Si llega a mí algo que exige F3 pero la estructura sigue en duda, hago primero F1/F2 y lo explico.
 

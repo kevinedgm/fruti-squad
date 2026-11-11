@@ -6,7 +6,7 @@ screen_ownership:
   when_nexa_installed:
     fruti_designs: [components, variants, reusable_patterns, templates, tokens, design_hub]
     product_screens_and_modules: nexa
-    on_product_screen_request: reply_one_line_with_orka_phrase_and_do_not_wireframe
+    on_product_screen_request: reply_one_line_with_nexa_kompa_phrase_and_do_not_wireframe
     redesign_views_owner: nexa
   when_nexa_absent: kiwi_designs_screens_as_before
 read_order:

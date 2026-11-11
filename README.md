@@ -235,7 +235,7 @@ Kiwi → Lima → Coco → Bruno → Coco (R0) → Lima → Mora
 
 ## Catálogo de componentes
 
-Mora mantiene `.fruti/catalog.json`, con una entrada por pieza: para qué sirve, cómo se importa, su API, variantes, tamaños, ancho y estados. El estado y la versión los toma del registro. `fruti catalog` genera `.fruti/catalog.md`, que es lo primero que leen Lima (al decidir si algo se reutiliza) y los roles de Nexa (Kura y Kompa) para elegir una pieza sin recorrer el Design Hub.
+Mora mantiene `.fruti/catalog.json`, con una entrada por pieza: para qué sirve, cómo se importa, su API, variantes, tamaños, ancho y estados. El estado y la versión los toma del registro. `fruti catalog` genera `.fruti/catalog.md`, que es lo primero que leen Lima (al decidir si algo se reutiliza) y los roles de Nexa (Kompa) para elegir una pieza sin recorrer el Design Hub.
 
 ```bash
 fruti catalog --registry design-hub/system/registry.json   # la primera vez; después basta `fruti catalog`
@@ -523,11 +523,11 @@ Ejemplo con la misma palabra:
 
 Cuando los dos están en el mismo proyecto:
 
-- **Las pantallas del producto son de Nexa.** Si existe `.nexa-squad/`, Kiwi no wireframea una pantalla o un módulo del producto: responde en una línea con la frase para Nexa (`/orka …`). Si la petición también nombra un patrón reutilizable ("el formulario de alta estándar"), Fruti diseña solo ese patrón. En un rediseño, Fruti planea fundamentos, primitivas, patrones y componentes; las vistas quedan con `owner: nexa`.
+- **Las pantallas del producto son de Nexa.** Si existe `.nexa-squad/`, Kiwi no wireframea una pantalla o un módulo del producto: responde en una línea con la frase para Nexa (`usa kompa: …`). Si la petición también nombra un patrón reutilizable ("el formulario de alta estándar"), Fruti diseña solo ese patrón. En un rediseño, Fruti planea fundamentos, primitivas, patrones y componentes; las vistas quedan con `owner: nexa`.
 - Sin Nexa en el proyecto, Fruti sigue diseñando pantallas como siempre.
 - Nexa lee el registro, los contratos y los tokens de Fruti, y nunca los modifica.
-- Si a Nexa le falta una pieza, su curador (Kura) escribe un pedido en `docs/componentes/pedidos/<id>.md`. Pídele a Fruti "diseña el componente de `docs/componentes/pedidos/<id>.md`": Kiwi arma su brief desde ese pedido y su tabla de estados alimenta la tabla de transiciones de Lima.
-- Cuando el componente queda en el registro, Nexa lo toma con `/orka continúa <módulo>`.
+- Si a Nexa le falta una pieza, Kompa escribe un pedido (`nuevo`, `variante`, `correccion` o `desde-codigo`) en `docs/componentes/pedidos/<id>.md`. Pídele a Fruti "diseña el componente de `docs/componentes/pedidos/<id>.md`": Kiwi arma su brief desde ese pedido y su tabla de estados alimenta la tabla de transiciones de Lima.
+- Cuando el componente queda en el registro, Nexa lo toma con "usa kompa: reemplaza el pendiente de <pantalla> con <componente>".
 
 La guía completa, con qué pedirle a cada uno, los cinco casos en que trabajan juntos y quién manda cuando no coinciden, está en [docs/nexa-y-fruti.md](docs/nexa-y-fruti.md). El instalador la copia a `.fruti/nexa-y-fruti.md`.
 
