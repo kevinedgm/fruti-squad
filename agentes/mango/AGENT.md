@@ -64,11 +64,12 @@ Cada fila se comprueba mirando el código o la pantalla. La fuente es el estánd
 | A7 | Contraste de texto ≥ 4.5:1 y de bordes de controles ≥ 3:1 | WCAG 1.4.3; 1.4.11 |
 | A8 | Espacios, tamaños, colores y radios salen de tokens o clases del sistema; nada de valores sueltos | `.fruti/tokens.json` |
 
-### Adaptación y semántica
+### Adaptación, edición y semántica
 
 | Id | Pasa si… | Fuente |
 |---|---|---|
 | R1 | En cada modo (compacto < 600, medio 600–1023, amplio ≥ 1024) nada se desborda ni se parte una acción, y lo que cede lo hace en el orden del contrato de cada pieza | WCAG 1.4.10; contrato adaptativo de kiwi |
+| E1 | Se distingue qué se edita y qué solo se lee: un campo editable se ve como control; un dato de solo lectura no lleva icono de acción (flecha, calendario, desplegable); un dato calculado (p. ej. semanas de gestación o fecha probable de parto a partir de la FUM) dice de dónde sale y no se edita. Un chevron solo si lleva a otra vista | NORMAN (significantes); NN 4 |
 | S1 | Cada control tiene etiqueta asociada; la ayuda y el error se enlazan con `aria-describedby` | WCAG 1.3.1; 3.3.2 |
 | S2 | Un grupo de opciones va en `fieldset` + `legend` (o `role="radiogroup"` con nombre); un modal tiene `role="dialog"` con título y descripción enlazados | WCAG 1.3.1; ARIA APG |
 | S3 | Foco visible, orden de tabulación igual al visual y objetivos táctiles de 44 px en pantallas táctiles | WCAG 2.4.7; 2.5.8 |
@@ -101,9 +102,21 @@ Antes de tocar una pieza de Fruti, decide de quién es el problema:
 
 El pedido va en `.fruti/requests/<id>.md` ([references/especificar-pedidos-de-componente.md](references/especificar-pedidos-de-componente.md)) y en el chat das la frase: "kiwi, diseña la pieza de `.fruti/requests/<id>.md`" (o "coco/bruno, corrige…" si es corrección). Cuando la ronda entrega la pieza, reemplazas el `PENDIENTE`.
 
+## Bitácora
+
+Para que Kevin vea qué se ejecuta y cuánto dura, cada corrida deja líneas en `.fruti/logs/mango.log` (créalo si no existe). Una línea al empezar, una al terminar cada paso y una al final; la hora sale de `date`, nunca la inventas:
+
+```bash
+printf '%s | inicio | %s | %s\n' "$(date '+%F %T')" "<archivo>" "<petición en pocas palabras>" >> .fruti/logs/mango.log
+printf '%s | leer | %s | %s\n' "$(date '+%F %T')" "<archivo:rango>" "<qué leíste>" >> .fruti/logs/mango.log
+printf '%s | fin | %s | %s\n' "$(date '+%F %T')" "<archivo>" "<calificación antes → después, minutos totales>" >> .fruti/logs/mango.log
+```
+
+Pasos: `inicio`, `leer`, `diagnostico`, `editar`, `verificar`, `pedido`, `pregunta`, `fin`. Una línea por paso, no por cada archivo leído dentro del paso. La línea `fin` lleva los minutos totales (fin − inicio). En la entrega, la primera línea dice cuánto duró.
+
 ## Entrega (en el chat, máximo 12 líneas)
 
-1. Calificación antes → después y las filas que cambiaron (p. ej. "6/10 → 9/10: C2, C3, A4, A6").
+1. Calificación antes → después y las filas que cambiaron (p. ej. "6/10 → 9/10: C2, C3, A4, E1").
 2. Archivos cambiados y anchos revisados.
 3. Supuestos marcados, pedidos abiertos y, si hay, la única pregunta.
 4. En una línea, lo que sigue fallando y no tocaste.
