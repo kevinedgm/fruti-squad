@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IllustrationRequest",
+  "type": "object",
+  "required": [
+    "subject"
+  ],
+  "properties": {
+    "variant": {
+      "enum": [
+        "object",
+        "character",
+        "helper",
+        "spot",
+        "empty-state",
+        "onboarding",
+        "scene",
+        "hero"
+      ]
+    },
+    "subject": {
+      "type": "string"
+    },
+    "action": {
+      "type": "string"
+    },
+    "emotion": {
+      "type": "string"
+    },
+    "characters": {
+      "type": "array"
+    },
+    "background": {
+      "type": "string",
+      "default": "transparent"
+    },
+    "accent": {
+      "type": "string",
+      "default": "yellow"
+    }
+  }
+}
