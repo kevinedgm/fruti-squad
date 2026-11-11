@@ -185,6 +185,7 @@ a{color:inherit}
 .vacio h3{font:600 22px/26px var(--display)}.vacio p{color:var(--muted);max-width:42ch}.vacio .acc{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
 
 /* Perfil */
+.rh,.pf-head,.pp{padding-top:16px}
 .volver{display:inline-flex;align-items:center;gap:6px;min-height:44px;font-weight:600;text-decoration:none;color:var(--tinta)}
 .perfil{display:grid;gap:20px;padding-block:8px 120px}
 @media (min-width:1024px){.perfil{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:40px;align-items:start;padding-bottom:56px}}
@@ -572,7 +573,7 @@ const promoDe = (m, c, pid) => { const p = PROMOS.find(x => x.id === pid); retur
 const precioTxt = (m, c, pid) => { const p = promoDe(m, c, pid); return p ? `${peso(p.pr)} con promoción · normal ${peso(p.normal)}` : peso(c.pr); };
 V.promo = (id) => { const p = PROMOS.find(x=>x.id===id); if (!p) return V.resultados();
   const m = MED.find(x=>x.id===p.med), c = m.cons.find(x=>x.id===p.cons);
-  return `${nav('buscar')}<main class="wrap"><a class="volver" href="#resultados">${ic('arrow-left')}Resultados</a><div class="pp"><img class="ban" src="${p.img}" alt="">
+  return `${nav('buscar')}<main class="wrap"><div class="pp"><img class="ban" src="${p.img}" alt="">
   <div class="info"><span class="etq">Patrocinado</span><h1 id="h-ok" tabindex="-1">${p.titulo}</h1><p class="spec" style="font-size:17px">${p.desc}</p>
   <dl class="det"><div><dt>Precio</dt><dd>${peso(p.pr)} · normal ${peso(p.normal)}</dd></div><div><dt>Vigencia</dt><dd>Hasta el ${p.hasta}</dd></div><div><dt>Dónde</dt><dd>${c.lu}</dd></div><div><dt>Condiciones</dt><dd>${p.cond}</dd></div></dl>
   <a class="anun" href="#medico-${m.id}">${avatar(m)}<b>${p.anun} · ${m.n}</b><small>${m.esp}</small>${ced(m)}</a>
@@ -630,7 +631,7 @@ V.resultados = () => {
   if (!n) lista = [!nFiltros()
     ? `<div class="vacio"><span class="ic">${ic('search')}</span><h3>Pronto tendremos especialistas de ${(S.esp || S.cat).toLowerCase()} cerca de ti</h3><p>Mientras tanto, revisa otra especialidad o busca por lo que sientes.</p><div class="acc"><button class="btn primario" data-abrir="esp" aria-haspopup="dialog">Ver especialidades</button><a class="btn texto" href="#inicio">Busca por lo que sientes</a></div></div>`
     : `<div class="vacio"><span class="ic">${ic('sliders-horizontal')}</span><h3>Nadie cumple todos tus filtros</h3><p>Filtros activos: ${[...FILT.filter(([k]) => S.f[k]).map(x => x[1]), S.f.hoy && 'Con lugar hoy'].filter(Boolean).join(' · ')}.</p><div class="acc"><button class="btn primario" data-limpiar>Quitar filtros</button></div></div>`];
-  return `${nav('buscar')}<main class="wrap"><div class="rh"><a class="volver" href="#inicio">${ic('arrow-left')}Inicio</a><h1 class="h2">${titulo}</h1>${S.grupo && GRUPOS[S.grupo] ? `<div class="gesp" role="group" aria-label="Especialidades de ${S.grupo.toLowerCase()}"><button class="chip" data-gesp="" aria-pressed="${!S.esp}">Todo ${S.grupo.toLowerCase()}</button>${GRUPOS[S.grupo].map(e=>`<button class="chip" data-gesp="${e}" aria-pressed="${S.esp===e}">${e}</button>`).join('')}</div>` : ''}</div>
+  return `${nav('buscar')}<main class="wrap"><div class="rh"><h1 class="h2">${titulo}</h1>${S.grupo && GRUPOS[S.grupo] ? `<div class="gesp" role="group" aria-label="Especialidades de ${S.grupo.toLowerCase()}"><button class="chip" data-gesp="" aria-pressed="${!S.esp}">Todo ${S.grupo.toLowerCase()}</button>${GRUPOS[S.grupo].map(e=>`<button class="chip" data-gesp="${e}" aria-pressed="${S.esp===e}">${e}</button>`).join('')}</div>` : ''}</div>
   <div class="barra"><span class="solo-cel"><button class="chip" data-abrir="filtros" aria-haspopup="dialog">${ic('sliders-horizontal')}Filtros${nFiltros()?` <span class="n">${nFiltros()}</span>`:''}</button></span>${chipsEsc}
   <span class="sel"><label for="orden">Ordenar</label><select id="orden"><option value="km" ${S.orden==='km'?'selected':''}>Más cerca</option><option value="conprecio" ${S.orden==='conprecio'?'selected':''}>Con precio</option><option value="op" ${S.orden==='op'?'selected':''}>Más opiniones</option></select></span></div>
   <div class="lista" aria-live="polite">${lista.join('')}</div></main>${pie()}`;
@@ -688,13 +689,13 @@ V.medico = (id) => {
   const rate = m.r ? `<button class="rate" data-sec="sec-opiniones"><b aria-hidden="true">★</b> ${m.r} · ${m.op.toLocaleString('es-MX')} opiniones</button>` : '';
   const barra = c.manik && p ? `<div class="barra-acc"><div><b>${peso(c.pr)} · ${nombreDia(p.off)}, ${p.h}</b><span>Próximo lugar · ${S.modo==='virtual' ? 'Teleconsulta' : c.lu}</span></div><button class="btn primario" data-hora="${p.off}|${p.h}">Agendar</button></div>`
     : c.tel ? `<div class="barra-acc"><div><b>${peso(c.pr)}</b><span>Consulta · ${c.lu}</span></div><a class="btn primario" href="${tel}" data-llamar="${c.tel}">${ic('phone')}Llamar</a></div>` : '';
-  return `${nav('buscar')}<main class="wrap"><a class="volver" href="#resultados">${ic('arrow-left')}Resultados</a>
+  return `${nav('buscar')}<main class="wrap">
   <div class="pf-head"><div class="ph">${avatar(m)}<div class="who"><h1>${m.n}</h1><p class="spec">${m.esp}${m.foco?' · '+m.foco:''}</p>${ced(m)}${rate}${m.vol ? `<details class="vol"><summary>${ic('message-circle-heart')}Sus pacientes regresan</summary><p>Muchos de sus pacientes vuelven a consulta. Lo medimos con las citas que se agendan en Mi Médico Manik.</p></details>` : ''}${artsH}</div></div>${m.dest ? `<figure class="dest"><blockquote>«${m.dest[0]}»</blockquote><figcaption>Opinión destacada · ${m.dest[1]}, ${m.dest[2]}</figcaption></figure>` : ''}</div>
   ${jump}<div class="pf-cuerpo">${agB}${sec.map(x=>`<section class="bloque" id="sec-${x[0]}" aria-labelledby="h-${x[0]}">${x[2]}</section>`).join('')}${m.cof ? `<p class="pf-nota">Aviso de publicidad COFEPRIS: ${m.cof} (número de ejemplo, declarado por la médica).</p>` : ''}</div></main>${pie()}${barra}`;
 };
 
 V['grupo-manik'] = () => { const G = GRUPO, ms = G.meds.map(medDe), esps = [...new Set(ms.map(m => m.esp))];
-  return `${nav('buscar')}<main class="wrap"><a class="volver" href="javascript:history.back()">${ic('arrow-left')}Volver</a>
+  return `${nav('buscar')}<main class="wrap">
   <div class="pf-head"><div class="ph gr-h">${IMG.logoGrupo ? `<img class="gr-logo" src="${IMG.logoGrupo}" alt="">` : ''}<div class="who"><span class="etq-g">Grupo médico</span><h1 id="h-ok" tabindex="-1">${G.n}</h1><p class="spec">Tres sedes en Puebla</p><ul class="tags">${esps.map(e=>`<li>${e}</li>`).join('')}</ul></div></div></div>
   <div class="pf-cuerpo gr-c">
   <section class="bloque" aria-labelledby="h-gac"><h2 id="h-gac">Acerca del grupo</h2><p>${G.acerca}</p></section>
