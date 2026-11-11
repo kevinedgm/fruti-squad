@@ -33,13 +33,13 @@ test('codex: skills and AGENTS.md block', () => {
   has(d, 'AGENTS.md');
 });
 
-test('kiro: steering and one custom agent per member, with permissions', () => {
+test('kiro: members as skills, one least-privilege agent per member, orchestrator', () => {
   const d = fresh();
   run('install', '--target', 'kiro', '--dest', d);
   has(d, '.kiro', 'steering', 'fruti-squad.md');
-  has(d, '.agents', 'skills', 'lima', 'SKILL.md');
   for (const n of ['kiwi', 'lima', 'coco', 'bruno', 'mora']) {
-    has(d, '.kiro', 'agents', `${n}.md`);
+    has(d, '.kiro', 'skills', n, 'SKILL.md');
+    assert.ok(!existsSync(join(d, '.kiro', 'agents', n)), `${n}: no procedure folder inside .kiro/agents`);
     const def = readFileSync(join(d, '.kiro', 'agents', `${n}.md`), 'utf8');
     assert.match(def, new RegExp(`^---\\nname: ${n}\\n`), `${n}: frontmatter name`);
     assert.match(def, /effect: deny/, `${n}: destructive commands denied`);
@@ -47,6 +47,30 @@ test('kiro: steering and one custom agent per member, with permissions', () => {
     // Every file:// or skill:// resource it points at must exist after install.
     for (const [, r] of def.matchAll(/^  - (?:file|skill):\/\/(.+)$/gm)) has(d, r);
   }
+  assert.doesNotMatch(readFileSync(join(d, '.kiro', 'agents', 'mora.md'), 'utf8'), /"web"/, 'mora has no web tool');
+  const orq = readFileSync(join(d, '.kiro', 'agents', 'fruti.md'), 'utf8');
+  assert.match(orq, /"subagent"/);
+  assert.match(orq, /availableAgents: \["kiwi", "lima", "coco", "bruno", "mora"\]/);
+  assert.doesNotMatch(orq.match(/trustedAgents: .*/)[0], /coco|bruno/, 'agents that write product code are not trusted');
+  assert.match(readFileSync(join(d, '.fruti', 'paths.yaml'), 'utf8'), /agentes\/kiwi: \.kiro\/skills\/kiwi/);
+});
+
+test('update --dry-run: same after install, migrates old Kiro layout without deleting it', () => {
+  const d = fresh();
+  run('install', '--target', 'kiro', '--dest', d);
+  assert.match(run('update', '--target', 'kiro', '--dest', d, '--dry-run'), / 0 nuevo · 0 cambiaría · \d+ igual · 0 omitido · 0 obsoleto/);
+  // Old layout: lima in .agents/skills with a user profile, kiwi as a folder in .kiro/agents.
+  spawnSync('mkdir', ['-p', join(d, '.agents', 'skills', 'lima', 'profiles'), join(d, '.kiro', 'agents', 'kiwi')]);
+  writeFileSync(join(d, '.agents', 'skills', 'lima', 'SKILL.md'), '---\nname: lima\n---\n');
+  writeFileSync(join(d, '.agents', 'skills', 'lima', 'profiles', 'demo.md'), 'impeccable_path: .agents/skills/lima/vendor/impeccable\n');
+  writeFileSync(join(d, '.kiro', 'agents', 'kiwi', 'AGENT.md'), '---\nname: kiwi\n---\n');
+  const dry = run('update', '--target', 'kiro', '--dest', d, '--dry-run');
+  assert.match(dry, /2 obsoleto · 1 migraría/);
+  assert.match(dry, /revisa.*demo\.md/);
+  assert.ok(!existsSync(join(d, '.kiro', 'skills', 'lima', 'profiles', 'demo.md')), 'dry-run migrated');
+  run('update', '--target', 'kiro', '--dest', d);
+  has(d, '.kiro', 'skills', 'lima', 'profiles', 'demo.md');
+  has(d, '.agents', 'skills', 'lima', 'profiles', 'demo.md');
 });
 
 test('reinstall with --force keeps live state and handoffs', () => {

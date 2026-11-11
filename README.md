@@ -102,9 +102,22 @@ Para probar el instalador después de un cambio: `npm test` (instala en proyecto
 
 Con `--target kiro` el instalador deja:
 
-- `.agents/skills/lima/` y `.kiro/agents/{kiwi,coco,bruno,mora}/` — los miembros.
-- `.kiro/agents/{kiwi,lima,coco,bruno,mora}.md` — un agente de Kiro por miembro, con sus herramientas, los recursos compartidos (`.fruti/policy.md`, estado y handoff) y permisos: lee todo, pregunta antes de escribir y tiene prohibidos `rm -rf`, `sudo`, `git push`, `git reset --hard` y `git clean`.
-- `.kiro/steering/fruti-squad.md` — apunta a la política.
+- `.kiro/skills/{kiwi,lima,coco,bruno,mora}/` — los miembros, cada uno con su `SKILL.md` y sus referencias.
+- `.kiro/agents/{kiwi,lima,coco,bruno,mora}.md` — un agente de Kiro por miembro, con su skill, la política, el estado y el handoff, y solo los permisos de su trabajo:
+  - kiwi, lima y mora escriben libremente en `.fruti/` (lima también en sus perfiles y el registro; mora en el Design Hub) y piden permiso para lo demás;
+  - coco y bruno escriben el CSS y los componentes del producto y corren las pruebas;
+  - nadie puede usar `rm -rf`, `sudo`, `git push`, `git reset --hard` ni `git clean`, ni escribir en `.env` o `.git/`.
+- `.kiro/agents/fruti.md` — el orquestador. Para una ronda completa eliges este agente y él lanza a cada miembro como subagente, en orden. kiwi, lima y mora corren sin pedirte aprobación; coco y bruno sí la piden, porque escriben código.
+- `.kiro/steering/fruti-squad.md` — steering `always` de pocas líneas que apunta a la política.
+
+**Actualizar.** Mira primero qué cambiaría y después aplícalo:
+
+```bash
+npx github:kevinedgm/fruti-squad update --target kiro --dry-run
+npx github:kevinedgm/fruti-squad update --target kiro
+```
+
+`update` renueva lo que es del squad y no toca lo tuyo: perfiles de lima, registro, estado y handoffs. Si vienes de la versión anterior (miembros en `.agents/skills/` y `.kiro/agents/<miembro>/`), copia tus perfiles de lima a `.kiro/skills/lima/profiles/`, marca lo viejo como `obsoleto` para que lo borres tú y te avisa si un perfil todavía cita las rutas viejas.
 
 ### Claude Code
 
