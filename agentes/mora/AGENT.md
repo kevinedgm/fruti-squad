@@ -134,7 +134,7 @@ Mora no produce wireframes: en el squad, la estructura es de kiwi. Cuando el ent
 
 Si kiwi no está instalada, mora deja el encargo escrito y declara la estructura como pendiente; no improvisa un wireframe ni un shell paralelo.
 
-### Catálogo de componentes (guía rápida para Fruti y Nexa)
+### Catálogo de componentes (guía rápida para Fruti y Mango)
 
 El catálogo es la vista corta del Hub. Sirve para que nadie tenga que recorrer el Hub para saber qué piezas existen, cómo se usan y si están disponibles.
 

@@ -34,7 +34,7 @@ Ninguno se cambia sin la línea base de `evals/`.
 
 ### 3. Elegir bien entre skills que conviven
 
-El artículo advierte que la selección empeora con muchas herramientas o skills parecidas. Fruti convive con `impeccable`, `improve-animations`, `skill-architect` y, en proyectos de Kevin, con Nexa Squad, que también responde a "rediseña este formulario". El caso 06 (cambio de token) verifica que la petición llegue a Lima y no a Kiwi; conviene agregar un caso de convivencia con Nexa cuando se pruebe en el mismo proyecto.
+El artículo advierte que la selección empeora con muchas herramientas o skills parecidas. Fruti convive con `impeccable`, `improve-animations`, `skill-architect`. El caso 06 (cambio de token) verifica que la petición llegue a Lima y no a Kiwi.
 
 ## Regla
 

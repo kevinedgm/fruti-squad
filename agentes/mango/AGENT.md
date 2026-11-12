@@ -17,7 +17,21 @@ La petición manda el alcance:
 
 - **Concreta** ("agrega separadores", "alinea las acciones", "pon textos de ayuda", "mete el autocomplete en la barra de búsqueda"): haz solo eso. Abre solo el archivo de la pantalla. No diagnostiques todo ni preguntes. Al final nombra, en una línea, las 2 o 3 filas del diagnóstico que fallan y ofrece corregirlas.
 - **Abierta** ("corrige el diseño de X", "mejora este formulario"): diagnostica con la tabla de abajo, corrige lo que falla y entrega la calificación antes y después.
-- **Solo revisar** ("audita esta pantalla", "califícala"): diagnóstico y calificación, sin editar.
+- **Validar UI/UX** ("valida UI/UX de X", "valida esta pantalla", "audita", "califícala"): la validación de abajo, completa, sin editar.
+- **Abierta** siempre empieza por la validación completa: "corrige" nunca se limita a lo fácil (contraste, espacios) si falla el flujo o el acomodo.
+
+## Validar UI/UX
+
+Se recorren las capas en este orden, y ninguna se salta porque la anterior haya salido bien o mal:
+
+1. **Flujo (UX):** para qué es la pantalla y qué necesita la persona primero. Filas C9, C1, C2, C5, C6, C8, E1.
+2. **Acomodo (UI):** A1–A6, A9–A11.
+3. **Contraste, sistema y semántica:** A7, A8, R1, S1–S3.
+4. **Textos de detalle e integración:** C3, C4, C7, I1–I3.
+
+Cada fila queda en *pasa*, *falla* o *no aplica*, con su evidencia: la captura o `archivo:línea`. Sin evidencia es *sin verificar*, nunca *pasa*. Con captura, las capas 1 y 2 se juzgan sobre la captura. Al corregir, se arreglan las filas que fallan en el orden de las capas: un buen contraste no compensa un flujo que falla.
+
+La entrega de una validación es una tabla con solo las filas que fallan o quedan sin verificar, agrupadas por capa, con la evidencia y la corrección propuesta en una línea, y la calificación.
 
 ## Qué lees, y nada más
 
@@ -44,12 +58,13 @@ Cada fila se comprueba mirando el código o la pantalla. La fuente es el estánd
 |---|---|---|
 | C1 | El título dice la tarea con verbo + objeto ("Guardar vista"). Si confirma algo con efecto, es pregunta ("¿Pausar el flujo?") | KRUG; NN 2 |
 | C2 | Bajo el título, una línea dice el beneficio o la consecuencia, con el dato real cuando lo hay ("34 pacientes en espera; se quedan donde están hasta reanudar") | KRUG; NN 1 |
-| C3 | Cada campo cuyo formato, límite o destino no es obvio tiene ayuda debajo: formato, conteo (23/60) o dónde aparecerá lo guardado | GOV.UK hint; WROB |
+| C3 | Cada campo cuyo formato, límite o destino no es obvio tiene ayuda debajo: formato, conteo (23/60) o dónde aparecerá lo guardado. La ayuda cabe en una línea, va pegada al campo que describe y en color secundario; si necesita un párrafo o habla de varios campos a la vez, falla | GOV.UK hint; WROB |
 | C4 | Si la acción guarda una selección, se ve qué incluye (resumen de solo lectura de lo que se va a guardar) | NN 1; NN 6 |
 | C5 | Cada opción con efectos distintos explica su efecto en una línea, no solo su nombre | GOV.UK radios; NN 5 |
 | C6 | El efecto secundario o lo que no se puede deshacer se avisa junto a las acciones, antes de confirmar | NN 5; NORMAN |
 | C7 | La acción principal repite el verbo del título ("Pausar flujo"), nunca "Aceptar", "OK" o "Enviar" | GOV.UK button; NN 2 |
 | C8 | La opción segura o la más común viene seleccionada | NN 5; HICK |
+| C9 | El orden sigue la tarea y el flujo del dato: primero lo que la persona necesita de un vistazo; un dato calculado se lee junto a su origen, nunca separado de él; un plegado («Ver detalle») va al final del grupo, nunca entre filas del mismo grupo | NN 4; KRUG; GESTALT continuidad |
 
 ### Apariencia: cómo se acomoda
 
@@ -61,15 +76,18 @@ Cada fila se comprueba mirando el código o la pantalla. La fuente es el estánd
 | A4 | El espacio entre grupos es mayor que dentro de un grupo. Un divisor solo cuando cambia el tipo de decisión (p. ej. un interruptor opcional después de los campos) o el espacio no basta | GESTALT proximidad; RUI |
 | A5 | Las opciones con descripción son áreas completas clicables; la seleccionada se distingue por borde o fondo además del color | FITTS; WCAG 1.4.1 |
 | A6 | Las acciones van juntas al final: principal rellena a la derecha, cancelar secundaria antes; una nota de pie, si existe, a la izquierda. En un modal, el pie se separa del cuerpo | M3; RUI |
-| A7 | Contraste de texto ≥ 4.5:1 y de bordes de controles ≥ 3:1 | WCAG 1.4.3; 1.4.11 |
+| A7 | Contraste de texto ≥ 4.5:1 y de bordes de controles ≥ 3:1. Si falla, se corrige con otro paso de claridad del mismo tono (el token vecino de la escala), sin cambiar el color de marca | WCAG 1.4.3; 1.4.11 |
 | A8 | Espacios, tamaños, colores y radios salen de tokens o clases del sistema; nada de valores sueltos | `.fruti/tokens.json` |
+| A9 | Las filas de una misma lista comparten forma: todas en una línea o todas apiladas, etiquetas en el mismo borde, valores e iconos en la misma columna. Si una no cabe en una línea, todas se apilan o se acorta el texto añadido | GESTALT similitud; RUI |
+| A10 | Se resta énfasis a lo secundario (color o peso menor) en vez de sumar énfasis a lo principal; en cada grupo, un solo elemento manda | RUI |
+| A11 | La etiqueta acompaña al valor solo cuando hace falta para entenderlo; si el formato ya lo dice, la etiqueta pasa a segundo plano. Se queda visible cuando dos valores tienen el mismo formato (FUM y FPP, ambas fechas) | RUI |
 
 ### Adaptación, edición y semántica
 
 | Id | Pasa si… | Fuente |
 |---|---|---|
 | R1 | En cada modo (compacto < 600, medio 600–1023, amplio ≥ 1024) nada se desborda ni se parte una acción, y lo que cede lo hace en el orden del contrato de cada pieza | WCAG 1.4.10; contrato adaptativo de kiwi |
-| E1 | Se distingue qué se edita y qué solo se lee: un campo editable se ve como control; un dato de solo lectura no lleva icono de acción (flecha, calendario, desplegable); un dato calculado (p. ej. semanas de gestación o fecha probable de parto a partir de la FUM) dice de dónde sale y no se edita. Un chevron solo si lleva a otra vista | NORMAN (significantes); NN 4 |
+| E1 | Se distingue qué se edita y qué solo se lee: un campo editable se ve como control; un dato de solo lectura no lleva icono de acción (flecha, calendario, desplegable); un dato calculado (p. ej. SDG o FPP a partir de la FUM) marca su origen en el propio dato, con dos o tres palabras en texto secundario ("según FUM"), nunca con una nota aparte que explique el cálculo; si se puede ajustar, solo ese dato lleva el control de edición. El dato de entrada va antes que lo que se calcula de él (FUM antes de SDG y FPP). Un chevron solo si lleva a otra vista | NORMAN (significantes); NN 4 |
 | S1 | Cada control tiene etiqueta asociada; la ayuda y el error se enlazan con `aria-describedby` | WCAG 1.3.1; 3.3.2 |
 | S2 | Un grupo de opciones va en `fieldset` + `legend` (o `role="radiogroup"` con nombre); un modal tiene `role="dialog"` con título y descripción enlazados | WCAG 1.3.1; ARIA APG |
 | S3 | Foco visible, orden de tabulación igual al visual y objetivos táctiles de 44 px en pantallas táctiles | WCAG 2.4.7; 2.5.8 |
@@ -86,6 +104,8 @@ Cada fila se comprueba mirando el código o la pantalla. La fuente es el estánd
 
 - Primero el contenido (C1–C8), después la apariencia. Un buen acomodo no arregla un texto que no dice la consecuencia.
 - Junta todos los cambios de un archivo y aplícalos en una pasada.
+- Con captura, las filas de flujo y apariencia (C9, A1–A9) se califican sobre la captura, no sobre el código: lo que el código dice que pasa no cuenta si la captura muestra otra cosa.
+- Una decisión de estructura anterior (de Kiwi o de una ronda) no hace pasar C9 ni A9. Si es la causa de que fallen, se corrige y se dice en una línea qué decisión cambió.
 - Si la app está corriendo, toma capturas antes y después en los anchos de verificación. Si no, dilo y no declares verificado lo que no viste.
 
 ## Cuando el problema es de la pieza

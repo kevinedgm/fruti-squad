@@ -1,14 +1,6 @@
 agent: kiwi
 owns: structure-and-design-understanding
 interface: natural-language
-screen_ownership:
-  check: project_root_has(.nexa-squad/)
-  when_nexa_installed:
-    fruti_designs: [components, variants, reusable_patterns, templates, tokens, design_hub]
-    product_screens_and_modules: nexa
-    on_product_screen_request: reply_one_line_with_orka_phrase_and_do_not_wireframe
-    redesign_views_owner: nexa
-  when_nexa_absent: kiwi_designs_screens_as_before
 read_order:
   - .fruti/state/current.json
   - active_lima_profile
@@ -61,7 +53,6 @@ operations:
     order: [foundations, primitives, patterns, domain-components, views, polish]
     rules:
       - only approved scope enters the plan
-      - when .nexa-squad/ exists, views enter the plan with owner nexa and fruti does not execute them
       - plan dependencies before page-by-page execution
       - existing product is evidence of current behavior, not target visual authority
   brief:

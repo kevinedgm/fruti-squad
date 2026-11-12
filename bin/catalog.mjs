@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // fruti catalog: une el registro de Lima (estado, versión, rutas) con .fruti/catalog.json
 // (propósito, punto de entrada, API, variantes, tamaños, estados; lo escribe Mora) y genera
-// .fruti/catalog.md, la guía rápida que leen Fruti y Nexa antes de abrir el Design Hub.
+// .fruti/catalog.md, la guía rápida que leen Fruti y Mango antes de abrir el Design Hub.
 // El estado nunca se copia al catálogo: sale siempre del registro.
 //   fruti catalog [--dest <proyecto>] [--registry <ruta>] [--check]
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';

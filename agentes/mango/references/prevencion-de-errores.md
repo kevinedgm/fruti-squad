@@ -110,7 +110,7 @@ Mostrar una acción que nunca se podrá usar genera ruido y falsas expectativas;
 Reglas:
 - Ningún deshabilitado sin razón. Un botón inactivo sin explicación parece descompuesto.
 - La razón vive en el contenido, no solo al pasar el puntero, para que funcione con teclado y en pantallas táctiles.
-- Ocultar en la interfaz no sustituye la validación en servidor; eso es dForja.
+- Ocultar en la interfaz no sustituye la validación en servidor; eso es de Bruno.
 
 ## 7. Capas de defensa
 
