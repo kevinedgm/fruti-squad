@@ -12,6 +12,36 @@ S = {k: uri(f'final/svg/{k}.svg') for k in ['medicalmanik', 'expediente', 'agend
 PIN = uri('manik-final/svg/simbolo.svg'); LOGO = uri('final/svg/medicalmanik-logotipo.svg')
 IA = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 3.5c.45 4.2 3.8 7.55 8 8-4.2.45-7.55 3.8-8 8-.45-4.2-3.8-7.55-8-8 4.2-.45 7.55-3.8 8-8z" fill="#5FD3E2"/><path d="M19 2c.2 1.6 1.4 2.8 3 3-1.6.2-2.8 1.4-3 3-.2-1.6-1.4-2.8-3-3 1.6-.2 2.8-1.4 3-3z" fill="#5FD3E2"/></svg>'
 
+# Fondos de las apps (2026-11-12): valores leídos del sistema de diseño del Ecosistema (fuente única), no copiados.
+TK = {t['name']: t['value'] for t in json.load(open(os.path.join(M, 'design-system/project/tokens.json')))['color']['tokens']}
+def _rgb(h): return [int(h[i:i+2], 16) for i in (1, 3, 5)]
+def _lum(h):
+    c = [x / 255 for x in _rgb(h)]; c = [x / 12.92 if x <= .03928 else ((x + .055) / 1.055) ** 2.4 for x in c]; return .2126 * c[0] + .7152 * c[1] + .0722 * c[2]
+def cr(a, b): a, b = _lum(a), _lum(b); return (max(a, b) + .05) / (min(a, b) + .05)
+def _lab(h):
+    f = lambda c: c / 12.92 if c <= .04045 else ((c + .055) / 1.055) ** 2.4
+    r, g, b = [f(x / 255) for x in _rgb(h)]
+    l = (.4122214708*r + .5363325363*g + .0514459929*b) ** (1/3); m = (.2119034982*r + .6806995451*g + .1073969566*b) ** (1/3); q = (.0883024619*r + .2817188376*g + .6299787005*b) ** (1/3)
+    return (.2104542553*l + .7936177850*m - .0040720468*q, 1.9779984951*l - 2.4285922050*m + .4505937099*q, .0259040371*l + .7827717662*m - .8086757660*q)
+def dE(a, b): A, B = _lab(a), _lab(b); return 100 * sum((A[i] - B[i]) ** 2 for i in range(3)) ** .5
+f1 = lambda x: f'{x:.1f}'.replace('.', '.')
+CAPAS = [('canvas', 'Página', 'El fondo detrás de todo, en las siete apps.'), ('surface', 'Tarjeta y paneles', 'Tarjetas, tablas, barra superior y barra lateral.'),
+ ('surface-soft', 'Agrupación', 'Encabezados de tabla, filas agrupadas, hover y campos de solo lectura.'), ('surface-pressed', 'Presionado', 'Lo que se está tocando o arrastrando.')]
+capas_filas = ''.join(f'<tr><th scope="row"><span class="mu" style="background:{TK[k]}"></span>{n}</th><td><code>{k}</code></td><td class="num">{TK[k]}</td><td>{u}</td><td class="num">{f1(cr(TK["ink"], TK[k]))}:1 · {f1(cr(TK["muted"], TK[k]))}:1</td></tr>' for k, n, u in CAPAS)
+ENOM = {'info': 'información', 'exito': 'éxito', 'aviso': 'atención', 'error': 'error'}
+ESTADO = {'expediente': ('info', 'Sincronizando'), 'farmacia': ('exito', 'Receta surtida'), 'compras': ('aviso', 'Existencias bajas'), 'grupos': ('error', 'Pago rechazado')}
+def mock(k, n, op):
+    tb = TK[f'app-{k}-soft'] if op == 'C' else TK['surface']; pg = TK[f'app-{k}-soft'] if op == 'B' else TK['canvas']; e, et = ESTADO[k]
+    return (f'<figure class="mkf"><div class="mk" role="img" aria-label="Pantalla de {n} Manik, opción {op}" style="--tb:{tb};--pg:{pg}"><div class="tb"><img src="{S[k]}" alt=""><span><b>{n}</b> Manik</span></div>'
+            f'<div class="cu"><div class="lat"><i class="on"></i><i></i><i></i><i></i></div><div class="pg"><span class="ban" style="background:{TK[e + "-soft"]};color:{TK["on-" + e + "-soft"]}">{et}</span>'
+            f'<div class="card"><b>Pendientes de hoy</b><span class="row"></span><span class="row c"></span><span class="bt" style="background:{TK["manik"]}">Guardar</span></div></div></div></div>'
+            f'<figcaption><b>{n}</b> · fondo {pg} · aviso de {ENOM[e]}: ΔE {f1(dE(pg, TK[e + "-soft"]))}</figcaption></figure>')
+MK = [('expediente', 'Expediente'), ('farmacia', 'Farmacia'), ('compras', 'Compras'), ('grupos', 'Grupos')]
+mocks = {op: ''.join(mock(k, n, op) for k, n in MK) for op in 'ABC'}
+_soft = {k: TK[f'app-{k}-soft'] for k, _ in [('expediente',0),('agenda',0),('compras',0),('farmacia',0),('impulsa',0),('grupos',0)]}
+_ks = list(_soft); par_min = min(((dE(_soft[a], _soft[b]), a, b) for i, a in enumerate(_ks) for b in _ks[i+1:]))
+PN = {'expediente': 'Expediente', 'agenda': 'Agenda', 'compras': 'Compras', 'farmacia': 'Farmacia', 'impulsa': 'Impulsa', 'grupos': 'Grupos'}
+
 PROD = [('expediente', 'Expediente'), ('agenda', 'Agenda'), ('compras', 'Compras'), ('farmacia', 'Farmacia'), ('impulsa', 'Impulsa'), ('grupos', 'Grupos')]
 RASGO = {'expediente': 'pestaña de carpeta', 'agenda': 'argollas de calendario', 'compras': 'borde de ticket', 'farmacia': 'cruz', 'impulsa': 'flecha que sale', 'grupos': 'segunda tarjeta detrás'}
 sellos = ''.join(f'<figure><img src="{S[k]}" alt="" width="64" height="64"><figcaption><b>{n}</b> Manik<span>{P[n]["para"]}</span><span class="r">{RASGO[k]}</span></figcaption></figure>' for k, n in PROD)
@@ -86,6 +116,18 @@ section{{display:grid;gap:24px}}section>header{{display:grid;gap:6px}}h2{{font-s
 .tw{{overflow-x:auto;border:1px solid var(--linea);border-radius:20px;background:var(--blanco)}}
 table{{border-collapse:collapse;width:100%;min-width:760px}}th,td{{text-align:left;vertical-align:top;padding:14px 16px;border-bottom:1px solid var(--linea);font-size:15px;line-height:22px}}thead th{{font:700 12px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:var(--suave)}}tbody tr:last-child>*{{border-bottom:0}}tbody th{{font-weight:700;min-width:150px}}
 .est{{display:inline-block;border-radius:999px;padding:2px 10px;font:700 12px/18px var(--sans);white-space:nowrap}}.est.hecho{{background:var(--ok-s);color:var(--ok)}}.est.en-curso{{background:var(--curso-s);color:var(--curso)}}
+.capas{{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start}}.capas .pila{{max-width:560px}}
+.pila{{border-radius:20px;padding:22px;display:grid;gap:10px;border:1px solid var(--linea)}}.pila>span{{font:700 12px/16px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}}
+.pila .t1{{background:#fff;border:1px solid var(--linea);border-radius:14px;padding:14px;display:grid;gap:8px}}.pila .t2{{border-radius:10px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center;font-size:14px}}.pila .t3{{border-radius:8px;padding:4px 10px;font-size:13px;font-weight:600}}
+.mu{{display:inline-block;width:14px;height:14px;border-radius:4px;border:1px solid var(--linea);vertical-align:-2px;margin-right:8px}}td.num{{font-variant-numeric:tabular-nums;white-space:nowrap}}code{{font:13px ui-monospace,Menlo,monospace;background:var(--suave);border-radius:6px;padding:1px 6px}}
+.ops{{display:grid;gap:28px}}.op{{display:grid;gap:12px}}.op>header{{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px}}.op>header h3{{font-size:20px}}
+.mks{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px}}.mkf{{margin:0;display:grid;gap:6px}}.mkf figcaption{{font-size:13px;line-height:18px;color:var(--muted);font-variant-numeric:tabular-nums}}.mkf figcaption b{{color:var(--tinta)}}
+.mk{{border:1px solid var(--linea);border-radius:14px;overflow:hidden;display:grid;grid-template-rows:34px 150px;background:#fff}}
+.mk .tb{{background:var(--tb);display:flex;align-items:center;gap:6px;padding:0 10px;border-bottom:1px solid var(--linea);font:400 12px var(--display)}}.mk .tb img{{width:22px;height:22px}}.mk .tb b{{font-weight:600}}
+.mk .cu{{display:grid;grid-template-columns:52px 1fr}}.mk .lat{{background:#fff;border-right:1px solid var(--linea);padding:10px 8px;display:grid;gap:6px;align-content:start}}.mk .lat i{{height:8px;border-radius:4px;background:#EEF1F7}}.mk .lat i.on{{background:#E9EDF5;box-shadow:inset 3px 0 0 #234899}}
+.mk .pg{{background:var(--pg);padding:10px;display:grid;gap:8px;align-content:start}}.mk .ban{{justify-self:stretch;border-radius:6px;padding:4px 8px;font:600 11px var(--sans)}}
+.mk .card{{background:#fff;border:1px solid var(--linea);border-radius:8px;padding:8px;display:grid;gap:6px}}.mk .card b{{font:600 12px var(--display)}}.mk .row{{height:6px;border-radius:3px;background:#EEF1F7}}.mk .row.c{{width:60%}}.mk .bt{{justify-self:start;color:#fff;border-radius:6px;padding:2px 8px;font:600 10px var(--sans)}}
+.reco{{border-left:4px solid var(--ok);background:var(--blanco);border-radius:0 16px 16px 0;padding:16px 20px;display:grid;gap:8px;max-width:76ch}}
 .abiertos{{margin:0;padding-left:24px;display:grid;gap:10px;max-width:72ch}}
 .glos{{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:12px 28px;margin:0}}.glos div{{display:grid;gap:2px}}.glos dt{{font:600 17px/1.3 var(--display)}}.glos dd{{margin:0;font-size:15px;line-height:22px;color:var(--muted)}}
 .pie{{border-top:1px solid var(--linea);padding-top:18px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:14px;color:var(--muted)}}
@@ -146,6 +188,26 @@ table{{border-collapse:collapse;width:100%;min-width:760px}}th,td{{text-align:le
  </div>
 </section>
 
+<section aria-labelledby="h-fon"><header><span class="eti">Los fondos</span><h2 id="h-fon">Los fondos de las apps</h2></header>
+ <div class="texto"><p>Una pantalla se arma con capas de fondo. Cada capa tiene un trabajo: separar lo que es página de lo que es contenido, agrupar filas y mostrar qué se está tocando. Las capas son <b>neutras</b>: un gris con un sesgo leve al azul MedicalManik, el mismo en las siete apps.</p></div>
+ <div class="capas">
+  <div class="pila" style="background:{TK["canvas"]}"><span>Página · canvas</span><div class="t1"><b style="font:600 16px var(--display)">Tarjeta · surface</b><div class="t2" style="background:{TK["surface-soft"]}">Fila agrupada · surface-soft <span class="t3" style="background:{TK["surface-pressed"]}">presionado</span></div><div class="t2" style="background:{TK["surface-soft"]}">Encabezado de tabla</div></div></div>
+  <div class="tw"><table style="min-width:620px"><thead><tr><th>Capa</th><th>Token</th><th>Color</th><th>Para qué</th><th>Texto · secundario</th></tr></thead><tbody>{capas_filas}</tbody></table></div>
+ </div>
+ <div class="dos">
+  <div class="lam"><h3>Fuera de las apps, la luz de marca</h3><p>El inicio de sesión, la portada y el inicio del ecosistema usan <code>bruma</code> ({TK["bruma"]}) con los halos <code>luz-cian</code> y <code>luz-calida</code>, igual que el directorio para pacientes. Dentro de una app manda la página neutra: ahí se trabaja, no se presenta.</p></div>
+  <div class="lam"><h3>Dónde sí entra el color del producto</h3><p>En el sello, en el nombre arriba a la izquierda y en la tarjeta de cada app en el inicio y el selector, que usa su fondo suave (por ejemplo <code>app-farmacia-soft</code> {TK["app-farmacia-soft"]}). Detrás de diálogos y hojas va el velo <code>scrim</code> (tinta al 40 %), nunca un color de producto.</p></div>
+ </div>
+ <header><span class="eti">Por decidir</span><h3>¿Y si el fondo de cada app llevara el color de su producto?</h3></header>
+ <div class="texto"><p>Tres opciones sobre la misma pantalla, con un aviso de estado arriba, que es donde se nota el problema. Debajo de cada ejemplo está la distancia de color (ΔE) entre el fondo y el aviso: <b>por debajo de 2 el ojo casi no ve la diferencia</b>.</p></div>
+ <div class="ops">
+  <div class="op"><header><h3>A · Todo neutro</h3><span class="tag h">recomendada</span><span class="nota">Así está hoy el sistema de diseño.</span></header><div class="mks">{mocks["A"]}</div></div>
+  <div class="op"><header><h3>B · La página con el tono del producto</h3><span class="tag i">no recomendada</span><span class="nota">La página usa el fondo suave de cada app.</span></header><div class="mks">{mocks["B"]}</div></div>
+  <div class="op"><header><h3>C · La barra superior con el tono del producto</h3><span class="tag i">alternativa</span><span class="nota">Solo la barra cambia; la página sigue neutra.</span></header><div class="mks">{mocks["C"]}</div></div>
+ </div>
+ <div class="reco"><h3>Recomendación: A</h3><p><b>Lo que se midió.</b> Los fondos suaves de producto están demasiado cerca entre sí para orientar: {PN[par_min[1]]} y {PN[par_min[2]]} quedan a ΔE {f1(par_min[0])}. Y quedan encima de los avisos: en la opción B, el fondo de Farmacia está a ΔE {f1(dE(TK["app-farmacia-soft"], TK["exito-soft"]))} del aviso de éxito y el de Compras a {f1(dE(TK["app-compras-soft"], TK["aviso-soft"]))} del aviso de atención, así que el aviso se pierde en la página.</p><p><b>Lo que se infiere.</b> Es el mismo conflicto que separa identidad e interfaz en los botones: el color de producto en un plano grande compite con los colores que avisan algo. Si se quiere más presencia del producto, la opción C es la menos riesgosa, porque la barra no comparte espacio con los avisos.</p><p class="nota">Aun en la opción A, un aviso se separa de la página solo por ΔE {f1(min(dE(TK["canvas"], TK[e + "-soft"]) for e in ENOM))} a {f1(max(dE(TK["canvas"], TK[e + "-soft"]) for e in ENOM))}: se reconoce porque siempre lleva icono y texto, como pide el sistema de diseño, no solo por su color. Ninguna opción afecta la lectura: tinta y texto secundario pasan 4.5:1 sobre todos los fondos mostrados.</p></div>
+</section>
+
 <section aria-labelledby="h-fam"><header><span class="eti">Para quién es cada cosa</span><h2 id="h-fam">Tres familias bajo el mismo respaldo</h2></header>
  <div class="fams">
   <div class="fam"><span class="ic"><img src="{S["ecosistema"]}" alt=""></span><h3>Ecosistema Manik</h3><dl><dt>Para</dt><dd>Clínicas, hospitales, médicos y su equipo.</dd><dt>Qué es</dt><dd>Seis apps de trabajo y Administración, que es interna.</dd><dt>Cómo se nombra</dt><dd>«Producto Manik».</dd></dl></div>
@@ -169,6 +231,7 @@ table{{border-collapse:collapse;width:100%;min-width:760px}}th,td{{text-align:le
 <section aria-labelledby="h-abi"><header><span class="eti">Lo que sigue abierto</span><h2 id="h-abi">Decisiones pendientes</h2></header>
  <ol class="abiertos"><li><b>Nombre del directorio para pacientes.</b> «Manik» solo no se puede registrar. Hay propuestas con el molde de Doctoralia (MediManik, DocManik, DoctorManik) y la tipografía del logotipo será Sora. Falta saber por qué se rechazó «Manik» y hacer la búsqueda en el registro de marcas.</li>
  <li><b>Migración de Impulsa</b> al sistema común (aprobada; la hace su equipo con la guía).</li>
+ <li><b>Fondos por producto.</b> Se recomienda la opción A (fondos neutros iguales en las siete apps); la C (barra superior con el tono del producto) queda como alternativa. Si se elige B o C, el cambio va primero al sistema de diseño del Ecosistema.</li>
  <li><b>Registro y dominios</b> de los nombres de producto en México y Centroamérica: no se han verificado.</li></ol>
 </section>
 
