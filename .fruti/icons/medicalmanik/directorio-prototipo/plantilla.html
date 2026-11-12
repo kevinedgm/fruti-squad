@@ -335,6 +335,25 @@ a{color:inherit}
 .hoja .t{display:flex;justify-content:space-between;align-items:center}.hoja .t b{font:600 20px/26px var(--display)}
 .hoja fieldset{border:0;margin:0;padding:0;display:grid;gap:8px}.hoja legend{font:600 15px/22px var(--sans);padding:0;margin-bottom:8px}.hoja .row{display:flex;flex-wrap:wrap;gap:8px}
 .menu-l{list-style:none;margin:0;padding:0}.menu-l a{display:flex;align-items:center;justify-content:space-between;min-height:52px;border-bottom:1px solid var(--linea);font:600 17px var(--sans);color:var(--tinta);text-decoration:none}.menu-l a[aria-current]{color:var(--teal-hover)}.menu-l .ico{color:var(--muted);width:18px;height:18px}
+.reg{display:grid;gap:24px;padding-block:20px 48px}@media (min-width:1024px){.reg{grid-template-columns:minmax(0,1fr) minmax(0,480px);column-gap:48px;align-items:start}.reg-hero{position:sticky;top:24px}.reg-mas{grid-column:2}}
+.reg-hero{display:grid;gap:14px;align-content:start}.reg-hero h1{font:300 clamp(32px,6vw,52px)/1.08 var(--display);letter-spacing:-.02em;max-width:16ch}.reg-hero h1 b{font-weight:600}
+.reg-badge{display:inline-flex;align-items:center;gap:8px;justify-self:start;font-size:15px;font-weight:600;color:var(--exito);background:var(--exito-suave);border-radius:999px;padding:6px 14px}.reg-badge .ico{width:18px;height:18px}
+.reg-card{background:var(--blanco);border:1px solid var(--linea);border-radius:20px;padding:20px;display:grid;gap:14px;min-width:0}.reg-card h2{font:600 22px/28px var(--display)}.reg-card h1{font:600 clamp(26px,5vw,32px)/1.15 var(--display)}
+.reg-u{padding-block:24px 48px;max-width:560px}.reg-card.ok .ic{display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:var(--exito-suave);color:var(--exito)}.reg-card.ok .ic .ico{width:28px;height:28px}
+.reg-ya{font-size:15px;color:var(--muted)}.reg-ya .lnk{display:inline-flex;min-height:36px;font-size:15px}
+.reg-g{background:var(--blanco);color:var(--tinta);border:1.5px solid var(--linea-control);width:100%}.reg-g:hover{background:var(--bruma)}.reg-demo{font-size:13px;color:var(--muted);margin-top:-8px}
+.reg-g-ok{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border:1px solid var(--linea);border-radius:14px;padding:10px 12px;font-size:14px}.reg-g-ok span{display:grid;flex:1;min-width:0;overflow-wrap:anywhere}.reg-g-ok .lnk{min-height:36px;font-size:14px}
+.reg-o{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:14px}.reg-o::before,.reg-o::after{content:"";flex:1;height:1px;background:var(--linea)}
+.reg-fila{display:grid;grid-template-columns:96px minmax(0,1fr);gap:10px;align-items:start}
+.campo-f select{font:16px var(--sans);color:var(--tinta);border:1.5px solid var(--linea-control);border-radius:14px;padding:0 12px;min-height:48px;background:var(--blanco);width:100%}.campo-f select:focus{outline:3px solid var(--teal);outline-offset:1px}.campo-f.err select{border-color:var(--error);border-width:2px}
+.campo-f input[readonly]{background:var(--bruma);color:var(--muted)}
+.reg-pw{display:flex;gap:8px;align-items:center}.reg-pw input{flex:1;min-width:0}.reg-pw .btn{flex:none}
+.reg-req{display:grid;gap:4px;background:var(--bruma);border-radius:12px;padding:10px 12px}.reg-req ul{list-style:none;margin:0;padding:0;display:grid;gap:2px;font-size:14px;color:var(--muted)}.reg-req li.si{color:var(--exito);font-weight:600}
+.check .lnk{display:inline;min-height:0;font-size:inherit;padding:0;vertical-align:baseline}.check span{line-height:24px}
+.reg-robot{display:flex;align-items:center;gap:12px;border:1.5px solid var(--linea-control);border-radius:10px;padding:12px 14px;font-size:15px;justify-self:start}.reg-robot input{width:24px;height:24px;margin:0;accent-color:var(--teal-hover)}.reg-robot small{margin-left:12px}
+.reg-sum{display:flex;align-items:center;gap:8px;background:var(--error-suave);color:var(--error);border-radius:12px;padding:10px 14px;font-weight:600;font-size:15px}.reg-sum .ico{width:18px;height:18px}
+.reg-env{width:100%}.reg-pasos{margin:0;padding-left:22px;display:grid;gap:6px;color:var(--muted)}.reg-aside{background:var(--bruma);border-radius:14px;padding:14px;display:grid;gap:4px;font-size:15px}.reg-aside p{color:var(--muted)}
+.reg-mas{border:1px solid var(--linea);border-radius:20px;padding:20px;display:grid;gap:6px;background:var(--blanco)}.reg-mas small{color:var(--muted);font-size:13px;font-weight:600}.reg-mas h3{font:600 19px/1.25 var(--display)}.reg-mas p{color:var(--muted);font-size:15px}.reg-mas .lnk{display:inline-flex;align-items:center;gap:6px}
 .hoja .pieh{display:flex;gap:12px;align-items:center;justify-content:space-between;border-top:1px solid var(--linea);padding-top:12px}.hoja .pieh .primario{flex:1}
 .full{position:fixed;inset:0;z-index:20;background:var(--blanco);display:flex;flex-direction:column;padding:calc(8px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) calc(16px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));gap:12px;overflow:auto}
 .full .tb{display:flex;align-items:center;gap:6px}.full .tb b{font:600 18px var(--display)}
@@ -554,7 +573,7 @@ function ficha({m, cons}){
   return `<article class="fm"><div class="fmi">${avatar(m)}<div class="who"><h3><a href="#medico-${m.id}">${m.n}</a></h3><p class="spec">${m.esp}${m.foco?' · '+m.foco:''}</p>${ced(m)}${meta(m)}</div>
   <div class="cons" role="list" aria-label="Consultorios de ${m.n}">${cons.slice(0,2).map((c,i)=>fila(m,c,i===0)).join('')}</div>${extra}</div></article>`;
 }
-const nav = (act) => `<header class="wrap nav"><a class="logo" href="#inicio" aria-label="Mi Médico Manik, inicio"><img src="${IMG.logo}" alt="" width="153" height="40"></a><ul><li><a href="#resultados" ${act==='buscar'?'aria-current="page"':''}>Especialidades</a></li><li><a href="#dudas">Preguntas</a></li><li><a href="#dudas">Artículos</a></li></ul><button class="me" data-toast="El registro para médicos aún no está en el prototipo">Únete como médico</button><button class="ib menu" data-abrir="menu" aria-haspopup="dialog" aria-label="Menú">${ic('menu')}</button></header>`;
+const nav = (act) => `<header class="wrap nav"><a class="logo" href="#inicio" aria-label="Mi Médico Manik, inicio"><img src="${IMG.logo}" alt="" width="153" height="40"></a><ul><li><a href="#resultados" ${act==='buscar'?'aria-current="page"':''}>Especialidades</a></li><li><a href="#dudas">Preguntas</a></li><li><a href="#dudas">Artículos</a></li></ul><a class="me" href="#registro">Únete como médico</a><button class="ib menu" data-abrir="menu" aria-haspopup="dialog" aria-label="Menú">${ic('menu')}</button></header>`;
 
 // Vistas
 const V = {};
@@ -616,7 +635,7 @@ ${hoy.length ? `<section class="wrap sec" aria-labelledby="h-hoy"><h2 class="h2"
 <h3>Artículos de médicos</h3>${ART.map(([t,id,i,min,img])=>{const m=medDe(id);return `<button class="q art" data-toast="La página del artículo aún no está en el prototipo">${img ? `<img class="th" src="${img}" alt="">` : `<span class="th">${ic(i)}</span>`}<b>${t}</b><small><span class="nw">Por ${art(m)}${m.n}</span> · <span class="nw">${m.esp}</span> · <span class="nw">${min} min</span></small></button>`}).join('')}
 <div class="acc"><button class="lnk" data-toast="El listado de artículos aún no está en el prototipo">Ver artículos</button></div></div></section>
 <section class="wrap sec"><div class="trust" aria-label="Por qué Mi Médico Manik"><div><span class="ic">${ic('badge-check')}</span><b>Médicos verificados</b><p>Revisamos la cédula profesional de cada médico.</p></div><div><span class="ic">${ic('message-circle-heart')}</span><b>Opiniones reales</b><p>Solo opina quien tuvo cita en Mi Médico Manik.</p></div><div><span class="ic">${ic('calendar-check')}</span><b>Gratis para ti</b><p>Pagas la consulta en el consultorio.</p></div></div></section>
-<section class="wrap sec"><div class="soymed"><div><b>¿Eres médico?</b><p>Aparece en Mi Médico Manik y recibe pacientes.</p></div><button class="btn secundario" data-toast="El registro para médicos aún no está en el prototipo">Únete como médico</button></div></section>
+<section class="wrap sec"><div class="soymed"><div><b>¿Eres médico?</b><p>Aparece en Mi Médico Manik y recibe pacientes.</p></div><a class="btn secundario" href="#registro">Únete como médico</a></div></section>
 ${pie()}`; };
 
 V.resultados = () => {
@@ -817,7 +836,7 @@ function capaMenu(){
   const h = location.hash || '#inicio', it = (href, t) => `<li><a href="${href}" data-cerrar${h === href ? ' aria-current="page"' : ''}>${t}${ic('chevron-right')}</a></li>`;
   $('#capa').innerHTML = `<div class="velo" data-velo><div class="hoja" role="dialog" aria-modal="true" aria-label="Menú"><span class="asa" aria-hidden="true"></span><div class="t"><b>Menú</b><button class="ib" data-cerrar aria-label="Cerrar">${ic('x')}</button></div>
   <nav aria-label="Principal"><ul class="menu-l">${it('#inicio','Inicio')}${it('#resultados','Especialidades')}${it('#dudas','Preguntas')}${it('#dudas','Artículos')}</ul></nav>
-  <div class="pieh"><button class="btn primario" data-toast="El registro para médicos aún no está en el prototipo">Únete como médico</button></div></div></div>`;
+  <div class="pieh"><a class="btn primario" href="#registro" data-cerrar>Únete como médico</a></div></div></div>`;
   $('#capa').onclick = e => { if (e.target.matches('[data-velo]')) cerrar(); };
   $('.menu-l a').focus();
 }
@@ -827,6 +846,70 @@ function cerrar(){ $('#capa').innerHTML = ''; $('#capa').onclick = null; documen
 function toast(t){ const el = $('#toast'); el.textContent = t; el.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(()=>el.hidden = true, 2400); }
 
 // Router
+// Registro de médicos (2026-11-12). Campos, textos y validaciones de mimedicomanik.com/directorio/registro (leídos de su código).
+// Agregado como demostración: «Regístrate con Google». Listas de país y especialidad abreviadas. Sin contactos reales de soporte.
+const PAISES = ['México','Antigua y Barbuda','Argentina','Bahamas','Barbados','Belice','Bolivia','Brasil','Canadá','Chile','Colombia','Costa Rica','Cuba','Dominica','Ecuador','El Salvador','España','Estados Unidos de América','Granada','Guatemala','Guayana Francesa','Guyana','Haití','Honduras','Islas Turcas y Caicos','Jamaica','Nicaragua','Panamá','Paraguay','Perú','Puerto Rico','República Dominicana','San Cristóbal y Nieves','Santa Lucía','Suriname','Trinidad y Tobago','Uruguay','Venezuela'];
+const REQ = [['len','Mínimo 6 caracteres',v=>v.length>=6],['may','Una mayúscula',v=>/[A-ZÁÉÍÓÚÑ]/.test(v)],['min','Una minúscula',v=>/[a-záéíóúñ]/.test(v)],['num','Un número',v=>/\d/.test(v)],['esp','Un carácter especial: @$!%*?&',v=>/[@$!%*?&]/.test(v)]];
+S.reg = {pre:'Dra.', nom:'', ap1:'', ap2:'', mail:'', tel:'', pw:'', pw2:'', pais:'México', esp:'', ced:'', ok:false, robot:false, google:false, err:{}, verMostrar:false, codigo:'', paso:'form'};
+function validaReg(){ const R = S.reg, e = {}, nombre = /^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ' -]+$/;
+  if (!R.nom.trim()) e.nom = 'El nombre es requerido'; else if (!nombre.test(R.nom.trim())) e.nom = 'El nombre no debe tener dígitos ni caracteres especiales';
+  if (!R.ap1.trim()) e.ap1 = 'El primer apellido es requerido'; else if (!nombre.test(R.ap1.trim())) e.ap1 = 'El primer apellido no es válido';
+  if (R.ap2.trim() && !nombre.test(R.ap2.trim())) e.ap2 = 'El segundo apellido no es válido';
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(R.mail.trim())) e.mail = 'El correo electrónico no es válido';
+  if (!/^\d{7,15}$/.test(R.tel)) e.tel = 'El teléfono debe tener de 7 a 15 dígitos';
+  if (!R.google) { if (!REQ.every(q => q[2](R.pw))) e.pw = 'La contraseña no cumple los requisitos indicados'; if (!R.pw2 || R.pw2 !== R.pw) e.pw2 = 'Las contraseñas no coinciden'; }
+  if (!R.pais) e.pais = 'Selecciona tu país'; if (!R.esp) e.esp = 'Selecciona tu especialidad';
+  if (!/^\d{1,8}$/.test(R.ced)) e.ced = 'La cédula debe tener máximo 8 dígitos';
+  if (!R.ok) e.ok = 'Debes aceptar los términos y condiciones'; if (!R.robot) e.robot = 'Confirma que no eres un robot';
+  return e; }
+const GLOGO = '<svg viewBox="0 0 48 48" width="20" height="20" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.6 5.4 2.7 13.3l7.9 6.1C12.5 13.6 17.8 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.7 6c4.5-4.2 6.9-10.3 6.9-17.7z"/><path fill="#FBBC05" d="M10.6 28.6c-.5-1.4-.8-3-.8-4.6s.3-3.2.8-4.6l-7.9-6.1C1 16.6 0 20.2 0 24s1 7.4 2.7 10.7l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.7-6c-2.1 1.4-4.9 2.3-8.2 2.3-6.2 0-11.5-4.2-13.4-9.9l-7.9 6.1C6.6 42.6 14.6 48 24 48z"/></svg>';
+V.registro = () => { const R = S.reg, E = R.err;
+  if (R.paso === 'codigo') return `${nav('')}<main class="wrap reg-u"><div class="reg-card"><span class="prop">Pantalla propuesta · no vimos la página real de verificación</span><h1 id="h-ok" tabindex="-1">Revisa tu correo</h1><p class="spec">Te enviamos un código de 6 dígitos a <b>${R.mail}</b>. Escríbelo para activar tu cuenta.</p>
+    <form class="form" data-form="reg-codigo" novalidate><div class="campo-f ${E.codigo?'err':''}" id="cf-codigo"><label for="r-codigo">Código</label><input id="r-codigo" inputmode="numeric" autocomplete="one-time-code" maxlength="6" value="${R.codigo}" aria-describedby="e-codigo"><span class="errm" id="e-codigo">${E.codigo||''}</span><small>En el prototipo funciona cualquier código de 6 dígitos.</small></div>
+    <button class="btn primario" type="submit">Activar mi cuenta</button><button class="btn texto" type="button" data-toast="Te enviamos un código nuevo">Reenviar código</button></form></div></main>${pie()}`;
+  if (R.paso === 'listo') return `${nav('')}<main class="wrap reg-u"><div class="reg-card ok"><span class="ic">${ic('circle-check')}</span><h1 id="h-ok" tabindex="-1">Tu cuenta está lista.</h1><p class="spec">Ya puedes iniciar sesión y preparar tu perfil. Tu cédula profesional está en revisión por nuestro equipo; una vez aprobada, tu perfil se mostrará en el directorio.</p>
+    <h2 class="sub-h">¿Qué sigue?</h2><ol class="reg-pasos"><li>Inicia sesión con tu correo y contraseña.</li><li>Completa los datos de tu consultorio y sube tu foto de perfil.</li><li>En cuanto validemos tu cédula, tu perfil aparecerá en el directorio.</li></ol>
+    <button class="btn primario" data-toast="El perfil del médico aún no está en el prototipo">Ir a mi perfil</button>
+    <div class="reg-aside"><b>¿Quieres agilizar la validación de tu cédula?</b><p>Envíanos una copia de tu cédula profesional por WhatsApp o correo electrónico.</p><small>En el prototipo no mostramos los contactos reales de soporte.</small></div></div></main>${pie()}`;
+  const f = (id, lab, inp, ayuda='') => `<div class="campo-f ${E[id]?'err':''}" id="cf-${id}"><label for="r-${id}">${lab}</label>${inp}${ayuda}<span class="errm" id="e-${id}">${E[id]||''}</span></div>`;
+  const inp = (id, tipo, extra='') => `<input id="r-${id}" type="${tipo}" value="${(R[id]||'').replace(/"/g,'&quot;')}" ${E[id]?'aria-invalid="true"':''} aria-describedby="e-${id}" ${extra}>`;
+  const req = REQ.map(q => `<li data-req="${q[0]}" class="${q[2](R.pw)?'si':''}">${q[2](R.pw)?'✓':'○'} ${q[1]}</li>`).join('');
+  const nE = Object.keys(E).length;
+  return `${nav('')}<main class="wrap reg">
+  <section class="reg-hero"><span class="etq-g">Para médicos</span><h1 id="h-ok" tabindex="-1">Aparece <b>gratis</b> en el directorio médico</h1><p class="lead">Miles de personas buscan especialista cada día. Crea tu perfil, registra tu consultorio y haz que te encuentren.</p><p class="reg-badge">${ic('circle-check')}Sin costo · sin tarjeta · listo en minutos</p></section>
+  <section class="reg-card" aria-labelledby="h-reg"><p class="reg-ya">¿Ya tienes cuenta? <button class="lnk" data-toast="Inicio de sesión de médicos: aún no está en el prototipo">Inicia sesión</button></p>
+   <h2 id="h-reg">Aparece gratis en el directorio</h2><p class="spec">Regístrate como médico y llega a más pacientes. Es gratis para empezar.</p>
+   ${nE ? `<div class="reg-sum" role="alert" tabindex="-1" id="reg-sum">${ic('x')}Revisa los campos marcados en rojo.</div>` : ''}
+   ${R.google ? `<div class="reg-g-ok">${GLOGO}<span><b>Conectado con Google</b>${R.mail}</span><button type="button" class="lnk" data-reg-g="off">Usar otro método</button></div>` : `<button type="button" class="btn reg-g" data-reg-g="on">${GLOGO}Regístrate con Google</button><p class="reg-demo">Demostración: usa una cuenta de Google de ejemplo.</p><div class="reg-o"><span>o con tu correo</span></div>`}
+   <form class="form" data-form="registro" novalidate>
+    <div class="reg-fila"><div class="campo-f"><label for="r-pre">Prefijo</label><select id="r-pre">${['Dra.','Dr.'].map(x=>`<option ${R.pre===x?'selected':''}>${x}</option>`).join('')}</select></div>${f('nom','Nombre(s)',inp('nom','text','maxlength="60" autocomplete="given-name" placeholder="Ej. Juan Carlos"'))}</div>
+    ${f('ap1','Primer apellido',inp('ap1','text','maxlength="60" autocomplete="family-name" placeholder="Ej. Pérez"'))}
+    ${f('ap2','Segundo apellido (opcional)',inp('ap2','text','maxlength="60" placeholder="Ej. García"'))}
+    ${f('mail','Correo electrónico',inp('mail','email',`maxlength="120" autocomplete="email" placeholder="doctor@ejemplo.com" ${R.google?'readonly':''}`))}
+    ${f('tel','Teléfono móvil',inp('tel','tel','maxlength="15" inputmode="numeric" autocomplete="tel" placeholder="Solo dígitos"'))}
+    ${R.google ? '' : `${f('pw','Contraseña',`<span class="reg-pw">${inp('pw', R.verMostrar?'text':'password','autocomplete="new-password" placeholder="Ej. SOYmedico*1" aria-describedby="e-pw reg-req"')}<button type="button" class="btn texto" data-reg-ver aria-pressed="${R.verMostrar}">${R.verMostrar?'Ocultar':'Mostrar'}</button></span>`,`<div class="reg-req" id="reg-req"><small>Tu contraseña debe tener</small><ul aria-live="polite">${req}</ul><small>Ejemplo: SOYmedico*1</small></div>`)}
+    ${f('pw2','Confirmar contraseña',inp('pw2','password','autocomplete="new-password" placeholder="Repite tu contraseña"'))}`}
+    ${f('pais','País',`<select id="r-pais" ${E.pais?'aria-invalid="true"':''} aria-describedby="e-pais"><option value="">Selecciona tu país</option>${PAISES.map(x=>`<option ${R.pais===x?'selected':''}>${x}</option>`).join('')}</select>`)}
+    ${f('esp','Especialidad',`<select id="r-esp" ${E.esp?'aria-invalid="true"':''} aria-describedby="e-esp"><option value="">Selecciona tu especialidad</option>${ESPS.map(x=>`<option ${R.esp===x[0]?'selected':''}>${x[0]}</option>`).join('')}</select>`,'<small>Lista abreviada en el prototipo.</small>')}
+    ${f('ced','Cédula profesional',inp('ced','text','maxlength="8" inputmode="numeric" placeholder="Máximo 8 dígitos"'),'<small>Nuestro equipo de Mi Médico Manik revisará tu cédula antes de publicar tu perfil. Para agilizarlo, puedes enviarnos una copia por WhatsApp o correo.</small>')}
+    <div class="campo-f ${E.ok?'err':''}" id="cf-ok"><label class="check"><input type="checkbox" id="r-ok" ${R.ok?'checked':''} aria-describedby="e-ok"><span>Acepto los <button type="button" class="lnk" data-toast="Términos y condiciones (ejemplo)">términos y condiciones</button> y el <button type="button" class="lnk" data-toast="Aviso de privacidad (ejemplo)">aviso de privacidad</button> de Mi Médico Manik.</span></label><span class="errm" id="e-ok">${E.ok||''}</span></div>
+    <div class="campo-f ${E.robot?'err':''}" id="cf-robot"><label class="reg-robot"><input type="checkbox" id="r-robot" ${R.robot?'checked':''} aria-describedby="e-robot"><span>No soy un robot</span><small>Verificación de ejemplo</small></label><span class="errm" id="e-robot">${E.robot||''}</span></div>
+    <button class="btn primario reg-env" type="submit">Registrarme</button>
+    <p class="reg-ya">¿Ya tienes cuenta? <button type="button" class="lnk" data-toast="Inicio de sesión de médicos: aún no está en el prototipo">Inicia sesión</button></p>
+   </form></section>
+  <aside class="reg-mas"><small>¿Necesitas más que el directorio?</small><h3>Expediente clínico, agenda y teleconsulta</h3><p>MedicalManik es la plataforma completa para gestionar tu consulta: historia clínica electrónica, recetas, agenda de citas en línea y videoconsulta.</p><button class="lnk" data-toast="Página de MedicalManik (ejemplo)">Conoce MedicalManik ${ic('arrow-right')}</button></aside>
+  </main>${pie()}`; };
+document.addEventListener('input', e => { const id = e.target.id; if (!id || !id.startsWith('r-') || !S.reg) return; const k = id.slice(2), R = S.reg;
+  if (e.target.type === 'checkbox') R[k] = e.target.checked; else { let v = e.target.value; if (k === 'tel' || k === 'ced' || k === 'codigo') { v = v.replace(/\D/g,''); e.target.value = v; } R[k] = v; }
+  if (k === 'pw') document.querySelectorAll('[data-req]').forEach(li => { const q = REQ.find(x => x[0] === li.dataset.req), okq = q[2](R.pw); li.classList.toggle('si', okq); li.textContent = (okq ? '✓ ' : '○ ') + q[1]; }); });
+document.addEventListener('change', e => { const id = e.target.id; if (id && id.startsWith('r-') && S.reg && e.target.tagName === 'SELECT') S.reg[id.slice(2)] = e.target.value; });
+document.addEventListener('click', e => { const g = e.target.closest('[data-reg-g]'); if (g) { const R = S.reg;
+    if (g.dataset.regG === 'on') { Object.assign(R, {google:true, nom:R.nom||'Ana', ap1:R.ap1||'Pérez', mail:'ana.perez@ejemplo.com', err:{}}); render(); toast('Demostración: cuenta de Google de ejemplo conectada'); $('#r-tel')?.focus(); }
+    else { Object.assign(R, {google:false, mail:'', err:{}}); render(); $('[data-reg-g="on"]')?.focus(); } return; }
+  if (e.target.closest('[data-reg-ver]')) { S.reg.verMostrar = !S.reg.verMostrar; render(); $('[data-reg-ver]')?.focus(); } });
+document.addEventListener('submit', e => { const f = e.target.dataset.form; const R = S.reg;
+  if (f === 'registro') { R.err = validaReg(); render(); if (Object.keys(R.err).length) { const k = Object.keys(R.err)[0]; $('#reg-sum')?.focus(); $('#r-' + k)?.focus?.(); } else { R.paso = 'codigo'; R.err = {}; render(); scrollTo(0,0); $('#h-ok')?.focus(); } }
+  if (f === 'reg-codigo') { if (!/^\d{6}$/.test(R.codigo)) { R.err = {codigo:'Escribe los 6 dígitos del código'}; render(); $('#r-codigo')?.focus(); } else { R.paso = 'listo'; R.err = {}; render(); scrollTo(0,0); $('#h-ok')?.focus(); } } });
 function render(){
   const h = (location.hash || '#inicio').slice(1);
   let html;
@@ -835,7 +918,7 @@ function render(){
   else html = (V[h] || V.inicio)();
   if (html) $('#app').innerHTML = html;
 }
-addEventListener('hashchange', () => { if (['#inicio','#resultados',''].includes(location.hash)) S.promo = null; render(); const d = (location.hash === '#dudas' && $('#dudas')) || (S.irAgenda && $('#sec-agenda')); S.irAgenda = false;
+addEventListener('hashchange', () => { if (location.hash === '#registro' && S.reg && S.reg.paso === 'listo') Object.assign(S.reg, {paso:'form', err:{}}); if (['#inicio','#resultados',''].includes(location.hash)) S.promo = null; render(); const d = (location.hash === '#dudas' && $('#dudas')) || (S.irAgenda && $('#sec-agenda')); S.irAgenda = false;
   if (d) { d.scrollIntoView({behavior:'instant', block:'start'}); d.setAttribute('tabindex','-1'); d.focus({preventScroll:true}); } else { scrollTo(0,0); ($('#h-ok') || $('#app')).focus?.(); } if (location.hash !== '#cita-cambiar') { S.cdia = null; S.chora = null; } });
 document.addEventListener('click', e => {
   const t = e.target;
@@ -898,7 +981,7 @@ const filaLugar = (c, modo) => modo === 'virtual' ? `<span class="fila">${ic('ca
 const pie = () => { const L = (t, k) => `<li><button class="pl" data-toast="${k || t + ' aún no está en el prototipo'}">${t}</button></li>`;
   return `<footer class="pie2"><div class="wrap pie2-a"><div class="pie2-m"><img src="${IMG.logo}" alt="Mi Médico Manik" width="153" height="40"><p>Encuentra médico, compara precios y agenda sin pagar nada. Médicos con cédula verificada.</p><small>Un servicio de MedicalManik.</small></div>
   <nav class="pie2-c" aria-label="Pacientes"><h2>Pacientes</h2><ul><li><a class="pl" href="#resultados">Buscar médico</a></li><li><button class="pl" data-abrir="esp" aria-haspopup="dialog">Especialidades de la A a la Z</button></li><li><a class="pl" href="#dudas">Preguntas a médicos</a></li>${L('Artículos de salud')}${L('Cómo verificamos las cédulas')}</ul></nav>
-  <nav class="pie2-c" aria-label="Médicos"><h2>Médicos</h2><ul>${L('Únete como médico','El registro para médicos aún no está en el prototipo')}${L('Impulsa Manik','La página de Impulsa Manik para médicos aún no está en el prototipo')}${L('Entrar a mi cuenta')}</ul></nav>
+  <nav class="pie2-c" aria-label="Médicos"><h2>Médicos</h2><ul><li><a class="pl" href="#registro">Únete como médico</a></li>${L('Impulsa Manik','La página de Impulsa Manik para médicos aún no está en el prototipo')}${L('Entrar a mi cuenta')}</ul></nav>
   <nav class="pie2-c" aria-label="Ayuda"><h2>Ayuda</h2><ul>${L('Preguntas frecuentes')}${L('Contacto')}${L('Reportar un perfil')}</ul></nav></div>
   <div class="pie2-b"><div class="wrap"><p class="pie2-aviso">La información de este sitio orienta; no sustituye una consulta. En una emergencia llama al 911.</p><div class="pie2-l"><span>© 2026 MedicalManik</span><button class="pl" data-toast="Aviso de privacidad (ejemplo)">Aviso de privacidad</button><button class="pl" data-toast="Términos y condiciones (ejemplo)">Términos y condiciones</button><span class="pie2-r" aria-label="Redes sociales">${['Instagram','Facebook','TikTok'].map(n=>`<button class="pl" data-toast="Enlace a ${n} (ejemplo)">${n}</button>`).join('')}</span></div></div></div></footer>`; };
 const svcRow = v => `<li><span><b>${v[0]}</b>${v[1] ? `<small>${v[1]}</small>` : ''}</span><b class="svc-p">${v[2]}</b></li>`;
