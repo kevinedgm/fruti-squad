@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="SAM" class="sam-a4-16px">
+  <!-- SAM · A4 · Para 16–24 px -->
+  <defs><clipPath id="sam-a4-u"><path d="M0 0H48V18L0 30Z"/></clipPath><clipPath id="sam-a4-d"><path d="M0 30L48 18V48H0Z"/></clipPath></defs>
+  <g fill="none" stroke-width="10">
+    <path d="M33 13.4C30.9 10.8 27.8 9.6 24 9.6C18.4 9.6 14.6 12.4 14.6 16.8C14.6 26 33.4 21.8 33.4 31.4C33.4 36 29.6 38.8 24 38.8C19.8 38.8 16.8 37.4 14.4 34.8" stroke="currentColor" clip-path="url(#sam-a4-u)" transform="translate(3.6 -2.6)"/>
+    <path d="M33 13.4C30.9 10.8 27.8 9.6 24 9.6C18.4 9.6 14.6 12.4 14.6 16.8C14.6 26 33.4 21.8 33.4 31.4C33.4 36 29.6 38.8 24 38.8C19.8 38.8 16.8 37.4 14.4 34.8" stroke="var(--g-color-brand,#c6f432)" clip-path="url(#sam-a4-d)"/>
+  </g>
+</svg>

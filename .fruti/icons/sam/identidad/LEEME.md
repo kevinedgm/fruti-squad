@@ -30,3 +30,14 @@ Acento provisional: lima `#c6f432` en oscuro, oliva `#4d7c0f` en claro. Nombre p
 | A · Corte | S sólida rebanada en diagonal; la parte de arriba se adelanta sobre el corte | La más fuerte a 16 px y la más «disruptiva». Riesgo: las S cortadas en dos colores existen en marcas deportivas y de energía |
 | B · Matriz | S de módulos en retícula 4 × 5; la fila central se desplaza y un módulo en color es la tarea | Muy tecnológica y animable. A 16 px los módulos se empastan: necesita versión chica con menos módulos |
 | C · Terminal | «s» monoespaciada + cursor de subrayado («s_»); wordmark «sam_» | Habla el idioma de desarrollo y soporte. Primera versión con cursor de bloque se leía «SI»: se cambió a subrayado. Riesgo: la estética de terminal es común en herramientas para desarrolladores |
+
+**Elegida (usuario, 2026-11-13): A · Corte.** «me gusta la A, desarróllala».
+
+## Ronda 3 (`ronda-3/banco.html`, `banco.png`) · desarrollo de Corte
+Símbolo:
+- A1 · Depurada: r2 con desplazamiento 3.2 (antes 2.6); corte de 14°. El corte se lee desde 24 px.
+- A2 · Corte profundo: 25° y más desplazamiento; más rota; la parte de arriba casi sale del cuadro a 128 px.
+- A3 · En marcha: A1 inclinada 9°; más velocidad, más cercana a marcas deportivas.
+- A4 · Para 16–24 px: trazo 10 y curvas abiertas; versión de favicon, complementa a la grande.
+
+Logotipo (con A1): L1 símbolo + nombre (la S se repite) · L2 el símbolo es la S («SAM» con el símbolo como primera letra; falta ajuste óptico de altura y peso frente a «AM») · L3 nombre cortado (el corte de 14° atraviesa «SAM»; el símbolo queda para el icono).
