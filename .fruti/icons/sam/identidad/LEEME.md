@@ -104,3 +104,12 @@ Criterio acordado: si se lee bien en pestaña, icono de PWA y barra superior, se
 | Barra superior, C2 a 28 px + «SAM» | Se lee en claro y oscuro; el contorno de la tarjeta de atrás aguanta a 28 px |
 | Notificación push, silueta de una tinta a 16 px (`notificacion.svg`) | Pasa: tarjeta delantera rellena con palomita calada |
 No verificado: dispositivos reales (la prueba es una simulación en navegador) ni el ajuste del renderizado de favicon en cada navegador.
+
+**CONGELADO (usuario, 2026-11-13): símbolo Tarjetas C2 (grande) + C4 (16–24 px) + silueta de notificación; color Voltaje `#c6f432` con la regla de relleno (ronda 7).** Desde aquí solo se pule; no se rediseña.
+
+## Ronda 10 (`ronda-10/banco.html`, `banco.png`) · tipografía con el símbolo congelado
+Criterio: la misma letra en marca e interfaz; legible a 13–15 px en celular; números claros; que acompañe las esquinas redondas. Folios en JetBrains Mono.
+- A · Instrument Sans: la letra de Grana; compacta; terminales rectos frente a esquinas redondas.
+- B · Figtree: geométrica y abierta; repite las curvas del símbolo; la más amable; más ancha.
+- C · Onest: hecha para interfaces; punto medio entre A y B.
+Sale IBM Plex Sans (ronda 6): angulosa frente al símbolo redondo.
