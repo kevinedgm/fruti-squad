@@ -17,5 +17,5 @@ Todas: `logo_url` (PNG `sam-logo-correo@2x.png`, mostrado a 140 × 40; Gmail y O
 `chip` y `filas` son fragmentos HTML que arma el código (ver `chip()` y `fila()` en `gen.py`); el resto es texto y debe escaparse.
 `muestras.json`: 10 muestras con datos ficticios.
 
-Supuestos por confirmar: vigencia del enlace de invitación (72 h) y de recuperación (1 h); los reportes muestran las 4 actividades más atrasadas.
+Confirmado (usuario, 2026-11-13): vigencia del enlace de invitación 72 h y de recuperación 1 h. Supuesto de diseño: los reportes muestran las 4 actividades más atrasadas.
 No verificado: render en clientes de correo reales (Outlook de escritorio, Gmail en Android).
