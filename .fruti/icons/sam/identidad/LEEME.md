@@ -52,3 +52,12 @@ Corrección: el oliva provisional de las rondas 2 y 3 (`#4d7c0f`) da 4.45:1 sobr
 | Voltaje (lima) | `#c6f432` | `#3f6b0a` | 15.4 · 15.4 · 5.6 · 6.3 | La más disruptiva; en claro se vuelve oliva, casi otro color |
 | Señal (naranja) | `#ff8a3d` | `#b93a06` | 8.4 · 8.4 · 5.1 · 5.7 | Energía; se confunde con «advertencia» en una herramienta de incidencias |
 | Cobalto (azul) | `#7d93ff` | `#3348d1` | 7.1 · 7.1 · 6.3 · 7.0 | El más estable en ambos temas; el azul es el color más común en software |
+
+**Color elegido (usuario, 2026-11-13): Voltaje** (oscuro `#c6f432`, claro `#3f6b0a`).
+
+## Ronda 5 (`ronda-5/banco.html`, `banco.png`) · tipografía
+L3 en Voltaje con tres familias de Google Fonts (OFL), más título, texto y datos de la app:
+- A · Geist 800 (texto Geist, datos Geist Mono): neutra y afilada; lo distintivo lo pone el corte.
+- B · Unbounded 800 (texto Geist): ancha y redondeada, futurista; solo para nombre y títulos grandes.
+- C · Archivo Expanded 800 (texto Archivo, datos JetBrains Mono): expandida, de cartel, industrial.
+Pendiente: con la familia elegida, redibujar la S del símbolo A1 a partir de la S de esa letra para que símbolo y logotipo compartan forma.
