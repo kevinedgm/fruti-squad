@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="SAM" class="sam-c4-16px">
+  <!-- SAM · C4 · Para 16–24 px -->
+  <rect x="4" y="8" width="28" height="22" rx="5.5" fill="currentColor"/>
+  <rect x="15" y="18" width="29" height="23" rx="5.5" fill="var(--g-color-brand,#c6f432)" stroke="currentColor" stroke-width="3"/>
+  <path d="M23.1 29.9L27.5 34.1L36.1 25.1" fill="none" stroke="var(--sam-tinta,#0a0a0b)" stroke-width="4.4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

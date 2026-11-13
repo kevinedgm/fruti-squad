@@ -83,3 +83,12 @@ Regla de color nueva: el lima `#c6f432` no se oscurece. Solo es relleno (botón 
 | C · Tarjetas | la tarjeta de actividad pasa adelante y queda completada (palomita en tinta fija) | tarjetas y palomita son comunes en apps de tareas |
 
 Nombre en Instrument Sans 700 (provisional) con el descriptor «Simple Activity Manager».
+
+**Elegido (usuario, 2026-11-13): C · Tarjetas.** «me gusta la C, desarróllala».
+
+## Ronda 8 (`ronda-8/banco.html`, `banco.png`) · desarrollo de Tarjetas
+- C1 · Depurada: tarjetas 9:7, palomita más firme, la de atrás sólida.
+- C2 · Atrás en contorno: la anterior solo como contorno («ya pasó»); más ligera; en claro pesa menos.
+- C3 · Pila de etapas: tres tarjetas; más flujo, más cargada; se empasta a 16 px.
+- C4 · Para 16–24 px: más desplazamiento y trazos más gruesos; complementa a la grande.
+Logotipo con C1 y C2 en tres arreglos: horizontal (barra de la app, documentos), vertical (portada, pantalla de inicio) y compacto sin descriptor.
