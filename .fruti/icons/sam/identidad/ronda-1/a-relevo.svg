@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="SAM" class="sam-a-relevo">
+  <!-- SAM · relevo: la S partida; el testigo en color pasa de una mitad a la otra -->
+  <g fill="none" stroke-width="5.2" stroke-linecap="round">
+    <path d="M32 12.5C29.4 9.6 26.4 8.4 22.6 8.4C17 8.4 12.6 11.4 12.6 16C12.6 19 14.4 20.8 17 21.9" stroke="currentColor"/>
+    <path d="M31 26.1C33.6 27.2 35.4 29 35.4 32C35.4 36.6 31 39.6 25.4 39.6C21.6 39.6 18.6 38.4 16 35.5" stroke="currentColor"/>
+    <path d="M21.6 23.4L26.4 24.6" stroke="var(--g-color-brand,#c2410c)" stroke-width="6"/>
+  </g>
+</svg>

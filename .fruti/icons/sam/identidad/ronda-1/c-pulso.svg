@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="SAM" class="sam-c-pulso">
+  <!-- SAM · pulso: S en marcha (inclinada) y su remate suelto como aviso en color -->
+  <g transform="skewX(-10) translate(4 0)">
+    <path d="M29.5 12.2C27.4 10 25 9.2 22 9.2C16.6 9.2 12.8 12 12.8 16.4C12.8 26 34.8 21.6 34.8 31.6C34.8 36.6 30.6 39.6 24.6 39.6C20.4 39.6 17.2 38.2 14.6 35.4" fill="none" stroke="currentColor" stroke-width="5.2" stroke-linecap="round"/>
+    <circle cx="35.6" cy="9.4" r="4.4" fill="var(--g-color-brand,#c2410c)"/>
+  </g>
+</svg>
