@@ -1,0 +1,228 @@
+<title>SAM gráficas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: pantalla de SAM. Barra de la app, título, una fila de filtros (periodo) y pestañas; debajo, cifras y gráficas en rejilla que pasa a una columna en celular.
+   Tokens: design system SAM (oscuro primero). Series de datos: paleta categórica validada (azul, naranja) aparte de Voltaje; Voltaje no se usa como dato. */
+:root{--surface:#0a0a0b;--surface-raised:#16161a;--surface-sunken:#1f1f24;--line:#2a2a30;--line-control:#6e6e78;--ink:#f2f2ee;--ink-muted:#a3a3a8;
+  --brand:#c6f432;--on-brand:#0a0a0b;--brand-edge:#c6f432;--focus:#f2f2ee;--danger:#ff8a7a;--warning:#f5b941;
+  --s1:#3987e5;--s2:#d95926;--grid:#2c2c2a;--axis:#383835;--muted-axis:#898781;
+  --sans:"Onest",ui-sans-serif,system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;color-scheme:dark}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]){--surface:#f2f2ee;--surface-raised:#ffffff;--surface-sunken:#e8e8e2;--line:#d6d6d0;--line-control:#7a7a82;--ink:#0a0a0b;--ink-muted:#55555c;--brand-edge:#0a0a0b;--focus:#0a0a0b;--danger:#b42318;--warning:#8a5a00;--s1:#2a78d6;--s2:#eb6834;--grid:#e1e0d9;--axis:#c3c2b7;--muted-axis:#6e6c66;color-scheme:light}}
+:root[data-theme="light"]{--surface:#f2f2ee;--surface-raised:#ffffff;--surface-sunken:#e8e8e2;--line:#d6d6d0;--line-control:#7a7a82;--ink:#0a0a0b;--ink-muted:#55555c;--brand-edge:#0a0a0b;--focus:#0a0a0b;--danger:#b42318;--warning:#8a5a00;--s1:#2a78d6;--s2:#eb6834;--grid:#e1e0d9;--axis:#c3c2b7;--muted-axis:#6e6c66;color-scheme:light}
+*{box-sizing:border-box}
+body{background:var(--surface);color:var(--ink);font:400 16px/1.5 var(--sans)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.bar .wrap{display:flex;align-items:center;gap:8px;padding-block:10px}
+.bar b{font:700 20px/1 var(--sans);letter-spacing:-.01em}
+.nav{display:flex;gap:2px;margin-left:24px;flex-wrap:wrap} .nav a{color:var(--ink-muted);text-decoration:none;font-weight:600;font-size:14px;padding:10px 12px;border-radius:6px;min-height:44px;display:inline-flex;align-items:center}
+.nav a[aria-current="page"]{color:var(--ink);background:var(--surface-sunken)}
+@media (max-width:640px){.nav{display:none}}
+main.wrap{padding-block:24px 56px;display:grid;gap:20px}
+h1{margin:0;font:700 23px/28px var(--sans);letter-spacing:-.01em} @media (min-width:900px){h1{font-size:32px;line-height:36px}}
+.cab{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
+.cab p{margin:4px 0 0;color:var(--ink-muted);font-size:14px}
+.filtros{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.filtros label{font:600 14px var(--sans)}
+select{font:500 15px var(--sans);color:var(--ink);background:var(--surface-raised);border:0;box-shadow:inset 0 0 0 1.5px var(--line-control);border-radius:6px;min-height:44px;padding:0 36px 0 12px;appearance:none;
+  background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line)}
+.tabs button{font:600 15px var(--sans);color:var(--ink-muted);background:none;border:0;padding:12px 14px;min-height:44px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px} @media (max-width:900px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tiles.t3{grid-template-columns:repeat(3,minmax(0,1fr))} @media (max-width:700px){.tiles.t3{grid-template-columns:1fr}}
+.tile{background:var(--surface-raised);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:2px;min-width:0}
+.tile .l{font-size:14px;color:var(--ink-muted)} .tile .v{font:600 30px/36px var(--sans)} .tile .d{font-size:13px;color:var(--ink-muted)}
+.tile .st{display:inline-flex;gap:6px;align-items:center;font-size:13px;font-weight:600;color:var(--danger)}
+.grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:12px} @media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--surface-raised);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0;display:grid;gap:10px;align-content:start}
+.card h2{margin:0;font:600 18px/24px var(--sans)} .card .sub{margin:0;font-size:14px;color:var(--ink-muted)}
+.leyenda{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--ink)} .leyenda span{display:inline-flex;gap:8px;align-items:center}
+.key{width:16px;height:2px;border-radius:2px;display:inline-block}
+.chart{position:relative;width:100%} .chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart:focus-visible{outline-offset:4px}
+.tick{font:500 12px var(--sans);fill:var(--muted-axis);font-variant-numeric:tabular-nums}
+.lbl{font:600 12px var(--sans);fill:var(--ink)} .lbl2{font:500 13px var(--sans);fill:var(--ink)}
+.tip{position:absolute;pointer-events:none;background:var(--surface);color:var(--ink);border:1px solid var(--line-control);border-radius:6px;padding:8px 10px;font-size:13px;min-width:140px;box-shadow:0 2px 8px rgba(0,0,0,.25);z-index:3}
+.tip .t{color:var(--ink-muted);margin-bottom:4px} .tip .r{display:flex;gap:8px;align-items:center;justify-content:space-between} .tip .r b{font-weight:600;font-variant-numeric:tabular-nums}
+.tip .r span{display:inline-flex;gap:6px;align-items:center;color:var(--ink-muted)}
+details.tabla summary{cursor:pointer;font-size:14px;font-weight:600;min-height:32px;display:flex;align-items:center}
+.tw{overflow-x:auto} table{border-collapse:collapse;font-size:14px;width:100%} th,td{padding:6px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap} td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+th{color:var(--ink-muted);font-weight:600;font-size:12px}
+.seg{display:flex;gap:2px;height:28px} .seg div{border-radius:4px;display:flex;align-items:center;padding:0 8px;font:600 13px var(--sans);white-space:nowrap;overflow:hidden;min-width:0}
+.nota{font-size:14px;color:var(--ink-muted);margin:0}
+.atr{list-style:none;margin:0;padding:0;display:grid}
+.atr li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:10px 0;border-bottom:1px solid var(--line)} .atr li:last-child{border-bottom:0}
+.atr a.ir{color:inherit;text-decoration:none;min-width:0} .atr a.ir:hover b{text-decoration:underline;text-underline-offset:3px}
+.atr .fol{font:500 12px var(--mono);color:var(--ink-muted)} .atr b{font-weight:600;font-size:15px;line-height:1.3} .atr .dias{font-weight:600;color:var(--danger);font-size:14px;align-self:center;font-variant-numeric:tabular-nums}
+.atr .quien{font-size:13px;color:var(--ink-muted)}
+[hidden]{display:none!important}
+.aviso{font-size:14px;color:var(--ink-muted);border:1px dashed var(--line-control);border-radius:10px;padding:12px 14px;margin:0}
+</style>
+
+<header class="bar"><div class="wrap">
+  <svg viewBox="0 0 48 48" width="28" height="28" aria-hidden="true"><rect x="6.3" y="10.3" width="24.4" height="18.4" rx="4" fill="none" stroke="currentColor" stroke-width="2.6"/><rect x="16" y="18" width="27" height="21" rx="5" fill="var(--brand)" stroke="currentColor" stroke-width="2.6"/><path d="M23.1 28.9L27.5 33.1L36.1 24.1" fill="none" stroke="var(--on-brand)" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  <b>SAM</b>
+  <nav class="nav" aria-label="Principal"><a href="#">Mis actividades</a><a href="#">Plantillas</a><a href="#">Documentos</a><a href="#" aria-current="page">Gráficas</a></nav>
+</div></header>
+
+<main class="wrap">
+  <div class="cab">
+    <div><h1>Gráficas</h1><p>Datos de ejemplo, ficticios. Actualizado hoy, 13 nov 2026, 09:00.</p></div>
+    <div class="filtros"><label for="periodo">Periodo</label>
+      <select id="periodo"><option value="4">Últimas 4 semanas</option><option value="8">Últimas 8 semanas</option><option value="12" selected>Últimas 12 semanas</option></select></div>
+  </div>
+
+  <div class="tabs" role="tablist" aria-label="Vistas">
+    <button role="tab" id="t-salud" aria-controls="p-salud" aria-selected="true">Salud del trabajo</button>
+    <button role="tab" id="t-yo" aria-controls="p-yo" aria-selected="false" tabindex="-1">Mi rendimiento</button>
+  </div>
+
+  <section id="p-salud" role="tabpanel" aria-labelledby="t-salud" style="display:grid;gap:12px">
+    <div class="tiles" id="tiles-salud"></div>
+    <div class="grid">
+      <article class="card"><h2>Entradas y cierres por semana</h2><p class="sub">Si las entradas superan a los cierres, el pendiente crece.</p>
+        <div class="leyenda"><span><i class="key" style="background:var(--s1)"></i>Entraron</span><span><i class="key" style="background:var(--s2)"></i>Se cerraron</span></div>
+        <div class="chart" id="c-flujo"></div><details class="tabla"><summary>Ver como tabla</summary><div class="tw" id="tb-flujo"></div></details></article>
+      <article class="card"><h2>Dónde se atora el trabajo</h2><p class="sub">Actividades abiertas por etapa, hoy.</p>
+        <div class="chart" id="c-etapas"></div><details class="tabla"><summary>Ver como tabla</summary><div class="tw" id="tb-etapas"></div></details></article>
+    </div>
+    <article class="card"><h2>Las más atrasadas</h2><p class="sub">Hoy. Tocar una lleva a su detalle.</p><ul class="atr" id="atr"></ul></article>
+  </section>
+
+  <section id="p-yo" role="tabpanel" aria-labelledby="t-yo" hidden style="display:grid;gap:12px">
+    <p class="aviso">Aquí ves tu avance junto al promedio del equipo. Nadie ve el rendimiento de otra persona con su nombre.</p>
+    <div class="tiles t3" id="tiles-yo"></div>
+    <div class="grid">
+      <article class="card"><h2>Mis cierres por semana</h2><p class="sub">Comparados con el promedio por persona del equipo.</p>
+        <div class="leyenda"><span><i class="key" style="background:var(--s1)"></i>Yo</span><span><i class="key" style="background:var(--s2)"></i>Promedio del equipo</span></div>
+        <div class="chart" id="c-yo"></div><details class="tabla"><summary>Ver como tabla</summary><div class="tw" id="tb-yo"></div></details></article>
+      <article class="card"><h2>¿Cerré a tiempo?</h2><p class="sub" id="seg-sub"></p>
+        <div class="seg" id="seg" role="img"></div>
+        <div class="leyenda"><span><i class="key" style="background:var(--s1);height:10px;width:10px;border-radius:2px"></i>A tiempo</span><span><i class="key" style="background:var(--s2);height:10px;width:10px;border-radius:2px"></i>Tarde</span></div>
+        <p class="nota" id="seg-nota"></p></article>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  // ---- Datos de ejemplo (ficticios), 12 semanas que terminan el 13 nov 2026 ----
+  const fin = new Date(2026, 10, 13);
+  const SEM = Array.from({length:12}, (_, i) => { const d = new Date(fin); d.setDate(d.getDate() - (11 - i) * 7 - 4); return d; });
+  const fmt = d => d.getDate() + ' ' + ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'][d.getMonth()];
+  const ENT = [14,16,12,18,15,17,20,16,19,15,18,17], CER = [12,15,13,14,16,15,16,18,17,16,19,18];
+  const YO = [2,3,1,4,3,2,4,3,3,2,4,3], YOT = [2,3,1,3,3,2,3,3,3,2,4,3]; // cierres míos y cuántos a tiempo
+  const PERSONAS = 6;
+  const ETAPAS = [['Nuevo',11],['En curso',15],['Revisión',9],['Esperando a otra área',7]];
+  const ATR = [['INC-2033','Ticket de WhatsApp sin evidencia adjunta','Óscar Ruiz',12],['TAR-0179','Actualizar plantilla de alta de proveedores','Laura Méndez',8],
+    ['INC-2036','Error al adjuntar PDF mayores de 10 MB','Daniela Ortiz',5],['TAR-0184','Documentar el flujo de cierre de incidencias para el equipo de soporte técnico nocturno','Óscar Ruiz',3]];
+  const sum = a => a.reduce((x, y) => x + y, 0), nf = n => n.toLocaleString('es-MX', {maximumFractionDigits:1});
+  const el = (t, a, ...k) => { const e = document.createElement(t); for (const [x, v] of Object.entries(a || {})) { if (x === 'text') e.textContent = v; else e.setAttribute(x, v); } k.forEach(c => c && e.append(c)); return e; };
+  const NS = 'http://www.w3.org/2000/svg', sv = (t, a) => { const e = document.createElementNS(NS, t); for (const [x, v] of Object.entries(a)) e.setAttribute(x, v); return e; };
+
+  // ---- Gráfica de líneas con cruz, tooltip y teclado ----
+  function lineas(cont, labels, series, nombre) {
+    cont.textContent = '';
+    const W = Math.max(280, cont.clientWidth || 640), H = W < 480 ? 220 : 260, m = {l:36, r:16, t:12, b:28}, iw = W - m.l - m.r, ih = H - m.t - m.b;
+    const max = Math.max(...series.flatMap(s => s.v)), paso0 = max <= 6 ? 1 : 5, top = Math.ceil(max / paso0) * paso0 || 5, nt = top / paso0 <= 6 ? top / paso0 : 4;
+    const x = i => m.l + (labels.length === 1 ? iw / 2 : i * iw / (labels.length - 1)), y = v => m.t + ih - v / top * ih;
+    const svg = sv('svg', {viewBox:`0 0 ${W} ${H}`, role:'img', 'aria-label':nombre});
+    for (let k = 0; k <= nt; k++) { const v = top * k / nt, yy = y(v);
+      svg.append(sv('line', {x1:m.l, x2:W - m.r, y1:yy, y2:yy, stroke:k ? 'var(--grid)' : 'var(--axis)', 'stroke-width':1}));
+      const t = sv('text', {x:m.l - 8, y:yy + 4, 'text-anchor':'end', class:'tick'}); t.textContent = nf(v); svg.append(t); }
+    const paso = Math.max(1, Math.ceil(labels.length / Math.max(2, Math.floor(iw / 64))));
+    labels.forEach((l, i) => { if (i % paso && i !== labels.length - 1) return; const t = sv('text', {x:x(i), y:H - 8, 'text-anchor':'middle', class:'tick'}); t.textContent = l; svg.append(t); });
+    series.forEach(s => {
+      svg.append(sv('path', {d:s.v.map((v, i) => (i ? 'L' : 'M') + x(i) + ' ' + y(v)).join(''), fill:'none', stroke:s.c, 'stroke-width':2, 'stroke-linejoin':'round', 'stroke-linecap':'round'}));
+      const i = s.v.length - 1; svg.append(sv('circle', {cx:x(i), cy:y(s.v[i]), r:4, fill:s.c, stroke:'var(--surface-raised)', 'stroke-width':2}));
+    });
+    const cruz = sv('line', {y1:m.t, y2:m.t + ih, stroke:'var(--muted-axis)', 'stroke-width':1, visibility:'hidden'}); svg.append(cruz);
+    const puntos = series.map(s => { const c = sv('circle', {r:4, fill:s.c, stroke:'var(--surface-raised)', 'stroke-width':2, visibility:'hidden'}); svg.append(c); return c; });
+    const hit = sv('rect', {x:m.l - 10, y:0, width:iw + 20, height:H, fill:'transparent'}); svg.append(hit);
+    cont.append(svg);
+    const tip = el('div', {class:'tip', hidden:''}); cont.append(tip);
+    let idx = -1;
+    function muestra(i) {
+      idx = Math.max(0, Math.min(labels.length - 1, i)); const px = x(idx);
+      cruz.setAttribute('x1', px); cruz.setAttribute('x2', px); cruz.setAttribute('visibility', 'visible');
+      puntos.forEach((p, k) => { p.setAttribute('cx', px); p.setAttribute('cy', y(series[k].v[idx])); p.setAttribute('visibility', 'visible'); });
+      tip.textContent = ''; tip.append(el('div', {class:'t', text:'Semana del ' + labels[idx]}));
+      series.forEach(s => tip.append(el('div', {class:'r'}, el('span', {}, el('i', {class:'key', style:'background:' + s.c}), document.createTextNode(s.n)), el('b', {text:nf(s.v[idx])}))));
+      tip.hidden = false; const r = cont.getBoundingClientRect(), sx = r.width / W, left = px * sx;
+      tip.style.left = Math.min(Math.max(0, left + 12), r.width - tip.offsetWidth) + 'px'; tip.style.top = '8px';
+      if (left + 12 + tip.offsetWidth > r.width) tip.style.left = Math.max(0, left - tip.offsetWidth - 12) + 'px';
+    }
+    const oculta = () => { cruz.setAttribute('visibility', 'hidden'); puntos.forEach(p => p.setAttribute('visibility', 'hidden')); tip.hidden = true; };
+    hit.addEventListener('pointermove', e => { const r = svg.getBoundingClientRect(), vx = (e.clientX - r.left) * W / r.width;
+      muestra(Math.round((vx - m.l) / (iw / Math.max(1, labels.length - 1)))); });
+    hit.addEventListener('pointerleave', oculta);
+    cont.tabIndex = 0; cont.setAttribute('aria-label', nombre + '. Usa las flechas para recorrer las semanas.');
+    cont.onkeydown = e => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); muestra(idx < 0 ? labels.length - 1 : idx + (e.key === 'ArrowRight' ? 1 : -1)); } if (e.key === 'Escape') oculta(); };
+    cont.onblur = oculta;
+  }
+  // ---- Barras horizontales (una serie) con valor en la punta ----
+  function barras(cont, datos, nombre) {
+    cont.textContent = '';
+    const W = Math.max(260, cont.clientWidth || 460), fila = 44, H = datos.length * fila + 8, lab = 0, max = Math.max(...datos.map(d => d[1]));
+    const svg = sv('svg', {viewBox:`0 0 ${W} ${H}`, role:'img', 'aria-label':nombre});
+    const iw = W - 40;
+    datos.forEach(([n, v], i) => {
+      const y0 = i * fila + 4, w = Math.max(4, v / max * iw), h = 20, by = y0 + 20;
+      const t = sv('text', {x:0, y:y0 + 13, class:'lbl2'}); t.textContent = n; svg.append(t);
+      const r = 4; svg.append(sv('path', {d:`M0 ${by}H${w - r}Q${w} ${by} ${w} ${by + r}V${by + h - r}Q${w} ${by + h} ${w - r} ${by + h}H0Z`, fill:'var(--s1)'}));
+      const vt = sv('text', {x:w + 8, y:by + 15, class:'lbl'}); vt.textContent = v; svg.append(vt);
+    });
+    cont.append(svg);
+  }
+  function tabla(cont, cab, filas) {
+    cont.textContent = ''; const t = el('table'), tr = el('tr');
+    cab.forEach((c, i) => tr.append(el('th', {text:c, class:i ? 'n' : ''}))); t.append(el('thead', {}, tr));
+    const tb = el('tbody'); filas.forEach(f => { const r = el('tr'); f.forEach((c, i) => r.append(el('td', {text:String(c), class:i ? 'n' : ''}))); tb.append(r); }); t.append(tb); cont.append(t);
+  }
+  function tile(l, v, d, extra) { return el('div', {class:'tile'}, el('span', {class:'l', text:l}), el('span', {class:'v', text:v}), extra || null, d ? el('span', {class:'d', text:d}) : null); }
+
+  function pinta() {
+    const n = +document.getElementById('periodo').value, a = 12 - n;
+    const lab = SEM.slice(a).map(fmt), ent = ENT.slice(a), cer = CER.slice(a);
+    const prevC = a - n >= 0 ? sum(CER.slice(a - n, a)) : null, cerT = sum(cer);
+    // Salud
+    const ts = document.getElementById('tiles-salud'); ts.textContent = '';
+    const st = el('span', {class:'st'}, el('span', {'aria-hidden':'true', text:'✕'}), document.createTextNode('Requieren atención'));
+    ts.append(tile('Abiertas hoy', '42', 'En 4 etapas'), tile('Atrasadas hoy', '7', '2 más que ayer', st), tile('Vencen esta semana', '9', 'Hasta el domingo 15 nov'),
+      tile('Cerradas en el periodo', String(cerT), prevC === null ? 'Sin periodo anterior para comparar' : (cerT >= prevC ? '+' : '−') + Math.abs(cerT - prevC) + ' frente a las ' + n + ' semanas anteriores'));
+    lineas(document.getElementById('c-flujo'), lab, [{n:'Entraron', v:ent, c:'var(--s1)'}, {n:'Se cerraron', v:cer, c:'var(--s2)'}], 'Entradas y cierres por semana');
+    tabla(document.getElementById('tb-flujo'), ['Semana del', 'Entraron', 'Se cerraron'], lab.map((l, i) => [l, ent[i], cer[i]]));
+    // Yo
+    const yo = YO.slice(a), yot = YOT.slice(a), prom = cer.map(v => +(v / PERSONAS).toFixed(1));
+    const ty = document.getElementById('tiles-yo'); ty.textContent = '';
+    const pYo = sum(yot) / sum(yo) * 100, pEq = 78;
+    ty.append(tile('Cerré', String(sum(yo)), 'El promedio por persona fue ' + nf(sum(prom))), tile('A tiempo', Math.round(pYo) + ' %', 'El equipo: ' + pEq + ' %'),
+      tile('Tiempo para resolver (mediana)', '2.4 días', 'El equipo: 3.1 días'));
+    lineas(document.getElementById('c-yo'), lab, [{n:'Yo', v:yo, c:'var(--s1)'}, {n:'Promedio del equipo', v:prom, c:'var(--s2)'}], 'Mis cierres por semana y promedio del equipo');
+    tabla(document.getElementById('tb-yo'), ['Semana del', 'Yo', 'Promedio del equipo'], lab.map((l, i) => [l, yo[i], nf(prom[i])]));
+    const at = sum(yot), ta = sum(yo) - at, seg = document.getElementById('seg'); seg.textContent = '';
+    const pa = Math.round(at / sum(yo) * 100);
+    seg.append(el('div', {style:`flex:${at};background:var(--s1);color:#ffffff`, text: pa + ' %'}));
+    if (ta) seg.append(el('div', {style:`flex:${ta};background:var(--s2);color:#0b0b0b`, text: ta / sum(yo) > .12 ? (100 - pa) + ' %' : ''}));
+    seg.setAttribute('aria-label', `A tiempo: ${at} de ${sum(yo)} (${pa} %). Tarde: ${ta}.`);
+    document.getElementById('seg-sub').textContent = `${sum(yo)} actividades cerradas en las últimas ${n} semanas.`;
+    document.getElementById('seg-nota').textContent = `${at} a tiempo y ${ta} tarde.`;
+  }
+  barras(document.getElementById('c-etapas'), ETAPAS, 'Actividades abiertas por etapa');
+  tabla(document.getElementById('tb-etapas'), ['Etapa', 'Abiertas'], ETAPAS);
+  const atr = document.getElementById('atr');
+  ATR.forEach(([f, t, q, d]) => atr.append(el('li', {}, el('a', {href:'#', class:'ir'}, el('span', {class:'fol', text:f}), el('br'), el('b', {text:t}), el('br'), el('span', {class:'quien', text:q})), el('span', {class:'dias', text:d + ' días'}))));
+  document.getElementById('periodo').addEventListener('change', pinta);
+  // Pestañas
+  const tabs = [...document.querySelectorAll('[role=tab]')];
+  function elige(t) { tabs.forEach(x => { const on = x === t; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute('aria-controls')).hidden = !on; }); pinta(); }
+  tabs.forEach((t, i) => { t.addEventListener('click', () => elige(t)); t.addEventListener('keydown', e => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { const n = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); elige(n); } }); });
+  pinta();
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { pinta(); barras(document.getElementById('c-etapas'), ETAPAS, 'Actividades abiertas por etapa'); }, 150); });
+})();
+</script>
