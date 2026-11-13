@@ -23,7 +23,7 @@ def home(fondo, forma):
     return f'<div class="home" style="background:{fondo}"><div class="g">{ic}{sam}</div><p>{"Android (máscara circular)" if forma=="circulo" else "iOS"}</p></div>'
 def barra(fondo, tinta, linea, sec):
     return (f'<div class="tel" style="background:{fondo};color:{tinta};border-color:{linea}"><div class="top" style="border-color:{linea}">'
-            f'{at(c2, 28)}<b class="wm">SAM</b><span class="sp"></span><span style="color:{sec};font-size:13px">Kevin R.</span></div>'
+            f'{at(c2, 28)}<b class="wm">SAM</b><span class="sp"></span><span style="color:{sec};font-size:13px">Laura M.</span></div>'
             f'<h3>Mis actividades</h3><p style="color:{sec};margin:0">3 abiertas · 1 vence hoy</p></div>')
 def notif(fondo, tinta, sec):
     return (f'<div class="nt" style="background:{fondo};color:{tinta}"><div class="nh" style="color:{sec}">{sil.replace("{z}", "16")}<span>SAM · ahora</span></div>'

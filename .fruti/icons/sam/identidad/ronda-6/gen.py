@@ -19,7 +19,7 @@ def tel(fam, mono, fondo, sup, tinta, sec, ac, txtbtn, linea):
         f'<span class="pie"><span class="chip" style="{"background:"+ac+";color:"+txtbtn if hot else "border:1px solid "+linea+";color:"+tinta}">{e}</span><span style="color:{sec}">Vence {v}</span></span></li>'
         for f, t, e, v, hot in ACT)
     return (f'<div class="tel" style="background:{fondo};color:{tinta};font-family:\'{fam}\';border-color:{linea}">'
-            f'<div class="top">{cortado(fam, tinta, ac, 28)}<span class="av" style="border-color:{linea}">KR</span></div>'
+            f'<div class="top">{cortado(fam, tinta, ac, 28)}<span class="av" style="border-color:{linea}">LM</span></div>'
             f'<h3>Mis actividades</h3><p class="res" style="color:{sec}">3 abiertas · 1 vence hoy</p><ul>{items}</ul>'
             f'<button style="background:{ac};color:{txtbtn}">Nueva actividad</button></div>')
 secs = ''
