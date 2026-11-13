@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="SAM" class="sam-b-ruta">
+  <!-- SAM · ruta: la S es el camino de la actividad; la parada en lima es donde va -->
+  <path d="M33 11.5C30.8 9.6 27.8 8.6 24.4 8.6C18.6 8.6 14.6 11.6 14.6 16.2C14.6 25.6 33.4 21.8 33.4 31.6C33.4 36.4 29.4 39.4 23.6 39.4C20.2 39.4 17.2 38.4 15 36.5" fill="none" stroke="currentColor" stroke-width="4.6" stroke-linecap="round"/>
+  <circle cx="24" cy="24" r="4.2" fill="currentColor"/>
+  <circle cx="35.4" cy="11.4" r="5.6" fill="var(--g-color-brand,#c6f432)" stroke="currentColor" stroke-width="2.6"/>
+</svg>

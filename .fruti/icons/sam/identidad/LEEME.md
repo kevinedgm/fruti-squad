@@ -70,3 +70,16 @@ Criterio: la marca usa la misma letra que la interfaz; legible a 13–15 px en c
 - A · Instrument Sans (datos JetBrains Mono): la letra de Grana; misma voz que la librería; compacta.
 - B · Figtree (datos JetBrains Mono): geométrica y abierta; la más «simple»; algo menos densa.
 - C · IBM Plex Sans (datos IBM Plex Mono): técnica; distingue I, l y 1; más seria.
+
+**Replanteo (usuario, 2026-11-13): «creo que hay que replantear el logo y colores».** Motivos elegidos: el logo cortado es «demasiado agresivo» y «no dice actividad»; del color, falla «el oliva del modo claro». Quedan sin efecto A1 + L3 y el valor claro `#3f6b0a`.
+
+## Ronda 7 (`ronda-7/banco.html`, `banco.png`) · replanteo
+Regla de color nueva: el lima `#c6f432` no se oscurece. Solo es relleno (botón principal, estado activo, acento del símbolo) y siempre toca tinta (texto oscuro encima; contorno de tinta en claro). En claro, texto, enlaces y foco van en tinta. Lima sobre claro mide 1.1:1, por eso nunca va solo ni como texto.
+
+| Símbolo | Idea | Riesgo |
+|---|---|---|
+| A · Etapas | dos etapas cumplidas (tinta) + la actividad en curso (píldora lima) | puede leerse como «escribiendo…» o carga |
+| B · Ruta | la S es el camino, trazo redondo; la parada en lima es la actividad | a 16 px la parada intermedia se pierde |
+| C · Tarjetas | la tarjeta de actividad pasa adelante y queda completada (palomita en tinta fija) | tarjetas y palomita son comunes en apps de tareas |
+
+Nombre en Instrument Sans 700 (provisional) con el descriptor «Simple Activity Manager».

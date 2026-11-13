@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="SAM" class="sam-a-etapas">
+  <!-- SAM · etapas: dos cumplidas y la actividad en curso -->
+  <circle cx="9" cy="24" r="5.5" fill="currentColor"/>
+  <circle cx="22" cy="24" r="5.5" fill="currentColor"/>
+  <rect x="30" y="17.5" width="15" height="13" rx="6.5" fill="var(--g-color-brand,#c6f432)" stroke="currentColor" stroke-width="2.6"/>
+</svg>

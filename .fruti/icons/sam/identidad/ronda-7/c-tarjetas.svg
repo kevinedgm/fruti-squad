@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="SAM" class="sam-c-tarjetas">
+  <!-- SAM · tarjetas: la actividad pasa adelante y se completa; detrás queda la anterior -->
+  <rect x="6" y="9" width="26" height="22" rx="5" fill="currentColor"/>
+  <rect x="16" y="17" width="26" height="22" rx="5" fill="var(--g-color-brand,#c6f432)" stroke="currentColor" stroke-width="2.6"/>
+  <path d="M22.5 28.2L26.5 32L35 23.8" fill="none" stroke="var(--sam-tinta,#0a0a0b)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
