@@ -113,3 +113,8 @@ Criterio: la misma letra en marca e interfaz; legible a 13–15 px en celular; n
 - B · Figtree: geométrica y abierta; repite las curvas del símbolo; la más amable; más ancha.
 - C · Onest: hecha para interfaces; punto medio entre A y B.
 Sale IBM Plex Sans (ronda 6): angulosa frente al símbolo redondo.
+
+**Tipografía elegida (usuario, 2026-11-13): C · Onest.**
+
+## Final (`../final/`)
+Símbolo, logotipos (horizontal, vertical, compacto; con variables y con colores fijos), favicon, iconos de PWA (incluido maskable), icono de notificación, tokens `sam-marca.css` y fragmento de manifest. Guía en `../final/LEEME.md`.

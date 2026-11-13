@@ -1,0 +1,12 @@
+/* SAM · Simple Activity Manager · marca (congelada 2026-11-13) */
+/* Regla del lima: es RELLENO (botón principal, estado activo, acento del símbolo) y siempre toca tinta.
+   Nunca es texto ni se oscurece. En tema claro lleva contorno de tinta; texto, enlaces y foco van en tinta. */
+:root {
+  --g-color-brand: #c6f432;          /* Voltaje: tiñe Grana y el símbolo */
+  --g-color-on-brand: #0a0a0b;      /* texto sobre lima: 15.4:1 */
+  --sam-tinta: #0a0a0b;             /* palomita del símbolo y texto sobre lima */
+  --sam-noche: #0a0a0b;             /* fondo oscuro; lima sobre noche: 15.4:1 */
+  --sam-papel: #f2f2ee;             /* fondo claro; tinta sobre papel: 17.6:1. Lima sobre papel: 1.1:1, solo con contorno */
+  --sam-font: "Onest", ui-sans-serif, system-ui, sans-serif;           /* marca e interfaz: 400, 500, 600, 700 */
+  --sam-font-mono: "JetBrains Mono", ui-monospace, monospace;          /* folios, horas y datos */
+}
