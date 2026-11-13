@@ -60,3 +60,5 @@ Publicado: https://claude.ai/artifact/EfXbngHaw3pqZ8EbN8egFM
 - Se quita el bloque «Su artículo / Sus artículos» de la cabecera del perfil (y su CSS). Los artículos siguen en la portada («Artículos de médicos»); los datos `arts` se conservan sin mostrarse.
 
 - Promociones en resultados: la etiqueta «Patrocinado» pasa a «Promoción especial» (texto visible y aria-label).
+
+- Promociones: el médico captura título, descripción, vigencia y términos y condiciones. Se quita el campo de precio (pr/normal) y la fila «Precio» del detalle. «Condiciones» pasa a «Términos y condiciones» en bloque de texto a lo ancho. Al agendar con promoción, el resumen dice «Con promoción: <título>» en lugar de un precio.
