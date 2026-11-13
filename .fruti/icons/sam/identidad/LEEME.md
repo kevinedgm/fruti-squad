@@ -61,3 +61,12 @@ L3 en Voltaje con tres familias de Google Fonts (OFL), más título, texto y dat
 - B · Unbounded 800 (texto Geist): ancha y redondeada, futurista; solo para nombre y títulos grandes.
 - C · Archivo Expanded 800 (texto Archivo, datos JetBrains Mono): expandida, de cartel, industrial.
 Pendiente: con la familia elegida, redibujar la S del símbolo A1 a partir de la S de esa letra para que símbolo y logotipo compartan forma.
+
+**Ronda 5 rechazada (usuario, 2026-11-13):** «no me gusta ninguna, debe estar pensada en el contexto de la aplicación; SAM es Simple Activity Manager».
+
+## Ronda 6 (`ronda-6/banco.html`, `banco.png`) · tipografía desde la app
+Hecho nuevo: SAM = **Simple Activity Manager** (se usa como descriptor bajo el logotipo).
+Criterio: la marca usa la misma letra que la interfaz; legible a 13–15 px en celular; números claros para folios, horas y fechas. Cada opción se muestra en una pantalla «Mis actividades» (oscuro y claro) con datos ficticios.
+- A · Instrument Sans (datos JetBrains Mono): la letra de Grana; misma voz que la librería; compacta.
+- B · Figtree (datos JetBrains Mono): geométrica y abierta; la más «simple»; algo menos densa.
+- C · IBM Plex Sans (datos IBM Plex Mono): técnica; distingue I, l y 1; más seria.
