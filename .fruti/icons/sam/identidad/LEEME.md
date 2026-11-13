@@ -41,3 +41,14 @@ Símbolo:
 - A4 · Para 16–24 px: trazo 10 y curvas abiertas; versión de favicon, complementa a la grande.
 
 Logotipo (con A1): L1 símbolo + nombre (la S se repite) · L2 el símbolo es la S («SAM» con el símbolo como primera letra; falta ajuste óptico de altura y peso frente a «AM») · L3 nombre cortado (el corte de 14° atraviesa «SAM»; el símbolo queda para el icono).
+
+**Elegidos (usuario, 2026-11-13): símbolo A1 + logotipo L3 (nombre cortado).** Por defecto de la ronda 3 (recomendación de Claude, sin objeción): A4 como versión de 16–24 px; pendiente de confirmar.
+
+## Ronda 4 (`ronda-4/banco.html`, `banco.png`) · color
+Corrección: el oliva provisional de las rondas 2 y 3 (`#4d7c0f`) da 4.45:1 sobre el claro `#f2f2ee`: no pasa texto AA. Aquí se usa `#3f6b0a`.
+
+| Color | Oscuro | Claro | Contraste (acento/oscuro · texto en botón · acento/claro · blanco en botón) | Lectura |
+|---|---|---|---|---|
+| Voltaje (lima) | `#c6f432` | `#3f6b0a` | 15.4 · 15.4 · 5.6 · 6.3 | La más disruptiva; en claro se vuelve oliva, casi otro color |
+| Señal (naranja) | `#ff8a3d` | `#b93a06` | 8.4 · 8.4 · 5.1 · 5.7 | Energía; se confunde con «advertencia» en una herramienta de incidencias |
+| Cobalto (azul) | `#7d93ff` | `#3348d1` | 7.1 · 7.1 · 6.3 · 7.0 | El más estable en ambos temas; el azul es el color más común en software |
