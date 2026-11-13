@@ -92,3 +92,15 @@ Nombre en Instrument Sans 700 (provisional) con el descriptor «Simple Activity 
 - C3 · Pila de etapas: tres tarjetas; más flujo, más cargada; se empasta a 16 px.
 - C4 · Para 16–24 px: más desplazamiento y trazos más gruesos; complementa a la grande.
 Logotipo con C1 y C2 en tres arreglos: horizontal (barra de la app, documentos), vertical (portada, pantalla de inicio) y compacto sin descriptor.
+
+**Elegido (usuario, 2026-11-13): C2 (tamaños grandes) + C4 (16–24 px).**
+
+## Ronda 9 (`ronda-9/banco.html`, `banco.png`) · prueba en contexto
+Criterio acordado: si se lee bien en pestaña, icono de PWA y barra superior, se congela.
+| Contexto | Resultado (observación de Claude en el render, a 1x y ampliado a 3x) |
+|---|---|
+| Pestaña, C4 a 16 px, claro y oscuro | Se distinguen dos tarjetas y la palomita; el lima identifica la pestaña entre las otras |
+| Icono PWA, C2 a 40 px en icono de 56, Android (círculo) e iOS | El símbolo queda dentro de la zona segura; la máscara circular no lo recorta |
+| Barra superior, C2 a 28 px + «SAM» | Se lee en claro y oscuro; el contorno de la tarjeta de atrás aguanta a 28 px |
+| Notificación push, silueta de una tinta a 16 px (`notificacion.svg`) | Pasa: tarjeta delantera rellena con palomita calada |
+No verificado: dispositivos reales (la prueba es una simulación en navegador) ni el ajuste del renderizado de favicon en cada navegador.
