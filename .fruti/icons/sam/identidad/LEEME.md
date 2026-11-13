@@ -19,3 +19,14 @@ Encargo del usuario (2026-11-13): nueva identidad de marca para SAM rediseñado 
 | C · Pulso | S continua inclinada; el remate superior se suelta como aviso en color | La más «ágil» a primera vista. Riesgo: el punto en la esquina se confunde con el globo de notificación de cualquier app |
 
 Pendiente de la ronda: el lockup «S + SAM» repite la S; se resuelve en la ronda del logotipo. Color y tipografía son provisionales.
+
+**Ronda 1 rechazada (usuario, 2026-11-13):** «no me gusta, quiero una propuesta más moderna, tecnológica, disruptiva».
+
+## Ronda 2 (`ronda-2/banco.html`, `banco.png`) · conceptos nuevos, presentación en oscuro
+Acento provisional: lima `#c6f432` en oscuro, oliva `#4d7c0f` en claro. Nombre provisional en Geist 700 (A, B) y JetBrains Mono 700 (C).
+
+| Concepto | Idea | Lectura (Claude) |
+|---|---|---|
+| A · Corte | S sólida rebanada en diagonal; la parte de arriba se adelanta sobre el corte | La más fuerte a 16 px y la más «disruptiva». Riesgo: las S cortadas en dos colores existen en marcas deportivas y de energía |
+| B · Matriz | S de módulos en retícula 4 × 5; la fila central se desplaza y un módulo en color es la tarea | Muy tecnológica y animable. A 16 px los módulos se empastan: necesita versión chica con menos módulos |
+| C · Terminal | «s» monoespaciada + cursor de subrayado («s_»); wordmark «sam_» | Habla el idioma de desarrollo y soporte. Primera versión con cursor de bloque se leía «SI»: se cambió a subrayado. Riesgo: la estética de terminal es común en herramientas para desarrolladores |

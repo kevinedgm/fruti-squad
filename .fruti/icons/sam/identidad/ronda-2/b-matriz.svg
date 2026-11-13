@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="SAM" class="sam-b-matriz">
+  <!-- SAM · matriz: S de módulos; la fila central se desplaza y un módulo en color es la tarea que avanza -->
+  <rect x="16" y="2.5" width="7" height="7" rx="1.4" fill="currentColor"/>
+  <rect x="25" y="2.5" width="7" height="7" rx="1.4" fill="currentColor"/>
+  <rect x="34" y="2.5" width="7" height="7" rx="1.4" fill="currentColor"/>
+  <rect x="7" y="11.5" width="7" height="7" rx="1.4" fill="currentColor"/>
+  <rect x="20.5" y="20.5" width="7" height="7" rx="1.4" fill="currentColor"/>
+  <rect x="29.5" y="20.5" width="7" height="7" rx="1.4" fill="var(--g-color-brand,#c6f432)"/>
+  <rect x="34" y="29.5" width="7" height="7" rx="1.4" fill="currentColor"/>
+  <rect x="7" y="38.5" width="7" height="7" rx="1.4" fill="currentColor"/>
+  <rect x="16" y="38.5" width="7" height="7" rx="1.4" fill="currentColor"/>
+  <rect x="25" y="38.5" width="7" height="7" rx="1.4" fill="currentColor"/>
+</svg>
