@@ -1,0 +1,26 @@
+/* SAM · componentes de dominio sobre Grana. Valores de respaldo: tema oscuro. */
+.sam{font-family:var(--font-sans,"Onest",ui-sans-serif,system-ui,sans-serif);color:var(--ink,#f2f2ee)}
+.sam-btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2,8px);min-height:var(--control-height,44px);padding:0 18px;border-radius:var(--radius-sm,6px);font:600 14px/20px var(--font-sans,"Onest",sans-serif);cursor:pointer;border:0;text-decoration:none}
+.sam-btn--primario{background:var(--brand,#c6f432);color:var(--on-brand,#0a0a0b);box-shadow:inset 0 0 0 2px var(--brand-edge,#c6f432)}
+.sam-btn--secundario{background:transparent;color:var(--ink,#f2f2ee);box-shadow:inset 0 0 0 1.5px var(--line-control,#6e6e78)}
+.sam-btn--texto{background:transparent;color:var(--ink,#f2f2ee);text-decoration:underline;text-underline-offset:3px;padding:0 4px}
+.sam-btn--primario:hover{filter:brightness(1.06)} .sam-btn--secundario:hover{background:var(--surface-sunken,#1f1f24)}
+.sam-btn:active{transform:translateY(1px)}
+.sam-btn[aria-disabled="true"]{background:var(--surface-sunken,#1f1f24);color:var(--ink-muted,#a3a3a8);box-shadow:none;cursor:not-allowed}
+.sam-btn:focus-visible,.sam-card:focus-visible{outline:3px solid var(--focus,#f2f2ee);outline-offset:3px}
+.sam-chip{display:inline-flex;align-items:center;gap:4px;font:600 12px/16px var(--font-sans,"Onest",sans-serif);padding:2px 9px;border-radius:var(--radius-pill,999px);white-space:nowrap}
+.sam-chip--activo{background:var(--brand,#c6f432);color:var(--on-brand,#0a0a0b);box-shadow:inset 0 0 0 1.5px var(--brand-edge,#c6f432)}
+.sam-chip--neutro{color:var(--ink,#f2f2ee);box-shadow:inset 0 0 0 1px var(--line-control,#6e6e78)}
+.sam-chip--peligro{color:var(--danger,#ff8a7a);box-shadow:inset 0 0 0 1px currentColor}
+.sam-chip--aviso{color:var(--warning,#f5b941);box-shadow:inset 0 0 0 1px currentColor}
+.sam-card{display:grid;gap:var(--space-1,4px);padding:var(--space-3,12px);background:var(--surface-raised,#16161a);border:1px solid var(--line,#2a2a30);border-radius:var(--radius-sm,6px);color:var(--ink,#f2f2ee);text-decoration:none}
+.sam-card:hover{background:var(--surface-sunken,#1f1f24)}
+.sam-card__folio{font:500 12px/16px var(--font-mono,"JetBrains Mono",monospace);font-variant-numeric:tabular-nums;color:var(--ink-muted,#a3a3a8)}
+.sam-card__titulo{font:600 15px/20px var(--font-sans,"Onest",sans-serif);overflow-wrap:anywhere}
+.sam-card__pie{display:flex;flex-wrap:wrap;gap:var(--space-2,8px);align-items:center;margin-top:var(--space-1,4px);font:400 13px/18px var(--font-sans,"Onest",sans-serif);color:var(--ink-muted,#a3a3a8)}
+.sam-bar{display:flex;align-items:center;gap:var(--space-2,8px);padding:10px var(--space-4,16px);background:var(--surface,#0a0a0b);border-bottom:1px solid var(--line,#2a2a30);color:var(--ink,#f2f2ee)}
+.sam-bar__nombre{font:700 20px/1 var(--font-sans,"Onest",sans-serif);letter-spacing:-.01em}
+.sam-bar__sp{flex:1}
+.sam-bar__btn{min-width:44px;min-height:44px;display:grid;place-items:center;border-radius:var(--radius-sm,6px);background:transparent;border:0;color:var(--ink,#f2f2ee);cursor:pointer}
+.sam-bar__btn:hover{background:var(--surface-sunken,#1f1f24)} .sam-bar__btn:focus-visible{outline:3px solid var(--focus,#f2f2ee);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.sam-btn:active{transform:none}}
