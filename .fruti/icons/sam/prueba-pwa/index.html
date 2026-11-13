@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SAM</title>
+<meta name="theme-color" content="#0a0a0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SAM">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="iconos/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="iconos/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="iconos/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+  :root{--noche:#0a0a0b;--papel:#f2f2ee;--voltaje:#c6f432;--sup:#16161a;--linea:#2a2a30;--muted:#a3a3a8;color-scheme:dark}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--noche);color:var(--papel);font:400 16px/1.55 "Onest",ui-sans-serif,system-ui,sans-serif;
+    padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(24px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+  main{max-width:560px;margin:0 auto;display:grid;gap:20px}
+  header{display:flex;gap:10px;align-items:center;padding-bottom:14px;border-bottom:1px solid var(--linea)}
+  header img{width:28px;height:28px} header b{font-size:20px}
+  h1{font-size:26px;line-height:1.15;margin:0} p{margin:0}
+  .muted{color:var(--muted)}
+  .estado{display:inline-flex;gap:8px;align-items:center;font-size:14px;padding:6px 12px;border-radius:999px;border:1px solid var(--linea)}
+  .estado.si{background:var(--voltaje);color:var(--noche);border-color:var(--voltaje);font-weight:600}
+  ol{margin:0;padding-left:22px;display:grid;gap:12px} li b{font-weight:600}
+  .caja{background:var(--sup);border:1px solid var(--linea);border-radius:10px;padding:16px;display:grid;gap:12px}
+  button{font:600 16px "Onest",sans-serif;min-height:48px;border:0;border-radius:8px;padding:0 18px;background:var(--voltaje);color:var(--noche);cursor:pointer}
+  button:disabled{background:#2a2a30;color:var(--muted);cursor:default}
+  button:focus-visible{outline:3px solid var(--papel);outline-offset:3px}
+  #msg{font-size:14px;min-height:1.5em}
+  code{font:500 13px "JetBrains Mono",monospace}
+</style>
+</head>
+<body>
+<main>
+  <header><img src="iconos/simbolo-sobre-oscuro.svg" alt=""><b>SAM</b></header>
+  <div>
+    <h1>Prueba de iconos de SAM</h1>
+    <p class="muted">Página de prueba de la marca. No es la aplicación.</p>
+  </div>
+  <p><span id="modo" class="estado">Abierta en el navegador</span></p>
+
+  <section class="caja" aria-labelledby="h-pasos">
+    <h2 id="h-pasos" style="margin:0;font-size:18px">Qué revisar</h2>
+    <ol>
+      <li><b>Pestaña.</b> En la computadora, mira el icono de esta pestaña en tema claro y oscuro.</li>
+      <li><b>Instalar.</b> Android (Chrome): menú ⋮ → «Instalar app» o «Agregar a pantalla principal». iPhone (Safari): Compartir → «Agregar a inicio». Computadora (Chrome o Edge): icono de instalar en la barra de direcciones.</li>
+      <li><b>Pantalla de inicio.</b> Revisa que el icono no salga recortado, que el nombre diga «SAM» y que al abrir aparezca la pantalla de carga en negro.</li>
+      <li><b>Notificación.</b> Con la app instalada, pulsa el botón y revisa el icono pequeño de la barra de notificaciones (en Android es una silueta blanca).</li>
+    </ol>
+  </section>
+
+  <section class="caja" aria-labelledby="h-notif">
+    <h2 id="h-notif" style="margin:0;font-size:18px">Notificación de prueba</h2>
+    <button id="notificar" type="button">Enviar notificación de prueba</button>
+    <p id="msg" role="status" class="muted"></p>
+    <p class="muted" style="font-size:14px">En iPhone solo funciona con la app agregada a inicio (iOS 16.4 o posterior).</p>
+  </section>
+</main>
+<script>
+  const modo = document.getElementById('modo'), msg = document.getElementById('msg'), btn = document.getElementById('notificar');
+  if (matchMedia('(display-mode: standalone)').matches || navigator.standalone) { modo.textContent = 'Abierta como app instalada'; modo.classList.add('si'); }
+  let reg = null;
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').then(r => { reg = r; }).catch(() => { msg.textContent = 'No se pudo activar el modo app: la página debe abrirse por HTTPS o en localhost.'; });
+  btn.addEventListener('click', async () => {
+    if (!('Notification' in window) || !('serviceWorker' in navigator)) { msg.textContent = 'Este navegador no muestra notificaciones aquí. En iPhone, agrega primero la app a inicio.'; return; }
+    const p = await Notification.requestPermission();
+    if (p !== 'granted') { msg.textContent = 'Las notificaciones están bloqueadas. Actívalas en los ajustes del sitio y vuelve a intentar.'; return; }
+    const r = reg || await navigator.serviceWorker.ready;
+    (r.active || navigator.serviceWorker.controller).postMessage('notificar');
+    msg.textContent = 'Notificación enviada. Revisa la barra de notificaciones.';
+  });
+</script>
+</body>
+</html>
