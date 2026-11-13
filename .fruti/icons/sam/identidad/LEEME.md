@@ -124,4 +124,5 @@ Publicado como artifact el 2026-11-13.
 
 ## Design system (`../design-system/`, artifact https://claude.ai/artifact/Vvx4szZVmCgX7Vgv7yQTaJ)
 Primera versión 2026-11-13 desde la marca congelada. Tokens de marca (superficies, tinta, Voltaje, on-brand, brand-edge, foco), tipografía Onest + JetBrains Mono, radios, logos e iconos, y cuatro componentes de dominio (Botón, Estado, Tarjeta de actividad, Barra de la app).
-**unresolved** (pendiente de aprobar): espaciado (escala de 4 px), line-control, danger, warning, info y equivalencia completa con los tokens de Grana (solo se conoce `--g-color-brand`).
+**Aprobado (usuario, 2026-11-13):** espaciado (escala de 4 px), line-control, danger, warning e info.
+**unresolved:** equivalencia completa con los tokens de Grana (solo se conoce `--g-color-brand`); familia de iconos de interfaz.

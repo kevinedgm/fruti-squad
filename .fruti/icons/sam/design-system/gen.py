@@ -10,7 +10,7 @@ def cuerpo(n):
     return s[s.index('>', s.index('<svg')) + 1: s.rindex('</svg>')].strip()
 C2 = cuerpo('sam-simbolo.svg').replace('var(--g-color-brand,#c6f432)', 'var(--brand,#c6f432)').replace('var(--sam-tinta,#0a0a0b)', 'var(--on-brand,#0a0a0b)')
 C4 = cuerpo('sam-simbolo-chico.svg').replace('var(--g-color-brand,#c6f432)', 'var(--brand,#c6f432)').replace('var(--sam-tinta,#0a0a0b)', 'var(--on-brand,#0a0a0b)')
-PROP = 'PROPUESTA (pendiente de aprobar): '
+PROP = ''  # propuestas aprobadas por el usuario el 2026-11-13
 def c(n, d, l, u): return {'name': n, 'value': {'dark': d, 'light': l}, 'usage': u}
 tokens = {
  'name': 'SAM', 'version': 1,
@@ -19,16 +19,16 @@ tokens = {
   c('surface-raised', '#16161a', '#ffffff', 'Tarjetas de actividad, paneles y diálogos sobre `surface`.'),
   c('surface-sunken', '#1f1f24', '#e8e8e2', 'Hover de filas, pestañas inactivas y campos de solo lectura.'),
   c('line', '#2a2a30', '#d6d6d0', 'Separadores y bordes decorativos (no llevan significado; no necesitan 3:1).'),
-  c('line-control', '#6e6e78', '#7a7a82', PROP + 'borde de campos y botones secundarios: 3.3:1 o más sobre `surface`, `surface-raised` y `surface-sunken` en ambos temas.'),
+  c('line-control', '#6e6e78', '#7a7a82', PROP + 'Borde de campos y botones secundarios: 3.3:1 o más sobre `surface`, `surface-raised` y `surface-sunken` en ambos temas.'),
   c('ink', '#f2f2ee', '#0a0a0b', 'Texto principal sobre `surface`, `surface-raised` y `surface-sunken` (17.6:1 o más en ambos temas). En claro también enlaces y foco.'),
   c('ink-muted', '#a3a3a8', '#55555c', 'Texto secundario: metadatos, fechas, ayudas. 6.0:1 o más sobre las tres superficies en ambos temas.'),
   c('brand', '#c6f432', '#c6f432', 'Voltaje. SOLO relleno: botón principal, estado activo («En curso»), tarjeta del símbolo y `--g-color-brand` de Grana. Nunca texto. Sobre `surface` claro mide 1.1:1: ahí siempre lleva `brand-edge`.'),
   c('on-brand', '#0a0a0b', '#0a0a0b', 'Texto e iconos sobre `brand` (15.4:1). También la palomita del símbolo.'),
   c('brand-edge', '#c6f432', '#0a0a0b', 'Contorno de todo relleno `brand`. En oscuro coincide con el relleno; en claro es tinta (2 px en botones, 1.5 px en estados).'),
   c('focus', '#f2f2ee', '#0a0a0b', 'Anillo de foco de 3 px con 3 px de separación. 17.6:1 sobre `surface` en ambos temas; nunca Voltaje (en claro no se ve).'),
-  c('danger', '#ff8a7a', '#b42318', PROP + 'estado «Vencida» y errores. Texto 5.3:1 o más sobre las tres superficies en ambos temas. Siempre con palabra o icono.'),
-  c('warning', '#f5b941', '#8a5a00', PROP + 'estado «Por vencer». 4.8:1 o más en ambos temas. Se distingue de `danger` por la palabra, no por el tono (entre ellos miden 1.1–1.3:1).'),
-  c('info', '#8ab4ff', '#2f5bd3', PROP + 'avisos informativos y enlaces dentro de avisos. 4.8:1 o más en ambos temas.'),
+  c('danger', '#ff8a7a', '#b42318', PROP + 'Estado «Vencida» y errores. Texto 5.3:1 o más sobre las tres superficies en ambos temas. Siempre con palabra o icono.'),
+  c('warning', '#f5b941', '#8a5a00', PROP + 'Estado «Por vencer». 4.8:1 o más en ambos temas. Se distingue de `danger` por la palabra, no por el tono (entre ellos miden 1.1–1.3:1).'),
+  c('info', '#8ab4ff', '#2f5bd3', PROP + 'Avisos informativos y enlaces dentro de avisos. 4.8:1 o más en ambos temas.'),
  ]},
  'type': {
   'fonts': [],
@@ -46,7 +46,7 @@ tokens = {
      {'name': 'caption', 'fontSize': '12px', 'lineHeight': '16px', 'fontWeight': 600, 'sample': 'En curso', 'usage': 'Estados (chips) y notas breves.'}]},
    {'name': 'Datos', 'family': 'mono', 'styles': [
      {'name': 'folio', 'fontSize': '12px', 'lineHeight': '16px', 'fontWeight': 500, 'sample': 'INC-2041 · TAR-0187', 'usage': 'Folios, horas y valores que se comparan en columna (números tabulares).'}]}]},
- 'spacing': {'note': PROP + 'escala de 4 px tomada de las maquetas de la marca.', 'tokens': [
+ 'spacing': {'note': 'Escala de 4 px tomada de las maquetas de la marca.', 'tokens': [
    {'name': 'space-1', 'value': '4px', 'usage': 'Entre folio, título y metadatos de una actividad.'},
    {'name': 'space-2', 'value': '8px', 'usage': 'Entre elementos de una fila: chip y fecha, icono y texto.'},
    {'name': 'space-3', 'value': '12px', 'usage': 'Relleno de tarjetas de actividad; separación entre tarjetas de una lista.'},
@@ -80,7 +80,7 @@ README = '''SAM es la herramienta con la que el equipo de desarrollo y soporte r
 - Todo relleno `brand` lleva contorno `brand-edge`. En oscuro no se nota; en claro es lo que lo separa del fondo (Voltaje sobre Papel mide 1.1:1).
 - El foco es `focus`, 3 px sólidos con 3 px de separación, en todos los controles. Nunca Voltaje.
 - Una sola acción principal en Voltaje por vista. Las demás, secundarias (borde `line-control`) o de texto.
-- `danger`, `warning` e `info` son PROPUESTA pendiente de aprobar. Cada estado lleva siempre su palabra: el color no basta.
+- `danger` (vencida, errores), `warning` (por vencer) e `info` (avisos) llevan siempre su palabra: el color no basta.
 - En la app, Voltaje entra en `--g-color-brand` de Grana y `on-brand` en `--g-color-on-brand`. El resto de la equivalencia con los tokens de Grana está pendiente: no conocemos su lista completa.
 
 ## Tipografía
@@ -92,7 +92,7 @@ README = '''SAM es la herramienta con la que el equipo de desarrollo y soporte r
 
 ## Espacio, forma y profundidad
 
-- Espaciado en pasos de 4 px (`space-1` a `space-8`; PROPUESTA). Margen lateral mínimo `space-4` en celular.
+- Espaciado en pasos de 4 px (`space-1` a `space-8`). Margen lateral mínimo `space-4` en celular.
 - Radios: `radius-sm` en botones, campos y tarjetas; `radius-md` en paneles y diálogos; `radius-pill` en estados.
 - Sin sombras: la profundidad la dan las superficies (`surface` → `surface-raised`) y los bordes `line`.
 - Altura mínima de controles: `control-height` (44 px).
@@ -181,7 +181,7 @@ Botón de acción de SAM: principal en Voltaje, secundario con borde y de texto.
 - El consumidor pone la etiqueta: un verbo concreto. Altura mínima `control-height`; foco con `focus`.
 - No: dos botones principales en el mismo bloque, Voltaje con texto blanco, un icono sin etiqueta.
 ''')
-w('components/Estado/preview.html', prev('<!-- @dsCard group="Estados" height=88 subtitle="Activo, neutros y propuestas de alerta" -->',
+w('components/Estado/preview.html', prev('<!-- @dsCard group="Estados" height=88 subtitle="Activo, neutros y alertas" -->',
   '<div class="p"><span class="sam-chip sam-chip--activo">En curso</span><span class="sam-chip sam-chip--neutro">Nuevo</span><span class="sam-chip sam-chip--neutro">Revisión</span><span class="sam-chip sam-chip--neutro">Cerrada</span><span class="sam-chip sam-chip--aviso">Por vencer</span><span class="sam-chip sam-chip--peligro">Vencida</span></div>'))
 w('components/Estado/README.md', '''# Estado
 
@@ -189,7 +189,7 @@ Chip que dice en qué etapa o situación está una actividad.
 
 - **Activo** (`sam-chip--activo`): solo «En curso», lo que alguien está trabajando ahora. Relleno `brand` con contorno `brand-edge`.
 - **Neutro** (`sam-chip--neutro`): el resto de etapas («Nuevo», «Revisión», «Cerrada»). Las etapas las define cada plantilla de flujo; el chip muestra su nombre.
-- **Por vencer** y **Vencida** (`sam-chip--aviso`, `sam-chip--peligro`): PROPUESTA pendiente de aprobar, con `warning` y `danger`.
+- **Por vencer** y **Vencida** (`sam-chip--aviso`, `sam-chip--peligro`): con `warning` y `danger`.
 - Siempre con palabra: el color nunca es la única señal.
 - El consumidor pone el texto de la etapa (corto, una o dos palabras).
 ''')

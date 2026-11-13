@@ -16,7 +16,7 @@ SAM es la herramienta con la que el equipo de desarrollo y soporte registra, mue
 - Todo relleno `brand` lleva contorno `brand-edge`. En oscuro no se nota; en claro es lo que lo separa del fondo (Voltaje sobre Papel mide 1.1:1).
 - El foco es `focus`, 3 px sólidos con 3 px de separación, en todos los controles. Nunca Voltaje.
 - Una sola acción principal en Voltaje por vista. Las demás, secundarias (borde `line-control`) o de texto.
-- `danger`, `warning` e `info` son PROPUESTA pendiente de aprobar. Cada estado lleva siempre su palabra: el color no basta.
+- `danger` (vencida, errores), `warning` (por vencer) e `info` (avisos) llevan siempre su palabra: el color no basta.
 - En la app, Voltaje entra en `--g-color-brand` de Grana y `on-brand` en `--g-color-on-brand`. El resto de la equivalencia con los tokens de Grana está pendiente: no conocemos su lista completa.
 
 ## Tipografía
@@ -28,7 +28,7 @@ SAM es la herramienta con la que el equipo de desarrollo y soporte registra, mue
 
 ## Espacio, forma y profundidad
 
-- Espaciado en pasos de 4 px (`space-1` a `space-8`; PROPUESTA). Margen lateral mínimo `space-4` en celular.
+- Espaciado en pasos de 4 px (`space-1` a `space-8`). Margen lateral mínimo `space-4` en celular.
 - Radios: `radius-sm` en botones, campos y tarjetas; `radius-md` en paneles y diálogos; `radius-pill` en estados.
 - Sin sombras: la profundidad la dan las superficies (`surface` → `surface-raised`) y los bordes `line`.
 - Altura mínima de controles: `control-height` (44 px).

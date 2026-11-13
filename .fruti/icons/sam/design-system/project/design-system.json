@@ -1,22 +1,82 @@
 {
   "v": 3,
-  "layout": "files",
-  "createdOnFiles": {
-    "v": 1,
-    "at": "2026-11-13T23:04:52Z"
-  },
-  "title": "SAM",
-  "namespace": "SAM",
-  "libraries": [],
-  "sections": {},
-  "groups": [
-    "Logos",
-    "Iconos"
-  ],
   "assetGroups": {
+    "Iconos": {
+      "files": {
+        "favicon.svg": {
+          "blob": "61516da28becc84ddb9bf3aaab52feda",
+          "name": "favicon.svg",
+          "size": 452,
+          "type": "image/svg+xml"
+        },
+        "icon-512.png": {
+          "blob": "3d580ca228bdfc02a598b26f16f037b9",
+          "name": "icon-512.png",
+          "size": 15788,
+          "type": "image/png"
+        },
+        "maskable-512.png": {
+          "blob": "1213c1089cf95ead1cf423d38c01a1b1",
+          "name": "maskable-512.png",
+          "size": 8741,
+          "type": "image/png"
+        },
+        "notificacion-96.png": {
+          "blob": "8b1a64bdf37647f33bec423288afb159",
+          "name": "notificacion-96.png",
+          "size": 1576,
+          "type": "image/png"
+        }
+      },
+      "name": "Iconos",
+      "order": [
+        "favicon.svg",
+        "icon-512.png",
+        "maskable-512.png",
+        "notificacion-96.png"
+      ],
+      "tile": "m"
+    },
     "Logos": {
+      "files": {
+        "sam-logotipo-compacto-sobre-claro.svg": {
+          "blob": "08477b2f9eaf2580bf307c75367ecfbc",
+          "name": "sam-logotipo-compacto-sobre-claro.svg",
+          "size": 2693,
+          "type": "image/svg+xml"
+        },
+        "sam-logotipo-compacto-sobre-oscuro.svg": {
+          "blob": "a6263928723170ff69d4dc71403c833c",
+          "name": "sam-logotipo-compacto-sobre-oscuro.svg",
+          "size": 2693,
+          "type": "image/svg+xml"
+        },
+        "sam-logotipo-horizontal-sobre-claro.svg": {
+          "blob": "9a34f8faa60581d810d55c59b12b8e85",
+          "name": "sam-logotipo-horizontal-sobre-claro.svg",
+          "size": 24342,
+          "type": "image/svg+xml"
+        },
+        "sam-logotipo-horizontal-sobre-oscuro.svg": {
+          "blob": "75c38ab6810dd9c3cbd4b2f1ca5bc692",
+          "name": "sam-logotipo-horizontal-sobre-oscuro.svg",
+          "size": 24342,
+          "type": "image/svg+xml"
+        },
+        "sam-logotipo-vertical-sobre-claro.svg": {
+          "blob": "7500532a557b5a8e553b47f904f89678",
+          "name": "sam-logotipo-vertical-sobre-claro.svg",
+          "size": 24356,
+          "type": "image/svg+xml"
+        },
+        "sam-logotipo-vertical-sobre-oscuro.svg": {
+          "blob": "edcb3c435794a3d894a87d6171f9c477",
+          "name": "sam-logotipo-vertical-sobre-oscuro.svg",
+          "size": 24356,
+          "type": "image/svg+xml"
+        }
+      },
       "name": "Logos",
-      "tile": "l",
       "order": [
         "sam-logotipo-horizontal-sobre-oscuro.svg",
         "sam-logotipo-horizontal-sobre-claro.svg",
@@ -25,90 +85,30 @@
         "sam-logotipo-compacto-sobre-oscuro.svg",
         "sam-logotipo-compacto-sobre-claro.svg"
       ],
-      "files": {
-        "sam-logotipo-horizontal-sobre-oscuro.svg": {
-          "name": "sam-logotipo-horizontal-sobre-oscuro.svg",
-          "blob": "75c38ab6810dd9c3cbd4b2f1ca5bc692",
-          "size": 24342,
-          "type": "image/svg+xml"
-        },
-        "sam-logotipo-horizontal-sobre-claro.svg": {
-          "name": "sam-logotipo-horizontal-sobre-claro.svg",
-          "blob": "9a34f8faa60581d810d55c59b12b8e85",
-          "size": 24342,
-          "type": "image/svg+xml"
-        },
-        "sam-logotipo-vertical-sobre-oscuro.svg": {
-          "name": "sam-logotipo-vertical-sobre-oscuro.svg",
-          "blob": "edcb3c435794a3d894a87d6171f9c477",
-          "size": 24356,
-          "type": "image/svg+xml"
-        },
-        "sam-logotipo-vertical-sobre-claro.svg": {
-          "name": "sam-logotipo-vertical-sobre-claro.svg",
-          "blob": "7500532a557b5a8e553b47f904f89678",
-          "size": 24356,
-          "type": "image/svg+xml"
-        },
-        "sam-logotipo-compacto-sobre-oscuro.svg": {
-          "name": "sam-logotipo-compacto-sobre-oscuro.svg",
-          "blob": "a6263928723170ff69d4dc71403c833c",
-          "size": 2693,
-          "type": "image/svg+xml"
-        },
-        "sam-logotipo-compacto-sobre-claro.svg": {
-          "name": "sam-logotipo-compacto-sobre-claro.svg",
-          "blob": "08477b2f9eaf2580bf307c75367ecfbc",
-          "size": 2693,
-          "type": "image/svg+xml"
-        }
-      }
-    },
-    "Iconos": {
-      "name": "Iconos",
-      "tile": "m",
-      "order": [
-        "favicon.svg",
-        "icon-512.png",
-        "maskable-512.png",
-        "notificacion-96.png"
-      ],
-      "files": {
-        "favicon.svg": {
-          "name": "favicon.svg",
-          "blob": "61516da28becc84ddb9bf3aaab52feda",
-          "size": 452,
-          "type": "image/svg+xml"
-        },
-        "icon-512.png": {
-          "name": "icon-512.png",
-          "blob": "3d580ca228bdfc02a598b26f16f037b9",
-          "size": 15788,
-          "type": "image/png"
-        },
-        "maskable-512.png": {
-          "name": "maskable-512.png",
-          "blob": "1213c1089cf95ead1cf423d38c01a1b1",
-          "size": 8741,
-          "type": "image/png"
-        },
-        "notificacion-96.png": {
-          "name": "notificacion-96.png",
-          "blob": "8b1a64bdf37647f33bec423288afb159",
-          "size": 1576,
-          "type": "image/png"
-        }
-      }
+      "tile": "l"
     }
   },
   "blobs": {},
+  "createdOnFiles": {
+    "at": "2026-11-13T23:04:52Z",
+    "v": 1
+  },
   "docs": {
     "sections": []
   },
+  "groups": [
+    "Logos",
+    "Iconos"
+  ],
   "lastChange": {
     "by": "Claude",
-    "at": "2026-11-13T23:04:52Z",
+    "at": "2026-11-13T23:06:33Z",
     "via": "Claude Code",
-    "note": "Primera versión desde la marca congelada (Tarjetas, Voltaje, Onest)."
-  }
+    "note": "Aprobadas: escala de espaciado, line-control y colores de alerta (danger, warning, info)."
+  },
+  "layout": "files",
+  "libraries": [],
+  "namespace": "SAM",
+  "sections": {},
+  "title": "SAM"
 }
