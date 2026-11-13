@@ -592,7 +592,7 @@ const precioTxt = (m, c, pid) => { const p = promoDe(m, c, pid); return p ? `${p
 V.promo = (id) => { const p = PROMOS.find(x=>x.id===id); if (!p) return V.resultados();
   const m = MED.find(x=>x.id===p.med), c = m.cons.find(x=>x.id===p.cons);
   return `${nav('buscar')}<main class="wrap"><div class="pp"><img class="ban" src="${p.img}" alt="">
-  <div class="info"><span class="etq">Patrocinado</span><h1 id="h-ok" tabindex="-1">${p.titulo}</h1><p class="spec" style="font-size:17px">${p.desc}</p>
+  <div class="info"><span class="etq">Promoción especial</span><h1 id="h-ok" tabindex="-1">${p.titulo}</h1><p class="spec" style="font-size:17px">${p.desc}</p>
   <dl class="det"><div><dt>Precio</dt><dd>${peso(p.pr)} · normal ${peso(p.normal)}</dd></div><div><dt>Vigencia</dt><dd>Hasta el ${p.hasta}</dd></div><div><dt>Dónde</dt><dd>${c.lu}</dd></div><div><dt>Condiciones</dt><dd>${p.cond}</dd></div></dl>
   <a class="anun" href="#medico-${m.id}">${avatar(m)}<b>${p.anun} · ${m.n}</b><small>${m.esp}</small>${ced(m)}</a>
   <div class="acc"><button class="btn primario" data-promo-agendar="${p.id}">Agendar con esta promoción</button><a class="btn texto" href="#medico-${m.id}">Ver perfil</a></div>
@@ -644,7 +644,7 @@ V.resultados = () => {
   let lista = r.map(ficha);
   // Publicidad segmentada por ubicación (2026-11-11): solo promociones de consultorios en la ciudad de la búsqueda.
   const pr = PROMOS.find(x => x.cat === (S.esp ? (espDe(S.esp)||[])[2] : S.cat) && (medDe(x.med).cons.find(c => c.id === x.cons) || {}).ciudad === ciudadBusq());
-  if (pr && n >= 2) lista.splice(2, 0, `<a class="promo" href="#promo-${pr.id}" aria-label="Patrocinado: ${pr.anun}. ${pr.titulo}. Con Impulsa Manik. Ver promoción"><img class="pimg" src="${pr.img}" alt=""><span class="ptx"><span class="etq">Patrocinado</span><b>${pr.titulo}</b><small>${pr.anun} · hasta el ${pr.hasta} · <span class="nw imp">con Impulsa Manik</span></small></span></a>`);
+  if (pr && n >= 2) lista.splice(2, 0, `<a class="promo" href="#promo-${pr.id}" aria-label="Promoción especial: ${pr.anun}. ${pr.titulo}. Con Impulsa Manik. Ver promoción"><img class="pimg" src="${pr.img}" alt=""><span class="ptx"><span class="etq">Promoción especial</span><b>${pr.titulo}</b><small>${pr.anun} · hasta el ${pr.hasta} · <span class="nw imp">con Impulsa Manik</span></small></span></a>`);
   if (!n) lista = [!nFiltros()
     ? `<div class="vacio"><span class="ic">${ic('search')}</span><h3>Pronto tendremos especialistas de ${(S.esp || S.cat).toLowerCase()} cerca de ti</h3><p>Mientras tanto, revisa otra especialidad o busca por lo que sientes.</p><div class="acc"><button class="btn primario" data-abrir="esp" aria-haspopup="dialog">Ver especialidades</button><a class="btn texto" href="#inicio">Busca por lo que sientes</a></div></div>`
     : `<div class="vacio"><span class="ic">${ic('sliders-horizontal')}</span><h3>Nadie cumple todos tus filtros</h3><p>Filtros activos: ${[...FILT.filter(([k]) => S.f[k]).map(x => x[1]), S.f.hoy && 'Con lugar hoy'].filter(Boolean).join(' · ')}.</p><div class="acc"><button class="btn primario" data-limpiar>Quitar filtros</button></div></div>`];

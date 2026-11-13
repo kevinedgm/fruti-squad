@@ -58,3 +58,5 @@ Publicado: https://claude.ai/artifact/EfXbngHaw3pqZ8EbN8egFM
 
 - Formación académica: visibles la licenciatura y el grado más alto (subespecialidad > especialidad > maestría). Lo demás (grados restantes y «Otros estudios y certificaciones») queda tras «Ver toda la formación». El botón solo aparece cuando hay algo oculto (Díaz, Carmela, Lucía).
 - Se quita el bloque «Su artículo / Sus artículos» de la cabecera del perfil (y su CSS). Los artículos siguen en la portada («Artículos de médicos»); los datos `arts` se conservan sin mostrarse.
+
+- Promociones en resultados: la etiqueta «Patrocinado» pasa a «Promoción especial» (texto visible y aria-label).
