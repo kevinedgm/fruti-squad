@@ -118,3 +118,6 @@ Sale IBM Plex Sans (ronda 6): angulosa frente al símbolo redondo.
 
 ## Final (`../final/`)
 Símbolo, logotipos (horizontal, vertical, compacto; con variables y con colores fijos), favicon, iconos de PWA (incluido maskable), icono de notificación, tokens `sam-marca.css` y fragmento de manifest. Guía en `../final/LEEME.md`.
+
+## Manual de marca (`../manual/manual.html`, generado con `gen.py` desde `../final/`)
+Publicado como artifact el 2026-11-13.
