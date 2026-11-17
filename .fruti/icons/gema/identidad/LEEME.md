@@ -83,3 +83,11 @@ Hecho: navy `#052A76` mide 1.5:1 sobre negro (no se ve en oscuro); 13.1:1 con te
 - N1 · Navy del laboratorio: claro navy + texto blanco; oscuro «noche navy» (`#071633`) con azul claro `#8fb3ff` y texto navy (8.6:1). El color cambia de valor entre modos.
 - N2 · Degradado navy: `#052A76 → #3D67AE` solo en superficies de marca (pico, icono, panel de login); botones planos (navy en claro; `#3D67AE` en oscuro, texto blanco 5.6:1, 3.5:1 sobre negro).
 - N3 · Navy + celeste: navy de base; pico y estado activo en el celeste del laboratorio `#00B4D8` (5.3:1 con texto navy). Dos colores de la paleta del laboratorio.
+
+**Color elegido (usuario, 2026-11-17): N2 · Degradado navy** (`#052A76 → #3D67AE` en superficies de marca; botones planos: navy en claro, `#3D67AE` en oscuro con texto blanco).
+
+## Ronda 9 (`ronda-9/banco.html`, `banco.png`) · tipografía
+Probadas en logotipo y en una pantalla de resultados (folios, parámetros, unidades, decimales, subíndices). Datos ficticios.
+- A · Onest (+ JetBrains Mono): la de SAM; familia común entre herramientas internas.
+- B · IBM Plex Sans (+ IBM Plex Mono): técnica e industrial; distingue I/l/1 y O/0; la más «instrumento».
+- C · Instrument Sans (+ JetBrains Mono): la de Grana; compacta.
