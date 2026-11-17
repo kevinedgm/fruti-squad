@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="GEMA" class="gema-c-mira">
+  <!-- GEMA · mira: el encuadre de la medición con la muestra en acento al centro -->
+  <g fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 17V11Q8 8 11 8H17M31 8H37Q40 8 40 11V17M40 31V37Q40 40 37 40H31M17 40H11Q8 40 8 37V31"/>
+  </g>
+  <circle cx="24" cy="24" r="7.5" fill="var(--g-color-brand,#38bdf8)" stroke="currentColor" stroke-width="2.6"/>
+</svg>

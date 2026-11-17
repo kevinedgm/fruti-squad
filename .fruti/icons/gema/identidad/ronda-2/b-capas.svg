@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="GEMA" class="gema-b-capas">
+  <!-- GEMA · capas: la muestra separada en sus componentes; la capa central en acento es lo que se mide -->
+  <rect x="8" y="10" width="32" height="7" rx="3.5" fill="none" stroke="currentColor" stroke-width="2.6"/>
+  <rect x="13" y="21" width="22" height="7" rx="3.5" fill="var(--g-color-brand,#38bdf8)" stroke="currentColor" stroke-width="2.6"/>
+  <rect x="18" y="32" width="12" height="7" rx="3.5" fill="currentColor"/>
+</svg>

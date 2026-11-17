@@ -16,3 +16,12 @@ Arriba el nombre corto, abajo el nombre completo que define el sistema: «Gesti�
 | A · Muestra | frasco con tapa; el líquido en acento es la muestra | el más claro y literal; puede leerse como frasco de medicina o bebida |
 | B · Gema | piedra tallada; el pabellón en acento es la gota de muestra | une nombre y oficio; riesgo: joyería, y el logo de Sketch (app de diseño) es una gema |
 | C · G con gota | la barra de la G desemboca en una gota | letra y oficio; se parece a logos de empresas de agua; a 16 px se empasta |
+
+**Ronda 1 rechazada (usuario, 2026-11-17):** «las formas no tienen nada que ver con el laboratorio»; laboratorio de análisis de muestras industriales; pide forma abstracta, diferente.
+
+## Ronda 2 (`ronda-2/banco.html`, `banco.png`) · formas abstractas del análisis
+| Concepto | Idea | Lectura (Claude) |
+|---|---|---|
+| A · Pico | señal de un instrumento (cromatograma/espectro): pico sobre línea base, área en acento = resultado | la más propia del análisis; ligera visualmente; puede leerse como gráfica o pulso |
+| B · Capas | muestra separada en componentes (destilación, decantación); capa central en acento | abstracta y sólida a 16 px; puede leerse como embudo o filtro |
+| C · Mira | encuadre de medición con la muestra en acento al centro | precisión y control; se parece al icono de escanear de las cámaras |

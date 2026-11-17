@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="GEMA" class="gema-a-pico">
+  <!-- GEMA · pico: señal de un instrumento; el área del pico en acento es el resultado -->
+  <path d="M14.5 37C19 37 20.5 11 24 11C27.5 11 29 37 33.5 37Z" fill="var(--g-color-brand,#38bdf8)"/>
+  <path d="M6 37H14.5C19 37 20.5 11 24 11C27.5 11 29 37 33.5 37H42" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
