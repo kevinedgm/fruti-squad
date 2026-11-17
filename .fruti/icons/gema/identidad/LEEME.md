@@ -91,3 +91,8 @@ Probadas en logotipo y en una pantalla de resultados (folios, parámetros, unida
 - A · Onest (+ JetBrains Mono): la de SAM; familia común entre herramientas internas.
 - B · IBM Plex Sans (+ IBM Plex Mono): técnica e industrial; distingue I/l/1 y O/0; la más «instrumento».
 - C · Instrument Sans (+ JetBrains Mono): la de Grana; compacta.
+
+**Tipografía elegida (usuario, 2026-11-17): A · Onest** (la misma de SAM).
+
+## Final (`../final/`)
+Símbolo, logotipos, favicon, iconos de PWA, silueta de notificación (pico calado), tokens `gema-marca.css` y fragmento de manifest. Guía en `../final/LEEME.md`.

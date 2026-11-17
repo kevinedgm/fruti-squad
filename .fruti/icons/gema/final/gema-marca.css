@@ -1,0 +1,20 @@
+/* GEMA · Gestión de Muestras y Análisis · marca (congelada 2026-11-17) */
+/* Degradado navy SOLO en superficies de marca (pico del símbolo, icono de la app, panel de inicio de sesión).
+   En la interfaz el color es plano: navy en tema claro, azul medio en oscuro, siempre con texto blanco. */
+:root {
+  --g-color-brand: #052A76;          /* Grana, tema claro. Blanco sobre navy: 13.1:1. Navy sobre papel: 11.7:1 */
+  --g-color-on-brand: #ffffff;
+  --gema-pico-a: #052A76;            /* degradado del pico: abajo */
+  --gema-pico-b: #3D67AE;            /* degradado del pico: arriba */
+  --gema-degradado: linear-gradient(160deg, #3D67AE, #052A76);
+  --gema-tinta: #0a0a0b; --gema-papel: #f2f2ee;
+  --gema-font: "Onest", ui-sans-serif, system-ui, sans-serif;            /* marca e interfaz */
+  --gema-font-mono: "JetBrains Mono", ui-monospace, monospace;           /* folios, valores y unidades */
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --g-color-brand: #3D67AE;        /* blanco sobre azul medio: 5.6:1; sobre negro: 3.5:1 (botón, no texto) */
+    --gema-pico-a: #3D67AE; --gema-pico-b: #7aa2f0;
+  }
+}
+:root[data-theme="dark"] { --g-color-brand: #3D67AE; --gema-pico-a: #3D67AE; --gema-pico-b: #7aa2f0; }
