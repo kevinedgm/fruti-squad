@@ -75,3 +75,11 @@ Regla de SAM desde el inicio: acento = relleno, mismo valor en claro y oscuro, t
 | Celeste | `#38bdf8` | 9.2 · 9.2 · 1.9 | agua y precisión; pariente del celeste del laboratorio (#00B4D8); común en software científico |
 | Ámbar | `#f5b52e` | 10.9 · 10.9 · 1.6 | industrial, instrumento encendido; se asocia a «precaución» |
 | Coral | `#ff8466` | 8.2 · 8.2 · 2.1 | energía; cerca del rojo de error |
+
+**Ronda 7 rechazada (usuario, 2026-11-17):** quiere un azul navy como el de Nisa Nabani, o un degradado de ese azul.
+
+## Ronda 8 (`ronda-8/banco.html`, `banco.png`) · azul navy
+Hecho: navy `#052A76` mide 1.5:1 sobre negro (no se ve en oscuro); 13.1:1 con texto blanco; 11.7:1 sobre papel.
+- N1 · Navy del laboratorio: claro navy + texto blanco; oscuro «noche navy» (`#071633`) con azul claro `#8fb3ff` y texto navy (8.6:1). El color cambia de valor entre modos.
+- N2 · Degradado navy: `#052A76 → #3D67AE` solo en superficies de marca (pico, icono, panel de login); botones planos (navy en claro; `#3D67AE` en oscuro, texto blanco 5.6:1, 3.5:1 sobre negro).
+- N3 · Navy + celeste: navy de base; pico y estado activo en el celeste del laboratorio `#00B4D8` (5.3:1 con texto navy). Dos colores de la paleta del laboratorio.
