@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="GEMA" class="gema-r3-resultado">
+  <!-- GEMA · resultado: pico menor en tinta y pico del resultado en acento -->
+  <path d="M20.80 38C25.60 38 27.20 9 30.40 9C33.60 9 35.20 38 41.60 38Z" fill="var(--g-color-brand,#38bdf8)"/>
+  <path d="M4.00 38H9.60C12.40 38 13.20 24.95 14.80 24.95C16.40 24.95 17.20 38 20.80 38C25.60 38 27.20 9 30.40 9C33.60 9 35.20 38 41.60 38H44.00" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

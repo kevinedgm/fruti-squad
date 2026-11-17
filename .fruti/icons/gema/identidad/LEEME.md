@@ -46,3 +46,10 @@ En «una tinta» las piezas en acento desaparecen: falta la versión monocroma d
 - C · Resultado: pico menor en tinta y pico del resultado, mayor, en acento; el más propio (una señal real tiene varios picos).
 - D · Capas de señal: capas alineadas; parece menú o barras.
 Criterio de salida propuesto: elegir una dirección en esta ronda y validarla en contexto (pestaña, icono PWA, barra), como SAM.
+
+**Elegidos de la ronda 4 (usuario, 2026-11-17):** B (Mira con pico), A2 (Pico en pantalla) y C (Resultado).
+
+## Ronda 5 (`ronda-5/banco.html`, `banco.png`) · combinaciones
+- R1 · Pantalla + Resultado (A2 + C): doble pico en el marco del instrumento; el más sólido como icono; a 16 px el pico menor casi desaparece.
+- R2 · Mira + Resultado (B + C): doble pico entre las esquinas de la medición; el más fino.
+- R3 · Resultado (C sola): sin marco, la más simple; ancha y baja en icono cuadrado.

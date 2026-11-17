@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="GEMA" class="gema-r2-mira">
+  <!-- GEMA · mira + resultado: el doble pico encuadrado por las esquinas de la medición -->
+  <g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7 16V10Q7 7 10 7H16M32 7H38Q41 7 41 10V16M41 32V38Q41 41 38 41H32M16 41H10Q7 41 7 38V32"/>
+  </g>
+  <path d="M22.08 33C24.96 33 25.92 15 27.84 15C29.76 15 30.72 33 34.56 33Z" fill="var(--g-color-brand,#38bdf8)"/>
+  <path d="M12.00 33H15.36C17.04 33 17.52 24.90 18.48 24.90C19.44 24.90 19.92 33 22.08 33C24.96 33 25.92 15 27.84 15C29.76 15 30.72 33 34.56 33H36.00" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
