@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="GEMA" class="gema-b-gema">
+  <!-- GEMA · gema: piedra tallada; el pabellón en acento es la gota de muestra -->
+  <path d="M11 18H37L24 41Z" fill="var(--g-color-brand,#38bdf8)"/>
+  <g fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M17.5 8H30.5L37 18L24 41L11 18Z"/>
+    <path d="M11 18H37M20.5 18L24 8L27.5 18"/>
+  </g>
+</svg>
