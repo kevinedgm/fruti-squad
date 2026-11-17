@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="GEMA" class="gema-a2-pantalla">
+  <!-- GEMA · pico en pantalla: la señal dentro del marco de un instrumento -->
+  <rect x="6" y="8" width="36" height="32" rx="7" fill="none" stroke="currentColor" stroke-width="2.6"/>
+  <path d="M15.5 33C19.5 33 21 15 24 15C27 15 28.5 33 32.5 33Z" fill="var(--g-color-brand,#38bdf8)"/>
+  <path d="M11 33H15.5C19.5 33 21 15 24 15C27 15 28.5 33 32.5 33H37" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

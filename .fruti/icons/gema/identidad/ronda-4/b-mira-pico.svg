@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="GEMA" class="gema-b-mira-pico">
+  <!-- GEMA · mira con pico: la medición enfocada en el resultado -->
+  <g fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7 16V10Q7 7 10 7H16M32 7H38Q41 7 41 10V16M41 32V38Q41 41 38 41H32M16 41H10Q7 41 7 38V32"/>
+  </g>
+  <path d="M17 33C20 33 21.5 16 24 16C26.5 16 28 33 31 33Z" fill="var(--g-color-brand,#38bdf8)"/>
+  <path d="M13 33H17C20 33 21.5 16 24 16C26.5 16 28 33 31 33H35" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

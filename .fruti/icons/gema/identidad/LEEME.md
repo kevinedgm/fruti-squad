@@ -36,3 +36,13 @@ Arriba el nombre corto, abajo el nombre completo que define el sistema: «Gesti�
 | C · Estratos | círculo en franjas desplazadas (núcleo de muestra, bandas de espectro); franja en acento | la más disruptiva; puede leerse como glitch |
 | D · Módulos | cuatro cuartos de retícula, uno en acento cierra el ciclo | abstracto puro; su significado hay que contarlo |
 En «una tinta» las piezas en acento desaparecen: falta la versión monocroma de la elegida.
+
+**Ronda 3 rechazada (usuario, 2026-11-17):** «no le encuentro sentido»; las de la ronda 2 (Pico, Capas, Mira) sí tenían sentido. Debe referirse al análisis de muestras y a sus resultados.
+
+## Ronda 4 (`ronda-4/banco.html`, `banco.png`) · desarrollo de la ronda 2
+- A1 · Pico sólido: más peso; a 16 px se lee como «^».
+- A2 · Pico en pantalla: marco de instrumento; el mejor como icono de app; riesgo «monitor/estadísticas».
+- B · Mira con pico: une Mira y Pico; a 16 px el pico se pierde.
+- C · Resultado: pico menor en tinta y pico del resultado, mayor, en acento; el más propio (una señal real tiene varios picos).
+- D · Capas de señal: capas alineadas; parece menú o barras.
+Criterio de salida propuesto: elegir una dirección en esta ronda y validarla en contexto (pestaña, icono PWA, barra), como SAM.
