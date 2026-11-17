@@ -1,0 +1,240 @@
+<title>GEMA gráficas</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: pantalla de GEMA (operación del laboratorio; dirección y calidad). Barra de la app, título, una fila de filtros (periodo) y pestañas; debajo, cifras y gráficas en rejilla que pasa a una columna en celular.
+   Tokens: design system SAM (oscuro primero). Series: paleta categórica validada de 4 colores (tipos de muestra), aparte del navy de marca. */
+:root{--surface:#f2f2ee;--surface-raised:#ffffff;--surface-sunken:#e8e8e2;--line:#d6d6d0;--line-control:#7a7a82;--ink:#0a0a0b;--ink-muted:#55555c;
+  --brand:#052A76;--on-brand:#ffffff;--focus:#0a0a0b;--danger:#b42318;--warning:#8a5a00;--pico-a:#052A76;--pico-b:#3D67AE;
+  --s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--grid:#e1e0d9;--axis:#c3c2b7;--muted-axis:#6e6c66;
+  --sans:"Onest",ui-sans-serif,system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;color-scheme:light}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--surface:#0a0a0b;--surface-raised:#16161a;--surface-sunken:#1f1f24;--line:#2a2a30;--line-control:#6e6e78;--ink:#f2f2ee;--ink-muted:#a3a3a8;--brand:#3D67AE;--focus:#f2f2ee;--danger:#ff8a7a;--warning:#f5b941;--pico-a:#3D67AE;--pico-b:#7aa2f0;--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--grid:#2c2c2a;--axis:#383835;--muted-axis:#898781;color-scheme:dark}}
+:root[data-theme="dark"]{--surface:#0a0a0b;--surface-raised:#16161a;--surface-sunken:#1f1f24;--line:#2a2a30;--line-control:#6e6e78;--ink:#f2f2ee;--ink-muted:#a3a3a8;--brand:#3D67AE;--focus:#f2f2ee;--danger:#ff8a7a;--warning:#f5b941;--pico-a:#3D67AE;--pico-b:#7aa2f0;--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--grid:#2c2c2a;--axis:#383835;--muted-axis:#898781;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--surface);color:var(--ink);font:400 16px/1.5 var(--sans)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.bar .wrap{display:flex;align-items:center;gap:8px;padding-block:10px}
+.bar b{font:700 20px/1 var(--sans);letter-spacing:-.01em}
+.nav{display:flex;gap:2px;margin-left:24px;flex-wrap:wrap} .nav a{color:var(--ink-muted);text-decoration:none;font-weight:600;font-size:14px;padding:10px 12px;border-radius:6px;min-height:44px;display:inline-flex;align-items:center}
+.nav a[aria-current="page"]{color:var(--ink);background:var(--surface-sunken)}
+@media (max-width:640px){.nav{display:none}}
+main.wrap{padding-block:24px 56px;display:grid;gap:20px}
+h1{margin:0;font:700 23px/28px var(--sans);letter-spacing:-.01em} @media (min-width:900px){h1{font-size:32px;line-height:36px}}
+.cab{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap}
+.cab p{margin:4px 0 0;color:var(--ink-muted);font-size:14px}
+.filtros{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.filtros label{font:600 14px var(--sans)}
+select{font:500 15px var(--sans);color:var(--ink);background:var(--surface-raised);border:0;box-shadow:inset 0 0 0 1.5px var(--line-control);border-radius:6px;min-height:44px;padding:0 36px 0 12px;appearance:none;
+  background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 18px) 50%,calc(100% - 13px) 50%;background-size:5px 5px;background-repeat:no-repeat}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line)}
+.tabs button{font:600 15px var(--sans);color:var(--ink-muted);background:none;border:0;padding:12px 14px;min-height:44px;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-1px}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--ink)}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px} @media (max-width:900px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.tiles.t3{grid-template-columns:repeat(3,minmax(0,1fr))} @media (max-width:700px){.tiles.t3{grid-template-columns:1fr}}
+.tile{background:var(--surface-raised);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:grid;gap:2px;min-width:0}
+.tile .l{font-size:14px;color:var(--ink-muted)} .tile .v{font:600 30px/36px var(--sans)} .tile .d{font-size:13px;color:var(--ink-muted)}
+.tile .st{display:inline-flex;gap:6px;align-items:center;font-size:13px;font-weight:600;color:var(--danger)}
+.grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:12px} @media (max-width:900px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--surface-raised);border:1px solid var(--line);border-radius:10px;padding:16px;min-width:0;display:grid;gap:10px;align-content:start}
+.card h2{margin:0;font:600 18px/24px var(--sans)} .card .sub{margin:0;font-size:14px;color:var(--ink-muted)}
+.leyenda{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--ink)} .leyenda span{display:inline-flex;gap:8px;align-items:center}
+.key{width:16px;height:2px;border-radius:2px;display:inline-block}
+.chart{position:relative;width:100%} .chart svg{display:block;width:100%;height:auto;overflow:visible}
+.chart:focus-visible{outline-offset:4px}
+.tick{font:500 12px var(--sans);fill:var(--muted-axis);font-variant-numeric:tabular-nums}
+.lbl{font:600 12px var(--sans);fill:var(--ink)} .lbl2{font:500 13px var(--sans);fill:var(--ink)}
+.tip{position:absolute;pointer-events:none;background:var(--surface);color:var(--ink);border:1px solid var(--line-control);border-radius:6px;padding:8px 10px;font-size:13px;min-width:140px;box-shadow:0 2px 8px rgba(0,0,0,.25);z-index:3}
+.tip .t{color:var(--ink-muted);margin-bottom:4px} .tip .r{display:flex;gap:8px;align-items:center;justify-content:space-between} .tip .r b{font-weight:600;font-variant-numeric:tabular-nums}
+.tip .r span{display:inline-flex;gap:6px;align-items:center;color:var(--ink-muted)}
+details.tabla summary{cursor:pointer;font-size:14px;font-weight:600;min-height:32px;display:flex;align-items:center}
+.tw{overflow-x:auto} table{border-collapse:collapse;font-size:14px;width:100%} th,td{padding:6px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap} td.n,th.n{text-align:right;font-variant-numeric:tabular-nums}
+th{color:var(--ink-muted);font-weight:600;font-size:12px}
+.seg{display:flex;gap:2px;height:28px} .seg div{border-radius:4px;display:flex;align-items:center;padding:0 8px;font:600 13px var(--sans);white-space:nowrap;overflow:hidden;min-width:0}
+.nota{font-size:14px;color:var(--ink-muted);margin:0}
+.atr{list-style:none;margin:0;padding:0;display:grid}
+.atr li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;padding:10px 0;border-bottom:1px solid var(--line)} .atr li:last-child{border-bottom:0}
+.atr a.ir{color:inherit;text-decoration:none;min-width:0} .atr a.ir:hover b{text-decoration:underline;text-underline-offset:3px}
+.atr .fol{font:500 12px var(--mono);color:var(--ink-muted)} .atr b{font-weight:600;font-size:15px;line-height:1.3} .atr .dias{font-weight:600;color:var(--warning);font-size:14px;align-self:center;font-variant-numeric:tabular-nums}
+.atr .quien{font-size:13px;color:var(--ink-muted)}
+[hidden]{display:none!important}
+.aviso{font-size:14px;color:var(--ink-muted);border:1px dashed var(--line-control);border-radius:10px;padding:12px 14px;margin:0}
+</style>
+
+<header class="bar"><div class="wrap">
+  <svg viewBox="0 0 48 48" width="28" height="28" aria-hidden="true">
+
+<defs><linearGradient id="gema-s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--pico-b)"/><stop offset="1" stop-color="var(--pico-a)"/></linearGradient></defs><rect x="5" y="8" width="38" height="32" rx="7" fill="none" stroke="currentColor" stroke-width="2.6"/><path d="M21.76 33C25.12 33 26.24 14 28.48 14C30.72 14 31.84 33 36.32 33Z" fill="url(#gema-s)"/><path d="M10 33H13.92C15.88 33 16.44 24.45 17.56 24.45C18.68 24.45 19.24 33 21.76 33C25.12 33 26.24 14 28.48 14C30.72 14 31.84 33 36.32 33H38" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+  <b>GEMA</b>
+  <nav class="nav" aria-label="Principal"><a href="#">Recepción</a><a href="#">Análisis</a><a href="#">Informes</a><a href="#">Cobranza</a><a href="#" aria-current="page">Gráficas</a></nav>
+</div></header>
+
+<main class="wrap">
+  <div class="cab">
+    <div><h1>Gráficas</h1><p>Operación del laboratorio. Datos de ejemplo, ficticios. Actualizado hoy, 17 nov 2026, 09:00.</p></div>
+    <div class="filtros"><label for="periodo">Periodo</label>
+      <select id="periodo"><option value="4">Últimas 4 semanas</option><option value="8">Últimas 8 semanas</option><option value="12" selected>Últimas 12 semanas</option></select>
+      <label for="sucursal">Sucursal</label>
+      <select id="sucursal"><option value="ambas" selected>Ambas</option><option value="oax">Oaxaca</option><option value="cdmx">Ciudad de México</option></select></div>
+  </div>
+  <div class="tiles" id="tiles"></div>
+  <div class="grid">
+    <article class="card"><h2>Muestras recibidas por semana</h2><p class="sub">Por tipo de muestra.</p>
+      <div class="leyenda" id="ley-tipos"></div>
+      <div class="chart" id="c-tipos"></div><details class="tabla"><summary>Ver como tabla</summary><div class="tw" id="tb-tipos"></div></details></article>
+    <article class="card"><h2>Dónde se acumulan</h2><p class="sub">Muestras abiertas por etapa, hoy.</p>
+      <div class="chart" id="c-etapas"></div><details class="tabla"><summary>Ver como tabla</summary><div class="tw" id="tb-etapas"></div></details></article>
+  </div>
+  <div class="grid">
+    <article class="card"><h2>Informes entregados a tiempo</h2><p class="sub">Porcentaje por semana, frente al tiempo de entrega comprometido con el cliente.</p>
+      <div class="chart" id="c-tiempo" data-pct="1"></div><details class="tabla"><summary>Ver como tabla</summary><div class="tw" id="tb-tiempo"></div></details></article>
+    <article class="card"><h2>Por sucursal</h2><p class="sub">El mismo periodo, lado a lado.</p><div class="tw" id="tb-suc"></div></article>
+  </div>
+  <article class="card"><h2>Por vencer hoy</h2><p class="sub">Informes que vencen hoy y aún no se emiten. Tocar una lleva a su detalle.</p><ul class="atr" id="atr"></ul></article>
+</main>
+
+<script>
+(function(){
+  // ---- Datos de ejemplo (ficticios), 12 semanas que terminan el 13 nov 2026, por sucursal ----
+  const fin = new Date(2026, 10, 13);
+  const SEM = Array.from({length:12}, (_, i) => { const d = new Date(fin); d.setDate(d.getDate() - (11 - i) * 7 - 4); return d; });
+  const fmt = d => d.getDate() + ' ' + ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'][d.getMonth()];
+  const TIPOS = [['Bebidas alcohólicas','var(--s1)'],['Aguas','var(--s2)'],['Alimentos','var(--s3)'],['Agrícolas','var(--s4)']];
+  const D = { oax: [[22,25,21,28,30,26,29,31,27,33,35,32],[18,20,17,19,22,21,20,23,24,22,25,23],[8,9,7,10,9,11,10,9,12,10,11,12],[5,6,4,7,6,5,8,7,6,9,8,7]],
+              cdmx:[[9,10,8,11,12,10,12,13,11,14,15,13],[14,15,13,16,15,17,16,18,17,16,19,18],[11,12,10,13,12,14,13,12,15,14,13,15],[2,3,2,3,2,4,3,2,3,4,3,3]] };
+  const AT = { oax: [88,90,86,84,89,91,87,85,90,92,88,91], cdmx: [92,91,93,90,94,92,95,93,91,94,96,93] };
+  const ET = { oax: [['Recibida',14],['En análisis',38],['En revisión',11],['Por emitir informe',9]], cdmx: [['Recibida',9],['En análisis',24],['En revisión',7],['Por emitir informe',5]] };
+  const TM = { oax: 4.6, cdmx: 4.1 };
+  const PV = [['M-2026-1171','Mezcal joven · lote 0704','Oaxaca','oax'],['M-2026-1176','Agua potable · pozo 2','Ciudad de México','cdmx'],['M-2026-1179','Chile seco · lote 12','Oaxaca','oax']];
+  const sum = a => a.reduce((x, y) => x + y, 0), nf = n => n.toLocaleString('es-MX', {maximumFractionDigits:1});
+  const el = (t, a, ...k) => { const e = document.createElement(t); for (const [x, v] of Object.entries(a || {})) { if (x === 'text') e.textContent = v; else e.setAttribute(x, v); } k.forEach(c => c && e.append(c)); return e; };
+  const NS = 'http://www.w3.org/2000/svg', sv = (t, a) => { const e = document.createElementNS(NS, t); for (const [x, v] of Object.entries(a)) e.setAttribute(x, v); return e; };
+  const sel = s => s === 'ambas' ? ['oax','cdmx'] : [s];
+  const serie = (ss, i) => D[ss[0]][i].map((_, k) => sum(ss.map(x => D[x][i][k])));
+  // ---- Gráfica de líneas con cruz, tooltip y teclado ----
+  function lineas(cont, labels, series, nombre) {
+    cont.textContent = '';
+    const W = Math.max(280, cont.clientWidth || 640), H = W < 480 ? 220 : 260, m = {l:36, r:16, t:12, b:28}, iw = W - m.l - m.r, ih = H - m.t - m.b;
+    const max = Math.max(...series.flatMap(s => s.v)), pct = cont.dataset.pct === '1', paso0 = max <= 6 ? 1 : 5, top = pct ? 100 : (Math.ceil(max / paso0) * paso0 || 5), nt = pct ? 4 : (top / paso0 <= 6 ? top / paso0 : 4);
+    const x = i => m.l + (labels.length === 1 ? iw / 2 : i * iw / (labels.length - 1)), y = v => m.t + ih - v / top * ih;
+    const svg = sv('svg', {viewBox:`0 0 ${W} ${H}`, role:'img', 'aria-label':nombre});
+    for (let k = 0; k <= nt; k++) { const v = top * k / nt, yy = y(v);
+      svg.append(sv('line', {x1:m.l, x2:W - m.r, y1:yy, y2:yy, stroke:k ? 'var(--grid)' : 'var(--axis)', 'stroke-width':1}));
+      const t = sv('text', {x:m.l - 8, y:yy + 4, 'text-anchor':'end', class:'tick'}); t.textContent = nf(v); svg.append(t); }
+    const paso = Math.max(1, Math.ceil(labels.length / Math.max(2, Math.floor(iw / 64))));
+    labels.forEach((l, i) => { if (i % paso && i !== labels.length - 1) return; const t = sv('text', {x:x(i), y:H - 8, 'text-anchor':'middle', class:'tick'}); t.textContent = l; svg.append(t); });
+    series.forEach(s => {
+      svg.append(sv('path', {d:s.v.map((v, i) => (i ? 'L' : 'M') + x(i) + ' ' + y(v)).join(''), fill:'none', stroke:s.c, 'stroke-width':2, 'stroke-linejoin':'round', 'stroke-linecap':'round'}));
+      const i = s.v.length - 1; svg.append(sv('circle', {cx:x(i), cy:y(s.v[i]), r:4, fill:s.c, stroke:'var(--surface-raised)', 'stroke-width':2}));
+    });
+    const cruz = sv('line', {y1:m.t, y2:m.t + ih, stroke:'var(--muted-axis)', 'stroke-width':1, visibility:'hidden'}); svg.append(cruz);
+    const puntos = series.map(s => { const c = sv('circle', {r:4, fill:s.c, stroke:'var(--surface-raised)', 'stroke-width':2, visibility:'hidden'}); svg.append(c); return c; });
+    const hit = sv('rect', {x:m.l - 10, y:0, width:iw + 20, height:H, fill:'transparent'}); svg.append(hit);
+    cont.append(svg);
+    const tip = el('div', {class:'tip', hidden:''}); cont.append(tip);
+    let idx = -1;
+    function muestra(i) {
+      idx = Math.max(0, Math.min(labels.length - 1, i)); const px = x(idx);
+      cruz.setAttribute('x1', px); cruz.setAttribute('x2', px); cruz.setAttribute('visibility', 'visible');
+      puntos.forEach((p, k) => { p.setAttribute('cx', px); p.setAttribute('cy', y(series[k].v[idx])); p.setAttribute('visibility', 'visible'); });
+      tip.textContent = ''; tip.append(el('div', {class:'t', text:'Semana del ' + labels[idx]}));
+      series.forEach(s => tip.append(el('div', {class:'r'}, el('span', {}, el('i', {class:'key', style:'background:' + s.c}), document.createTextNode(s.n)), el('b', {text:nf(s.v[idx])}))));
+      tip.hidden = false; const r = cont.getBoundingClientRect(), sx = r.width / W, left = px * sx;
+      tip.style.left = Math.min(Math.max(0, left + 12), r.width - tip.offsetWidth) + 'px'; tip.style.top = '8px';
+      if (left + 12 + tip.offsetWidth > r.width) tip.style.left = Math.max(0, left - tip.offsetWidth - 12) + 'px';
+    }
+    const oculta = () => { cruz.setAttribute('visibility', 'hidden'); puntos.forEach(p => p.setAttribute('visibility', 'hidden')); tip.hidden = true; };
+    hit.addEventListener('pointermove', e => { const r = svg.getBoundingClientRect(), vx = (e.clientX - r.left) * W / r.width;
+      muestra(Math.round((vx - m.l) / (iw / Math.max(1, labels.length - 1)))); });
+    hit.addEventListener('pointerleave', oculta);
+    cont.tabIndex = 0; cont.setAttribute('aria-label', nombre + '. Usa las flechas para recorrer las semanas.');
+    cont.onkeydown = e => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); muestra(idx < 0 ? labels.length - 1 : idx + (e.key === 'ArrowRight' ? 1 : -1)); } if (e.key === 'Escape') oculta(); };
+    cont.onblur = oculta;
+  }
+  // ---- Columnas apiladas (tipos), 2 px de separación, punta redondeada, tooltip por columna ----
+  function columnas(cont, labels, series, nombre) {
+    cont.textContent = '';
+    const W = Math.max(280, cont.clientWidth || 640), H = W < 480 ? 220 : 260, m = {l:36, r:8, t:12, b:28}, iw = W - m.l - m.r, ih = H - m.t - m.b;
+    const tot = labels.map((_, i) => sum(series.map(s => s.v[i]))), max = Math.max(...tot), paso0 = 20, top = Math.ceil(max / paso0) * paso0, nt = top / paso0 <= 6 ? top / paso0 : 4;
+    const y = v => m.t + ih - v / top * ih, bw = Math.min(24, iw / labels.length * 0.6), cx = i => m.l + (i + .5) * iw / labels.length;
+    const svg = sv('svg', {viewBox:`0 0 ${W} ${H}`, role:'img', 'aria-label':nombre});
+    for (let k = 0; k <= nt; k++) { const v = top * k / nt, yy = y(v); svg.append(sv('line', {x1:m.l, x2:W - m.r, y1:yy, y2:yy, stroke:k ? 'var(--grid)' : 'var(--axis)', 'stroke-width':1}));
+      const t = sv('text', {x:m.l - 8, y:yy + 4, 'text-anchor':'end', class:'tick'}); t.textContent = nf(v); svg.append(t); }
+    const paso = Math.max(1, Math.ceil(labels.length / Math.max(2, Math.floor(iw / 64))));
+    labels.forEach((l, i) => { if (i % paso && i !== labels.length - 1) return; const t = sv('text', {x:cx(i), y:H - 8, 'text-anchor':'middle', class:'tick'}); t.textContent = l; svg.append(t); });
+    const tip = el('div', {class:'tip', hidden:''});
+    labels.forEach((l, i) => {
+      let acc = 0; const g = sv('g', {tabindex:0, role:'img', 'aria-label':`Semana del ${l}: ${tot[i]} muestras`});
+      series.forEach((s, k) => { const v = s.v[i]; if (!v) return; const y0 = y(acc), y1 = y(acc + v); acc += v; const last = k === series.length - 1;
+        const h = Math.max(0, y0 - y1 - (k ? 2 : 0)), x = cx(i) - bw / 2, yt = y1;
+        g.append(last ? sv('path', {d:`M${x} ${yt + h}V${yt + 4}Q${x} ${yt} ${x + 4} ${yt}H${x + bw - 4}Q${x + bw} ${yt} ${x + bw} ${yt + 4}V${yt + h}Z`, fill:s.c}) : sv('rect', {x, y:yt, width:bw, height:h, fill:s.c})); });
+      g.append(sv('rect', {x:cx(i) - iw / labels.length / 2, y:m.t, width:iw / labels.length, height:ih, fill:'transparent'}));
+      const show = () => { tip.textContent = ''; tip.append(el('div', {class:'t', text:'Semana del ' + l}));
+        [...series].reverse().forEach(s => tip.append(el('div', {class:'r'}, el('span', {}, el('i', {class:'key', style:'background:' + s.c + ';height:10px;width:10px;border-radius:2px'}), document.createTextNode(s.n)), el('b', {text:nf(s.v[i])}))));
+        tip.append(el('div', {class:'r'}, el('span', {text:'Total'}), el('b', {text:nf(tot[i])})));
+        tip.hidden = false; const r = cont.getBoundingClientRect(), px = cx(i) * r.width / W; tip.style.top = '8px';
+        tip.style.left = (px + 14 + tip.offsetWidth > r.width ? Math.max(0, px - tip.offsetWidth - 14) : px + 14) + 'px'; };
+      g.addEventListener('pointerenter', show); g.addEventListener('focus', show); g.addEventListener('pointerleave', () => tip.hidden = true); g.addEventListener('blur', () => tip.hidden = true);
+      svg.append(g); });
+    cont.append(svg, tip);
+  }
+  // ---- Barras horizontales (una serie) con valor en la punta ----
+  function barras(cont, datos, nombre) {
+    cont.textContent = '';
+    const W = Math.max(260, cont.clientWidth || 460), fila = 44, H = datos.length * fila + 8, lab = 0, max = Math.max(...datos.map(d => d[1]));
+    const svg = sv('svg', {viewBox:`0 0 ${W} ${H}`, role:'img', 'aria-label':nombre});
+    const iw = W - 40;
+    datos.forEach(([n, v], i) => {
+      const y0 = i * fila + 4, w = Math.max(4, v / max * iw), h = 20, by = y0 + 20;
+      const t = sv('text', {x:0, y:y0 + 13, class:'lbl2'}); t.textContent = n; svg.append(t);
+      const r = 4; svg.append(sv('path', {d:`M0 ${by}H${w - r}Q${w} ${by} ${w} ${by + r}V${by + h - r}Q${w} ${by + h} ${w - r} ${by + h}H0Z`, fill:'var(--s1)'}));
+      const vt = sv('text', {x:w + 8, y:by + 15, class:'lbl'}); vt.textContent = v; svg.append(vt);
+    });
+    cont.append(svg);
+  }
+  function tabla(cont, cab, filas) {
+    cont.textContent = ''; const t = el('table'), tr = el('tr');
+    cab.forEach((c, i) => tr.append(el('th', {text:c, class:i ? 'n' : ''}))); t.append(el('thead', {}, tr));
+    const tb = el('tbody'); filas.forEach(f => { const r = el('tr'); f.forEach((c, i) => r.append(el('td', {text:String(c), class:i ? 'n' : ''}))); tb.append(r); }); t.append(tb); cont.append(t);
+  }
+  function tile(l, v, d, extra) { return el('div', {class:'tile'}, el('span', {class:'l', text:l}), el('span', {class:'v', text:v}), extra || null, d ? el('span', {class:'d', text:d}) : null); }
+
+  function pinta() {
+    const n = +document.getElementById('periodo').value, a = 12 - n, ss = sel(document.getElementById('sucursal').value);
+    const lab = SEM.slice(a).map(fmt), tipos = TIPOS.map(([nom, c], i) => ({n:nom, c, v:serie(ss, i).slice(a)}));
+    const tot = lab.map((_, k) => sum(tipos.map(t => t.v[k]))), rec = sum(tot);
+    const prev = a - n >= 0 ? sum(TIPOS.map((_, i) => sum(serie(ss, i).slice(a - n, a)))) : null;
+    const pesos = ss.map(x => sum(D[x].map(t => sum(t.slice(a)))));
+    const at = SEM.slice(a).map((_, k) => Math.round(sum(ss.map((x, j) => AT[x][a + k] * sum(D[x].map(t => t[a + k])))) / sum(ss.map(x => sum(D[x].map(t => t[a + k]))))));
+    const atP = Math.round(sum(at.map((v, k) => v * tot[k])) / rec);
+    const etapas = ET.oax.map(([e], i) => [e, sum(ss.map(x => ET[x][i][1]))]);
+    const abiertas = sum(etapas.map(e => e[1]));
+    const tm = sum(ss.map((x, j) => TM[x] * pesos[j])) / sum(pesos);
+    const ti = document.getElementById('tiles'); ti.textContent = '';
+    ti.append(tile('Muestras recibidas', nf(rec), prev === null ? 'Sin periodo anterior para comparar' : (rec >= prev ? '+' : '−') + nf(Math.abs(rec - prev)) + ' frente a las ' + n + ' semanas anteriores'),
+      tile('Abiertas hoy', nf(abiertas), etapas[1][1] + ' en análisis'), tile('Informes a tiempo', atP + ' %', 'Del periodo; comprometido contra entregado'),
+      tile('Tiempo de entrega', nf(+tm.toFixed(1)) + ' días', 'Promedio de recepción a informe'));
+    const ley = document.getElementById('ley-tipos'); ley.textContent = '';
+    TIPOS.forEach(([nom, c]) => ley.append(el('span', {}, el('i', {class:'key', style:`background:${c};height:10px;width:10px;border-radius:2px`}), document.createTextNode(nom))));
+    columnas(document.getElementById('c-tipos'), lab, tipos, 'Muestras recibidas por semana y tipo');
+    tabla(document.getElementById('tb-tipos'), ['Semana del', ...TIPOS.map(t => t[0]), 'Total'], lab.map((l, k) => [l, ...tipos.map(t => t.v[k]), tot[k]]));
+    lineas(document.getElementById('c-tiempo'), lab, [{n:'A tiempo (%)', v:at, c:'var(--s1)'}], 'Informes entregados a tiempo por semana');
+    tabla(document.getElementById('tb-tiempo'), ['Semana del', 'A tiempo (%)'], lab.map((l, k) => [l, at[k]]));
+    barras(document.getElementById('c-etapas'), etapas, 'Muestras abiertas por etapa');
+    tabla(document.getElementById('tb-etapas'), ['Etapa', 'Abiertas'], etapas);
+    const fila = x => { const r = sum(D[x].map(t => sum(t.slice(a)))); const atx = Math.round(sum(AT[x].slice(a).map((v, k) => v * sum(D[x].map(t => t[a + k])))) / r); return [x === 'oax' ? 'Oaxaca' : 'Ciudad de México', nf(r), atx + ' %', nf(TM[x]) + ' días']; };
+    tabla(document.getElementById('tb-suc'), ['Sucursal', 'Recibidas', 'A tiempo', 'Tiempo de entrega'], ['oax','cdmx'].map(fila));
+    const atr = document.getElementById('atr'); atr.textContent = '';
+    PV.filter(p => ss.includes(p[3])).forEach(([f, t, q]) => atr.append(el('li', {}, el('a', {href:'#', class:'ir'}, el('span', {class:'fol', text:f}), el('br'), el('b', {text:t}), el('br'), el('span', {class:'quien', text:q})), el('span', {class:'dias', text:'Vence hoy'}))));
+    if (!atr.children.length) atr.append(el('li', {}, el('span', {text:'Nada por vencer hoy en esta sucursal.'})));
+  }
+  document.getElementById('periodo').addEventListener('change', pinta);
+  document.getElementById('sucursal').addEventListener('change', pinta);
+  pinta();
+  let rt; addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(pinta, 150); });
+})();
+</script>
