@@ -53,3 +53,15 @@ Criterio de salida propuesto: elegir una dirección en esta ronda y validarla en
 - R1 · Pantalla + Resultado (A2 + C): doble pico en el marco del instrumento; el más sólido como icono; a 16 px el pico menor casi desaparece.
 - R2 · Mira + Resultado (B + C): doble pico entre las esquinas de la medición; el más fino.
 - R3 · Resultado (C sola): sin marco, la más simple; ancha y baja en icono cuadrado.
+
+**Elegido (usuario, 2026-11-17): R1 · Pantalla + Resultado.**
+
+## Ronda 6 (`ronda-6/banco.html`, `banco.png`) · prueba en contexto
+Versión chica (`gema-chica.svg`, 16–24 px): marco 3.6 y solo el pico del resultado. Silueta de notificación (`gema-notificacion.svg`).
+| Contexto | Resultado (observación de Claude, a 1x y ampliado a 3x) |
+|---|---|
+| Pestaña, chica a 16 px | Se lee marco + pico; el acento es pequeño pero visible |
+| Icono PWA (Android círculo, iOS) | Dentro de la zona segura; no se recorta |
+| Barra superior, R1 a 28 px | Se lee en claro y oscuro; el pico menor se distingue |
+| Notificación, silueta a 16 px | Se reconoce el marco; el pico relleno puede leerse como triángulo o «subir» |
+No verificado: dispositivos reales.
