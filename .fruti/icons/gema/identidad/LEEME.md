@@ -65,3 +65,13 @@ Versión chica (`gema-chica.svg`, 16–24 px): marco 3.6 y solo el pico del resu
 | Barra superior, R1 a 28 px | Se lee en claro y oscuro; el pico menor se distingue |
 | Notificación, silueta a 16 px | Se reconoce el marco; el pico relleno puede leerse como triángulo o «subir» |
 No verificado: dispositivos reales.
+
+**CONGELADO (usuario, 2026-11-17): símbolo R1 (Pantalla + Resultado) + versión chica + silueta de notificación.** Pulido pendiente: en la silueta, pico calado en vez de relleno.
+
+## Ronda 7 (`ronda-7/banco.html`, `banco.png`) · color
+Regla de SAM desde el inicio: acento = relleno, mismo valor en claro y oscuro, texto de tinta encima, contorno de tinta en claro; texto, enlaces y foco en tinta. Fuera: lima (SAM), carmín (Grana), teal (MedicalManik).
+| Color | Valor | Tinta sobre color · color sobre noche · color sobre papel | Lectura |
+|---|---|---|---|
+| Celeste | `#38bdf8` | 9.2 · 9.2 · 1.9 | agua y precisión; pariente del celeste del laboratorio (#00B4D8); común en software científico |
+| Ámbar | `#f5b52e` | 10.9 · 10.9 · 1.6 | industrial, instrumento encendido; se asocia a «precaución» |
+| Coral | `#ff8466` | 8.2 · 8.2 · 2.1 | energía; cerca del rojo de error |
