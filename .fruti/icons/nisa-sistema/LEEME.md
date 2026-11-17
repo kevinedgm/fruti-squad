@@ -31,3 +31,6 @@ Forma elegida: pocillo redondo. Paquete en `nabi-final/`, manual en `nabi-guia/g
 
 ## Design system de Nabi
 Artefacto: https://claude.ai/artifact/FzzBwrjsBqAm4gdgcTduiV. Fuentes en `nabi-design-system/` (los scripts que lo generaron están en `historico/` y ya no se corren; hoy se editan `tokens.json`, `README.md` y `components/`). Tipografía: Archivo (títulos al 125 % de ancho e interfaz) + IBM Plex Mono con cero con barra para valores y resultados de análisis (sección `valores.md`). Color: azul y pera del laboratorio; estados con los secundarios del laboratorio (#006D53 conforme, #3D67AE pendiente, #F48C06 solo relleno) más #B42318 fuera. Tema claro. Componentes: Cover, Boton, Campo, ResultadoAnalisis, TablaResultados, EstadoMuestra, IdMuestra, Carga. Pendientes: decisión frente al esmeralda de Verdant; confirmar nombres de estado con el flujo real.
+
+## Descartado (usuario, 2026-11-17)
+Todas las identidades anteriores del sistema (Conectti, Nisalab, Nabi y sus variantes) quedan descartadas. Nueva identidad desde cero, con el manual de SAM (`../sam/manual/`) como referencia de simplicidad y estilo. Nombre nuevo: libre, puede ser un acrónimo del sistema de laboratorio.
