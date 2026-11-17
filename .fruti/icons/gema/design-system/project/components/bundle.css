@@ -1,0 +1,27 @@
+/* GEMA · componentes de dominio sobre Grana. Valores de respaldo: tema claro. */
+.gema{font-family:var(--font-sans,"Onest",ui-sans-serif,system-ui,sans-serif);color:var(--ink,#0a0a0b)}
+.gema-btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2,8px);min-height:var(--control-height,44px);padding:0 18px;border-radius:var(--radius-sm,6px);font:600 14px/20px var(--font-sans,"Onest",sans-serif);cursor:pointer;border:0;text-decoration:none}
+.gema-btn--primario{background:var(--brand,#052A76);color:var(--on-brand,#ffffff)}
+.gema-btn--secundario{background:transparent;color:var(--ink,#0a0a0b);box-shadow:inset 0 0 0 1.5px var(--line-control,#7a7a82)}
+.gema-btn--texto{background:transparent;color:var(--ink,#0a0a0b);text-decoration:underline;text-underline-offset:3px;padding:0 4px}
+.gema-btn--primario:hover{filter:brightness(1.12)} .gema-btn--secundario:hover{background:var(--surface-sunken,#e8e8e2)}
+.gema-btn[aria-disabled="true"]{background:var(--surface-sunken,#e8e8e2);color:var(--ink-muted,#55555c);box-shadow:none;cursor:not-allowed}
+.gema-btn:focus-visible,.gema-fila:focus-visible{outline:3px solid var(--focus,#0a0a0b);outline-offset:3px}
+.gema-estado{display:inline-flex;align-items:center;gap:4px;font:600 12px/16px var(--font-sans,"Onest",sans-serif);padding:2px 9px;border-radius:var(--radius-pill,999px);white-space:nowrap}
+.gema-estado--activo{background:var(--brand,#052A76);color:var(--on-brand,#ffffff)}
+.gema-estado--neutro{color:var(--ink,#0a0a0b);box-shadow:inset 0 0 0 1px var(--line-control,#7a7a82)}
+.gema-estado--cumple{color:var(--ink,#0a0a0b);padding-left:0}
+.gema-estado--nocumple{color:var(--danger,#b42318);box-shadow:inset 0 0 0 1px currentColor}
+.gema-estado--aviso{color:var(--warning,#8a5a00);box-shadow:inset 0 0 0 1px currentColor}
+.gema-tabla{width:100%;border-collapse:collapse;background:var(--surface-raised,#ffffff);border:1px solid var(--line,#d6d6d0);border-radius:var(--radius-md,10px);color:var(--ink,#0a0a0b);font:400 14px/20px var(--font-sans,"Onest",sans-serif)}
+.gema-tabla th{text-align:left;font:600 12px/16px var(--font-sans,"Onest",sans-serif);color:var(--ink-muted,#55555c);padding:10px 12px;border-bottom:1px solid var(--line,#d6d6d0)}
+.gema-tabla td{padding:var(--space-3,12px);border-bottom:1px solid var(--line,#d6d6d0);vertical-align:top}
+.gema-tabla tr:last-child td{border-bottom:0} .gema-fila:hover td{background:var(--surface-sunken,#e8e8e2)}
+.gema-tabla .n{text-align:right}
+.gema-folio{display:block;font:500 12px/16px var(--font-mono,"JetBrains Mono",monospace);color:var(--ink-muted,#55555c);font-variant-numeric:tabular-nums}
+.gema-nombre{font:600 15px/20px var(--font-sans,"Onest",sans-serif)}
+.gema-valor{font:500 14px/20px var(--font-mono,"JetBrains Mono",monospace);font-variant-numeric:tabular-nums;white-space:nowrap}
+.gema-bar{display:flex;align-items:center;gap:var(--space-2,8px);padding:10px var(--space-4,16px);background:var(--surface,#f2f2ee);border-bottom:1px solid var(--line,#d6d6d0);color:var(--ink,#0a0a0b)}
+.gema-bar__nombre{font:700 20px/1 var(--font-sans,"Onest",sans-serif)} .gema-bar__sp{flex:1} .gema-bar__ctx{font-size:13px;color:var(--ink-muted,#55555c)}
+.gema-bar__btn{min-width:44px;min-height:44px;display:grid;place-items:center;border-radius:var(--radius-sm,6px);background:transparent;border:0;color:var(--ink,#0a0a0b);cursor:pointer}
+.gema-bar__btn:hover{background:var(--surface-sunken,#e8e8e2)} .gema-bar__btn:focus-visible{outline:3px solid var(--focus,#0a0a0b);outline-offset:2px}

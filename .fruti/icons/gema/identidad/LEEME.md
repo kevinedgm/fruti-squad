@@ -99,3 +99,7 @@ Símbolo, logotipos, favicon, iconos de PWA, silueta de notificación (pico cala
 
 ## Manual de marca (`../manual/manual.html`, generado con `gen.py` desde `../final/`)
 Publicado como artifact el 2026-11-17.
+
+## Design system (`../design-system/`, artifact https://claude.ai/artifact/UNn6PkL4b7YJJcmbgeGbVr)
+Primera versión 2026-11-17. Temas claro (primero) y oscuro; `brand` plano (navy en claro, `#3D67AE` en oscuro) y degradado como `brand-grad-start/end` solo para marca. Heredado de SAM: superficies, tinta, line-control, danger, warning, espaciado, radios. Dictamen: «Cumple» en tinta con ✓ (sin verde) y «No cumple» en danger con ✕, para no distinguirlos solo por tono. Componentes: Botón, Estado, Fila de resultado, Barra de la app.
+**unresolved:** equivalencia completa con tokens de Grana; familia de iconos; Verdant frente a Grana.
