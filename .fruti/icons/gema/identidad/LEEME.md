@@ -25,3 +25,14 @@ Arriba el nombre corto, abajo el nombre completo que define el sistema: «Gesti�
 | A · Pico | señal de un instrumento (cromatograma/espectro): pico sobre línea base, área en acento = resultado | la más propia del análisis; ligera visualmente; puede leerse como gráfica o pulso |
 | B · Capas | muestra separada en componentes (destilación, decantación); capa central en acento | abstracta y sólida a 16 px; puede leerse como embudo o filtro |
 | C · Mira | encuadre de medición con la muestra en acento al centro | precisión y control; se parece al icono de escanear de las cámaras |
+
+**Ronda 2 sin elegir (usuario, 2026-11-17):** pide «una forma abstracta, disruptiva, una geometría nueva».
+
+## Ronda 3 (`ronda-3/banco.html`, `banco.png`) · geometrías construidas
+| Concepto | Idea | Lectura (Claude) |
+|---|---|---|
+| A · Intersección | círculo (muestra) cruza cuadrado (método); el cruce en acento es el análisis | limpia y legible; riesgo: diagrama de Venn |
+| B · Cristal | hexágono en seis piezas; una en acento se desprende (la fracción que se analiza); gema = cristal | la más dinámica; hexágono común en ciencia |
+| C · Estratos | círculo en franjas desplazadas (núcleo de muestra, bandas de espectro); franja en acento | la más disruptiva; puede leerse como glitch |
+| D · Módulos | cuatro cuartos de retícula, uno en acento cierra el ciclo | abstracto puro; su significado hay que contarlo |
+En «una tinta» las piezas en acento desaparecen: falta la versión monocroma de la elegida.

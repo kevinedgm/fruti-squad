@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="GEMA" class="gema-a-interseccion">
+  <!-- GEMA · intersección: muestra y método se cruzan; el cruce en acento es el análisis -->
+  <defs><clipPath id="gema-a-q"><rect x="6" y="12" width="24" height="24" rx="6"/></clipPath></defs>
+  <circle cx="30" cy="24" r="12" fill="var(--g-color-brand,#38bdf8)" clip-path="url(#gema-a-q)"/>
+  <rect x="6" y="12" width="24" height="24" rx="6" fill="none" stroke="currentColor" stroke-width="2.6"/>
+  <circle cx="30" cy="24" r="12" fill="none" stroke="currentColor" stroke-width="2.6"/>
+</svg>

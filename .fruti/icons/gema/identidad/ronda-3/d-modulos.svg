@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="GEMA" class="gema-d-modulos">
+  <!-- GEMA · módulos: cuatro cuartos de retícula; el cuarto en acento completa el proceso -->
+  <path d="M8 23A15 15 0 0 1 23 8V23Z" fill="currentColor"/>
+  <rect x="25" y="8" width="15" height="15" rx="3" fill="none" stroke="currentColor" stroke-width="2.6"/>
+  <path d="M8 25H23V40H11Q8 40 8 37Z" fill="currentColor"/>
+  <path d="M25 25H40A15 15 0 0 1 25 40Z" fill="var(--g-color-brand,#38bdf8)"/>
+</svg>

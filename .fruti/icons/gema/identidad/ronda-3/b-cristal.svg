@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" role="img" aria-label="GEMA" class="gema-b-cristal">
+  <!-- GEMA · cristal: hexágono en seis piezas; la pieza en acento se desprende para analizarse -->
+  <path d="M26.99 18.82 L26.99 5.38 L38.63 12.10Z" fill="var(--g-color-brand,#38bdf8)" stroke-linejoin="round"/>
+  <path d="M25.48 24.00 L37.12 17.28 L37.12 30.72Z" fill="currentColor" stroke-linejoin="round"/>
+  <path d="M24.74 25.28 L36.38 32.00 L24.74 38.72Z" fill="currentColor" stroke-linejoin="round"/>
+  <path d="M23.26 25.28 L23.26 38.72 L11.62 32.00Z" fill="currentColor" stroke-linejoin="round"/>
+  <path d="M22.52 24.00 L10.88 30.72 L10.88 17.28Z" fill="currentColor" stroke-linejoin="round"/>
+  <path d="M23.26 22.72 L11.62 16.00 L23.26 9.28Z" fill="currentColor" stroke-linejoin="round"/>
+</svg>
