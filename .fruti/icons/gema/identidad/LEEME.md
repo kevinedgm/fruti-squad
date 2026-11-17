@@ -96,3 +96,6 @@ Probadas en logotipo y en una pantalla de resultados (folios, parámetros, unida
 
 ## Final (`../final/`)
 Símbolo, logotipos, favicon, iconos de PWA, silueta de notificación (pico calado), tokens `gema-marca.css` y fragmento de manifest. Guía en `../final/LEEME.md`.
+
+## Manual de marca (`../manual/manual.html`, generado con `gen.py` desde `../final/`)
+Publicado como artifact el 2026-11-17.
